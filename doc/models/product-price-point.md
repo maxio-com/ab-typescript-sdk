@@ -29,7 +29,7 @@
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined. |
-| `type` | [`PricePointTypeEnum \| undefined`](../../doc/models/price-point-type-enum.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
+| `type` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `taxIncluded` | `boolean \| undefined` | Optional | - |
 | `subscriptionId` | `number \| null \| undefined` | Optional | - |
 

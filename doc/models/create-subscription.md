@@ -16,7 +16,7 @@
 | `customPrice` | [`CustomPriceUsedForSubscriptionCreateUpdate \| undefined`](../../doc/models/custom-price-used-for-subscription-create-update.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `couponCode` | `string \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
-| `paymentCollectionMethod` | [`PaymentCollectionMethodForSubscriptionEnum \| undefined`](../../doc/models/payment-collection-method-for-subscription-enum.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
+| `paymentCollectionMethod` | [`PaymentCollectionMethod \| undefined`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `PaymentCollectionMethod.Automatic` |
 | `receivesInvoiceEmails` | `string \| undefined` | Optional | (Optional) Default: True - Whether or not this subscription is set to receive emails related to this subscription. |
 | `netTerms` | `string \| undefined` | Optional | (Optional) Default: null The number of days after renewal (on invoice billing) that a subscription is due. A value between 0 (due immediately) and 180. |
 | `customerId` | `number \| undefined` | Optional | The ID of an existing customer within Chargify. Required, unless a `customer_reference` or a set of `customer_attributes` is given. |
@@ -28,6 +28,7 @@
 | `reference` | `string \| undefined` | Optional | The reference value (provided by your app) for the subscription itelf. |
 | `customerAttributes` | [`CustomerAttributes \| undefined`](../../doc/models/customer-attributes.md) | Optional | - |
 | `paymentProfileAttributes` | [`PaymentProfileAttributes \| undefined`](../../doc/models/payment-profile-attributes.md) | Optional | alias to credit_card_attributes |
+| `creditCardAttributes` | [`PaymentProfileAttributes \| undefined`](../../doc/models/payment-profile-attributes.md) | Optional | Credit Card data to create a new Subscription. Interchangeable with `payment_profile_attributes` property. |
 | `bankAccountAttributes` | [`BankAccountAttributes \| undefined`](../../doc/models/bank-account-attributes.md) | Optional | - |
 | `components` | [`CreateSubscriptionComponents[] \| undefined`](../../doc/models/containers/create-subscription-components.md) | Optional | This is Array of a container for one-of cases. |
 | `calendarBilling` | [`CalendarBilling \| undefined`](../../doc/models/calendar-billing.md) | Optional | (Optional). Cannot be used when also specifying next_billing_at |
@@ -62,6 +63,11 @@
 
 ```json
 {
+  "payment_collection_method": "automatic",
+  "metafields": {
+    "custom_field_name_1": "custom_field_value_1",
+    "custom_field_name_2": "custom_field_value_2"
+  },
   "dunning_communication_delay_enabled": false,
   "dunning_communication_delay_time_zone": "\"Eastern Time (US & Canada)\"",
   "skip_billing_manifest_taxes": false,

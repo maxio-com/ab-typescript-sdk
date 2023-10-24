@@ -135,7 +135,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`OffersJson422Error`](../../doc/models/offers-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
 
 
 # List Offers

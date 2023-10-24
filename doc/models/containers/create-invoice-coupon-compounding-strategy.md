@@ -9,5 +9,5 @@
 
 | Type |
 |  --- |
-| [`CompoundingStrategyEnum`](../../../doc/models/compounding-strategy-enum.md) |
+| [`CompoundingStrategy`](../../../doc/models/compounding-strategy.md) |
 

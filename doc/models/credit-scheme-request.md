@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `creditScheme` | [`CreditSchemeEnum`](../../doc/models/credit-scheme-enum.md) | Required | - |
+| `creditScheme` | [`CreditScheme`](../../doc/models/credit-scheme.md) | Required | - |
 
 ## Example (as JSON)
 

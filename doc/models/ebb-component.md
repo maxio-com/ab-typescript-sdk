@@ -15,7 +15,7 @@
 | `handle` | `string \| undefined` | Optional | A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
 | `taxable` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `pricingScheme` | [`EBBComponentPricingScheme`](../../doc/models/containers/ebb-component-pricing-scheme.md) | Required | This is a container for one-of cases. |
-| `prices` | [`CreateComponentPrice[] \| undefined`](../../doc/models/create-component-price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
+| `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
 | `upgradeCharge` | `string \| undefined` | Optional | - |
 | `downgradeCredit` | `string \| undefined` | Optional | - |
 | `pricePoints` | [`ComponentPricePointItem[] \| undefined`](../../doc/models/component-price-point-item.md) | Optional | - |
@@ -37,8 +37,9 @@
   "pricing_scheme": "tiered",
   "prices": [
     {
-      "starting_quantity": 64,
-      "unit_price": "String3"
+      "starting_quantity": 242,
+      "ending_quantity": 40,
+      "unit_price": 23.26
     }
   ],
   "upgrade_charge": "upgrade_charge2",

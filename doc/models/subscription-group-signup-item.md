@@ -21,12 +21,16 @@
 | `components` | [`SubscriptionGroupSignupComponent[] \| undefined`](../../doc/models/subscription-group-signup-component.md) | Optional | - |
 | `customPrice` | [`CustomPriceUsedForSubscriptionCreateUpdate \| undefined`](../../doc/models/custom-price-used-for-subscription-create-update.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `calendarBilling` | [`CalendarBilling \| undefined`](../../doc/models/calendar-billing.md) | Optional | (Optional). Cannot be used when also specifying next_billing_at |
-| `metafields` | `unknown \| undefined` | Optional | - |
+| `metafields` | `Record<string, string> \| undefined` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 
 ## Example (as JSON)
 
 ```json
 {
+  "metafields": {
+    "custom_field_name_1": "custom_field_value_1",
+    "custom_field_name_2": "custom_field_value_2"
+  },
   "product_handle": "product_handle2",
   "product_id": 34,
   "product_price_point_id": 214,

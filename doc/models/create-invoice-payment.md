@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `amount` | [`CreateInvoicePaymentAmount \| undefined`](../../doc/models/containers/create-invoice-payment-amount.md) | Optional | This is a container for one-of cases. |
 | `memo` | `string \| undefined` | Optional | A description to be attached to the payment. |
-| `method` | [`InvoicePaymentMethodTypeEnum \| undefined`](../../doc/models/invoice-payment-method-type-enum.md) | Optional | The type of payment method used.<br>**Default**: `InvoicePaymentMethodTypeEnum.Other` |
+| `method` | [`InvoicePaymentMethodType \| undefined`](../../doc/models/invoice-payment-method-type.md) | Optional | The type of payment method used.<br>**Default**: `InvoicePaymentMethodType.Other` |
 | `details` | `string \| undefined` | Optional | Additional information related to the payment method (eg. Check #) |
 
 ## Example (as JSON)

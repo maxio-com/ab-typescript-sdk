@@ -14,8 +14,8 @@
 | `bankRoutingNumber` | `string \| undefined` | Optional | (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API |
 | `bankIban` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided |
 | `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided |
-| `bankAccountType` | [`BankAccountTypeEnum \| undefined`](../../doc/models/bank-account-type-enum.md) | Optional | **Default**: `BankAccountTypeEnum.Checking` |
-| `bankAccountHolderType` | [`HolderTypeEnum \| undefined`](../../doc/models/holder-type-enum.md) | Optional | - |
+| `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | **Default**: `BankAccountType.Checking` |
+| `bankAccountHolderType` | [`HolderType \| undefined`](../../doc/models/holder-type.md) | Optional | - |
 | `paymentType` | `string \| undefined` | Optional | - |
 | `billingAddress` | `string \| undefined` | Optional | - |
 | `billingCity` | `string \| undefined` | Optional | - |
@@ -23,7 +23,7 @@
 | `billingZip` | `string \| undefined` | Optional | - |
 | `billingCountry` | `string \| undefined` | Optional | - |
 | `chargifyToken` | `string \| undefined` | Optional | - |
-| `currentVault` | `string \| undefined` | Optional | - |
+| `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
 | `gatewayHandle` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

@@ -19,6 +19,10 @@
     "payment_collection_method": "automatic",
     "subscriptions": [
       {
+        "metafields": {
+          "custom_field_name_1": "custom_field_value_1",
+          "custom_field_name_2": "custom_field_value_2"
+        },
         "product_handle": "product_handle8",
         "product_id": 144,
         "product_price_point_id": 68,

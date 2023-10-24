@@ -9,6 +9,6 @@
 
 | Type |
 |  --- |
-| [`SnapDayEnum`](../../../doc/models/snap-day-enum.md) |
+| [`SnapDayOneOf0`](../../../doc/models/snap-day-one-of-0.md) |
 | `number` |
 

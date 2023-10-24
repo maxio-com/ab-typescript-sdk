@@ -21,7 +21,7 @@
     "first_name": "first_name4",
     "last_name": "last_name2",
     "customer_id": 82,
-    "current_vault": "current_vault4"
+    "current_vault": "gocardless"
   }
 }
 ```

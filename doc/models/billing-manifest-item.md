@@ -16,6 +16,13 @@
 | `discountAmountInCents` | `number \| undefined` | Optional | - |
 | `taxableAmountInCents` | `number \| undefined` | Optional | - |
 | `componentId` | `number \| undefined` | Optional | - |
+| `componentHandle` | `string \| undefined` | Optional | - |
+| `componentName` | `string \| undefined` | Optional | - |
+| `productId` | `number \| undefined` | Optional | - |
+| `productHandle` | `string \| undefined` | Optional | - |
+| `productName` | `string \| undefined` | Optional | - |
+| `periodRangeStart` | `string \| undefined` | Optional | - |
+| `periodRangeEnd` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

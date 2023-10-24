@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `payment` | [`CreateInvoicePayment`](../../doc/models/create-invoice-payment.md) | Required | - |
-| `type` | [`InvoicePaymentTypeEnum \| undefined`](../../doc/models/invoice-payment-type-enum.md) | Optional | The type of payment to be applied to an Invoice.<br>**Default**: `InvoicePaymentTypeEnum.External` |
+| `type` | [`InvoicePaymentType \| undefined`](../../doc/models/invoice-payment-type.md) | Optional | The type of payment to be applied to an Invoice.<br>**Default**: `InvoicePaymentType.External` |
 
 ## Example (as JSON)
 

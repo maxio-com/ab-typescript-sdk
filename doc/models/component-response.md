@@ -19,9 +19,9 @@
     "item_category": "Business Software",
     "id": 80,
     "name": "name8",
+    "handle": "handle4",
     "pricing_scheme": "pricing_scheme0",
-    "unit_name": "unit_name0",
-    "unit_price": "unit_price6"
+    "unit_name": "unit_name0"
   }
 }
 ```

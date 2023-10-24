@@ -18,6 +18,9 @@
 | `bankIban` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided |
 | `bankAccountHolderType` | `string \| undefined` | Optional | - |
 | `paymentType` | `string \| undefined` | Optional | - |
+| `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
+| `vaultToken` | `string \| undefined` | Optional | - |
+| `customerVaultToken` | `string \| undefined` | Optional | (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token |
 
 ## Example (as JSON)
 

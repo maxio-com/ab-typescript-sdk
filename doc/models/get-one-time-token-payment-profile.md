@@ -17,7 +17,7 @@
 | `expirationMonth` | `number` | Required | - |
 | `expirationYear` | `number` | Required | - |
 | `customerId` | `string \| null \| undefined` | Optional | - |
-| `currentVault` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
+| `currentVault` | [`CurrentVault`](../../doc/models/current-vault.md) | Required | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `vaultToken` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `billingAddress` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `billingAddress2` | `string \| undefined` | Optional | - |
@@ -43,7 +43,7 @@
   "expiration_month": 187.78,
   "expiration_year": 164.44,
   "customer_id": "customer_id0",
-  "current_vault": "current_vault2",
+  "current_vault": "firstdata",
   "vault_token": "vault_token4",
   "billing_address": "billing_address4",
   "billing_address_2": "billing_address_24",
@@ -53,7 +53,7 @@
   "billing_zip": "billing_zip0",
   "payment_type": "payment_type2",
   "disabled": false,
-  "site_gateway_setting_id": 143.12,
+  "site_gateway_setting_id": 232,
   "customer_vault_token": "customer_vault_token0",
   "gateway_handle": "gateway_handle4"
 }

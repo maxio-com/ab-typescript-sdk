@@ -251,10 +251,10 @@ async listProformaInvoices(
   subscriptionId: string,
   startDate?: string,
   endDate?: string,
-  status?: StatusEnum,
+  status?: Status,
   page?: number,
   perPage?: number,
-  direction?: DirectionEnum,
+  direction?: Direction,
   lineItems?: boolean,
   discounts?: boolean,
   taxes?: boolean,
@@ -272,10 +272,10 @@ async listProformaInvoices(
 | `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
 | `startDate` | `string \| undefined` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `endDate` | `string \| undefined` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
-| `status` | [`StatusEnum \| undefined`](../../doc/models/status-enum.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`Status \| undefined`](../../doc/models/status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `direction` | [`DirectionEnum \| undefined`](../../doc/models/direction-enum.md) | Query, Optional | The sort direction of the returned invoices.<br>**Default**: `DirectionEnum.Desc` |
+| `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices.<br>**Default**: `Direction.Desc` |
 | `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data<br>**Default**: `false` |
 | `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data<br>**Default**: `false` |
 | `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data<br>**Default**: `false` |
@@ -297,7 +297,7 @@ const page = 2;
 
 const perPage = 50;
 
-const direction = DirectionEnum.Desc;
+const direction = Direction.Desc;
 
 const lineItems = false;
 
@@ -524,7 +524,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsProformaInvoicesJson400Error`](../../doc/models/subscriptions-proforma-invoices-json-400-error.md) |
+| 400 | Bad Request | [`ProformaBadRequestErrorResponseError`](../../doc/models/proforma-bad-request-error-response-error.md) |
 | 403 | Forbidden | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
 
@@ -596,7 +596,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsProformaInvoicesPreviewJson400Error`](../../doc/models/subscriptions-proforma-invoices-preview-json-400-error.md) |
+| 400 | Bad Request | [`ProformaBadRequestErrorResponseError`](../../doc/models/proforma-bad-request-error-response-error.md) |
 | 403 | Forbidden | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
 

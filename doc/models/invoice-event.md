@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
-| `eventType` | [`InvoiceEventTypeEnum \| undefined`](../../doc/models/invoice-event-type-enum.md) | Optional | Invoice Event Type |
+| `eventType` | [`InvoiceEventType \| undefined`](../../doc/models/invoice-event-type.md) | Optional | Invoice Event Type |
 | `eventData` | [`InvoiceEventEventData \| undefined`](../../doc/models/containers/invoice-event-event-data.md) | Optional | This is a container for any-of cases. |
 | `timestamp` | `string \| undefined` | Optional | - |
 | `invoice` | [`Invoice \| undefined`](../../doc/models/invoice.md) | Optional | - |
@@ -20,16 +20,13 @@
 ```json
 {
   "id": 78,
-  "event_type": "issue_invoice",
+  "event_type": "remove_payment",
   "event_data": {
-    "memo": "memo8",
-    "original_amount": "original_amount8",
-    "applied_amount": "applied_amount4",
-    "transaction_time": "transaction_time6",
-    "payment_method": {
-      "key1": "val1",
-      "key2": "val2"
-    }
+    "uid": "uid2",
+    "credit_note_number": "credit_note_number4",
+    "credit_note_uid": "credit_note_uid4",
+    "original_amount": "original_amount6",
+    "applied_amount": "applied_amount6"
   },
   "timestamp": "timestamp8",
   "invoice": {

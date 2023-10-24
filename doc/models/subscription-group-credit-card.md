@@ -14,7 +14,7 @@
 | `expirationYear` | [`SubscriptionGroupCreditCardExpirationYear \| undefined`](../../doc/models/containers/subscription-group-credit-card-expiration-year.md) | Optional | This is a container for one-of cases. |
 | `chargifyToken` | `string \| undefined` | Optional | - |
 | `vaultToken` | `string \| undefined` | Optional | - |
-| `currentVault` | `string \| undefined` | Optional | - |
+| `currentVault` | [`CurrentVault \| undefined`](../../doc/models/current-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `gatewayHandle` | `string \| undefined` | Optional | - |
 | `firstName` | `string \| undefined` | Optional | - |
 | `lastName` | `string \| undefined` | Optional | - |

@@ -9,5 +9,5 @@
 
 | Type |
 |  --- |
-| [`IntervalUnitEnum`](../../../doc/models/interval-unit-enum.md) |
+| [`IntervalUnit`](../../../doc/models/interval-unit.md) |
 

@@ -26,7 +26,7 @@
 | `productFamilyName` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `role` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `seller` | [`InvoiceSeller \| undefined`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the invoice. |
-| `customer` | [`ProformaCustomer \| undefined`](../../doc/models/proforma-customer.md) | Optional | - |
+| `customer` | [`InvoiceCustomer \| undefined`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient the invoiced subscription. |
 | `memo` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `billingAddress` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
 | `shippingAddress` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
@@ -38,7 +38,7 @@
 | `paidAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `refundAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `dueAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `lineItems` | [`ProformaInvoiceLineItem[] \| undefined`](../../doc/models/proforma-invoice-line-item.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
+| `lineItems` | [`InvoiceLineItem[] \| undefined`](../../doc/models/invoice-line-item.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 | `discounts` | [`ProformaInvoiceDiscount[] \| undefined`](../../doc/models/proforma-invoice-discount.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 | `taxes` | [`ProformaInvoiceTax[] \| undefined`](../../doc/models/proforma-invoice-tax.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 | `credits` | [`ProformaInvoiceCredit[] \| undefined`](../../doc/models/proforma-invoice-credit.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |

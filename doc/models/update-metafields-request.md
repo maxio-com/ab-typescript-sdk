@@ -25,7 +25,7 @@
       "portal": "0",
       "public_show": "0"
     },
-    "input_type": "text",
+    "input_type": "balance_tracker",
     "enum": [
       "enum2"
     ]

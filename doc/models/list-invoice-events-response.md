@@ -23,14 +23,11 @@
       "id": 68,
       "event_type": "issue_invoice",
       "event_data": {
-        "memo": "memo8",
-        "original_amount": "original_amount8",
-        "applied_amount": "applied_amount4",
-        "transaction_time": "transaction_time6",
-        "payment_method": {
-          "key1": "val1",
-          "key2": "val2"
-        }
+        "uid": "uid2",
+        "credit_note_number": "credit_note_number4",
+        "credit_note_uid": "credit_note_uid4",
+        "original_amount": "original_amount6",
+        "applied_amount": "applied_amount6"
       },
       "timestamp": "timestamp8",
       "invoice": {

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `pricePoints` | [`ComponentPricePointResponse[]`](../../doc/models/component-price-point-response.md) | Required | - |
+| `pricePoints` | [`ComponentPricePoint[]`](../../doc/models/component-price-point.md) | Required | - |
 
 ## Example (as JSON)
 
@@ -17,14 +17,12 @@
 {
   "price_points": [
     {
-      "price_point": {
-        "use_site_exchange_rate": true,
-        "id": 248,
-        "type": "default",
-        "default": false,
-        "name": "name0",
-        "pricing_scheme": "pricing_scheme8"
-      }
+      "use_site_exchange_rate": true,
+      "id": 40,
+      "type": "default",
+      "default": false,
+      "name": "name2",
+      "pricing_scheme": "pricing_scheme4"
     }
   ]
 }

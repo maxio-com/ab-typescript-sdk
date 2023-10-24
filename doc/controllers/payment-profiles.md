@@ -294,11 +294,13 @@ async createPaymentProfile(
 ```ts
 const body: CreatePaymentProfileRequest = {
   paymentProfile: {
-    paymentType: PaymentTypeEnum.BankAccount,
+    paymentType: PaymentType.BankAccount,
     customerId: 123,
     bankName: 'Best Bank',
     bankRoutingNumber: '021000089',
     bankAccountNumber: '111111111111',
+    bankAccountType: 'checking',
+    bankAccountHolderType: 'business',
   },
 };
 
@@ -325,7 +327,6 @@ try {
   "payment_profile": {
     "first_name": "Jessica",
     "last_name": "Test",
-    "last_four": "1111",
     "card_type": "visa",
     "expiration_month": 10,
     "expiration_year": 2018,
@@ -637,10 +638,10 @@ const body: UpdatePaymentProfileRequest = {
     firstName: 'Graham',
     lastName: 'Test',
     fullNumber: '4111111111111111',
-    cardType: 'master',
+    cardType: CardType.Master,
     expirationMonth: '04',
     expirationYear: '2030',
-    currentVault: 'bogus',
+    currentVault: CurrentVault.Bogus,
     billingAddress: '456 Juniper Court',
     billingCity: 'Boulder',
     billingState: 'CO',
@@ -822,7 +823,7 @@ async verifyBankAccount(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bankAccountId` | `number` | Template, Required | - |
+| `bankAccountId` | `number` | Template, Required | Identifier of the bank account in the system. |
 | `body` | [`BankAccountVerificationRequest \| undefined`](../../doc/models/bank-account-verification-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 

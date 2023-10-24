@@ -127,7 +127,7 @@ async listProductPricePoints(
   page?: number,
   perPage?: number,
   currencyPrices?: boolean,
-  filterType?: PricePointTypeEnum[],
+  filterType?: PricePointType[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
@@ -140,7 +140,7 @@ async listProductPricePoints(
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>**Default**: `10`<br>**Constraints**: `<= 200` |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency. |
-| `filterType` | [`PricePointTypeEnum[] \| undefined`](../../doc/models/price-point-type-enum.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
+| `filterType` | [`PricePointType[] \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -763,17 +763,17 @@ const body: CreateProductCurrencyPricesRequest = {
     {
       currency: 'EUR',
       price: 60,
-      role: CurrencyPriceRoleEnum.Baseline,
+      role: CurrencyPriceRole.Baseline,
     },
     {
       currency: 'EUR',
       price: 30,
-      role: CurrencyPriceRoleEnum.Trial,
+      role: CurrencyPriceRole.Trial,
     },
     {
       currency: 'EUR',
       price: 100,
-      role: CurrencyPriceRoleEnum.Initial,
+      role: CurrencyPriceRole.Initial,
     }
   ],
 };
@@ -801,7 +801,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ProductPricePointsCurrencyPricesJson422Error`](../../doc/models/product-price-points-currency-prices-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
 
 
 # Update Product Currency Prices
@@ -892,15 +892,15 @@ This method allows retrieval of a list of Products Price Points belonging to a S
 ```ts
 async listAllProductPricePoints(
   direction?: ListAllProductPricePointsDirection,
-  filterArchivedAt?: IncludeNotNullEnum,
-  filterDateField?: BasicDateFieldEnum,
+  filterArchivedAt?: IncludeNotNull,
+  filterDateField?: BasicDateField,
   filterEndDate?: string,
   filterEndDatetime?: string,
   filterIds?: number[],
   filterStartDate?: string,
   filterStartDatetime?: string,
-  filterType?: PricePointTypeEnum[],
-  include?: ListProductsPricePointsIncludeEnum,
+  filterType?: PricePointType,
+  include?: ListProductsPricePointsInclude,
   page?: number,
   perPage?: number,
   requestOptions?: RequestOptions
@@ -912,15 +912,15 @@ async listAllProductPricePoints(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `direction` | [`ListAllProductPricePointsDirection \| undefined`](../../doc/models/containers/list-all-product-price-points-direction.md) | Query, Optional | This is a container for one-of cases. |
-| `filterArchivedAt` | [`IncludeNotNullEnum \| undefined`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
-| `filterDateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
+| `filterArchivedAt` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
 | `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
 | `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `filterType` | [`PricePointTypeEnum[] \| undefined`](../../doc/models/price-point-type-enum.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`. |
-| `include` | [`ListProductsPricePointsIncludeEnum \| undefined`](../../doc/models/list-products-price-points-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
+| `filterType` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`. |
+| `include` | [`ListProductsPricePointsInclude \| undefined`](../../doc/models/list-products-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -932,7 +932,7 @@ async listAllProductPricePoints(
 ## Example Usage
 
 ```ts
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const include = ListProductsPricePointsIncludeEnum.CurrencyPrices;
+Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const include = ListProductsPricePointsInclude.CurrencyPrices;
 
 const page = 2;
 

@@ -17,12 +17,18 @@
 {
   "proforma_invoice_preview": {
     "current_proforma_invoice": {
-      "key1": "val1",
-      "key2": "val2"
+      "uid": "uid6",
+      "site_id": 72,
+      "customer_id": 184,
+      "subscription_id": 0,
+      "number": 132
     },
     "next_proforma_invoice": {
-      "key1": "val1",
-      "key2": "val2"
+      "uid": "uid8",
+      "site_id": 212,
+      "customer_id": 68,
+      "subscription_id": 140,
+      "number": 16
     }
   }
 }

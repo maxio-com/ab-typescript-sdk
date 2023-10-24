@@ -29,12 +29,12 @@
       {
         "starting_quantity": 242,
         "ending_quantity": 40,
-        "unit_price": 10
+        "unit_price": 23.26
       },
       {
         "starting_quantity": 242,
         "ending_quantity": 40,
-        "unit_price": 10
+        "unit_price": 23.26
       }
     ],
     "overage_pricing": [
@@ -44,7 +44,7 @@
           {
             "starting_quantity": 242,
             "ending_quantity": 40,
-            "unit_price": 10
+            "unit_price": 23.26
           }
         ]
       },
@@ -54,7 +54,7 @@
           {
             "starting_quantity": 242,
             "ending_quantity": 40,
-            "unit_price": 10
+            "unit_price": 23.26
           }
         ]
       },
@@ -64,7 +64,7 @@
           {
             "starting_quantity": 242,
             "ending_quantity": 40,
-            "unit_price": 10
+            "unit_price": 23.26
           }
         ]
       }

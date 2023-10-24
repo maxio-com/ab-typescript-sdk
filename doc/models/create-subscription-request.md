@@ -16,6 +16,11 @@
 ```json
 {
   "subscription": {
+    "payment_collection_method": "automatic",
+    "metafields": {
+      "custom_field_name_1": "custom_field_value_1",
+      "custom_field_name_2": "custom_field_value_2"
+    },
     "dunning_communication_delay_enabled": false,
     "dunning_communication_delay_time_zone": "\"Eastern Time (US & Canada)\"",
     "skip_billing_manifest_taxes": false,

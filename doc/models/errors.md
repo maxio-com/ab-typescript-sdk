@@ -9,13 +9,21 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error` | `string \| undefined` | Optional | - |
+| `perPage` | `string[] \| undefined` | Optional | - |
+| `pricePoint` | `string[] \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "error": "error8"
+  "per_page": [
+    "per_page7",
+    "per_page8"
+  ],
+  "price_point": [
+    "price_point6",
+    "price_point7"
+  ]
 }
 ```
 

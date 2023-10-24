@@ -12,7 +12,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `snapDay` | [`CalendarBillingSnapDay \| undefined`](../../doc/models/containers/calendar-billing-snap-day.md) | Optional | This is a container for one-of cases. |
-| `calendarBillingFirstCharge` | [`FirstChargeTypeEnum \| undefined`](../../doc/models/first-charge-type-enum.md) | Optional | - |
+| `calendarBillingFirstCharge` | [`FirstChargeType \| undefined`](../../doc/models/first-charge-type.md) | Optional | - |
 
 ## Example (as JSON)
 

@@ -26,6 +26,7 @@
 | `vatNumber` | `string \| undefined` | Optional | - |
 | `taxExempt` | `boolean \| undefined` | Optional | - |
 | `taxExemptReason` | `string \| undefined` | Optional | - |
+| `parentId` | `number \| null \| undefined` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
 
 ## Example (as JSON)
 

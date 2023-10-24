@@ -16,7 +16,7 @@
 | `componentUnitPrice` | `string \| undefined` | Optional | - |
 | `componentName` | `string \| undefined` | Optional | - |
 | `pricePointName` | `string \| undefined` | Optional | - |
-| `currencyPrices` | `unknown[] \| undefined` | Optional | - |
+| `currencyPrices` | [`CurrencyPrice[] \| undefined`](../../doc/models/currency-price.md) | Optional | - |
 
 ## Example (as JSON)
 

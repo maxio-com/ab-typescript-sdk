@@ -50,7 +50,7 @@ If configuring metafields in the Admin UI or via the API, be careful sending upd
 
 ```ts
 async createMetafields(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   body?: CreateMetafieldsRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Metafield[]>>
@@ -60,7 +60,7 @@ async createMetafields(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `body` | [`CreateMetafieldsRequest \| undefined`](../../doc/models/create-metafields-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -71,16 +71,16 @@ async createMetafields(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const body: CreateMetafieldsRequest = {
   metafields: {
     name: 'Dropdown field',
     scope: {
-      publicShow: IncludeOptionEnum.Include,
-      publicEdit: IncludeOptionEnum.Include,
+      publicShow: IncludeOption.Include,
+      publicEdit: IncludeOption.Include,
     },
-    inputType: MetafieldInputEnum.Dropdown,
+    inputType: MetafieldInput.Dropdown,
     mEnum: [
       'option 1',
       'option 2'
@@ -107,39 +107,6 @@ try {
 }
 ```
 
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "name": "Color",
-    "scope": {
-      "hosted": [],
-      "csv": "0",
-      "statements": "0",
-      "invoices": "0",
-      "portal": "0"
-    },
-    "data_count": 0,
-    "input_type": "text",
-    "enum": null
-  },
-  {
-    "name": "Brand",
-    "scope": {
-      "hosted": [],
-      "csv": "0",
-      "statements": "0",
-      "invoices": "0",
-      "portal": "0"
-    },
-    "data_count": 0,
-    "input_type": "text",
-    "enum": null
-  }
-]
-```
-
 
 # List Metafields
 
@@ -147,7 +114,7 @@ This endpoint lists metafields associated with a site. The metafield description
 
 ```ts
 async listMetafields(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   name?: string,
   page?: number,
   perPage?: number,
@@ -160,7 +127,7 @@ async listMetafields(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `name` | `string \| undefined` | Query, Optional | filter by the name of the metafield |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
@@ -174,7 +141,7 @@ async listMetafields(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const page = 2;
 
@@ -201,34 +168,6 @@ try {
 }
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "total_count": 0,
-  "current_page": 0,
-  "total_pages": 0,
-  "per_page": 0,
-  "metafields": [
-    {
-      "id": 0,
-      "name": "string",
-      "scope": {
-        "csv": "0",
-        "statements": "0",
-        "invoices": "0",
-        "portal": "0",
-        "public_show": "0",
-        "public_edit": "0"
-      },
-      "data_count": 0,
-      "input_type": "string",
-      "enum": null
-    }
-  ]
-}
-```
-
 
 # Update Metafield
 
@@ -236,7 +175,7 @@ Use the following method to update metafields for your Site. Metafields can be p
 
 ```ts
 async updateMetafield(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   name: string,
   currentName?: string,
   body?: UpdateMetafieldsRequest,
@@ -248,8 +187,8 @@ async updateMetafield(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
-| `name` | `string` | Query, Required | - |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
+| `name` | `string` | Query, Required | Name of the custom field. |
 | `currentName` | `string \| undefined` | Query, Optional | This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field |
 | `body` | [`UpdateMetafieldsRequest \| undefined`](../../doc/models/update-metafields-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -261,7 +200,7 @@ async updateMetafield(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const name = 'name0';
 
@@ -293,7 +232,7 @@ Additionally, this will remove the metafield and associated metadata with all Su
 
 ```ts
 async deleteMetafield(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   name?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
@@ -303,7 +242,7 @@ async deleteMetafield(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `name` | `string \| undefined` | Query, Optional | The name of the metafield to be deleted |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -314,7 +253,7 @@ async deleteMetafield(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 try {
   // @ts-expect-error: unused variables
@@ -366,7 +305,7 @@ Please pay special attention to the resource you use when creating metadata.
 
 ```ts
 async createMetadata(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   resourceId: string,
   value?: string,
   body?: CreateMetadataRequest,
@@ -378,7 +317,7 @@ async createMetadata(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `value` | `string \| undefined` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`CreateMetadataRequest \| undefined`](../../doc/models/create-metadata-request.md) | Body, Optional | - |
@@ -391,7 +330,7 @@ async createMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const resourceId = 'resource_id4';
 
@@ -440,7 +379,7 @@ This endpoint will also display the current stats of your metadata to use as a t
 
 ```ts
 async readMetadata(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   resourceId: string,
   page?: number,
   perPage?: number,
@@ -452,7 +391,7 @@ async readMetadata(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
@@ -465,7 +404,7 @@ async readMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const resourceId = 'resource_id4';
 
@@ -501,7 +440,7 @@ This method allows you to update the existing metadata associated with a subscri
 
 ```ts
 async updateMetadata(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   resourceId: string,
   value?: string,
   body?: UpdateMetadataRequest,
@@ -513,7 +452,7 @@ async updateMetadata(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `value` | `string \| undefined` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`UpdateMetadataRequest \| undefined`](../../doc/models/update-metadata-request.md) | Body, Optional | - |
@@ -526,7 +465,7 @@ async updateMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const resourceId = 'resource_id4';
 
@@ -578,7 +517,7 @@ When a failed response is encountered, you will receive a `404` response and the
 
 ```ts
 async deleteMetadata(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   resourceId: string,
   name?: string,
   names?: string[],
@@ -590,10 +529,10 @@ async deleteMetadata(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `name` | `string \| undefined` | Query, Optional | - |
-| `names` | `string[] \| undefined` | Query, Optional | - |
+| `name` | `string \| undefined` | Query, Optional | Name of field to be removed. |
+| `names` | `string[] \| undefined` | Query, Optional | Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -603,7 +542,7 @@ async deleteMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const resourceId = 'resource_id4';
 
@@ -651,10 +590,10 @@ This endpoint will list the number of pages of metadata information that are con
 
 ```ts
 async listMetadata(
-  resourceType: ResourceTypeEnum,
+  resourceType: ResourceType,
   page?: number,
   perPage?: number,
-  dateField?: BasicDateFieldEnum,
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
@@ -670,16 +609,16 @@ async listMetadata(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resourceType` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `dateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `withDeleted` | `boolean \| undefined` | Query, Optional | Allow to fetch deleted metadata. |
-| `resourceIds` | `number[] \| undefined` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids.<br>**Constraints**: *Maximum Items*: `50` |
+| `resourceIds` | `number[] \| undefined` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.<br>**Constraints**: *Maximum Items*: `50` |
 | `direction` | [`ListMetadataDirection \| undefined`](../../doc/models/containers/list-metadata-direction.md) | Query, Optional | This is a container for one-of cases. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -690,13 +629,13 @@ async listMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceTypeEnum.Subscriptions;
+const resourceType = ResourceType.Subscriptions;
 
 const page = 2;
 
 const perPage = 50;
 
-const dateField = BasicDateFieldEnum.UpdatedAt;
+const dateField = BasicDateField.UpdatedAt;
 
 Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables

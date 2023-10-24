@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
-| `type` | [`PricePointTypeEnum \| undefined`](../../doc/models/price-point-type-enum.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
+| `type` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `mDefault` | `boolean \| undefined` | Optional | Note: Refer to type attribute instead |
 | `name` | `string \| undefined` | Optional | - |
 | `pricingScheme` | `string \| undefined` | Optional | - |

@@ -16,7 +16,7 @@
 | `details` | `string \| undefined` | Optional | - |
 | `external` | `boolean \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
-| `paymentType` | [`PrepaymentMethodEnum \| undefined`](../../doc/models/prepayment-method-enum.md) | Optional | :- When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance. This is especially useful for manual replenishment of prepaid subscriptions. |
+| `paymentType` | [`PrepaymentMethod \| undefined`](../../doc/models/prepayment-method.md) | Optional | :- When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance. This is especially useful for manual replenishment of prepaid subscriptions. |
 | `createdAt` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

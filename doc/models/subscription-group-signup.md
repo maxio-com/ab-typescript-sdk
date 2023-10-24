@@ -12,7 +12,7 @@
 | `paymentProfileId` | `number \| undefined` | Optional | - |
 | `payerId` | `number \| undefined` | Optional | - |
 | `payerReference` | `string \| undefined` | Optional | - |
-| `paymentCollectionMethod` | [`SignupCollectionMethodEnum \| undefined`](../../doc/models/signup-collection-method-enum.md) | Optional | **Default**: `SignupCollectionMethodEnum.Automatic` |
+| `paymentCollectionMethod` | [`PaymentCollectionMethod \| undefined`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `PaymentCollectionMethod.Automatic` |
 | `payerAttributes` | [`PayerAttributes \| undefined`](../../doc/models/payer-attributes.md) | Optional | - |
 | `creditCardAttributes` | [`SubscriptionGroupCreditCard \| undefined`](../../doc/models/subscription-group-credit-card.md) | Optional | - |
 | `bankAccountAttributes` | [`SubscriptionGroupBankAccount \| undefined`](../../doc/models/subscription-group-bank-account.md) | Optional | - |
@@ -25,6 +25,10 @@
   "payment_collection_method": "automatic",
   "subscriptions": [
     {
+      "metafields": {
+        "custom_field_name_1": "custom_field_value_1",
+        "custom_field_name_2": "custom_field_value_2"
+      },
       "product_handle": "product_handle8",
       "product_id": 144,
       "product_price_point_id": 68,

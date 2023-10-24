@@ -11,12 +11,12 @@ Warning: When updating a metafield's scope attribute, all scope attributes must 
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `csv` | [`IncludeOptionEnum \| undefined`](../../doc/models/include-option-enum.md) | Optional | Include (1) or exclude (0) metafields from the csv export. |
-| `invoices` | [`IncludeOptionEnum \| undefined`](../../doc/models/include-option-enum.md) | Optional | Include (1) or exclude (0) metafields from invoices. |
-| `statements` | [`IncludeOptionEnum \| undefined`](../../doc/models/include-option-enum.md) | Optional | Include (1) or exclude (0) metafields from statements. |
-| `portal` | [`IncludeOptionEnum \| undefined`](../../doc/models/include-option-enum.md) | Optional | Include (1) or exclude (0) metafields from the portal. |
-| `publicShow` | [`IncludeOptionEnum \| undefined`](../../doc/models/include-option-enum.md) | Optional | Include (1) or exclude (0) metafields from being viewable by your ecosystem. |
-| `publicEdit` | [`IncludeOptionEnum \| undefined`](../../doc/models/include-option-enum.md) | Optional | Include (1) or exclude (0) metafields from being edited by your ecosystem. |
+| `csv` | [`IncludeOption \| undefined`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields from the csv export. |
+| `invoices` | [`IncludeOption \| undefined`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields from invoices. |
+| `statements` | [`IncludeOption \| undefined`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields from statements. |
+| `portal` | [`IncludeOption \| undefined`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields from the portal. |
+| `publicShow` | [`IncludeOption \| undefined`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields from being viewable by your ecosystem. |
+| `publicEdit` | [`IncludeOption \| undefined`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields from being edited by your ecosystem. |
 
 ## Example (as JSON)
 

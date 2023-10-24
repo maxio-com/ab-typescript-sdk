@@ -5,9 +5,10 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `subdomain` | `string` | The subdomain for your Chargify site<br>*Default*: `'subdomain'` |
+| `subdomain` | `string` | The subdomain for your Chargify site.<br>*Default*: `'subdomain'` |
+| `domain` | `string` | The Chargify server domain.<br>*Default*: `'chargify.com'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
-| `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
+| `timeout` | `number` | Timeout for API calls.<br>*Default*: `30000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
 | `basicAuthUserName` | `string` | The username to use with basic authentication |
@@ -38,14 +39,14 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  timeout: 0,
+  timeout: 30000,
   environment: Environment.Production,
   basicAuthUserName: 'BasicAuthUserName',
   basicAuthPassword: 'BasicAuthPassword',
 });
 ```
 
-## Maxio Advanced Billing formerly Chargify API Client
+## Maxio Advanced Billing Client
 
 The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
 

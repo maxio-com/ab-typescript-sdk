@@ -24,17 +24,17 @@
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         },
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         },
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         }
       ],
       "use_site_exchange_rate": false
@@ -47,17 +47,17 @@
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         },
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         },
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         }
       ],
       "use_site_exchange_rate": false

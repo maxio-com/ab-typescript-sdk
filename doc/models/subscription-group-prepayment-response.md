@@ -12,7 +12,7 @@
 | `id` | `number \| undefined` | Optional | - |
 | `amountInCents` | `number \| undefined` | Optional | The amount in cents of the entry. |
 | `endingBalanceInCents` | `number \| undefined` | Optional | The ending balance in cents of the account. |
-| `entryType` | [`ServiceCreditTypeEnum \| undefined`](../../doc/models/service-credit-type-enum.md) | Optional | The type of entry |
+| `entryType` | [`ServiceCreditType \| undefined`](../../doc/models/service-credit-type.md) | Optional | The type of entry |
 | `memo` | `string \| undefined` | Optional | A memo attached to the entry. |
 
 ## Example (as JSON)

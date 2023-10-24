@@ -16,6 +16,7 @@
 | `discountAmountInCents` | `number \| undefined` | Optional | - |
 | `taxableAmountInCents` | `number \| undefined` | Optional | - |
 | `componentId` | `number \| undefined` | Optional | - |
+| `componentHandle` | `string \| undefined` | Optional | - |
 | `direction` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

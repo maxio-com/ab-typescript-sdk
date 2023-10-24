@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `currency` | `string` | Required | ISO code for one of the site level currencies. |
 | `price` | `number` | Required | Price for the given role. |
-| `role` | [`CurrencyPriceRoleEnum`](../../doc/models/currency-price-role-enum.md) | Required | Role for the price. |
+| `role` | [`CurrencyPriceRole`](../../doc/models/currency-price-role.md) | Required | Role for the price. |
 
 ## Example (as JSON)
 

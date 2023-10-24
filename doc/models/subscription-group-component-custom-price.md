@@ -24,7 +24,7 @@ Used in place of `price_point_id` to define a custom price point unique to the s
     {
       "starting_quantity": 242,
       "ending_quantity": 40,
-      "unit_price": 10
+      "unit_price": 23.26
     }
   ],
   "overage_pricing": [
@@ -34,7 +34,7 @@ Used in place of `price_point_id` to define a custom price point unique to the s
         {
           "starting_quantity": 242,
           "ending_quantity": 40,
-          "unit_price": 10
+          "unit_price": 23.26
         }
       ]
     }

@@ -102,7 +102,7 @@ const body: CreatePrepaymentRequest = {
     amount: 100,
     details: 'John Doe signup for $100',
     memo: 'Signup for $100',
-    method: PrepaymentMethodEnum.Check,
+    method: PrepaymentMethod.Check,
   },
 };
 
@@ -151,11 +151,11 @@ async listPrepayments(
   subscriptionId: string,
   page?: number,
   perPage?: number,
-  filterDateField?: BasicDateFieldEnum,
+  filterDateField?: BasicDateField,
   filterStartDate?: string,
   filterEndDate?: string,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionsPrepaymentsJsonResponse>>
+): Promise<ApiResponse<PrepaymentsResponse>>
 ```
 
 ## Parameters
@@ -165,14 +165,14 @@ async listPrepayments(
 | `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `filterDateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. |
 | `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-15`. |
 | `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[end_date]=2011-12-15`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`SubscriptionsPrepaymentsJsonResponse`](../../doc/models/subscriptions-prepayments-json-response.md)
+[`PrepaymentsResponse`](../../doc/models/prepayments-response.md)
 
 ## Example Usage
 
@@ -209,17 +209,16 @@ Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot 
 {
   "prepayments": [
     {
-      "prepayment": {
-        "id": 17,
-        "subscription_id": 3558750,
-        "amount_in_cents": 2000,
-        "remaining_amount_in_cents": 1100,
-        "external": true,
-        "memo": "test",
-        "details": "test details",
-        "payment_type": "cash",
-        "created_at": "2022-01-18T22:45:41+11:00"
-      }
+      "id": 17,
+      "subscription_id": 3558750,
+      "amount_in_cents": 2000,
+      "remaining_amount_in_cents": 1100,
+      "refunded_amount_in_cents": 0,
+      "external": true,
+      "memo": "test",
+      "details": "test details",
+      "payment_type": "cash",
+      "created_at": "2022-01-18T22:45:41+11:00"
     }
   ]
 }
@@ -422,7 +421,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsPrepaymentsRefundsJson400Error`](../../doc/models/subscriptions-prepayments-refunds-json-400-error.md) |
+| 400 | Bad Request | [`RefundPrepaymentBaseErrorsResponseError`](../../doc/models/refund-prepayment-base-errors-response-error.md) |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsPrepaymentsRefundsJson422Error`](../../doc/models/subscriptions-prepayments-refunds-json-422-error.md) |
+| 422 | Unprocessable Entity | [`RefundPrepaymentAggregatedErrorsResponseError`](../../doc/models/refund-prepayment-aggregated-errors-response-error.md) |
 

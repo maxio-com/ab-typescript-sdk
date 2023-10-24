@@ -23,7 +23,7 @@ Create or update custom pricing unique to the subscription. Used in place of `pr
     {
       "starting_quantity": 242,
       "ending_quantity": 40,
-      "unit_price": 10
+      "unit_price": 23.26
     }
   ]
 }

@@ -16,7 +16,7 @@
 | `accountingCode` | `string \| null \| undefined` | Optional | E.g. Internal ID or SKU Number |
 | `requestCreditCard` | `boolean \| undefined` | Optional | Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. |
 | `expirationInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
-| `expirationIntervalUnit` | [`ProductExpirationIntervalUnit \| null \| undefined`](../../doc/models/containers/product-expiration-interval-unit.md) | Optional | This is a container for one-of cases. |
+| `expirationIntervalUnit` | [`ProductExpirationIntervalUnit \| undefined`](../../doc/models/containers/product-expiration-interval-unit.md) | Optional | This is a container for one-of cases. |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this product was created |
 | `updatedAt` | `string \| undefined` | Optional | Timestamp indicating when this product was last updated |
 | `priceInCents` | `number \| undefined` | Optional | The product price, in integer cents |
@@ -25,7 +25,7 @@
 | `initialChargeInCents` | `number \| null \| undefined` | Optional | The up front charge you have specified. |
 | `trialPriceInCents` | `number \| null \| undefined` | Optional | The price of the trial period for a subscription to this product, in integer cents. |
 | `trialInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
-| `trialIntervalUnit` | [`ProductTrialIntervalUnit \| null \| undefined`](../../doc/models/containers/product-trial-interval-unit.md) | Optional | This is a container for one-of cases. |
+| `trialIntervalUnit` | [`ProductTrialIntervalUnit \| undefined`](../../doc/models/containers/product-trial-interval-unit.md) | Optional | This is a container for one-of cases. |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this product was archived |
 | `requireCreditCard` | `boolean \| undefined` | Optional | Boolean that controls whether a payment profile is required to be entered for customers wishing to sign up on this product. |
 | `returnParams` | `string \| null \| undefined` | Optional | - |
@@ -44,6 +44,8 @@
 | `defaultProductPricePointId` | `number \| undefined` | Optional | - |
 | `useSiteExchangeRate` | `boolean \| null \| undefined` | Optional | - |
 | `itemCategory` | `string \| null \| undefined` | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |
+| `productPricePointId` | `number \| undefined` | Optional | - |
+| `productPricePointHandle` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `coupon` | [`CreateOrUpdateCouponCoupon \| undefined`](../../doc/models/containers/create-or-update-coupon-coupon.md) | Optional | This is a container for one-of cases. |
-| `restrictedProducts` | [`Record<string, CreateOrUpdateCouponRestrictedProducts> \| undefined`](../../doc/models/containers/create-or-update-coupon-restricted-products.md) | Optional | This is Map of a container for one-of cases. |
-| `restrictedComponents` | [`Record<string, CreateOrUpdateCouponRestrictedComponents> \| undefined`](../../doc/models/containers/create-or-update-coupon-restricted-components.md) | Optional | This is Map of a container for one-of cases. |
+| `restrictedProducts` | `Record<string, boolean> \| undefined` | Optional | An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product |
+| `restrictedComponents` | `Record<string, boolean> \| undefined` | Optional | An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component |
 
 ## Example (as JSON)
 
@@ -28,16 +28,10 @@
     "product_family_id": "product_family_id6"
   },
   "restricted_products": {
-    "key0": {
-      "key0": true,
-      "key1": false
-    }
+    "key0": true
   },
   "restricted_components": {
-    "key0": {
-      "key0": true,
-      "key1": false
-    }
+    "key0": true
   }
 }
 ```

@@ -25,14 +25,14 @@ async listProductsForProductFamily(
   productFamilyId: number,
   page?: number,
   perPage?: number,
-  dateField?: BasicDateFieldEnum,
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
   endDatetime?: string,
   includeArchived?: boolean,
-  include?: ListProductsIncludeEnum,
-  filterPrepaidProductPricePointProductPricePointId?: IncludeNotNullEnum,
+  include?: ListProductsInclude,
+  filterPrepaidProductPricePointProductPricePointId?: IncludeNotNull,
   filterUseSiteExchangeRate?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductResponse[]>>
@@ -45,14 +45,14 @@ async listProductsForProductFamily(
 | `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the product belongs |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `dateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `includeArchived` | `boolean \| undefined` | Query, Optional | Include archived products |
-| `include` | [`ListProductsIncludeEnum \| undefined`](../../doc/models/list-products-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
-| `filterPrepaidProductPricePointProductPricePointId` | [`IncludeNotNullEnum \| undefined`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`. |
+| `include` | [`ListProductsInclude \| undefined`](../../doc/models/list-products-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
+| `filterPrepaidProductPricePointProductPricePointId` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`. |
 | `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). Use in query `filter[use_site_exchange_rate]=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -69,9 +69,9 @@ const page = 2;
 
 const perPage = 50;
 
-const dateField = BasicDateFieldEnum.UpdatedAt;
+const dateField = BasicDateField.UpdatedAt;
 
-const include = ListProductsIncludeEnum.PrepaidProductPricePoint;
+const include = ListProductsInclude.PrepaidProductPricePoint;
 
 Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables
@@ -277,7 +277,7 @@ This method allows to retrieve a list of Product Families for a site.
 
 ```ts
 async listProductFamilies(
-  dateField?: BasicDateFieldEnum,
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
@@ -290,7 +290,7 @@ async listProductFamilies(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `dateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
@@ -304,7 +304,7 @@ async listProductFamilies(
 ## Example Usage
 
 ```ts
-const dateField = BasicDateFieldEnum.UpdatedAt;
+const dateField = BasicDateField.UpdatedAt;
 
 try {
   // @ts-expect-error: unused variables

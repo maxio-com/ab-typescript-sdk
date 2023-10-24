@@ -12,7 +12,7 @@
 | `proratedAdjustmentInCents` | `number \| undefined` | Optional | The amount of the prorated adjustment that would be issued for the current subscription. |
 | `chargeInCents` | `number \| undefined` | Optional | The amount of the charge that would be created for the new product. |
 | `paymentDueInCents` | `number \| undefined` | Optional | The amount of the payment due in the case of an upgrade. |
-| `creditAppliedInCents` | `number \| undefined` | Optional | The amount of the credit that would be applied in the case that some is available to the subscription |
+| `creditAppliedInCents` | `number \| undefined` | Optional | Represents a credit in cents that is applied to your subscription as part of a migration process for a specific product, which reduces the amount owed for the subscription. |
 
 ## Example (as JSON)
 

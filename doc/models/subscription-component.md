@@ -37,6 +37,7 @@
 | `description` | `string \| null \| undefined` | Optional | - |
 | `allowFractionalQuantities` | `boolean \| undefined` | Optional | - |
 | `subscription` | [`SubscriptionComponentSubscription \| undefined`](../../doc/models/subscription-component-subscription.md) | Optional | An optional object, will be returned if provided `include=subscription` query param. |
+| `displayOnHostedPage` | `boolean \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

@@ -13,6 +13,8 @@
 | `id` | `string \| undefined` | Optional | A unique ID set by Chargify. Please note that this field is reserved. If `chargify.id` is present in the request payload, it will be overwritten. |
 | `createdAt` | `string \| undefined` | Optional | An ISO-8601 timestamp, set by Chargify at the time each event is recorded. Please note that this field is reserved. If `chargify.created_at` is present in the request payload, it will be overwritten. |
 | `uniquenessToken` | `string \| undefined` | Optional | User-defined string scoped per-stream. Duplicate events within a stream will be silently ignored. Tokens expire after 31 days.<br>**Constraints**: *Maximum Length*: `64` |
+| `subscriptionId` | `number \| undefined` | Optional | Id of Maxio Advanced Billing Subscription which is connected to this event.<br>Provide `subscription_id` if you configured `chargify.subscription_id` as Subscription Identifier in your Event Stream. |
+| `subscriptionReference` | `string \| undefined` | Optional | Reference of Maxio Advanced Billing Subscription which is connected to this event.<br>Provide `subscription_reference` if you configured `chargify.subscription_reference` as Subscription Identifier in your Event Stream. |
 
 ## Example (as JSON)
 
@@ -21,7 +23,8 @@
   "timestamp": "timestamp8",
   "id": "id4",
   "created_at": "created_at8",
-  "uniqueness_token": "uniqueness_token0"
+  "uniqueness_token": "uniqueness_token0",
+  "subscription_id": 200
 }
 ```
 

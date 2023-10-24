@@ -1,5 +1,5 @@
 
-# Getting Started with Maxio Advanced Billing formerly Chargify API
+# Getting Started with Maxio Advanced Billing
 
 ## Introduction
 
@@ -7,7 +7,7 @@
 
 #### API Integration
 
-Maxio Advanced Billing can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
+Maxio Advanced Billing (formerly Chargify API) can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
 
 #### Testing Guide
 
@@ -37,10 +37,6 @@ But don’t worry! There are quite a few options to help you get the answers you
 - Explore the endpoints of our API Documentation
 - [Watch our videos and tutorials](https://chargify.com/tutorials)
 - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
-
-#### Available Consultants
-
-Check out the list of [Chargify Consultants](http://chargify.com/consultants) if you require deeper technical expertise for your integration.
 
 ### API Overview
 
@@ -165,7 +161,7 @@ Those scenarios are as follows:
 - The site you're making a request for has been deleted.
   - _Note: any API request for another site that is in a good state will NOT be blocked_
 
-Read more about your Chargify subscription [here](https://chargify.zendesk.com/hc/en-us/articles/4407747017115)
+Read more about your Chargify subscription [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430043149-Advanced-Billing-Subscription#advanced-billing-subscription-0-0)
 
 #### What happens when an API request is blocked
 
@@ -237,7 +233,7 @@ This is an error message indicating that Cross-Origin Resource Sharing (CORS) is
 
 #### API Compatibility for Relationship Invoicing
 
-This section describes the API for the new, [Relationship Invoicing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) style of invoices introduced in January 2018.
+This section describes the API for the new, [Relationship Invoicing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253) style of invoices introduced in January 2018.
 
 If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
@@ -286,7 +282,7 @@ Run the following commands in the command prompt or shell of your choice to chec
 
 * npm: `npm --version`
 
-![Version Check](https://apidocs.io/illustration/typescript?workspaceFolder=MaxioAdvancedBillingFormerlyChargifyAPI&step=versionCheck)
+![Version Check](https://apidocs.io/illustration/typescript?workspaceFolder=AdvancedBilling&step=versionCheck)
 
 ### Install Dependencies
 
@@ -298,7 +294,7 @@ npm install
 
 - This will install all dependencies in the **node_modules** folder.
 
-![Resolve Dependencies](https://apidocs.io/illustration/typescript?workspaceFolder=MaxioAdvancedBillingFormerlyChargifyAPI&workspaceName=maxio-advanced-billing-formerly-chargify-apilib&step=resolveDependency)
+![Resolve Dependencies](https://apidocs.io/illustration/typescript?workspaceFolder=AdvancedBilling&workspaceName=maxio-advanced-billinglib&step=resolveDependency)
 
 ## Installation
 
@@ -322,9 +318,9 @@ npm init --y
 
 ### 2. Add Dependencies to the Client Library
 
-- The created project manages its dependencies using its `package.json` file. In order to add a dependency on the *Maxio Advanced Billing formerly Chargify APILib* client library, double click on the `package.json` file in the bar on the left and add the dependency to the package in it.
+- The created project manages its dependencies using its `package.json` file. In order to add a dependency on the *Maxio Advanced BillingLib* client library, double click on the `package.json` file in the bar on the left and add the dependency to the package in it.
 
-![Add MaxioAdvancedBillingFormerlyChargifyApilib Dependency](https://apidocs.io/illustration/typescript?workspaceFolder=MaxioAdvancedBillingFormerlyChargifyAPI&workspaceName=maxio-advanced-billing-formerly-chargify-apilib&step=importDependency)
+![Add MaxioAdvancedBillinglib Dependency](https://apidocs.io/illustration/typescript?workspaceFolder=AdvancedBilling&workspaceName=maxio-advanced-billinglib&step=importDependency)
 
 - To install the package in the project, run the following command in the terminal:
 
@@ -332,7 +328,7 @@ npm init --y
 npm install
 ```
 
-![Install MaxioAdvancedBillingFormerlyChargifyApilib Dependency](https://apidocs.io/illustration/typescript?step=installDependency)
+![Install MaxioAdvancedBillinglib Dependency](https://apidocs.io/illustration/typescript?step=installDependency)
 
 ## Initialize the API Client
 
@@ -342,9 +338,10 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `subdomain` | `string` | The subdomain for your Chargify site<br>*Default*: `'subdomain'` |
+| `subdomain` | `string` | The subdomain for your Chargify site.<br>*Default*: `'subdomain'` |
+| `domain` | `string` | The Chargify server domain.<br>*Default*: `'chargify.com'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
-| `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
+| `timeout` | `number` | Timeout for API calls.<br>*Default*: `30000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
 | `basicAuthUserName` | `string` | The username to use with basic authentication |
@@ -375,7 +372,7 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  timeout: 0,
+  timeout: 30000,
   environment: Environment.Production,
   basicAuthUserName: 'BasicAuthUserName',
   basicAuthPassword: 'BasicAuthPassword',

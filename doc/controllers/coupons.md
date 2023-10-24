@@ -68,10 +68,37 @@ async createCoupon(
 ```ts
 const productFamilyId = 140;
 
+const body: CreateCouponBody = {
+  coupon: {
+    name: '15% off',
+    code: '15OFF',
+    percentage: '15',
+    description: '15% off for life',
+    allowNegativeBalance: 'false',
+    recurring: 'false',
+    endDate: '2012-08-29T12:00:00-04:00',
+    productFamilyId: '2',
+    stackable: 'true',
+    compoundingStrategy: CompoundingStrategy.Compound,
+    excludeMidPeriodAllocations: true,
+    applyOnCancelAtEndOfPeriod: true,
+  },
+  restrictedProducts: {
+    '1': true
+  },
+  restrictedComponents: {
+    '1': true,
+    '2': false
+  },
+};
+
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.createCoupon(productFamilyId);
+  const { result, ...httpResponse } = await couponsController.createCoupon(
+  productFamilyId,
+  body
+);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -102,7 +129,7 @@ async listCouponsForProductFamily(
   productFamilyId: number,
   page?: number,
   perPage?: number,
-  filterDateField?: BasicDateFieldEnum,
+  filterDateField?: BasicDateField,
   filterEndDate?: string,
   filterEndDatetime?: string,
   filterStartDate?: string,
@@ -112,7 +139,7 @@ async listCouponsForProductFamily(
   currencyPrices?: boolean,
   filterUseSiteExchangeRate?: boolean,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<Coupon[]>>
+): Promise<ApiResponse<CouponResponse[]>>
 ```
 
 ## Parameters
@@ -122,7 +149,7 @@ async listCouponsForProductFamily(
 | `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `30`<br>**Constraints**: `<= 200` |
-| `filterDateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. |
 | `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[date_field]=2011-12-15`. |
 | `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `?filter[end_datetime]=2011-12-1T10:15:30+01:00`. |
 | `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-17`. |
@@ -135,7 +162,7 @@ async listCouponsForProductFamily(
 
 ## Response Type
 
-[`Coupon[]`](../../doc/models/coupon.md)
+[`CouponResponse[]`](../../doc/models/coupon-response.md)
 
 ## Example Usage
 
@@ -192,7 +219,7 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
       "duration_interval_unit": "day",
       "allow_negative_balance": true,
       "archived_at": null,
-      "conversion_limit": 100,
+      "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
       "coupon_restrictions": [],
@@ -218,7 +245,7 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
       "duration_interval_unit": "day",
       "allow_negative_balance": true,
       "archived_at": null,
-      "conversion_limit": 100,
+      "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
       "coupon_restrictions": [],
@@ -244,7 +271,7 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
       "duration_interval_unit": "day",
       "allow_negative_balance": true,
       "archived_at": null,
-      "conversion_limit": 100,
+      "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
       "coupon_restrictions": [
@@ -282,7 +309,7 @@ async readCouponByCode(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number \| undefined` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
-| `code` | `string \| undefined` | Query, Optional | - |
+| `code` | `string \| undefined` | Query, Optional | The code of the coupon |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -433,12 +460,35 @@ const productFamilyId = 140;
 
 const couponId = 162;
 
+const body: UpdateCouponBody = {
+  coupon: {
+    name: '15% off',
+    code: '15OFF',
+    percentage: '15',
+    description: '15% off for life',
+    allowNegativeBalance: 'false',
+    recurring: 'false',
+    endDate: '2012-08-29T12:00:00-04:00',
+    productFamilyId: '2',
+    stackable: 'true',
+    compoundingStrategy: CompoundingStrategy.Compound,
+  },
+  restrictedProducts: {
+    '1': true
+  },
+  restrictedComponents: {
+    '1': true,
+    '2': false
+  },
+};
+
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.updateCoupon(
   productFamilyId,
-  couponId
+  couponId,
+  body
 );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
@@ -576,7 +626,7 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 async listCoupons(
   page?: number,
   perPage?: number,
-  dateField?: BasicDateFieldEnum,
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
@@ -588,7 +638,7 @@ async listCoupons(
   filterEndDatetime?: string,
   filterStartDate?: string,
   filterStartDatetime?: string,
-  filterDateField?: BasicDateFieldEnum,
+  filterDateField?: BasicDateField,
   filterUseSiteExchangeRate?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse[]>>
@@ -600,7 +650,7 @@ async listCoupons(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `30`<br>**Constraints**: `<= 200` |
-| `dateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search. |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search. |
 | `startDate` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[start_datetime] instead to achieve the same result. The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
@@ -612,7 +662,7 @@ async listCoupons(
 | `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `filter[end_datetime]=2011-12-19T10:15:30+01:00`. |
 | `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-19`. |
 | `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filterDateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=updated_at`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=updated_at`. |
 | `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -627,7 +677,7 @@ const page = 2;
 
 const perPage = 50;
 
-const dateField = BasicDateFieldEnum.UpdatedAt;
+const dateField = BasicDateField.UpdatedAt;
 
 Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const currencyPrices = true;
 
@@ -689,10 +739,10 @@ Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot 
       "updated_at": "string",
       "discount_type": "amount",
       "exclude_mid_period_allocations": true,
-      "apply_on_cancel_at_end_of_period ": true,
+      "apply_on_cancel_at_end_of_period": true,
       "coupon_restrictions": [
         {
-          "id": "string",
+          "id": 0,
           "item_type": "Component",
           "item_id": 0,
           "name": "string",
@@ -889,7 +939,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 404 | Not Found | [`CouponsValidateJson404Error`](../../doc/models/coupons-validate-json-404-error.md) |
+| 404 | Not Found | [`SingleStringErrorResponseError`](../../doc/models/single-string-error-response-error.md) |
 
 
 # Update Coupon Currency Prices
@@ -1256,7 +1306,7 @@ async deleteCouponSubcode(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `couponId` | `number` | Template, Required | The Chargify id of the coupon to which the subcode belongs |
-| `subcode` | `string` | Template, Required | - |
+| `subcode` | `string` | Template, Required | The subcode of the coupon |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

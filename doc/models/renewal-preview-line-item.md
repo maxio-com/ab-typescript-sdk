@@ -16,6 +16,7 @@
 | `discountAmountInCents` | `number \| undefined` | Optional | - |
 | `taxableAmountInCents` | `number \| undefined` | Optional | - |
 | `productId` | `number \| undefined` | Optional | - |
+| `productName` | `string \| undefined` | Optional | - |
 | `componentId` | `number \| undefined` | Optional | - |
 | `componentHandle` | `string \| undefined` | Optional | - |
 | `componentName` | `string \| undefined` | Optional | - |

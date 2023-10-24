@@ -18,7 +18,7 @@
 | `billingState` | `string \| undefined` | Optional | The current billing address state for the bank account |
 | `billingZip` | `string \| undefined` | Optional | The current billing address zip code for the bank account |
 | `billingCountry` | `string \| undefined` | Optional | The current billing address country for the bank account |
-| `currentVault` | [`BankAccountVaultEnum \| undefined`](../../doc/models/bank-account-vault-enum.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
+| `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
 | `customerId` | `number \| undefined` | Optional | The Chargify-assigned id for the customer record to which the bank account belongs |
 | `customerVaultToken` | `string \| undefined` | Optional | (only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token |
 | `firstName` | `string \| undefined` | Optional | The first name of the bank account holder |

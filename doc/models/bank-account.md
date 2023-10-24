@@ -13,7 +13,7 @@
 | `firstName` | `string \| undefined` | Optional | - |
 | `lastName` | `string \| undefined` | Optional | - |
 | `customerId` | `number \| undefined` | Optional | - |
-| `currentVault` | `string \| undefined` | Optional | - |
+| `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
 | `vaultToken` | `string \| undefined` | Optional | - |
 | `billingAddress` | `string \| undefined` | Optional | - |
 | `billingCity` | `string \| undefined` | Optional | - |
@@ -41,7 +41,7 @@
   "first_name": "first_name2",
   "last_name": "last_name0",
   "customer_id": 228,
-  "current_vault": "current_vault2"
+  "current_vault": "stripe_connect"
 }
 ```
 

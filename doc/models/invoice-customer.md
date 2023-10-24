@@ -16,6 +16,8 @@ Information about the customer who is owner or recipient the invoiced subscripti
 | `lastName` | `string \| undefined` | Optional | - |
 | `organization` | `string \| null \| undefined` | Optional | - |
 | `email` | `string \| undefined` | Optional | - |
+| `vatNumber` | `string \| null \| undefined` | Optional | - |
+| `reference` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

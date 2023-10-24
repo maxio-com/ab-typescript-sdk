@@ -16,6 +16,7 @@
 | `unitPrice` | `string \| undefined` | Optional | - |
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `formattedUnitPrice` | `string \| undefined` | Optional | - |
+| `segmentId` | `number \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

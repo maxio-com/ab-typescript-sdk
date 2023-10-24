@@ -123,7 +123,7 @@ This call is asynchronous and there may be a delay before the site data is fully
 
 ```ts
 async clearSite(
-  cleanupScope?: CleanupScopeEnum,
+  cleanupScope?: CleanupScope,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
@@ -132,7 +132,7 @@ async clearSite(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cleanupScope` | [`CleanupScopeEnum \| undefined`](../../doc/models/cleanup-scope-enum.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`.<br>**Default**: `CleanupScopeEnum.All` |
+| `cleanupScope` | [`CleanupScope \| undefined`](../../doc/models/cleanup-scope.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`.<br>**Default**: `CleanupScope.All` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -142,7 +142,7 @@ async clearSite(
 ## Example Usage
 
 ```ts
-const cleanupScope = CleanupScopeEnum.All;
+const cleanupScope = CleanupScope.All;
 
 try {
   // @ts-expect-error: unused variables

@@ -16,9 +16,10 @@
 | `expirationMonth` | `number \| undefined` | Optional | - |
 | `expirationYear` | `number \| undefined` | Optional | - |
 | `customerId` | `number \| undefined` | Optional | - |
-| `currentVault` | `string \| undefined` | Optional | - |
+| `currentVault` | [`CurrentVault \| undefined`](../../doc/models/current-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `vaultToken` | `string \| undefined` | Optional | - |
 | `billingAddress` | `string \| undefined` | Optional | - |
+| `billingAddress2` | `string \| undefined` | Optional | - |
 | `billingCity` | `string \| undefined` | Optional | - |
 | `billingState` | `string \| undefined` | Optional | - |
 | `billingZip` | `string \| undefined` | Optional | - |
@@ -26,6 +27,8 @@
 | `paymentType` | `string \| undefined` | Optional | - |
 | `siteGatewaySettingId` | `number \| undefined` | Optional | - |
 | `gatewayHandle` | `string \| null \| undefined` | Optional | - |
+| `maskedCardNumber` | `string \| undefined` | Optional | - |
+| `customerVaultToken` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

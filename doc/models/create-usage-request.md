@@ -16,7 +16,7 @@
 ```json
 {
   "usage": {
-    "quantity": 28,
+    "quantity": 162.34,
     "price_point_id": "price_point_id0",
     "memo": "memo2"
   }

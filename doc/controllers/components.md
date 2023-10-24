@@ -52,7 +52,7 @@ For information on how to record component usage against a subscription, please 
 ```ts
 async createComponent(
   productFamilyId: number,
-  componentKind: ComponentKindPathEnum,
+  componentKind: ComponentKindPath,
   body?: CreateComponentBody,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentResponse>>
@@ -63,7 +63,7 @@ async createComponent(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the component belongs |
-| `componentKind` | [`ComponentKindPathEnum`](../../doc/models/component-kind-path-enum.md) | Template, Required | The component kind |
+| `componentKind` | [`ComponentKindPath`](../../doc/models/component-kind-path.md) | Template, Required | The component kind |
 | `body` | [`CreateComponentBody \| undefined`](../../doc/models/containers/create-component-body.md) | Body, Optional | This is a container for one-of cases. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -76,13 +76,13 @@ async createComponent(
 ```ts
 const productFamilyId = 140;
 
-const componentKind = ComponentKindPathEnum.OnOffComponents;
+const componentKind = ComponentKindPath.OnOffComponents;
 
 const body: CreateComponentBody = {
   meteredComponent: {
     name: 'Text messages',
     unitName: 'text message',
-    pricingScheme: PricingSchemeEnum.Stairstep,
+    pricingScheme: PricingScheme.Stairstep,
     taxable: false,
     prices: [
       {
@@ -347,7 +347,7 @@ const componentId = 'component_id8';
 
 const body: UpdateComponentRequest = {
   component: {
-    itemCategory: ItemCategoryEnum.EnumBusinessSoftware,
+    itemCategory: ItemCategory.EnumBusinessSoftware,
   },
 };
 
@@ -405,7 +405,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Archive Component
@@ -499,7 +499,7 @@ This request will return a list of components for a site.
 
 ```ts
 async listComponents(
-  dateField?: BasicDateFieldEnum,
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
@@ -517,7 +517,7 @@ async listComponents(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `dateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
@@ -536,7 +536,7 @@ async listComponents(
 ## Example Usage
 
 ```ts
-const dateField = BasicDateFieldEnum.UpdatedAt;
+const dateField = BasicDateField.UpdatedAt;
 
 const page = 2;
 
@@ -697,7 +697,7 @@ const componentId = 'component_id8';
 
 const body: UpdateComponentRequest = {
   component: {
-    itemCategory: ItemCategoryEnum.EnumBusinessSoftware,
+    itemCategory: ItemCategory.EnumBusinessSoftware,
   },
 };
 
@@ -787,7 +787,7 @@ async listComponentsForProductFamily(
   filterIds?: number[],
   page?: number,
   perPage?: number,
-  dateField?: BasicDateFieldEnum,
+  dateField?: BasicDateField,
   endDate?: string,
   endDatetime?: string,
   startDate?: string,
@@ -806,7 +806,7 @@ async listComponentsForProductFamily(
 | `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching components with matching id based on provided value. Use in query `filter[ids]=1,2`. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `dateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `date_field=created_at`. |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `date_field=created_at`. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. optional. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
@@ -827,7 +827,7 @@ Liquid error: Value cannot be null. (Parameter 'key')const page = 2;
 
 const perPage = 50;
 
-const dateField = BasicDateFieldEnum.UpdatedAt;
+const dateField = BasicDateField.UpdatedAt;
 
 Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables
@@ -979,20 +979,15 @@ const componentId = 222;
 
 const body: CreateComponentPricePointRequest = {
   pricePoint: {
-    name: 'Wholesale',
-    pricingScheme: 'stairstep',
+    name: 'Special Pricing',
+    pricingScheme: 'per_unit',
     prices: [
       {
-        startingQuantity: '1',
-        unitPrice: '5.00',
-        endingQuantity: '100',
-      },
-      {
-        startingQuantity: '101',
-        unitPrice: '4.00',
+        startingQuantity: 1,
+        unitPrice: 5,
       }
     ],
-    handle: 'wholesale-handle',
+    handle: 'special',
   },
 };
 
@@ -1032,7 +1027,7 @@ async listComponentPricePoints(
   currencyPrices?: boolean,
   page?: number,
   perPage?: number,
-  filterType?: PricePointTypeEnum[],
+  filterType?: PricePointType[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
@@ -1045,7 +1040,7 @@ async listComponentPricePoints(
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | Include an array of currency price data |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `filterType` | [`PricePointTypeEnum[] \| undefined`](../../doc/models/price-point-type-enum.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
+| `filterType` | [`PricePointType[] \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1148,7 +1143,7 @@ async createComponentPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `string` | Template, Required | - |
+| `componentId` | `string` | Template, Required | The Chargify id of the component for which you want to fetch price points. |
 | `body` | [`CreateComponentPricePointsRequest \| undefined`](../../doc/models/create-component-price-points-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1657,18 +1652,18 @@ This method allows to retrieve a list of Components Price Points belonging to a 
 
 ```ts
 async listAllComponentPricePoints(
-  filterDateField?: BasicDateFieldEnum,
+  filterDateField?: BasicDateField,
   filterEndDate?: string,
   filterEndDatetime?: string,
-  include?: ListComponentsPricePointsIncludeEnum,
+  include?: ListComponentsPricePointsInclude,
   page?: number,
   perPage?: number,
   filterStartDate?: string,
   filterStartDatetime?: string,
-  filterType?: PricePointTypeEnum[],
+  filterType?: PricePointType,
   direction?: ListAllComponentPricePointsDirection,
   filterIds?: number[],
-  filterArchivedAt?: IncludeNotNullEnum,
+  filterArchivedAt?: IncludeNotNull,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListComponentsPricePointsResponse>>
 ```
@@ -1677,18 +1672,18 @@ async listAllComponentPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `filterDateField` | [`BasicDateFieldEnum \| undefined`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
 | `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `include` | [`ListComponentsPricePointsIncludeEnum \| undefined`](../../doc/models/list-components-price-points-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
+| `include` | [`ListComponentsPricePointsInclude \| undefined`](../../doc/models/list-components-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `filterType` | [`PricePointTypeEnum[] \| undefined`](../../doc/models/price-point-type-enum.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`. |
+| `filterType` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`. |
 | `direction` | [`ListAllComponentPricePointsDirection \| undefined`](../../doc/models/containers/list-all-component-price-points-direction.md) | Query, Optional | This is a container for one-of cases. |
 | `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
-| `filterArchivedAt` | [`IncludeNotNullEnum \| undefined`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
+| `filterArchivedAt` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1698,7 +1693,7 @@ async listAllComponentPricePoints(
 ## Example Usage
 
 ```ts
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const include = ListComponentsPricePointsIncludeEnum.CurrencyPrices;
+Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const include = ListComponentsPricePointsInclude.CurrencyPrices;
 
 const page = 2;
 
@@ -1730,27 +1725,28 @@ Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot 
 {
   "price_points": [
     {
-      "price_point": {
-        "id": 1,
-        "name": "Auto-created",
-        "type": "default",
-        "component_id": 2,
-        "handle": "auto-created",
-        "created_at": "2021-02-21T11:05:57-05:00",
-        "updated_at": "2021-02-21T11:05:57-05:00",
-        "prices": [
-          {
-            "id": 3,
-            "component_id": 2,
-            "starting_quantity": 0,
-            "ending_quantity": null,
-            "unit_price": "1.0",
-            "price_point_id": 1,
-            "formatted_unit_price": "$1.00",
-            "segment_id": null
-          }
-        ]
-      }
+      "id": 1,
+      "name": "Auto-created",
+      "type": "default",
+      "pricing_scheme": "per_unit",
+      "component_id": 2,
+      "handle": "auto-created",
+      "archived_at": null,
+      "created_at": "2021-02-21T11:05:57-05:00",
+      "updated_at": "2021-02-21T11:05:57-05:00",
+      "prices": [
+        {
+          "id": 3,
+          "component_id": 2,
+          "starting_quantity": 0,
+          "ending_quantity": null,
+          "unit_price": "1.0",
+          "price_point_id": 1,
+          "formatted_unit_price": "$1.00",
+          "segment_id": null
+        }
+      ],
+      "tax_included": false
     }
   ]
 }

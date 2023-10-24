@@ -26,7 +26,7 @@
 | `productFamilyName` | `string \| undefined` | Optional | - |
 | `role` | `string \| undefined` | Optional | - |
 | `seller` | [`InvoiceSeller \| undefined`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the invoice. |
-| `customer` | [`ProformaCustomer \| undefined`](../../doc/models/proforma-customer.md) | Optional | - |
+| `customer` | [`InvoiceCustomer \| undefined`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient the invoiced subscription. |
 | `memo` | `string \| undefined` | Optional | - |
 | `billingAddress` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
 | `shippingAddress` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
@@ -38,12 +38,12 @@
 | `paidAmount` | `string \| undefined` | Optional | - |
 | `refundAmount` | `string \| undefined` | Optional | - |
 | `dueAmount` | `string \| undefined` | Optional | - |
-| `lineItems` | [`ProformaInvoiceLineItem[] \| undefined`](../../doc/models/proforma-invoice-line-item.md) | Optional | - |
-| `discounts` | `unknown[] \| undefined` | Optional | - |
-| `taxes` | `unknown[] \| undefined` | Optional | - |
-| `credits` | `unknown[] \| undefined` | Optional | - |
-| `payments` | `unknown[] \| undefined` | Optional | - |
-| `customFields` | `unknown[] \| undefined` | Optional | - |
+| `lineItems` | [`InvoiceLineItem[] \| undefined`](../../doc/models/invoice-line-item.md) | Optional | - |
+| `discounts` | [`ProformaInvoiceDiscount[] \| undefined`](../../doc/models/proforma-invoice-discount.md) | Optional | - |
+| `taxes` | [`ProformaInvoiceTax[] \| undefined`](../../doc/models/proforma-invoice-tax.md) | Optional | - |
+| `credits` | [`ProformaInvoiceCredit[] \| undefined`](../../doc/models/proforma-invoice-credit.md) | Optional | - |
+| `payments` | [`ProformaInvoicePayment[] \| undefined`](../../doc/models/proforma-invoice-payment.md) | Optional | - |
+| `customFields` | [`ProformaCustomField[] \| undefined`](../../doc/models/proforma-custom-field.md) | Optional | - |
 | `publicUrl` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `prepayment` | [`Prepayment1`](../../doc/models/prepayment-1.md) | Required | - |
+| `prepayment` | [`PrepaymentPrepaymentResponse`](../../doc/models/prepayment-prepayment-response.md) | Required | - |
 
 ## Example (as JSON)
 
@@ -20,16 +20,11 @@
     "subscription_id": 155.08,
     "amount_in_cents": 108.76,
     "remaining_amount_in_cents": 160.54,
-    "details": {
-      "key1": "val1",
-      "key2": "val2"
-    },
+    "refunded_amount_in_cents": 185.64,
+    "details": "details8",
     "external": false,
     "memo": "memo2",
-    "payment_type": {
-      "key1": "val1",
-      "key2": "val2"
-    },
+    "payment_type": "credit_card_on_file",
     "created_at": "created_at6"
   }
 }

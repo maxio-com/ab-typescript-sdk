@@ -24,12 +24,14 @@
     "pricing_scheme": "volume",
     "prices": [
       {
-        "starting_quantity": 64,
-        "unit_price": "String3"
+        "starting_quantity": 242,
+        "ending_quantity": 40,
+        "unit_price": 23.26
       },
       {
-        "starting_quantity": 64,
-        "unit_price": "String3"
+        "starting_quantity": 242,
+        "ending_quantity": 40,
+        "unit_price": 23.26
       }
     ],
     "upgrade_charge": "upgrade_charge8"

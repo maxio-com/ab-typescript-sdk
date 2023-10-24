@@ -9,5 +9,5 @@
 
 | Type |
 |  --- |
-| [`CancellationMethodEnum`](../../../doc/models/cancellation-method-enum.md) |
+| [`CancellationMethod`](../../../doc/models/cancellation-method.md) |
 

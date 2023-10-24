@@ -86,9 +86,9 @@ async listEvents(
   perPage?: number,
   sinceId?: number,
   maxId?: number,
-  direction?: DirectionEnum,
-  filter?: EventTypeEnum[],
-  dateField?: ListEventsDateFieldEnum,
+  direction?: Direction,
+  filter?: EventType[],
+  dateField?: ListEventsDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
@@ -103,11 +103,11 @@ async listEvents(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `sinceId` | `number \| undefined` | Query, Optional | - |
-| `maxId` | `number \| undefined` | Query, Optional | - |
-| `direction` | [`DirectionEnum \| undefined`](../../doc/models/direction-enum.md) | Query, Optional | **Default**: `DirectionEnum.Desc` |
-| `filter` | [`EventTypeEnum[] \| undefined`](../../doc/models/event-type-enum.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
-| `dateField` | [`ListEventsDateFieldEnum \| undefined`](../../doc/models/list-events-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. |
+| `sinceId` | `number \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `maxId` | `number \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br>**Default**: `Direction.Desc` |
+| `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+| `dateField` | [`ListEventsDateField \| undefined`](../../doc/models/list-events-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
@@ -125,14 +125,14 @@ const page = 2;
 
 const perPage = 50;
 
-const direction = DirectionEnum.Desc;
+const direction = Direction.Desc;
 
-const filter: EventTypeEnum[] = [
-  EventTypeEnum.CustomFieldValueChange,
-  EventTypeEnum.PaymentSuccess
+const filter: EventType[] = [
+  EventType.CustomFieldValueChange,
+  EventType.PaymentSuccess
 ];
 
-const dateField = ListEventsDateFieldEnum.CreatedAt;
+const dateField = ListEventsDateField.CreatedAt;
 
 try {
   // @ts-expect-error: unused variables
@@ -158,67 +158,6 @@ try {
 }
 ```
 
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "event": {
-      "id": 343087780,
-      "key": "subscription_state_change",
-      "message": "State changed on Test subscription to Monthly Product from active to past_due",
-      "subscription_id": 14950962,
-      "created_at": "2016-10-27T16:42:22-04:00",
-      "event_specific_data": {
-        "previous_subscription_state": "active",
-        "new_subscription_state": "past_due"
-      }
-    }
-  },
-  {
-    "event": {
-      "id": 343087742,
-      "key": "billing_date_change",
-      "message": "Billing date changed on Test's subscription to Monthly Product from 11/27/2016 to 10/27/2016",
-      "subscription_id": 14950962,
-      "created_at": "2016-10-27T16:42:19-04:00",
-      "event_specific_data": null
-    }
-  },
-  {
-    "event": {
-      "id": 343085267,
-      "key": "statement_closed",
-      "message": "Statement 79401838 closed (but not settled) for Test's subscription to ANNUAL product",
-      "subscription_id": 14950975,
-      "created_at": "2016-10-27T16:40:40-04:00",
-      "event_specific_data": null
-    }
-  },
-  {
-    "event": {
-      "id": 4481,
-      "key": "custom_field_value_change",
-      "message": "Custom field (Extra support included) changed for Subscription 117 from 'Yes' to 'No'.",
-      "subscription_id": 117,
-      "customer_id": null,
-      "created_at": "2022-03-24T07:55:06-04:00",
-      "event_specific_data": {
-        "event_type": "updated",
-        "metafield_name": "Extra support included",
-        "metafield_id": 2,
-        "old_value": "Yes",
-        "new_value": "No",
-        "resource_type": "Subscription",
-        "resource_id": 117,
-        "previous_subscription_state": "active",
-        "new_subscription_state": "past_due"
-      }
-    }
-  }
-]
-```
-
 
 # List Subscription Events
 
@@ -233,8 +172,8 @@ async listSubscriptionEvents(
   perPage?: number,
   sinceId?: number,
   maxId?: number,
-  direction?: DirectionEnum,
-  filter?: EventTypeEnum[],
+  direction?: Direction,
+  filter?: EventType[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EventResponse[]>>
 ```
@@ -246,10 +185,10 @@ async listSubscriptionEvents(
 | `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `sinceId` | `number \| undefined` | Query, Optional | - |
-| `maxId` | `number \| undefined` | Query, Optional | - |
-| `direction` | [`DirectionEnum \| undefined`](../../doc/models/direction-enum.md) | Query, Optional | **Default**: `DirectionEnum.Desc` |
-| `filter` | [`EventTypeEnum[] \| undefined`](../../doc/models/event-type-enum.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+| `sinceId` | `number \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `maxId` | `number \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br>**Default**: `Direction.Desc` |
+| `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -265,11 +204,11 @@ const page = 2;
 
 const perPage = 50;
 
-const direction = DirectionEnum.Desc;
+const direction = Direction.Desc;
 
-const filter: EventTypeEnum[] = [
-  EventTypeEnum.CustomFieldValueChange,
-  EventTypeEnum.PaymentSuccess
+const filter: EventType[] = [
+  EventType.CustomFieldValueChange,
+  EventType.PaymentSuccess
 ];
 
 try {
@@ -296,48 +235,6 @@ try {
 }
 ```
 
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "event": {
-      "id": 344799837,
-      "key": "statement_settled",
-      "message": "Statement 79702531 settled successfully for Amelia Example's subscription to Basic Plan",
-      "subscription_id": 14900541,
-      "created_at": "2016-11-01T12:41:29-04:00",
-      "event_specific_data": null
-    }
-  },
-  {
-    "event": {
-      "id": 344799815,
-      "key": "renewal_success",
-      "message": "Successful renewal for Amelia Example's subscription to Basic Plan",
-      "subscription_id": 14900541,
-      "created_at": "2016-11-01T12:41:28-04:00",
-      "event_specific_data": {
-        "product_id": 3792003,
-        "account_transaction_id": null,
-        "previous_subscription_state": "active",
-        "new_subscription_state": "active"
-      }
-    }
-  },
-  {
-    "event": {
-      "id": 344799705,
-      "key": "billing_date_change",
-      "message": "Billing date changed on Amelia Example's subscription to Basic Plan from 11/26/2016 to 11/01/2016",
-      "subscription_id": 14900541,
-      "created_at": "2016-11-01T12:41:25-04:00",
-      "event_specific_data": null
-    }
-  }
-]
-```
-
 
 # Read Events Count
 
@@ -349,8 +246,8 @@ async readEventsCount(
   perPage?: number,
   sinceId?: number,
   maxId?: number,
-  direction?: DirectionEnum,
-  filter?: EventTypeEnum[],
+  direction?: Direction,
+  filter?: EventType[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Count>>
 ```
@@ -361,10 +258,10 @@ async readEventsCount(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `sinceId` | `number \| undefined` | Query, Optional | - |
-| `maxId` | `number \| undefined` | Query, Optional | - |
-| `direction` | [`DirectionEnum \| undefined`](../../doc/models/direction-enum.md) | Query, Optional | **Default**: `DirectionEnum.Desc` |
-| `filter` | [`EventTypeEnum[] \| undefined`](../../doc/models/event-type-enum.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+| `sinceId` | `number \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `maxId` | `number \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br>**Default**: `Direction.Desc` |
+| `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -378,11 +275,11 @@ const page = 2;
 
 const perPage = 50;
 
-const direction = DirectionEnum.Desc;
+const direction = Direction.Desc;
 
-const filter: EventTypeEnum[] = [
-  EventTypeEnum.CustomFieldValueChange,
-  EventTypeEnum.PaymentSuccess
+const filter: EventType[] = [
+  EventType.CustomFieldValueChange,
+  EventType.PaymentSuccess
 ];
 
 try {

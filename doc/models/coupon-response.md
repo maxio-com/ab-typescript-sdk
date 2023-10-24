@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `coupon` | [`Coupon \| undefined`](../../doc/models/coupon.md) | Optional | - |
+| `coupon` | [`CouponCouponResponse \| undefined`](../../doc/models/coupon-coupon-response.md) | Optional | - |
 
 ## Example (as JSON)
 

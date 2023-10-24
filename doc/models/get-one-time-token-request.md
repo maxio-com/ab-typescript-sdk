@@ -24,7 +24,7 @@
     "expiration_month": 133.5,
     "expiration_year": 156.84,
     "customer_id": "customer_id2",
-    "current_vault": "current_vault4",
+    "current_vault": "eway",
     "vault_token": "vault_token6",
     "billing_address": "billing_address4",
     "billing_address_2": "billing_address_26",
@@ -34,7 +34,7 @@
     "billing_zip": "billing_zip2",
     "payment_type": "payment_type6",
     "disabled": false,
-    "site_gateway_setting_id": 77.84,
+    "site_gateway_setting_id": 104,
     "customer_vault_token": "customer_vault_token2",
     "gateway_handle": "gateway_handle4"
   }

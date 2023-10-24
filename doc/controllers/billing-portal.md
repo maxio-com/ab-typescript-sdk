@@ -37,7 +37,7 @@ In order to prevent abuse & overuse, we ask that you request a new URL only when
 ```ts
 async enableBillingPortalForCustomer(
   customerId: number,
-  autoInvite?: AutoInviteEnum,
+  autoInvite?: AutoInvite,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CustomerResponse>>
 ```
@@ -47,7 +47,7 @@ async enableBillingPortalForCustomer(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customerId` | `number` | Template, Required | The Chargify id of the customer |
-| `autoInvite` | [`AutoInviteEnum \| undefined`](../../doc/models/auto-invite-enum.md) | Query, Optional | When set to 1, an Invitation email will be sent to the Customer.<br>When set to 0, or not sent, an email will not be sent.<br>Use in query: `auto_invite=1`. |
+| `autoInvite` | [`AutoInvite \| undefined`](../../doc/models/auto-invite.md) | Query, Optional | When set to 1, an Invitation email will be sent to the Customer.<br>When set to 0, or not sent, an email will not be sent.<br>Use in query: `auto_invite=1`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -151,7 +151,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-| 429 | Too Many Requests | [`PortalCustomersManagementLinkJson429Error`](../../doc/models/portal-customers-management-link-json-429-error.md) |
+| 429 | Too Many Requests | [`TooManyManagementLinkRequestsError`](../../doc/models/too-many-management-link-requests-error.md) |
 
 
 # Resend Billing Portal Invitation

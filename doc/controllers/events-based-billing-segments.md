@@ -99,7 +99,7 @@ try {
 | 401 | Unauthorized | `ApiError` |
 | 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsJson422Error`](../../doc/models/components-price-points-segments-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsError`](../../doc/models/event-based-billing-segment-errors-error.md) |
 
 
 # List Segments for Price Point
@@ -181,7 +181,7 @@ Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot 
 | 401 | Unauthorized | `ApiError` |
 | 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsJson422Error2Error`](../../doc/models/components-price-points-segments-json-422-error-2-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingListSegmentsErrorsError`](../../doc/models/event-based-billing-list-segments-errors-error.md) |
 
 
 # Update Segment
@@ -250,7 +250,7 @@ try {
 | 401 | Unauthorized | `ApiError` |
 | 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsIdJson422Error`](../../doc/models/components-price-points-segments-id-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsError`](../../doc/models/event-based-billing-segment-errors-error.md) |
 
 
 # Delete Segment
@@ -383,7 +383,7 @@ try {
 | 401 | Unauthorized | `ApiError` |
 | 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsBulkJson422Error`](../../doc/models/components-price-points-segments-bulk-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
 
 
 # Update Segments
@@ -449,5 +449,5 @@ try {
 | 401 | Unauthorized | `ApiError` |
 | 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsBulkJson422Error2Error`](../../doc/models/components-price-points-segments-bulk-json-422-error-2-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
 

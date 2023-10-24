@@ -16,7 +16,7 @@
 ```json
 {
   "allocation": {
-    "quantity": 32,
+    "quantity": 228.94,
     "component_id": 8,
     "memo": "memo2",
     "proration_downgrade_scheme": "proration_downgrade_scheme4",

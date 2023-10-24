@@ -42,7 +42,7 @@ async createSubscriptionNote(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
-| `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | - |
+| `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -299,7 +299,7 @@ async updateSubscriptionNote(
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
 | `noteId` | `string` | Template, Required | The Chargify id of the note |
-| `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | - |
+| `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

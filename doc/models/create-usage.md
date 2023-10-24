@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `quantity` | [`CreateUsageQuantity \| undefined`](../../doc/models/containers/create-usage-quantity.md) | Optional | This is a container for one-of cases. |
+| `quantity` | `number \| undefined` | Optional | integer by default or decimal number if fractional quantities are enabled for the component |
 | `pricePointId` | `string \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
 
@@ -17,7 +17,7 @@
 
 ```json
 {
-  "quantity": 218,
+  "quantity": 23.44,
   "price_point_id": "price_point_id0",
   "memo": "memo2"
 }

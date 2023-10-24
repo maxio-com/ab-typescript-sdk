@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `componentId` | `number \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
-| `quantity` | [`AllocationPreviewItemQuantity \| undefined`](../../doc/models/containers/allocation-preview-item-quantity.md) | Optional | This is a container for one-of cases. |
+| `quantity` | `number \| undefined` | Optional | - |
 | `previousQuantity` | `number \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
 | `timestamp` | `string \| null \| undefined` | Optional | - |
@@ -20,6 +20,9 @@
 | `accrueCharge` | `boolean \| undefined` | Optional | - |
 | `upgradeCharge` | `string \| undefined` | Optional | - |
 | `downgradeCredit` | `string \| undefined` | Optional | - |
+| `pricePointId` | `number \| undefined` | Optional | - |
+| `previousPricePointId` | `number \| undefined` | Optional | - |
+| `componentHandle` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
@@ -27,7 +30,7 @@
 {
   "component_id": 54,
   "subscription_id": 54,
-  "quantity": 159.62,
+  "quantity": 173.08,
   "previous_quantity": 14,
   "memo": "memo6"
 }

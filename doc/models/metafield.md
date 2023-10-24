@@ -14,7 +14,7 @@
 | `scope` | [`MetafieldScope \| undefined`](../../doc/models/metafield-scope.md) | Optional | Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings. |
 | `dataCount` | `number \| undefined` | Optional | the amount of subscriptions this metafield has been applied to in Chargify |
 | `inputType` | `string \| undefined` | Optional | - |
-| `mEnum` | [`MetafieldEnum[] \| null \| undefined`](../../doc/models/containers/metafield-enum.md) | Optional | This is Array of a container for one-of cases. |
+| `mEnum` | [`MetafieldEnum \| undefined`](../../doc/models/containers/metafield-enum.md) | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

@@ -77,5 +77,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 404 | Not Found | [`ReferralCodesValidateJson404Error`](../../doc/models/referral-codes-validate-json-404-error.md) |
+| 404 | Not Found | [`SingleStringErrorResponseError`](../../doc/models/single-string-error-response-error.md) |
 

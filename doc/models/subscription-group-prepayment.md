@@ -12,7 +12,7 @@
 | `amount` | `number` | Required | - |
 | `details` | `string` | Required | - |
 | `memo` | `string` | Required | - |
-| `method` | [`SubscriptionGroupPrepaymentMethodEnum`](../../doc/models/subscription-group-prepayment-method-enum.md) | Required | - |
+| `method` | [`SubscriptionGroupPrepaymentMethod`](../../doc/models/subscription-group-prepayment-method.md) | Required | - |
 
 ## Example (as JSON)
 
