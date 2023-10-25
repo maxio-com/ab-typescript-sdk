@@ -13,7 +13,7 @@ import {
  * Creates an instance of TooManyManagementLinkRequests
  */
 interface TooManyManagementLinkRequests {
-  errors?: TooManyManagementLinkRequests;
+  errors: TooManyManagementLinkRequests;
 }
 
 export class TooManyManagementLinkRequestsError extends ApiError<TooManyManagementLinkRequests> {}

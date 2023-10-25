@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error` | `string \| undefined` | Optional | - |
-| `newLinkAvailableAt` | `string \| undefined` | Optional | - |
+| `error` | `string` | Required | - |
+| `newLinkAvailableAt` | `string` | Required | - |
 
 ## Example (as JSON)
 

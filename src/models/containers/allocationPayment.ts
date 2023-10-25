@@ -4,16 +4,16 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, Schema, validateAndMap } from '../../schema';
+import { oneOf, Schema, validateAndMap } from '../../schema';
 import {
   AllocationPayment,
   allocationPaymentSchema,
 } from '../allocationPayment';
 
-/** This is a container type for any-of types. */
+/** This is a container type for one-of types. */
 export type AllocationPayment = AllocationPayment;
 
-export const allocationPaymentSchema: Schema<AllocationPayment> = anyOf([
+export const allocationPaymentSchema: Schema<AllocationPayment> = oneOf([
   allocationPaymentSchema,
 ]);
 
