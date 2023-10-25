@@ -15,9 +15,9 @@
 | `prorationDowngradeScheme` | `string \| undefined` | Optional | The scheme used if the proration is a downgrade. Defaults to the site setting if one is not provided. |
 | `prorationUpgradeScheme` | `string \| undefined` | Optional | The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided. |
 | `accrueCharge` | `boolean \| undefined` | Optional | If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided. |
-| `downgradeCredit` | [`CreditTypeCreateAllocation \| undefined`](../../doc/models/credit-type-create-allocation.md) | Optional | The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided. |
-| `upgradeCharge` | [`CreditTypeCreateAllocation \| undefined`](../../doc/models/credit-type-create-allocation.md) | Optional | The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided. |
-| `pricePointId` | [`CreateAllocationPricePointId \| undefined`](../../doc/models/containers/create-allocation-price-point-id.md) | Optional | This is a container for one-of cases. |
+| `downgradeCredit` | [`CreditType1 \| undefined`](../../doc/models/credit-type-1.md) | Optional | The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided. |
+| `upgradeCharge` | [`CreditType1 \| undefined`](../../doc/models/credit-type-1.md) | Optional | The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided. |
+| `pricePointId` | [`CreateAllocationPricePointId \| null \| undefined`](../../doc/models/containers/create-allocation-price-point-id.md) | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

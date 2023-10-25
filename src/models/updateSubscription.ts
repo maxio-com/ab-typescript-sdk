@@ -74,14 +74,11 @@ export const updateSubscriptionSchema: Schema<UpdateSubscription> = object({
   productChangeDelayed: ['product_change_delayed', optional(boolean())],
   nextProductId: ['next_product_id', optional(string())],
   nextProductPricePointId: ['next_product_price_point_id', optional(string())],
-  snapDay: ['snap_day', optional(lazy(() => updateSubscriptionSnapDaySchema))],
+  snapDay: ['snap_day', optional(updateSubscriptionSnapDaySchema)],
   nextBillingAt: ['next_billing_at', optional(string())],
   paymentCollectionMethod: ['payment_collection_method', optional(string())],
   receivesInvoiceEmails: ['receives_invoice_emails', optional(boolean())],
-  netTerms: [
-    'net_terms',
-    optional(lazy(() => updateSubscriptionNetTermsSchema)),
-  ],
+  netTerms: ['net_terms', optional(updateSubscriptionNetTermsSchema)],
   storedCredentialTransactionId: [
     'stored_credential_transaction_id',
     optional(number()),

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
+import { number, object, optional, Schema, string } from '../schema';
 import { UsageQuantity, usageQuantitySchema } from './containers/usageQuantity';
 
 export interface Usage {
@@ -24,7 +24,7 @@ export const usageSchema: Schema<Usage> = object({
   memo: ['memo', optional(string())],
   createdAt: ['created_at', optional(string())],
   pricePointId: ['price_point_id', optional(number())],
-  quantity: ['quantity', optional(lazy(() => usageQuantitySchema))],
+  quantity: ['quantity', optional(usageQuantitySchema)],
   overageQuantity: ['overage_quantity', optional(number())],
   componentId: ['component_id', optional(number())],
   componentHandle: ['component_handle', optional(string())],

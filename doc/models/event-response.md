@@ -20,6 +20,7 @@
     "key": "key0",
     "message": "message0",
     "subscription_id": 216.0,
+    "customer_id": 61.68,
     "created_at": "created_at8",
     "event_specific_data": {
       "previous_unit_balance": null,

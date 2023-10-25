@@ -4,15 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  lazy,
-  nullable,
-  number,
-  object,
-  optional,
-  Schema,
-  string,
-} from '../schema';
+import { nullable, number, object, optional, Schema, string } from '../schema';
 import { CardType, cardTypeSchema } from './cardType';
 import {
   PaymentProfileAttributesExpirationMonth,
@@ -85,11 +77,11 @@ export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = 
     cardType: ['card_type', optional(cardTypeSchema)],
     expirationMonth: [
       'expiration_month',
-      optional(lazy(() => paymentProfileAttributesExpirationMonthSchema)),
+      optional(paymentProfileAttributesExpirationMonthSchema),
     ],
     expirationYear: [
       'expiration_year',
-      optional(lazy(() => paymentProfileAttributesExpirationYearSchema)),
+      optional(paymentProfileAttributesExpirationYearSchema),
     ],
     billingAddress: ['billing_address', optional(string())],
     billingAddress2: ['billing_address_2', optional(nullable(string()))],

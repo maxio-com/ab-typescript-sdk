@@ -46,7 +46,7 @@ export interface Allocation {
   upgradeCharge?: string;
   /** The type of credit to be created if the change in cost is a downgrade. */
   downgradeCredit?: string;
-  payment?: AllocationPayment;
+  payment?: AllocationPayment | null;
 }
 
 export const allocationSchema: Schema<Allocation> = object({
@@ -65,5 +65,5 @@ export const allocationSchema: Schema<Allocation> = object({
   accrueCharge: ['accrue_charge', optional(boolean())],
   upgradeCharge: ['upgrade_charge', optional(string())],
   downgradeCredit: ['downgrade_credit', optional(string())],
-  payment: ['payment', optional(lazy(() => allocationPaymentSchema))],
+  payment: ['payment', optional(nullable(lazy(() => allocationPaymentSchema)))],
 });

@@ -5,23 +5,23 @@
  */
 
 import { number, oneOf, Schema, validateAndMap } from '../../schema';
-import { SnapDayOneOf0, snapDayOneOf0Schema } from '../snapDayOneOf0';
+import { SnapDay, snapDaySchema } from '../snapDay';
 
 /** This is a container type for one-of types. */
-export type UpdateSubscriptionSnapDay = SnapDayOneOf0 | number;
+export type UpdateSubscriptionSnapDay = SnapDay | number;
 
 export const updateSubscriptionSnapDaySchema: Schema<UpdateSubscriptionSnapDay> = oneOf(
-  [snapDayOneOf0Schema, number()]
+  [snapDaySchema, number()]
 );
 
 export namespace UpdateSubscriptionSnapDay {
   /**
-  * Validation method to narrow down union type to SnapDayOneOf0 type case.
+  * Validation method to narrow down union type to SnapDay type case.
   *
-  * This is SnapDay_OneOf0 case.
+  * This is SnapDay case.
   */
-  export function isSnapDayOneOf0(value: unknown): value is SnapDayOneOf0 {
-    const validationResult = validateAndMap(value, snapDayOneOf0Schema);
+  export function isSnapDay(value: unknown): value is SnapDay {
+    const validationResult = validateAndMap(value, snapDaySchema);
     return validationResult.errors === false;
   }
 

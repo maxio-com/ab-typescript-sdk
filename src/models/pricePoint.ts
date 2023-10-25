@@ -53,6 +53,6 @@ export const pricePointSchema: Schema<PricePoint> = object({
   expirationInterval: ['expiration_interval', optional(number())],
   expirationIntervalUnit: [
     'expiration_interval_unit',
-    optional(lazy(() => pricePointExpirationIntervalUnitSchema)),
+    optional(pricePointExpirationIntervalUnitSchema),
   ],
 });

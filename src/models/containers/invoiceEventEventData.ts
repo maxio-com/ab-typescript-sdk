@@ -38,12 +38,12 @@ import {
   voidInvoiceEventDataSchema,
 } from '../voidInvoiceEventData';
 import {
-  VoidInvoiceEventDataAnyOf8,
-  voidInvoiceEventDataAnyOf8Schema,
-} from '../voidInvoiceEventDataAnyOf8';
+  VoidInvoiceEventData1,
+  voidInvoiceEventData1Schema,
+} from '../voidInvoiceEventData1';
 
 /** This is a container type for any-of types. */
-export type InvoiceEventEventData = ApplyCreditNoteEventData | ApplyDebitNoteEventData | ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData | IssueInvoiceEventData | RefundInvoiceEventData | RemovePaymentEventData | VoidInvoiceEventData | VoidInvoiceEventDataAnyOf8;
+export type InvoiceEventEventData = ApplyCreditNoteEventData | ApplyDebitNoteEventData | ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData | IssueInvoiceEventData | RefundInvoiceEventData | RemovePaymentEventData | VoidInvoiceEventData | VoidInvoiceEventData1;
 
 export const invoiceEventEventDataSchema: Schema<InvoiceEventEventData> = anyOf(
   [
@@ -55,7 +55,7 @@ export const invoiceEventEventDataSchema: Schema<InvoiceEventEventData> = anyOf(
     refundInvoiceEventDataSchema,
     removePaymentEventDataSchema,
     voidInvoiceEventDataSchema,
-    voidInvoiceEventDataAnyOf8Schema,
+    voidInvoiceEventData1Schema,
   ]
 );
 
@@ -141,12 +141,12 @@ export namespace InvoiceEventEventData {
   }
 
   /**
-  * Validation method to narrow down union type to VoidInvoiceEventDataAnyOf8 type case.
+  * Validation method to narrow down union type to VoidInvoiceEventData1 type case.
   *
-  * This is Void Invoice Event Data_AnyOf8 case.
+  * This is Void Invoice Event Data1 case.
   */
-  export function isVoidInvoiceEventDataAnyOf8(value: unknown): value is VoidInvoiceEventDataAnyOf8 {
-    const validationResult = validateAndMap(value, voidInvoiceEventDataAnyOf8Schema);
+  export function isVoidInvoiceEventData1(value: unknown): value is VoidInvoiceEventData1 {
+    const validationResult = validateAndMap(value, voidInvoiceEventData1Schema);
     return validationResult.errors === false;
   }
 }

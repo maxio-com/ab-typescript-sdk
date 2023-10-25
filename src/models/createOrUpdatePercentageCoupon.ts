@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, lazy, object, optional, Schema, string } from '../schema';
+import { boolean, object, optional, Schema, string } from '../schema';
 import {
   CreateOrUpdatePercentageCouponCompoundingStrategy,
   createOrUpdatePercentageCouponCompoundingStrategySchema,
@@ -36,10 +36,7 @@ export const createOrUpdatePercentageCouponSchema: Schema<CreateOrUpdatePercenta
     name: ['name', string()],
     code: ['code', string()],
     description: ['description', optional(string())],
-    percentage: [
-      'percentage',
-      lazy(() => createOrUpdatePercentageCouponPercentageSchema),
-    ],
+    percentage: ['percentage', createOrUpdatePercentageCouponPercentageSchema],
     allowNegativeBalance: ['allow_negative_balance', optional(string())],
     recurring: ['recurring', optional(string())],
     endDate: ['end_date', optional(string())],
@@ -47,9 +44,7 @@ export const createOrUpdatePercentageCouponSchema: Schema<CreateOrUpdatePercenta
     stackable: ['stackable', optional(string())],
     compoundingStrategy: [
       'compounding_strategy',
-      optional(
-        lazy(() => createOrUpdatePercentageCouponCompoundingStrategySchema)
-      ),
+      optional(createOrUpdatePercentageCouponCompoundingStrategySchema),
     ],
     excludeMidPeriodAllocations: [
       'exclude_mid_period_allocations',

@@ -37,7 +37,7 @@ export const createSubscriptionComponentSchema: Schema<CreateSubscriptionCompone
   {
     componentId: [
       'component_id',
-      optional(lazy(() => createSubscriptionComponentComponentIdSchema)),
+      optional(createSubscriptionComponentComponentIdSchema),
     ],
     enabled: ['enabled', optional(boolean())],
     unitBalance: ['unit_balance', optional(number())],
@@ -45,7 +45,7 @@ export const createSubscriptionComponentSchema: Schema<CreateSubscriptionCompone
     quantity: ['quantity', optional(number())],
     pricePointId: [
       'price_point_id',
-      optional(lazy(() => createSubscriptionComponentPricePointIdSchema)),
+      optional(createSubscriptionComponentPricePointIdSchema),
     ],
     customPrice: [
       'custom_price',

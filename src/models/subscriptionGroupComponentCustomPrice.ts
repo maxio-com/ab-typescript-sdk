@@ -27,9 +27,7 @@ export const subscriptionGroupComponentCustomPriceSchema: Schema<SubscriptionGro
   {
     pricingScheme: [
       'pricing_scheme',
-      optional(
-        lazy(() => subscriptionGroupComponentCustomPricePricingSchemeSchema)
-      ),
+      optional(subscriptionGroupComponentCustomPricePricingSchemeSchema),
     ],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],
     overagePricing: [

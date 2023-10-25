@@ -206,7 +206,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   ],
   metafields: ['metafields', optional(dict(string()))],
   customerReference: ['customer_reference', optional(string())],
-  group: ['group', optional(lazy(() => createSubscriptionGroupSchema))],
+  group: ['group', optional(createSubscriptionGroupSchema)],
   ref: ['ref', optional(string())],
   cancellationMessage: ['cancellation_message', optional(string())],
   cancellationMethod: ['cancellation_method', optional(string())],
@@ -225,7 +225,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   ],
   reasonCode: ['reason_code', optional(string())],
   productChangeDelayed: ['product_change_delayed', optional(boolean())],
-  offerId: ['offer_id', optional(lazy(() => createSubscriptionOfferIdSchema))],
+  offerId: ['offer_id', optional(createSubscriptionOfferIdSchema)],
   prepaidSubscriptionConfiguration: [
     'prepaid_subscription_configuration',
     optional(lazy(() => upsertPrepaidConfigurationSchema)),

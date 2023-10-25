@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema, string } from '../schema';
+import { object, optional, Schema, string } from '../schema';
 import {
   CreateInvoicePaymentAmount,
   createInvoicePaymentAmountSchema,
@@ -26,7 +26,7 @@ export interface CreateInvoicePayment {
 }
 
 export const createInvoicePaymentSchema: Schema<CreateInvoicePayment> = object({
-  amount: ['amount', optional(lazy(() => createInvoicePaymentAmountSchema))],
+  amount: ['amount', optional(createInvoicePaymentAmountSchema)],
   memo: ['memo', optional(string())],
   method: ['method', optional(invoicePaymentMethodTypeSchema)],
   details: ['details', optional(string())],

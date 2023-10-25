@@ -13,10 +13,7 @@ import {
   Schema,
   string,
 } from '../schema';
-import {
-  CardTypeCreditCardPaymentProfile,
-  cardTypeCreditCardPaymentProfileSchema,
-} from './cardTypeCreditCardPaymentProfile';
+import { CardType1, cardType1Schema } from './cardType1';
 import { CurrentVault, currentVaultSchema } from './currentVault';
 
 export interface CreditCardPaymentProfile {
@@ -24,7 +21,7 @@ export interface CreditCardPaymentProfile {
   firstName?: string;
   lastName?: string;
   maskedCardNumber: string;
-  cardType?: CardTypeCreditCardPaymentProfile;
+  cardType?: CardType1;
   expirationMonth?: number;
   expirationYear?: number;
   customerId?: number;
@@ -50,7 +47,7 @@ export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = 
     firstName: ['first_name', optional(string())],
     lastName: ['last_name', optional(string())],
     maskedCardNumber: ['masked_card_number', string()],
-    cardType: ['card_type', optional(cardTypeCreditCardPaymentProfileSchema)],
+    cardType: ['card_type', optional(cardType1Schema)],
     expirationMonth: ['expiration_month', optional(number())],
     expirationYear: ['expiration_year', optional(number())],
     customerId: ['customer_id', optional(number())],

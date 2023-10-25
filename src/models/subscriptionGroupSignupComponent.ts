@@ -40,21 +40,19 @@ export const subscriptionGroupSignupComponentSchema: Schema<SubscriptionGroupSig
   {
     componentId: [
       'component_id',
-      optional(lazy(() => subscriptionGroupSignupComponentComponentIdSchema)),
+      optional(subscriptionGroupSignupComponentComponentIdSchema),
     ],
     allocatedQuantity: [
       'allocated_quantity',
-      optional(
-        lazy(() => subscriptionGroupSignupComponentAllocatedQuantitySchema)
-      ),
+      optional(subscriptionGroupSignupComponentAllocatedQuantitySchema),
     ],
     unitBalance: [
       'unit_balance',
-      optional(lazy(() => subscriptionGroupSignupComponentUnitBalanceSchema)),
+      optional(subscriptionGroupSignupComponentUnitBalanceSchema),
     ],
     pricePointId: [
       'price_point_id',
-      optional(lazy(() => subscriptionGroupSignupComponentPricePointIdSchema)),
+      optional(subscriptionGroupSignupComponentPricePointIdSchema),
     ],
     customPrice: [
       'custom_price',

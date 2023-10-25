@@ -84,6 +84,55 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "product": {
+    "id": 4364984,
+    "name": "Gold Plan",
+    "handle": "gold",
+    "description": "This is our gold plan.",
+    "accounting_code": "123",
+    "request_credit_card": true,
+    "created_at": "2016-11-04T16:31:15-04:00",
+    "updated_at": "2016-11-04T16:31:15-04:00",
+    "price_in_cents": 1000,
+    "interval": 1,
+    "interval_unit": "month",
+    "expiration_interval_unit": null,
+    "initial_charge_in_cents": null,
+    "trial_price_in_cents": null,
+    "trial_interval": null,
+    "trial_interval_unit": null,
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": null,
+    "taxable": false,
+    "update_return_url": null,
+    "initial_charge_after_trial": false,
+    "version_number": 1,
+    "update_return_params": null,
+    "product_family": {
+      "id": 527890,
+      "name": "Acme Projects",
+      "description": "",
+      "handle": "billing-plans",
+      "accounting_code": null
+    },
+    "public_signup_pages": [
+      {
+        "id": 301078,
+        "return_url": null,
+        "return_params": null,
+        "url": "https://general-goods.chargify.com/subscribe/ftgbpq7f5qpr/gold"
+      }
+    ],
+    "product_price_point_name": "Default"
+  }
+}
+```
+
 
 # Read Product
 
@@ -222,6 +271,54 @@ try {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product": {
+    "id": 4365034,
+    "name": "Platinum Plan",
+    "handle": "platinum",
+    "description": "This is our platinum plan.",
+    "accounting_code": "123",
+    "request_credit_card": true,
+    "created_at": "2016-11-04T16:34:29-04:00",
+    "updated_at": "2016-11-04T16:37:11-04:00",
+    "price_in_cents": 1000,
+    "interval": 1,
+    "interval_unit": "month",
+    "initial_charge_in_cents": null,
+    "trial_price_in_cents": null,
+    "trial_interval": null,
+    "trial_interval_unit": null,
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": null,
+    "taxable": false,
+    "update_return_url": null,
+    "initial_charge_after_trial": false,
+    "version_number": 1,
+    "update_return_params": null,
+    "product_family": {
+      "id": 527890,
+      "name": "Acme Projects",
+      "description": "",
+      "handle": "billing-plans",
+      "accounting_code": null
+    },
+    "public_signup_pages": [
+      {
+        "id": 301079,
+        "return_url": null,
+        "return_params": null,
+        "url": "https://general-goods.chargify.com/subscribe/wgyd96tb5pj9/platinum"
+      }
+    ],
+    "product_price_point_name": "Original"
   }
 }
 ```

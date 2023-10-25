@@ -24,7 +24,7 @@
 | `createdAt` | `string \| undefined` | Optional | The creation date for this subscription |
 | `updatedAt` | `string \| undefined` | Optional | The date of last update for this subscription |
 | `cancellationMessage` | `string \| null \| undefined` | Optional | Seller-provided reason for, or note about, the cancellation. |
-| `cancellationMethod` | [`SubscriptionCancellationMethod \| undefined`](../../doc/models/containers/subscription-cancellation-method.md) | Optional | This is a container for one-of cases. |
+| `cancellationMethod` | [`SubscriptionCancellationMethod \| null \| undefined`](../../doc/models/containers/subscription-cancellation-method.md) | Optional | This is a container for one-of cases. |
 | `cancelAtEndOfPeriod` | `boolean \| null \| undefined` | Optional | Whether or not the subscription will (or has) canceled at the end of the period. |
 | `canceledAt` | `string \| null \| undefined` | Optional | The timestamp of the most recent cancellation |
 | `currentPeriodStartedAt` | `string \| undefined` | Optional | Timestamp relating to the start of the current (recurring) period |
@@ -34,11 +34,11 @@
 | `delayedCancelAt` | `string \| null \| undefined` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `couponCode` | `string \| null \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `snapDay` | `string \| null \| undefined` | Optional | The day of the month that the subscription will charge according to calendar billing rules, if used. |
-| `paymentCollectionMethod` | [`SubscriptionPaymentCollectionMethod \| undefined`](../../doc/models/containers/subscription-payment-collection-method.md) | Optional | This is a container for one-of cases. |
+| `paymentCollectionMethod` | [`SubscriptionPaymentCollectionMethod \| null \| undefined`](../../doc/models/containers/subscription-payment-collection-method.md) | Optional | This is a container for one-of cases. |
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`PaymentProfile \| undefined`](../../doc/models/payment-profile.md) | Optional | - |
-| `group` | [`SubscriptionGroup \| undefined`](../../doc/models/containers/subscription-group.md) | Optional | This is a container for one-of cases. |
+| `group` | [`SubscriptionGroup \| null \| undefined`](../../doc/models/containers/subscription-group.md) | Optional | This is a container for one-of cases. |
 | `bankAccount` | [`SubscriptionBankAccount \| undefined`](../../doc/models/subscription-bank-account.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |

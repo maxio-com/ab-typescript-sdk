@@ -15,7 +15,7 @@
 | `accrueCharge` | `boolean \| undefined` | Optional | - |
 | `upgradeCharge` | `string \| undefined` | Optional | - |
 | `downgradeCredit` | `string \| undefined` | Optional | - |
-| `paymentCollectionMethod` | [`PaymentCollectionMethodAllocateComponents \| undefined`](../../doc/models/payment-collection-method-allocate-components.md) | Optional | (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription<br>**Default**: `PaymentCollectionMethodAllocateComponents.Automatic` |
+| `paymentCollectionMethod` | [`PaymentCollectionMethod1 \| undefined`](../../doc/models/payment-collection-method-1.md) | Optional | (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription<br>**Default**: `PaymentCollectionMethod1.Automatic` |
 
 ## Example (as JSON)
 

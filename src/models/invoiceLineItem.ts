@@ -6,6 +6,7 @@
 
 import {
   boolean,
+  lazy,
   nullable,
   number,
   object,
@@ -13,6 +14,10 @@ import {
   Schema,
   string,
 } from '../schema';
+import {
+  InvoiceLineItemComponentCostData,
+  invoiceLineItemComponentCostDataSchema,
+} from './containers/invoiceLineItemComponentCostData';
 
 export interface InvoiceLineItem {
   /** Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists. */
@@ -67,6 +72,7 @@ export interface InvoiceLineItem {
    * * For non-periodic charges, this date and the start date will match.
    */
   periodRangeEnd?: string;
+  transactionId?: number;
   /**
    * The ID of the product subscribed when the charge was made.
    * This may be set even for component charges, so true product-only (non-component) charges will also have a nil `component_id`.
@@ -78,6 +84,8 @@ export interface InvoiceLineItem {
   componentId?: number | null;
   /** The price point ID of the component being billed. Will be `nil` for non-component charges. */
   pricePointId?: number | null;
+  hide?: boolean;
+  componentCostData?: InvoiceLineItemComponentCostData | null;
   /** The price point ID of the line item's product */
   productPricePointId?: number | null;
   customItem?: boolean;
@@ -96,10 +104,16 @@ export const invoiceLineItemSchema: Schema<InvoiceLineItem> = object({
   tieredUnitPrice: ['tiered_unit_price', optional(boolean())],
   periodRangeStart: ['period_range_start', optional(string())],
   periodRangeEnd: ['period_range_end', optional(string())],
+  transactionId: ['transaction_id', optional(number())],
   productId: ['product_id', optional(nullable(number()))],
   productVersion: ['product_version', optional(nullable(number()))],
   componentId: ['component_id', optional(nullable(number()))],
   pricePointId: ['price_point_id', optional(nullable(number()))],
+  hide: ['hide', optional(boolean())],
+  componentCostData: [
+    'component_cost_data',
+    optional(nullable(lazy(() => invoiceLineItemComponentCostDataSchema))),
+  ],
   productPricePointId: ['product_price_point_id', optional(nullable(number()))],
   customItem: ['custom_item', optional(boolean())],
 });

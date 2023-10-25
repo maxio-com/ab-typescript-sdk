@@ -4,15 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  boolean,
-  lazy,
-  number,
-  object,
-  optional,
-  Schema,
-  string,
-} from '../schema';
+import { boolean, number, object, optional, Schema, string } from '../schema';
 import {
   RefundPrepaymentAmount,
   refundPrepaymentAmountSchema,
@@ -30,7 +22,7 @@ export interface RefundPrepayment {
 
 export const refundPrepaymentSchema: Schema<RefundPrepayment> = object({
   amountInCents: ['amount_in_cents', number()],
-  amount: ['amount', lazy(() => refundPrepaymentAmountSchema)],
+  amount: ['amount', refundPrepaymentAmountSchema],
   memo: ['memo', string()],
   external: ['external', optional(boolean())],
 });

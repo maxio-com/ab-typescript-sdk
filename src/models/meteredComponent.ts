@@ -73,10 +73,7 @@ export const meteredComponentSchema: Schema<MeteredComponent> = object({
     'price_points',
     optional(array(lazy(() => componentPricePointItemSchema))),
   ],
-  unitPrice: [
-    'unit_price',
-    optional(lazy(() => meteredComponentUnitPriceSchema)),
-  ],
+  unitPrice: ['unit_price', optional(meteredComponentUnitPriceSchema)],
   taxCode: ['tax_code', optional(string())],
   hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
   priceInCents: ['price_in_cents', optional(string())],

@@ -17,5 +17,5 @@
 | [`RefundInvoiceEventData`](../../../doc/models/refund-invoice-event-data.md) |
 | [`RemovePaymentEventData`](../../../doc/models/remove-payment-event-data.md) |
 | [`VoidInvoiceEventData`](../../../doc/models/void-invoice-event-data.md) |
-| [`VoidInvoiceEventDataAnyOf8`](../../../doc/models/void-invoice-event-data-any-of-8.md) |
+| [`VoidInvoiceEventData1`](../../../doc/models/void-invoice-event-data-1.md) |
 

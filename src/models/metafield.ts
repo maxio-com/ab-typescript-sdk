@@ -4,7 +4,16 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
+import {
+  array,
+  lazy,
+  nullable,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { MetafieldEnum, metafieldEnumSchema } from './containers/metafieldEnum';
 import { MetafieldScope, metafieldScopeSchema } from './metafieldScope';
 
@@ -16,7 +25,7 @@ export interface Metafield {
   /** the amount of subscriptions this metafield has been applied to in Chargify */
   dataCount?: number;
   inputType?: string;
-  mEnum?: MetafieldEnum;
+  mEnum?: MetafieldEnum[] | null;
 }
 
 export const metafieldSchema: Schema<Metafield> = object({
@@ -25,5 +34,5 @@ export const metafieldSchema: Schema<Metafield> = object({
   scope: ['scope', optional(lazy(() => metafieldScopeSchema))],
   dataCount: ['data_count', optional(number())],
   inputType: ['input_type', optional(string())],
-  mEnum: ['enum', optional(lazy(() => metafieldEnumSchema))],
+  mEnum: ['enum', optional(nullable(array(metafieldEnumSchema)))],
 });

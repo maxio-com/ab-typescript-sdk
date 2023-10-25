@@ -158,6 +158,68 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "event": {
+      "id": 343087780,
+      "key": "subscription_state_change",
+      "message": "State changed on Test subscription to Monthly Product from active to past_due",
+      "subscription_id": 14950962,
+      "customer_id": 12345678,
+      "created_at": "2016-10-27T16:42:22-04:00",
+      "event_specific_data": {
+        "previous_subscription_state": "active",
+        "new_subscription_state": "past_due"
+      }
+    }
+  },
+  {
+    "event": {
+      "id": 343087742,
+      "key": "billing_date_change",
+      "message": "Billing date changed on Test's subscription to Monthly Product from 11/27/2016 to 10/27/2016",
+      "subscription_id": 14950962,
+      "customer_id": 12345678,
+      "created_at": "2016-10-27T16:42:19-04:00",
+      "event_specific_data": null
+    }
+  },
+  {
+    "event": {
+      "id": 343085267,
+      "key": "statement_closed",
+      "message": "Statement 79401838 closed (but not settled) for Test's subscription to ANNUAL product",
+      "subscription_id": 14950975,
+      "customer_id": 87654321,
+      "created_at": "2016-10-27T16:40:40-04:00",
+      "event_specific_data": null
+    }
+  },
+  {
+    "event": {
+      "id": 4481,
+      "key": "custom_field_value_change",
+      "message": "Custom field (Extra support included) changed for Subscription 117 from 'Yes' to 'No'.",
+      "subscription_id": 117,
+      "customer_id": 22334455,
+      "created_at": "2022-03-24T07:55:06-04:00",
+      "event_specific_data": {
+        "event_type": "updated",
+        "metafield_name": "Extra support included",
+        "metafield_id": 2,
+        "old_value": "Yes",
+        "new_value": "No",
+        "resource_type": "Subscription",
+        "resource_id": 117
+      }
+    }
+  }
+]
+```
+
 
 # List Subscription Events
 
@@ -233,6 +295,49 @@ try {
     // const { statusCode, headers } = error;
   }
 }
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "event": {
+      "id": 344799837,
+      "key": "statement_settled",
+      "message": "Statement 79702531 settled successfully for Amelia Example's subscription to Basic Plan",
+      "subscription_id": 14900541,
+      "customer_id": 77223344,
+      "created_at": "2016-11-01T12:41:29-04:00",
+      "event_specific_data": null
+    }
+  },
+  {
+    "event": {
+      "id": 344799815,
+      "key": "renewal_success",
+      "message": "Successful renewal for Amelia Example's subscription to Basic Plan",
+      "subscription_id": 14900541,
+      "customer_id": 77223344,
+      "created_at": "2016-11-01T12:41:28-04:00",
+      "event_specific_data": {
+        "product_id": 3792003,
+        "account_transaction_id": 7590246
+      }
+    }
+  },
+  {
+    "event": {
+      "id": 344799705,
+      "key": "billing_date_change",
+      "message": "Billing date changed on Amelia Example's subscription to Basic Plan from 11/26/2016 to 11/01/2016",
+      "subscription_id": 14900541,
+      "customer_id": 77223344,
+      "created_at": "2016-11-01T12:41:25-04:00",
+      "event_specific_data": null
+    }
+  }
+]
 ```
 
 

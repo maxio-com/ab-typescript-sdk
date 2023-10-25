@@ -43,19 +43,19 @@ export interface CreateSegment {
 export const createSegmentSchema: Schema<CreateSegment> = object({
   segmentProperty1Value: [
     'segment_property_1_value',
-    optional(lazy(() => createSegmentSegmentProperty1ValueSchema)),
+    optional(createSegmentSegmentProperty1ValueSchema),
   ],
   segmentProperty2Value: [
     'segment_property_2_value',
-    optional(lazy(() => createSegmentSegmentProperty2ValueSchema)),
+    optional(createSegmentSegmentProperty2ValueSchema),
   ],
   segmentProperty3Value: [
     'segment_property_3_value',
-    optional(lazy(() => createSegmentSegmentProperty3ValueSchema)),
+    optional(createSegmentSegmentProperty3ValueSchema),
   ],
   segmentProperty4Value: [
     'segment_property_4_value',
-    optional(lazy(() => createSegmentSegmentProperty4ValueSchema)),
+    optional(createSegmentSegmentProperty4ValueSchema),
   ],
   pricingScheme: ['pricing_scheme', string()],
   prices: [

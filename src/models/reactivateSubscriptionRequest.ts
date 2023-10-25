@@ -42,9 +42,6 @@ export const reactivateSubscriptionRequestSchema: Schema<ReactivateSubscriptionR
       'use_credits_and_prepayments',
       optional(boolean()),
     ],
-    resume: [
-      'resume',
-      optional(lazy(() => reactivateSubscriptionRequestResumeSchema)),
-    ],
+    resume: ['resume', optional(reactivateSubscriptionRequestResumeSchema)],
   }
 );

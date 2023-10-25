@@ -14,6 +14,7 @@ Information about the seller (merchant) listed on the masthead of the invoice.
 | `name` | `string \| undefined` | Optional | - |
 | `address` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
 | `phone` | `string \| undefined` | Optional | - |
+| `logoUrl` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
@@ -27,7 +28,8 @@ Information about the seller (merchant) listed on the masthead of the invoice.
     "state": "state2",
     "zip": "zip0"
   },
-  "phone": "phone0"
+  "phone": "phone0",
+  "logo_url": "logo_url0"
 }
 ```
 

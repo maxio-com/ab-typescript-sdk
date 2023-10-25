@@ -31,11 +31,11 @@
       },
       "timestamp": "timestamp8",
       "invoice": {
+        "id": 166,
         "uid": "uid6",
         "site_id": 92,
         "customer_id": 204,
-        "subscription_id": 20,
-        "number": "number6"
+        "subscription_id": 20
       }
     }
   ],
