@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "rm -rf dist & tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json",
-    "test": "jest --coverage --passWithNoTests",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "prepare": "rm -rf dist & tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json"
   },
