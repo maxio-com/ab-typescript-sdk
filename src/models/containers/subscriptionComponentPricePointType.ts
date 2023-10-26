@@ -6,29 +6,15 @@
 
 import { oneOf, Schema, validateAndMap } from '../../schema';
 import { PricePointType, pricePointTypeSchema } from '../pricePointType';
-import {
-  PricePointTypeOneOf0,
-  pricePointTypeOneOf0Schema,
-} from '../pricePointTypeOneOf0';
 
 /** This is a container type for one-of types. */
-export type SubscriptionComponentPricePointType = PricePointTypeOneOf0 | PricePointType;
+export type SubscriptionComponentPricePointType = PricePointType;
 
 export const subscriptionComponentPricePointTypeSchema: Schema<SubscriptionComponentPricePointType> = oneOf(
-  [pricePointTypeOneOf0Schema, pricePointTypeSchema]
+  [pricePointTypeSchema]
 );
 
 export namespace SubscriptionComponentPricePointType {
-  /**
-  * Validation method to narrow down union type to PricePointTypeOneOf0 type case.
-  *
-  * This is PricePointType_OneOf0 case.
-  */
-  export function isPricePointTypeOneOf0(value: unknown): value is PricePointTypeOneOf0 {
-    const validationResult = validateAndMap(value, pricePointTypeOneOf0Schema);
-    return validationResult.errors === false;
-  }
-
   /**
   * Validation method to narrow down union type to PricePointType type case.
   *

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema, string } from '../schema';
+import { object, optional, Schema, string } from '../schema';
 import {
   SubscriptionGroupCreditCardExpirationMonth,
   subscriptionGroupCreditCardExpirationMonthSchema,
@@ -47,15 +47,15 @@ export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCa
   {
     fullNumber: [
       'full_number',
-      optional(lazy(() => subscriptionGroupCreditCardFullNumberSchema)),
+      optional(subscriptionGroupCreditCardFullNumberSchema),
     ],
     expirationMonth: [
       'expiration_month',
-      optional(lazy(() => subscriptionGroupCreditCardExpirationMonthSchema)),
+      optional(subscriptionGroupCreditCardExpirationMonthSchema),
     ],
     expirationYear: [
       'expiration_year',
-      optional(lazy(() => subscriptionGroupCreditCardExpirationYearSchema)),
+      optional(subscriptionGroupCreditCardExpirationYearSchema),
     ],
     chargifyToken: ['chargify_token', optional(string())],
     vaultToken: ['vault_token', optional(string())],

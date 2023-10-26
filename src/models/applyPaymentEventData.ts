@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
+import { number, object, optional, Schema, string } from '../schema';
 import {
   ApplyPaymentEventDataPaymentMethod,
   applyPaymentEventDataPaymentMethodSchema,
@@ -34,7 +34,7 @@ export const applyPaymentEventDataSchema: Schema<ApplyPaymentEventData> = object
     transactionTime: ['transaction_time', optional(string())],
     paymentMethod: [
       'payment_method',
-      optional(lazy(() => applyPaymentEventDataPaymentMethodSchema)),
+      optional(applyPaymentEventDataPaymentMethodSchema),
     ],
     transactionId: ['transaction_id', optional(number())],
   }

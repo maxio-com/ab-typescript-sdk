@@ -20,17 +20,13 @@ import {
   subscriptionCancellationMethodSchema,
 } from './containers/subscriptionCancellationMethod';
 import {
-  SubscriptionGroup,
-  subscriptionGroupSchema,
-} from './containers/subscriptionGroup';
+  SubscriptionGroup2,
+  subscriptionGroup2Schema,
+} from './containers/subscriptionGroup2';
 import {
   SubscriptionPaymentCollectionMethod,
   subscriptionPaymentCollectionMethodSchema,
 } from './containers/subscriptionPaymentCollectionMethod';
-import {
-  SubscriptionPrepaidDunning,
-  subscriptionPrepaidDunningSchema,
-} from './containers/subscriptionPrepaidDunning';
 import { Customer, customerSchema } from './customer';
 import { PaymentProfile, paymentProfileSchema } from './paymentProfile';
 import { Product, productSchema } from './product';
@@ -75,7 +71,7 @@ export interface Subscription {
   /** Seller-provided reason for, or note about, the cancellation. */
   cancellationMessage?: string | null;
   /** The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription's state is not canceled. */
-  cancellationMethod?: SubscriptionCancellationMethod;
+  cancellationMethod?: SubscriptionCancellationMethod | null;
   /** Whether or not the subscription will (or has) canceled at the end of the period. */
   cancelAtEndOfPeriod?: boolean | null;
   /** The timestamp of the most recent cancellation */
@@ -94,11 +90,11 @@ export interface Subscription {
   couponCode?: string | null;
   /** The day of the month that the subscription will charge according to calendar billing rules, if used. */
   snapDay?: string | null;
-  paymentCollectionMethod?: SubscriptionPaymentCollectionMethod;
+  paymentCollectionMethod?: SubscriptionPaymentCollectionMethod | null;
   customer?: Customer;
   product?: Product;
   creditCard?: PaymentProfile;
-  group?: SubscriptionGroup;
+  group?: SubscriptionGroup2 | null;
   bankAccount?: SubscriptionBankAccount;
   /** The payment profile type for the active profile on file. */
   paymentType?: string | null;
@@ -139,7 +135,7 @@ export interface Subscription {
   /** The timestamp of the most recent on hold action. */
   onHoldAt?: string | null;
   /** Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled */
-  prepaidDunning?: SubscriptionPrepaidDunning;
+  prepaidDunning?: boolean;
   /**
    * Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.
    * Only in Read Subscription Endpoint.
@@ -175,7 +171,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   cancellationMessage: ['cancellation_message', optional(nullable(string()))],
   cancellationMethod: [
     'cancellation_method',
-    optional(lazy(() => subscriptionCancellationMethodSchema)),
+    optional(nullable(subscriptionCancellationMethodSchema)),
   ],
   cancelAtEndOfPeriod: [
     'cancel_at_end_of_period',
@@ -191,12 +187,12 @@ export const subscriptionSchema: Schema<Subscription> = object({
   snapDay: ['snap_day', optional(nullable(string()))],
   paymentCollectionMethod: [
     'payment_collection_method',
-    optional(lazy(() => subscriptionPaymentCollectionMethodSchema)),
+    optional(nullable(subscriptionPaymentCollectionMethodSchema)),
   ],
   customer: ['customer', optional(lazy(() => customerSchema))],
   product: ['product', optional(lazy(() => productSchema))],
   creditCard: ['credit_card', optional(lazy(() => paymentProfileSchema))],
-  group: ['group', optional(lazy(() => subscriptionGroupSchema))],
+  group: ['group', optional(nullable(lazy(() => subscriptionGroup2Schema)))],
   bankAccount: [
     'bank_account',
     optional(lazy(() => subscriptionBankAccountSchema)),
@@ -232,10 +228,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   ],
   reference: ['reference', optional(nullable(string()))],
   onHoldAt: ['on_hold_at', optional(nullable(string()))],
-  prepaidDunning: [
-    'prepaid_dunning',
-    optional(lazy(() => subscriptionPrepaidDunningSchema)),
-  ],
+  prepaidDunning: ['prepaid_dunning', optional(boolean())],
   coupons: [
     'coupons',
     optional(array(lazy(() => subscriptionIncludedCouponSchema))),

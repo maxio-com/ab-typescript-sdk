@@ -22,7 +22,7 @@ export interface ComponentCustomPrice {
 export const componentCustomPriceSchema: Schema<ComponentCustomPrice> = object({
   pricingScheme: [
     'pricing_scheme',
-    optional(lazy(() => componentCustomPricePricingSchemeSchema)),
+    optional(componentCustomPricePricingSchemeSchema),
   ],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
 });

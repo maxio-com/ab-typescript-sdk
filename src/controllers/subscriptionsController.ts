@@ -9,11 +9,11 @@ import { ApiResponse, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import {
+  SubscriptionAddCouponError,
+} from '../errors/subscriptionAddCouponError';
+import {
   SubscriptionRemoveCouponErrorsError,
 } from '../errors/subscriptionRemoveCouponErrorsError';
-import {
-  SubscriptionsAddCouponJson422Error,
-} from '../errors/subscriptionsAddCouponJson422Error';
 import {
   ActivateSubscriptionRequest,
   activateSubscriptionRequestSchema,
@@ -1386,7 +1386,7 @@ export class SubscriptionsController extends BaseController {
     req.query('code', mapped.code);
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/add_coupon.json`;
-    req.throwOn(422, SubscriptionsAddCouponJson422Error, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, SubscriptionAddCouponError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 

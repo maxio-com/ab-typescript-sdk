@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, lazy, object, optional, Schema, string } from '../schema';
+import { boolean, object, optional, Schema, string } from '../schema';
 import {
   CreateInvoiceItemComponentId,
   createInvoiceItemComponentIdSchema,
@@ -58,30 +58,21 @@ export interface CreateInvoiceItem {
 
 export const createInvoiceItemSchema: Schema<CreateInvoiceItem> = object({
   title: ['title', optional(string())],
-  quantity: ['quantity', optional(lazy(() => createInvoiceItemQuantitySchema))],
-  unitPrice: [
-    'unit_price',
-    optional(lazy(() => createInvoiceItemUnitPriceSchema)),
-  ],
+  quantity: ['quantity', optional(createInvoiceItemQuantitySchema)],
+  unitPrice: ['unit_price', optional(createInvoiceItemUnitPriceSchema)],
   taxable: ['taxable', optional(boolean())],
   taxCode: ['tax_code', optional(string())],
   periodRangeStart: ['period_range_start', optional(string())],
   periodRangeEnd: ['period_range_end', optional(string())],
-  productId: [
-    'product_id',
-    optional(lazy(() => createInvoiceItemProductIdSchema)),
-  ],
-  componentId: [
-    'component_id',
-    optional(lazy(() => createInvoiceItemComponentIdSchema)),
-  ],
+  productId: ['product_id', optional(createInvoiceItemProductIdSchema)],
+  componentId: ['component_id', optional(createInvoiceItemComponentIdSchema)],
   pricePointId: [
     'price_point_id',
-    optional(lazy(() => createInvoiceItemPricePointIdSchema)),
+    optional(createInvoiceItemPricePointIdSchema),
   ],
   productPricePointId: [
     'product_price_point_id',
-    optional(lazy(() => createInvoiceItemProductPricePointIdSchema)),
+    optional(createInvoiceItemProductPricePointIdSchema),
   ],
   description: ['description', optional(string())],
 });

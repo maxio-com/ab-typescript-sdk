@@ -31,9 +31,9 @@ import {
   createSubscriptionComponentsSchema,
 } from './containers/createSubscriptionComponents';
 import {
-  CreateSubscriptionGroup,
-  createSubscriptionGroupSchema,
-} from './containers/createSubscriptionGroup';
+  CreateSubscriptionGroup2,
+  createSubscriptionGroup2Schema,
+} from './containers/createSubscriptionGroup2';
 import {
   CreateSubscriptionOfferId,
   createSubscriptionOfferIdSchema,
@@ -107,7 +107,7 @@ export interface CreateSubscription {
   metafields?: Record<string, string>;
   /** The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given. */
   customerReference?: string;
-  group?: CreateSubscriptionGroup;
+  group?: CreateSubscriptionGroup2;
   /** A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail. */
   ref?: string;
   /** (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation. */
@@ -206,7 +206,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   ],
   metafields: ['metafields', optional(dict(string()))],
   customerReference: ['customer_reference', optional(string())],
-  group: ['group', optional(lazy(() => createSubscriptionGroupSchema))],
+  group: ['group', optional(createSubscriptionGroup2Schema)],
   ref: ['ref', optional(string())],
   cancellationMessage: ['cancellation_message', optional(string())],
   cancellationMethod: ['cancellation_method', optional(string())],
@@ -225,7 +225,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   ],
   reasonCode: ['reason_code', optional(string())],
   productChangeDelayed: ['product_change_delayed', optional(boolean())],
-  offerId: ['offer_id', optional(lazy(() => createSubscriptionOfferIdSchema))],
+  offerId: ['offer_id', optional(createSubscriptionOfferIdSchema)],
   prepaidSubscriptionConfiguration: [
     'prepaid_subscription_configuration',
     optional(lazy(() => upsertPrepaidConfigurationSchema)),

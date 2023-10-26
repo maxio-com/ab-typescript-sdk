@@ -57,19 +57,19 @@ export const segmentSchema: Schema<Segment> = object({
   pricingScheme: ['pricing_scheme', optional(string())],
   segmentProperty1Value: [
     'segment_property_1_value',
-    optional(lazy(() => segmentSegmentProperty1ValueSchema)),
+    optional(segmentSegmentProperty1ValueSchema),
   ],
   segmentProperty2Value: [
     'segment_property_2_value',
-    optional(lazy(() => segmentSegmentProperty2ValueSchema)),
+    optional(segmentSegmentProperty2ValueSchema),
   ],
   segmentProperty3Value: [
     'segment_property_3_value',
-    optional(lazy(() => segmentSegmentProperty3ValueSchema)),
+    optional(segmentSegmentProperty3ValueSchema),
   ],
   segmentProperty4Value: [
     'segment_property_4_value',
-    optional(lazy(() => segmentSegmentProperty4ValueSchema)),
+    optional(segmentSegmentProperty4ValueSchema),
   ],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],

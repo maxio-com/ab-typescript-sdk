@@ -90,10 +90,7 @@ export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = object
       'price_points',
       optional(array(lazy(() => prepaidComponentPricePointSchema))),
     ],
-    unitPrice: [
-      'unit_price',
-      optional(lazy(() => prepaidUsageComponentUnitPriceSchema)),
-    ],
+    unitPrice: ['unit_price', optional(prepaidUsageComponentUnitPriceSchema)],
     taxCode: ['tax_code', optional(string())],
     hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
     priceInCents: ['price_in_cents', optional(string())],
@@ -109,7 +106,7 @@ export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = object
     expirationInterval: ['expiration_interval', optional(number())],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(lazy(() => prepaidUsageComponentExpirationIntervalUnitSchema)),
+      optional(prepaidUsageComponentExpirationIntervalUnitSchema),
     ],
     displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
     allowFractionalQuantities: [

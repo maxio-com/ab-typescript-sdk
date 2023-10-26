@@ -26,7 +26,12 @@ import {
   invoiceCustomFieldSchema,
 } from './invoiceCustomField';
 import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
+import {
+  InvoiceDisplaySettings,
+  invoiceDisplaySettingsSchema,
+} from './invoiceDisplaySettings';
 import { InvoiceLineItem, invoiceLineItemSchema } from './invoiceLineItem';
+import { InvoicePayer, invoicePayerSchema } from './invoicePayer';
 import { InvoicePayment, invoicePaymentSchema } from './invoicePayment';
 import {
   InvoicePreviousBalance,
@@ -38,6 +43,7 @@ import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
 import { Status, statusSchema } from './status';
 
 export interface Invoice {
+  id?: number;
   /** Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters. */
   uid?: string;
   /** ID of the site to which the invoice belongs. */
@@ -53,6 +59,9 @@ export interface Invoice {
   number?: string;
   /** A monotonically increasing number assigned to invoices as they are created.  This number is unique within a site and can be used to sort and order invoices. */
   sequenceNumber?: number;
+  transactionTime?: string;
+  createdAt?: string;
+  updatedAt?: string;
   /**
    * Date the invoice was issued to the customer.  This is the date that the invoice was made available for payment.
    * The format is `"YYYY-MM-DD"`.
@@ -71,6 +80,8 @@ export interface Invoice {
   paidDate?: string | null;
   /** The current status of the invoice. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
   status?: Status;
+  role?: string;
+  parentInvoiceId?: number | null;
   /** The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant). */
   collectionMethod?: string;
   /** A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant. */
@@ -88,6 +99,7 @@ export interface Invoice {
   consolidationLevel?: InvoiceConsolidationLevel;
   /** For invoices with `consolidation_level` of `child`, this specifies the UID of the parent (consolidated) invoice. */
   parentInvoiceUid?: string | null;
+  subscriptionGroupId?: number | null;
   /** For invoices with `consolidation_level` of `child`, this specifies the number of the parent (consolidated) invoice. */
   parentInvoiceNumber?: number | null;
   /** For invoices with `consolidation_level` of `parent`, this specifies the ID of the subscription which was the primary subscription of the subscription group that generated the invoice. */
@@ -100,6 +112,9 @@ export interface Invoice {
   seller?: InvoiceSeller;
   /** Information about the customer who is owner or recipient the invoiced subscription. */
   customer?: InvoiceCustomer;
+  payer?: InvoicePayer;
+  recipientEmails?: string[];
+  netTerms?: number;
   /** The memo printed on invoices of any collection type.  This message is in control of the merchant. */
   memo?: string;
   /** The invoice billing address. */
@@ -132,22 +147,29 @@ export interface Invoice {
   refunds?: InvoiceRefund[];
   payments?: InvoicePayment[];
   customFields?: InvoiceCustomField[];
+  displaySettings?: InvoiceDisplaySettings;
   /** The public URL of the invoice */
   publicUrl?: string;
   previousBalanceData?: InvoicePreviousBalance;
 }
 
 export const invoiceSchema: Schema<Invoice> = object({
+  id: ['id', optional(number())],
   uid: ['uid', optional(string())],
   siteId: ['site_id', optional(number())],
   customerId: ['customer_id', optional(number())],
   subscriptionId: ['subscription_id', optional(number())],
   number: ['number', optional(string())],
   sequenceNumber: ['sequence_number', optional(number())],
+  transactionTime: ['transaction_time', optional(string())],
+  createdAt: ['created_at', optional(string())],
+  updatedAt: ['updated_at', optional(string())],
   issueDate: ['issue_date', optional(string())],
   dueDate: ['due_date', optional(string())],
   paidDate: ['paid_date', optional(nullable(string()))],
   status: ['status', optional(statusSchema)],
+  role: ['role', optional(string())],
+  parentInvoiceId: ['parent_invoice_id', optional(nullable(number()))],
   collectionMethod: ['collection_method', optional(string())],
   paymentInstructions: ['payment_instructions', optional(string())],
   currency: ['currency', optional(string())],
@@ -156,6 +178,7 @@ export const invoiceSchema: Schema<Invoice> = object({
     optional(invoiceConsolidationLevelSchema),
   ],
   parentInvoiceUid: ['parent_invoice_uid', optional(nullable(string()))],
+  subscriptionGroupId: ['subscription_group_id', optional(nullable(number()))],
   parentInvoiceNumber: ['parent_invoice_number', optional(nullable(number()))],
   groupPrimarySubscriptionId: [
     'group_primary_subscription_id',
@@ -165,6 +188,9 @@ export const invoiceSchema: Schema<Invoice> = object({
   productFamilyName: ['product_family_name', optional(string())],
   seller: ['seller', optional(lazy(() => invoiceSellerSchema))],
   customer: ['customer', optional(lazy(() => invoiceCustomerSchema))],
+  payer: ['payer', optional(lazy(() => invoicePayerSchema))],
+  recipientEmails: ['recipient_emails', optional(array(string()))],
+  netTerms: ['net_terms', optional(number())],
   memo: ['memo', optional(string())],
   billingAddress: [
     'billing_address',
@@ -191,6 +217,10 @@ export const invoiceSchema: Schema<Invoice> = object({
   customFields: [
     'custom_fields',
     optional(array(lazy(() => invoiceCustomFieldSchema))),
+  ],
+  displaySettings: [
+    'display_settings',
+    optional(lazy(() => invoiceDisplaySettingsSchema)),
   ],
   publicUrl: ['public_url', optional(string())],
   previousBalanceData: [

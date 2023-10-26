@@ -6,7 +6,7 @@
 
 import {
   boolean,
-  lazy,
+  nullable,
   number,
   object,
   optional,
@@ -17,10 +17,7 @@ import {
   CreateAllocationPricePointId,
   createAllocationPricePointIdSchema,
 } from './containers/createAllocationPricePointId';
-import {
-  CreditTypeCreateAllocation,
-  creditTypeCreateAllocationSchema,
-} from './creditTypeCreateAllocation';
+import { CreditType1, creditType1Schema } from './creditType1';
 
 export interface CreateAllocation {
   /** The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off. */
@@ -36,11 +33,11 @@ export interface CreateAllocation {
   /** If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided. */
   accrueCharge?: boolean;
   /** The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided. */
-  downgradeCredit?: CreditTypeCreateAllocation;
+  downgradeCredit?: CreditType1;
   /** The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided. */
-  upgradeCharge?: CreditTypeCreateAllocation;
+  upgradeCharge?: CreditType1;
   /** Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used. */
-  pricePointId?: CreateAllocationPricePointId;
+  pricePointId?: CreateAllocationPricePointId | null;
 }
 
 export const createAllocationSchema: Schema<CreateAllocation> = object({
@@ -50,13 +47,10 @@ export const createAllocationSchema: Schema<CreateAllocation> = object({
   prorationDowngradeScheme: ['proration_downgrade_scheme', optional(string())],
   prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
   accrueCharge: ['accrue_charge', optional(boolean())],
-  downgradeCredit: [
-    'downgrade_credit',
-    optional(creditTypeCreateAllocationSchema),
-  ],
-  upgradeCharge: ['upgrade_charge', optional(creditTypeCreateAllocationSchema)],
+  downgradeCredit: ['downgrade_credit', optional(creditType1Schema)],
+  upgradeCharge: ['upgrade_charge', optional(creditType1Schema)],
   pricePointId: [
     'price_point_id',
-    optional(lazy(() => createAllocationPricePointIdSchema)),
+    optional(nullable(createAllocationPricePointIdSchema)),
   ],
 });

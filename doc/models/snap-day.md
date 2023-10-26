@@ -1,20 +1,15 @@
 
 # Snap Day
 
-A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'.
+Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
 
-## Structure
+## Enumeration
 
 `SnapDay`
 
 ## Fields
 
-|  |
-| 
-
-## Example (as JSON)
-
-```json
-{}
-```
+| Name |
+|  --- |
+| `end` |
 

@@ -80,7 +80,7 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = object
     pricePointHandle: ['price_point_handle', optional(nullable(string()))],
     pricePointType: [
       'price_point_type',
-      optional(lazy(() => subscriptionComponentPricePointTypeSchema)),
+      optional(subscriptionComponentPricePointTypeSchema),
     ],
     pricePointName: ['price_point_name', optional(nullable(string()))],
     productFamilyId: ['product_family_id', optional(number())],

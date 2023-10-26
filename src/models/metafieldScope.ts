@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema } from '../schema';
+import { array, object, optional, Schema, string } from '../schema';
 import { IncludeOption, includeOptionSchema } from './includeOption';
 
 /** Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings. */
@@ -21,6 +21,7 @@ export interface MetafieldScope {
   publicShow?: IncludeOption;
   /** Include (1) or exclude (0) metafields from being edited by your ecosystem. */
   publicEdit?: IncludeOption;
+  hosted?: string[];
 }
 
 export const metafieldScopeSchema: Schema<MetafieldScope> = object({
@@ -30,4 +31,5 @@ export const metafieldScopeSchema: Schema<MetafieldScope> = object({
   portal: ['portal', optional(includeOptionSchema)],
   publicShow: ['public_show', optional(includeOptionSchema)],
   publicEdit: ['public_edit', optional(includeOptionSchema)],
+  hosted: ['hosted', optional(array(string()))],
 });

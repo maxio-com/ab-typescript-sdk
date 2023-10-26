@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema, string } from '../schema';
+import { object, optional, Schema, string } from '../schema';
 import {
   CreateInvoiceCouponAmount,
   createInvoiceCouponAmountSchema,
@@ -33,15 +33,12 @@ export interface CreateInvoiceCoupon {
 
 export const createInvoiceCouponSchema: Schema<CreateInvoiceCoupon> = object({
   code: ['code', optional(string())],
-  percentage: [
-    'percentage',
-    optional(lazy(() => createInvoiceCouponPercentageSchema)),
-  ],
-  amount: ['amount', optional(lazy(() => createInvoiceCouponAmountSchema))],
+  percentage: ['percentage', optional(createInvoiceCouponPercentageSchema)],
+  amount: ['amount', optional(createInvoiceCouponAmountSchema)],
   description: ['description', optional(string())],
   productFamilyId: [
     'product_family_id',
-    optional(lazy(() => createInvoiceCouponProductFamilyIdSchema)),
+    optional(createInvoiceCouponProductFamilyIdSchema),
   ],
   compoundingStrategy: [
     'compounding_strategy',

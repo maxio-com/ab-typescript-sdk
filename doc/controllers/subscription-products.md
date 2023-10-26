@@ -127,6 +127,130 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 15054201,
+    "state": "trialing",
+    "trial_started_at": "2016-11-03T13:43:36-04:00",
+    "trial_ended_at": "2016-11-10T12:43:36-05:00",
+    "activated_at": "2016-11-02T10:20:57-04:00",
+    "created_at": "2016-11-02T10:20:55-04:00",
+    "updated_at": "2016-11-03T13:43:36-04:00",
+    "expires_at": null,
+    "balance_in_cents": -13989,
+    "current_period_ends_at": "2016-11-10T12:43:36-05:00",
+    "next_assessment_at": "2016-11-10T12:43:36-05:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "automatic",
+    "snap_day": null,
+    "cancellation_method": null,
+    "current_period_started_at": "2016-11-03T13:43:35-04:00",
+    "previous_state": "active",
+    "signup_payment_id": 160680121,
+    "signup_revenue": "0.00",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": 14000,
+    "product_price_in_cents": 1000,
+    "product_version_number": 6,
+    "payment_type": "credit_card",
+    "referral_code": "ghnhvy",
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "customer": {
+      "id": 14543792,
+      "first_name": "Frankie",
+      "last_name": "Test",
+      "organization": null,
+      "email": "testfrankie111@test.com",
+      "created_at": "2016-11-02T10:20:55-04:00",
+      "updated_at": "2016-11-02T10:20:58-04:00",
+      "reference": null,
+      "address": null,
+      "address_2": null,
+      "city": null,
+      "state": null,
+      "zip": null,
+      "country": null,
+      "phone": "5555551212",
+      "portal_invite_last_sent_at": "2016-11-02T10:20:58-04:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": false,
+      "portal_customer_created_at": "2016-11-02T10:20:58-04:00",
+      "cc_emails": null
+    },
+    "product": {
+      "id": 3861800,
+      "name": "Trial Product",
+      "handle": "trial-product",
+      "description": "Trial period with payment expected at end of trial.",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2016-07-08T09:53:55-04:00",
+      "updated_at": "2016-09-05T13:00:36-04:00",
+      "price_in_cents": 1000,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": 0,
+      "trial_interval": 7,
+      "trial_interval_unit": "day",
+      "archived_at": null,
+      "require_credit_card": true,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "initial_charge_after_trial": false,
+      "version_number": 6,
+      "update_return_params": "",
+      "product_family": {
+        "id": 527890,
+        "name": "Acme Projects",
+        "description": "",
+        "handle": "billing-plans",
+        "accounting_code": null
+      },
+      "public_signup_pages": [
+        {
+          "id": 294791,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargify.com/subscribe/xv52yrcc3byx/trial-product"
+        }
+      ]
+    },
+    "credit_card": {
+      "id": 10088716,
+      "first_name": "F",
+      "last_name": "NB",
+      "masked_card_number": "XXXX-XXXX-XXXX-1",
+      "card_type": "bogus",
+      "expiration_month": 1,
+      "expiration_year": 2017,
+      "customer_id": 14543792,
+      "current_vault": "bogus",
+      "vault_token": "1",
+      "billing_address": "123 Montana Way",
+      "billing_city": "Billings",
+      "billing_state": "MT",
+      "billing_zip": "59101",
+      "billing_country": "US",
+      "customer_vault_token": null,
+      "billing_address_2": "Apt. 10",
+      "payment_type": "credit_card"
+    }
+  }
+}
+```
+
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |

@@ -24,7 +24,7 @@
 | `accrueCharge` | `boolean \| undefined` | Optional | If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. |
 | `upgradeCharge` | `string \| undefined` | Optional | The type of charge to be created if the change in cost is an upgrade. |
 | `downgradeCredit` | `string \| undefined` | Optional | The type of credit to be created if the change in cost is a downgrade. |
-| `payment` | [`AllocationPayment \| undefined`](../../doc/models/containers/allocation-payment.md) | Optional | This is a container for any-of cases. |
+| `payment` | [`AllocationPayment2 \| null \| undefined`](../../doc/models/containers/allocation-payment-2.md) | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `prepayment` | [`PrepaymentPrepaymentResponse`](../../doc/models/prepayment-prepayment-response.md) | Required | - |
+| `prepayment` | [`Prepayment1`](../../doc/models/prepayment-1.md) | Required | - |
 
 ## Example (as JSON)
 

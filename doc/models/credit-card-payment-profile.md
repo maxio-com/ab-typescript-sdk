@@ -13,7 +13,7 @@
 | `firstName` | `string \| undefined` | Optional | - |
 | `lastName` | `string \| undefined` | Optional | - |
 | `maskedCardNumber` | `string` | Required | - |
-| `cardType` | [`CardTypeCreditCardPaymentProfile \| undefined`](../../doc/models/card-type-credit-card-payment-profile.md) | Optional | - |
+| `cardType` | [`CardType1 \| undefined`](../../doc/models/card-type-1.md) | Optional | - |
 | `expirationMonth` | `number \| undefined` | Optional | - |
 | `expirationYear` | `number \| undefined` | Optional | - |
 | `customerId` | `number \| undefined` | Optional | - |

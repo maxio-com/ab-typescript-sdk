@@ -17,18 +17,18 @@
 {
   "invoices": [
     {
+      "id": 196,
       "uid": "uid6",
       "site_id": 122,
       "customer_id": 234,
-      "subscription_id": 50,
-      "number": "number6"
+      "subscription_id": 50
     },
     {
+      "id": 196,
       "uid": "uid6",
       "site_id": 122,
       "customer_id": 234,
-      "subscription_id": 50,
-      "number": "number6"
+      "subscription_id": 50
     }
   ]
 }

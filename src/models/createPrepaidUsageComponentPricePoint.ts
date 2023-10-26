@@ -55,10 +55,7 @@ export const createPrepaidUsageComponentPricePointSchema: Schema<CreatePrepaidUs
     expirationIntervalUnit: [
       'expiration_interval_unit',
       optional(
-        lazy(
-          () =>
-            createPrepaidUsageComponentPricePointExpirationIntervalUnitSchema
-        )
+        createPrepaidUsageComponentPricePointExpirationIntervalUnitSchema
       ),
     ],
   }

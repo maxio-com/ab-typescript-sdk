@@ -18,9 +18,9 @@ import {
   createAllocationRequestSchema,
 } from './createAllocationRequest';
 import {
-  PaymentCollectionMethodAllocateComponents,
-  paymentCollectionMethodAllocateComponentsSchema,
-} from './paymentCollectionMethodAllocateComponents';
+  PaymentCollectionMethod1,
+  paymentCollectionMethod1Schema,
+} from './paymentCollectionMethod1';
 
 export interface AllocateComponents {
   prorationUpgradeScheme?: string;
@@ -30,7 +30,7 @@ export interface AllocateComponents {
   upgradeCharge?: string;
   downgradeCredit?: string;
   /** (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription */
-  paymentCollectionMethod?: PaymentCollectionMethodAllocateComponents;
+  paymentCollectionMethod?: PaymentCollectionMethod1;
 }
 
 export const allocateComponentsSchema: Schema<AllocateComponents> = object({
@@ -45,6 +45,6 @@ export const allocateComponentsSchema: Schema<AllocateComponents> = object({
   downgradeCredit: ['downgrade_credit', optional(string())],
   paymentCollectionMethod: [
     'payment_collection_method',
-    optional(paymentCollectionMethodAllocateComponentsSchema),
+    optional(paymentCollectionMethod1Schema),
   ],
 });

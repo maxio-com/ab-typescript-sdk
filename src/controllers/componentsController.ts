@@ -96,8 +96,8 @@ export class ComponentsController extends BaseController {
    * + [Recording component usage against a subscription](https://maxio-chargify.zendesk.com/hc/en-
    * us/articles/5404606587917#recording-component-usage)
    *
-   * @param productFamilyId   The Chargify id of the product family to which the
-   *                                                        component belongs
+   * @param productFamilyId   The Chargify id of the product family to which the component
+   *                                                 belongs
    * @param componentKind     The component kind
    * @param body
    * @return Response from the API call

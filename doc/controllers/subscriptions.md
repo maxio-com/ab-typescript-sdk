@@ -1038,6 +1038,116 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 18220670,
+    "state": "active",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2017-06-27T13:45:15-05:00",
+    "created_at": "2017-06-27T13:45:13-05:00",
+    "updated_at": "2017-06-30T09:26:50-05:00",
+    "expires_at": null,
+    "balance_in_cents": 10000,
+    "current_period_ends_at": "2017-06-30T12:00:00-05:00",
+    "next_assessment_at": "2017-06-30T12:00:00-05:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "automatic",
+    "snap_day": "end",
+    "cancellation_method": null,
+    "current_period_started_at": "2017-06-27T13:45:13-05:00",
+    "previous_state": "active",
+    "signup_payment_id": 191819284,
+    "signup_revenue": "0.00",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": 0,
+    "product_price_in_cents": 0,
+    "product_version_number": 1,
+    "payment_type": null,
+    "referral_code": "d3pw7f",
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "current_billing_amount_in_cents": 10000,
+    "receives_invoice_emails": false,
+    "customer": {
+      "id": 17780587,
+      "first_name": "Catie",
+      "last_name": "Test",
+      "organization": "Acme, Inc.",
+      "email": "catie@example.com",
+      "created_at": "2017-06-27T13:01:05-05:00",
+      "updated_at": "2017-06-30T09:23:10-05:00",
+      "reference": "123ABC",
+      "address": "123 Anywhere Street",
+      "address_2": "Apartment #10",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90210",
+      "country": "US",
+      "phone": "555-555-5555",
+      "portal_invite_last_sent_at": "2017-06-27T13:45:16-05:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": true,
+      "portal_customer_created_at": "2017-06-27T13:01:08-05:00",
+      "cc_emails": "support@example.com",
+      "tax_exempt": true
+    },
+    "product": {
+      "id": 4470347,
+      "name": "Zero Dollar Product",
+      "handle": "zero-dollar-product",
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2017-03-23T10:54:12-05:00",
+      "updated_at": "2017-04-20T15:18:46-05:00",
+      "price_in_cents": 0,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": false,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "version_number": 1,
+      "update_return_params": "",
+      "product_family": {
+        "id": 997233,
+        "name": "Acme Products",
+        "description": "",
+        "handle": "acme-products",
+        "accounting_code": null
+      },
+      "public_signup_pages": [
+        {
+          "id": 316810,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
+        }
+      ]
+    }
+  }
+}
+```
+
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
@@ -1090,6 +1200,145 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 15236915,
+    "state": "active",
+    "balance_in_cents": 0,
+    "total_revenue_in_cents": 14000,
+    "product_price_in_cents": 1000,
+    "product_version_number": 7,
+    "current_period_ends_at": "2016-11-15T14:48:10-05:00",
+    "next_assessment_at": "2016-11-15T14:48:10-05:00",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2016-11-14T14:48:12-05:00",
+    "expires_at": null,
+    "created_at": "2016-11-14T14:48:10-05:00",
+    "updated_at": "2016-11-14T15:24:41-05:00",
+    "cancellation_message": null,
+    "cancellation_method": null,
+    "cancel_at_end_of_period": null,
+    "canceled_at": null,
+    "current_period_started_at": "2016-11-14T14:48:10-05:00",
+    "previous_state": "active",
+    "signup_payment_id": 162269766,
+    "signup_revenue": "260.00",
+    "delayed_cancel_at": null,
+    "coupon_code": "5SNN6HFK3GBH",
+    "payment_collection_method": "automatic",
+    "snap_day": null,
+    "reason_code": null,
+    "receives_invoice_emails": false,
+    "net_terms": 0,
+    "customer": {
+      "first_name": "Curtis",
+      "last_name": "Test",
+      "email": "curtis@example.com",
+      "cc_emails": "jeff@example.com",
+      "organization": "",
+      "reference": null,
+      "id": 14714298,
+      "created_at": "2016-11-14T14:48:10-05:00",
+      "updated_at": "2016-11-14T14:48:13-05:00",
+      "address": "123 Anywhere Street",
+      "address_2": "",
+      "city": "Boulder",
+      "state": "CO",
+      "zip": "80302",
+      "country": "US",
+      "phone": "",
+      "verified": false,
+      "portal_customer_created_at": "2016-11-14T14:48:13-05:00",
+      "portal_invite_last_sent_at": "2016-11-14T14:48:13-05:00",
+      "portal_invite_last_accepted_at": null,
+      "tax_exempt": false,
+      "vat_number": "012345678"
+    },
+    "product": {
+      "id": 3792003,
+      "name": "$10 Basic Plan",
+      "handle": "basic",
+      "description": "lorem ipsum",
+      "accounting_code": "basic",
+      "price_in_cents": 1000,
+      "interval": 1,
+      "interval_unit": "day",
+      "initial_charge_in_cents": null,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "month",
+      "initial_charge_after_trial": false,
+      "return_params": "",
+      "request_credit_card": false,
+      "require_credit_card": false,
+      "created_at": "2016-03-24T13:38:39-04:00",
+      "updated_at": "2016-11-03T13:03:05-04:00",
+      "archived_at": null,
+      "update_return_url": "",
+      "update_return_params": "",
+      "product_family": {
+        "id": 527890,
+        "name": "Acme Projects",
+        "handle": "billing-plans",
+        "accounting_code": null,
+        "description": ""
+      },
+      "public_signup_pages": [
+        {
+          "id": 281054,
+          "url": "https://general-goods.chargify.com/subscribe/kqvmfrbgd89q/basic"
+        },
+        {
+          "id": 281240,
+          "url": "https://general-goods.chargify.com/subscribe/dkffht5dxfd8/basic"
+        },
+        {
+          "id": 282694,
+          "url": "https://general-goods.chargify.com/subscribe/jwffwgdd95s8/basic"
+        }
+      ],
+      "taxable": false,
+      "version_number": 7,
+      "product_price_point_name": "Default"
+    },
+    "credit_card": {
+      "id": 10191713,
+      "payment_type": "credit_card",
+      "first_name": "Curtis",
+      "last_name": "Test",
+      "masked_card_number": "XXXX-XXXX-XXXX-1",
+      "card_type": "bogus",
+      "expiration_month": 1,
+      "expiration_year": 2026,
+      "billing_address": "123 Anywhere Street",
+      "billing_address_2": "",
+      "billing_city": "Boulder",
+      "billing_state": null,
+      "billing_country": "",
+      "billing_zip": "80302",
+      "current_vault": "bogus",
+      "vault_token": "1",
+      "customer_vault_token": null,
+      "customer_id": 14714298
+    },
+    "payment_type": "credit_card",
+    "referral_code": "w7kjc9",
+    "next_product_id": null,
+    "coupon_use_count": 1,
+    "coupon_uses_allowed": 1,
+    "stored_credential_transaction_id": 166411599220288,
+    "on_hold_at": null,
+    "scheduled_cancellation_at": "2016-11-14T14:48:13-05:00"
   }
 }
 ```
@@ -1615,11 +1864,161 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 21607180,
+    "state": "active",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2018-04-20T14:20:57-05:00",
+    "created_at": "2018-04-20T14:20:57-05:00",
+    "updated_at": "2018-05-11T13:53:44-05:00",
+    "expires_at": null,
+    "balance_in_cents": 49000,
+    "current_period_ends_at": "2018-05-12T11:33:03-05:00",
+    "next_assessment_at": "2018-05-12T11:33:03-05:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "remittance",
+    "snap_day": null,
+    "cancellation_method": null,
+    "current_period_started_at": "2018-05-11T11:33:03-05:00",
+    "previous_state": "active",
+    "signup_payment_id": 237154761,
+    "signup_revenue": "0.00",
+    "delayed_cancel_at": null,
+    "coupon_code": "COUPONA",
+    "total_revenue_in_cents": 52762,
+    "product_price_in_cents": 100000,
+    "product_version_number": 2,
+    "payment_type": "credit_card",
+    "referral_code": "x45nc8",
+    "coupon_use_count": 0,
+    "coupon_uses_allowed": 1,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "coupon_codes": [
+      "COUPONA",
+      "COUPONB"
+    ],
+    "customer": {
+      "id": 21259051,
+      "first_name": "K",
+      "last_name": "C",
+      "organization": "",
+      "email": "example@chargify.com",
+      "created_at": "2018-04-20T14:20:57-05:00",
+      "updated_at": "2018-04-23T15:29:28-05:00",
+      "reference": null,
+      "address": "",
+      "address_2": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "country": "",
+      "phone": "",
+      "portal_invite_last_sent_at": "2018-04-20T14:20:59-05:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": false,
+      "portal_customer_created_at": "2018-04-20T14:20:59-05:00",
+      "cc_emails": "",
+      "tax_exempt": false
+    },
+    "product": {
+      "id": 4581816,
+      "name": "Basic",
+      "handle": "basic",
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2017-11-02T15:00:11-05:00",
+      "updated_at": "2018-04-10T09:02:59-05:00",
+      "price_in_cents": 100000,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": 100000,
+      "trial_price_in_cents": 1000,
+      "trial_interval": 10,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": true,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "version_number": 2,
+      "update_return_params": "",
+      "product_family": {
+        "id": 1025627,
+        "name": "My Product Family",
+        "description": "",
+        "handle": "acme-products",
+        "accounting_code": null
+      },
+      "public_signup_pages": [
+        {
+          "id": 333589,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/hbwtd98j3hk2/basic"
+        },
+        {
+          "id": 335926,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/g366zy67c7rm/basic"
+        },
+        {
+          "id": 345555,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/txqyyqk7d8rz/basic"
+        },
+        {
+          "id": 345556,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/2zss3qpf4249/basic"
+        }
+      ]
+    },
+    "credit_card": {
+      "id": 14839830,
+      "first_name": "John",
+      "last_name": "Doe",
+      "masked_card_number": "XXXX-XXXX-XXXX-1",
+      "card_type": "bogus",
+      "expiration_month": 1,
+      "expiration_year": 2028,
+      "customer_id": 21259051,
+      "current_vault": "bogus",
+      "vault_token": "1",
+      "billing_address": null,
+      "billing_city": null,
+      "billing_state": null,
+      "billing_zip": "99999",
+      "billing_country": null,
+      "customer_vault_token": null,
+      "billing_address_2": null,
+      "payment_type": "credit_card"
+    }
+  }
+}
+```
+
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsAddCouponJson422Error`](../../doc/models/subscriptions-add-coupon-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionAddCouponError`](../../doc/models/subscription-add-coupon-error.md) |
 
 
 # Delete Coupon From Subscription

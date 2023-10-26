@@ -979,15 +979,20 @@ const componentId = 222;
 
 const body: CreateComponentPricePointRequest = {
   pricePoint: {
-    name: 'Special Pricing',
-    pricingScheme: 'per_unit',
+    name: 'Wholesale',
+    pricingScheme: 'stairstep',
     prices: [
       {
-        startingQuantity: 1,
-        unitPrice: 5,
+        startingQuantity: '1',
+        unitPrice: '5.00',
+        endingQuantity: '100',
+      },
+      {
+        startingQuantity: '101',
+        unitPrice: '4.00',
       }
     ],
-    handle: 'special',
+    handle: 'wholesale-handle',
   },
 };
 

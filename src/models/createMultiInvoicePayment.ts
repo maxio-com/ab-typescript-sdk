@@ -37,7 +37,7 @@ export const createMultiInvoicePaymentSchema: Schema<CreateMultiInvoicePayment> 
     memo: ['memo', optional(string())],
     details: ['details', optional(string())],
     method: ['method', optional(invoicePaymentMethodTypeSchema)],
-    amount: ['amount', lazy(() => createMultiInvoicePaymentAmountSchema)],
+    amount: ['amount', createMultiInvoicePaymentAmountSchema],
     receivedOn: ['received_on', optional(string())],
     applications: [
       'applications',

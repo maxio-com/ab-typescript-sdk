@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`TooManyManagementLinkRequests \| undefined`](../../doc/models/too-many-management-link-requests.md) | Optional | - |
+| `errors` | [`TooManyManagementLinkRequests`](../../doc/models/too-many-management-link-requests.md) | Required | - |
 
 ## Example (as JSON)
 

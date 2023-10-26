@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema } from '../schema';
+import { object, optional, Schema } from '../schema';
 import {
   CalendarBillingSnapDay,
   calendarBillingSnapDaySchema,
@@ -19,7 +19,7 @@ export interface CalendarBilling {
 }
 
 export const calendarBillingSchema: Schema<CalendarBilling> = object({
-  snapDay: ['snap_day', optional(lazy(() => calendarBillingSnapDaySchema))],
+  snapDay: ['snap_day', optional(calendarBillingSnapDaySchema)],
   calendarBillingFirstCharge: [
     'calendar_billing_first_charge',
     optional(firstChargeTypeSchema),

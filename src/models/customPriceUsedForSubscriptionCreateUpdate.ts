@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, lazy, object, optional, Schema, string } from '../schema';
+import { boolean, object, optional, Schema, string } from '../schema';
 import {
   CustomPriceUsedForSubscriptionCreateUpdateExpirationInterval,
   customPriceUsedForSubscriptionCreateUpdateExpirationIntervalSchema,
@@ -78,55 +78,36 @@ export const customPriceUsedForSubscriptionCreateUpdateSchema: Schema<CustomPric
     handle: ['handle', optional(string())],
     priceInCents: [
       'price_in_cents',
-      optional(
-        lazy(() => customPriceUsedForSubscriptionCreateUpdatePriceInCentsSchema)
-      ),
+      optional(customPriceUsedForSubscriptionCreateUpdatePriceInCentsSchema),
     ],
     interval: [
       'interval',
-      optional(
-        lazy(() => customPriceUsedForSubscriptionCreateUpdateIntervalSchema)
-      ),
+      optional(customPriceUsedForSubscriptionCreateUpdateIntervalSchema),
     ],
     intervalUnit: [
       'interval_unit',
-      optional(
-        lazy(() => customPriceUsedForSubscriptionCreateUpdateIntervalUnitSchema)
-      ),
+      optional(customPriceUsedForSubscriptionCreateUpdateIntervalUnitSchema),
     ],
     trialPriceInCents: [
       'trial_price_in_cents',
       optional(
-        lazy(
-          () =>
-            customPriceUsedForSubscriptionCreateUpdateTrialPriceInCentsSchema
-        )
+        customPriceUsedForSubscriptionCreateUpdateTrialPriceInCentsSchema
       ),
     ],
     trialInterval: [
       'trial_interval',
-      optional(
-        lazy(
-          () => customPriceUsedForSubscriptionCreateUpdateTrialIntervalSchema
-        )
-      ),
+      optional(customPriceUsedForSubscriptionCreateUpdateTrialIntervalSchema),
     ],
     trialIntervalUnit: [
       'trial_interval_unit',
       optional(
-        lazy(
-          () =>
-            customPriceUsedForSubscriptionCreateUpdateTrialIntervalUnitSchema
-        )
+        customPriceUsedForSubscriptionCreateUpdateTrialIntervalUnitSchema
       ),
     ],
     initialChargeInCents: [
       'initial_charge_in_cents',
       optional(
-        lazy(
-          () =>
-            customPriceUsedForSubscriptionCreateUpdateInitialChargeInCentsSchema
-        )
+        customPriceUsedForSubscriptionCreateUpdateInitialChargeInCentsSchema
       ),
     ],
     initialChargeAfterTrial: [
@@ -136,19 +117,13 @@ export const customPriceUsedForSubscriptionCreateUpdateSchema: Schema<CustomPric
     expirationInterval: [
       'expiration_interval',
       optional(
-        lazy(
-          () =>
-            customPriceUsedForSubscriptionCreateUpdateExpirationIntervalSchema
-        )
+        customPriceUsedForSubscriptionCreateUpdateExpirationIntervalSchema
       ),
     ],
     expirationIntervalUnit: [
       'expiration_interval_unit',
       optional(
-        lazy(
-          () =>
-            customPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnitSchema
-        )
+        customPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnitSchema
       ),
     ],
     taxIncluded: ['tax_included', optional(boolean())],

@@ -73,10 +73,7 @@ export const onOffComponentSchema: Schema<OnOffComponent> = object({
     'price_points',
     optional(array(lazy(() => componentPricePointItemSchema))),
   ],
-  unitPrice: [
-    'unit_price',
-    optional(lazy(() => onOffComponentUnitPriceSchema)),
-  ],
+  unitPrice: ['unit_price', optional(onOffComponentUnitPriceSchema)],
   taxCode: ['tax_code', optional(string())],
   hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
   priceInCents: ['price_in_cents', optional(string())],

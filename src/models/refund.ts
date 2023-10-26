@@ -4,15 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  boolean,
-  lazy,
-  number,
-  object,
-  optional,
-  Schema,
-  string,
-} from '../schema';
+import { boolean, number, object, optional, Schema, string } from '../schema';
 import {
   RefundSegmentUids,
   refundSegmentUidsSchema,
@@ -42,5 +34,5 @@ export const refundSchema: Schema<Refund> = object({
   external: ['external', optional(boolean())],
   applyCredit: ['apply_credit', optional(boolean())],
   voidInvoice: ['void_invoice', optional(boolean())],
-  segmentUids: ['segment_uids', optional(lazy(() => refundSegmentUidsSchema))],
+  segmentUids: ['segment_uids', optional(refundSegmentUidsSchema)],
 });

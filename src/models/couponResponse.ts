@@ -5,15 +5,12 @@
  */
 
 import { lazy, object, optional, Schema } from '../schema';
-import {
-  CouponCouponResponse,
-  couponCouponResponseSchema,
-} from './couponCouponResponse';
+import { Coupon, couponSchema } from './coupon';
 
 export interface CouponResponse {
-  coupon?: CouponCouponResponse;
+  coupon?: Coupon;
 }
 
 export const couponResponseSchema: Schema<CouponResponse> = object({
-  coupon: ['coupon', optional(lazy(() => couponCouponResponseSchema))],
+  coupon: ['coupon', optional(lazy(() => couponSchema))],
 });

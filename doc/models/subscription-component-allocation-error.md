@@ -15,11 +15,10 @@
 
 ```json
 {
-  "Example": null,
   "errors": [
     {
-      "kind": "base",
-      "message": "Credit scheme must be one of credit, refund or none."
+      "kind": "kind8",
+      "message": "message0"
     }
   ]
 }

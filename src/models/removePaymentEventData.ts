@@ -4,15 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  boolean,
-  lazy,
-  number,
-  object,
-  optional,
-  Schema,
-  string,
-} from '../schema';
+import { boolean, number, object, optional, Schema, string } from '../schema';
 import {
   RemovePaymentEventDataPaymentMethod,
   removePaymentEventDataPaymentMethodSchema,
@@ -45,7 +37,7 @@ export const removePaymentEventDataSchema: Schema<RemovePaymentEventData> = obje
     transactionTime: ['transaction_time', optional(string())],
     paymentMethod: [
       'payment_method',
-      optional(lazy(() => removePaymentEventDataPaymentMethodSchema)),
+      optional(removePaymentEventDataPaymentMethodSchema),
     ],
     prepayment: ['prepayment', optional(boolean())],
   }
