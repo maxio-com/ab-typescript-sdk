@@ -10,10 +10,10 @@ import {
 } from '../models/tooManyManagementLinkRequests';
 
 /**
- * Creates an instance of TooManyManagementLinkRequests
+ * Creates an instance of TooManyManagementLinkRequests2
  */
-interface TooManyManagementLinkRequests {
+interface TooManyManagementLinkRequests2 {
   errors: TooManyManagementLinkRequests;
 }
 
-export class TooManyManagementLinkRequestsError extends ApiError<TooManyManagementLinkRequests> {}
+export class TooManyManagementLinkRequestsError extends ApiError<TooManyManagementLinkRequests2> {}

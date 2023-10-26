@@ -1,9 +1,9 @@
 
-# Allocation Payment
+# Allocation Payment 2
 
 ## Class Name
 
-`AllocationPayment`
+`AllocationPayment2`
 
 ## Cases
 

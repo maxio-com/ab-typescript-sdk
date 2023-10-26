@@ -11,13 +11,13 @@ import {
 } from '../subscriptionGroupInlined';
 
 /** This is a container type for one-of types. */
-export type SubscriptionGroup = SubscriptionGroupInlined;
+export type SubscriptionGroup2 = SubscriptionGroupInlined;
 
-export const subscriptionGroupSchema: Schema<SubscriptionGroup> = oneOf([
+export const subscriptionGroup2Schema: Schema<SubscriptionGroup2> = oneOf([
   subscriptionGroupInlinedSchema,
 ]);
 
-export namespace SubscriptionGroup {
+export namespace SubscriptionGroup2 {
   /**
   * Validation method to narrow down union type to SubscriptionGroupInlined type case.
   *

@@ -8,13 +8,13 @@ import { boolean, oneOf, Schema, validateAndMap } from '../../schema';
 import { GroupSettings, groupSettingsSchema } from '../groupSettings';
 
 /** This is a container type for one-of types. */
-export type CreateSubscriptionGroup = GroupSettings | boolean;
+export type CreateSubscriptionGroup2 = GroupSettings | boolean;
 
-export const createSubscriptionGroupSchema: Schema<CreateSubscriptionGroup> = oneOf(
+export const createSubscriptionGroup2Schema: Schema<CreateSubscriptionGroup2> = oneOf(
   [groupSettingsSchema, boolean()]
 );
 
-export namespace CreateSubscriptionGroup {
+export namespace CreateSubscriptionGroup2 {
   /**
   * Validation method to narrow down union type to GroupSettings type case.
   *

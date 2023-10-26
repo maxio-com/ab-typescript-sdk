@@ -38,7 +38,7 @@
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`PaymentProfile \| undefined`](../../doc/models/payment-profile.md) | Optional | - |
-| `group` | [`SubscriptionGroup \| null \| undefined`](../../doc/models/containers/subscription-group.md) | Optional | This is a container for one-of cases. |
+| `group` | [`SubscriptionGroup2 \| null \| undefined`](../../doc/models/containers/subscription-group-2.md) | Optional | This is a container for one-of cases. |
 | `bankAccount` | [`SubscriptionBankAccount \| undefined`](../../doc/models/subscription-bank-account.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |
@@ -59,7 +59,7 @@
 | `storedCredentialTransactionId` | `number \| null \| undefined` | Optional | For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. |
 | `reference` | `string \| null \| undefined` | Optional | The reference value (provided by your app) for the subscription itelf. |
 | `onHoldAt` | `string \| null \| undefined` | Optional | The timestamp of the most recent on hold action. |
-| `prepaidDunning` | [`SubscriptionPrepaidDunning \| undefined`](../../doc/models/containers/subscription-prepaid-dunning.md) | Optional | This is a container for one-of cases. |
+| `prepaidDunning` | `boolean \| undefined` | Optional | Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled |
 | `coupons` | [`SubscriptionIncludedCoupon[] \| undefined`](../../doc/models/subscription-included-coupon.md) | Optional | Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.<br>Only in Read Subscription Endpoint. |
 | `dunningCommunicationDelayEnabled` | `boolean \| undefined` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `false` |
 | `dunningCommunicationDelayTimeZone` | `string \| null \| undefined` | Optional | Time zone for the Dunning Communication Delay feature. |

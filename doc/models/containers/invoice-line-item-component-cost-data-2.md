@@ -1,9 +1,9 @@
 
-# Invoice Line Item Component Cost Data
+# Invoice Line Item Component Cost Data 2
 
 ## Class Name
 
-`InvoiceLineItemComponentCostData`
+`InvoiceLineItemComponentCostData2`
 
 ## Cases
 

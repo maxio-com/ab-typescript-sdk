@@ -34,7 +34,7 @@
 | `calendarBilling` | [`CalendarBilling \| undefined`](../../doc/models/calendar-billing.md) | Optional | (Optional). Cannot be used when also specifying next_billing_at |
 | `metafields` | `Record<string, string> \| undefined` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 | `customerReference` | `string \| undefined` | Optional | The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given. |
-| `group` | [`CreateSubscriptionGroup \| undefined`](../../doc/models/containers/create-subscription-group.md) | Optional | This is a container for one-of cases. |
+| `group` | [`CreateSubscriptionGroup2 \| undefined`](../../doc/models/containers/create-subscription-group-2.md) | Optional | This is a container for one-of cases. |
 | `ref` | `string \| undefined` | Optional | A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail. |
 | `cancellationMessage` | `string \| undefined` | Optional | (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation. |
 | `cancellationMethod` | `string \| undefined` | Optional | (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about how the subscription was canceled. |

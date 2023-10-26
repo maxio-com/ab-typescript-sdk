@@ -11,13 +11,13 @@ import {
 } from '../invoiceLineItemComponentCostData';
 
 /** This is a container type for one-of types. */
-export type InvoiceLineItemComponentCostData = InvoiceLineItemComponentCostData;
+export type InvoiceLineItemComponentCostData2 = InvoiceLineItemComponentCostData;
 
-export const invoiceLineItemComponentCostDataSchema: Schema<InvoiceLineItemComponentCostData> = oneOf(
+export const invoiceLineItemComponentCostData2Schema: Schema<InvoiceLineItemComponentCostData2> = oneOf(
   [invoiceLineItemComponentCostDataSchema]
 );
 
-export namespace InvoiceLineItemComponentCostData {
+export namespace InvoiceLineItemComponentCostData2 {
   /**
   * Validation method to narrow down union type to InvoiceLineItemComponentCostData type case.
   *

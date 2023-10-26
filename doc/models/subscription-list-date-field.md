@@ -1,9 +1,9 @@
 
-# List Subscription Components Date Field
+# Subscription List Date Field
 
 ## Enumeration
 
-`ListSubscriptionComponentsDateField`
+`SubscriptionListDateField`
 
 ## Fields
 

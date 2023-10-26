@@ -354,7 +354,7 @@ async readEventsCount(
   direction?: Direction,
   filter?: EventType[],
   requestOptions?: RequestOptions
-): Promise<ApiResponse<Count>>
+): Promise<ApiResponse<CountResponse>>
 ```
 
 ## Parameters
@@ -371,7 +371,7 @@ async readEventsCount(
 
 ## Response Type
 
-[`Count`](../../doc/models/count.md)
+[`CountResponse`](../../doc/models/count-response.md)
 
 ## Example Usage
 

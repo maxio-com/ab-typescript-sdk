@@ -1,9 +1,9 @@
 
-# Create Subscription Group
+# Create Subscription Group 2
 
 ## Class Name
 
-`CreateSubscriptionGroup`
+`CreateSubscriptionGroup2`
 
 ## Cases
 

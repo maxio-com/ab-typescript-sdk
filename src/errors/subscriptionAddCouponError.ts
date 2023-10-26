@@ -7,12 +7,12 @@
 import { ApiError } from '../core';
 
 /**
- * Creates an instance of SubscriptionsAddCouponJson422
+ * Creates an instance of SubscriptionAddCoupon
  */
-interface SubscriptionsAddCouponJson422 {
+interface SubscriptionAddCoupon {
   codes?: string[];
-  subscription?: string[];
   coupon_codes?: string[];
+  subscription?: string[];
 }
 
-export class SubscriptionsAddCouponJson422Error extends ApiError<SubscriptionsAddCouponJson422> {}
+export class SubscriptionAddCouponError extends ApiError<SubscriptionAddCoupon> {}

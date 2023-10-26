@@ -5,7 +5,7 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import { Count, countSchema } from '../models/count';
+import { CountResponse, countResponseSchema } from '../models/countResponse';
 import { Direction, directionSchema } from '../models/direction';
 import { EventResponse, eventResponseSchema } from '../models/eventResponse';
 import { EventType, eventTypeSchema } from '../models/eventType';
@@ -242,7 +242,7 @@ export class EventsController extends BaseController {
     direction?: Direction,
     filter?: EventType[],
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Count>> {
+  ): Promise<ApiResponse<CountResponse>> {
     const req = this.createRequest('GET', '/events/count.json');
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
@@ -258,6 +258,6 @@ export class EventsController extends BaseController {
     req.query('max_id', mapped.maxId);
     req.query('direction', mapped.direction);
     req.query('filter', mapped.filter);
-    return req.callAsJson(countSchema, requestOptions);
+    return req.callAsJson(countResponseSchema, requestOptions);
   }
 }

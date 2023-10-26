@@ -1205,6 +1205,8 @@ const body: CreateInvoicePaymentRequest = {
   payment: {
     amount: 124.33,
     memo: 'for John Smith',
+    method: InvoicePaymentMethodType.Check,
+    details: '#0102',
   },
 };
 
@@ -2955,6 +2957,9 @@ const body: SendInvoiceRequest = {
   ],
   ccRecipientEmails: [
     'user1@example.com'
+  ],
+  bccRecipientEmails: [
+    'user2@example.com'
   ],
 };
 

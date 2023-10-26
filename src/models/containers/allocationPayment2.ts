@@ -11,13 +11,13 @@ import {
 } from '../allocationPayment';
 
 /** This is a container type for one-of types. */
-export type AllocationPayment = AllocationPayment;
+export type AllocationPayment2 = AllocationPayment;
 
-export const allocationPaymentSchema: Schema<AllocationPayment> = oneOf([
+export const allocationPayment2Schema: Schema<AllocationPayment2> = oneOf([
   allocationPaymentSchema,
 ]);
 
-export namespace AllocationPayment {
+export namespace AllocationPayment2 {
   /**
   * Validation method to narrow down union type to AllocationPayment type case.
   *

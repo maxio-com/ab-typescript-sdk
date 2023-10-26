@@ -15,9 +15,9 @@ import {
   string,
 } from '../schema';
 import {
-  AllocationPayment,
-  allocationPaymentSchema,
-} from './containers/allocationPayment';
+  AllocationPayment2,
+  allocationPayment2Schema,
+} from './containers/allocationPayment2';
 
 export interface Allocation {
   /** The integer component ID for the allocation. This references a component that you have created in your Product setup */
@@ -46,7 +46,7 @@ export interface Allocation {
   upgradeCharge?: string;
   /** The type of credit to be created if the change in cost is a downgrade. */
   downgradeCredit?: string;
-  payment?: AllocationPayment | null;
+  payment?: AllocationPayment2 | null;
 }
 
 export const allocationSchema: Schema<Allocation> = object({
@@ -65,5 +65,8 @@ export const allocationSchema: Schema<Allocation> = object({
   accrueCharge: ['accrue_charge', optional(boolean())],
   upgradeCharge: ['upgrade_charge', optional(string())],
   downgradeCredit: ['downgrade_credit', optional(string())],
-  payment: ['payment', optional(nullable(lazy(() => allocationPaymentSchema)))],
+  payment: [
+    'payment',
+    optional(nullable(lazy(() => allocationPayment2Schema))),
+  ],
 });

@@ -6,10 +6,10 @@
 
 import { number, object, optional, Schema } from '../schema';
 
-export interface Count {
+export interface CountResponse {
   count?: number;
 }
 
-export const countSchema: Schema<Count> = object({
+export const countResponseSchema: Schema<CountResponse> = object({
   count: ['count', optional(number())],
 });

@@ -1,9 +1,9 @@
 
-# Subscription Group
+# Subscription Group 2
 
 ## Class Name
 
-`SubscriptionGroup`
+`SubscriptionGroup2`
 
 ## Cases
 

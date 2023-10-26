@@ -20,17 +20,13 @@ import {
   subscriptionCancellationMethodSchema,
 } from './containers/subscriptionCancellationMethod';
 import {
-  SubscriptionGroup,
-  subscriptionGroupSchema,
-} from './containers/subscriptionGroup';
+  SubscriptionGroup2,
+  subscriptionGroup2Schema,
+} from './containers/subscriptionGroup2';
 import {
   SubscriptionPaymentCollectionMethod,
   subscriptionPaymentCollectionMethodSchema,
 } from './containers/subscriptionPaymentCollectionMethod';
-import {
-  SubscriptionPrepaidDunning,
-  subscriptionPrepaidDunningSchema,
-} from './containers/subscriptionPrepaidDunning';
 import { Customer, customerSchema } from './customer';
 import { PaymentProfile, paymentProfileSchema } from './paymentProfile';
 import { Product, productSchema } from './product';
@@ -98,7 +94,7 @@ export interface Subscription {
   customer?: Customer;
   product?: Product;
   creditCard?: PaymentProfile;
-  group?: SubscriptionGroup | null;
+  group?: SubscriptionGroup2 | null;
   bankAccount?: SubscriptionBankAccount;
   /** The payment profile type for the active profile on file. */
   paymentType?: string | null;
@@ -139,7 +135,7 @@ export interface Subscription {
   /** The timestamp of the most recent on hold action. */
   onHoldAt?: string | null;
   /** Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled */
-  prepaidDunning?: SubscriptionPrepaidDunning;
+  prepaidDunning?: boolean;
   /**
    * Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.
    * Only in Read Subscription Endpoint.
@@ -196,7 +192,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   customer: ['customer', optional(lazy(() => customerSchema))],
   product: ['product', optional(lazy(() => productSchema))],
   creditCard: ['credit_card', optional(lazy(() => paymentProfileSchema))],
-  group: ['group', optional(nullable(lazy(() => subscriptionGroupSchema)))],
+  group: ['group', optional(nullable(lazy(() => subscriptionGroup2Schema)))],
   bankAccount: [
     'bank_account',
     optional(lazy(() => subscriptionBankAccountSchema)),
@@ -232,10 +228,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   ],
   reference: ['reference', optional(nullable(string()))],
   onHoldAt: ['on_hold_at', optional(nullable(string()))],
-  prepaidDunning: [
-    'prepaid_dunning',
-    optional(subscriptionPrepaidDunningSchema),
-  ],
+  prepaidDunning: ['prepaid_dunning', optional(boolean())],
   coupons: [
     'coupons',
     optional(array(lazy(() => subscriptionIncludedCouponSchema))),

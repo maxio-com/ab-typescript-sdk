@@ -1,33 +1,32 @@
 
-# Subscriptions Add Coupon Json 422 Error
+# Subscription Add Coupon Error
 
 ## Structure
 
-`SubscriptionsAddCouponJson422Error`
+`SubscriptionAddCouponError`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `codes` | `string[] \| undefined` | Optional | - |
-| `subscription` | `string[] \| undefined` | Optional | - |
 | `couponCodes` | `string[] \| undefined` | Optional | - |
+| `subscription` | `string[] \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
   "codes": [
-    "codes4"
-  ],
-  "subscription": [
-    "subscription6",
-    "subscription7",
-    "subscription8"
+    "codes6",
+    "codes7",
+    "codes8"
   ],
   "coupon_codes": [
-    "coupon_codes0",
-    "coupon_codes1"
+    "coupon_codes2"
+  ],
+  "subscription": [
+    "subscription8"
   ]
 }
 ```

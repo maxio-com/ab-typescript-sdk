@@ -1,9 +1,9 @@
 
-# Count
+# Count Response
 
 ## Structure
 
-`Count`
+`CountResponse`
 
 ## Fields
 
@@ -15,7 +15,7 @@
 
 ```json
 {
-  "count": 106
+  "count": 60
 }
 ```
 

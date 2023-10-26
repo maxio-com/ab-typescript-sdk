@@ -2018,7 +2018,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsAddCouponJson422Error`](../../doc/models/subscriptions-add-coupon-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionAddCouponError`](../../doc/models/subscription-add-coupon-error.md) |
 
 
 # Delete Coupon From Subscription
