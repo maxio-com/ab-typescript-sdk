@@ -227,5 +227,183 @@ describe("CustomersController", () => {
             expect(firstPageResponse.result.length).toBe(5)
             expect(secondPageResponse.result.length).toBe(1)
         })
+
+        describe('Read Customer', () => {
+            afterAll(async () => {
+                await cleanSite();
+            });
+
+            test('should read a customer when the user sends a correct id from already created customer', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const customerCreated = await customersController.createCustomer({
+                    customer: {
+                        firstName: "Fernando",
+                        lastName: "Pedregal",
+                        email: "nando@example.com",
+                        organization: "Holand, Inc.",
+                        reference: '102'
+                    },
+                })
+                const id = customerCreated.result.customer.id as number;
+                const response = await customersController.readCustomer(id)
+                expect(response.result).toEqual(customerCreated.result);
+            });
+
+            test('should throw an error when the user read from a customer with an invalid Id', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const id = 102;
+                const promise = customersController.readCustomer(id)
+                expect(promise).rejects.toThrow()
+                await promise.catch(response => {
+                    expect(response.statusCode).toEqual(404);
+                });
+            });
+
+        });
+
+        describe('Update Customer', () => {
+            afterAll(async () => {
+                await cleanSite();
+            });
+
+            test('should update a customer when the user sends a correct id from already created customer', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const customerCreated = await customersController.createCustomer({
+                    customer: {
+                        firstName: "Fernando",
+                        lastName: "Pedregal",
+                        email: "nando@example.com",
+                        organization: "Holand, Inc.",
+                        reference: '102'
+                    },
+                })
+                const id = customerCreated.result.customer.id as number;
+                const bodyPayload = {
+                    customer: {
+                        firstName: 'Manuel',
+                        lastName: 'Zandia'
+                    }
+                }
+                const response = await customersController.updateCustomer(id, bodyPayload)
+                expect(response.result.customer.firstName).toBe('Manuel')
+                expect(response.result.customer.lastName).toBe('Zandia')
+            });
+
+            test('should throw an error when the user update a customer with an invalid Id', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const id = 102;
+                const promise = customersController.updateCustomer(id)
+                expect(promise).rejects.toThrow()
+                await promise.catch(response => {
+                    expect(response.statusCode).toEqual(404);
+                });
+            });
+        });
+
+        describe('Delete Customer', () => {
+            afterAll(async () => {
+                await cleanSite();
+            });
+
+            test('should delete a customer when the user sends a correct id from already created customer', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const customerCreated = await customersController.createCustomer({
+                    customer: {
+                        firstName: "Fernando",
+                        lastName: "Pedregal",
+                        email: "nando@example.com",
+                        organization: "Holand, Inc.",
+                        reference: '102'
+                    },
+                })
+                const id = customerCreated.result.customer.id as number;
+                const response = await customersController.deleteCustomer(id)
+                expect(response.statusCode).toBe(204);
+            });
+
+            test('should throw an error when the user delete a customer with an invalid Id', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const id = 102;
+                const promise = customersController.deleteCustomer(id)
+                expect(promise).rejects.toThrow()
+                await promise.catch(response => {
+                    expect(response.statusCode).toEqual(404);
+                });
+            });
+        });
+
+        describe('Read Customer By Reference', () => {
+            afterAll(async () => {
+                await cleanSite();
+            });
+
+            test('should read a customer by reference when the user sends a correct id from already created customer', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const customerCreated = await customersController.createCustomer({
+                    customer: {
+                        firstName: "Fernando",
+                        lastName: "Pedregal",
+                        email: "nando@example.com",
+                        organization: "Holand, Inc.",
+                        reference: '102'
+                    },
+                })
+                const response = await customersController.readCustomerByReference('102')
+                expect(response.result).toEqual(customerCreated.result);
+            });
+
+            test('should throw an error when the user read by reference from a customer with an invalid reference', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const reference = 'ABC-IO';
+                const promise = customersController.readCustomerByReference(reference)
+                expect(promise).rejects.toThrow()
+                await promise.catch(response => {
+                    expect(response.statusCode).toEqual(404);
+                });
+            });
+        });
+
+
+        describe('List Customer subscriptions', () => {
+            afterAll(async () => {
+                await cleanSite();
+            });
+
+            test('should list the customer subscriptions when the user sends a correct id from already created customer', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const customerCreated = await customersController.createCustomer({
+                    customer: {
+                        firstName: "Fernando",
+                        lastName: "Pedregal",
+                        email: "nando@example.com",
+                        organization: "Holand, Inc.",
+                        reference: '102'
+                    },
+                })
+                const id = customerCreated.result.customer.id as number;
+                const response = await customersController.listCustomerSubscriptions(id)
+                expect(response.statusCode).toBe(200);
+            });
+
+            test('should throw an error when the user list subscriptions from a customer with an invalid id', async () => {
+                const client = createClient();
+                const customersController = new CustomersController(client);
+                const id = 102;
+                const promise = customersController.readCustomer(id)
+                expect(promise).rejects.toThrow()
+                await promise.catch(response => {
+                    expect(response.statusCode).toEqual(404);
+                });
+            });
+        });
     })
 });
