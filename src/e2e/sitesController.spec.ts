@@ -37,7 +37,7 @@ describe("SitesController", () => {
             taxConfiguration: {
                 kind: 'custom',
                 destinationAddress: 'shipping_then_billing',
-                fullyConfigured: true
+                fullyConfigured: false
             },
             netTerms: {
                 defaultNetTerms: 0,
