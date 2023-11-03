@@ -29,6 +29,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Lint verification
+        run: pnpm run lint
       - name: Build process verification
         run: pnpm run build
       - name: e2e tests verification
@@ -37,4 +39,4 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
           DOMAIN: ${{ secrets.DOMAIN }}
-        run: pnpm run coverage
+        run: pnpm run test
