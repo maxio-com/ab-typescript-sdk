@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ComponentAllocationError } from '../errors/componentAllocationError';
 import { ComponentPricePointError } from '../errors/componentPricePointError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
@@ -226,13 +226,13 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('end_date', mapped.endDate);
     req.query('end_datetime', mapped.endDatetime);
     req.query('price_point_ids', mapped.pricePointIds);
-    req.query('product_family_ids', mapped.productFamilyIds);
+    req.query('product_family_ids', mapped.productFamilyIds, commaPrefix);
     req.query('sort', mapped.sort);
     req.query('start_date', mapped.startDate);
     req.query('start_datetime', mapped.startDatetime);
     req.query('include', mapped.include);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
-    req.query('filter[currencies]', mapped.filterCurrencies);
+    req.query('filter[currencies]', mapped.filterCurrencies, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components.json`;
     return req.callAsJson(
       array(subscriptionComponentResponseSchema),
@@ -1231,13 +1231,13 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_date', mapped.endDate);
     req.query('end_datetime', mapped.endDatetime);
-    req.query('subscription_ids', mapped.subscriptionIds);
+    req.query('subscription_ids', mapped.subscriptionIds, commaPrefix);
     req.query('price_point_ids', mapped.pricePointIds);
-    req.query('product_family_ids', mapped.productFamilyIds);
+    req.query('product_family_ids', mapped.productFamilyIds, commaPrefix);
     req.query('include', mapped.include);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
-    req.query('filter[currencies]', mapped.filterCurrencies);
-    req.query('filter[subscription][states]', mapped.filterSubscriptionStates);
+    req.query('filter[currencies]', mapped.filterCurrencies, commaPrefix);
+    req.query('filter[subscription][states]', mapped.filterSubscriptionStates, commaPrefix);
     req.query('filter[subscription][date_field]', mapped.filterSubscriptionDateField);
     req.query('filter[subscription][start_date]', mapped.filterSubscriptionStartDate);
     req.query('filter[subscription][start_datetime]', mapped.filterSubscriptionStartDatetime);

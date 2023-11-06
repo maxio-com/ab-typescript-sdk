@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
   SingleStringErrorResponseError,
@@ -181,8 +181,8 @@ export class CouponsController extends BaseController {
     req.query('filter[end_datetime]', mapped.filterEndDatetime);
     req.query('filter[start_date]', mapped.filterStartDate);
     req.query('filter[start_datetime]', mapped.filterStartDatetime);
-    req.query('filter[ids]', mapped.filterIds);
-    req.query('filter[codes]', mapped.filterCodes);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[codes]', mapped.filterCodes, commaPrefix);
     req.query('currency_prices', mapped.currencyPrices);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
@@ -442,8 +442,8 @@ export class CouponsController extends BaseController {
     req.query('end_date', mapped.endDate);
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
-    req.query('filter[ids]', mapped.filterIds);
-    req.query('filter[codes]', mapped.filterCodes);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[codes]', mapped.filterCodes, commaPrefix);
     req.query('currency_prices', mapped.currencyPrices);
     req.query('filter[end_date]', mapped.filterEndDate);
     req.query('filter[end_datetime]', mapped.filterEndDatetime);

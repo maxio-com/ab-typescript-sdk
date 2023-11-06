@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
@@ -301,7 +301,7 @@ export class ComponentsController extends BaseController {
     req.query('include_archived', mapped.includeArchived);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter[ids]', mapped.filterIds);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     return req.callAsJson(array(componentResponseSchema), requestOptions);
   }
@@ -438,7 +438,7 @@ export class ComponentsController extends BaseController {
       ],
     });
     req.query('include_archived', mapped.includeArchived);
-    req.query('filter[ids]', mapped.filterIds);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('date_field', mapped.dateField);
@@ -521,7 +521,7 @@ export class ComponentsController extends BaseController {
     req.query('currency_prices', mapped.currencyPrices);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter[type]', mapped.filterType);
+    req.query('filter[type]', mapped.filterType, commaPrefix);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points.json`;
     return req.callAsJson(componentPricePointsResponseSchema, requestOptions);
   }
@@ -791,7 +791,7 @@ export class ComponentsController extends BaseController {
     req.query('filter[start_datetime]', mapped.filterStartDatetime);
     req.query('filter[type]', mapped.filterType);
     req.query('direction', mapped.direction);
-    req.query('filter[ids]', mapped.filterIds);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('filter[archived_at]', mapped.filterArchivedAt);
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(

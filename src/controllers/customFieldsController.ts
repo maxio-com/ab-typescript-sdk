@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   ListMetadataDirection,
@@ -397,7 +397,7 @@ export class CustomFieldsController extends BaseController {
       names: [names, optional(array(string()))],
     });
     req.query('name', mapped.name);
-    req.query('names[]', mapped.names);
+    req.query('names[]', mapped.names, commaPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(404, ApiError, 'Not Found');
     return req.call(requestOptions);
@@ -492,7 +492,7 @@ export class CustomFieldsController extends BaseController {
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
     req.query('with_deleted', mapped.withDeleted);
-    req.query('resource_ids[]', mapped.resourceIds);
+    req.query('resource_ids[]', mapped.resourceIds, commaPrefix);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metadata.json`;
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
