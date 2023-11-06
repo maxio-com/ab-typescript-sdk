@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { CountResponse, countResponseSchema } from '../models/countResponse';
 import { Direction, directionSchema } from '../models/direction';
 import { EventResponse, eventResponseSchema } from '../models/eventResponse';
@@ -154,7 +154,7 @@ export class EventsController extends BaseController {
     req.query('since_id', mapped.sinceId);
     req.query('max_id', mapped.maxId);
     req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
+    req.query('filter', mapped.filter, commaPrefix);
     req.query('date_field', mapped.dateField);
     req.query('start_date', mapped.startDate);
     req.query('end_date', mapped.endDate);
@@ -210,7 +210,7 @@ export class EventsController extends BaseController {
     req.query('since_id', mapped.sinceId);
     req.query('max_id', mapped.maxId);
     req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
+    req.query('filter', mapped.filter, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/events.json`;
     return req.callAsJson(array(eventResponseSchema), requestOptions);
   }
@@ -257,7 +257,7 @@ export class EventsController extends BaseController {
     req.query('since_id', mapped.sinceId);
     req.query('max_id', mapped.maxId);
     req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
+    req.query('filter', mapped.filter, commaPrefix);
     return req.callAsJson(countResponseSchema, requestOptions);
   }
 }

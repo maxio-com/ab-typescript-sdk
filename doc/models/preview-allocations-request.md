@@ -10,6 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `allocations` | [`CreateAllocation[]`](../../doc/models/create-allocation.md) | Required | - |
+| `effectiveProrationDate` | `string \| undefined` | Optional | To calculate proration amounts for a future time. Only within a current subscription period. Only ISO8601 format is supported. |
 
 ## Example (as JSON)
 
@@ -24,7 +25,8 @@
       "proration_upgrade_scheme": "proration_upgrade_scheme2",
       "accrue_charge": false
     }
-  ]
+  ],
+  "effective_proration_date": "2023-12-01"
 }
 ```
 

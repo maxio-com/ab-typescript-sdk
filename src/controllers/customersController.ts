@@ -6,8 +6,9 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { CustomersJson422Error } from '../errors/customersJson422Error';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import {
+  CustomerErrorResponseError,
+} from '../errors/customerErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   ListCustomersDirection,
@@ -85,7 +86,7 @@ export class CustomersController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, CustomersJson422Error, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, CustomerErrorResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
@@ -217,7 +218,7 @@ export class CustomersController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/customers/${mapped.id}.json`;
     req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, CustomerErrorResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 

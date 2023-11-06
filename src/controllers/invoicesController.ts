@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import {
@@ -255,9 +255,9 @@ export class InvoicesController extends BaseController {
     req.query('date_field', mapped.dateField);
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
-    req.query('customer_ids', mapped.customerIds);
-    req.query('number', mapped.mNumber);
-    req.query('product_ids', mapped.productIds);
+    req.query('customer_ids', mapped.customerIds, commaPrefix);
+    req.query('number', mapped.mNumber, commaPrefix);
+    req.query('product_ids', mapped.productIds, commaPrefix);
     req.query('sort', mapped.sort);
     return req.callAsJson(listInvoicesResponseSchema, requestOptions);
   }
@@ -359,7 +359,7 @@ export class InvoicesController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('invoice_uid', mapped.invoiceUid);
     req.query('with_change_invoice_status', mapped.withChangeInvoiceStatus);
-    req.query('event_types', mapped.eventTypes);
+    req.query('event_types', mapped.eventTypes, commaPrefix);
     return req.callAsJson(listInvoiceEventsResponseSchema, requestOptions);
   }
 

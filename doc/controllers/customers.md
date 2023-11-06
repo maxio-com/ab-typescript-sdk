@@ -141,7 +141,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`CustomersJson422Error`](../../doc/models/customers-json-422-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseError`](../../doc/models/customer-error-response-error.md) |
 
 
 # List Customers
@@ -447,7 +447,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseError`](../../doc/models/customer-error-response-error.md) |
 
 
 # Delete Customer

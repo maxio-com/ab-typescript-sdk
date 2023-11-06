@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { ErrorMapResponseError } from '../errors/errorMapResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
@@ -126,7 +126,7 @@ export class ProductPricePointsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('currency_prices', mapped.currencyPrices);
-    req.query('filter[type]', mapped.filterType);
+    req.query('filter[type]', mapped.filterType, commaPrefix);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
     return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
   }
@@ -453,7 +453,7 @@ export class ProductPricePointsController extends BaseController {
     req.query('filter[date_field]', mapped.filterDateField);
     req.query('filter[end_date]', mapped.filterEndDate);
     req.query('filter[end_datetime]', mapped.filterEndDatetime);
-    req.query('filter[ids]', mapped.filterIds);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('filter[start_date]', mapped.filterStartDate);
     req.query('filter[start_datetime]', mapped.filterStartDatetime);
     req.query('filter[type]', mapped.filterType);
