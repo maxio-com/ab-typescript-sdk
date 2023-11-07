@@ -266,73 +266,19 @@ It is up to API consumers to parse the string into a decimal number representati
   + [Invoices: Charges](./b3A6MTQxMTA0MTM-create-charge)
   + [Invoices: Credits](./b3A6MTQxMTA0MTQ-create-invoice-credit)
 
-## Building
+## Install the Package
 
-### Requirements
+Run the following command from your project directory to install the package from npm:
 
-The SDK relies on **Node.js** and **npm** (to resolve dependencies). It also requires **Typescript version 3.9+**. You can download and install Node.js and [npm](https://www.npmjs.com/) from [the official Node.js website](https://nodejs.org/en/download/).
-
-> **NOTE:** npm is installed by default when Node.js is installed.
-
-### Verify Successful Installation
-
-Run the following commands in the command prompt or shell of your choice to check if Node.js and npm are successfully installed:
-
-* Node.js: `node --version`
-
-* npm: `npm --version`
-
-![Version Check](https://apidocs.io/illustration/typescript?workspaceFolder=AdvancedBilling&step=versionCheck)
-
-### Install Dependencies
-
-- To resolve all dependencies, go to the **SDK root directory** and run the following command with npm:
-
-```bash
-npm install
+```ts
+npm install advanced-billing-sdk@0.0.2
 ```
 
-- This will install all dependencies in the **node_modules** folder.
-
-![Resolve Dependencies](https://apidocs.io/illustration/typescript?workspaceFolder=AdvancedBilling&workspaceName=maxio-advanced-billinglib&step=resolveDependency)
-
-## Installation
-
-The following section explains how to use the generated library in a new project.
-
-### 1. Initialize the Node Project
-
-- Open an IDE/text editor for JavaScript like Visual Studio Code. The basic workflow presented here is also applicable if you prefer using a different editor or IDE.
-
-- Click on **File** and select **Open Folder**. Select an empty folder of your project, the folder will become visible in the sidebar on the left.
-
-![Open Folder](https://apidocs.io/illustration/typescript?step=openProject)
-
-- To initialize the Node project, click on **Terminal** and select **New Terminal**. Execute the following command in the terminal:
-
-```bash
-npm init --y
-```
-
-![Initialize the Node Project](https://apidocs.io/illustration/typescript?step=initializeProject)
-
-### 2. Add Dependencies to the Client Library
-
-- The created project manages its dependencies using its `package.json` file. In order to add a dependency on the *Maxio Advanced BillingLib* client library, double click on the `package.json` file in the bar on the left and add the dependency to the package in it.
-
-![Add MaxioAdvancedBillinglib Dependency](https://apidocs.io/illustration/typescript?workspaceFolder=AdvancedBilling&workspaceName=maxio-advanced-billinglib&step=importDependency)
-
-- To install the package in the project, run the following command in the terminal:
-
-```bash
-npm install
-```
-
-![Install MaxioAdvancedBillinglib Dependency](https://apidocs.io/illustration/typescript?step=installDependency)
+For additional package details, see the [Npm page for the advanced-billing-sdk@0.0.2 npm](https://www.npmjs.com/package/advanced-billing-sdk/v/0.0.2).
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
@@ -396,40 +342,40 @@ This API uses `Basic Authentication`.
 
 ## List of APIs
 
-* [API Exports](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/api-exports.md)
-* [Advance Invoice](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/advance-invoice.md)
-* [Billing Portal](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/billing-portal.md)
-* [Custom Fields](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/custom-fields.md)
-* [Events-Based Billing Segments](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/events-based-billing-segments.md)
-* [Payment Profiles](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/payment-profiles.md)
-* [Product Families](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/product-families.md)
-* [Product Price Points](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/product-price-points.md)
-* [Proforma Invoices](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/proforma-invoices.md)
-* [Reason Codes](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/reason-codes.md)
-* [Referral Codes](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/referral-codes.md)
-* [Sales Commissions](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/sales-commissions.md)
-* [Subscription Components](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-components.md)
-* [Subscription Groups](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-groups.md)
-* [Subscription Group Invoice Account](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-group-invoice-account.md)
-* [Subscription Group Status](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-group-status.md)
-* [Subscription Invoice Account](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-invoice-account.md)
-* [Subscription Notes](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-notes.md)
-* [Subscription Products](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-products.md)
-* [Subscription Status](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscription-status.md)
-* [Coupons](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/coupons.md)
-* [Components](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/components.md)
-* [Customers](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/customers.md)
-* [Events](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/events.md)
-* [Insights](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/insights.md)
-* [Invoices](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/invoices.md)
-* [Offers](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/offers.md)
-* [Products](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/products.md)
-* [Sites](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/sites.md)
-* [Subscriptions](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/subscriptions.md)
-* [Webhooks](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/controllers/webhooks.md)
+* [API Exports](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/api-exports.md)
+* [Advance Invoice](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/advance-invoice.md)
+* [Billing Portal](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/billing-portal.md)
+* [Custom Fields](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/custom-fields.md)
+* [Events-Based Billing Segments](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/events-based-billing-segments.md)
+* [Payment Profiles](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/payment-profiles.md)
+* [Product Families](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/product-families.md)
+* [Product Price Points](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/product-price-points.md)
+* [Proforma Invoices](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/proforma-invoices.md)
+* [Reason Codes](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/reason-codes.md)
+* [Referral Codes](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/referral-codes.md)
+* [Sales Commissions](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/sales-commissions.md)
+* [Subscription Components](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-components.md)
+* [Subscription Groups](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-groups.md)
+* [Subscription Group Invoice Account](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-group-invoice-account.md)
+* [Subscription Group Status](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-group-status.md)
+* [Subscription Invoice Account](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-invoice-account.md)
+* [Subscription Notes](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-notes.md)
+* [Subscription Products](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-products.md)
+* [Subscription Status](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscription-status.md)
+* [Coupons](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/coupons.md)
+* [Components](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/components.md)
+* [Customers](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/customers.md)
+* [Events](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/events.md)
+* [Insights](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/insights.md)
+* [Invoices](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/invoices.md)
+* [Offers](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/offers.md)
+* [Products](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/products.md)
+* [Sites](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/sites.md)
+* [Subscriptions](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/subscriptions.md)
+* [Webhooks](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/controllers/webhooks.md)
 
 ## Classes Documentation
 
-* [ApiResponse](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/api-response.md)
-* [ApiError](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.6/doc/api-error.md)
+* [ApiResponse](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/api-response.md)
+* [ApiError](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.2/doc/api-error.md)
 

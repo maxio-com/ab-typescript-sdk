@@ -51,7 +51,7 @@ export class Client implements ClientInterface {
         ? this._config.httpClientOptions.timeout
         : this._config.timeout;
     this._userAgent = updateUserAgent(
-      'AB SDK TypeScript:1.0.0 on OS {os-info}',
+      'AB SDK TypeScript:0.0.2 on OS {os-info}',
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
       server => getBaseUri(server, this._config),
