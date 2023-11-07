@@ -12,6 +12,7 @@ import { Schema, stringEnum } from '../schema';
 export enum RecurringScheme {
   DoNotRecur = 'do_not_recur',
   RecurIndefinitely = 'recur_indefinitely',
+  RecurWithDuration = 'recur_with_duration',
 }
 
 /**

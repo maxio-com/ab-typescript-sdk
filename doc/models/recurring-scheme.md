@@ -11,4 +11,5 @@
 |  --- |
 | `doNotRecur` |
 | `recurIndefinitely` |
+| `recurWithDuration` |
 
