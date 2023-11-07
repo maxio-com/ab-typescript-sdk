@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, plainPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import {
@@ -1150,7 +1150,7 @@ export class SubscriptionsController extends BaseController {
       subscriptionId: [subscriptionId, string()],
       include: [include, optional(array(subscriptionIncludeSchema))],
     });
-    req.query('include[]', mapped.include, commaPrefix);
+    req.query('include[]', mapped.include, plainPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
@@ -1263,7 +1263,7 @@ export class SubscriptionsController extends BaseController {
       cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
     });
     req.query('ack', mapped.ack);
-    req.query('cascade[]', mapped.cascade, commaPrefix);
+    req.query('cascade[]', mapped.cascade, plainPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
     req.throwOn(400, ApiError, 'Bad Request');
     return req.call(requestOptions);

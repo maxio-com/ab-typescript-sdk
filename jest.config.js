@@ -6,4 +6,5 @@ module.exports = {
       tsConfig: 'tsconfig.base.json',
     },
   },
+  globalTeardown: "./e2e/utils/testTeardown.ts",
 };

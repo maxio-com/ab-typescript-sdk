@@ -5,7 +5,9 @@
  */
 
 import { ApiError } from '../core';
-import { CustomerErrorResponseErrors } from '../models/containers/customerErrorResponseErrors';
+import {
+  CustomerErrorResponseErrors,
+} from '../models/containers/customerErrorResponseErrors';
 
 /**
  * Creates an instance of CustomerErrorResponse
