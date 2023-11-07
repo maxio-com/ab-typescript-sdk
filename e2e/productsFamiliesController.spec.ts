@@ -1,12 +1,7 @@
 import { createClient } from './config';
 import { ProductFamiliesController } from '../src/controllers/productFamiliesController';
 
-import { cleanSite } from './utils';
-
 describe('ProductsFamilies Controller', () => {
-  afterAll(async () => {
-    await cleanSite();
-  });
   test('should create a product family with the correct params', async () => {
     const client = createClient();
     const productFamiliesController = new ProductFamiliesController(client);
