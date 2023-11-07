@@ -4,9 +4,9 @@
 name: Build & run E2E tests
 on:
   push:
-    branches: ['main']
+    branches: ['tests']
   pull_request:
-    branches: ['main']
+    branches: ['tests']
 
 jobs:
   build:
