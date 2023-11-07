@@ -7,8 +7,7 @@
 import { ApiError } from '../core';
 import {
   CustomerErrorResponseErrors,
-  customerErrorResponseErrorsSchema,
-} from './containers/customerErrorResponseErrors';
+} from '../models/containers/customerErrorResponseErrors';
 
 /**
  * Creates an instance of CustomerErrorResponse
