@@ -183,7 +183,7 @@ async readMrrMovements(
   subscriptionId?: number,
   page?: number,
   perPage?: number,
-  direction?: ReadMrrMovementsDirection,
+  direction?: ReadMrrMovementsInputDirection,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListMRRResponse>>
 ```
@@ -195,7 +195,7 @@ async readMrrMovements(
 | `subscriptionId` | `number \| undefined` | Query, Optional | optionally filter results by subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 50; any per_page value over 50 will be changed to 50.<br>Use in query `per_page=20`.<br>**Default**: `10`<br>**Constraints**: `<= 50` |
-| `direction` | [`ReadMrrMovementsDirection \| undefined`](../../doc/models/containers/read-mrr-movements-direction.md) | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`ReadMrrMovementsInputDirection \| undefined`](../../doc/models/containers/read-mrr-movements-input-direction.md) | Query, Optional | This is a container for one-of cases. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -205,18 +205,14 @@ async readMrrMovements(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 20;
-
+const collect = {
+  page: 2,
+  perPage: 20
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await insightsController.readMrrMovements(
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await insightsController.readMrrMovements(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -317,23 +313,16 @@ async listMrrPerSubscription(
 ## Example Usage
 
 ```ts
-Liquid error: Value cannot be null. (Parameter 'key')const atTime = 'at_time=2022-01-10T10:00:00-05:00';
-
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Desc;
-
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+  atTime: 'at_time=2022-01-10T10:00:00-05:00',
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await insightsController.listMrrPerSubscription(
-  atTime,
-  page,
-  perPage,
-  direction
-);
+  const { result, ...httpResponse } = await insightsController.listMrrPerSubscription(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

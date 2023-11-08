@@ -8,13 +8,13 @@ import { ApiError } from '@apimatic/core';
 import { ApiResponse, plainPrefix, RequestOptions } from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
-  ListMetadataDirection,
-  listMetadataDirectionSchema,
-} from '../models/containers/listMetadataDirection';
+  ListMetadataInputDirection,
+  listMetadataInputDirectionSchema,
+} from '../models/containers/listMetadataInputDirection';
 import {
-  ListMetafieldsDirection,
-  listMetafieldsDirectionSchema,
-} from '../models/containers/listMetafieldsDirection';
+  ListMetafieldsInputDirection,
+  listMetafieldsInputDirectionSchema,
+} from '../models/containers/listMetafieldsInputDirection';
 import {
   CreateMetadataRequest,
   createMetadataRequestSchema,
@@ -114,27 +114,35 @@ export class CustomFieldsController extends BaseController {
    *
    * @param resourceType  the resource type to which the metafields belong
    * @param name          filter by the name of the metafield
-   * @param page          Result records are organized in pages. By default, the first page
-   *                                                 of results is displayed. The page parameter specifies a page
-   *                                                 number of results to fetch. You can start navigating through the
-   *                                                 pages to consume the results. You do this by passing in a page
-   *                                                 parameter. Retrieve the next page by adding ?page=2 to the query
-   *                                                 string. If there are no results to return, then an empty result
-   *                                                 set will be returned. Use in query `page=1`.
+   * @param page          Result records are organized in pages. By default, the first
+   *                                                      page of results is displayed. The page parameter specifies a
+   *                                                      page number of results to fetch. You can start navigating
+   *                                                      through the pages to consume the results. You do this by
+   *                                                      passing in a page parameter. Retrieve the next page by adding
+   *                                                      ?page=2 to the query string. If there are no results to
+   *                                                      return, then an empty result set will be returned. Use in
+   *                                                      query `page=1`.
    * @param perPage       This parameter indicates how many records to fetch in each
-   *                                                 request. Default value is 20. The maximum allowed values is 200;
-   *                                                 any per_page value over 200 will be changed to 200. Use in query
-   *                                                 `per_page=200`.
-   * @param direction     Controls the order in which results are returned. Use in query
-   *                                                 `direction=asc`.
+   *                                                      request. Default value is 20. The maximum allowed values is
+   *                                                      200; any per_page value over 200 will be changed to 200. Use
+   *                                                      in query `per_page=200`.
+   * @param direction     Controls the order in which results are returned. Use in
+   *                                                      query `direction=asc`.
    * @return Response from the API call
    */
-  async listMetafields(
+  async listMetafields({
+    resourceType,
+    name,
+    page,
+    perPage,
+    direction,
+  }: {
     resourceType: ResourceType,
     name?: string,
     page?: number,
     perPage?: number,
-    direction?: ListMetafieldsDirection,
+    direction?: ListMetafieldsInputDirection,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListMetafieldsResponse>> {
     const req = this.createRequest('GET');
@@ -143,7 +151,7 @@ export class CustomFieldsController extends BaseController {
       name: [name, optional(string())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      direction: [direction, optional(listMetafieldsDirectionSchema)],
+      direction: [direction, optional(listMetafieldsInputDirectionSchema)],
     });
     req.query('name', mapped.name);
     req.query('page', mapped.page);
@@ -297,11 +305,17 @@ export class CustomFieldsController extends BaseController {
    *                                      will be changed to 200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async readMetadata(
+  async readMetadata({
+    resourceType,
+    resourceId,
+    page,
+    perPage,
+  }: {
     resourceType: ResourceType,
     resourceId: string,
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaginatedMetadata>> {
     const req = this.createRequest('GET');
@@ -420,43 +434,60 @@ export class CustomFieldsController extends BaseController {
    * This endpoint will list the number of pages of metadata information that are contained within a site.
    *
    * @param resourceType   the resource type to which the metafields belong
-   * @param page           Result records are organized in pages. By default, the first page
-   *                                                of results is displayed. The page parameter specifies a page number
-   *                                                of results to fetch. You can start navigating through the pages to
-   *                                                consume the results. You do this by passing in a page parameter.
-   *                                                Retrieve the next page by adding ?page=2 to the query string. If
-   *                                                there are no results to return, then an empty result set will be
-   *                                                returned. Use in query `page=1`.
-   * @param perPage        This parameter indicates how many records to fetch in each request.
-   *                                                Default value is 20. The maximum allowed values is 200; any
-   *                                                per_page value over 200 will be changed to 200. Use in query
-   *                                                `per_page=200`.
+   * @param page           Result records are organized in pages. By default, the first
+   *                                                     page of results is displayed. The page parameter specifies a
+   *                                                     page number of results to fetch. You can start navigating
+   *                                                     through the pages to consume the results. You do this by
+   *                                                     passing in a page parameter. Retrieve the next page by adding ?
+   *                                                     page=2 to the query string. If there are no results to return,
+   *                                                     then an empty result set will be returned. Use in query
+   *                                                     `page=1`.
+   * @param perPage        This parameter indicates how many records to fetch in each
+   *                                                     request. Default value is 20. The maximum allowed values is
+   *                                                     200; any per_page value over 200 will be changed to 200. Use
+   *                                                     in query `per_page=200`.
    * @param dateField      The type of filter you would like to apply to your search.
    * @param startDate      The start date (format YYYY-MM-DD) with which to filter the
-   *                                                date_field. Returns metadata with a timestamp at or after midnight
-   *                                                (12:00:00 AM) in your site’s time zone on the date specified.
+   *                                                     date_field. Returns metadata with a timestamp at or after
+   *                                                     midnight (12:00:00 AM) in your site’s time zone on the date
+   *                                                     specified.
    * @param endDate        The end date (format YYYY-MM-DD) with which to filter the
-   *                                                date_field. Returns metadata with a timestamp up to and including
-   *                                                11:59:59PM in your site’s time zone on the date specified.
-   * @param startDatetime  The start date and time (format YYYY-MM-DD HH:MM:SS) with which to
-   *                                                filter the date_field. Returns metadata with a timestamp at or
-   *                                                after exact time provided in query. You can specify timezone in
-   *                                                query - otherwise your site's time zone will be used. If provided,
-   *                                                this parameter will be used instead of start_date.
-   * @param endDatetime    The end date and time (format YYYY-MM-DD HH:MM:SS) with which to
-   *                                                filter the date_field. Returns metadata with a timestamp at or
-   *                                                before exact time provided in query. You can specify timezone in
-   *                                                query - otherwise your site's time zone will be used. If provided,
-   *                                                this parameter will be used instead of end_date.
+   *                                                     date_field. Returns metadata with a timestamp up to and
+   *                                                     including 11:59:59PM in your site’s time zone on the date
+   *                                                     specified.
+   * @param startDatetime  The start date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                     which to filter the date_field. Returns metadata with a
+   *                                                     timestamp at or after exact time provided in query. You can
+   *                                                     specify timezone in query - otherwise your site's time zone
+   *                                                     will be used. If provided, this parameter will be used instead
+   *                                                     of start_date.
+   * @param endDatetime    The end date and time (format YYYY-MM-DD HH:MM:SS) with which
+   *                                                     to filter the date_field. Returns metadata with a timestamp at
+   *                                                     or before exact time provided in query. You can specify
+   *                                                     timezone in query - otherwise your site's time zone will be
+   *                                                     used. If provided, this parameter will be used instead of
+   *                                                     end_date.
    * @param withDeleted    Allow to fetch deleted metadata.
-   * @param resourceIds    Allow to fetch metadata for multiple records based on provided ids.
-   *                                                Use in query:
-   *                                                `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.
-   * @param direction      Controls the order in which results are returned. Use in query
-   *                                                `direction=asc`.
+   * @param resourceIds    Allow to fetch metadata for multiple records based on
+   *                                                     provided ids. Use in query:
+   *                                                     `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.
+   * @param direction      Controls the order in which results are returned. Use in
+   *                                                     query `direction=asc`.
    * @return Response from the API call
    */
-  async listMetadata(
+  async listMetadata({
+    resourceType,
+    page,
+    perPage,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    withDeleted,
+    resourceIds,
+    direction,
+  }: {
     resourceType: ResourceType,
     page?: number,
     perPage?: number,
@@ -467,7 +498,8 @@ export class CustomFieldsController extends BaseController {
     endDatetime?: string,
     withDeleted?: boolean,
     resourceIds?: number[],
-    direction?: ListMetadataDirection,
+    direction?: ListMetadataInputDirection,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaginatedMetadata>> {
     const req = this.createRequest('GET');
@@ -482,7 +514,7 @@ export class CustomFieldsController extends BaseController {
       endDatetime: [endDatetime, optional(string())],
       withDeleted: [withDeleted, optional(boolean())],
       resourceIds: [resourceIds, optional(array(number()))],
-      direction: [direction, optional(listMetadataDirectionSchema)],
+      direction: [direction, optional(listMetadataInputDirectionSchema)],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);

@@ -1,9 +1,9 @@
 
-# List All Product Price Points Direction
+# List Metafields Input Direction
 
 ## Class Name
 
-`ListAllProductPricePointsDirection`
+`ListMetafieldsInputDirection`
 
 ## Cases
 

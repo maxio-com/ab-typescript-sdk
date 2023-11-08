@@ -63,31 +63,17 @@ async listProductsForProductFamily(
 ## Example Usage
 
 ```ts
-const productFamilyId = 140;
-
-const page = 2;
-
-const perPage = 50;
-
-const dateField = BasicDateField.UpdatedAt;
-
-const include = ListProductsInclude.PrepaidProductPricePoint;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  productFamilyId: 140,
+  page: 2,
+  perPage: 50,
+  dateField: BasicDateField.UpdatedAt,
+  include: ListProductsInclude.PrepaidProductPricePoint
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await productFamiliesController.listProductsForProductFamily(
-  productFamilyId,
-  page,
-  perPage,
-  dateField,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  include
-);
+  const { result, ...httpResponse } = await productFamiliesController.listProductsForProductFamily(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -304,12 +290,13 @@ async listProductFamilies(
 ## Example Usage
 
 ```ts
-const dateField = BasicDateField.UpdatedAt;
-
+const collect = {
+  dateField: BasicDateField.UpdatedAt
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productFamiliesController.listProductFamilies(dateField);
+  const { result, ...httpResponse } = await productFamiliesController.listProductFamilies(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

@@ -252,7 +252,19 @@ export class ProductsController extends BaseController {
    *                                                                                           e_rate]=true`.
    * @return Response from the API call
    */
-  async listProducts(
+  async listProducts({
+    dateField,
+    endDate,
+    endDatetime,
+    startDate,
+    startDatetime,
+    page,
+    perPage,
+    includeArchived,
+    include,
+    filterPrepaidProductPricePointProductPricePointId,
+    filterUseSiteExchangeRate,
+  }: {
     dateField?: BasicDateField,
     endDate?: string,
     endDatetime?: string,
@@ -264,6 +276,7 @@ export class ProductsController extends BaseController {
     include?: ListProductsInclude,
     filterPrepaidProductPricePointProductPricePointId?: IncludeNotNull,
     filterUseSiteExchangeRate?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse[]>> {
     const req = this.createRequest('GET', '/products.json');

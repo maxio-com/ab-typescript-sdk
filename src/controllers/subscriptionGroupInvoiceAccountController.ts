@@ -106,13 +106,21 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
    *                                                                       200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listPrepaymentsForSubscriptionGroup(
+  async listPrepaymentsForSubscriptionGroup({
+    uid,
+    filterDateField,
+    filterEndDate,
+    filterStartDate,
+    page,
+    perPage,
+  }: {
     uid: string,
     filterDateField?: ListSubscriptionGroupPrepaymentDateField,
     filterEndDate?: string,
     filterStartDate?: string,
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSubscriptionGroupPrepaymentResponse>> {
     const req = this.createRequest('GET');

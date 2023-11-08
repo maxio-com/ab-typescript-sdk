@@ -187,7 +187,30 @@ export class InvoicesController extends BaseController {
    *                                                   query `sort=total_amount`.
    * @return Response from the API call
    */
-  async listInvoices(
+  async listInvoices({
+    startDate,
+    endDate,
+    status,
+    subscriptionId,
+    subscriptionGroupUid,
+    page,
+    perPage,
+    direction,
+    lineItems,
+    discounts,
+    taxes,
+    credits,
+    payments,
+    customFields,
+    refunds,
+    dateField,
+    startDatetime,
+    endDatetime,
+    customerIds,
+    mNumber,
+    productIds,
+    sort,
+  }: {
     startDate?: string,
     endDate?: string,
     status?: Status,
@@ -210,6 +233,7 @@ export class InvoicesController extends BaseController {
     mNumber?: string[],
     productIds?: number[],
     sort?: InvoiceSortField,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListInvoicesResponse>> {
     const req = this.createRequest('GET', '/invoices.json');
@@ -333,7 +357,15 @@ export class InvoicesController extends BaseController {
    *                                                         `event_types=void_invoice,void_remainder`.
    * @return Response from the API call
    */
-  async listInvoiceEvents(
+  async listInvoiceEvents({
+    sinceDate,
+    sinceId,
+    page,
+    perPage,
+    invoiceUid,
+    withChangeInvoiceStatus,
+    eventTypes,
+  }: {
     sinceDate?: string,
     sinceId?: number,
     page?: number,
@@ -341,6 +373,7 @@ export class InvoicesController extends BaseController {
     invoiceUid?: string,
     withChangeInvoiceStatus?: string,
     eventTypes?: InvoiceEventType[],
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListInvoiceEventsResponse>> {
     const req = this.createRequest('GET', '/invoices/events.json');
@@ -511,7 +544,16 @@ export class InvoicesController extends BaseController {
    * @param applications    Include applications data
    * @return Response from the API call
    */
-  async listCreditNotes(
+  async listCreditNotes({
+    subscriptionId,
+    page,
+    perPage,
+    lineItems,
+    discounts,
+    taxes,
+    refunds,
+    applications,
+  }: {
     subscriptionId?: number,
     page?: number,
     perPage?: number,
@@ -520,6 +562,7 @@ export class InvoicesController extends BaseController {
     taxes?: boolean,
     refunds?: boolean,
     applications?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListCreditNotesResponse>> {
     const req = this.createRequest('GET', '/credit_notes.json');
@@ -673,11 +716,17 @@ export class InvoicesController extends BaseController {
    * @param direction   Sort direction of the returned segments.
    * @return Response from the API call
    */
-  async listInvoiceSegments(
+  async listInvoiceSegments({
+    invoiceUid,
+    page,
+    perPage,
+    direction,
+  }: {
     invoiceUid: string,
     page?: number,
     perPage?: number,
     direction?: Direction,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ConsolidatedInvoice>> {
     const req = this.createRequest('GET');

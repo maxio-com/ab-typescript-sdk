@@ -115,20 +115,15 @@ async listPrepaymentsForSubscriptionGroup(
 ## Example Usage
 
 ```ts
-const uid = 'uid0';
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const page = 2;
-
-const perPage = 50;
-
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  uid: 'uid0',
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await subscriptionGroupInvoiceAccountController.listPrepaymentsForSubscriptionGroup(
-  uid,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.listPrepaymentsForSubscriptionGroup(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

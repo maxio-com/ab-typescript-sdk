@@ -85,7 +85,15 @@ export class WebhooksController extends BaseController {
    * @param subscription The Chargify id of a subscription you'd like to filter for
    * @return Response from the API call
    */
-  async listWebhooks(
+  async listWebhooks({
+    status,
+    sinceDate,
+    untilDate,
+    page,
+    perPage,
+    order,
+    subscription,
+  }: {
     status?: WebhookStatus,
     sinceDate?: string,
     untilDate?: string,
@@ -93,6 +101,7 @@ export class WebhooksController extends BaseController {
     perPage?: number,
     order?: WebhookOrder,
     subscription?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<WebhookResponse[]>> {
     const req = this.createRequest('GET', '/webhooks.json');

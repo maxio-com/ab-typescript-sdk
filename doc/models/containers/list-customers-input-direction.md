@@ -1,9 +1,9 @@
 
-# List Metadata Direction
+# List Customers Input Direction
 
 ## Class Name
 
-`ListMetadataDirection`
+`ListCustomersInputDirection`
 
 ## Cases
 

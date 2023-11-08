@@ -291,44 +291,22 @@ async listProformaInvoices(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
-
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Desc;
-
-const lineItems = false;
-
-const discounts = false;
-
-const taxes = false;
-
-const credits = false;
-
-const payments = false;
-
-const customFields = false;
-
+const collect = {
+  subscriptionId: 'subscription_id0',
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc,
+  lineItems: false,
+  discounts: false,
+  taxes: false,
+  credits: false,
+  payments: false,
+  customFields: false
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await proformaInvoicesController.listProformaInvoices(
-  subscriptionId,
-  undefined,
-  undefined,
-  undefined,
-  page,
-  perPage,
-  direction,
-  lineItems,
-  discounts,
-  taxes,
-  credits,
-  payments,
-  customFields
-);
+  const { result, ...httpResponse } = await proformaInvoicesController.listProformaInvoices(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

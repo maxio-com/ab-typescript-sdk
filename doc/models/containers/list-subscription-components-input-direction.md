@@ -1,9 +1,9 @@
 
-# Read Mrr Movements Direction
+# List Subscription Components Input Direction
 
 ## Class Name
 
-`ReadMrrMovementsDirection`
+`ListSubscriptionComponentsInputDirection`
 
 ## Cases
 

@@ -52,12 +52,19 @@ export class SalesCommissionsController extends BaseController {
    *                                 is 100.
    * @return Response from the API call
    */
-  async listSalesCommissionSettings(
+  async listSalesCommissionSettings({
+    sellerId,
+    authorization,
+    liveMode,
+    page,
+    perPage,
+  }: {
     sellerId: string,
     authorization?: string,
     liveMode?: boolean,
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SaleRepSettings[]>> {
     const req = this.createRequest('GET');
@@ -110,12 +117,19 @@ export class SalesCommissionsController extends BaseController {
    *                                 is 100.
    * @return Response from the API call
    */
-  async listSalesReps(
+  async listSalesReps({
+    sellerId,
+    authorization,
+    liveMode,
+    page,
+    perPage,
+  }: {
     sellerId: string,
     authorization?: string,
     liveMode?: boolean,
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSaleRepItem[]>> {
     const req = this.createRequest('GET');

@@ -1,9 +1,9 @@
 
-# List Subscription Components for Site Direction
+# List All Component Price Points Input Direction
 
 ## Class Name
 
-`ListSubscriptionComponentsForSiteDirection`
+`ListAllComponentPricePointsInputDirection`
 
 ## Cases
 

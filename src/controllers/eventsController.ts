@@ -121,7 +121,19 @@ export class EventsController extends BaseController {
    *                                              this parameter will be used instead of end_date.
    * @return Response from the API call
    */
-  async listEvents(
+  async listEvents({
+    page,
+    perPage,
+    sinceId,
+    maxId,
+    direction,
+    filter,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+  }: {
     page?: number,
     perPage?: number,
     sinceId?: number,
@@ -133,6 +145,7 @@ export class EventsController extends BaseController {
     endDate?: string,
     startDatetime?: string,
     endDatetime?: string,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<EventResponse[]>> {
     const req = this.createRequest('GET', '/events.json');
@@ -185,7 +198,15 @@ export class EventsController extends BaseController {
    *                                       `filter=signup_success,payment_success`.
    * @return Response from the API call
    */
-  async listSubscriptionEvents(
+  async listSubscriptionEvents({
+    subscriptionId,
+    page,
+    perPage,
+    sinceId,
+    maxId,
+    direction,
+    filter,
+  }: {
     subscriptionId: string,
     page?: number,
     perPage?: number,
@@ -193,6 +214,7 @@ export class EventsController extends BaseController {
     maxId?: number,
     direction?: Direction,
     filter?: EventType[],
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<EventResponse[]>> {
     const req = this.createRequest('GET');
@@ -234,13 +256,21 @@ export class EventsController extends BaseController {
    *                                 payment_success`.
    * @return Response from the API call
    */
-  async readEventsCount(
+  async readEventsCount({
+    page,
+    perPage,
+    sinceId,
+    maxId,
+    direction,
+    filter,
+  }: {
     page?: number,
     perPage?: number,
     sinceId?: number,
     maxId?: number,
     direction?: Direction,
     filter?: EventType[],
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CountResponse>> {
     const req = this.createRequest('GET', '/events/count.json');

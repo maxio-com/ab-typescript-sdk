@@ -56,24 +56,16 @@ async listSalesCommissionSettings(
 ## Example Usage
 
 ```ts
-const sellerId = 'seller_id8';
-
-const authorization = 'Bearer <<apiKey>>';
-
-const page = 2;
-
-const perPage = 100;
-
+const collect = {
+  sellerId: 'seller_id8',
+  authorization: 'Bearer <<apiKey>>',
+  page: 2,
+  perPage: 100
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await salesCommissionsController.listSalesCommissionSettings(
-  sellerId,
-  authorization,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await salesCommissionsController.listSalesCommissionSettings(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -162,24 +154,16 @@ async listSalesReps(
 ## Example Usage
 
 ```ts
-const sellerId = 'seller_id8';
-
-const authorization = 'Bearer <<apiKey>>';
-
-const page = 2;
-
-const perPage = 100;
-
+const collect = {
+  sellerId: 'seller_id8',
+  authorization: 'Bearer <<apiKey>>',
+  page: 2,
+  perPage: 100
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await salesCommissionsController.listSalesReps(
-  sellerId,
-  authorization,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await salesCommissionsController.listSalesReps(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

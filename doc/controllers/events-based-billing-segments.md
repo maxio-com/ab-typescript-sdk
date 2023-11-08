@@ -145,23 +145,16 @@ async listSegmentsForPricePoint(
 ## Example Usage
 
 ```ts
-const componentId = 'component_id8';
-
-const pricePointId = 'price_point_id8';
-
-const page = 2;
-
-const perPage = 50;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  componentId: 'component_id8',
+  pricePointId: 'price_point_id8',
+  page: 2,
+  perPage: 50
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await eventsBasedBillingSegmentsController.listSegmentsForPricePoint(
-  componentId,
-  pricePointId,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.listSegmentsForPricePoint(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
