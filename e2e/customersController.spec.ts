@@ -158,7 +158,7 @@ describe('CustomersController', () => {
     test('should get all customers list when the user send empty query criteria', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const response = await customersController.listCustomers();
+      const response = await customersController.listCustomers({});
       const responseEmails = response.result
         .map((value: CustomerResponse) => value.customer.email)
         .sort();
@@ -172,17 +172,7 @@ describe('CustomersController', () => {
     test('should get filtered customers list when the user send a query criteria', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const response = await customersController.listCustomers(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        'nando'
-      );
+      const response = await customersController.listCustomers({ q: 'nando' });
       const responseEmails = response.result
         .map((value: CustomerResponse) => value.customer.email)
         .sort();
@@ -196,34 +186,16 @@ describe('CustomersController', () => {
     test('should get empty customers list when the user query criteria was not found in data', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const response = await customersController.listCustomers(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        'invalid-criteria'
-      );
+      const response = await customersController.listCustomers({
+        q: 'invalid-criteria',
+      });
       expect(response.result.length).toBe(0);
     });
 
     test('should get customers list based on organization criteria when the user query criteria search by ABC organization', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const response = await customersController.listCustomers(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        'ABC'
-      );
+      const response = await customersController.listCustomers({ q: 'ABC' });
       expect(response.result.length >= 2).toBeTruthy();
       const responseEmails = response.result
         .map((value: CustomerResponse) => value.customer.email)
@@ -235,17 +207,7 @@ describe('CustomersController', () => {
     test('should get customers list based on reference application criteria when the user search by reference', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const response = await customersController.listCustomers(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        '10001'
-      );
+      const response = await customersController.listCustomers({ q: '10001' });
       expect(response.result.length).toBe(1);
       const responseEmails = response.result.map(
         (value: CustomerResponse) => value.customer.email
@@ -256,26 +218,14 @@ describe('CustomersController', () => {
     test('should get customers list based on page size of 5 when the user gets the first page', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const firstPageResponse = await customersController.listCustomers(
-        undefined,
-        1,
-        5,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined
-      );
-      const secondPageResponse = await customersController.listCustomers(
-        undefined,
-        2,
-        5,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined
-      );
+      const firstPageResponse = await customersController.listCustomers({
+        page: 1,
+        perPage: 5,
+      });
+      const secondPageResponse = await customersController.listCustomers({
+        page: 2,
+        perPage: 5,
+      });
       expect(firstPageResponse.result.length).toBe(5);
       expect(secondPageResponse.result.length > 1).toBeTruthy();
     });
