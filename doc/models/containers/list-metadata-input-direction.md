@@ -1,9 +1,9 @@
 
-# List Metafields Direction
+# List Metadata Input Direction
 
 ## Class Name
 
-`ListMetafieldsDirection`
+`ListMetadataInputDirection`
 
 ## Cases
 

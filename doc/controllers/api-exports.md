@@ -52,20 +52,15 @@ async listExportedProformaInvoices(
 ## Example Usage
 
 ```ts
-const batchId = 'batch_id8';
-
-const perPage = 100;
-
-const page = 2;
-
+const collect = {
+  batchId: 'batch_id8',
+  perPage: 100,
+  page: 2
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await aPIExportsController.listExportedProformaInvoices(
-  batchId,
-  perPage,
-  page
-);
+  const { result, ...httpResponse } = await aPIExportsController.listExportedProformaInvoices(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -116,20 +111,15 @@ async listExportedInvoices(
 ## Example Usage
 
 ```ts
-const batchId = 'batch_id8';
-
-const perPage = 100;
-
-const page = 2;
-
+const collect = {
+  batchId: 'batch_id8',
+  perPage: 100,
+  page: 2
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await aPIExportsController.listExportedInvoices(
-  batchId,
-  perPage,
-  page
-);
+  const { result, ...httpResponse } = await aPIExportsController.listExportedInvoices(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -180,20 +170,15 @@ async listExportedSubscriptions(
 ## Example Usage
 
 ```ts
-const batchId = 'batch_id8';
-
-const perPage = 100;
-
-const page = 2;
-
+const collect = {
+  batchId: 'batch_id8',
+  perPage: 100,
+  page: 2
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await aPIExportsController.listExportedSubscriptions(
-  batchId,
-  perPage,
-  page
-);
+  const { result, ...httpResponse } = await aPIExportsController.listExportedSubscriptions(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

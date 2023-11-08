@@ -79,9 +79,13 @@ export class ReasonCodesController extends BaseController {
    *                           Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listReasonCodes(
+  async listReasonCodes({
+    page,
+    perPage,
+  }: {
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ReasonCodeResponse[]>> {
     const req = this.createRequest('GET', '/reason_codes.json');

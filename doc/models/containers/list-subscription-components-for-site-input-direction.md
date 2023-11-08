@@ -1,9 +1,9 @@
 
-# List Subscription Components Direction
+# List Subscription Components for Site Input Direction
 
 ## Class Name
 
-`ListSubscriptionComponentsDirection`
+`ListSubscriptionComponentsForSiteInputDirection`
 
 ## Cases
 

@@ -143,7 +143,20 @@ export class ProductFamiliesController extends BaseController {
    *                                                                                           e_rate]=true`.
    * @return Response from the API call
    */
-  async listProductsForProductFamily(
+  async listProductsForProductFamily({
+    productFamilyId,
+    page,
+    perPage,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    includeArchived,
+    include,
+    filterPrepaidProductPricePointProductPricePointId,
+    filterUseSiteExchangeRate,
+  }: {
     productFamilyId: number,
     page?: number,
     perPage?: number,
@@ -156,6 +169,7 @@ export class ProductFamiliesController extends BaseController {
     include?: ListProductsInclude,
     filterPrepaidProductPricePointProductPricePointId?: IncludeNotNull,
     filterUseSiteExchangeRate?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse[]>> {
     const req = this.createRequest('GET');
@@ -241,12 +255,19 @@ export class ProductFamiliesController extends BaseController {
    *                                         instead of end_date.
    * @return Response from the API call
    */
-  async listProductFamilies(
+  async listProductFamilies({
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+  }: {
     dateField?: BasicDateField,
     startDate?: string,
     endDate?: string,
     startDatetime?: string,
     endDatetime?: string,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductFamilyResponse[]>> {
     const req = this.createRequest('GET', '/product_families.json');

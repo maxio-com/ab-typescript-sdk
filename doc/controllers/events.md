@@ -121,31 +121,20 @@ async listEvents(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Desc;
-
-const filter: EventType[] = [
-  EventType.CustomFieldValueChange,
-  EventType.PaymentSuccess
-];
-
-const dateField = ListEventsDateField.CreatedAt;
-
+const collect = {
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc,
+  filter: [
+    EventType.CustomFieldValueChange,
+    EventType.PaymentSuccess
+  ],
+  dateField: ListEventsDateField.CreatedAt
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await eventsController.listEvents(
-  page,
-  perPage,
-  undefined,
-  undefined,
-  direction,
-  filter,
-  dateField
-);
+  const { result, ...httpResponse } = await eventsController.listEvents(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -260,31 +249,20 @@ async listSubscriptionEvents(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
-
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Desc;
-
-const filter: EventType[] = [
-  EventType.CustomFieldValueChange,
-  EventType.PaymentSuccess
-];
-
+const collect = {
+  subscriptionId: 'subscription_id0',
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc,
+  filter: [
+    EventType.CustomFieldValueChange,
+    EventType.PaymentSuccess
+  ]
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await eventsController.listSubscriptionEvents(
-  subscriptionId,
-  page,
-  perPage,
-  undefined,
-  undefined,
-  direction,
-  filter
-);
+  const { result, ...httpResponse } = await eventsController.listSubscriptionEvents(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -376,28 +354,19 @@ async readEventsCount(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Desc;
-
-const filter: EventType[] = [
-  EventType.CustomFieldValueChange,
-  EventType.PaymentSuccess
-];
-
+const collect = {
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc,
+  filter: [
+    EventType.CustomFieldValueChange,
+    EventType.PaymentSuccess
+  ]
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await eventsController.readEventsCount(
-  page,
-  perPage,
-  undefined,
-  undefined,
-  direction,
-  filter
-);
+  const { result, ...httpResponse } = await eventsController.readEventsCount(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

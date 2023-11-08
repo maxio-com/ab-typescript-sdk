@@ -8,13 +8,13 @@ import { oneOf, Schema, validateAndMap } from '../../schema';
 import { SortingDirection, sortingDirectionSchema } from '../sortingDirection';
 
 /** This is a container type for one-of types. */
-export type ListSubscriptionComponentsForSiteDirection = SortingDirection;
+export type ReadMrrMovementsInputDirection = SortingDirection;
 
-export const listSubscriptionComponentsForSiteDirectionSchema: Schema<ListSubscriptionComponentsForSiteDirection> = oneOf(
+export const readMrrMovementsInputDirectionSchema: Schema<ReadMrrMovementsInputDirection> = oneOf(
   [sortingDirectionSchema]
 );
 
-export namespace ListSubscriptionComponentsForSiteDirection {
+export namespace ReadMrrMovementsInputDirection {
   /**
   * Validation method to narrow down union type to SortingDirection type case.
   *

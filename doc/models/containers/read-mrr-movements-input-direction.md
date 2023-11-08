@@ -1,9 +1,9 @@
 
-# List All Component Price Points Direction
+# Read Mrr Movements Input Direction
 
 ## Class Name
 
-`ListAllComponentPricePointsDirection`
+`ReadMrrMovementsInputDirection`
 
 ## Cases
 

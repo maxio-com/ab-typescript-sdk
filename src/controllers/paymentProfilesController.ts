@@ -399,10 +399,15 @@ export class PaymentProfilesController extends BaseController {
    * @param customerId  The ID of the customer for which you wish to list payment profiles
    * @return Response from the API call
    */
-  async listPaymentProfiles(
+  async listPaymentProfiles({
+    page,
+    perPage,
+    customerId,
+  }: {
     page?: number,
     perPage?: number,
     customerId?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListPaymentProfilesResponse[]>> {
     const req = this.createRequest('GET', '/payment_profiles.json');

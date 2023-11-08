@@ -68,20 +68,14 @@ async listWebhooks(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
+const collect = {
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await webhooksController.listWebhooks(
-  undefined,
-  undefined,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await webhooksController.listWebhooks(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

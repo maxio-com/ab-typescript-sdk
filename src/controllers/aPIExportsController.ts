@@ -39,10 +39,15 @@ export class APIExportsController extends BaseController {
    *                           results to return, then an empty result set will be returned. Use in query `page=1`.
    * @return Response from the API call
    */
-  async listExportedProformaInvoices(
+  async listExportedProformaInvoices({
+    batchId,
+    perPage,
+    page,
+  }: {
     batchId: string,
     perPage?: number,
     page?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProformaInvoice[]>> {
     const req = this.createRequest('GET');
@@ -75,10 +80,15 @@ export class APIExportsController extends BaseController {
    *                           results to return, then an empty result set will be returned. Use in query `page=1`.
    * @return Response from the API call
    */
-  async listExportedInvoices(
+  async listExportedInvoices({
+    batchId,
+    perPage,
+    page,
+  }: {
     batchId: string,
     perPage?: number,
     page?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Invoice[]>> {
     const req = this.createRequest('GET');
@@ -112,10 +122,15 @@ export class APIExportsController extends BaseController {
    *                           results to return, then an empty result set will be returned. Use in query `page=1`.
    * @return Response from the API call
    */
-  async listExportedSubscriptions(
+  async listExportedSubscriptions({
+    batchId,
+    perPage,
+    page,
+  }: {
     batchId: string,
     perPage?: number,
     page?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Subscription[]>> {
     const req = this.createRequest('GET');

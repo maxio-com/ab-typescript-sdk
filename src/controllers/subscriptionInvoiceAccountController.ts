@@ -131,13 +131,21 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    *                                             `filter[end_date]=2011-12-15`.
    * @return Response from the API call
    */
-  async listPrepayments(
+  async listPrepayments({
+    subscriptionId,
+    page,
+    perPage,
+    filterDateField,
+    filterStartDate,
+    filterEndDate,
+  }: {
     subscriptionId: string,
     page?: number,
     perPage?: number,
     filterDateField?: BasicDateField,
     filterStartDate?: string,
     filterEndDate?: string,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PrepaymentsResponse>> {
     const req = this.createRequest('GET');

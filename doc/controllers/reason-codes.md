@@ -114,17 +114,14 @@ async listReasonCodes(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
+const collect = {
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await reasonCodesController.listReasonCodes(
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await reasonCodesController.listReasonCodes(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
