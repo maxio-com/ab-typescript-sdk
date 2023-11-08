@@ -536,25 +536,15 @@ async listComponents(
 ## Example Usage
 
 ```ts
-const dateField = BasicDateField.UpdatedAt;
-
-const page = 2;
-
-const perPage = 50;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  dateField: BasicDateField.UpdatedAt,
+  page: 2,
+  perPage: 50
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await componentsController.listComponents(
-  dateField,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await componentsController.listComponents(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -821,24 +811,16 @@ async listComponentsForProductFamily(
 ## Example Usage
 
 ```ts
-const productFamilyId = 140;
-
-Liquid error: Value cannot be null. (Parameter 'key')const page = 2;
-
-const perPage = 50;
-
-const dateField = BasicDateField.UpdatedAt;
-
-Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  productFamilyId: 140,
+  page: 2,
+  perPage: 50,
+  dateField: BasicDateField.UpdatedAt
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await componentsController.listComponentsForProductFamily(
-  productFamilyId,
-  undefined,
-  page,
-  perPage,
-  dateField
-);
+  const { result, ...httpResponse } = await componentsController.listComponentsForProductFamily(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1055,21 +1037,15 @@ async listComponentPricePoints(
 ## Example Usage
 
 ```ts
-const componentId = 222;
-
-const page = 2;
-
-const perPage = 50;
-
-Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+  componentId: 222,
+  page: 2,
+  perPage: 50
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await componentsController.listComponentPricePoints(
-  componentId,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await componentsController.listComponentPricePoints(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1666,7 +1642,7 @@ async listAllComponentPricePoints(
   filterStartDate?: string,
   filterStartDatetime?: string,
   filterType?: PricePointType,
-  direction?: ListAllComponentPricePointsDirection,
+  direction?: ListAllComponentPricePointsInputDirection,
   filterIds?: number[],
   filterArchivedAt?: IncludeNotNull,
   requestOptions?: RequestOptions
@@ -1686,7 +1662,7 @@ async listAllComponentPricePoints(
 | `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `filterType` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`. |
-| `direction` | [`ListAllComponentPricePointsDirection \| undefined`](../../doc/models/containers/list-all-component-price-points-direction.md) | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`ListAllComponentPricePointsInputDirection \| undefined`](../../doc/models/containers/list-all-component-price-points-input-direction.md) | Query, Optional | This is a container for one-of cases. |
 | `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
 | `filterArchivedAt` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1698,20 +1674,15 @@ async listAllComponentPricePoints(
 ## Example Usage
 
 ```ts
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const include = ListComponentsPricePointsInclude.CurrencyPrices;
-
-const page = 2;
-
-const perPage = 50;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  include: ListComponentsPricePointsInclude.CurrencyPrices,
+  page: 2,
+  perPage: 50
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await componentsController.listAllComponentPricePoints(
-  include,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await componentsController.listAllComponentPricePoints(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

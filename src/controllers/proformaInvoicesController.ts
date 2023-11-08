@@ -169,7 +169,21 @@ export class ProformaInvoicesController extends BaseController {
    * @param customFields    Include custom fields data
    * @return Response from the API call
    */
-  async listProformaInvoices(
+  async listProformaInvoices({
+    subscriptionId,
+    startDate,
+    endDate,
+    status,
+    page,
+    perPage,
+    direction,
+    lineItems,
+    discounts,
+    taxes,
+    credits,
+    payments,
+    customFields,
+  }: {
     subscriptionId: string,
     startDate?: string,
     endDate?: string,
@@ -183,6 +197,7 @@ export class ProformaInvoicesController extends BaseController {
     credits?: boolean,
     payments?: boolean,
     customFields?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProformaInvoice[]>> {
     const req = this.createRequest('GET');

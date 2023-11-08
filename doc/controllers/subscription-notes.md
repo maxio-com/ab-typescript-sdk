@@ -160,20 +160,15 @@ async listSubscriptionNotes(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
-
-const page = 2;
-
-const perPage = 50;
-
+const collect = {
+  subscriptionId: 'subscription_id0',
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionNotesController.listSubscriptionNotes(
-  subscriptionId,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await subscriptionNotesController.listSubscriptionNotes(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

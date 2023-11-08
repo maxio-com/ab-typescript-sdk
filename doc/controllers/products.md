@@ -577,30 +577,17 @@ async listProducts(
 ## Example Usage
 
 ```ts
-const dateField = BasicDateField.UpdatedAt;
-
-const page = 2;
-
-const perPage = 50;
-
-const includeArchived = true;
-
-const include = ListProductsInclude.PrepaidProductPricePoint;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  dateField: BasicDateField.UpdatedAt,
+  page: 2,
+  perPage: 50,
+  includeArchived: true,
+  include: ListProductsInclude.PrepaidProductPricePoint
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await productsController.listProducts(
-  dateField,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  page,
-  perPage,
-  includeArchived,
-  include
-);
+  const { result, ...httpResponse } = await productsController.listProducts(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

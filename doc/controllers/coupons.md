@@ -167,23 +167,16 @@ async listCouponsForProductFamily(
 ## Example Usage
 
 ```ts
-const productFamilyId = 140;
-
-const page = 2;
-
-const perPage = 50;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const currencyPrices = true;
-
-Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  productFamilyId: 140,
+  page: 2,
+  perPage: 50,
+  currencyPrices: true
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await couponsController.listCouponsForProductFamily(
-  productFamilyId,
-  page,
-  perPage,
-  currencyPrices
-);
+  const { result, ...httpResponse } = await couponsController.listCouponsForProductFamily(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -673,27 +666,16 @@ async listCoupons(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
-const dateField = BasicDateField.UpdatedAt;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')const currencyPrices = true;
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  page: 2,
+  perPage: 50,
+  dateField: BasicDateField.UpdatedAt,
+  currencyPrices: true
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')await couponsController.listCoupons(
-  page,
-  perPage,
-  dateField,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  currencyPrices
-);
+  const { result, ...httpResponse } = await couponsController.listCoupons(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1145,20 +1127,15 @@ async listCouponSubcodes(
 ## Example Usage
 
 ```ts
-const couponId = 162;
-
-const page = 2;
-
-const perPage = 50;
-
+const collect = {
+  couponId: 162,
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.listCouponSubcodes(
-  couponId,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await couponsController.listCouponSubcodes(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

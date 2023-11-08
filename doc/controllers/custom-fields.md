@@ -151,7 +151,7 @@ async listMetafields(
   name?: string,
   page?: number,
   perPage?: number,
-  direction?: ListMetafieldsDirection,
+  direction?: ListMetafieldsInputDirection,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListMetafieldsResponse>>
 ```
@@ -164,7 +164,7 @@ async listMetafields(
 | `name` | `string \| undefined` | Query, Optional | filter by the name of the metafield |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `direction` | [`ListMetafieldsDirection \| undefined`](../../doc/models/containers/list-metafields-direction.md) | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`ListMetafieldsInputDirection \| undefined`](../../doc/models/containers/list-metafields-input-direction.md) | Query, Optional | This is a container for one-of cases. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -174,21 +174,15 @@ async listMetafields(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceType.Subscriptions;
-
-const page = 2;
-
-const perPage = 50;
-
+const collect = {
+  resourceType: ResourceType.Subscriptions,
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customFieldsController.listMetafields(
-  resourceType,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await customFieldsController.listMetafields(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -465,23 +459,16 @@ async readMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceType.Subscriptions;
-
-const resourceId = 'resource_id4';
-
-const page = 2;
-
-const perPage = 50;
-
+const collect = {
+  resourceType: ResourceType.Subscriptions,
+  resourceId: 'resource_id4',
+  page: 2,
+  perPage: 50
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customFieldsController.readMetadata(
-  resourceType,
-  resourceId,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await customFieldsController.readMetadata(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -661,7 +648,7 @@ async listMetadata(
   endDatetime?: string,
   withDeleted?: boolean,
   resourceIds?: number[],
-  direction?: ListMetadataDirection,
+  direction?: ListMetadataInputDirection,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaginatedMetadata>>
 ```
@@ -680,7 +667,7 @@ async listMetadata(
 | `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `withDeleted` | `boolean \| undefined` | Query, Optional | Allow to fetch deleted metadata. |
 | `resourceIds` | `number[] \| undefined` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.<br>**Constraints**: *Maximum Items*: `50` |
-| `direction` | [`ListMetadataDirection \| undefined`](../../doc/models/containers/list-metadata-direction.md) | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`ListMetadataInputDirection \| undefined`](../../doc/models/containers/list-metadata-input-direction.md) | Query, Optional | This is a container for one-of cases. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -690,23 +677,16 @@ async listMetadata(
 ## Example Usage
 
 ```ts
-const resourceType = ResourceType.Subscriptions;
-
-const page = 2;
-
-const perPage = 50;
-
-const dateField = BasicDateField.UpdatedAt;
-
-Liquid error: Value cannot be null. (Parameter 'key')try {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+  resourceType: ResourceType.Subscriptions,
+  page: 2,
+  perPage: 50,
+  dateField: BasicDateField.UpdatedAt
+}
+try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await customFieldsController.listMetadata(
-  resourceType,
-  page,
-  perPage,
-  dateField
-);
+  const { result, ...httpResponse } = await customFieldsController.listMetadata(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

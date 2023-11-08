@@ -116,7 +116,16 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    *                                                   empty string is passed, this filter would be rejected.
    * @return Response from the API call
    */
-  async listSegmentsForPricePoint(
+  async listSegmentsForPricePoint({
+    componentId,
+    pricePointId,
+    page,
+    perPage,
+    filterSegmentProperty1Value,
+    filterSegmentProperty2Value,
+    filterSegmentProperty3Value,
+    filterSegmentProperty4Value,
+  }: {
     componentId: string,
     pricePointId: string,
     page?: number,
@@ -125,6 +134,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     filterSegmentProperty2Value?: string,
     filterSegmentProperty3Value?: string,
     filterSegmentProperty4Value?: string,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSegmentsResponse>> {
     const req = this.createRequest('GET');

@@ -141,7 +141,20 @@ export class CouponsController extends BaseController {
    *                                                         query `filter[use_site_exchange_rate]=true`.
    * @return Response from the API call
    */
-  async listCouponsForProductFamily(
+  async listCouponsForProductFamily({
+    productFamilyId,
+    page,
+    perPage,
+    filterDateField,
+    filterEndDate,
+    filterEndDatetime,
+    filterStartDate,
+    filterStartDatetime,
+    filterIds,
+    filterCodes,
+    currencyPrices,
+    filterUseSiteExchangeRate,
+  }: {
     productFamilyId: number,
     page?: number,
     perPage?: number,
@@ -154,6 +167,7 @@ export class CouponsController extends BaseController {
     filterCodes?: string[],
     currencyPrices?: boolean,
     filterUseSiteExchangeRate?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse[]>> {
     const req = this.createRequest('GET');
@@ -394,7 +408,24 @@ export class CouponsController extends BaseController {
    *                                                         query `filter[use_site_exchange_rate]=true`.
    * @return Response from the API call
    */
-  async listCoupons(
+  async listCoupons({
+    page,
+    perPage,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    filterIds,
+    filterCodes,
+    currencyPrices,
+    filterEndDate,
+    filterEndDatetime,
+    filterStartDate,
+    filterStartDatetime,
+    filterDateField,
+    filterUseSiteExchangeRate,
+  }: {
     page?: number,
     perPage?: number,
     dateField?: BasicDateField,
@@ -411,6 +442,7 @@ export class CouponsController extends BaseController {
     filterStartDatetime?: string,
     filterDateField?: BasicDateField,
     filterUseSiteExchangeRate?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse[]>> {
     const req = this.createRequest('GET', '/coupons.json');
@@ -640,10 +672,15 @@ export class CouponsController extends BaseController {
    *                            200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listCouponSubcodes(
+  async listCouponSubcodes({
+    couponId,
+    page,
+    perPage,
+  }: {
     couponId: number,
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponSubcodes>> {
     const req = this.createRequest('GET');

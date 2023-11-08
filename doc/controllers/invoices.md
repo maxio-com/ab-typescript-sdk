@@ -162,73 +162,37 @@ async listInvoices(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Desc;
-
-const lineItems = false;
-
-const discounts = false;
-
-const taxes = false;
-
-const credits = false;
-
-const payments = false;
-
-const customFields = false;
-
-const refunds = false;
-
-const dateField = InvoiceDateField.IssueDate;
-
-const customerIds: number[] = [
-  1,
-  2,
-  3
-];
-
-const mNumber: string[] = [
-  '1234',
-  '1235'
-];
-
-const productIds: number[] = [
-  23,
-  34
-];
-
-const sort = InvoiceSortField.TotalAmount;
-
+const collect = {
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc,
+  lineItems: false,
+  discounts: false,
+  taxes: false,
+  credits: false,
+  payments: false,
+  customFields: false,
+  refunds: false,
+  dateField: InvoiceDateField.IssueDate,
+  customerIds: [
+    1,
+    2,
+    3
+  ],
+  mNumber: [
+    '1234',
+    '1235'
+  ],
+  productIds: [
+    23,
+    34
+  ],
+  sort: InvoiceSortField.TotalAmount
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.listInvoices(
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  page,
-  perPage,
-  direction,
-  lineItems,
-  discounts,
-  taxes,
-  credits,
-  payments,
-  customFields,
-  refunds,
-  dateField,
-  undefined,
-  undefined,
-  customerIds,
-  mNumber,
-  productIds,
-  sort
-);
+  const { result, ...httpResponse } = await invoicesController.listInvoices(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -728,19 +692,14 @@ async listInvoiceEvents(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 100;
-
+const collect = {
+  page: 2,
+  perPage: 100
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.listInvoiceEvents(
-  undefined,
-  undefined,
-  page,
-  perPage
-);
+  const { result, ...httpResponse } = await invoicesController.listInvoiceEvents(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1387,33 +1346,19 @@ async listCreditNotes(
 ## Example Usage
 
 ```ts
-const page = 2;
-
-const perPage = 50;
-
-const lineItems = false;
-
-const discounts = false;
-
-const taxes = false;
-
-const refunds = false;
-
-const applications = false;
-
+const collect = {
+  page: 2,
+  perPage: 50,
+  lineItems: false,
+  discounts: false,
+  taxes: false,
+  refunds: false,
+  applications: false
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.listCreditNotes(
-  undefined,
-  page,
-  perPage,
-  lineItems,
-  discounts,
-  taxes,
-  refunds,
-  applications
-);
+  const { result, ...httpResponse } = await invoicesController.listCreditNotes(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2278,23 +2223,16 @@ async listInvoiceSegments(
 ## Example Usage
 
 ```ts
-const invoiceUid = 'invoice_uid0';
-
-const page = 2;
-
-const perPage = 50;
-
-const direction = Direction.Asc;
-
+const collect = {
+  invoiceUid: 'invoice_uid0',
+  page: 2,
+  perPage: 50,
+  direction: Direction.Asc
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.listInvoiceSegments(
-  invoiceUid,
-  page,
-  perPage,
-  direction
-);
+  const { result, ...httpResponse } = await invoicesController.listInvoiceSegments(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

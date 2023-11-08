@@ -84,9 +84,13 @@ export class SitesController extends BaseController {
    *                           Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listChargifyJsPublicKeys(
+  async listChargifyJsPublicKeys({
+    page,
+    perPage,
+  }: {
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListPublicKeysResponse>> {
     const req = this.createRequest('GET', '/chargify_js_keys.json');

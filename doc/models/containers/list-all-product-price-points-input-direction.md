@@ -1,9 +1,9 @@
 
-# List Customers Direction
+# List All Product Price Points Input Direction
 
 ## Class Name
 
-`ListCustomersDirection`
+`ListAllProductPricePointsInputDirection`
 
 ## Cases
 

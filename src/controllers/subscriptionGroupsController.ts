@@ -134,10 +134,15 @@ export class SubscriptionGroupsController extends BaseController {
    *                           groups. Use in query: `include[]=account_balances`
    * @return Response from the API call
    */
-  async listSubscriptionGroups(
+  async listSubscriptionGroups({
+    page,
+    perPage,
+    include,
+  }: {
     page?: number,
     perPage?: number,
     include?: string,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSubscriptionGroupsResponse>> {
     const req = this.createRequest('GET', '/subscription_groups.json');

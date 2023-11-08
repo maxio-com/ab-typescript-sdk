@@ -85,10 +85,15 @@ export class SubscriptionNotesController extends BaseController {
    *                                  be changed to 200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listSubscriptionNotes(
+  async listSubscriptionNotes({
+    subscriptionId,
+    page,
+    perPage,
+  }: {
     subscriptionId: string,
     page?: number,
     perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionNoteResponse[]>> {
     const req = this.createRequest('GET');
