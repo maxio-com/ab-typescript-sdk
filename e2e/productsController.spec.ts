@@ -6,6 +6,49 @@ import {
 } from '../src';
 import { ProductsController, IncludeNotNull } from '../src';
 
+const payloads = [
+  {
+    product: {
+      name: 'premium-0001',
+      handle: 'premium-0001',
+      description: 'premium-desc',
+      priceInCents: 1000,
+      interval: 1,
+      intervalUnit: 'month',
+    },
+  },
+  {
+    product: {
+      name: 'premium-0002',
+      handle: 'premium-0002',
+      description: 'premium-desc',
+      priceInCents: 1000,
+      interval: 1,
+      intervalUnit: 'month',
+    },
+  },
+  {
+    product: {
+      name: 'premium-0003',
+      handle: 'premium-0003',
+      description: 'premium-desc',
+      priceInCents: 1000,
+      interval: 1,
+      intervalUnit: 'month',
+    },
+  },
+  {
+    product: {
+      name: 'premium-0004',
+      handle: 'premium-0004',
+      description: 'premium-desc',
+      priceInCents: 1000,
+      interval: 1,
+      intervalUnit: 'month',
+    },
+  },
+];
+
 describe('Products Controller', () => {
   const invalidClient = createClient({
     timeout: 0,
@@ -34,49 +77,7 @@ describe('Products Controller', () => {
       await productFamiliesController.createProductFamily(payload);
 
     const { productFamily } = response.result;
-    productFamilyId = productFamily?.id as number;
-    const payloads = [
-      {
-        product: {
-          name: 'premium-0001',
-          handle: 'premium-0001',
-          description: 'premium-desc',
-          priceInCents: 1000,
-          interval: 1,
-          intervalUnit: 'month',
-        },
-      },
-      {
-        product: {
-          name: 'premium-0002',
-          handle: 'premium-0002',
-          description: 'premium-desc',
-          priceInCents: 1000,
-          interval: 1,
-          intervalUnit: 'month',
-        },
-      },
-      {
-        product: {
-          name: 'premium-0003',
-          handle: 'premium-0003',
-          description: 'premium-desc',
-          priceInCents: 1000,
-          interval: 1,
-          intervalUnit: 'month',
-        },
-      },
-      {
-        product: {
-          name: 'premium-0004',
-          handle: 'premium-0004',
-          description: 'premium-desc',
-          priceInCents: 1000,
-          interval: 1,
-          intervalUnit: 'month',
-        },
-      },
-    ];
+    productFamilyId = productFamily?.id || 0;
     const promises = payloads.map((payload) =>
       productsController.createProduct(productFamilyId, payload)
     );
@@ -206,7 +207,7 @@ describe('Products Controller', () => {
 
   describe('Read Product', () => {
     test('should read a product when the user sends the correct id', async () => {
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product.id || 0;
       const client = createClient();
       const productsController = new ProductsController(client);
       const response = await productsController.readProduct(productId);
@@ -215,7 +216,7 @@ describe('Products Controller', () => {
     });
 
     test('should throw 401 error when the user has invalid credentials', async () => {
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product.id || 0;
       const productsController = new ProductsController(invalidClient);
       const promise = productsController.readProduct(productId);
       expect(promise).rejects.toThrow();
@@ -245,7 +246,7 @@ describe('Products Controller', () => {
         interval: 3,
         intervalUnit: 'month',
       };
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product.id || 0;
 
       const client = createClient();
       const productsController = new ProductsController(client);
@@ -271,7 +272,7 @@ describe('Products Controller', () => {
         interval: 0,
         intervalUnit: 'month',
       };
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product.id || 0;
       const client = createClient();
       const productsController = new ProductsController(client);
       const promise = productsController.updateProduct(productId, {
@@ -305,7 +306,7 @@ describe('Products Controller', () => {
     });
 
     test('should throw 401 error when the user has invalid credentials', async () => {
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product!.id || 0;
       const updatePayload = {
         name: 'Updated Product Name',
         description: 'An updated description for testing',
@@ -326,7 +327,7 @@ describe('Products Controller', () => {
 
   describe('Archive Product', () => {
     test('should delete a product when the user send the correct id', async () => {
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product.id || 0;
       const client = createClient();
       const productsController = new ProductsController(client);
       const response = await productsController.archiveProduct(productId);
@@ -336,7 +337,7 @@ describe('Products Controller', () => {
     });
 
     test('should throw 401 error when the user has invalid credentials', async () => {
-      const productId = productsCreated[0].product.id as number;
+      const productId = productsCreated[0].product.id || 0;
       const productsController = new ProductsController(invalidClient);
       const promise = productsController.archiveProduct(productId);
       expect(promise).rejects.toThrow();
