@@ -6,8 +6,8 @@
 
 import {
   array,
+  bigint,
   lazy,
-  number,
   object,
   optional,
   Schema,
@@ -20,14 +20,14 @@ import {
 
 export interface BillingManifest {
   lineItems?: BillingManifestItem[];
-  totalInCents?: number;
-  totalDiscountInCents?: number;
-  totalTaxInCents?: number;
-  subtotalInCents?: number;
+  totalInCents?: bigint;
+  totalDiscountInCents?: bigint;
+  totalTaxInCents?: bigint;
+  subtotalInCents?: bigint;
   startDate?: string;
   endDate?: string;
   periodType?: string;
-  existingBalanceInCents?: number;
+  existingBalanceInCents?: bigint;
 }
 
 export const billingManifestSchema: Schema<BillingManifest> = object({
@@ -35,12 +35,12 @@ export const billingManifestSchema: Schema<BillingManifest> = object({
     'line_items',
     optional(array(lazy(() => billingManifestItemSchema))),
   ],
-  totalInCents: ['total_in_cents', optional(number())],
-  totalDiscountInCents: ['total_discount_in_cents', optional(number())],
-  totalTaxInCents: ['total_tax_in_cents', optional(number())],
-  subtotalInCents: ['subtotal_in_cents', optional(number())],
+  totalInCents: ['total_in_cents', optional(bigint())],
+  totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
+  totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
+  subtotalInCents: ['subtotal_in_cents', optional(bigint())],
   startDate: ['start_date', optional(string())],
   endDate: ['end_date', optional(string())],
   periodType: ['period_type', optional(string())],
-  existingBalanceInCents: ['existing_balance_in_cents', optional(number())],
+  existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
 });

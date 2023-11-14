@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `prepayments` | [`Prepayment1[] \| undefined`](../../doc/models/prepayment-1.md) | Optional | **Constraints**: *Unique Items Required* |
+| `prepayments` | [`Prepayment[] \| undefined`](../../doc/models/prepayment.md) | Optional | **Constraints**: *Unique Items Required* |
 
 ## Example (as JSON)
 
@@ -17,11 +17,11 @@
 {
   "prepayments": [
     {
-      "id": 231.16,
-      "subscription_id": 1.86,
-      "amount_in_cents": 44.46,
-      "remaining_amount_in_cents": 7.32,
-      "refunded_amount_in_cents": 32.42,
+      "id": 76,
+      "subscription_id": 186,
+      "amount_in_cents": 94,
+      "remaining_amount_in_cents": 220,
+      "refunded_amount_in_cents": 170,
       "details": "details6",
       "external": false,
       "memo": "memo0",
@@ -29,11 +29,11 @@
       "created_at": "created_at4"
     },
     {
-      "id": 231.16,
-      "subscription_id": 1.86,
-      "amount_in_cents": 44.46,
-      "remaining_amount_in_cents": 7.32,
-      "refunded_amount_in_cents": 32.42,
+      "id": 76,
+      "subscription_id": 186,
+      "amount_in_cents": 94,
+      "remaining_amount_in_cents": 220,
+      "refunded_amount_in_cents": 170,
       "details": "details6",
       "external": false,
       "memo": "memo0",

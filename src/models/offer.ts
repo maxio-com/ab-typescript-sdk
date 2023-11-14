@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   lazy,
   nullable,
   number,
@@ -27,7 +28,7 @@ export interface Offer {
   productRevisableNumber?: number;
   name?: string;
   handle?: string;
-  description?: string;
+  description?: string | null;
   createdAt?: string;
   updatedAt?: string;
   archivedAt?: string | null;
@@ -36,7 +37,7 @@ export interface Offer {
   productFamilyName?: string;
   productName?: string;
   productPricePointName?: string;
-  productPriceInCents?: number;
+  productPriceInCents?: bigint;
   offerSignupPages?: OfferSignupPage[];
 }
 
@@ -49,7 +50,7 @@ export const offerSchema: Schema<Offer> = object({
   productRevisableNumber: ['product_revisable_number', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(string())],
-  description: ['description', optional(string())],
+  description: ['description', optional(nullable(string()))],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
   archivedAt: ['archived_at', optional(nullable(string()))],
@@ -61,7 +62,7 @@ export const offerSchema: Schema<Offer> = object({
   productFamilyName: ['product_family_name', optional(string())],
   productName: ['product_name', optional(string())],
   productPricePointName: ['product_price_point_name', optional(string())],
-  productPriceInCents: ['product_price_in_cents', optional(number())],
+  productPriceInCents: ['product_price_in_cents', optional(bigint())],
   offerSignupPages: [
     'offer_signup_pages',
     optional(array(lazy(() => offerSignupPageSchema))),

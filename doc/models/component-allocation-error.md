@@ -17,19 +17,19 @@
 {
   "errors": [
     {
-      "component_id": 122.68,
+      "component_id": 236,
       "message": "message0",
       "kind": "kind8",
       "on": "on0"
     },
     {
-      "component_id": 122.68,
+      "component_id": 236,
       "message": "message0",
       "kind": "kind8",
       "on": "on0"
     },
     {
-      "component_id": 122.68,
+      "component_id": 236,
       "message": "message0",
       "kind": "kind8",
       "on": "on0"

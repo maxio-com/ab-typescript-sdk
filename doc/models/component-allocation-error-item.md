@@ -18,7 +18,7 @@
 
 ```json
 {
-  "component_id": 40.28,
+  "component_id": 188,
   "message": "message0",
   "kind": "kind8",
   "on": "on0"

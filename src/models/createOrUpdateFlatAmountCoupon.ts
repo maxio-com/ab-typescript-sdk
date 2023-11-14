@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import { bigint, boolean, object, optional, Schema, string } from '../schema';
 import {
   CreateOrUpdateFlatAmountCouponCompoundingStrategy,
   createOrUpdateFlatAmountCouponCompoundingStrategySchema,
@@ -16,7 +16,7 @@ export interface CreateOrUpdateFlatAmountCoupon {
   /** may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.” */
   code: string;
   description?: string;
-  amountInCents: number;
+  amountInCents: bigint;
   allowNegativeBalance?: string;
   recurring?: string;
   endDate?: string;
@@ -32,7 +32,7 @@ export const createOrUpdateFlatAmountCouponSchema: Schema<CreateOrUpdateFlatAmou
     name: ['name', string()],
     code: ['code', string()],
     description: ['description', optional(string())],
-    amountInCents: ['amount_in_cents', number()],
+    amountInCents: ['amount_in_cents', bigint()],
     allowNegativeBalance: ['allow_negative_balance', optional(string())],
     recurring: ['recurring', optional(string())],
     endDate: ['end_date', optional(string())],

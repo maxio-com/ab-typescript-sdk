@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `state` | `string` | Required | - |
 | `subscriptionId` | `number` | Required | - |
-| `revenueAtRiskInCents` | `number` | Required | - |
+| `revenueAtRiskInCents` | `bigint` | Required | - |
 | `createdAt` | `string` | Required | - |
 | `attempts` | `number` | Required | - |
 | `lastAttemptedAt` | `string` | Required | - |

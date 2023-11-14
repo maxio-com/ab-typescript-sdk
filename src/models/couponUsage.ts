@@ -4,7 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  nullable,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface CouponUsage {
   /** The Chargify id of the product */
@@ -16,11 +24,11 @@ export interface CouponUsage {
   /** Dollar amount of customer savings as a result of the coupon. */
   savings?: number | null;
   /** Dollar amount of customer savings as a result of the coupon. */
-  savingsInCents?: number | null;
+  savingsInCents?: bigint | null;
   /** Total revenue of the all subscriptions that have received a discount from this coupon. */
   revenue?: number | null;
   /** Total revenue of the all subscriptions that have received a discount from this coupon. */
-  revenueInCents?: number;
+  revenueInCents?: bigint;
 }
 
 export const couponUsageSchema: Schema<CouponUsage> = object({
@@ -28,7 +36,7 @@ export const couponUsageSchema: Schema<CouponUsage> = object({
   name: ['name', optional(string())],
   signups: ['signups', optional(number())],
   savings: ['savings', optional(nullable(number()))],
-  savingsInCents: ['savings_in_cents', optional(nullable(number()))],
+  savingsInCents: ['savings_in_cents', optional(nullable(bigint()))],
   revenue: ['revenue', optional(nullable(number()))],
-  revenueInCents: ['revenue_in_cents', optional(number())],
+  revenueInCents: ['revenue_in_cents', optional(bigint())],
 });

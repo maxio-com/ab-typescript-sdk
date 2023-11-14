@@ -17,11 +17,11 @@
 {
   "subscriptions_mrr": [
     {
-      "subscription_id": 0.0,
-      "mrr_amount_in_cents": 0.0,
+      "subscription_id": 0,
+      "mrr_amount_in_cents": 0,
       "breakouts": {
-        "plan_amount_in_cents": 0.0,
-        "usage_amount_in_cents": 0.0
+        "plan_amount_in_cents": 0,
+        "usage_amount_in_cents": 0
       }
     }
   ]

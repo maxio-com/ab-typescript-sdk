@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   lazy,
   nullable,
   number,
@@ -43,7 +44,7 @@ import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
 import { Status, statusSchema } from './status';
 
 export interface Invoice {
-  id?: number;
+  id?: bigint;
   /** Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters. */
   uid?: string;
   /** ID of the site to which the invoice belongs. */
@@ -154,7 +155,7 @@ export interface Invoice {
 }
 
 export const invoiceSchema: Schema<Invoice> = object({
-  id: ['id', optional(number())],
+  id: ['id', optional(bigint())],
   uid: ['uid', optional(string())],
   siteId: ['site_id', optional(number())],
   customerId: ['customer_id', optional(number())],

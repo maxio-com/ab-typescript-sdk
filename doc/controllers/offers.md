@@ -58,8 +58,8 @@ const body: CreateOfferRequest = {
   offer: {
     name: 'Solo',
     handle: 'han_shot_first',
-    description: 'A Star Wars Story',
     productId: 31,
+    description: 'A Star Wars Story',
     productPricePointId: 102,
     components: [
       {
@@ -144,6 +144,9 @@ This endpoint will list offers for a site.
 
 ```ts
 async listOffers(
+  page?: number,
+  perPage?: number,
+  includeArchived?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListOffersResponse>>
 ```
@@ -152,6 +155,9 @@ async listOffers(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `includeArchived` | `boolean \| undefined` | Query, Optional | Include archived products. Use in query: `include_archived=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -161,10 +167,15 @@ async listOffers(
 ## Example Usage
 
 ```ts
+const collect = {
+  page: 2,
+  perPage: 50,
+  includeArchived: true
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await offersController.listOffers();
+  const { result, ...httpResponse } = await offersController.listOffers(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

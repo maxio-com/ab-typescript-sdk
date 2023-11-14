@@ -11,14 +11,14 @@
 |  --- | --- | --- | --- |
 | `name` | `string` | Required | - |
 | `handle` | `string \| undefined` | Optional | - |
-| `priceInCents` | `number` | Required | - |
+| `priceInCents` | `bigint` | Required | - |
 | `interval` | `number` | Required | - |
 | `intervalUnit` | `string` | Required | - |
-| `trialPriceInCents` | `number \| undefined` | Optional | - |
+| `trialPriceInCents` | `bigint \| undefined` | Optional | - |
 | `trialInterval` | `number \| undefined` | Optional | - |
 | `trialIntervalUnit` | `string \| undefined` | Optional | - |
 | `trialType` | `string \| undefined` | Optional | - |
-| `initialChargeInCents` | `number \| undefined` | Optional | - |
+| `initialChargeInCents` | `bigint \| undefined` | Optional | - |
 | `initialChargeAfterTrial` | `boolean \| undefined` | Optional | - |
 | `expirationInterval` | `number \| undefined` | Optional | - |
 | `expirationIntervalUnit` | `string \| undefined` | Optional | - |
