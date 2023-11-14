@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, Schema, string } from '../schema';
+import { bigint, object, Schema, string } from '../schema';
 
 export interface PrepaymentAccountBalanceChanged {
   reason: string;
-  prepaymentAccountBalanceInCents: number;
-  prepaymentBalanceChangeInCents: number;
+  prepaymentAccountBalanceInCents: bigint;
+  prepaymentBalanceChangeInCents: bigint;
   currencyCode: string;
 }
 
@@ -18,11 +18,11 @@ export const prepaymentAccountBalanceChangedSchema: Schema<PrepaymentAccountBala
     reason: ['reason', string()],
     prepaymentAccountBalanceInCents: [
       'prepayment_account_balance_in_cents',
-      number(),
+      bigint(),
     ],
     prepaymentBalanceChangeInCents: [
       'prepayment_balance_change_in_cents',
-      number(),
+      bigint(),
     ],
     currencyCode: ['currency_code', string()],
   }

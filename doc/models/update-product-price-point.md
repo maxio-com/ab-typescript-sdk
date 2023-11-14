@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `handle` | `string \| undefined` | Optional | - |
-| `priceInCents` | `number \| undefined` | Optional | - |
+| `priceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

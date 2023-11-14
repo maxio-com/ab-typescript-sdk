@@ -10,9 +10,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `reason` | `string` | Required | - |
-| `currentAccountBalanceInCents` | `number` | Required | - |
-| `prepaymentAccountBalanceInCents` | `number` | Required | - |
-| `currentUsageAmountInCents` | `number` | Required | - |
+| `currentAccountBalanceInCents` | `bigint` | Required | - |
+| `prepaymentAccountBalanceInCents` | `bigint` | Required | - |
+| `currentUsageAmountInCents` | `bigint` | Required | - |
 
 ## Example (as JSON)
 

@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `paidInvoices` | [`Payment[] \| undefined`](../../doc/models/payment.md) | Optional | - |
-| `prepayment` | [`PrePayment \| undefined`](../../doc/models/pre-payment.md) | Optional | - |
+| `prepayment` | [`InvoicePrePayment \| undefined`](../../doc/models/invoice-pre-payment.md) | Optional | - |
 
 ## Example (as JSON)
 

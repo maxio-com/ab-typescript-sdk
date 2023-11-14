@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number \| undefined` | Optional | - |
+| `id` | `bigint \| undefined` | Optional | - |
 | `uid` | `string \| undefined` | Optional | Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters. |
 | `siteId` | `number \| undefined` | Optional | ID of the site to which the invoice belongs. |
 | `customerId` | `number \| undefined` | Optional | ID of the customer to which the invoice belongs. |

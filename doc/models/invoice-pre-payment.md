@@ -1,9 +1,9 @@
 
-# Pre Payment
+# Invoice Pre Payment
 
 ## Structure
 
-`PrePayment`
+`InvoicePrePayment`
 
 ## Fields
 
@@ -18,8 +18,8 @@
 ```json
 {
   "subscription_id": "subscription_id0",
-  "amount_in_cents": "amount_in_cents8",
-  "ending_balance_in_cents": "ending_balance_in_cents6"
+  "amount_in_cents": "amount_in_cents2",
+  "ending_balance_in_cents": "ending_balance_in_cents4"
 }
 ```
 

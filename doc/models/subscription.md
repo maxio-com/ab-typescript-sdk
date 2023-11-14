@@ -11,9 +11,9 @@
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | The subscription unique id within Chargify. |
 | `state` | `string \| undefined` | Optional | The current state of the subscription. Please see the documentation for [Subscription States](https://help.chargify.com/subscriptions/subscription-states.html) |
-| `balanceInCents` | `number \| undefined` | Optional | Gives the current outstanding subscription balance in the number of cents. |
-| `totalRevenueInCents` | `number \| undefined` | Optional | Gives the total revenue from the subscription in the number of cents. |
-| `productPriceInCents` | `number \| undefined` | Optional | (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. |
+| `balanceInCents` | `bigint \| undefined` | Optional | Gives the current outstanding subscription balance in the number of cents. |
+| `totalRevenueInCents` | `bigint \| undefined` | Optional | Gives the total revenue from the subscription in the number of cents. |
+| `productPriceInCents` | `bigint \| undefined` | Optional | (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. |
 | `productVersionNumber` | `number \| undefined` | Optional | The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility. |
 | `currentPeriodEndsAt` | `string \| undefined` | Optional | Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) |
 | `nextAssessmentAt` | `string \| undefined` | Optional | Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases) |
@@ -51,7 +51,7 @@
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
 | `offerId` | `number \| null \| undefined` | Optional | The ID of the offer associated with the subscription. |
 | `payerId` | `number \| undefined` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
-| `currentBillingAmountInCents` | `number \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. |
+| `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. |
 | `productPricePointId` | `number \| undefined` | Optional | The product price point currently subscribed to. |
 | `productPricePointType` | `string \| undefined` | Optional | One of the following: custom, default, catalog. |
 | `nextProductPricePointId` | `number \| null \| undefined` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
@@ -67,8 +67,8 @@
 | `locale` | `string \| null \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
 | `scheduledCancellationAt` | `string \| null \| undefined` | Optional | - |
-| `creditBalanceInCents` | `number \| undefined` | Optional | - |
-| `prepaymentBalanceInCents` | `number \| undefined` | Optional | - |
+| `creditBalanceInCents` | `bigint \| undefined` | Optional | - |
+| `prepaymentBalanceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

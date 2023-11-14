@@ -16,7 +16,7 @@
 ```json
 {
   "refund": {
-    "amount_in_cents": 101.16,
+    "amount_in_cents": 132,
     "amount": "String1",
     "memo": "memo2",
     "external": false

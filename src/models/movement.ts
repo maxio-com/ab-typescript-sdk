@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   lazy,
   number,
   object,
@@ -18,7 +19,7 @@ import { MovementLineItem, movementLineItemSchema } from './movementLineItem';
 
 export interface Movement {
   timestamp?: string;
-  amountInCents?: number;
+  amountInCents?: bigint;
   amountFormatted?: string;
   description?: string;
   category?: string;
@@ -30,7 +31,7 @@ export interface Movement {
 
 export const movementSchema: Schema<Movement> = object({
   timestamp: ['timestamp', optional(string())],
-  amountInCents: ['amount_in_cents', optional(number())],
+  amountInCents: ['amount_in_cents', optional(bigint())],
   amountFormatted: ['amount_formatted', optional(string())],
   description: ['description', optional(string())],
   category: ['category', optional(string())],

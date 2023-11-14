@@ -18,7 +18,7 @@
 | `nextAssessmentAt` | `string \| undefined` | Optional | - |
 | `state` | `string \| undefined` | Optional | - |
 | `cancelAtEndOfPeriod` | `boolean \| undefined` | Optional | - |
-| `currentBillingAmountInCents` | `number \| undefined` | Optional | - |
+| `currentBillingAmountInCents` | `bigint \| undefined` | Optional | - |
 | `customer` | [`SubscriptionGroupCustomer \| undefined`](../../doc/models/subscription-group-customer.md) | Optional | - |
 | `accountBalances` | [`SubscriptionGroupBalances \| undefined`](../../doc/models/subscription-group-balances.md) | Optional | - |
 

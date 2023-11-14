@@ -11,10 +11,10 @@
 |  --- | --- | --- | --- |
 | `transactionType` | `string \| undefined` | Optional | - |
 | `kind` | `string \| undefined` | Optional | - |
-| `amountInCents` | `number \| undefined` | Optional | - |
+| `amountInCents` | `bigint \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
-| `discountAmountInCents` | `number \| undefined` | Optional | - |
-| `taxableAmountInCents` | `number \| undefined` | Optional | - |
+| `discountAmountInCents` | `bigint \| undefined` | Optional | - |
+| `taxableAmountInCents` | `bigint \| undefined` | Optional | - |
 | `componentId` | `number \| undefined` | Optional | - |
 | `componentHandle` | `string \| undefined` | Optional | - |
 | `componentName` | `string \| undefined` | Optional | - |

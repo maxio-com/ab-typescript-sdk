@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `amountInCents` | `number \| undefined` | Optional | - |
+| `amountInCents` | `bigint \| undefined` | Optional | - |
 | `amountFormatted` | `string \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
 | `currencySymbol` | `string \| undefined` | Optional | - |

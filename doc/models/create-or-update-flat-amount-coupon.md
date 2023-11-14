@@ -12,7 +12,7 @@
 | `name` | `string` | Required | the name of the coupon |
 | `code` | `string` | Required | may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.” |
 | `description` | `string \| undefined` | Optional | - |
-| `amountInCents` | `number` | Required | - |
+| `amountInCents` | `bigint` | Required | - |
 | `allowNegativeBalance` | `string \| undefined` | Optional | - |
 | `recurring` | `string \| undefined` | Optional | - |
 | `endDate` | `string \| undefined` | Optional | - |

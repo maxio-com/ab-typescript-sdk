@@ -835,8 +835,8 @@ const bankAccountId = 252;
 
 const body: BankAccountVerificationRequest = {
   bankAccountVerification: {
-    deposit1InCents: 32,
-    deposit2InCents: 45,
+    deposit1InCents: BigInt(32),
+    deposit2InCents: BigInt(45),
   },
 };
 
