@@ -6,9 +6,9 @@
 
 import {
   array,
+  bigint,
   boolean,
   lazy,
-  number,
   object,
   optional,
   Schema,
@@ -26,10 +26,10 @@ import {
 export interface AllocationPreview {
   startDate?: string;
   endDate?: string;
-  subtotalInCents?: number;
-  totalTaxInCents?: number;
-  totalDiscountInCents?: number;
-  totalInCents?: number;
+  subtotalInCents?: bigint;
+  totalTaxInCents?: bigint;
+  totalDiscountInCents?: bigint;
+  totalInCents?: bigint;
   direction?: string;
   prorationScheme?: string;
   lineItems?: AllocationPreviewLineItem[];
@@ -37,16 +37,16 @@ export interface AllocationPreview {
   allocations?: AllocationPreviewItem[];
   periodType?: string;
   /** An integer representing the amount of the subscription's current balance */
-  existingBalanceInCents?: number;
+  existingBalanceInCents?: bigint;
 }
 
 export const allocationPreviewSchema: Schema<AllocationPreview> = object({
   startDate: ['start_date', optional(string())],
   endDate: ['end_date', optional(string())],
-  subtotalInCents: ['subtotal_in_cents', optional(number())],
-  totalTaxInCents: ['total_tax_in_cents', optional(number())],
-  totalDiscountInCents: ['total_discount_in_cents', optional(number())],
-  totalInCents: ['total_in_cents', optional(number())],
+  subtotalInCents: ['subtotal_in_cents', optional(bigint())],
+  totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
+  totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
+  totalInCents: ['total_in_cents', optional(bigint())],
   direction: ['direction', optional(string())],
   prorationScheme: ['proration_scheme', optional(string())],
   lineItems: [
@@ -59,5 +59,5 @@ export const allocationPreviewSchema: Schema<AllocationPreview> = object({
     optional(array(lazy(() => allocationPreviewItemSchema))),
   ],
   periodType: ['period_type', optional(string())],
-  existingBalanceInCents: ['existing_balance_in_cents', optional(number())],
+  existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
 });

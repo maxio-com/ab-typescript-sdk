@@ -12,15 +12,15 @@
 | `id` | `number \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | - |
 | `handle` | `string \| undefined` | Optional | - |
-| `priceInCents` | `number \| undefined` | Optional | - |
+| `priceInCents` | `bigint \| undefined` | Optional | - |
 | `interval` | `number \| undefined` | Optional | - |
 | `intervalUnit` | `string \| undefined` | Optional | - |
-| `trialPriceInCents` | `number \| undefined` | Optional | - |
+| `trialPriceInCents` | `bigint \| undefined` | Optional | - |
 | `trialInterval` | `number \| undefined` | Optional | - |
 | `trialIntervalUnit` | `string \| undefined` | Optional | - |
 | `trialType` | `string \| undefined` | Optional | - |
 | `introductoryOffer` | `boolean \| undefined` | Optional | reserved for future use |
-| `initialChargeInCents` | `number \| undefined` | Optional | - |
+| `initialChargeInCents` | `bigint \| undefined` | Optional | - |
 | `initialChargeAfterTrial` | `boolean \| undefined` | Optional | - |
 | `expirationInterval` | `number \| undefined` | Optional | - |
 | `expirationIntervalUnit` | `string \| undefined` | Optional | - |

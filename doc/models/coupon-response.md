@@ -16,7 +16,7 @@
 ```json
 {
   "coupon": {
-    "id": 214.44,
+    "id": 196,
     "name": "name4",
     "code": "code2",
     "description": "description6",

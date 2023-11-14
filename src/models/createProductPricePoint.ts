@@ -4,19 +4,27 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  boolean,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface CreateProductPricePoint {
   name: string;
   handle?: string;
-  priceInCents: number;
+  priceInCents: bigint;
   interval: number;
   intervalUnit: string;
-  trialPriceInCents?: number;
+  trialPriceInCents?: bigint;
   trialInterval?: number;
   trialIntervalUnit?: string;
   trialType?: string;
-  initialChargeInCents?: number;
+  initialChargeInCents?: bigint;
   initialChargeAfterTrial?: boolean;
   expirationInterval?: number;
   expirationIntervalUnit?: string;
@@ -28,14 +36,14 @@ export const createProductPricePointSchema: Schema<CreateProductPricePoint> = ob
   {
     name: ['name', string()],
     handle: ['handle', optional(string())],
-    priceInCents: ['price_in_cents', number()],
+    priceInCents: ['price_in_cents', bigint()],
     interval: ['interval', number()],
     intervalUnit: ['interval_unit', string()],
-    trialPriceInCents: ['trial_price_in_cents', optional(number())],
+    trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
     trialInterval: ['trial_interval', optional(number())],
     trialIntervalUnit: ['trial_interval_unit', optional(string())],
     trialType: ['trial_type', optional(string())],
-    initialChargeInCents: ['initial_charge_in_cents', optional(number())],
+    initialChargeInCents: ['initial_charge_in_cents', optional(bigint())],
     initialChargeAfterTrial: [
       'initial_charge_after_trial',
       optional(boolean()),

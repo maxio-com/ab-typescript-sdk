@@ -17,14 +17,14 @@
 {
   "errors": [
     {
-      "component_id": 122.68,
+      "component_id": 236,
       "message": "message0",
-      "price_point": 85.7
+      "price_point": 122
     },
     {
-      "component_id": 122.68,
+      "component_id": 236,
       "message": "message0",
-      "price_point": 85.7
+      "price_point": 122
     }
   ]
 }

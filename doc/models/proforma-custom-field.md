@@ -19,11 +19,11 @@
 
 ```json
 {
-  "owner_id": 86.72,
+  "owner_id": 224,
   "owner_type": "owner_type0",
   "name": "name8",
   "value": "value0",
-  "metadatum_id": 32.96
+  "metadatum_id": 224
 }
 ```
 

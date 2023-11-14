@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | - |
-| `handle` | `string \| undefined` | Optional | - |
+| `name` | `string` | Required | - |
+| `handle` | `string` | Required | - |
 | `description` | `string \| undefined` | Optional | - |
-| `productId` | `number \| undefined` | Optional | - |
+| `productId` | `number` | Required | - |
 | `productPricePointId` | `number \| undefined` | Optional | - |
 | `components` | [`CreateOfferComponent[] \| undefined`](../../doc/models/create-offer-component.md) | Optional | - |
 | `coupons` | `string[] \| undefined` | Optional | - |
@@ -25,7 +25,20 @@
   "handle": "handle0",
   "description": "description4",
   "product_id": 208,
-  "product_price_point_id": 132
+  "product_price_point_id": 132,
+  "components": [
+    {
+      "component_id": 108,
+      "starting_quantity": 84
+    },
+    {
+      "component_id": 108,
+      "starting_quantity": 84
+    }
+  ],
+  "coupons": [
+    "coupons4"
+  ]
 }
 ```
 

@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, Schema, string } from '../schema';
+import { bigint, object, Schema, string } from '../schema';
 
 export interface CreditAccountBalanceChanged {
   reason: string;
-  serviceCreditAccountBalanceInCents: number;
-  serviceCreditBalanceChangeInCents: number;
+  serviceCreditAccountBalanceInCents: bigint;
+  serviceCreditBalanceChangeInCents: bigint;
   currencyCode: string;
   atTime: string;
 }
@@ -19,11 +19,11 @@ export const creditAccountBalanceChangedSchema: Schema<CreditAccountBalanceChang
     reason: ['reason', string()],
     serviceCreditAccountBalanceInCents: [
       'service_credit_account_balance_in_cents',
-      number(),
+      bigint(),
     ],
     serviceCreditBalanceChangeInCents: [
       'service_credit_balance_change_in_cents',
-      number(),
+      bigint(),
     ],
     currencyCode: ['currency_code', string()],
     atTime: ['at_time', string()],

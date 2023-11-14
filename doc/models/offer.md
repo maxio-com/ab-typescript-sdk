@@ -17,7 +17,7 @@
 | `productRevisableNumber` | `number \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | - |
 | `handle` | `string \| undefined` | Optional | - |
-| `description` | `string \| undefined` | Optional | - |
+| `description` | `string \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
@@ -26,7 +26,7 @@
 | `productFamilyName` | `string \| undefined` | Optional | - |
 | `productName` | `string \| undefined` | Optional | - |
 | `productPricePointName` | `string \| undefined` | Optional | - |
-| `productPriceInCents` | `number \| undefined` | Optional | - |
+| `productPriceInCents` | `bigint \| undefined` | Optional | - |
 | `offerSignupPages` | [`OfferSignupPage[] \| undefined`](../../doc/models/offer-signup-page.md) | Optional | - |
 
 ## Example (as JSON)

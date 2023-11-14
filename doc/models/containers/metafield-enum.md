@@ -9,5 +9,6 @@
 
 | Type |
 |  --- |
+| `string` |
 | `string[]` |
 

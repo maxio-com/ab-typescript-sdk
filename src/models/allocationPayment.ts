@@ -4,19 +4,27 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  boolean,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 /** Information for captured payment, if applicable */
 export interface AllocationPayment {
   id?: number;
-  amountInCents?: number;
+  amountInCents?: bigint;
   success?: boolean;
   memo?: string;
 }
 
 export const allocationPaymentSchema: Schema<AllocationPayment> = object({
   id: ['id', optional(number())],
-  amountInCents: ['amount_in_cents', optional(number())],
+  amountInCents: ['amount_in_cents', optional(bigint())],
   success: ['success', optional(boolean())],
   memo: ['memo', optional(string())],
 });

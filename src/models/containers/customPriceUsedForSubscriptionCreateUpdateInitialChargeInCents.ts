@@ -4,13 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, oneOf, Schema, string } from '../../schema';
+import { bigint, oneOf, Schema, string } from '../../schema';
 
 /** This is a container type for one-of types. */
-export type CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents = string | number;
+export type CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents = string | bigint;
 
 export const customPriceUsedForSubscriptionCreateUpdateInitialChargeInCentsSchema: Schema<CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents> = oneOf(
-  [string(), number()]
+  [string(), bigint()]
 );
 
 export namespace CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents {
@@ -24,11 +24,11 @@ export namespace CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents 
   }
 
   /**
-  * Validation method to narrow down union type to number type case.
+  * Validation method to narrow down union type to bigint type case.
   *
-  * This is Number case.
+  * This is Long case.
   */
-  export function isNumber(value: unknown): value is number {
-    return typeof value === 'number';
+  export function isBigint(value: unknown): value is bigint {
+    return typeof value === 'bigint';
   }
 }

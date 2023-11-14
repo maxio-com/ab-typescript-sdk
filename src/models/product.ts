@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   boolean,
   lazy,
   nullable,
@@ -51,15 +52,15 @@ export interface Product {
   /** Timestamp indicating when this product was last updated */
   updatedAt?: string;
   /** The product price, in integer cents */
-  priceInCents?: number;
+  priceInCents?: bigint;
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days */
   interval?: number;
   /** A string representing the interval unit for this product, either month or day */
   intervalUnit?: ProductIntervalUnit;
   /** The up front charge you have specified. */
-  initialChargeInCents?: number | null;
+  initialChargeInCents?: bigint | null;
   /** The price of the trial period for a subscription to this product, in integer cents. */
-  trialPriceInCents?: number | null;
+  trialPriceInCents?: bigint | null;
   /** A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
   trialInterval?: number | null;
   /** A string representing the trial interval unit for this product, either month or day */
@@ -110,14 +111,14 @@ export const productSchema: Schema<Product> = object({
   ],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
-  priceInCents: ['price_in_cents', optional(number())],
+  priceInCents: ['price_in_cents', optional(bigint())],
   interval: ['interval', optional(number())],
   intervalUnit: ['interval_unit', optional(productIntervalUnitSchema)],
   initialChargeInCents: [
     'initial_charge_in_cents',
-    optional(nullable(number())),
+    optional(nullable(bigint())),
   ],
-  trialPriceInCents: ['trial_price_in_cents', optional(nullable(number()))],
+  trialPriceInCents: ['trial_price_in_cents', optional(nullable(bigint()))],
   trialInterval: ['trial_interval', optional(nullable(number()))],
   trialIntervalUnit: [
     'trial_interval_unit',

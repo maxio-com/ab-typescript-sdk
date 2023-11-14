@@ -54,7 +54,7 @@ const body: CreateOrUpdateProductRequest = {
   product: {
     name: 'Gold Plan',
     description: 'This is our gold plan.',
-    priceInCents: 1000,
+    priceInCents: BigInt(1000),
     interval: 1,
     intervalUnit: 'month',
     handle: 'gold',

@@ -17,9 +17,9 @@
 
 ```json
 {
-  "component_id": 119.82,
+  "component_id": 206,
   "message": "message4",
-  "price_point": 88.56
+  "price_point": 152
 }
 ```
 
