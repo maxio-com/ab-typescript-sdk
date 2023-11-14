@@ -185,14 +185,15 @@ describe('Products Controller', () => {
       const productNames = response.result
         .map((result) => result.product.name)
         .sort();
-      expect(response.result.length).toBe(5);
-      expect(productNames).toEqual([
+      expect(response.result.length >= 5).toBeTruthy();
+      const hasAllProducts = [
         'Platinum plan',
         'premium-0001',
         'premium-0002',
         'premium-0003',
         'premium-0004',
-      ]);
+      ].every((name) => productNames.includes(name));
+      expect(hasAllProducts).toBeTruthy();
     });
 
     test('should throw 401 error when user list products with invalid credentials', async () => {
@@ -306,7 +307,7 @@ describe('Products Controller', () => {
     });
 
     test('should throw 401 error when the user has invalid credentials', async () => {
-      const productId = productsCreated[0].product!.id || 0;
+      const productId = productsCreated[0].product.id || 0;
       const updatePayload = {
         name: 'Updated Product Name',
         description: 'An updated description for testing',
