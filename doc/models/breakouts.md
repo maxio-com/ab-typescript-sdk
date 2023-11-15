@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `planAmountInCents` | `number \| undefined` | Optional | - |
+| `planAmountInCents` | `bigint \| undefined` | Optional | - |
 | `planAmountFormatted` | `string \| undefined` | Optional | - |
-| `usageAmountInCents` | `number \| undefined` | Optional | - |
+| `usageAmountInCents` | `bigint \| undefined` | Optional | - |
 | `usageAmountFormatted` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

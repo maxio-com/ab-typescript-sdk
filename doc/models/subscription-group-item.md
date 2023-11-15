@@ -17,8 +17,8 @@
 | `productPricePointHandle` | `string \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
 | `couponCode` | `string \| null \| undefined` | Optional | - |
-| `totalRevenueInCents` | `number \| undefined` | Optional | - |
-| `balanceInCents` | `number \| undefined` | Optional | - |
+| `totalRevenueInCents` | `bigint \| undefined` | Optional | - |
+| `balanceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

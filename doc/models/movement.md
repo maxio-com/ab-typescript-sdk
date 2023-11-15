@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `timestamp` | `string \| undefined` | Optional | - |
-| `amountInCents` | `number \| undefined` | Optional | - |
+| `amountInCents` | `bigint \| undefined` | Optional | - |
 | `amountFormatted` | `string \| undefined` | Optional | - |
 | `description` | `string \| undefined` | Optional | - |
 | `category` | `string \| undefined` | Optional | - |

@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `reason` | `string` | Required | - |
-| `serviceCreditAccountBalanceInCents` | `number` | Required | - |
-| `serviceCreditBalanceChangeInCents` | `number` | Required | - |
+| `serviceCreditAccountBalanceInCents` | `bigint` | Required | - |
+| `serviceCreditBalanceChangeInCents` | `bigint` | Required | - |
 | `currencyCode` | `string` | Required | - |
 | `atTime` | `string` | Required | - |
 

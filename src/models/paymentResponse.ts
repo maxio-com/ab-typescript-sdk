@@ -5,15 +5,15 @@
  */
 
 import { array, lazy, object, optional, Schema } from '../schema';
+import { InvoicePrePayment, invoicePrePaymentSchema } from './invoicePrePayment';
 import { Payment, paymentSchema } from './payment';
-import { PrePayment, prePaymentSchema } from './prePayment';
 
 export interface PaymentResponse {
   paidInvoices?: Payment[];
-  prepayment?: PrePayment;
+  prepayment?: InvoicePrePayment;
 }
 
 export const paymentResponseSchema: Schema<PaymentResponse> = object({
   paidInvoices: ['paid_invoices', optional(array(lazy(() => paymentSchema)))],
-  prepayment: ['prepayment', optional(lazy(() => prePaymentSchema))],
+  prepayment: ['prepayment', optional(lazy(() => invoicePrePaymentSchema))],
 });

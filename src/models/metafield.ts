@@ -5,7 +5,6 @@
  */
 
 import {
-  array,
   lazy,
   nullable,
   number,
@@ -25,7 +24,7 @@ export interface Metafield {
   /** the amount of subscriptions this metafield has been applied to in Chargify */
   dataCount?: number;
   inputType?: string;
-  mEnum?: MetafieldEnum[] | null;
+  mEnum?: MetafieldEnum | null;
 }
 
 export const metafieldSchema: Schema<Metafield> = object({
@@ -34,5 +33,5 @@ export const metafieldSchema: Schema<Metafield> = object({
   scope: ['scope', optional(lazy(() => metafieldScopeSchema))],
   dataCount: ['data_count', optional(number())],
   inputType: ['input_type', optional(string())],
-  mEnum: ['enum', optional(nullable(array(metafieldEnumSchema)))],
+  mEnum: ['enum', optional(nullable(metafieldEnumSchema))],
 });

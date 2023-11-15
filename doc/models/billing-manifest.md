@@ -10,14 +10,14 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `lineItems` | [`BillingManifestItem[] \| undefined`](../../doc/models/billing-manifest-item.md) | Optional | - |
-| `totalInCents` | `number \| undefined` | Optional | - |
-| `totalDiscountInCents` | `number \| undefined` | Optional | - |
-| `totalTaxInCents` | `number \| undefined` | Optional | - |
-| `subtotalInCents` | `number \| undefined` | Optional | - |
+| `totalInCents` | `bigint \| undefined` | Optional | - |
+| `totalDiscountInCents` | `bigint \| undefined` | Optional | - |
+| `totalTaxInCents` | `bigint \| undefined` | Optional | - |
+| `subtotalInCents` | `bigint \| undefined` | Optional | - |
 | `startDate` | `string \| undefined` | Optional | - |
 | `endDate` | `string \| undefined` | Optional | - |
 | `periodType` | `string \| undefined` | Optional | - |
-| `existingBalanceInCents` | `number \| undefined` | Optional | - |
+| `existingBalanceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

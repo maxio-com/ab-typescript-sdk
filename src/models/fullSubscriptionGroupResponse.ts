@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   boolean,
   lazy,
   number,
@@ -33,7 +34,7 @@ export interface FullSubscriptionGroupResponse {
   nextAssessmentAt?: string;
   state?: string;
   cancelAtEndOfPeriod?: boolean;
-  currentBillingAmountInCents?: number;
+  currentBillingAmountInCents?: bigint;
   customer?: SubscriptionGroupCustomer;
   accountBalances?: SubscriptionGroupBalances;
 }
@@ -51,7 +52,7 @@ export const fullSubscriptionGroupResponseSchema: Schema<FullSubscriptionGroupRe
     cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
     currentBillingAmountInCents: [
       'current_billing_amount_in_cents',
-      optional(number()),
+      optional(bigint()),
     ],
     customer: [
       'customer',

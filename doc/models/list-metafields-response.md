@@ -25,7 +25,7 @@
   "per_page": 92,
   "metafields": [
     {
-      "id": 64.22,
+      "id": 22,
       "name": "name2",
       "scope": {
         "csv": "0",

@@ -1567,10 +1567,10 @@ const subscriptionId = 'subscription_id0';
 
 const body: UpsertPrepaidConfigurationRequest = {
   prepaidConfiguration: {
-    initialFundingAmountInCents: 50000,
-    replenishToAmountInCents: 50000,
+    initialFundingAmountInCents: BigInt(50000),
+    replenishToAmountInCents: BigInt(50000),
     autoReplenish: true,
-    replenishThresholdAmountInCents: 10000,
+    replenishThresholdAmountInCents: BigInt(10000),
   },
 };
 

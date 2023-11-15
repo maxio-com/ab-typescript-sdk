@@ -14,7 +14,7 @@
 | `description` | `string` | Required | - |
 | `accountingCode` | `string \| undefined` | Optional | - |
 | `requireCreditCard` | `boolean \| undefined` | Optional | - |
-| `priceInCents` | `number` | Required | - |
+| `priceInCents` | `bigint` | Required | - |
 | `interval` | `number` | Required | - |
 | `intervalUnit` | `string` | Required | - |
 | `autoCreateSignupPage` | `boolean \| undefined` | Optional | - |

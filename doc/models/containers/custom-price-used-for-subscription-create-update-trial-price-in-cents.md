@@ -10,5 +10,5 @@
 | Type |
 |  --- |
 | `string` |
-| `number` |
+| `bigint` |
 

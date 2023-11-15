@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   boolean,
   lazy,
   nullable,
@@ -37,7 +38,7 @@ export interface Component {
   /** The name of the Product Family to which the Component belongs */
   productFamilyName?: string;
   /** deprecated - use unit_price instead */
-  pricePerUnitInCents?: number | null;
+  pricePerUnitInCents?: bigint | null;
   /** A handle for the component type */
   kind?: ComponentKind;
   /** Boolean flag describing whether a component is archived or not. */
@@ -88,7 +89,7 @@ export const componentSchema: Schema<Component> = object({
   productFamilyName: ['product_family_name', optional(string())],
   pricePerUnitInCents: [
     'price_per_unit_in_cents',
-    optional(nullable(number())),
+    optional(nullable(bigint())),
   ],
   kind: ['kind', optional(componentKindSchema)],
   archived: ['archived', optional(boolean())],

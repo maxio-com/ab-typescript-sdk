@@ -5,12 +5,12 @@
  */
 
 import { lazy, object, Schema } from '../schema';
-import { Prepayment1, prepayment1Schema } from './prepayment1';
+import { Prepayment, prepaymentSchema } from './prepayment';
 
 export interface PrepaymentResponse {
-  prepayment: Prepayment1;
+  prepayment: Prepayment;
 }
 
 export const prepaymentResponseSchema: Schema<PrepaymentResponse> = object({
-  prepayment: ['prepayment', lazy(() => prepayment1Schema)],
+  prepayment: ['prepayment', lazy(() => prepaymentSchema)],
 });

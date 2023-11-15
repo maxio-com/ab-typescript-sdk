@@ -7,13 +7,23 @@
 import { array, oneOf, Schema, string } from '../../schema';
 
 /** This is a container type for one-of types. */
-export type MetafieldEnum = string[];
+export type MetafieldEnum = string | string[];
 
 export const metafieldEnumSchema: Schema<MetafieldEnum> = oneOf([
+  string(),
   array(string()),
 ]);
 
 export namespace MetafieldEnum {
+  /**
+  * Validation method to narrow down union type to string type case.
+  *
+  * This is String case.
+  */
+  export function isString(value: unknown): value is string {
+    return typeof value === 'string';
+  }
+
   /**
   * Validation method to narrow down union type to string[] type case.
   *
