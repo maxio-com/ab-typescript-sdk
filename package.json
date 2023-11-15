@@ -18,7 +18,7 @@
     "coverage": "jest --coverage",
     "lint": "eslint --ignore-path .eslintignore --ext spec.js,spec.ts .",
     "format": "prettier --write \"src/e2e/**/*.{js,ts}\"",
-    "prepare": "rm -rf dist & tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json && husky install"
+    "prepare": "husky install"
   },
   "prettier": {
     "printWidth": 80,
