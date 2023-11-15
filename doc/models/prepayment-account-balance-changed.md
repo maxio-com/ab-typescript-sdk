@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `reason` | `string` | Required | - |
-| `prepaymentAccountBalanceInCents` | `number` | Required | - |
-| `prepaymentBalanceChangeInCents` | `number` | Required | - |
+| `prepaymentAccountBalanceInCents` | `bigint` | Required | - |
+| `prepaymentBalanceChangeInCents` | `bigint` | Required | - |
 | `currencyCode` | `string` | Required | - |
 
 ## Example (as JSON)

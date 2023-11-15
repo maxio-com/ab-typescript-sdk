@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
-| `amountInCents` | `number \| undefined` | Optional | The amount in cents of the entry. |
-| `endingBalanceInCents` | `number \| undefined` | Optional | The ending balance in cents of the account. |
+| `amountInCents` | `bigint \| undefined` | Optional | The amount in cents of the entry. |
+| `endingBalanceInCents` | `bigint \| undefined` | Optional | The ending balance in cents of the account. |
 | `entryType` | [`ServiceCreditType \| undefined`](../../doc/models/service-credit-type.md) | Optional | The type of entry |
 | `memo` | `string \| undefined` | Optional | A memo attached to the entry. |
 

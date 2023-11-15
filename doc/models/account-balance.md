@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `balanceInCents` | `number \| undefined` | Optional | The balance in cents. |
+| `balanceInCents` | `bigint \| undefined` | Optional | The balance in cents. |
 
 ## Example (as JSON)
 

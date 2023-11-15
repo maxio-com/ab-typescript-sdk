@@ -10,10 +10,10 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
-| `initialFundingAmountInCents` | `number \| undefined` | Optional | - |
-| `replenishToAmountInCents` | `number \| undefined` | Optional | - |
+| `initialFundingAmountInCents` | `bigint \| undefined` | Optional | - |
+| `replenishToAmountInCents` | `bigint \| undefined` | Optional | - |
 | `autoReplenish` | `boolean \| undefined` | Optional | - |
-| `replenishThresholdAmountInCents` | `number \| undefined` | Optional | - |
+| `replenishThresholdAmountInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

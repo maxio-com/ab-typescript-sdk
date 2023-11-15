@@ -19,7 +19,7 @@
 
 ```json
 {
-  "id": 0.0,
+  "id": 0,
   "name": "my_field",
   "scope": {
     "csv": "0",

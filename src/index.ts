@@ -304,6 +304,7 @@ export type { InvoicePaymentApplication } from './models/invoicePaymentApplicati
 export type { InvoicePaymentMethod } from './models/invoicePaymentMethod';
 export { InvoicePaymentMethodType } from './models/invoicePaymentMethodType';
 export { InvoicePaymentType } from './models/invoicePaymentType';
+export type { InvoicePrePayment } from './models/invoicePrePayment';
 export type { InvoicePreviousBalance } from './models/invoicePreviousBalance';
 export type { InvoiceRefund } from './models/invoiceRefund';
 export type { InvoiceResponse } from './models/invoiceResponse';
@@ -405,8 +406,7 @@ export type { PrepaidSubscriptionBalanceChanged } from './models/prepaidSubscrip
 export type { PrepaidUsage } from './models/prepaidUsage';
 export type { PrepaidUsageAllocationDetail } from './models/prepaidUsageAllocationDetail';
 export type { PrepaidUsageComponent } from './models/prepaidUsageComponent';
-export type { PrePayment } from './models/prePayment';
-export type { Prepayment1 } from './models/prepayment1';
+export type { Prepayment } from './models/prepayment';
 export type { PrepaymentAccountBalanceChanged } from './models/prepaymentAccountBalanceChanged';
 export type { PrepaymentAggregatedError } from './models/prepaymentAggregatedError';
 export { PrepaymentMethod } from './models/prepaymentMethod';

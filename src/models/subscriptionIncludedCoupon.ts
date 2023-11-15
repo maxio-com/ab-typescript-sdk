@@ -5,6 +5,7 @@
  */
 
 import {
+  bigint,
   boolean,
   nullable,
   number,
@@ -20,7 +21,7 @@ export interface SubscriptionIncludedCoupon {
   usesAllowed?: number;
   expiresAt?: string | null;
   recurring?: boolean;
-  amountInCents?: number | null;
+  amountInCents?: bigint | null;
   percentage?: string | null;
 }
 
@@ -31,7 +32,7 @@ export const subscriptionIncludedCouponSchema: Schema<SubscriptionIncludedCoupon
     usesAllowed: ['uses_allowed', optional(number())],
     expiresAt: ['expires_at', optional(nullable(string()))],
     recurring: ['recurring', optional(boolean())],
-    amountInCents: ['amount_in_cents', optional(nullable(number()))],
+    amountInCents: ['amount_in_cents', optional(nullable(bigint()))],
     percentage: ['percentage', optional(nullable(string()))],
   }
 );

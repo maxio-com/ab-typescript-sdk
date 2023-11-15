@@ -16,7 +16,7 @@
 ```json
 {
   "payment": {
-    "transaction_id": 168.64,
+    "transaction_id": 224,
     "total_amount": "total_amount2",
     "currency_code": "currency_code2",
     "applications": [

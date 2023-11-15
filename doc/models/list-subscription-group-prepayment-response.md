@@ -18,10 +18,10 @@
   "prepayments": [
     {
       "prepayment": {
-        "id": 128.38,
+        "id": 38,
         "subscription_group_uid": "subscription_group_uid2",
-        "amount_in_cents": 108.76,
-        "remaining_amount_in_cents": 160.54,
+        "amount_in_cents": 124,
+        "remaining_amount_in_cents": 182,
         "details": "details8"
       }
     }

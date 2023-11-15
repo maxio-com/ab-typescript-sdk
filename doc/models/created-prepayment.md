@@ -11,11 +11,11 @@
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
-| `amountInCents` | `number \| undefined` | Optional | - |
+| `amountInCents` | `bigint \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
-| `startingBalanceInCents` | `number \| undefined` | Optional | - |
-| `endingBalanceInCents` | `number \| undefined` | Optional | - |
+| `startingBalanceInCents` | `bigint \| undefined` | Optional | - |
+| `endingBalanceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

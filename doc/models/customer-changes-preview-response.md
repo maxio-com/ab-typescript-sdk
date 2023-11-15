@@ -49,41 +49,41 @@
     "custom_fields": {
       "before": [
         {
-          "owner_id": 212.74,
+          "owner_id": 26,
           "owner_type": "owner_type2",
           "name": "name0",
           "value": "value2",
-          "metadatum_id": 158.98
+          "metadatum_id": 26
         },
         {
-          "owner_id": 212.74,
+          "owner_id": 26,
           "owner_type": "owner_type2",
           "name": "name0",
           "value": "value2",
-          "metadatum_id": 158.98
+          "metadatum_id": 26
         }
       ],
       "after": [
         {
-          "owner_id": 80.66,
+          "owner_id": 130,
           "owner_type": "owner_type4",
           "name": "name2",
           "value": "value4",
-          "metadatum_id": 26.9
+          "metadatum_id": 130
         },
         {
-          "owner_id": 80.66,
+          "owner_id": 130,
           "owner_type": "owner_type4",
           "name": "name2",
           "value": "value4",
-          "metadatum_id": 26.9
+          "metadatum_id": 130
         },
         {
-          "owner_id": 80.66,
+          "owner_id": 130,
           "owner_type": "owner_type4",
           "name": "name2",
           "value": "value4",
-          "metadatum_id": 26.9
+          "metadatum_id": 130
         }
       ]
     }
