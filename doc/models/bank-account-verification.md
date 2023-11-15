@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `deposit1InCents` | `number \| undefined` | Optional | - |
-| `deposit2InCents` | `number \| undefined` | Optional | - |
+| `deposit1InCents` | `bigint \| undefined` | Optional | - |
+| `deposit2InCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

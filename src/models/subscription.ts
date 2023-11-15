@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   boolean,
   lazy,
   nullable,
@@ -45,11 +46,11 @@ export interface Subscription {
   /** The current state of the subscription. Please see the documentation for [Subscription States](https://help.chargify.com/subscriptions/subscription-states.html) */
   state?: string;
   /** Gives the current outstanding subscription balance in the number of cents. */
-  balanceInCents?: number;
+  balanceInCents?: bigint;
   /** Gives the total revenue from the subscription in the number of cents. */
-  totalRevenueInCents?: number;
+  totalRevenueInCents?: bigint;
   /** (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. */
-  productPriceInCents?: number;
+  productPriceInCents?: bigint;
   /** The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility. */
   productVersionNumber?: number;
   /** Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) */
@@ -119,7 +120,7 @@ export interface Subscription {
   /** On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. */
   payerId?: number;
   /** The balance in cents plus the estimated renewal amount in cents. */
-  currentBillingAmountInCents?: number;
+  currentBillingAmountInCents?: bigint;
   /** The product price point currently subscribed to. */
   productPricePointId?: number;
   /** One of the following: custom, default, catalog. */
@@ -149,16 +150,16 @@ export interface Subscription {
   locale?: string | null;
   currency?: string;
   scheduledCancellationAt?: string | null;
-  creditBalanceInCents?: number;
-  prepaymentBalanceInCents?: number;
+  creditBalanceInCents?: bigint;
+  prepaymentBalanceInCents?: bigint;
 }
 
 export const subscriptionSchema: Schema<Subscription> = object({
   id: ['id', optional(number())],
   state: ['state', optional(string())],
-  balanceInCents: ['balance_in_cents', optional(number())],
-  totalRevenueInCents: ['total_revenue_in_cents', optional(number())],
-  productPriceInCents: ['product_price_in_cents', optional(number())],
+  balanceInCents: ['balance_in_cents', optional(bigint())],
+  totalRevenueInCents: ['total_revenue_in_cents', optional(bigint())],
+  productPriceInCents: ['product_price_in_cents', optional(bigint())],
   productVersionNumber: ['product_version_number', optional(number())],
   currentPeriodEndsAt: ['current_period_ends_at', optional(string())],
   nextAssessmentAt: ['next_assessment_at', optional(string())],
@@ -213,7 +214,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   payerId: ['payer_id', optional(number())],
   currentBillingAmountInCents: [
     'current_billing_amount_in_cents',
-    optional(number()),
+    optional(bigint()),
   ],
   productPricePointId: ['product_price_point_id', optional(number())],
   productPricePointType: ['product_price_point_type', optional(string())],
@@ -251,6 +252,6 @@ export const subscriptionSchema: Schema<Subscription> = object({
     'scheduled_cancellation_at',
     optional(nullable(string())),
   ],
-  creditBalanceInCents: ['credit_balance_in_cents', optional(number())],
-  prepaymentBalanceInCents: ['prepayment_balance_in_cents', optional(number())],
+  creditBalanceInCents: ['credit_balance_in_cents', optional(bigint())],
+  prepaymentBalanceInCents: ['prepayment_balance_in_cents', optional(bigint())],
 });

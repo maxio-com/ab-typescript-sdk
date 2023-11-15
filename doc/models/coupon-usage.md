@@ -13,9 +13,9 @@
 | `name` | `string \| undefined` | Optional | Name of the product |
 | `signups` | `number \| undefined` | Optional | Number of times the coupon has been applied |
 | `savings` | `number \| null \| undefined` | Optional | Dollar amount of customer savings as a result of the coupon. |
-| `savingsInCents` | `number \| null \| undefined` | Optional | Dollar amount of customer savings as a result of the coupon. |
+| `savingsInCents` | `bigint \| null \| undefined` | Optional | Dollar amount of customer savings as a result of the coupon. |
 | `revenue` | `number \| null \| undefined` | Optional | Total revenue of the all subscriptions that have received a discount from this coupon. |
-| `revenueInCents` | `number \| undefined` | Optional | Total revenue of the all subscriptions that have received a discount from this coupon. |
+| `revenueInCents` | `bigint \| undefined` | Optional | Total revenue of the all subscriptions that have received a discount from this coupon. |
 
 ## Example (as JSON)
 

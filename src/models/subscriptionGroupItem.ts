@@ -4,7 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  nullable,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface SubscriptionGroupItem {
   id?: number;
@@ -15,8 +23,8 @@ export interface SubscriptionGroupItem {
   productPricePointHandle?: string;
   currency?: string;
   couponCode?: string | null;
-  totalRevenueInCents?: number;
-  balanceInCents?: number;
+  totalRevenueInCents?: bigint;
+  balanceInCents?: bigint;
 }
 
 export const subscriptionGroupItemSchema: Schema<SubscriptionGroupItem> = object(
@@ -29,7 +37,7 @@ export const subscriptionGroupItemSchema: Schema<SubscriptionGroupItem> = object
     productPricePointHandle: ['product_price_point_handle', optional(string())],
     currency: ['currency', optional(string())],
     couponCode: ['coupon_code', optional(nullable(string()))],
-    totalRevenueInCents: ['total_revenue_in_cents', optional(number())],
-    balanceInCents: ['balance_in_cents', optional(number())],
+    totalRevenueInCents: ['total_revenue_in_cents', optional(bigint())],
+    balanceInCents: ['balance_in_cents', optional(bigint())],
   }
 );

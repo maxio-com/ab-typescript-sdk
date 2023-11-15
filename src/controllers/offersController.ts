@@ -16,7 +16,7 @@ import {
   listOffersResponseSchema,
 } from '../models/listOffersResponse';
 import { OfferResponse, offerResponseSchema } from '../models/offerResponse';
-import { number, optional } from '../schema';
+import { boolean, number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class OffersController extends BaseController {
@@ -59,12 +59,38 @@ export class OffersController extends BaseController {
   /**
    * This endpoint will list offers for a site.
    *
+   * @param page             Result records are organized in pages. By default, the first page of results
+   *                                    is displayed. The page parameter specifies a page number of results to fetch.
+   *                                    You can start navigating through the pages to consume the results. You do this
+   *                                    by passing in a page parameter. Retrieve the next page by adding ?page=2 to the
+   *                                    query string. If there are no results to return, then an empty result set will
+   *                                    be returned. Use in query `page=1`.
+   * @param perPage          This parameter indicates how many records to fetch in each request. Default
+   *                                    value is 20. The maximum allowed values is 200; any per_page value over 200
+   *                                    will be changed to 200. Use in query `per_page=200`.
+   * @param includeArchived  Include archived products. Use in query: `include_archived=true`.
    * @return Response from the API call
    */
-  async listOffers(
+  async listOffers({
+    page,
+    perPage,
+    includeArchived,
+  }: {
+    page?: number,
+    perPage?: number,
+    includeArchived?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListOffersResponse>> {
     const req = this.createRequest('GET', '/offers.json');
+    const mapped = req.prepareArgs({
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+      includeArchived: [includeArchived, optional(boolean())],
+    });
+    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage);
+    req.query('include_archived', mapped.includeArchived);
     return req.callAsJson(listOffersResponseSchema, requestOptions);
   }
 

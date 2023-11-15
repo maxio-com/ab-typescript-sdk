@@ -20,7 +20,7 @@
 {
   "name": "name0",
   "value": "value2",
-  "owner_id": 236.94,
+  "owner_id": 142,
   "owner_type": "owner_type2"
 }
 ```

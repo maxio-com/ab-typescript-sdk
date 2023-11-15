@@ -21,11 +21,11 @@
 
 ```json
 {
-  "id": 159.12,
+  "id": 40,
   "key": "key2",
   "message": "message8",
-  "subscription_id": 185.82,
-  "customer_id": 31.5,
+  "subscription_id": 150,
+  "customer_id": 78,
   "created_at": "created_at0",
   "event_specific_data": {
     "previous_unit_balance": null,

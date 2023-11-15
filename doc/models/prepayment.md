@@ -1,9 +1,9 @@
 
-# Prepayment 1
+# Prepayment
 
 ## Structure
 
-`Prepayment1`
+`Prepayment`
 
 ## Fields
 
@@ -11,9 +11,9 @@
 |  --- | --- | --- | --- |
 | `id` | `number` | Required | - |
 | `subscriptionId` | `number` | Required | - |
-| `amountInCents` | `number` | Required | - |
-| `remainingAmountInCents` | `number` | Required | - |
-| `refundedAmountInCents` | `number \| undefined` | Optional | - |
+| `amountInCents` | `bigint` | Required | - |
+| `remainingAmountInCents` | `bigint` | Required | - |
+| `refundedAmountInCents` | `bigint \| undefined` | Optional | - |
 | `details` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `external` | `boolean` | Required | - |
 | `memo` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
@@ -24,15 +24,15 @@
 
 ```json
 {
-  "id": 52.0,
-  "subscription_id": 78.7,
-  "amount_in_cents": 32.38,
-  "remaining_amount_in_cents": 84.16,
-  "refunded_amount_in_cents": 109.26,
-  "details": "details0",
+  "id": 50,
+  "subscription_id": 160,
+  "amount_in_cents": 120,
+  "remaining_amount_in_cents": 194,
+  "refunded_amount_in_cents": 144,
+  "details": "details4",
   "external": false,
-  "memo": "memo4",
-  "payment_type": "ach",
+  "memo": "memo8",
+  "payment_type": "cash",
   "created_at": "created_at8"
 }
 ```

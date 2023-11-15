@@ -5,6 +5,7 @@
  */
 
 import {
+  bigint,
   boolean,
   nullable,
   number,
@@ -19,16 +20,16 @@ export interface ProductPricePoint {
   id?: number;
   name?: string;
   handle?: string;
-  priceInCents?: number;
+  priceInCents?: bigint;
   interval?: number;
   intervalUnit?: string;
-  trialPriceInCents?: number;
+  trialPriceInCents?: bigint;
   trialInterval?: number;
   trialIntervalUnit?: string;
   trialType?: string;
   /** reserved for future use */
   introductoryOffer?: boolean;
-  initialChargeInCents?: number;
+  initialChargeInCents?: bigint;
   initialChargeAfterTrial?: boolean;
   expirationInterval?: number;
   expirationIntervalUnit?: string;
@@ -53,15 +54,15 @@ export const productPricePointSchema: Schema<ProductPricePoint> = object({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(string())],
-  priceInCents: ['price_in_cents', optional(number())],
+  priceInCents: ['price_in_cents', optional(bigint())],
   interval: ['interval', optional(number())],
   intervalUnit: ['interval_unit', optional(string())],
-  trialPriceInCents: ['trial_price_in_cents', optional(number())],
+  trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
   trialInterval: ['trial_interval', optional(number())],
   trialIntervalUnit: ['trial_interval_unit', optional(string())],
   trialType: ['trial_type', optional(string())],
   introductoryOffer: ['introductory_offer', optional(boolean())],
-  initialChargeInCents: ['initial_charge_in_cents', optional(number())],
+  initialChargeInCents: ['initial_charge_in_cents', optional(bigint())],
   initialChargeAfterTrial: ['initial_charge_after_trial', optional(boolean())],
   expirationInterval: ['expiration_interval', optional(number())],
   expirationIntervalUnit: ['expiration_interval_unit', optional(string())],

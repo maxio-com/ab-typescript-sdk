@@ -19,20 +19,20 @@ import {
 } from './createOfferComponent';
 
 export interface CreateOffer {
-  name?: string;
-  handle?: string;
+  name: string;
+  handle: string;
   description?: string;
-  productId?: number;
+  productId: number;
   productPricePointId?: number;
   components?: CreateOfferComponent[];
   coupons?: string[];
 }
 
 export const createOfferSchema: Schema<CreateOffer> = object({
-  name: ['name', optional(string())],
-  handle: ['handle', optional(string())],
+  name: ['name', string()],
+  handle: ['handle', string()],
   description: ['description', optional(string())],
-  productId: ['product_id', optional(number())],
+  productId: ['product_id', number()],
   productPricePointId: ['product_price_point_id', optional(number())],
   components: [
     'components',

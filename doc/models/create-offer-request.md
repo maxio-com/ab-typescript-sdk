@@ -20,7 +20,20 @@
     "handle": "handle0",
     "description": "description6",
     "product_id": 30,
-    "product_price_point_id": 150
+    "product_price_point_id": 150,
+    "components": [
+      {
+        "component_id": 108,
+        "starting_quantity": 84
+      },
+      {
+        "component_id": 108,
+        "starting_quantity": 84
+      }
+    ],
+    "coupons": [
+      "coupons6"
+    ]
   }
 }
 ```
