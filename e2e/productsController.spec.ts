@@ -12,7 +12,7 @@ const payloads = [
       name: 'premium-0001',
       handle: 'premium-0001',
       description: 'premium-desc',
-      priceInCents: 1000,
+      priceInCents: BigInt(1000),
       interval: 1,
       intervalUnit: 'month',
     },
@@ -22,7 +22,7 @@ const payloads = [
       name: 'premium-0002',
       handle: 'premium-0002',
       description: 'premium-desc',
-      priceInCents: 1000,
+      priceInCents: BigInt(1000),
       interval: 1,
       intervalUnit: 'month',
     },
@@ -32,7 +32,7 @@ const payloads = [
       name: 'premium-0003',
       handle: 'premium-0003',
       description: 'premium-desc',
-      priceInCents: 1000,
+      priceInCents: BigInt(1000),
       interval: 1,
       intervalUnit: 'month',
     },
@@ -42,7 +42,7 @@ const payloads = [
       name: 'premium-0004',
       handle: 'premium-0004',
       description: 'premium-desc',
-      priceInCents: 1000,
+      priceInCents: BigInt(1000),
       interval: 1,
       intervalUnit: 'month',
     },
@@ -95,7 +95,7 @@ describe('Products Controller', () => {
           description: 'This is our gold plan.',
           accountingCode: '123',
           requireCredit_card: true,
-          priceInCents: 1000,
+          priceInCents: BigInt(1000),
           interval: 1,
           intervalUnit: 'month',
           autoCreateSignupPage: true,
@@ -121,7 +121,7 @@ describe('Products Controller', () => {
           description: '',
           accountingCode: '',
           requireCredit_card: true,
-          priceInCents: 1000,
+          priceInCents: BigInt(1000),
           interval: 1,
           intervalUnit: '',
           autoCreateSignupPage: true,
@@ -154,7 +154,7 @@ describe('Products Controller', () => {
           description: 'This is our gold plan.',
           accountingCode: '123',
           requireCredit_card: true,
-          priceInCents: 1000,
+          priceInCents: BigInt(1000),
           interval: 1,
           intervalUnit: 'month',
           autoCreateSignupPage: true,
@@ -243,7 +243,7 @@ describe('Products Controller', () => {
       const updatePayload = {
         name: 'Updated Product Name',
         description: 'An updated description for testing',
-        priceInCents: 1200,
+        priceInCents: BigInt(1200),
         interval: 3,
         intervalUnit: 'month',
       };
@@ -260,7 +260,7 @@ describe('Products Controller', () => {
       expect(response.result.product.description).toBe(
         'An updated description for testing'
       );
-      expect(response.result.product.priceInCents).toBe(1200);
+      expect(response.result.product.priceInCents).toBe(BigInt(1200));
       expect(response.result.product.interval).toBe(3);
       expect(response.result.product.intervalUnit).toBe('month');
     });
@@ -269,7 +269,7 @@ describe('Products Controller', () => {
       const updatePayload = {
         name: '',
         description: '',
-        priceInCents: 0,
+        priceInCents: BigInt(0),
         interval: 0,
         intervalUnit: 'month',
       };
@@ -290,7 +290,7 @@ describe('Products Controller', () => {
       const updatePayload = {
         name: 'Updated Product Name',
         description: 'An updated description for testing',
-        priceInCents: 1200,
+        priceInCents: BigInt(1200),
         interval: 3,
         intervalUnit: 'month',
       };
@@ -311,7 +311,7 @@ describe('Products Controller', () => {
       const updatePayload = {
         name: 'Updated Product Name',
         description: 'An updated description for testing',
-        priceInCents: 1200,
+        priceInCents: BigInt(1200),
         interval: 3,
         intervalUnit: 'month',
       };
