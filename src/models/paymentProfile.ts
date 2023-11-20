@@ -56,7 +56,7 @@ export interface PaymentProfile {
   disabled?: boolean;
   /** Token received after sending billing informations using chargify.js. */
   chargifyToken?: string;
-  siteGatewaySettingId?: number;
+  siteGatewaySettingId?: number | null;
   /** An identifier of connected gateway. */
   gatewayHandle?: string | null;
 }
@@ -82,6 +82,9 @@ export const paymentProfileSchema: Schema<PaymentProfile> = object({
   paymentType: ['payment_type', optional(paymentTypeSchema)],
   disabled: ['disabled', optional(boolean())],
   chargifyToken: ['chargify_token', optional(string())],
-  siteGatewaySettingId: ['site_gateway_setting_id', optional(number())],
+  siteGatewaySettingId: [
+    'site_gateway_setting_id',
+    optional(nullable(number())),
+  ],
   gatewayHandle: ['gateway_handle', optional(nullable(string()))],
 });
