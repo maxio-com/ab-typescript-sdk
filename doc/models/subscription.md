@@ -50,7 +50,7 @@
 | `automaticallyResumeAt` | `string \| null \| undefined` | Optional | The date the subscription is scheduled to automatically resume from the on_hold state. |
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
 | `offerId` | `number \| null \| undefined` | Optional | The ID of the offer associated with the subscription. |
-| `payerId` | `number \| undefined` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
+| `payerId` | `number \| null \| undefined` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
 | `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. |
 | `productPricePointId` | `number \| undefined` | Optional | The product price point currently subscribed to. |
 | `productPricePointType` | `string \| undefined` | Optional | One of the following: custom, default, catalog. |

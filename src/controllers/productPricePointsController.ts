@@ -4,9 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
+import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { ErrorMapResponseError } from '../errors/errorMapResponseError';
+import {
+  ProductPricePointErrorResponseError,
+} from '../errors/productPricePointErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   BulkCreateProductPricePointsRequest,
@@ -79,6 +83,7 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
+    req.throwOn(422, ProductPricePointErrorResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -288,6 +293,7 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/bulk.json`;
+    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(
       bulkCreateProductPricePointsResponseSchema,
       requestOptions
