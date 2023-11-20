@@ -118,7 +118,7 @@ export interface Subscription {
   /** The ID of the offer associated with the subscription. */
   offerId?: number | null;
   /** On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. */
-  payerId?: number;
+  payerId?: number | null;
   /** The balance in cents plus the estimated renewal amount in cents. */
   currentBillingAmountInCents?: bigint;
   /** The product price point currently subscribed to. */
@@ -211,7 +211,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   ],
   couponCodes: ['coupon_codes', optional(array(string()))],
   offerId: ['offer_id', optional(nullable(number()))],
-  payerId: ['payer_id', optional(number())],
+  payerId: ['payer_id', optional(nullable(number()))],
   currentBillingAmountInCents: [
     'current_billing_amount_in_cents',
     optional(bigint()),

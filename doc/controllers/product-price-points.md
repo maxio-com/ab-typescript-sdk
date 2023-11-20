@@ -116,6 +116,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ProductPricePointErrorResponseError`](../../doc/models/product-price-point-error-response-error.md) |
+
 
 # List Product Price Points
 
@@ -718,6 +724,12 @@ try {
   ]
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
 # Create Product Currency Prices
