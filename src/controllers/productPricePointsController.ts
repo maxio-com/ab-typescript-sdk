@@ -4,9 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
+import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { ErrorMapResponseError } from '../errors/errorMapResponseError';
+import { ProductPricePointErrorResponseError } from '../errors/productPricePointErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   BulkCreateProductPricePointsRequest,
@@ -79,6 +81,11 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
+    req.throwOn(
+      422,
+      ProductPricePointErrorResponseError,
+      'Unprocessable Entity (WebDAV)'
+    );
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -107,19 +114,20 @@ export class ProductPricePointsController extends BaseController {
    * @param filterType      Use in query: `filter[type]=catalog,default`.
    * @return Response from the API call
    */
-  async listProductPricePoints({
-    productId,
-    page,
-    perPage,
-    currencyPrices,
-    filterType,
-  }: {
-    productId: number,
-    page?: number,
-    perPage?: number,
-    currencyPrices?: boolean,
-    filterType?: PricePointType[],
-  },
+  async listProductPricePoints(
+    {
+      productId,
+      page,
+      perPage,
+      currencyPrices,
+      filterType,
+    }: {
+      productId: number;
+      page?: number;
+      perPage?: number;
+      currencyPrices?: boolean;
+      filterType?: PricePointType[];
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET');
@@ -288,6 +296,7 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/bulk.json`;
+    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(
       bulkCreateProductPricePointsResponseSchema,
       requestOptions
@@ -425,33 +434,34 @@ export class ProductPricePointsController extends BaseController {
    *                                                                          `per_page=200`.
    * @return Response from the API call
    */
-  async listAllProductPricePoints({
-    direction,
-    filterArchivedAt,
-    filterDateField,
-    filterEndDate,
-    filterEndDatetime,
-    filterIds,
-    filterStartDate,
-    filterStartDatetime,
-    filterType,
-    include,
-    page,
-    perPage,
-  }: {
-    direction?: ListAllProductPricePointsInputDirection,
-    filterArchivedAt?: IncludeNotNull,
-    filterDateField?: BasicDateField,
-    filterEndDate?: string,
-    filterEndDatetime?: string,
-    filterIds?: number[],
-    filterStartDate?: string,
-    filterStartDatetime?: string,
-    filterType?: PricePointType,
-    include?: ListProductsPricePointsInclude,
-    page?: number,
-    perPage?: number,
-  },
+  async listAllProductPricePoints(
+    {
+      direction,
+      filterArchivedAt,
+      filterDateField,
+      filterEndDate,
+      filterEndDatetime,
+      filterIds,
+      filterStartDate,
+      filterStartDatetime,
+      filterType,
+      include,
+      page,
+      perPage,
+    }: {
+      direction?: ListAllProductPricePointsInputDirection;
+      filterArchivedAt?: IncludeNotNull;
+      filterDateField?: BasicDateField;
+      filterEndDate?: string;
+      filterEndDatetime?: string;
+      filterIds?: number[];
+      filterStartDate?: string;
+      filterStartDatetime?: string;
+      filterType?: PricePointType;
+      include?: ListProductsPricePointsInclude;
+      page?: number;
+      perPage?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET', '/products_price_points.json');
