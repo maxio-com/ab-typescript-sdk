@@ -26,7 +26,7 @@ export interface Component {
   /** The name of the Component, suitable for display on statements. i.e. Text Messages. */
   name?: string;
   /** The component API handle */
-  handle?: string;
+  handle?: string | null;
   /** The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes. */
   pricingScheme?: string | null;
   /** The name of the unit that the component’s usage is measured in. i.e. message */
@@ -70,7 +70,7 @@ export interface Component {
   hideDateRangeOnInvoice?: boolean;
   allowFractionalQuantities?: boolean;
   /** One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other */
-  itemCategory?: ItemCategory;
+  itemCategory?: ItemCategory | null;
   useSiteExchangeRate?: boolean | null;
   /** E.g. Internal ID or SKU Number */
   accountingCode?: string | null;
@@ -81,7 +81,7 @@ export interface Component {
 export const componentSchema: Schema<Component> = object({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
-  handle: ['handle', optional(string())],
+  handle: ['handle', optional(nullable(string()))],
   pricingScheme: ['pricing_scheme', optional(nullable(string()))],
   unitName: ['unit_name', optional(string())],
   unitPrice: ['unit_price', optional(nullable(string()))],
@@ -115,7 +115,7 @@ export const componentSchema: Schema<Component> = object({
     'allow_fractional_quantities',
     optional(boolean()),
   ],
-  itemCategory: ['item_category', optional(itemCategorySchema)],
+  itemCategory: ['item_category', optional(nullable(itemCategorySchema))],
   useSiteExchangeRate: [
     'use_site_exchange_rate',
     optional(nullable(boolean())),

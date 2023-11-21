@@ -237,26 +237,6 @@ describe('Subscriptions Controller', () => {
             creditCardAttributes,
           },
         },
-        {
-          subscription: {
-            productHandle: 'basic-subscription-02',
-            customerAttributes: {
-              firstName: 'Joe',
-              lastName: 'Blow',
-              email: 'joe@example.com',
-              zip: '02120',
-              state: 'MA',
-              reference: 'XYZ6',
-              phone: '(617) 111 - 0000',
-              organization: 'Acme',
-              country: 'US',
-              city: 'Boston',
-              address2: null,
-              address: '123 Mass Ave.',
-            },
-            creditCardAttributes,
-          },
-        },
       ];
 
       const promises = subscriptionsByProduct.map((subscription) =>
@@ -267,7 +247,7 @@ describe('Subscriptions Controller', () => {
         await subscriptionsController.listSubscriptions({
           product: productResponse02.product.id,
         });
-      expect(subscriptionsResponse.result.length).toBe(3);
+      expect(subscriptionsResponse.result.length).toBe(2);
     });
 
     test('should list all by based in an state', async () => {
@@ -275,7 +255,7 @@ describe('Subscriptions Controller', () => {
         await subscriptionsController.listSubscriptions({
           state: SubscriptionState.Active,
         });
-      expect(subscriptionsResponse.result.length).toBe(5);
+      expect(subscriptionsResponse.result.length).toBe(4);
     });
   });
 

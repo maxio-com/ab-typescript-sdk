@@ -20,7 +20,7 @@ export interface UpdateComponent {
   /** A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
   taxCode?: string | null;
   /** One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other */
-  itemCategory?: ItemCategory;
+  itemCategory?: ItemCategory | null;
   displayOnHostedPage?: boolean;
   /** The type of charge to be applied when a component is upgraded. Valid values are: `prorated`, `full`, `none`. */
   upgradeCharge?: CreditType;
@@ -33,7 +33,7 @@ export const updateComponentSchema: Schema<UpdateComponent> = object({
   accountingCode: ['accounting_code', optional(string())],
   taxable: ['taxable', optional(boolean())],
   taxCode: ['tax_code', optional(nullable(string()))],
-  itemCategory: ['item_category', optional(itemCategorySchema)],
+  itemCategory: ['item_category', optional(nullable(itemCategorySchema))],
   displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
   upgradeCharge: ['upgrade_charge', optional(creditTypeSchema)],
 });

@@ -29,7 +29,7 @@
 | `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | **Default**: `PaymentType.CreditCard` |
 | `disabled` | `boolean \| undefined` | Optional | - |
 | `chargifyToken` | `string \| undefined` | Optional | Token received after sending billing informations using chargify.js. |
-| `siteGatewaySettingId` | `number \| undefined` | Optional | - |
+| `siteGatewaySettingId` | `number \| null \| undefined` | Optional | - |
 | `gatewayHandle` | `string \| null \| undefined` | Optional | An identifier of connected gateway. |
 
 ## Example (as JSON)
