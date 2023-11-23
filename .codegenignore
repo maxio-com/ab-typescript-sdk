@@ -1,0 +1,5 @@
+e2e/**
+.gitignore
+pnpm-lock.yaml
+.github/**
+.husky

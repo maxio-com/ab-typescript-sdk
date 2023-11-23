@@ -8,7 +8,7 @@ import {
   SubscriptionsController,
   ProductResponse,
   SubscriptionState,
-} from '../src';
+} from '../../src';
 import { createClient } from './config';
 
 describe('Subscriptions Controller', () => {

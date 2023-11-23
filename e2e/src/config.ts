@@ -1,4 +1,4 @@
-import { Client, Environment } from '../src';
+import { Client, Environment } from '../../src';
 
 export const CONFIG = {
   SDK_KEY: process.env.SDK_KEY,

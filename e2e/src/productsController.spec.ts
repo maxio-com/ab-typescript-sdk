@@ -3,8 +3,8 @@ import {
   Environment,
   ProductFamiliesController,
   ProductResponse,
-} from '../src';
-import { ProductsController, IncludeNotNull } from '../src';
+} from '../../src';
+import { ProductsController, IncludeNotNull } from '../../src';
 
 const payloads = [
   {

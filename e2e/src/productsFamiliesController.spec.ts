@@ -1,5 +1,5 @@
 import { createClient } from './config';
-import { ProductFamiliesController } from '../src/controllers/productFamiliesController';
+import { ProductFamiliesController } from '../../src/controllers/productFamiliesController';
 
 describe('ProductsFamilies Controller', () => {
   test('should create a product family with the correct params', async () => {

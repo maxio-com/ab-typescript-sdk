@@ -1,6 +1,5 @@
 import { CONFIG, createClient } from './config';
-import { SitesController } from '../src/controllers/sitesController';
-import { Environment } from '..';
+import { SitesController, Environment } from '../../src';
 
 describe('SitesController', () => {
   test('should get site data throw configured client when SiteController read a site', async () => {

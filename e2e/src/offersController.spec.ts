@@ -1,4 +1,4 @@
-import { ProductResponse } from '../dist/types';
+import { ProductResponse } from '../../dist/types';
 import {
   Environment,
   OfferResponse,
@@ -6,7 +6,7 @@ import {
   ProductFamiliesController,
   ProductFamilyResponse,
   ProductsController,
-} from '../src';
+} from '../../src';
 import { CONFIG, createClient } from './config';
 
 describe('Offers Controller', () => {
