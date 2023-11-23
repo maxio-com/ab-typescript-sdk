@@ -1,5 +1,8 @@
 import { createClient } from './config';
-import { ProductFamiliesController } from '../../src/controllers/productFamiliesController';
+import {
+  ProductFamilyResponse,
+  ProductFamiliesController,
+} from 'advanced-billing-sdk';
 
 describe('ProductsFamilies Controller', () => {
   test('should create a product family with the correct params', async () => {
@@ -71,7 +74,7 @@ describe('ProductsFamilies Controller', () => {
     expect(readResponse.statusCode).toBe(200);
     expect(readResponse.result.length >= 2).toBeTruthy();
     const productNames = readResponse.result.map(
-      (item) => item.productFamily?.name
+      (item: ProductFamilyResponse) => item.productFamily?.name
     );
     expect(productNames.includes('Acme Projects')).toBeTruthy();
     expect(productNames.includes('productFamily')).toBeTruthy();

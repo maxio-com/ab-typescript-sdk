@@ -1,4 +1,3 @@
-import { ProductResponse } from '../../dist/types';
 import {
   Environment,
   OfferResponse,
@@ -6,7 +5,8 @@ import {
   ProductFamiliesController,
   ProductFamilyResponse,
   ProductsController,
-} from '../../src';
+  ProductResponse,
+} from 'advanced-billing-sdk';
 import { CONFIG, createClient } from './config';
 
 describe('Offers Controller', () => {
@@ -105,7 +105,7 @@ describe('Offers Controller', () => {
 
       const offersResponse = await offersController.listOffers({});
       const offersNames = offersResponse.result.offers
-        ?.map((offer) => offer.name)
+        ?.map((offer: OfferResponse['offer']) => offer?.name)
         .sort();
       expect(offersResponse.statusCode).toBe(200);
       expect(offersResponse.result.offers?.length).toBe(3);

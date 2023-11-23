@@ -1,6 +1,5 @@
 import { createClient } from './config';
-import { CustomersController } from '../../src/controllers/customersController';
-import { CustomerResponse } from '../../src/models/customerResponse';
+import { CustomersController, CustomerResponse } from 'advanced-billing-sdk';
 
 describe('CustomersController', () => {
   describe('Create customer', () => {

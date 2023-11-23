@@ -3,8 +3,9 @@ import {
   Environment,
   ProductFamiliesController,
   ProductResponse,
-} from '../../src';
-import { ProductsController, IncludeNotNull } from '../../src';
+  IncludeNotNull,
+  ProductsController,
+} from 'advanced-billing-sdk';
 
 const payloads = [
   {
@@ -183,7 +184,7 @@ describe('Products Controller', () => {
           IncludeNotNull.NotNull,
       });
       const productNames = response.result
-        .map((result) => result.product.name)
+        .map((result: ProductResponse) => result.product.name)
         .sort();
       expect(response.result.length >= 5).toBeTruthy();
       const hasAllProducts = [

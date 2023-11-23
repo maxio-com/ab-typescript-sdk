@@ -31,3 +31,15 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build process verification
         run: pnpm run build
+
+      - name: Install e2e dependencies
+        working-directory: ./e2e
+        run: pnpm install --frozen-lockfile
+      - name: e2e tests verification
+        env:
+          SDK_KEY: ${{ secrets.CHARGIFY_API_KEY }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+        working-directory: ./e2e
+        run: pnpm run test

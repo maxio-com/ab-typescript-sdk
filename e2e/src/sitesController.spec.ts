@@ -1,5 +1,5 @@
 import { CONFIG, createClient } from './config';
-import { SitesController, Environment } from '../../src';
+import { SitesController, Environment } from 'advanced-billing-sdk';
 
 describe('SitesController', () => {
   test('should get site data throw configured client when SiteController read a site', async () => {

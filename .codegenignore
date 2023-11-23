@@ -3,3 +3,4 @@ e2e/**
 pnpm-lock.yaml
 .github/**
 .husky
+.lintstagedrc.json

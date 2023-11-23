@@ -8,7 +8,7 @@ import {
   SubscriptionsController,
   ProductResponse,
   SubscriptionState,
-} from '../../src';
+} from 'advanced-billing-sdk';
 import { createClient } from './config';
 
 describe('Subscriptions Controller', () => {
