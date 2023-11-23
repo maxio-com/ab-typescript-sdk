@@ -15,12 +15,13 @@ export interface ProductPricePointErrors {
   priceInCents?: string[];
 }
 
-export const productPricePointErrorsSchema: Schema<ProductPricePointErrors> =
-  object({
+export const productPricePointErrorsSchema: Schema<ProductPricePointErrors> = object(
+  {
     pricePoint: ['price_point', optional(string())],
     interval: ['interval', optional(array(string()))],
     intervalUnit: ['interval_unit', optional(array(string()))],
     name: ['name', optional(array(string()))],
     price: ['price', optional(array(string()))],
     priceInCents: ['price_in_cents', optional(array(string()))],
-  });
+  }
+);

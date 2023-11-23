@@ -8,7 +8,9 @@ import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { ErrorMapResponseError } from '../errors/errorMapResponseError';
-import { ProductPricePointErrorResponseError } from '../errors/productPricePointErrorResponseError';
+import {
+  ProductPricePointErrorResponseError,
+} from '../errors/productPricePointErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   BulkCreateProductPricePointsRequest,
@@ -81,11 +83,7 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
-    req.throwOn(
-      422,
-      ProductPricePointErrorResponseError,
-      'Unprocessable Entity (WebDAV)'
-    );
+    req.throwOn(422, ProductPricePointErrorResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
