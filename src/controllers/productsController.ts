@@ -49,6 +49,7 @@ export class ProductsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -120,6 +121,7 @@ export class ProductsController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ productId: [productId, number()] });
     req.appendTemplatePath`/products/${mapped.productId}.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
