@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -31,10 +31,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build process verification
         run: pnpm run build
-
-      - name: Install e2e dependencies
-        working-directory: ./e2e
-        run: pnpm install --frozen-lockfile
       - name: e2e tests verification
         env:
           SDK_KEY: ${{ secrets.CHARGIFY_API_KEY }}
