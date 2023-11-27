@@ -5,6 +5,7 @@ import {
   ProductResponse,
   IncludeNotNull,
   ProductsController,
+  IntervalUnit,
 } from 'advanced-billing-sdk';
 
 const payloads = [
@@ -15,7 +16,7 @@ const payloads = [
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   },
   {
@@ -25,7 +26,7 @@ const payloads = [
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   },
   {
@@ -35,7 +36,7 @@ const payloads = [
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   },
   {
@@ -45,7 +46,7 @@ const payloads = [
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   },
 ];
@@ -98,7 +99,7 @@ describe('Products Controller', () => {
           requireCredit_card: true,
           priceInCents: BigInt(1000),
           interval: 1,
-          intervalUnit: 'month',
+          intervalUnit: IntervalUnit.Month,
           autoCreateSignupPage: true,
           taxCode: 'D0000000',
         },
@@ -124,7 +125,7 @@ describe('Products Controller', () => {
           requireCredit_card: true,
           priceInCents: BigInt(1000),
           interval: 1,
-          intervalUnit: '',
+          intervalUnit: IntervalUnit.Month,
           autoCreateSignupPage: true,
         },
       };
@@ -135,13 +136,9 @@ describe('Products Controller', () => {
 
       expect(promise).rejects.toThrow();
 
-      await promise.catch((error) => {
-        expect(error.statusCode).toBe(422);
-        expect(error.result.errors).toEqual([
-          'Name: cannot be blank.',
-          'Interval unit: cannot be blank.',
-          "Interval unit: must be 'month' or 'day'.",
-        ]);
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(422);
+        expect(reason.result.errors).toEqual(['Name: cannot be blank.']);
       });
     });
 
@@ -157,7 +154,7 @@ describe('Products Controller', () => {
           requireCredit_card: true,
           priceInCents: BigInt(1000),
           interval: 1,
-          intervalUnit: 'month',
+          intervalUnit: IntervalUnit.Month,
           autoCreateSignupPage: true,
           taxCode: 'D0000000',
         },
@@ -246,7 +243,7 @@ describe('Products Controller', () => {
         description: 'An updated description for testing',
         priceInCents: BigInt(1200),
         interval: 3,
-        intervalUnit: 'month',
+        intervalUnit: IntervalUnit.Month,
       };
       const productId = productsCreated[0].product.id || 0;
 
@@ -272,7 +269,7 @@ describe('Products Controller', () => {
         description: '',
         priceInCents: BigInt(0),
         interval: 0,
-        intervalUnit: 'month',
+        intervalUnit: IntervalUnit.Month,
       };
       const productId = productsCreated[0].product.id || 0;
       const client = createClient();
@@ -293,7 +290,7 @@ describe('Products Controller', () => {
         description: 'An updated description for testing',
         priceInCents: BigInt(1200),
         interval: 3,
-        intervalUnit: 'month',
+        intervalUnit: IntervalUnit.Month,
       };
       const productId = 141241241;
       const client = createClient();
@@ -314,7 +311,7 @@ describe('Products Controller', () => {
         description: 'An updated description for testing',
         priceInCents: BigInt(1200),
         interval: 3,
-        intervalUnit: 'month',
+        intervalUnit: IntervalUnit.Month,
       };
       const productsController = new ProductsController(invalidClient);
       const promise = productsController.updateProduct(productId, {

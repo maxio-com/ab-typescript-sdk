@@ -7,7 +7,8 @@ import {
   ProductsController,
   SubscriptionsController,
   ProductResponse,
-  SubscriptionState,
+  IntervalUnit,
+  SubscriptionStateFilter,
 } from 'advanced-billing-sdk';
 import { createClient } from './config';
 
@@ -31,7 +32,7 @@ describe('Subscriptions Controller', () => {
       description: 'Description print',
       priceInCents: BigInt(1000),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   };
 
@@ -42,7 +43,7 @@ describe('Subscriptions Controller', () => {
       description: 'Description print',
       priceInCents: BigInt(100),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   };
 
@@ -253,7 +254,7 @@ describe('Subscriptions Controller', () => {
     test('should list all by based in an state', async () => {
       const subscriptionsResponse =
         await subscriptionsController.listSubscriptions({
-          state: SubscriptionState.Active,
+          state: SubscriptionStateFilter.Active,
         });
       expect(subscriptionsResponse.result.length).toBe(4);
     });
