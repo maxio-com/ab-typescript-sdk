@@ -6,25 +6,25 @@
 
 import { oneOf, Schema, validateAndMap } from '../../schema';
 import {
-  ProductExpirationIntervalUnitCase0,
-  productExpirationIntervalUnitCase0Schema,
-} from './productExpirationIntervalUnitCase0';
+  ExtendedIntervalUnit,
+  extendedIntervalUnitSchema,
+} from '../extendedIntervalUnit';
 
 /** This is a container type for one-of types. */
-export type ProductExpirationIntervalUnit = ProductExpirationIntervalUnitCase0;
+export type ProductExpirationIntervalUnit = ExtendedIntervalUnit;
 
 export const productExpirationIntervalUnitSchema: Schema<ProductExpirationIntervalUnit> = oneOf(
-  [productExpirationIntervalUnitCase0Schema]
+  [extendedIntervalUnitSchema]
 );
 
 export namespace ProductExpirationIntervalUnit {
   /**
-  * Validation method to narrow down union type to ProductExpirationIntervalUnitCase0 type case.
+  * Validation method to narrow down union type to ExtendedIntervalUnit type case.
   *
-  * This is ProductExpirationIntervalUnitCase0 case.
+  * This is Extended Interval Unit case.
   */
-  export function isProductExpirationIntervalUnitCase0(value: unknown): value is ProductExpirationIntervalUnitCase0 {
-    const validationResult = validateAndMap(value, productExpirationIntervalUnitCase0Schema);
+  export function isExtendedIntervalUnit(value: unknown): value is ExtendedIntervalUnit {
+    const validationResult = validateAndMap(value, extendedIntervalUnitSchema);
     return validationResult.errors === false;
   }
 }

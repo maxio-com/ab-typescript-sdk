@@ -6,9 +6,9 @@
 
 import { boolean, object, optional, Schema, string } from '../schema';
 import {
-  CreateOrUpdatePercentageCouponCompoundingStrategy,
-  createOrUpdatePercentageCouponCompoundingStrategySchema,
-} from './containers/createOrUpdatePercentageCouponCompoundingStrategy';
+  CompoundingStrategy,
+  compoundingStrategySchema,
+} from './compoundingStrategy';
 import {
   CreateOrUpdatePercentageCouponPercentage,
   createOrUpdatePercentageCouponPercentageSchema,
@@ -26,7 +26,7 @@ export interface CreateOrUpdatePercentageCoupon {
   endDate?: string;
   productFamilyId?: string;
   stackable?: string;
-  compoundingStrategy?: CreateOrUpdatePercentageCouponCompoundingStrategy;
+  compoundingStrategy?: CompoundingStrategy;
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
 }
@@ -44,7 +44,7 @@ export const createOrUpdatePercentageCouponSchema: Schema<CreateOrUpdatePercenta
     stackable: ['stackable', optional(string())],
     compoundingStrategy: [
       'compounding_strategy',
-      optional(createOrUpdatePercentageCouponCompoundingStrategySchema),
+      optional(compoundingStrategySchema),
     ],
     excludeMidPeriodAllocations: [
       'exclude_mid_period_allocations',

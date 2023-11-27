@@ -9,14 +9,14 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `pricingScheme` | [`OveragePricingPricingScheme`](../../doc/models/containers/overage-pricing-pricing-scheme.md) | Required | This is a container for one-of cases. |
+| `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "pricing_scheme": "volume",
+  "pricing_scheme": "stairstep",
   "prices": [
     {
       "starting_quantity": 242,

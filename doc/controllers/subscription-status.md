@@ -625,7 +625,7 @@ try {
 {
   "subscription": {
     "id": 18220670,
-    "state": "on-hold",
+    "state": "on_hold",
     "trial_started_at": null,
     "trial_ended_at": null,
     "activated_at": "2017-06-27T13:45:15-05:00",

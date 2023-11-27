@@ -8,10 +8,6 @@ import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   SubscriptionsMrrErrorResponseError,
 } from '../errors/subscriptionsMrrErrorResponseError';
-import {
-  ReadMrrMovementsInputDirection,
-  readMrrMovementsInputDirectionSchema,
-} from '../models/containers/readMrrMovementsInputDirection';
 import { Direction, directionSchema } from '../models/direction';
 import {
   ListMRRResponse,
@@ -19,6 +15,10 @@ import {
 } from '../models/listMRRResponse';
 import { MRRResponse, mRRResponseSchema } from '../models/mRRResponse';
 import { SiteSummary, siteSummarySchema } from '../models/siteSummary';
+import {
+  SortingDirection,
+  sortingDirectionSchema,
+} from '../models/sortingDirection';
 import {
   SubscriptionMRRResponse,
   subscriptionMRRResponseSchema,
@@ -104,20 +104,18 @@ export class InsightsController extends BaseController {
    * * Prepaid Usage Components
    *
    * @param subscriptionId  optionally filter results by subscription
-   * @param page            Result records are organized in pages. By default, the
-   *                                                          first page of results is displayed. The page parameter
-   *                                                          specifies a page number of results to fetch. You can
-   *                                                          start navigating through the pages to consume the results.
-   *                                                          You do this by passing in a page parameter. Retrieve the
-   *                                                          next page by adding ?page=2 to the query string. If there
-   *                                                          are no results to return, then an empty result set will
-   *                                                          be returned. Use in query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in
-   *                                                          each request. Default value is 10. The maximum allowed
-   *                                                          values is 50; any per_page value over 50 will be changed
-   *                                                          to 50. Use in query `per_page=20`.
-   * @param direction       Controls the order in which results are returned. Use in
-   *                                                          query `direction=asc`.
+   * @param page            Result records are organized in pages. By default, the first page of
+   *                                            results is displayed. The page parameter specifies a page number of
+   *                                            results to fetch. You can start navigating through the pages to consume
+   *                                            the results. You do this by passing in a page parameter. Retrieve the
+   *                                            next page by adding ?page=2 to the query string. If there are no
+   *                                            results to return, then an empty result set will be returned. Use in
+   *                                            query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each request.
+   *                                            Default value is 10. The maximum allowed values is 50; any per_page
+   *                                            value over 50 will be changed to 50. Use in query `per_page=20`.
+   * @param direction       Controls the order in which results are returned. Use in query
+   *                                            `direction=asc`.
    * @return Response from the API call
    * @deprecated
    */
@@ -130,7 +128,7 @@ export class InsightsController extends BaseController {
     subscriptionId?: number,
     page?: number,
     perPage?: number,
-    direction?: ReadMrrMovementsInputDirection,
+    direction?: SortingDirection,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListMRRResponse>> {
@@ -139,7 +137,7 @@ export class InsightsController extends BaseController {
       subscriptionId: [subscriptionId, optional(number())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      direction: [direction, optional(readMrrMovementsInputDirectionSchema)],
+      direction: [direction, optional(sortingDirectionSchema)],
     });
     req.query('subscription_id', mapped.subscriptionId);
     req.query('page', mapped.page);

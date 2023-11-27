@@ -21,7 +21,7 @@
     "description": "description6",
     "handle": "handle2",
     "taxable": false,
-    "pricing_scheme": "volume",
+    "pricing_scheme": "stairstep",
     "prices": [
       {
         "starting_quantity": 242,

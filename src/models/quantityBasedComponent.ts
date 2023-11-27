@@ -19,14 +19,11 @@ import {
   componentPricePointItemSchema,
 } from './componentPricePointItem';
 import {
-  QuantityBasedComponentPricingScheme,
-  quantityBasedComponentPricingSchemeSchema,
-} from './containers/quantityBasedComponentPricingScheme';
-import {
   QuantityBasedComponentUnitPrice,
   quantityBasedComponentUnitPriceSchema,
 } from './containers/quantityBasedComponentUnitPrice';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface QuantityBasedComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */
@@ -40,7 +37,7 @@ export interface QuantityBasedComponent {
   /** Boolean flag describing whether a component is taxable or not. */
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme: QuantityBasedComponentPricingScheme;
+  pricingScheme: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   upgradeCharge?: string;
@@ -67,10 +64,7 @@ export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = obje
     description: ['description', optional(string())],
     handle: ['handle', optional(string())],
     taxable: ['taxable', optional(boolean())],
-    pricingScheme: [
-      'pricing_scheme',
-      quantityBasedComponentPricingSchemeSchema,
-    ],
+    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],
     upgradeCharge: ['upgrade_charge', optional(string())],
     downgradeCredit: ['downgrade_credit', optional(string())],

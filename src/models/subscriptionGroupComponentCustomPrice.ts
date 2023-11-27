@@ -9,26 +9,20 @@ import {
   ComponentCustomPrice,
   componentCustomPriceSchema,
 } from './componentCustomPrice';
-import {
-  SubscriptionGroupComponentCustomPricePricingScheme,
-  subscriptionGroupComponentCustomPricePricingSchemeSchema,
-} from './containers/subscriptionGroupComponentCustomPricePricingScheme';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 /** Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`. */
 export interface SubscriptionGroupComponentCustomPrice {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme?: SubscriptionGroupComponentCustomPricePricingScheme;
+  pricingScheme?: PricingScheme;
   prices?: Price[];
   overagePricing?: ComponentCustomPrice[];
 }
 
 export const subscriptionGroupComponentCustomPriceSchema: Schema<SubscriptionGroupComponentCustomPrice> = object(
   {
-    pricingScheme: [
-      'pricing_scheme',
-      optional(subscriptionGroupComponentCustomPricePricingSchemeSchema),
-    ],
+    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],
     overagePricing: [
       'overage_pricing',

@@ -11,7 +11,7 @@ Used in place of `price_point_id` to define a custom price point unique to the s
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `pricingScheme` | [`SubscriptionGroupComponentCustomPricePricingScheme \| undefined`](../../doc/models/containers/subscription-group-component-custom-price-pricing-scheme.md) | Optional | This is a container for one-of cases. |
+| `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | - |
 | `overagePricing` | [`ComponentCustomPrice[] \| undefined`](../../doc/models/component-custom-price.md) | Optional | - |
 
@@ -19,7 +19,7 @@ Used in place of `price_point_id` to define a custom price point unique to the s
 
 ```json
 {
-  "pricing_scheme": "tiered",
+  "pricing_scheme": "per_unit",
   "prices": [
     {
       "starting_quantity": 242,
@@ -29,7 +29,7 @@ Used in place of `price_point_id` to define a custom price point unique to the s
   ],
   "overage_pricing": [
     {
-      "pricing_scheme": "volume",
+      "pricing_scheme": "stairstep",
       "prices": [
         {
           "starting_quantity": 242,

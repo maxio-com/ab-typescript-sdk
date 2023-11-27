@@ -5,5 +5,5 @@ module.exports = {
     'ts-jest': {
       tsConfig: 'tsconfig.base.json',
     },
-  }
+  },
 };

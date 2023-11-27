@@ -19,14 +19,11 @@ import {
   componentPricePointItemSchema,
 } from './componentPricePointItem';
 import {
-  MeteredComponentPricingScheme,
-  meteredComponentPricingSchemeSchema,
-} from './containers/meteredComponentPricingScheme';
-import {
   MeteredComponentUnitPrice,
   meteredComponentUnitPriceSchema,
 } from './containers/meteredComponentUnitPrice';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface MeteredComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */
@@ -40,7 +37,7 @@ export interface MeteredComponent {
   /** Boolean flag describing whether a component is taxable or not. */
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme: MeteredComponentPricingScheme;
+  pricingScheme: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   upgradeCharge?: string;
@@ -65,7 +62,7 @@ export const meteredComponentSchema: Schema<MeteredComponent> = object({
   description: ['description', optional(string())],
   handle: ['handle', optional(string())],
   taxable: ['taxable', optional(boolean())],
-  pricingScheme: ['pricing_scheme', meteredComponentPricingSchemeSchema],
+  pricingScheme: ['pricing_scheme', pricingSchemeSchema],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
   upgradeCharge: ['upgrade_charge', optional(string())],
   downgradeCredit: ['downgrade_credit', optional(string())],

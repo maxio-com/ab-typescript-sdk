@@ -35,7 +35,7 @@
     }
   ],
   "overage_pricing": {
-    "pricing_scheme": "volume",
+    "pricing_scheme": "stairstep",
     "prices": [
       {
         "starting_quantity": 242,

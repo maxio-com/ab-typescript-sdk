@@ -63,11 +63,11 @@ export interface CreateSubscription {
   /** The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead. */
   productHandle?: string;
   /** The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead. */
-  productId?: string;
+  productId?: number;
   /** The user-friendly API handle of a product's particular price point. */
   productPricePointHandle?: string;
   /** The ID of the particular price point on the product. */
-  productPricePointId?: string;
+  productPricePointId?: number;
   /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
   customPrice?: CustomPriceUsedForSubscriptionCreateUpdate;
   /** (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. */
@@ -155,9 +155,9 @@ export interface CreateSubscription {
 
 export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   productHandle: ['product_handle', optional(string())],
-  productId: ['product_id', optional(string())],
+  productId: ['product_id', optional(number())],
   productPricePointHandle: ['product_price_point_handle', optional(string())],
-  productPricePointId: ['product_price_point_id', optional(string())],
+  productPricePointId: ['product_price_point_id', optional(number())],
   customPrice: [
     'custom_price',
     optional(lazy(() => customPriceUsedForSubscriptionCreateUpdateSchema)),

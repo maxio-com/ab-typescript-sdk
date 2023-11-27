@@ -20,19 +20,24 @@
 
 ```json
 {
-  "price_point": "price_point2",
+  "price_point": "can't be blank",
   "interval": [
-    "interval0"
+    "Recurring Interval: cannot be blank.",
+    "Recurring Interval: must be greater than or equal to 1."
   ],
   "interval_unit": [
-    "interval_unit8"
+    "Interval unit: cannot be blank.",
+    "Interval unit: must be 'month' or 'day'."
   ],
   "name": [
-    "name8",
-    "name9"
+    "Name: cannot be blank."
   ],
   "price": [
-    "price8"
+    "Price: is not a number.",
+    "Price: must be greater than or equal to 0."
+  ],
+  "price_in_cents": [
+    "Price in cents: cannot be blank."
   ]
 }
 ```
