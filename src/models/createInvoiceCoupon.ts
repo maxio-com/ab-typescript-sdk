@@ -6,13 +6,13 @@
 
 import { object, optional, Schema, string } from '../schema';
 import {
+  CompoundingStrategy,
+  compoundingStrategySchema,
+} from './compoundingStrategy';
+import {
   CreateInvoiceCouponAmount,
   createInvoiceCouponAmountSchema,
 } from './containers/createInvoiceCouponAmount';
-import {
-  CreateInvoiceCouponCompoundingStrategy,
-  createInvoiceCouponCompoundingStrategySchema,
-} from './containers/createInvoiceCouponCompoundingStrategy';
 import {
   CreateInvoiceCouponPercentage,
   createInvoiceCouponPercentageSchema,
@@ -28,7 +28,7 @@ export interface CreateInvoiceCoupon {
   amount?: CreateInvoiceCouponAmount;
   description?: string;
   productFamilyId?: CreateInvoiceCouponProductFamilyId;
-  compoundingStrategy?: CreateInvoiceCouponCompoundingStrategy;
+  compoundingStrategy?: CompoundingStrategy;
 }
 
 export const createInvoiceCouponSchema: Schema<CreateInvoiceCoupon> = object({
@@ -42,6 +42,6 @@ export const createInvoiceCouponSchema: Schema<CreateInvoiceCoupon> = object({
   ],
   compoundingStrategy: [
     'compounding_strategy',
-    optional(createInvoiceCouponCompoundingStrategySchema),
+    optional(compoundingStrategySchema),
   ],
 });

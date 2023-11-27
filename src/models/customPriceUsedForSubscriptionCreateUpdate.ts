@@ -10,10 +10,6 @@ import {
   customPriceUsedForSubscriptionCreateUpdateExpirationIntervalSchema,
 } from './containers/customPriceUsedForSubscriptionCreateUpdateExpirationInterval';
 import {
-  CustomPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnit,
-  customPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnitSchema,
-} from './containers/customPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnit';
-import {
   CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents,
   customPriceUsedForSubscriptionCreateUpdateInitialChargeInCentsSchema,
 } from './containers/customPriceUsedForSubscriptionCreateUpdateInitialChargeInCents';
@@ -21,10 +17,6 @@ import {
   CustomPriceUsedForSubscriptionCreateUpdateInterval,
   customPriceUsedForSubscriptionCreateUpdateIntervalSchema,
 } from './containers/customPriceUsedForSubscriptionCreateUpdateInterval';
-import {
-  CustomPriceUsedForSubscriptionCreateUpdateIntervalUnit,
-  customPriceUsedForSubscriptionCreateUpdateIntervalUnitSchema,
-} from './containers/customPriceUsedForSubscriptionCreateUpdateIntervalUnit';
 import {
   CustomPriceUsedForSubscriptionCreateUpdatePriceInCents,
   customPriceUsedForSubscriptionCreateUpdatePriceInCentsSchema,
@@ -34,13 +26,10 @@ import {
   customPriceUsedForSubscriptionCreateUpdateTrialIntervalSchema,
 } from './containers/customPriceUsedForSubscriptionCreateUpdateTrialInterval';
 import {
-  CustomPriceUsedForSubscriptionCreateUpdateTrialIntervalUnit,
-  customPriceUsedForSubscriptionCreateUpdateTrialIntervalUnitSchema,
-} from './containers/customPriceUsedForSubscriptionCreateUpdateTrialIntervalUnit';
-import {
   CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents,
   customPriceUsedForSubscriptionCreateUpdateTrialPriceInCentsSchema,
 } from './containers/customPriceUsedForSubscriptionCreateUpdateTrialPriceInCents';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
 export interface CustomPriceUsedForSubscriptionCreateUpdate {
@@ -53,13 +42,13 @@ export interface CustomPriceUsedForSubscriptionCreateUpdate {
   /** Required if using `custom_price` attribute. */
   interval?: CustomPriceUsedForSubscriptionCreateUpdateInterval;
   /** Required if using `custom_price` attribute. */
-  intervalUnit?: CustomPriceUsedForSubscriptionCreateUpdateIntervalUnit;
+  intervalUnit?: IntervalUnit;
   /** (Optional) */
   trialPriceInCents?: CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents;
   /** (Optional) */
   trialInterval?: CustomPriceUsedForSubscriptionCreateUpdateTrialInterval;
   /** (Optional) */
-  trialIntervalUnit?: CustomPriceUsedForSubscriptionCreateUpdateTrialIntervalUnit;
+  trialIntervalUnit?: IntervalUnit;
   /** (Optional) */
   initialChargeInCents?: CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents;
   /** (Optional) */
@@ -67,7 +56,7 @@ export interface CustomPriceUsedForSubscriptionCreateUpdate {
   /** (Optional) */
   expirationInterval?: CustomPriceUsedForSubscriptionCreateUpdateExpirationInterval;
   /** (Optional) */
-  expirationIntervalUnit?: CustomPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnit;
+  expirationIntervalUnit?: IntervalUnit;
   /** (Optional) */
   taxIncluded?: boolean;
 }
@@ -84,10 +73,7 @@ export const customPriceUsedForSubscriptionCreateUpdateSchema: Schema<CustomPric
       'interval',
       optional(customPriceUsedForSubscriptionCreateUpdateIntervalSchema),
     ],
-    intervalUnit: [
-      'interval_unit',
-      optional(customPriceUsedForSubscriptionCreateUpdateIntervalUnitSchema),
-    ],
+    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
     trialPriceInCents: [
       'trial_price_in_cents',
       optional(
@@ -98,12 +84,7 @@ export const customPriceUsedForSubscriptionCreateUpdateSchema: Schema<CustomPric
       'trial_interval',
       optional(customPriceUsedForSubscriptionCreateUpdateTrialIntervalSchema),
     ],
-    trialIntervalUnit: [
-      'trial_interval_unit',
-      optional(
-        customPriceUsedForSubscriptionCreateUpdateTrialIntervalUnitSchema
-      ),
-    ],
+    trialIntervalUnit: ['trial_interval_unit', optional(intervalUnitSchema)],
     initialChargeInCents: [
       'initial_charge_in_cents',
       optional(
@@ -122,9 +103,7 @@ export const customPriceUsedForSubscriptionCreateUpdateSchema: Schema<CustomPric
     ],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(
-        customPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnitSchema
-      ),
+      optional(intervalUnitSchema),
     ],
     taxIncluded: ['tax_included', optional(boolean())],
   }

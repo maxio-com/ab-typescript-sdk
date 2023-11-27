@@ -23,7 +23,7 @@
     "require_credit_card": false,
     "price_in_cents": 54,
     "interval": 186,
-    "interval_unit": "interval_unit0",
+    "interval_unit": "day",
     "auto_create_signup_page": false,
     "tax_code": "tax_code8"
   }

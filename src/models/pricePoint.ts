@@ -14,10 +14,7 @@ import {
   Schema,
   string,
 } from '../schema';
-import {
-  PricePointExpirationIntervalUnit,
-  pricePointExpirationIntervalUnitSchema,
-} from './containers/pricePointExpirationIntervalUnit';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { OveragePricing, overagePricingSchema } from './overagePricing';
 import { Price, priceSchema } from './price';
 
@@ -35,7 +32,7 @@ export interface PricePoint {
   renewPrepaidAllocation?: boolean;
   /** (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire */
   expirationInterval?: number;
-  expirationIntervalUnit?: PricePointExpirationIntervalUnit;
+  expirationIntervalUnit?: IntervalUnit;
 }
 
 export const pricePointSchema: Schema<PricePoint> = object({
@@ -53,6 +50,6 @@ export const pricePointSchema: Schema<PricePoint> = object({
   expirationInterval: ['expiration_interval', optional(number())],
   expirationIntervalUnit: [
     'expiration_interval_unit',
-    optional(pricePointExpirationIntervalUnitSchema),
+    optional(intervalUnitSchema),
   ],
 });

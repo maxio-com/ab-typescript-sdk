@@ -19,14 +19,11 @@ import {
   componentPricePointItemSchema,
 } from './componentPricePointItem';
 import {
-  OnOffComponentPricingScheme,
-  onOffComponentPricingSchemeSchema,
-} from './containers/onOffComponentPricingScheme';
-import {
   OnOffComponentUnitPrice,
   onOffComponentUnitPriceSchema,
 } from './containers/onOffComponentUnitPrice';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface OnOffComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */
@@ -40,7 +37,7 @@ export interface OnOffComponent {
   /** Boolean flag describing whether a component is taxable or not. */
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme: OnOffComponentPricingScheme;
+  pricingScheme: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   upgradeCharge?: string;
@@ -65,7 +62,7 @@ export const onOffComponentSchema: Schema<OnOffComponent> = object({
   description: ['description', optional(string())],
   handle: ['handle', optional(string())],
   taxable: ['taxable', optional(boolean())],
-  pricingScheme: ['pricing_scheme', onOffComponentPricingSchemeSchema],
+  pricingScheme: ['pricing_scheme', pricingSchemeSchema],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
   upgradeCharge: ['upgrade_charge', optional(string())],
   downgradeCredit: ['downgrade_credit', optional(string())],

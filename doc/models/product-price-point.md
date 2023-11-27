@@ -10,28 +10,28 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
-| `name` | `string \| undefined` | Optional | - |
-| `handle` | `string \| undefined` | Optional | - |
-| `priceInCents` | `bigint \| undefined` | Optional | - |
-| `interval` | `number \| undefined` | Optional | - |
-| `intervalUnit` | `string \| undefined` | Optional | - |
-| `trialPriceInCents` | `bigint \| undefined` | Optional | - |
-| `trialInterval` | `number \| undefined` | Optional | - |
-| `trialIntervalUnit` | `string \| undefined` | Optional | - |
+| `name` | `string \| undefined` | Optional | The product price point name |
+| `handle` | `string \| undefined` | Optional | The product price point API handle |
+| `priceInCents` | `bigint \| undefined` | Optional | The product price point price, in integer cents |
+| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days |
+| `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this product price point, either month or day |
+| `trialPriceInCents` | `bigint \| undefined` | Optional | The product price point trial price, in integer cents |
+| `trialInterval` | `number \| undefined` | Optional | The numerical trial interval. i.e. an interval of ‘30’ coupled with an trial_interval_unit of day would mean this product price point would renew every 30 days |
+| `trialIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product price point, either month or day |
 | `trialType` | `string \| undefined` | Optional | - |
 | `introductoryOffer` | `boolean \| undefined` | Optional | reserved for future use |
-| `initialChargeInCents` | `bigint \| undefined` | Optional | - |
+| `initialChargeInCents` | `bigint \| undefined` | Optional | The product price point initial charge, in integer cents |
 | `initialChargeAfterTrial` | `boolean \| undefined` | Optional | - |
-| `expirationInterval` | `number \| undefined` | Optional | - |
-| `expirationIntervalUnit` | `string \| undefined` | Optional | - |
-| `productId` | `number \| undefined` | Optional | - |
-| `archivedAt` | `string \| undefined` | Optional | - |
-| `createdAt` | `string \| undefined` | Optional | - |
-| `updatedAt` | `string \| undefined` | Optional | - |
+| `expirationInterval` | `number \| undefined` | Optional | The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire every 30 days |
+| `expirationIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month or day |
+| `productId` | `number \| undefined` | Optional | The product id this price point belongs to |
+| `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this price point was archived |
+| `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this price point was created |
+| `updatedAt` | `string \| undefined` | Optional | Timestamp indicating when this price point was last updated |
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined. |
-| `type` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
-| `taxIncluded` | `boolean \| undefined` | Optional | - |
-| `subscriptionId` | `number \| null \| undefined` | Optional | - |
+| `type` | [`PricePointType2 \| undefined`](../../doc/models/price-point-type-2.md) | Optional | The type of price point |
+| `taxIncluded` | `boolean \| undefined` | Optional | Whether or not the price point includes tax |
+| `subscriptionId` | `number \| null \| undefined` | Optional | The subscription id this price point belongs to |
 
 ## Example (as JSON)
 

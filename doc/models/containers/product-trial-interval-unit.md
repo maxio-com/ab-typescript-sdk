@@ -9,5 +9,5 @@
 
 | Type |
 |  --- |
-| [`ProductTrialIntervalUnitCase0`](../../../doc/models/containers/product-trial-interval-unit-case-0.md) |
+| [`IntervalUnit`](../../../doc/models/interval-unit.md) |
 

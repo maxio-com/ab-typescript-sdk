@@ -18,10 +18,7 @@ import {
   ComponentCostDataRateTier,
   componentCostDataRateTierSchema,
 } from './componentCostDataRateTier';
-import {
-  ComponentCostDataPricingScheme,
-  componentCostDataPricingSchemeSchema,
-} from './containers/componentCostDataPricingScheme';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface ComponentCostData {
   componentCodeId?: number | null;
@@ -30,7 +27,7 @@ export interface ComponentCostData {
   quantity?: string;
   amount?: string;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme?: ComponentCostDataPricingScheme;
+  pricingScheme?: PricingScheme;
   tiers?: ComponentCostDataRateTier[];
 }
 
@@ -40,10 +37,7 @@ export const componentCostDataSchema: Schema<ComponentCostData> = object({
   productId: ['product_id', optional(number())],
   quantity: ['quantity', optional(string())],
   amount: ['amount', optional(string())],
-  pricingScheme: [
-    'pricing_scheme',
-    optional(componentCostDataPricingSchemeSchema),
-  ],
+  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
   tiers: [
     'tiers',
     optional(array(lazy(() => componentCostDataRateTierSchema))),

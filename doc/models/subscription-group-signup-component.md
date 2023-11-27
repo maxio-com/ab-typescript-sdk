@@ -24,7 +24,7 @@
   "unit_balance": "String9",
   "price_point_id": "String5",
   "custom_price": {
-    "pricing_scheme": "volume",
+    "pricing_scheme": "stairstep",
     "prices": [
       {
         "starting_quantity": 242,
@@ -39,7 +39,7 @@
     ],
     "overage_pricing": [
       {
-        "pricing_scheme": "volume",
+        "pricing_scheme": "stairstep",
         "prices": [
           {
             "starting_quantity": 242,
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "pricing_scheme": "volume",
+        "pricing_scheme": "stairstep",
         "prices": [
           {
             "starting_quantity": 242,
@@ -59,7 +59,7 @@
         ]
       },
       {
-        "pricing_scheme": "volume",
+        "pricing_scheme": "stairstep",
         "prices": [
           {
             "starting_quantity": 242,

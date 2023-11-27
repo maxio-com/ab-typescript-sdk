@@ -18,7 +18,7 @@
 | `rolloverPrepaidRemainder` | `boolean \| undefined` | Optional | Boolean which controls whether or not remaining units should be rolled over to the next period |
 | `renewPrepaidAllocation` | `boolean \| undefined` | Optional | Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period |
 | `expirationInterval` | `number \| undefined` | Optional | (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire |
-| `expirationIntervalUnit` | [`PricePointExpirationIntervalUnit \| undefined`](../../doc/models/containers/price-point-expiration-interval-unit.md) | Optional | This is a container for one-of cases. |
+| `expirationIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | - |
 
 ## Example (as JSON)
 
