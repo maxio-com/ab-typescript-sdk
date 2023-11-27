@@ -279,7 +279,6 @@ For additional package details, see the [Npm page for the advanced-billing-sdk@0
 ## Initialize the API Client
 
 **_Note:_** Documentation for the client can be found [here.](https://www.github.com/maxio-com/ab-typescript-sdk/tree/0.0.5/doc/client.md)
-
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
