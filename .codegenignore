@@ -1,0 +1,7 @@
+e2e/**
+.gitignore
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.github/**
+.husky
+.lintstagedrc.json

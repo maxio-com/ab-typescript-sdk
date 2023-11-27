@@ -28,7 +28,7 @@ import {
   HttpClientInterface,
   RetryConfiguration,
 } from './core';
- import { HttpClient } from './clientAdapter';
+import { HttpClient } from './clientAdapter';
 
 export class Client implements ClientInterface {
   private _config: Readonly<Configuration>;
@@ -54,8 +54,11 @@ export class Client implements ClientInterface {
       'AB SDK TypeScript:0.0.4 on OS {os-info}',
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
-      server => getBaseUri(server, this._config),
-      basicAuthenticationProvider(this._config.basicAuthUserName, this._config.basicAuthPassword),
+      (server) => getBaseUri(server, this._config),
+      basicAuthenticationProvider(
+        this._config.basicAuthUserName,
+        this._config.basicAuthPassword
+      ),
       new HttpClient(AbortError, {
         timeout: this._timeout,
         clientConfigOverrides: this._config.unstable_httpClientOptions,
@@ -92,7 +95,9 @@ function createHttpClientAdapter(client: HttpClient): HttpClientInterface {
 function getBaseUri(server: Server = 'default', config: Configuration): string {
   if (config.environment === Environment.Production) {
     if (server === 'default') {
-      return pathTemplate`https://${new SkipEncode(config.subdomain)}.${new SkipEncode(config.domain)}`;
+      return pathTemplate`https://${new SkipEncode(
+        config.subdomain
+      )}.${new SkipEncode(config.domain)}`;
     }
   }
   if (config.environment === Environment.Environment2) {
@@ -127,7 +132,7 @@ function tap(
 ): SdkRequestBuilderFactory {
   return (...args) => {
     const requestBuilder = requestBuilderFactory(...args);
-    callback.forEach(c => c(requestBuilder));
+    callback.forEach((c) => c(requestBuilder));
     return requestBuilder;
   };
 }
@@ -138,7 +143,7 @@ function withErrorHandlers(rb: SdkRequestBuilder) {
 
 function withUserAgent(userAgent: string) {
   return (rb: SdkRequestBuilder) => {
-    rb.interceptRequest(request => {
+    rb.interceptRequest((request) => {
       const headers = request.headers ?? {};
       setHeader(headers, 'user-agent', userAgent);
       return { ...request, headers };
