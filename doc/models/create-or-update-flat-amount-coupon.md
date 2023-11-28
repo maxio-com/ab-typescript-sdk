@@ -18,7 +18,7 @@
 | `endDate` | `string \| undefined` | Optional | - |
 | `productFamilyId` | `string \| undefined` | Optional | - |
 | `stackable` | `string \| undefined` | Optional | - |
-| `compoundingStrategy` | [`CreateOrUpdateFlatAmountCouponCompoundingStrategy \| undefined`](../../doc/models/containers/create-or-update-flat-amount-coupon-compounding-strategy.md) | Optional | This is a container for one-of cases. |
+| `compoundingStrategy` | [`CompoundingStrategy \| undefined`](../../doc/models/compounding-strategy.md) | Optional | - |
 | `excludeMidPeriodAllocations` | `boolean \| undefined` | Optional | - |
 | `applyOnCancelAtEndOfPeriod` | `boolean \| undefined` | Optional | - |
 

@@ -19,14 +19,11 @@ import {
   componentPricePointItemSchema,
 } from './componentPricePointItem';
 import {
-  EBBComponentPricingScheme,
-  eBBComponentPricingSchemeSchema,
-} from './containers/eBBComponentPricingScheme';
-import {
   EBBComponentUnitPrice,
   eBBComponentUnitPriceSchema,
 } from './containers/eBBComponentUnitPrice';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface EBBComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */
@@ -40,7 +37,7 @@ export interface EBBComponent {
   /** Boolean flag describing whether a component is taxable or not. */
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme: EBBComponentPricingScheme;
+  pricingScheme: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   upgradeCharge?: string;
@@ -64,7 +61,7 @@ export const eBBComponentSchema: Schema<EBBComponent> = object({
   description: ['description', optional(string())],
   handle: ['handle', optional(string())],
   taxable: ['taxable', optional(boolean())],
-  pricingScheme: ['pricing_scheme', eBBComponentPricingSchemeSchema],
+  pricingScheme: ['pricing_scheme', pricingSchemeSchema],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
   upgradeCharge: ['upgrade_charge', optional(string())],
   downgradeCredit: ['downgrade_credit', optional(string())],

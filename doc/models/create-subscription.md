@@ -10,9 +10,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productHandle` | `string \| undefined` | Optional | The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead. |
-| `productId` | `string \| undefined` | Optional | The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead. |
+| `productId` | `number \| undefined` | Optional | The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead. |
 | `productPricePointHandle` | `string \| undefined` | Optional | The user-friendly API handle of a product's particular price point. |
-| `productPricePointId` | `string \| undefined` | Optional | The ID of the particular price point on the product. |
+| `productPricePointId` | `number \| undefined` | Optional | The ID of the particular price point on the product. |
 | `customPrice` | [`CustomPriceUsedForSubscriptionCreateUpdate \| undefined`](../../doc/models/custom-price-used-for-subscription-create-update.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `couponCode` | `string \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
@@ -72,9 +72,9 @@
   "dunning_communication_delay_time_zone": "\"Eastern Time (US & Canada)\"",
   "skip_billing_manifest_taxes": false,
   "product_handle": "product_handle6",
-  "product_id": "product_id8",
+  "product_id": 212,
   "product_price_point_handle": "product_price_point_handle0",
-  "product_price_point_id": "product_price_point_id6",
+  "product_price_point_id": 136,
   "custom_price": {
     "name": "name4",
     "handle": "handle0",

@@ -25,9 +25,9 @@
     "dunning_communication_delay_time_zone": "\"Eastern Time (US & Canada)\"",
     "skip_billing_manifest_taxes": false,
     "product_handle": "product_handle6",
-    "product_id": "product_id0",
+    "product_id": 206,
     "product_price_point_handle": "product_price_point_handle2",
-    "product_price_point_id": "product_price_point_id8",
+    "product_price_point_id": 130,
     "custom_price": {
       "name": "name4",
       "handle": "handle0",

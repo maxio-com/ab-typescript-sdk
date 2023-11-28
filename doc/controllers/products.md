@@ -56,7 +56,7 @@ const body: CreateOrUpdateProductRequest = {
     description: 'This is our gold plan.',
     priceInCents: BigInt(1000),
     interval: 1,
-    intervalUnit: 'month',
+    intervalUnit: IntervalUnit.Month,
     handle: 'gold',
     accountingCode: '123',
     requireCreditCard: true,
@@ -132,6 +132,12 @@ try {
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Read Product
@@ -419,6 +425,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Read Product by Handle
 
@@ -614,8 +626,8 @@ try {
       "request_credit_card": true,
       "expiration_interval": 0,
       "expiration_interval_unit": "month",
-      "created_at": "string",
-      "updated_at": "string",
+      "created_at": "2023-11-23T10:28:34-05:00",
+      "updated_at": "2023-11-23T10:28:34-05:00",
       "price_in_cents": 0,
       "interval": 0,
       "interval_unit": "month",
@@ -623,7 +635,7 @@ try {
       "trial_price_in_cents": 0,
       "trial_interval": 0,
       "trial_interval_unit": "month",
-      "archived_at": "string",
+      "archived_at": null,
       "require_credit_card": true,
       "return_params": "string",
       "taxable": true,

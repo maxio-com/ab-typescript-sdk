@@ -15,23 +15,17 @@ import {
   string,
 } from '../schema';
 import {
-  PrepaidUsageComponentExpirationIntervalUnit,
-  prepaidUsageComponentExpirationIntervalUnitSchema,
-} from './containers/prepaidUsageComponentExpirationIntervalUnit';
-import {
-  PrepaidUsageComponentPricingScheme,
-  prepaidUsageComponentPricingSchemeSchema,
-} from './containers/prepaidUsageComponentPricingScheme';
-import {
   PrepaidUsageComponentUnitPrice,
   prepaidUsageComponentUnitPriceSchema,
 } from './containers/prepaidUsageComponentUnitPrice';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { OveragePricing, overagePricingSchema } from './overagePricing';
 import {
   PrepaidComponentPricePoint,
   prepaidComponentPricePointSchema,
 } from './prepaidComponentPricePoint';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface PrepaidUsageComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */
@@ -45,7 +39,7 @@ export interface PrepaidUsageComponent {
   /** Boolean flag describing whether a component is taxable or not. */
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
-  pricingScheme?: PrepaidUsageComponentPricingScheme;
+  pricingScheme?: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   upgradeCharge?: string;
@@ -66,7 +60,7 @@ export interface PrepaidUsageComponent {
   renewPrepaidAllocation?: boolean;
   /** (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire */
   expirationInterval?: number;
-  expirationIntervalUnit?: PrepaidUsageComponentExpirationIntervalUnit;
+  expirationIntervalUnit?: IntervalUnit;
   displayOnHostedPage?: boolean;
   allowFractionalQuantities?: boolean;
   publicSignupPageIds?: number[];
@@ -79,10 +73,7 @@ export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = object
     description: ['description', optional(string())],
     handle: ['handle', optional(string())],
     taxable: ['taxable', optional(boolean())],
-    pricingScheme: [
-      'pricing_scheme',
-      optional(prepaidUsageComponentPricingSchemeSchema),
-    ],
+    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],
     upgradeCharge: ['upgrade_charge', optional(string())],
     downgradeCredit: ['downgrade_credit', optional(string())],
@@ -106,7 +97,7 @@ export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = object
     expirationInterval: ['expiration_interval', optional(number())],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(prepaidUsageComponentExpirationIntervalUnitSchema),
+      optional(intervalUnitSchema),
     ],
     displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
     allowFractionalQuantities: [

@@ -21,7 +21,7 @@
 | `updatedAt` | `string \| undefined` | Optional | Timestamp indicating when this product was last updated |
 | `priceInCents` | `bigint \| undefined` | Optional | The product price, in integer cents |
 | `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days |
-| `intervalUnit` | [`ProductIntervalUnit \| undefined`](../../doc/models/containers/product-interval-unit.md) | Optional | This is a container for one-of cases. |
+| `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this product, either month or day |
 | `initialChargeInCents` | `bigint \| null \| undefined` | Optional | The up front charge you have specified. |
 | `trialPriceInCents` | `bigint \| null \| undefined` | Optional | The price of the trial period for a subscription to this product, in integer cents. |
 | `trialInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |

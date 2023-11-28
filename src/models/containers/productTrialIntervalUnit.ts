@@ -5,26 +5,23 @@
  */
 
 import { oneOf, Schema, validateAndMap } from '../../schema';
-import {
-  ProductTrialIntervalUnitCase0,
-  productTrialIntervalUnitCase0Schema,
-} from './productTrialIntervalUnitCase0';
+import { IntervalUnit, intervalUnitSchema } from '../intervalUnit';
 
 /** This is a container type for one-of types. */
-export type ProductTrialIntervalUnit = ProductTrialIntervalUnitCase0;
+export type ProductTrialIntervalUnit = IntervalUnit;
 
 export const productTrialIntervalUnitSchema: Schema<ProductTrialIntervalUnit> = oneOf(
-  [productTrialIntervalUnitCase0Schema]
+  [intervalUnitSchema]
 );
 
 export namespace ProductTrialIntervalUnit {
   /**
-  * Validation method to narrow down union type to ProductTrialIntervalUnitCase0 type case.
+  * Validation method to narrow down union type to IntervalUnit type case.
   *
-  * This is ProductTrialIntervalUnitCase0 case.
+  * This is Interval Unit case.
   */
-  export function isProductTrialIntervalUnitCase0(value: unknown): value is ProductTrialIntervalUnitCase0 {
-    const validationResult = validateAndMap(value, productTrialIntervalUnitCase0Schema);
+  export function isIntervalUnit(value: unknown): value is IntervalUnit {
+    const validationResult = validateAndMap(value, intervalUnitSchema);
     return validationResult.errors === false;
   }
 }

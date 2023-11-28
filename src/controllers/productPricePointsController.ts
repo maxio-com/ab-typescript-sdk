@@ -21,10 +21,6 @@ import {
   bulkCreateProductPricePointsResponseSchema,
 } from '../models/bulkCreateProductPricePointsResponse';
 import {
-  ListAllProductPricePointsInputDirection,
-  listAllProductPricePointsInputDirectionSchema,
-} from '../models/containers/listAllProductPricePointsInputDirection';
-import {
   CreateProductCurrencyPricesRequest,
   createProductCurrencyPricesRequestSchema,
 } from '../models/createProductCurrencyPricesRequest';
@@ -50,6 +46,10 @@ import {
   ProductPricePointResponse,
   productPricePointResponseSchema,
 } from '../models/productPricePointResponse';
+import {
+  SortingDirection,
+  sortingDirectionSchema,
+} from '../models/sortingDirection';
 import {
   UpdateCurrencyPricesRequest,
   updateCurrencyPricesRequestSchema,
@@ -112,20 +112,19 @@ export class ProductPricePointsController extends BaseController {
    * @param filterType      Use in query: `filter[type]=catalog,default`.
    * @return Response from the API call
    */
-  async listProductPricePoints(
-    {
-      productId,
-      page,
-      perPage,
-      currencyPrices,
-      filterType,
-    }: {
-      productId: number;
-      page?: number;
-      perPage?: number;
-      currencyPrices?: boolean;
-      filterType?: PricePointType[];
-    },
+  async listProductPricePoints({
+    productId,
+    page,
+    perPage,
+    currencyPrices,
+    filterType,
+  }: {
+    productId: number,
+    page?: number,
+    perPage?: number,
+    currencyPrices?: boolean,
+    filterType?: PricePointType[],
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET');
@@ -369,105 +368,91 @@ export class ProductPricePointsController extends BaseController {
   /**
    * This method allows retrieval of a list of Products Price Points belonging to a Site.
    *
-   * @param direction              Controls the order in which results are
-   *                                                                          returned. Use in query `direction=asc`.
-   * @param filterArchivedAt       Allows fetching price points only if
-   *                                                                          archived_at is present or not. Use in
-   *                                                                          query: `filter[archived_at]=not_null`.
-   * @param filterDateField        The type of filter you would like to
-   *                                                                          apply to your search. Use in query:
-   *                                                                          `filter[date_field]=created_at`.
-   * @param filterEndDate          The end date (format YYYY-MM-DD) with
-   *                                                                          which to filter the date_field. Returns
-   *                                                                          price points with a timestamp up to and
-   *                                                                          including 11:59:59PM in your site’s time
-   *                                                                          zone on the date specified.
-   * @param filterEndDatetime      The end date and time (format YYYY-MM-DD
-   *                                                                          HH:MM:SS) with which to filter the
-   *                                                                          date_field. Returns price points with a
-   *                                                                          timestamp at or before exact time
-   *                                                                          provided in query. You can specify
-   *                                                                          timezone in query - otherwise your site's
-   *                                                                          time zone will be used. If provided, this
-   *                                                                          parameter will be used instead of
-   *                                                                          end_date.
-   * @param filterIds              Allows fetching price points with
-   *                                                                          matching id based on provided values. Use
-   *                                                                          in query: `filter[ids]=1,2,3`.
-   * @param filterStartDate        The start date (format YYYY-MM-DD) with
-   *                                                                          which to filter the date_field. Returns
-   *                                                                          price points with a timestamp at or after
-   *                                                                          midnight (12:00:00 AM) in your site’s
-   *                                                                          time zone on the date specified.
-   * @param filterStartDatetime    The start date and time (format YYYY-MM-
-   *                                                                          DD HH:MM:SS) with which to filter the
-   *                                                                          date_field. Returns price points with a
-   *                                                                          timestamp at or after exact time provided
-   *                                                                          in query. You can specify timezone in
-   *                                                                          query - otherwise your site's time zone
-   *                                                                          will be used. If provided, this parameter
-   *                                                                          will be used instead of start_date.
-   * @param filterType             Allows fetching price points with
-   *                                                                          matching type. Use in query:
-   *                                                                          `filter[type]=catalog,custom`.
-   * @param include                Allows including additional data in the
-   *                                                                          response. Use in query:
-   *                                                                          `include=currency_prices`.
-   * @param page                   Result records are organized in pages.
-   *                                                                          By default, the first page of results is
-   *                                                                          displayed. The page parameter specifies a
-   *                                                                          page number of results to fetch. You can
-   *                                                                          start navigating through the pages to
-   *                                                                          consume the results. You do this by
-   *                                                                          passing in a page parameter. Retrieve the
-   *                                                                          next page by adding ?page=2 to the query
-   *                                                                          string. If there are no results to return,
-   *                                                                          then an empty result set will be
-   *                                                                          returned. Use in query `page=1`.
-   * @param perPage                This parameter indicates how many
-   *                                                                          records to fetch in each request. Default
-   *                                                                          value is 20. The maximum allowed values
-   *                                                                          is 200; any per_page value over 200 will
-   *                                                                          be changed to 200. Use in query
-   *                                                                          `per_page=200`.
+   * @param direction              Controls the order in which results are returned.
+   *                                                                 Use in query `direction=asc`.
+   * @param filterArchivedAt       Allows fetching price points only if archived_at
+   *                                                                 is present or not. Use in query:
+   *                                                                 `filter[archived_at]=not_null`.
+   * @param filterDateField        The type of filter you would like to apply to
+   *                                                                 your search. Use in query:
+   *                                                                 `filter[date_field]=created_at`.
+   * @param filterEndDate          The end date (format YYYY-MM-DD) with which to
+   *                                                                 filter the date_field. Returns price points with a
+   *                                                                 timestamp up to and including 11:59:59PM in your
+   *                                                                 site’s time zone on the date specified.
+   * @param filterEndDatetime      The end date and time (format YYYY-MM-DD HH:MM:
+   *                                                                 SS) with which to filter the date_field. Returns
+   *                                                                 price points with a timestamp at or before exact
+   *                                                                 time provided in query. You can specify timezone
+   *                                                                 in query - otherwise your site's time zone will be
+   *                                                                 used. If provided, this parameter will be used
+   *                                                                 instead of end_date.
+   * @param filterIds              Allows fetching price points with matching id
+   *                                                                 based on provided values. Use in query:
+   *                                                                 `filter[ids]=1,2,3`.
+   * @param filterStartDate        The start date (format YYYY-MM-DD) with which to
+   *                                                                 filter the date_field. Returns price points with a
+   *                                                                 timestamp at or after midnight (12:00:00 AM) in
+   *                                                                 your site’s time zone on the date specified.
+   * @param filterStartDatetime    The start date and time (format YYYY-MM-DD HH:MM:
+   *                                                                 SS) with which to filter the date_field. Returns
+   *                                                                 price points with a timestamp at or after exact
+   *                                                                 time provided in query. You can specify timezone
+   *                                                                 in query - otherwise your site's time zone will be
+   *                                                                 used. If provided, this parameter will be used
+   *                                                                 instead of start_date.
+   * @param filterType             Allows fetching price points with matching type.
+   *                                                                 Use in query: `filter[type]=catalog,custom`.
+   * @param include                Allows including additional data in the response.
+   *                                                                 Use in query: `include=currency_prices`.
+   * @param page                   Result records are organized in pages. By default,
+   *                                                                 the first page of results is displayed. The page
+   *                                                                 parameter specifies a page number of results to
+   *                                                                 fetch. You can start navigating through the pages
+   *                                                                 to consume the results. You do this by passing in
+   *                                                                 a page parameter. Retrieve the next page by adding
+   *                                                                 ?page=2 to the query string. If there are no
+   *                                                                 results to return, then an empty result set will
+   *                                                                 be returned. Use in query `page=1`.
+   * @param perPage                This parameter indicates how many records to
+   *                                                                 fetch in each request. Default value is 20. The
+   *                                                                 maximum allowed values is 200; any per_page value
+   *                                                                 over 200 will be changed to 200. Use in query
+   *                                                                 `per_page=200`.
    * @return Response from the API call
    */
-  async listAllProductPricePoints(
-    {
-      direction,
-      filterArchivedAt,
-      filterDateField,
-      filterEndDate,
-      filterEndDatetime,
-      filterIds,
-      filterStartDate,
-      filterStartDatetime,
-      filterType,
-      include,
-      page,
-      perPage,
-    }: {
-      direction?: ListAllProductPricePointsInputDirection;
-      filterArchivedAt?: IncludeNotNull;
-      filterDateField?: BasicDateField;
-      filterEndDate?: string;
-      filterEndDatetime?: string;
-      filterIds?: number[];
-      filterStartDate?: string;
-      filterStartDatetime?: string;
-      filterType?: PricePointType;
-      include?: ListProductsPricePointsInclude;
-      page?: number;
-      perPage?: number;
-    },
+  async listAllProductPricePoints({
+    direction,
+    filterArchivedAt,
+    filterDateField,
+    filterEndDate,
+    filterEndDatetime,
+    filterIds,
+    filterStartDate,
+    filterStartDatetime,
+    filterType,
+    include,
+    page,
+    perPage,
+  }: {
+    direction?: SortingDirection,
+    filterArchivedAt?: IncludeNotNull,
+    filterDateField?: BasicDateField,
+    filterEndDate?: string,
+    filterEndDatetime?: string,
+    filterIds?: number[],
+    filterStartDate?: string,
+    filterStartDatetime?: string,
+    filterType?: PricePointType[],
+    include?: ListProductsPricePointsInclude,
+    page?: number,
+    perPage?: number,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET', '/products_price_points.json');
     const mapped = req.prepareArgs({
-      direction: [
-        direction,
-        optional(listAllProductPricePointsInputDirectionSchema),
-      ],
+      direction: [direction, optional(sortingDirectionSchema)],
       filterArchivedAt: [filterArchivedAt, optional(includeNotNullSchema)],
       filterDateField: [filterDateField, optional(basicDateFieldSchema)],
       filterEndDate: [filterEndDate, optional(string())],
@@ -475,7 +460,7 @@ export class ProductPricePointsController extends BaseController {
       filterIds: [filterIds, optional(array(number()))],
       filterStartDate: [filterStartDate, optional(string())],
       filterStartDatetime: [filterStartDatetime, optional(string())],
-      filterType: [filterType, optional(pricePointTypeSchema)],
+      filterType: [filterType, optional(array(pricePointTypeSchema))],
       include: [include, optional(listProductsPricePointsIncludeSchema)],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
@@ -488,7 +473,7 @@ export class ProductPricePointsController extends BaseController {
     req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('filter[start_date]', mapped.filterStartDate);
     req.query('filter[start_datetime]', mapped.filterStartDatetime);
-    req.query('filter[type]', mapped.filterType);
+    req.query('filter[type]', mapped.filterType, commaPrefix);
     req.query('include', mapped.include);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);

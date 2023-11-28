@@ -10,18 +10,21 @@ import { Schema, stringEnum } from '../schema';
  * Enum for SubscriptionState
  */
 export enum SubscriptionState {
+  Pending = 'pending',
+  FailedToCreate = 'failed_to_create',
+  Trialing = 'trialing',
+  Assessing = 'assessing',
   Active = 'active',
+  SoftFailure = 'soft_failure',
+  PastDue = 'past_due',
+  Suspended = 'suspended',
   Canceled = 'canceled',
   Expired = 'expired',
-  ExpiredCards = 'expired_cards',
-  OnHold = 'on_hold',
-  PastDue = 'past_due',
-  PendingCancellation = 'pending_cancellation',
-  PendingRenewal = 'pending_renewal',
-  Suspended = 'suspended',
-  TrialEnded = 'trial_ended',
-  Trialing = 'trialing',
+  Paused = 'paused',
   Unpaid = 'unpaid',
+  TrialEnded = 'trial_ended',
+  OnHold = 'on_hold',
+  AwaitingSignup = 'awaiting_signup',
 }
 
 /**

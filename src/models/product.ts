@@ -21,13 +21,10 @@ import {
   productExpirationIntervalUnitSchema,
 } from './containers/productExpirationIntervalUnit';
 import {
-  ProductIntervalUnit,
-  productIntervalUnitSchema,
-} from './containers/productIntervalUnit';
-import {
   ProductTrialIntervalUnit,
   productTrialIntervalUnitSchema,
 } from './containers/productTrialIntervalUnit';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { ProductFamily, productFamilySchema } from './productFamily';
 import { PublicSignupPage, publicSignupPageSchema } from './publicSignupPage';
 
@@ -56,7 +53,7 @@ export interface Product {
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days */
   interval?: number;
   /** A string representing the interval unit for this product, either month or day */
-  intervalUnit?: ProductIntervalUnit;
+  intervalUnit?: IntervalUnit;
   /** The up front charge you have specified. */
   initialChargeInCents?: bigint | null;
   /** The price of the trial period for a subscription to this product, in integer cents. */
@@ -113,7 +110,7 @@ export const productSchema: Schema<Product> = object({
   updatedAt: ['updated_at', optional(string())],
   priceInCents: ['price_in_cents', optional(bigint())],
   interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(productIntervalUnitSchema)],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
   initialChargeInCents: [
     'initial_charge_in_cents',
     optional(nullable(bigint())),

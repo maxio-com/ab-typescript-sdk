@@ -6,9 +6,9 @@
 
 import { bigint, boolean, object, optional, Schema, string } from '../schema';
 import {
-  CreateOrUpdateFlatAmountCouponCompoundingStrategy,
-  createOrUpdateFlatAmountCouponCompoundingStrategySchema,
-} from './containers/createOrUpdateFlatAmountCouponCompoundingStrategy';
+  CompoundingStrategy,
+  compoundingStrategySchema,
+} from './compoundingStrategy';
 
 export interface CreateOrUpdateFlatAmountCoupon {
   /** the name of the coupon */
@@ -22,7 +22,7 @@ export interface CreateOrUpdateFlatAmountCoupon {
   endDate?: string;
   productFamilyId?: string;
   stackable?: string;
-  compoundingStrategy?: CreateOrUpdateFlatAmountCouponCompoundingStrategy;
+  compoundingStrategy?: CompoundingStrategy;
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
 }
@@ -40,7 +40,7 @@ export const createOrUpdateFlatAmountCouponSchema: Schema<CreateOrUpdateFlatAmou
     stackable: ['stackable', optional(string())],
     compoundingStrategy: [
       'compounding_strategy',
-      optional(createOrUpdateFlatAmountCouponCompoundingStrategySchema),
+      optional(compoundingStrategySchema),
     ],
     excludeMidPeriodAllocations: [
       'exclude_mid_period_allocations',

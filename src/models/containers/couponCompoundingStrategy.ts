@@ -6,25 +6,25 @@
 
 import { anyOf, Schema, validateAndMap } from '../../schema';
 import {
-  CouponCompoundingStrategyCase0,
-  couponCompoundingStrategyCase0Schema,
-} from './couponCompoundingStrategyCase0';
+  CompoundingStrategy,
+  compoundingStrategySchema,
+} from '../compoundingStrategy';
 
 /** This is a container type for any-of types. */
-export type CouponCompoundingStrategy = CouponCompoundingStrategyCase0;
+export type CouponCompoundingStrategy = CompoundingStrategy;
 
 export const couponCompoundingStrategySchema: Schema<CouponCompoundingStrategy> = anyOf(
-  [couponCompoundingStrategyCase0Schema]
+  [compoundingStrategySchema]
 );
 
 export namespace CouponCompoundingStrategy {
   /**
-  * Validation method to narrow down union type to CouponCompoundingStrategyCase0 type case.
+  * Validation method to narrow down union type to CompoundingStrategy type case.
   *
-  * This is CouponCompoundingStrategyCase0 case.
+  * This is Compounding Strategy case.
   */
-  export function isCouponCompoundingStrategyCase0(value: unknown): value is CouponCompoundingStrategyCase0 {
-    const validationResult = validateAndMap(value, couponCompoundingStrategyCase0Schema);
+  export function isCompoundingStrategy(value: unknown): value is CompoundingStrategy {
+    const validationResult = validateAndMap(value, compoundingStrategySchema);
     return validationResult.errors === false;
   }
 }

@@ -6,6 +6,7 @@ import {
   ProductFamilyResponse,
   ProductsController,
   ProductResponse,
+  IntervalUnit,
 } from 'advanced-billing-sdk';
 import { CONFIG, createClient } from './config';
 
@@ -29,7 +30,7 @@ describe('Offers Controller', () => {
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
-      intervalUnit: 'month',
+      intervalUnit: IntervalUnit.Month,
     },
   };
 

@@ -117,7 +117,7 @@ When requesting to list components for a given subscription, if the subscription
 async listSubscriptionComponents(
   subscriptionId: string,
   dateField?: SubscriptionListDateField,
-  direction?: ListSubscriptionComponentsInputDirection,
+  direction?: SortingDirection,
   endDate?: string,
   endDatetime?: string,
   pricePointIds?: IncludeNotNull,
@@ -138,7 +138,7 @@ async listSubscriptionComponents(
 |  --- | --- | --- | --- |
 | `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
 | `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
-| `direction` | [`ListSubscriptionComponentsInputDirection \| undefined`](../../doc/models/containers/list-subscription-components-input-direction.md) | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
@@ -362,16 +362,16 @@ try {
 {
   "subscription": {
     "id": -80293620,
-    "state": "mollit exercitation ipsum",
+    "state": "active",
     "trial_started_at": null,
     "trial_ended_at": null,
-    "activated_at": "nostrud nulla et",
-    "created_at": "qui L",
-    "updated_at": "in veniam aute in",
+    "activated_at": "2023-11-23T10:28:34-05:00",
+    "created_at": "2023-11-23T10:28:34-05:00",
+    "updated_at": "2023-11-23T10:28:34-05:00",
     "expires_at": null,
     "balance_in_cents": 50504234,
-    "current_period_ends_at": "Lorem anim eu",
-    "next_assessment_at": "adipisicing ullamco",
+    "current_period_ends_at": "2023-11-23T10:28:34-05:00",
+    "next_assessment_at": "2023-11-23T10:28:34-05:00",
     "canceled_at": null,
     "cancellation_message": "lorem ipsum",
     "next_product_id": null,
@@ -379,7 +379,7 @@ try {
     "payment_collection_method": "remittance",
     "snap_day": null,
     "cancellation_method": "dunning",
-    "current_period_started_at": "Ut quis non",
+    "current_period_started_at": "2023-11-23T10:28:34-05:00",
     "previous_state": "occaecat proident sunt cillum ",
     "signup_payment_id": -45156092,
     "signup_revenue": "do aliquip ea",
@@ -426,8 +426,8 @@ try {
       "request_credit_card": false,
       "expiration_interval": 1,
       "expiration_interval_unit": "day",
-      "created_at": "officia sint",
-      "updated_at": "sed",
+      "created_at": "2022-11-23T10:28:34-05:00",
+      "updated_at": "2022-11-23T10:28:34-05:00",
       "price_in_cents": -4151649,
       "interval": 20680876,
       "interval_unit": "day",
@@ -1686,7 +1686,7 @@ async listSubscriptionComponentsForSite(
   page?: number,
   perPage?: number,
   sort?: ListSubscriptionComponentsSort,
-  direction?: ListSubscriptionComponentsForSiteInputDirection,
+  direction?: SortingDirection,
   dateField?: SubscriptionListDateField,
   startDate?: string,
   startDatetime?: string,
@@ -1698,7 +1698,7 @@ async listSubscriptionComponentsForSite(
   include?: ListSubscriptionComponentsInclude,
   filterUseSiteExchangeRate?: boolean,
   filterCurrencies?: string[],
-  filterSubscriptionStates?: SubscriptionState[],
+  filterSubscriptionStates?: SubscriptionStateFilter[],
   filterSubscriptionDateField?: SubscriptionListDateField,
   filterSubscriptionStartDate?: string,
   filterSubscriptionStartDatetime?: string,
@@ -1715,7 +1715,7 @@ async listSubscriptionComponentsForSite(
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
-| `direction` | [`ListSubscriptionComponentsForSiteInputDirection \| undefined`](../../doc/models/containers/list-subscription-components-for-site-input-direction.md) | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2011-12-15`. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
@@ -1727,7 +1727,7 @@ async listSubscriptionComponentsForSite(
 | `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
 | `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=USD,EUR`. |
-| `filterSubscriptionStates` | [`SubscriptionState[] \| undefined`](../../doc/models/subscription-state.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
+| `filterSubscriptionStates` | [`SubscriptionStateFilter[] \| undefined`](../../doc/models/subscription-state-filter.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
 | `filterSubscriptionDateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filterSubscriptionStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filterSubscriptionStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`. |

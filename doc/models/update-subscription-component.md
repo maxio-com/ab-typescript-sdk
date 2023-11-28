@@ -18,7 +18,7 @@
 {
   "component_id": 244,
   "custom_price": {
-    "pricing_scheme": "volume",
+    "pricing_scheme": "stairstep",
     "prices": [
       {
         "starting_quantity": 242,
