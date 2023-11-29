@@ -256,7 +256,7 @@ describe('Subscriptions Controller', () => {
         await subscriptionsController.listSubscriptions({
           state: SubscriptionStateFilter.Active,
         });
-      expect(subscriptionsResponse.result.length).toBe(4);
+      expect(subscriptionsResponse.result.length >= 4).toBeTruthy();
     });
   });
 

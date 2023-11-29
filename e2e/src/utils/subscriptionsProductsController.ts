@@ -26,8 +26,8 @@ export async function createContextForMigration(): Promise<MigrationContext> {
   const productFamilyResponse = (
     await productFamiliesController.createProductFamily({
       productFamily: {
-        name: 'subscriptions-engage',
-        description: 'Amazing subscriptions-engage',
+        name: 'subscriptions migrations 01',
+        description: 'Amazing subscriptions migration',
       },
     })
   ).result;
