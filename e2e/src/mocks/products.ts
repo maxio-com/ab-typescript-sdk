@@ -1,9 +1,6 @@
-import {
-  CreateOrUpdateProductRequest,
-  IntervalUnit,
-} from 'advanced-billing-sdk';
+import { CreateOrUpdateProduct, IntervalUnit } from 'advanced-billing-sdk';
 
-export const product: CreateOrUpdateProductRequest['product'] = {
+export const product: CreateOrUpdateProduct = {
   name: 'subscriptions-engage03',
   //Handle should be unique
   handle: 'unique-handle',

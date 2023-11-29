@@ -7,5 +7,5 @@ module.exports = {
     },
   },
   globalTeardown: "./src/utils/testTeardown.ts",
-  setupFilesAfterEnv: ['./jest.setup.ts'],
+  testTimeout: 30000
 };
