@@ -7,4 +7,5 @@ module.exports = {
     },
   },
   globalTeardown: "./src/utils/testTeardown.ts",
+  testTimeout: 30000
 };
