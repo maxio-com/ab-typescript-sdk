@@ -15,7 +15,7 @@
 
 ```json
 {
-  "automatically_resume_at": "automatically_resume_at0"
+  "automatically_resume_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

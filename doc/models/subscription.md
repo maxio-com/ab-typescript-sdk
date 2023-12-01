@@ -24,21 +24,21 @@
 | `createdAt` | `string \| undefined` | Optional | The creation date for this subscription |
 | `updatedAt` | `string \| undefined` | Optional | The date of last update for this subscription |
 | `cancellationMessage` | `string \| null \| undefined` | Optional | Seller-provided reason for, or note about, the cancellation. |
-| `cancellationMethod` | [`SubscriptionCancellationMethod \| null \| undefined`](../../doc/models/containers/subscription-cancellation-method.md) | Optional | This is a container for one-of cases. |
+| `cancellationMethod` | [`CancellationMethod \| null \| undefined`](../../doc/models/cancellation-method.md) | Optional | The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription's state is not canceled. |
 | `cancelAtEndOfPeriod` | `boolean \| null \| undefined` | Optional | Whether or not the subscription will (or has) canceled at the end of the period. |
 | `canceledAt` | `string \| null \| undefined` | Optional | The timestamp of the most recent cancellation |
 | `currentPeriodStartedAt` | `string \| undefined` | Optional | Timestamp relating to the start of the current (recurring) period |
-| `previousState` | `string \| undefined` | Optional | Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) |
+| `previousState` | [`SubscriptionState \| undefined`](../../doc/models/subscription-state.md) | Optional | Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) |
 | `signupPaymentId` | `number \| undefined` | Optional | The ID of the transaction that generated the revenue |
 | `signupRevenue` | `string \| undefined` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
 | `delayedCancelAt` | `string \| null \| undefined` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `couponCode` | `string \| null \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `snapDay` | `string \| null \| undefined` | Optional | The day of the month that the subscription will charge according to calendar billing rules, if used. |
-| `paymentCollectionMethod` | [`SubscriptionPaymentCollectionMethod \| null \| undefined`](../../doc/models/containers/subscription-payment-collection-method.md) | Optional | This is a container for one-of cases. |
+| `paymentCollectionMethod` | [`PaymentCollectionMethod \| undefined`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `PaymentCollectionMethod.Automatic` |
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`PaymentProfile \| undefined`](../../doc/models/payment-profile.md) | Optional | - |
-| `group` | [`SubscriptionGroup2 \| null \| undefined`](../../doc/models/containers/subscription-group-2.md) | Optional | This is a container for one-of cases. |
+| `group` | [`SubscriptionGroupInlined \| undefined`](../../doc/models/subscription-group-inlined.md) | Optional | - |
 | `bankAccount` | [`SubscriptionBankAccount \| undefined`](../../doc/models/subscription-bank-account.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |
@@ -53,7 +53,7 @@
 | `payerId` | `number \| null \| undefined` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
 | `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. |
 | `productPricePointId` | `number \| undefined` | Optional | The product price point currently subscribed to. |
-| `productPricePointType` | `string \| undefined` | Optional | One of the following: custom, default, catalog. |
+| `productPricePointType` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `nextProductPricePointId` | `number \| null \| undefined` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
 | `netTerms` | `number \| null \| undefined` | Optional | On Relationship Invoicing, the number of days before a renewal invoice is due. |
 | `storedCredentialTransactionId` | `number \| null \| undefined` | Optional | For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. |
@@ -74,6 +74,7 @@
 
 ```json
 {
+  "payment_collection_method": "automatic",
   "credit_card": {
     "id": 10088716,
     "first_name": "Test",

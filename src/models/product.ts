@@ -35,7 +35,7 @@ export interface Product {
   /** The product API handle */
   handle?: string | null;
   /** The product description */
-  description?: string;
+  description?: string | null;
   /** E.g. Internal ID or SKU Number */
   accountingCode?: string | null;
   /** Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. */
@@ -98,7 +98,7 @@ export const productSchema: Schema<Product> = object({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(nullable(string()))],
-  description: ['description', optional(string())],
+  description: ['description', optional(nullable(string()))],
   accountingCode: ['accounting_code', optional(nullable(string()))],
   requestCreditCard: ['request_credit_card', optional(boolean())],
   expirationInterval: ['expiration_interval', optional(nullable(number()))],

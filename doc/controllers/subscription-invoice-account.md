@@ -24,7 +24,7 @@ Returns the `balance_in_cents` of the Subscription's Pending Discount, Service C
 
 ```ts
 async readAccountBalances(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<AccountBalances>>
 ```
@@ -33,7 +33,7 @@ async readAccountBalances(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -43,7 +43,7 @@ async readAccountBalances(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -74,7 +74,7 @@ Please note that you **can't** pass `amount_in_cents`.
 
 ```ts
 async createPrepayment(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: CreatePrepaymentRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CreatePrepaymentResponse>>
@@ -84,7 +84,7 @@ async createPrepayment(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CreatePrepaymentRequest \| undefined`](../../doc/models/create-prepayment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -95,7 +95,7 @@ async createPrepayment(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: CreatePrepaymentRequest = {
   prepayment: {
@@ -148,7 +148,7 @@ This request will list a subscription's prepayments.
 
 ```ts
 async listPrepayments(
-  subscriptionId: string,
+  subscriptionId: number,
   page?: number,
   perPage?: number,
   filterDateField?: BasicDateField,
@@ -162,7 +162,7 @@ async listPrepayments(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. |
@@ -178,7 +178,7 @@ async listPrepayments(
 
 ```ts
 const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-  subscriptionId: 'subscription_id0',
+  subscriptionId: 222,
   page: 2,
   perPage: 50
 }
@@ -234,7 +234,7 @@ Credit will be added to the subscription in the amount specified in the request 
 
 ```ts
 async issueServiceCredit(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: IssueServiceCreditRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ServiceCredit>>
@@ -244,7 +244,7 @@ async issueServiceCredit(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`IssueServiceCreditRequest \| undefined`](../../doc/models/issue-service-credit-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -255,7 +255,7 @@ async issueServiceCredit(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: IssueServiceCreditRequest = {
   serviceCredit: {
@@ -302,7 +302,7 @@ Credit will be removed from the subscription in the amount specified in the requ
 
 ```ts
 async deductServiceCredit(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: DeductServiceCreditRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
@@ -312,7 +312,7 @@ async deductServiceCredit(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`DeductServiceCreditRequest \| undefined`](../../doc/models/deduct-service-credit-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -323,7 +323,7 @@ async deductServiceCredit(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: DeductServiceCreditRequest = {
   deduction: {
@@ -366,7 +366,7 @@ The amount may be passed either as a decimal, with `amount`, or an integer in ce
 
 ```ts
 async refundPrepayment(
-  subscriptionId: string,
+  subscriptionId: number,
   prepaymentId: string,
   body?: RefundPrepaymentRequest,
   requestOptions?: RequestOptions
@@ -377,7 +377,7 @@ async refundPrepayment(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `prepaymentId` | `string` | Template, Required | id of prepayment |
 | `body` | [`RefundPrepaymentRequest \| undefined`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -389,7 +389,7 @@ async refundPrepayment(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const prepaymentId = 'prepayment_id8';
 

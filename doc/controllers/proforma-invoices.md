@@ -197,7 +197,7 @@ Proforma invoices are only available on Relationship Invoicing sites. To create 
 
 ```ts
 async createProformaInvoice(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
@@ -206,7 +206,7 @@ async createProformaInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -216,7 +216,7 @@ async createProformaInvoice(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -248,7 +248,7 @@ By default, proforma invoices returned on the index will only include totals, no
 
 ```ts
 async listProformaInvoices(
-  subscriptionId: string,
+  subscriptionId: number,
   startDate?: string,
   endDate?: string,
   status?: Status,
@@ -269,7 +269,7 @@ async listProformaInvoices(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `startDate` | `string \| undefined` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `endDate` | `string \| undefined` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `status` | [`Status \| undefined`](../../doc/models/status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
@@ -292,7 +292,7 @@ async listProformaInvoices(
 
 ```ts
 const collect = {
-  subscriptionId: 'subscription_id0',
+  subscriptionId: 222,
   page: 2,
   perPage: 50,
   direction: Direction.Desc,
@@ -394,7 +394,7 @@ Alternatively, if you have some proforma invoices already, you may make a previe
 
 ```ts
 async previewProformaInvoice(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProformaInvoicePreview>>
 ```
@@ -403,7 +403,7 @@ async previewProformaInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -413,7 +413,7 @@ async previewProformaInvoice(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables

@@ -6,6 +6,7 @@
 
 import {
   boolean,
+  lazy,
   nullable,
   number,
   object,
@@ -13,6 +14,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { BillingSchedule, billingScheduleSchema } from './billingSchedule';
 import {
   CreateAllocationPricePointId,
   createAllocationPricePointIdSchema,
@@ -38,6 +40,8 @@ export interface CreateAllocation {
   upgradeCharge?: CreditType1;
   /** Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used. */
   pricePointId?: CreateAllocationPricePointId | null;
+  /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. Please note this only works for site with Multifrequency enabled */
+  billingSchedule?: BillingSchedule;
 }
 
 export const createAllocationSchema: Schema<CreateAllocation> = object({
@@ -52,5 +56,9 @@ export const createAllocationSchema: Schema<CreateAllocation> = object({
   pricePointId: [
     'price_point_id',
     optional(nullable(createAllocationPricePointIdSchema)),
+  ],
+  billingSchedule: [
+    'billing_schedule',
+    optional(lazy(() => billingScheduleSchema)),
   ],
 });

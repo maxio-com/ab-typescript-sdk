@@ -619,13 +619,13 @@ export class InvoicesController extends BaseController {
    * @return Response from the API call
    */
   async recordPaymentForSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: RecordPaymentRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaymentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(recordPaymentRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -929,13 +929,13 @@ export class InvoicesController extends BaseController {
    * @return Response from the API call
    */
   async createInvoice(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: CreateInvoiceRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<InvoiceResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(createInvoiceRequestSchema)],
     });
     req.header('Content-Type', 'application/json');

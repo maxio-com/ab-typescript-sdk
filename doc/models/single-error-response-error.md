@@ -9,13 +9,13 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error` | `string \| undefined` | Optional | - |
+| `error` | `string` | Required | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "error": "error2"
+  "error": "error8"
 }
 ```
 

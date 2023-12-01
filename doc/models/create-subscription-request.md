@@ -33,7 +33,10 @@
       "handle": "handle0",
       "price_in_cents": "String3",
       "interval": "String3",
-      "interval_unit": "day"
+      "interval_unit": "day",
+      "trial_price_in_cents": "String3",
+      "trial_interval": "String5",
+      "trial_interval_unit": "day"
     }
   }
 }

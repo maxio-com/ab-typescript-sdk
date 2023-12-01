@@ -16,7 +16,7 @@ import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
 } from '../models/voidInvoiceRequest';
-import { optional, string } from '../schema';
+import { number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class AdvanceInvoiceController extends BaseController {
@@ -39,13 +39,13 @@ export class AdvanceInvoiceController extends BaseController {
    * @return Response from the API call
    */
   async issueAdvanceInvoice(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: IssueAdvanceInvoiceRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Invoice>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(issueAdvanceInvoiceRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -65,12 +65,12 @@ export class AdvanceInvoiceController extends BaseController {
    * @return Response from the API call
    */
   async readAdvanceInvoice(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Invoice>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice.json`;
     req.throwOn(403, ApiError, 'Forbidden');
@@ -90,13 +90,13 @@ export class AdvanceInvoiceController extends BaseController {
    * @return Response from the API call
    */
   async voidAdvanceInvoice(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: VoidInvoiceRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Invoice>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(voidInvoiceRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
