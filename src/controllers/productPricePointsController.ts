@@ -355,7 +355,7 @@ export class ProductPricePointsController extends BaseController {
     productPricePointId: number,
     body?: UpdateCurrencyPricesRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointCurrencyPrice[]>> {
+  ): Promise<ApiResponse<ProductPricePointCurrencyPrice>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       productPricePointId: [productPricePointId, number()],
@@ -364,10 +364,8 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    return req.callAsJson(
-      array(productPricePointCurrencyPriceSchema),
-      requestOptions
-    );
+    req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
+    return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
   }
 
   /**

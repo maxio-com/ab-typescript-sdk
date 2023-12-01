@@ -687,6 +687,7 @@ export * from './models/containers/subscriptionCustomPriceInterval';
 export * from './models/containers/subscriptionCustomPricePriceInCents';
 export * from './models/containers/subscriptionCustomPriceTrialInterval';
 export * from './models/containers/subscriptionCustomPriceTrialPriceInCents';
+export * from './models/containers/subscriptionGroup2';
 export * from './models/containers/subscriptionGroupCreditCardExpirationMonth';
 export * from './models/containers/subscriptionGroupCreditCardExpirationYear';
 export * from './models/containers/subscriptionGroupCreditCardFullNumber';

@@ -38,7 +38,7 @@
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`PaymentProfile \| undefined`](../../doc/models/payment-profile.md) | Optional | - |
-| `group` | [`SubscriptionGroupInlined \| undefined`](../../doc/models/subscription-group-inlined.md) | Optional | - |
+| `group` | [`SubscriptionGroup2 \| null \| undefined`](../../doc/models/containers/subscription-group-2.md) | Optional | This is a container for one-of cases. |
 | `bankAccount` | [`SubscriptionBankAccount \| undefined`](../../doc/models/subscription-bank-account.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |

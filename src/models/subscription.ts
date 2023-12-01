@@ -20,6 +20,10 @@ import {
   CancellationMethod,
   cancellationMethodSchema,
 } from './cancellationMethod';
+import {
+  SubscriptionGroup2,
+  subscriptionGroup2Schema,
+} from './containers/subscriptionGroup2';
 import { Customer, customerSchema } from './customer';
 import {
   PaymentCollectionMethod,
@@ -32,10 +36,6 @@ import {
   SubscriptionBankAccount,
   subscriptionBankAccountSchema,
 } from './subscriptionBankAccount';
-import {
-  SubscriptionGroupInlined,
-  subscriptionGroupInlinedSchema,
-} from './subscriptionGroupInlined';
 import {
   SubscriptionIncludedCoupon,
   subscriptionIncludedCouponSchema,
@@ -119,7 +119,7 @@ export interface Subscription {
   customer?: Customer;
   product?: Product;
   creditCard?: PaymentProfile;
-  group?: SubscriptionGroupInlined;
+  group?: SubscriptionGroup2 | null;
   bankAccount?: SubscriptionBankAccount;
   /** The payment profile type for the active profile on file. */
   paymentType?: string | null;
@@ -222,7 +222,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   customer: ['customer', optional(lazy(() => customerSchema))],
   product: ['product', optional(lazy(() => productSchema))],
   creditCard: ['credit_card', optional(lazy(() => paymentProfileSchema))],
-  group: ['group', optional(lazy(() => subscriptionGroupInlinedSchema))],
+  group: ['group', optional(nullable(lazy(() => subscriptionGroup2Schema)))],
   bankAccount: [
     'bank_account',
     optional(lazy(() => subscriptionBankAccountSchema)),

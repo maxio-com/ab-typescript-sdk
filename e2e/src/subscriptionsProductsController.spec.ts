@@ -38,7 +38,7 @@ describe('Subscriptions Products Controller', () => {
     test('should migrate a subscription correctly', async () => {
       const migrationResponse =
         await subscriptionProductsController.migrateSubscriptionProduct(
-          String(context.subscriptionResponse?.subscription?.id),
+          context.subscriptionResponse?.subscription?.id || 0,
           {
             migration: {
               productId: context.productResponse02?.product.id,
@@ -55,7 +55,7 @@ describe('Subscriptions Products Controller', () => {
     test('should do a preview migration correctly', async () => {
       const migrationResponse =
         await subscriptionProductsController.previewSubscriptionProductMigration(
-          String(context.subscriptionResponse?.subscription?.id),
+          context.subscriptionResponse?.subscription?.id || 0,
           {
             migration: {
               productId: context.productResponse02?.product.id,
@@ -74,7 +74,7 @@ describe('Subscriptions Products Controller', () => {
 
     test('should throw an error when user sends invalid subscription id', async () => {
       const promise = subscriptionProductsController.migrateSubscriptionProduct(
-        'invalid',
+        1001,
         {
           migration: {
             productId: context.productResponse01?.product.id,
@@ -91,7 +91,7 @@ describe('Subscriptions Products Controller', () => {
     test('should throw an 401 error when user sends valid subscription with invalid credentials', async () => {
       const promise =
         invalidSubscriptionProductsController.migrateSubscriptionProduct(
-          String(context.subscriptionResponse?.subscription?.id),
+          context.subscriptionResponse?.subscription?.id || 0,
           {
             migration: {
               productId: context.productResponse02?.product.id,

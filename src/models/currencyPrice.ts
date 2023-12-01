@@ -5,14 +5,16 @@
  */
 
 import { number, object, optional, Schema, string } from '../schema';
+import { CurrencyPriceRole, currencyPriceRoleSchema } from './currencyPriceRole';
 
 export interface CurrencyPrice {
   id?: number;
   currency?: string;
   price?: number;
   formattedPrice?: string;
-  priceId?: number;
-  pricePointId?: number;
+  productPricePointId?: number;
+  /** Role for the price. */
+  role?: CurrencyPriceRole;
 }
 
 export const currencyPriceSchema: Schema<CurrencyPrice> = object({
@@ -20,6 +22,6 @@ export const currencyPriceSchema: Schema<CurrencyPrice> = object({
   currency: ['currency', optional(string())],
   price: ['price', optional(number())],
   formattedPrice: ['formatted_price', optional(string())],
-  priceId: ['price_id', optional(number())],
-  pricePointId: ['price_point_id', optional(number())],
+  productPricePointId: ['product_price_point_id', optional(number())],
+  role: ['role', optional(currencyPriceRoleSchema)],
 });

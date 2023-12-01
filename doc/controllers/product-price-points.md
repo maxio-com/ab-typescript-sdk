@@ -837,6 +837,23 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "currency_prices": [
+    {
+      "id": 123,
+      "currency": "EUR",
+      "price": 100,
+      "formatted_price": "€123,00",
+      "product_price_point_id": 32669,
+      "role": "baseline"
+    }
+  ]
+}
+```
+
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
@@ -857,7 +874,7 @@ async updateProductCurrencyPrices(
   productPricePointId: number,
   body?: UpdateCurrencyPricesRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointCurrencyPrice[]>>
+): Promise<ApiResponse<ProductPricePointCurrencyPrice>>
 ```
 
 ## Parameters
@@ -870,7 +887,7 @@ async updateProductCurrencyPrices(
 
 ## Response Type
 
-[`ProductPricePointCurrencyPrice[]`](../../doc/models/product-price-point-currency-price.md)
+[`ProductPricePointCurrencyPrice`](../../doc/models/product-price-point-currency-price.md)
 
 ## Example Usage
 
@@ -912,17 +929,25 @@ try {
 ## Example Response *(as JSON)*
 
 ```json
-[
-  {
-    "id": 0,
-    "currency": "string",
-    "price": 0,
-    "formatted_price": "string",
-    "product_price_point_id": 0,
-    "role": "baseline"
-  }
-]
+{
+  "currency_prices": [
+    {
+      "id": 123,
+      "currency": "EUR",
+      "price": 100,
+      "formatted_price": "€123,00",
+      "product_price_point_id": 32669,
+      "role": "baseline"
+    }
+  ]
+}
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
 
 
 # List All Product Price Points
