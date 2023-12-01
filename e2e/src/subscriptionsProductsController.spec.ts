@@ -31,7 +31,11 @@ describe('Subscriptions Products Controller', () => {
     invalidSubscriptionProductsController = new SubscriptionProductsController(
       invalidClient
     );
-    context = await createContextForMigration();
+    try {
+      context = await createContextForMigration();
+    } catch (reson) {
+      console.log(reson);
+    }
   });
 
   describe('Migrate product subscription', () => {

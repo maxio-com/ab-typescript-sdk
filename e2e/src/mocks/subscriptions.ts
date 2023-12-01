@@ -42,13 +42,18 @@ export const bankAccountAttributes = {
 
 export function createMockSubscription({
   productHandle,
+  customerReference,
 }: {
   productHandle: string;
+  customerReference: string;
 }) {
   return {
     productHandle,
     creditCardAttributes,
     bankAccountAttributes,
-    customerAttributes,
+    customerAttributes: {
+      ...customerAttributes,
+      reference: customerReference,
+    },
   };
 }

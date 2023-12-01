@@ -1,3 +1,5 @@
+import { createClient } from '../config';
+
 import {
   ProductFamiliesController,
   ProductFamilyResponse,
@@ -6,18 +8,26 @@ import {
   SubscriptionResponse,
   SubscriptionsController,
 } from 'advanced-billing-sdk';
-import { createClient } from '../config';
 import { product } from '../mocks/products';
 import { createMockSubscription } from '../mocks/subscriptions';
 
-export interface MigrationContext {
-  productFamilyResponse: ProductFamilyResponse | null;
-  productResponse01: ProductResponse | null;
-  productResponse02: ProductResponse | null;
-  subscriptionResponse: SubscriptionResponse | null;
+export interface SubscriptionConfig {
+  productFamilyName: string;
+  productHandle: string;
+  customerReference: string;
 }
 
-export async function createContextForMigration(): Promise<MigrationContext> {
+export interface SubscriptionContext {
+  productFamilyResponse: ProductFamilyResponse | null;
+  subscriptionResponse: SubscriptionResponse | null;
+  productResponse: ProductResponse | null;
+}
+
+export async function createSubscription({
+  productFamilyName,
+  productHandle,
+  customerReference,
+}: SubscriptionConfig): Promise<SubscriptionContext> {
   const client = createClient();
   const subscriptionsController = new SubscriptionsController(client);
   const productFamiliesController = new ProductFamiliesController(client);
@@ -26,31 +36,23 @@ export async function createContextForMigration(): Promise<MigrationContext> {
   const productFamilyResponse = (
     await productFamiliesController.createProductFamily({
       productFamily: {
-        name: 'subscriptions migrations 01',
-        description: 'Amazing subscriptions migration',
+        name: productFamilyName,
+        description: 'generic product family',
       },
     })
   ).result;
-  const productResponse01 = (
+  const productResponse = (
     await productsController.createProduct(
       productFamilyResponse.productFamily?.id || 0,
       {
-        product: { ...product, handle: 'subs0001' },
-      }
-    )
-  ).result;
-  const productResponse02 = (
-    await productsController.createProduct(
-      productFamilyResponse.productFamily?.id || 0,
-      {
-        product: { ...product, handle: 'subs0002' },
+        product: { ...product, handle: productHandle },
       }
     )
   ).result;
 
   const subscriptionBody = createMockSubscription({
-    productHandle: 'subs0001',
-    customerReference: 'subsProduct001',
+    productHandle,
+    customerReference,
   });
 
   const subscriptionResponse = (
@@ -61,8 +63,7 @@ export async function createContextForMigration(): Promise<MigrationContext> {
 
   return {
     productFamilyResponse,
-    productResponse01,
-    productResponse02,
     subscriptionResponse,
+    productResponse,
   };
 }
