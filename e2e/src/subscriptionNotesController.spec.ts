@@ -35,7 +35,7 @@ describe('Subscription Notes Controller', () => {
     test('should create a note on selected subscription', async () => {
       const noteResponse =
         await subscriptionNotesController.createSubscriptionNote(
-          String(subscriptionContext.subscriptionResponse?.subscription?.id),
+          subscriptionContext.subscriptionResponse?.subscription?.id || 0,
           {
             note: {
               body: 'note 01',
@@ -54,15 +54,12 @@ describe('Subscription Notes Controller', () => {
     });
 
     test('should throw 404 error when the user sends invalid id', async () => {
-      const promise = subscriptionNotesController.createSubscriptionNote(
-        'invalid',
-        {
-          note: {
-            body: 'note 02',
-            sticky: true,
-          },
-        }
-      );
+      const promise = subscriptionNotesController.createSubscriptionNote(2001, {
+        note: {
+          body: 'note 02',
+          sticky: true,
+        },
+      });
 
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {
@@ -72,7 +69,7 @@ describe('Subscription Notes Controller', () => {
 
     test('should throw 401 error when the user sends invalid credentials', async () => {
       const promise = invalidSubscriptionNotesController.createSubscriptionNote(
-        'invalid',
+        2001,
         {
           note: {
             body: 'note 03',
@@ -92,7 +89,7 @@ describe('Subscription Notes Controller', () => {
     test('should update a note already created', async () => {
       const noteResponse =
         await subscriptionNotesController.createSubscriptionNote(
-          String(subscriptionContext.subscriptionResponse?.subscription?.id),
+          subscriptionContext.subscriptionResponse?.subscription?.id || 0,
           {
             note: {
               body: 'note 01',
@@ -102,8 +99,8 @@ describe('Subscription Notes Controller', () => {
         );
       const updateNoteResponse =
         await subscriptionNotesController.updateSubscriptionNote(
-          String(subscriptionContext.subscriptionResponse?.subscription?.id),
-          String(noteResponse.result.note.id),
+          subscriptionContext.subscriptionResponse?.subscription?.id || 0,
+          noteResponse.result.note.id || 0,
           {
             note: {
               body: 'note 01 updated',
@@ -124,7 +121,7 @@ describe('Subscription Notes Controller', () => {
     test('should throw 404 error when the user sends invalid subscription id', async () => {
       const noteResponse =
         await subscriptionNotesController.createSubscriptionNote(
-          String(subscriptionContext.subscriptionResponse?.subscription?.id),
+          subscriptionContext.subscriptionResponse?.subscription?.id || 0,
           {
             note: {
               body: 'note 02',
@@ -133,8 +130,8 @@ describe('Subscription Notes Controller', () => {
           }
         );
       const promise = subscriptionNotesController.updateSubscriptionNote(
-        'invalid',
-        String(noteResponse.result.note.id),
+        2001,
+        noteResponse.result.note.id || 0,
         {
           note: {
             body: 'note 01',
@@ -151,8 +148,8 @@ describe('Subscription Notes Controller', () => {
 
     test('should throw 404 error when the user sends invalid note id', async () => {
       const promise = subscriptionNotesController.updateSubscriptionNote(
-        String(subscriptionContext.subscriptionResponse?.subscription?.id),
-        'invalid',
+        subscriptionContext.subscriptionResponse?.subscription?.id || 0,
+        2001,
         {
           note: {
             body: 'note 01',
@@ -168,8 +165,8 @@ describe('Subscription Notes Controller', () => {
     });
     test('should throw 401 error when the user sends invalid credentials', async () => {
       const promise = invalidSubscriptionNotesController.updateSubscriptionNote(
-        'invalid',
-        'invalid',
+        2001,
+        2001,
         {
           note: {
             body: 'note 01',
@@ -188,9 +185,8 @@ describe('Subscription Notes Controller', () => {
   describe('List subscription notes', () => {
     test('should list all notes from a subscription', async () => {
       const response = await subscriptionNotesController.listSubscriptionNotes({
-        subscriptionId: String(
-          subscriptionContext.subscriptionResponse?.subscription?.id
-        ),
+        subscriptionId:
+          subscriptionContext.subscriptionResponse?.subscription?.id || 0,
       });
 
       expect(response.statusCode).toBe(200);
@@ -202,7 +198,7 @@ describe('Subscription Notes Controller', () => {
 
     test('should throw 404 error when user list invalid subscription id', async () => {
       const promise = subscriptionNotesController.listSubscriptionNotes({
-        subscriptionId: 'invalid',
+        subscriptionId: 2001,
       });
 
       expect(promise).rejects.toThrow();
@@ -216,7 +212,7 @@ describe('Subscription Notes Controller', () => {
     test('should read a note from a valid subscription id and note id', async () => {
       const noteResponse =
         await subscriptionNotesController.createSubscriptionNote(
-          String(subscriptionContext.subscriptionResponse?.subscription?.id),
+          subscriptionContext.subscriptionResponse?.subscription?.id || 0,
           {
             note: {
               body: 'note read',
@@ -225,8 +221,8 @@ describe('Subscription Notes Controller', () => {
           }
         );
       const response = await subscriptionNotesController.readSubscriptionNote(
-        String(subscriptionContext.subscriptionResponse?.subscription?.id),
-        String(noteResponse.result.note.id)
+        subscriptionContext.subscriptionResponse?.subscription?.id || 0,
+        noteResponse.result.note.id || 0
       );
 
       expect(response.result.note).toEqual(
@@ -239,8 +235,8 @@ describe('Subscription Notes Controller', () => {
 
     test('should throw 404 error when user read invalid subscription id', async () => {
       const promise = subscriptionNotesController.readSubscriptionNote(
-        'invalid',
-        'invalid'
+        2001,
+        2001
       );
 
       expect(promise).rejects.toThrow();
@@ -251,8 +247,8 @@ describe('Subscription Notes Controller', () => {
 
     test('should throw 401 error when user read a note with invalid credentials', async () => {
       const promise = invalidSubscriptionNotesController.readSubscriptionNote(
-        'invalid',
-        'invalid'
+        2001,
+        2001
       );
 
       expect(promise).rejects.toThrow();
@@ -264,25 +260,59 @@ describe('Subscription Notes Controller', () => {
 
   describe('Delete subscription note', () => {
     test('should delete a note from the list of subscriptions', async () => {
-      try {
-        const subscriptionId = String(
-          subscriptionContext.subscriptionResponse?.subscription?.id
-        );
+      const subscriptionId =
+        subscriptionContext.subscriptionResponse?.subscription?.id || 0;
+      const [noteResponse] = (
+        await subscriptionNotesController.listSubscriptionNotes({
+          subscriptionId,
+        })
+      ).result;
 
-        const result =
-          await subscriptionNotesController.deleteSubscriptionNote(
-            subscriptionId
-          );
+      const result = await subscriptionNotesController.deleteSubscriptionNote(
+        subscriptionId,
+        noteResponse.note.id || 0
+      );
 
-        const notes = (
-          await subscriptionNotesController.listSubscriptionNotes({
-            subscriptionId,
-          })
-        ).result;
-        console.log(result, notes);
-      } catch (reason) {
-        console.log(reason);
-      }
+      const readPromise = subscriptionNotesController.readSubscriptionNote(
+        subscriptionId,
+        noteResponse.note.id || 0
+      );
+
+      expect(result.statusCode).toBe(200);
+      expect(readPromise).rejects.toThrow();
+      await readPromise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
+    test('should throw 404 error when user try to delete an invalid subscription note', async () => {
+      const subscriptionId =
+        subscriptionContext.subscriptionResponse?.subscription?.id || 0;
+
+      const promise = subscriptionNotesController.deleteSubscriptionNote(
+        subscriptionId,
+        2001
+      );
+
+      expect(promise).rejects.toThrow();
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
+    test('should throw 401 error when user try to delete with invalid credentials', async () => {
+      const subscriptionId =
+        subscriptionContext.subscriptionResponse?.subscription?.id || 0;
+
+      const promise = invalidSubscriptionNotesController.deleteSubscriptionNote(
+        subscriptionId,
+        2001
+      );
+
+      expect(promise).rejects.toThrow();
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
     });
   });
 });
