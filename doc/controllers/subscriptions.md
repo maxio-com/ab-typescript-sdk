@@ -985,7 +985,7 @@ Note: If you change the product associated with a subscription that contains a `
 
 ```ts
 async updateSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: UpdateSubscriptionRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -995,7 +995,7 @@ async updateSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`UpdateSubscriptionRequest \| undefined`](../../doc/models/update-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1006,7 +1006,7 @@ async updateSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: UpdateSubscriptionRequest = {
   subscription: {
@@ -1165,7 +1165,7 @@ Self-Service Page token for the subscription is not returned by default. If this
 
 ```ts
 async readSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   include?: SubscriptionInclude[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -1175,7 +1175,7 @@ async readSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `include` | [`SubscriptionInclude[] \| undefined`](../../doc/models/subscription-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=coupons&include[]=self_service_page_token`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1186,7 +1186,7 @@ async readSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables
@@ -1368,7 +1368,7 @@ If unpermitted parameters are sent, a 400 HTTP response is sent along with a str
 
 ```ts
 async overrideSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: OverrideSubscriptionRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
@@ -1378,7 +1378,7 @@ async overrideSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`OverrideSubscriptionRequest \| undefined`](../../doc/models/override-subscription-request.md) | Body, Optional | Only these fields are available to be set. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1389,7 +1389,7 @@ async overrideSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: OverrideSubscriptionRequest = {
   subscription: {
@@ -1483,7 +1483,7 @@ The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payme
 
 ```ts
 async purgeSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   ack: number,
   cascade?: SubscriptionPurgeType[],
   requestOptions?: RequestOptions
@@ -1494,7 +1494,7 @@ async purgeSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `ack` | `number` | Query, Required | id of the customer. |
 | `cascade` | [`SubscriptionPurgeType[] \| undefined`](../../doc/models/subscription-purge-type.md) | Query, Optional | Options are "customer" or "payment_profile".<br>Use in query: `cascade[]=customer&cascade[]=payment_profile`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1506,7 +1506,7 @@ async purgeSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const ack = 252;
 
@@ -1542,7 +1542,7 @@ Use this endpoint to update a subscription's prepaid configuration.
 
 ```ts
 async createPrepaidSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: UpsertPrepaidConfigurationRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PrepaidConfigurationResponse>>
@@ -1552,7 +1552,7 @@ async createPrepaidSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`UpsertPrepaidConfigurationRequest \| undefined`](../../doc/models/upsert-prepaid-configuration-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1563,7 +1563,7 @@ async createPrepaidSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: UpsertPrepaidConfigurationRequest = {
   prepaidConfiguration: {
@@ -1812,7 +1812,7 @@ For this reason, using this query parameter on this endpoint has been deprecated
 
 ```ts
 async applyCouponToSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   code?: string,
   body?: AddCouponsRequest,
   requestOptions?: RequestOptions
@@ -1823,7 +1823,7 @@ async applyCouponToSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `code` | `string \| undefined` | Query, Optional | A code for the coupon that would be applied to a subscription |
 | `body` | [`AddCouponsRequest \| undefined`](../../doc/models/add-coupons-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1835,7 +1835,7 @@ async applyCouponToSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: AddCouponsRequest = {
   codes: [
@@ -2029,7 +2029,7 @@ For more information on the expected behaviour of removing a coupon from a subsc
 
 ```ts
 async deleteCouponFromSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   couponCode?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<string>>
@@ -2039,7 +2039,7 @@ async deleteCouponFromSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `couponCode` | `string \| undefined` | Query, Optional | The coupon code |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -2050,7 +2050,7 @@ async deleteCouponFromSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -2129,7 +2129,7 @@ When the `revert_on_failure` parameter is set to `true`, the subscription's stat
 
 ```ts
 async activateSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: ActivateSubscriptionRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -2139,7 +2139,7 @@ async activateSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`ActivateSubscriptionRequest \| undefined`](../../doc/models/activate-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -2150,7 +2150,7 @@ async activateSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables

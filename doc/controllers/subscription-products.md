@@ -75,7 +75,7 @@ You may wish to redirect customers to different pages depending on whether their
 
 ```ts
 async migrateSubscriptionProduct(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: SubscriptionProductMigrationRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -85,7 +85,7 @@ async migrateSubscriptionProduct(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`SubscriptionProductMigrationRequest \| undefined`](../../doc/models/subscription-product-migration-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -96,7 +96,7 @@ async migrateSubscriptionProduct(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: SubscriptionProductMigrationRequest = {
   migration: {
@@ -268,7 +268,7 @@ This will calculate the prorated adjustment, charge, payment and credit applied 
 
 ```ts
 async previewSubscriptionProductMigration(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: SubscriptionMigrationPreviewRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionMigrationPreviewResponse>>
@@ -278,7 +278,7 @@ async previewSubscriptionProductMigration(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`SubscriptionMigrationPreviewRequest \| undefined`](../../doc/models/subscription-migration-preview-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -289,7 +289,7 @@ async previewSubscriptionProductMigration(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: SubscriptionMigrationPreviewRequest = {
   migration: {

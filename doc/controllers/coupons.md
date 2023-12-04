@@ -46,7 +46,7 @@ You can restrict a coupon to only apply to specific products / components by opt
 ```ts
 async createCoupon(
   productFamilyId: number,
-  body?: CreateCouponBody,
+  body?: CreateOrUpdateCoupon,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse>>
 ```
@@ -56,7 +56,7 @@ async createCoupon(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `body` | [`CreateCouponBody \| undefined`](../../doc/models/containers/create-coupon-body.md) | Body, Optional | This is a container for one-of cases. |
+| `body` | [`CreateOrUpdateCoupon \| undefined`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -68,7 +68,7 @@ async createCoupon(
 ```ts
 const productFamilyId = 140;
 
-const body: CreateCouponBody = {
+const body: CreateOrUpdateCoupon = {
   coupon: {
     name: '15% off',
     code: '15OFF',
@@ -428,7 +428,7 @@ You can restrict a coupon to only apply to specific products / components by opt
 async updateCoupon(
   productFamilyId: number,
   couponId: number,
-  body?: UpdateCouponBody,
+  body?: CreateOrUpdateCoupon,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse>>
 ```
@@ -439,7 +439,7 @@ async updateCoupon(
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
 | `couponId` | `number` | Template, Required | The Chargify id of the coupon |
-| `body` | [`UpdateCouponBody \| undefined`](../../doc/models/containers/update-coupon-body.md) | Body, Optional | This is a container for one-of cases. |
+| `body` | [`CreateOrUpdateCoupon \| undefined`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -453,7 +453,7 @@ const productFamilyId = 140;
 
 const couponId = 162;
 
-const body: UpdateCouponBody = {
+const body: CreateOrUpdateCoupon = {
   coupon: {
     name: '15% off',
     code: '15OFF',
@@ -670,6 +670,9 @@ const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid err
   page: 2,
   perPage: 50,
   dateField: BasicDateField.UpdatedAt,
+  startDate: '2011-12-17',
+  startDatetime: '06/07/2019 17:20:06',
+  endDatetime: '06/07/2019 17:20:06',
   currencyPrices: true
 }
 try {

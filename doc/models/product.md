@@ -12,7 +12,7 @@
 | `id` | `number \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | The product name |
 | `handle` | `string \| null \| undefined` | Optional | The product API handle |
-| `description` | `string \| undefined` | Optional | The product description |
+| `description` | `string \| null \| undefined` | Optional | The product description |
 | `accountingCode` | `string \| null \| undefined` | Optional | E.g. Internal ID or SKU Number |
 | `requestCreditCard` | `boolean \| undefined` | Optional | Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. |
 | `expirationInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |

@@ -17,19 +17,20 @@ import {
   string,
 } from '../schema';
 import {
-  SubscriptionCancellationMethod,
-  subscriptionCancellationMethodSchema,
-} from './containers/subscriptionCancellationMethod';
+  CancellationMethod,
+  cancellationMethodSchema,
+} from './cancellationMethod';
 import {
   SubscriptionGroup2,
   subscriptionGroup2Schema,
 } from './containers/subscriptionGroup2';
-import {
-  SubscriptionPaymentCollectionMethod,
-  subscriptionPaymentCollectionMethodSchema,
-} from './containers/subscriptionPaymentCollectionMethod';
 import { Customer, customerSchema } from './customer';
+import {
+  PaymentCollectionMethod,
+  paymentCollectionMethodSchema,
+} from './paymentCollectionMethod';
 import { PaymentProfile, paymentProfileSchema } from './paymentProfile';
+import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { Product, productSchema } from './product';
 import {
   SubscriptionBankAccount,
@@ -94,7 +95,7 @@ export interface Subscription {
   /** Seller-provided reason for, or note about, the cancellation. */
   cancellationMessage?: string | null;
   /** The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription's state is not canceled. */
-  cancellationMethod?: SubscriptionCancellationMethod | null;
+  cancellationMethod?: CancellationMethod | null;
   /** Whether or not the subscription will (or has) canceled at the end of the period. */
   cancelAtEndOfPeriod?: boolean | null;
   /** The timestamp of the most recent cancellation */
@@ -102,7 +103,7 @@ export interface Subscription {
   /** Timestamp relating to the start of the current (recurring) period */
   currentPeriodStartedAt?: string;
   /** Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) */
-  previousState?: string;
+  previousState?: SubscriptionState;
   /** The ID of the transaction that generated the revenue */
   signupPaymentId?: number;
   /** The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) */
@@ -113,7 +114,8 @@ export interface Subscription {
   couponCode?: string | null;
   /** The day of the month that the subscription will charge according to calendar billing rules, if used. */
   snapDay?: string | null;
-  paymentCollectionMethod?: SubscriptionPaymentCollectionMethod | null;
+  /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
+  paymentCollectionMethod?: PaymentCollectionMethod;
   customer?: Customer;
   product?: Product;
   creditCard?: PaymentProfile;
@@ -145,8 +147,13 @@ export interface Subscription {
   currentBillingAmountInCents?: bigint;
   /** The product price point currently subscribed to. */
   productPricePointId?: number;
-  /** One of the following: custom, default, catalog. */
-  productPricePointType?: string;
+  /**
+   * Price point type. We expose the following types:
+   * 1. **default**: a price point that is marked as a default price for a certain product.
+   * 2. **custom**: a custom price point.
+   * 3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one.
+   */
+  productPricePointType?: PricePointType;
   /** If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. */
   nextProductPricePointId?: number | null;
   /** On Relationship Invoicing, the number of days before a renewal invoice is due. */
@@ -194,7 +201,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   cancellationMessage: ['cancellation_message', optional(nullable(string()))],
   cancellationMethod: [
     'cancellation_method',
-    optional(nullable(subscriptionCancellationMethodSchema)),
+    optional(nullable(cancellationMethodSchema)),
   ],
   cancelAtEndOfPeriod: [
     'cancel_at_end_of_period',
@@ -202,7 +209,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   ],
   canceledAt: ['canceled_at', optional(nullable(string()))],
   currentPeriodStartedAt: ['current_period_started_at', optional(string())],
-  previousState: ['previous_state', optional(string())],
+  previousState: ['previous_state', optional(subscriptionStateSchema)],
   signupPaymentId: ['signup_payment_id', optional(number())],
   signupRevenue: ['signup_revenue', optional(string())],
   delayedCancelAt: ['delayed_cancel_at', optional(nullable(string()))],
@@ -210,7 +217,7 @@ export const subscriptionSchema: Schema<Subscription> = object({
   snapDay: ['snap_day', optional(nullable(string()))],
   paymentCollectionMethod: [
     'payment_collection_method',
-    optional(nullable(subscriptionPaymentCollectionMethodSchema)),
+    optional(paymentCollectionMethodSchema),
   ],
   customer: ['customer', optional(lazy(() => customerSchema))],
   product: ['product', optional(lazy(() => productSchema))],
@@ -239,7 +246,10 @@ export const subscriptionSchema: Schema<Subscription> = object({
     optional(bigint()),
   ],
   productPricePointId: ['product_price_point_id', optional(number())],
-  productPricePointType: ['product_price_point_type', optional(string())],
+  productPricePointType: [
+    'product_price_point_type',
+    optional(pricePointTypeSchema),
+  ],
   nextProductPricePointId: [
     'next_product_price_point_id',
     optional(nullable(number())),

@@ -11,10 +11,10 @@ const subscriptionNotesController = new SubscriptionNotesController(client);
 ## Methods
 
 * [Create Subscription Note](../../doc/controllers/subscription-notes.md#create-subscription-note)
-* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 * [List Subscription Notes](../../doc/controllers/subscription-notes.md#list-subscription-notes)
 * [Read Subscription Note](../../doc/controllers/subscription-notes.md#read-subscription-note)
 * [Update Subscription Note](../../doc/controllers/subscription-notes.md#update-subscription-note)
+* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 
 
 # Create Subscription Note
@@ -31,7 +31,7 @@ Full documentation on how to use Notes in the Chargify UI can be located [here](
 
 ```ts
 async createSubscriptionNote(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: UpdateSubscriptionNoteRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionNoteResponse>>
@@ -41,7 +41,7 @@ async createSubscriptionNote(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -52,7 +52,7 @@ async createSubscriptionNote(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: UpdateSubscriptionNoteRequest = {
   note: {
@@ -81,63 +81,13 @@ try {
 ```
 
 
-# Delete Subscription Note
-
-Use the following method to delete a note for a Subscription.
-
-```ts
-async deleteSubscriptionNote(
-  subscriptionId: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const subscriptionId = 'subscription_id0';
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionNotesController.deleteSubscriptionNote(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
-
-
 # List Subscription Notes
 
 Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
 
 ```ts
 async listSubscriptionNotes(
-  subscriptionId: string,
+  subscriptionId: number,
   page?: number,
   perPage?: number,
   requestOptions?: RequestOptions
@@ -148,7 +98,7 @@ async listSubscriptionNotes(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -161,7 +111,7 @@ async listSubscriptionNotes(
 
 ```ts
 const collect = {
-  subscriptionId: 'subscription_id0',
+  subscriptionId: 222,
   page: 2,
   perPage: 50
 }
@@ -215,8 +165,8 @@ Once you have obtained the ID of the note you wish to read, use this method to s
 
 ```ts
 async readSubscriptionNote(
-  subscriptionId: string,
-  noteId: string,
+  subscriptionId: number,
+  noteId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
@@ -225,8 +175,8 @@ async readSubscriptionNote(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
-| `noteId` | `string` | Template, Required | The Chargify id of the note |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `noteId` | `number` | Template, Required | The Chargify id of the note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -236,9 +186,9 @@ async readSubscriptionNote(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
-const noteId = 'note_id8';
+const noteId = 66;
 
 try {
   // @ts-expect-error: unused variables
@@ -281,8 +231,8 @@ Use the following method to update a note for a Subscription.
 
 ```ts
 async updateSubscriptionNote(
-  subscriptionId: string,
-  noteId: string,
+  subscriptionId: number,
+  noteId: number,
   body?: UpdateSubscriptionNoteRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionNoteResponse>>
@@ -292,8 +242,8 @@ async updateSubscriptionNote(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
-| `noteId` | `string` | Template, Required | The Chargify id of the note |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `noteId` | `number` | Template, Required | The Chargify id of the note |
 | `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -304,9 +254,9 @@ async updateSubscriptionNote(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
-const noteId = 'note_id8';
+const noteId = 66;
 
 const body: UpdateSubscriptionNoteRequest = {
   note: {
@@ -334,4 +284,61 @@ try {
   }
 }
 ```
+
+
+# Delete Subscription Note
+
+Use the following method to delete a note for a Subscription.
+
+```ts
+async deleteSubscriptionNote(
+  subscriptionId: number,
+  noteId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `noteId` | `number` | Template, Required | The Chargify id of the note |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const noteId = 66;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionNotesController.deleteSubscriptionNote(
+  subscriptionId,
+  noteId
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 

@@ -17,9 +17,9 @@ import {
 } from '../schema';
 import { CalendarBilling, calendarBillingSchema } from './calendarBilling';
 import {
-  CustomPriceUsedForSubscriptionCreateUpdate,
-  customPriceUsedForSubscriptionCreateUpdateSchema,
-} from './customPriceUsedForSubscriptionCreateUpdate';
+  SubscriptionCustomPrice,
+  subscriptionCustomPriceSchema,
+} from './subscriptionCustomPrice';
 import {
   SubscriptionGroupSignupComponent,
   subscriptionGroupSignupComponentSchema,
@@ -46,7 +46,7 @@ export interface SubscriptionGroupSignupItem {
   couponCodes?: string[];
   components?: SubscriptionGroupSignupComponent[];
   /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
-  customPrice?: CustomPriceUsedForSubscriptionCreateUpdate;
+  customPrice?: SubscriptionCustomPrice;
   /** (Optional). Cannot be used when also specifying next_billing_at */
   calendarBilling?: CalendarBilling;
   /** (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. */
@@ -70,7 +70,7 @@ export const subscriptionGroupSignupItemSchema: Schema<SubscriptionGroupSignupIt
     ],
     customPrice: [
       'custom_price',
-      optional(lazy(() => customPriceUsedForSubscriptionCreateUpdateSchema)),
+      optional(lazy(() => subscriptionCustomPriceSchema)),
     ],
     calendarBilling: [
       'calendar_billing',

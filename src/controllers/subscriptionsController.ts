@@ -1104,13 +1104,13 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async updateSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: UpdateSubscriptionRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(updateSubscriptionRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -1134,13 +1134,13 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async readSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     include?: SubscriptionInclude[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       include: [include, optional(array(subscriptionIncludeSchema))],
     });
     req.query('include[]', mapped.include, plainPrefix);
@@ -1187,13 +1187,13 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async overrideSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: OverrideSubscriptionRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(overrideSubscriptionRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -1244,14 +1244,14 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async purgeSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     ack: number,
     cascade?: SubscriptionPurgeType[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       ack: [ack, number()],
       cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
     });
@@ -1270,13 +1270,13 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async createPrepaidSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: UpsertPrepaidConfigurationRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PrepaidConfigurationResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(upsertPrepaidConfigurationRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -1364,14 +1364,14 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async applyCouponToSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     code?: string,
     body?: AddCouponsRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       code: [code, optional(string())],
       body: [body, optional(addCouponsRequestSchema)],
     });
@@ -1395,13 +1395,13 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async deleteCouponFromSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     couponCode?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       couponCode: [couponCode, optional(string())],
     });
     req.query('coupon_code', mapped.couponCode);
@@ -1472,13 +1472,13 @@ export class SubscriptionsController extends BaseController {
    * @return Response from the API call
    */
   async activateSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: ActivateSubscriptionRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(activateSubscriptionRequestSchema)],
     });
     req.header('Content-Type', 'application/json');

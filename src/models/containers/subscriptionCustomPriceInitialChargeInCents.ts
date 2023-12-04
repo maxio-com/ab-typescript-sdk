@@ -7,13 +7,13 @@
 import { bigint, oneOf, Schema, string } from '../../schema';
 
 /** This is a container type for one-of types. */
-export type CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents = string | bigint;
+export type SubscriptionCustomPriceInitialChargeInCents = string | bigint;
 
-export const customPriceUsedForSubscriptionCreateUpdateTrialPriceInCentsSchema: Schema<CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents> = oneOf(
+export const subscriptionCustomPriceInitialChargeInCentsSchema: Schema<SubscriptionCustomPriceInitialChargeInCents> = oneOf(
   [string(), bigint()]
 );
 
-export namespace CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents {
+export namespace SubscriptionCustomPriceInitialChargeInCents {
   /**
   * Validation method to narrow down union type to string type case.
   *

@@ -10,7 +10,7 @@ import { ApiError } from '../core';
  * Creates an instance of SingleErrorResponse
  */
 interface SingleErrorResponse {
-  error?: string;
+  error: string;
 }
 
 export class SingleErrorResponseError extends ApiError<SingleErrorResponse> {}

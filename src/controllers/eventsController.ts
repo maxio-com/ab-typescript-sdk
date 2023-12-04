@@ -207,7 +207,7 @@ export class EventsController extends BaseController {
     direction,
     filter,
   }: {
-    subscriptionId: string,
+    subscriptionId: number,
     page?: number,
     perPage?: number,
     sinceId?: number,
@@ -219,7 +219,7 @@ export class EventsController extends BaseController {
   ): Promise<ApiResponse<EventResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       sinceId: [sinceId, optional(number())],

@@ -13,7 +13,7 @@
 | `productId` | `number \| undefined` | Optional | The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead. |
 | `productPricePointHandle` | `string \| undefined` | Optional | The user-friendly API handle of a product's particular price point. |
 | `productPricePointId` | `number \| undefined` | Optional | The ID of the particular price point on the product. |
-| `customPrice` | [`CustomPriceUsedForSubscriptionCreateUpdate \| undefined`](../../doc/models/custom-price-used-for-subscription-create-update.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
+| `customPrice` | [`SubscriptionCustomPrice \| undefined`](../../doc/models/subscription-custom-price.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `couponCode` | `string \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
 | `paymentCollectionMethod` | [`PaymentCollectionMethod \| undefined`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `PaymentCollectionMethod.Automatic` |
@@ -30,7 +30,7 @@
 | `paymentProfileAttributes` | [`PaymentProfileAttributes \| undefined`](../../doc/models/payment-profile-attributes.md) | Optional | alias to credit_card_attributes |
 | `creditCardAttributes` | [`PaymentProfileAttributes \| undefined`](../../doc/models/payment-profile-attributes.md) | Optional | Credit Card data to create a new Subscription. Interchangeable with `payment_profile_attributes` property. |
 | `bankAccountAttributes` | [`BankAccountAttributes \| undefined`](../../doc/models/bank-account-attributes.md) | Optional | - |
-| `components` | [`CreateSubscriptionComponents[] \| undefined`](../../doc/models/containers/create-subscription-components.md) | Optional | This is Array of a container for one-of cases. |
+| `components` | [`CreateSubscriptionComponent[] \| undefined`](../../doc/models/create-subscription-component.md) | Optional | (Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) for more information. |
 | `calendarBilling` | [`CalendarBilling \| undefined`](../../doc/models/calendar-billing.md) | Optional | (Optional). Cannot be used when also specifying next_billing_at |
 | `metafields` | `Record<string, string> \| undefined` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 | `customerReference` | `string \| undefined` | Optional | The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given. |
@@ -80,7 +80,10 @@
     "handle": "handle0",
     "price_in_cents": "String3",
     "interval": "String3",
-    "interval_unit": "day"
+    "interval_unit": "day",
+    "trial_price_in_cents": "String3",
+    "trial_interval": "String5",
+    "trial_interval_unit": "day"
   }
 }
 ```

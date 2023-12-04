@@ -11,14 +11,6 @@ import {
   SingleStringErrorResponseError,
 } from '../errors/singleStringErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
-import {
-  CreateCouponBody,
-  createCouponBodySchema,
-} from '../models/containers/createCouponBody';
-import {
-  UpdateCouponBody,
-  updateCouponBodySchema,
-} from '../models/containers/updateCouponBody';
 import { CouponCurrency, couponCurrencySchema } from '../models/couponCurrency';
 import {
   CouponCurrencyRequest,
@@ -31,6 +23,10 @@ import {
   couponSubcodesResponseSchema,
 } from '../models/couponSubcodesResponse';
 import { CouponUsage, couponUsageSchema } from '../models/couponUsage';
+import {
+  CreateOrUpdateCoupon,
+  createOrUpdateCouponSchema,
+} from '../models/createOrUpdateCoupon';
 import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
@@ -59,19 +55,19 @@ export class CouponsController extends BaseController {
    * `{ "<product/component_id>": boolean_value }`
    *
    * @param productFamilyId   The Chargify id of the product family to which the coupon
-   *                                                     belongs
+   *                                                         belongs
    * @param body
    * @return Response from the API call
    */
   async createCoupon(
     productFamilyId: number,
-    body?: CreateCouponBody,
+    body?: CreateOrUpdateCoupon,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
-      body: [body, optional(createCouponBodySchema)],
+      body: [body, optional(createOrUpdateCouponSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -271,7 +267,7 @@ export class CouponsController extends BaseController {
    * `{ "<product/component_id>": boolean_value }`
    *
    * @param productFamilyId   The Chargify id of the product family to which the coupon
-   *                                                     belongs
+   *                                                         belongs
    * @param couponId          The Chargify id of the coupon
    * @param body
    * @return Response from the API call
@@ -279,14 +275,14 @@ export class CouponsController extends BaseController {
   async updateCoupon(
     productFamilyId: number,
     couponId: number,
-    body?: UpdateCouponBody,
+    body?: CreateOrUpdateCoupon,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
       couponId: [couponId, number()],
-      body: [body, optional(updateCouponBodySchema)],
+      body: [body, optional(createOrUpdateCouponSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

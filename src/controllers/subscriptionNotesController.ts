@@ -14,7 +14,7 @@ import {
   UpdateSubscriptionNoteRequest,
   updateSubscriptionNoteRequestSchema,
 } from '../models/updateSubscriptionNoteRequest';
-import { array, number, optional, string } from '../schema';
+import { array, number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionNotesController extends BaseController {
@@ -35,38 +35,19 @@ export class SubscriptionNotesController extends BaseController {
    * @return Response from the API call
    */
   async createSubscriptionNote(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: UpdateSubscriptionNoteRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionNoteResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(updateSubscriptionNoteRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use the following method to delete a note for a Subscription.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @return Response from the API call
-   */
-  async deleteSubscriptionNote(
-    subscriptionId: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
-    });
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
-    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
-    return req.call(requestOptions);
   }
 
   /**
@@ -90,7 +71,7 @@ export class SubscriptionNotesController extends BaseController {
     page,
     perPage,
   }: {
-    subscriptionId: string,
+    subscriptionId: number,
     page?: number,
     perPage?: number,
   },
@@ -98,7 +79,7 @@ export class SubscriptionNotesController extends BaseController {
   ): Promise<ApiResponse<SubscriptionNoteResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
@@ -120,14 +101,14 @@ export class SubscriptionNotesController extends BaseController {
    * @return Response from the API call
    */
   async readSubscriptionNote(
-    subscriptionId: string,
-    noteId: string,
+    subscriptionId: number,
+    noteId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionNoteResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
-      noteId: [noteId, string()],
+      subscriptionId: [subscriptionId, number()],
+      noteId: [noteId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
@@ -142,20 +123,42 @@ export class SubscriptionNotesController extends BaseController {
    * @return Response from the API call
    */
   async updateSubscriptionNote(
-    subscriptionId: string,
-    noteId: string,
+    subscriptionId: number,
+    noteId: number,
     body?: UpdateSubscriptionNoteRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionNoteResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
-      noteId: [noteId, string()],
+      subscriptionId: [subscriptionId, number()],
+      noteId: [noteId, number()],
       body: [body, optional(updateSubscriptionNoteRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use the following method to delete a note for a Subscription.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param noteId          The Chargify id of the note
+   * @return Response from the API call
+   */
+  async deleteSubscriptionNote(
+    subscriptionId: number,
+    noteId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      noteId: [noteId, number()],
+    });
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
+    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
+    return req.call(requestOptions);
   }
 }

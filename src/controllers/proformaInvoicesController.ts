@@ -128,12 +128,12 @@ export class ProformaInvoicesController extends BaseController {
    * @return Response from the API call
    */
   async createProformaInvoice(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProformaInvoice>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
     req.throwOn(403, ApiError, 'Forbidden');
@@ -184,7 +184,7 @@ export class ProformaInvoicesController extends BaseController {
     payments,
     customFields,
   }: {
-    subscriptionId: string,
+    subscriptionId: number,
     startDate?: string,
     endDate?: string,
     status?: Status,
@@ -202,7 +202,7 @@ export class ProformaInvoicesController extends BaseController {
   ): Promise<ApiResponse<ProformaInvoice[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
       status: [status, optional(statusSchema)],
@@ -290,12 +290,12 @@ export class ProformaInvoicesController extends BaseController {
    * @return Response from the API call
    */
   async previewProformaInvoice(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProformaInvoicePreview>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices/preview.json`;
     req.throwOn(403, ApiError, 'Forbidden');

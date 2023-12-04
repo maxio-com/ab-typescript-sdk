@@ -281,13 +281,13 @@ export class SubscriptionGroupsController extends BaseController {
    * @return Response from the API call
    */
   async createSubscriptionGroupHierarchy(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: AddSubscriptionToAGroup,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionGroupResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(addSubscriptionToAGroupSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -306,12 +306,12 @@ export class SubscriptionGroupsController extends BaseController {
    * @return Response from the API call
    */
   async removeSubscriptionFromGroup(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/group.json`;
     req.throwOn(404, ApiError, 'Not Found');

@@ -35,7 +35,7 @@ This request will list information regarding a specific component owned by a sub
 
 ```ts
 async readSubscriptionComponent(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionComponentResponse>>
@@ -45,7 +45,7 @@ async readSubscriptionComponent(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | The Chargify id of the component. Alternatively, the component's handle prefixed by `handle:` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -56,7 +56,7 @@ async readSubscriptionComponent(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const componentId = 222;
 
@@ -115,7 +115,7 @@ When requesting to list components for a given subscription, if the subscription
 
 ```ts
 async listSubscriptionComponents(
-  subscriptionId: string,
+  subscriptionId: number,
   dateField?: SubscriptionListDateField,
   direction?: SortingDirection,
   endDate?: string,
@@ -136,7 +136,7 @@ async listSubscriptionComponents(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
@@ -159,7 +159,7 @@ async listSubscriptionComponents(
 
 ```ts
 const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-  subscriptionId: 'subscription_id0',
+  subscriptionId: 222,
   dateField: SubscriptionListDateField.UpdatedAt,
   pricePointIds: IncludeNotNull.NotNull,
   productFamilyIds: [
@@ -228,7 +228,7 @@ The `price_point` key can take either a:
 
 ```ts
 async updateSubscriptionComponentsPricePoints(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: BulkComponentSPricePointAssignment,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<BulkComponentSPricePointAssignment>>
@@ -238,7 +238,7 @@ async updateSubscriptionComponentsPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`BulkComponentSPricePointAssignment \| undefined`](../../doc/models/bulk-component-s-price-point-assignment.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -249,7 +249,7 @@ async updateSubscriptionComponentsPricePoints(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: BulkComponentSPricePointAssignment = {
   components: [
@@ -319,7 +319,7 @@ Resets all of a subscription's components to use the current default.
 
 ```ts
 async resetSubscriptionComponentsPricePoints(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
 ```
@@ -328,7 +328,7 @@ async resetSubscriptionComponentsPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -338,7 +338,7 @@ async resetSubscriptionComponentsPricePoints(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -380,7 +380,7 @@ try {
     "snap_day": null,
     "cancellation_method": "dunning",
     "current_period_started_at": "2023-11-23T10:28:34-05:00",
-    "previous_state": "occaecat proident sunt cillum ",
+    "previous_state": "active",
     "signup_payment_id": -45156092,
     "signup_revenue": "do aliquip ea",
     "delayed_cancel_at": null,
@@ -512,7 +512,7 @@ See the tables below for valid values.
 
 ```ts
 async allocateComponent(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   body?: CreateAllocationRequest,
   requestOptions?: RequestOptions
@@ -523,7 +523,7 @@ async allocateComponent(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | The Chargify id of the component |
 | `body` | [`CreateAllocationRequest \| undefined`](../../doc/models/create-allocation-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -535,7 +535,7 @@ async allocateComponent(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const componentId = 222;
 
@@ -620,7 +620,7 @@ puts component.allocated_quantity
 
 ```ts
 async listAllocations(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   page?: number,
   requestOptions?: RequestOptions
@@ -631,7 +631,7 @@ async listAllocations(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | The Chargify id of the component |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -643,7 +643,7 @@ async listAllocations(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const componentId = 222;
 
@@ -719,7 +719,7 @@ This endpoint only responds to JSON. It is not available for XML.
 
 ```ts
 async allocateComponents(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: AllocateComponents,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<AllocationResponse[]>>
@@ -729,7 +729,7 @@ async allocateComponents(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`AllocateComponents \| undefined`](../../doc/models/allocate-components.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -740,7 +740,7 @@ async allocateComponents(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: AllocateComponents = {
   prorationUpgradeScheme: 'prorate-attempt-capture',
@@ -846,7 +846,7 @@ See example below for Fine-Grained Component Control response.
 
 ```ts
 async previewAllocations(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: PreviewAllocationsRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<AllocationPreviewResponse>>
@@ -856,7 +856,7 @@ async previewAllocations(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`PreviewAllocationsRequest \| undefined`](../../doc/models/preview-allocations-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -867,7 +867,7 @@ async previewAllocations(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: PreviewAllocationsRequest = {
   allocations: [
@@ -1028,7 +1028,7 @@ A few limitations exist when changing an allocation's expiration date:
 
 ```ts
 async updatePrepaidUsageAllocation(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   allocationId: number,
   body?: UpdateAllocationExpirationDate,
@@ -1040,7 +1040,7 @@ async updatePrepaidUsageAllocation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | The Chargify id of the component |
 | `allocationId` | `number` | Template, Required | The Chargify id of the allocation |
 | `body` | [`UpdateAllocationExpirationDate \| undefined`](../../doc/models/update-allocation-expiration-date.md) | Body, Optional | - |
@@ -1053,7 +1053,7 @@ async updatePrepaidUsageAllocation(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const componentId = 222;
 
@@ -1107,7 +1107,7 @@ By default, destroying an allocation will generate a service credit on the subsc
 
 ```ts
 async deletePrepaidUsageAllocation(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   allocationId: number,
   body?: CreditSchemeRequest,
@@ -1119,7 +1119,7 @@ async deletePrepaidUsageAllocation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | The Chargify id of the component |
 | `allocationId` | `number` | Template, Required | The Chargify id of the allocation |
 | `body` | [`CreditSchemeRequest \| undefined`](../../doc/models/credit-scheme-request.md) | Body, Optional | - |
@@ -1132,7 +1132,7 @@ async deletePrepaidUsageAllocation(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const componentId = 222;
 
@@ -1231,7 +1231,7 @@ A. No. Usage should be reported as one API call per component on a single subscr
 
 ```ts
 async createUsage(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   body?: CreateUsageRequest,
   requestOptions?: RequestOptions
@@ -1242,7 +1242,7 @@ async createUsage(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | Either the Chargify id for the component or the component's handle prefixed by `handle:` |
 | `body` | [`CreateUsageRequest \| undefined`](../../doc/models/create-usage-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1254,7 +1254,7 @@ async createUsage(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const componentId = 222;
 
@@ -1330,7 +1330,7 @@ Use this endpoint to read the previously recorded components for a subscription.
 
 ```ts
 async listUsages(
-  subscriptionId: string,
+  subscriptionId: number,
   componentId: number,
   sinceId?: number,
   maxId?: number,
@@ -1346,7 +1346,7 @@ async listUsages(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | Either the Chargify id for the component or the component's handle prefixed by `handle:` |
 | `sinceId` | `number \| undefined` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
 | `maxId` | `number \| undefined` | Query, Optional | Returns usages with an id less than or equal to the one specified |
@@ -1364,7 +1364,7 @@ async listUsages(
 
 ```ts
 const collect = {
-  subscriptionId: 'subscription_id0',
+  subscriptionId: 222,
   componentId: 222,
   page: 2,
   perPage: 50

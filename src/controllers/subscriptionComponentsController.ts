@@ -96,13 +96,13 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async readSubscriptionComponent(
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionComponentResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}.json`;
@@ -190,7 +190,7 @@ export class SubscriptionComponentsController extends BaseController {
     filterUseSiteExchangeRate,
     filterCurrencies,
   }: {
-    subscriptionId: string,
+    subscriptionId: number,
     dateField?: SubscriptionListDateField,
     direction?: SortingDirection,
     endDate?: string,
@@ -208,7 +208,7 @@ export class SubscriptionComponentsController extends BaseController {
   ): Promise<ApiResponse<SubscriptionComponentResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       dateField: [dateField, optional(subscriptionListDateFieldSchema)],
       direction: [direction, optional(sortingDirectionSchema)],
       endDate: [endDate, optional(string())],
@@ -258,13 +258,13 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async updateSubscriptionComponentsPricePoints(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: BulkComponentSPricePointAssignment,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<BulkComponentSPricePointAssignment>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(bulkComponentSPricePointAssignmentSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -287,12 +287,12 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async resetSubscriptionComponentsPricePoints(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/price_points/reset.json`;
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
@@ -373,14 +373,14 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async allocateComponent(
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     body?: CreateAllocationRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<AllocationResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
       body: [body, optional(createAllocationRequestSchema)],
     });
@@ -425,14 +425,14 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async listAllocations(
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     page?: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<AllocationResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
       page: [page, optional(number())],
     });
@@ -459,13 +459,13 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async allocateComponents(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: AllocateComponents,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<AllocationResponse[]>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(allocateComponentsSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -496,13 +496,13 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async previewAllocations(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: PreviewAllocationsRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<AllocationPreviewResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(previewAllocationsRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -537,7 +537,7 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async updatePrepaidUsageAllocation(
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     allocationId: number,
     body?: UpdateAllocationExpirationDate,
@@ -545,7 +545,7 @@ export class SubscriptionComponentsController extends BaseController {
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
       allocationId: [allocationId, number()],
       body: [body, optional(updateAllocationExpirationDateSchema)],
@@ -582,7 +582,7 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async deletePrepaidUsageAllocation(
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     allocationId: number,
     body?: CreditSchemeRequest,
@@ -590,7 +590,7 @@ export class SubscriptionComponentsController extends BaseController {
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
       allocationId: [allocationId, number()],
       body: [body, optional(creditSchemeRequestSchema)],
@@ -685,14 +685,14 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async createUsage(
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     body?: CreateUsageRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<UsageResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
       body: [body, optional(createUsageRequestSchema)],
     });
@@ -755,7 +755,7 @@ export class SubscriptionComponentsController extends BaseController {
     page,
     perPage,
   }: {
-    subscriptionId: string,
+    subscriptionId: number,
     componentId: number,
     sinceId?: number,
     maxId?: number,
@@ -768,7 +768,7 @@ export class SubscriptionComponentsController extends BaseController {
   ): Promise<ApiResponse<UsageResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       componentId: [componentId, number()],
       sinceId: [sinceId, optional(number())],
       maxId: [maxId, optional(number())],
