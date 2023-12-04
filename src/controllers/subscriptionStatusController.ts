@@ -36,7 +36,7 @@ import {
   SubscriptionResponse,
   subscriptionResponseSchema,
 } from '../models/subscriptionResponse';
-import { optional, string } from '../schema';
+import { number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionStatusController extends BaseController {
@@ -56,12 +56,12 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async retrySubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/retry.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
@@ -77,20 +77,20 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async cancelSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: CancellationRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(cancellationRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
     req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -106,13 +106,13 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async resumeSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     calendarBillingResumptionCharge?: ResumptionCharge,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       calendarBillingResumptionCharge: [
         calendarBillingResumptionCharge,
         optional(resumptionChargeSchema),
@@ -120,6 +120,7 @@ export class SubscriptionStatusController extends BaseController {
     });
     req.query('calendar_billing[\'resumption_charge\']', mapped.calendarBillingResumptionCharge);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/resume.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -135,13 +136,13 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async pauseSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: PauseRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(pauseRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -168,18 +169,19 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async updateAutomaticSubscriptionResumption(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: PauseRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(pauseRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/hold.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -360,13 +362,13 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async reactivateSubscription(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: ReactivateSubscriptionRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(reactivateSubscriptionRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -391,13 +393,13 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async initiateDelayedCancellation(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: CancellationRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<DelayedCancellationResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(cancellationRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -419,12 +421,12 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async stopDelayedCancellation(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<DelayedCancellationResponse>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/delayed_cancel.json`;
     req.throwOn(404, ApiError, 'Not Found');
@@ -439,12 +441,12 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async cancelDunning(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/cancel_dunning.json`;
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
@@ -490,13 +492,13 @@ export class SubscriptionStatusController extends BaseController {
    * @return Response from the API call
    */
   async previewRenewal(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: RenewalPreviewRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<RenewalPreviewResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(renewalPreviewRequestSchema)],
     });
     req.header('Content-Type', 'application/json');

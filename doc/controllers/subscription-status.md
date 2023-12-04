@@ -36,7 +36,7 @@ The response will be `422 "Unprocessable Entity`.
 
 ```ts
 async retrySubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
 ```
@@ -45,7 +45,7 @@ async retrySubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -55,7 +55,7 @@ async retrySubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -223,7 +223,7 @@ The DELETE action causes the cancellation of the Subscription. This means, the m
 
 ```ts
 async cancelSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: CancellationRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -233,7 +233,7 @@ async cancelSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CancellationRequest \| undefined`](../../doc/models/cancellation-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -244,7 +244,7 @@ async cancelSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -403,7 +403,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
 # Resume Subscription
@@ -412,7 +412,7 @@ Resume a paused (on-hold) subscription. If the normal next renewal date has not 
 
 ```ts
 async resumeSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   calendarBillingResumptionCharge?: ResumptionCharge,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -422,7 +422,7 @@ async resumeSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `calendarBillingResumptionCharge` | [`ResumptionCharge \| undefined`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled<br>**Default**: `ResumptionCharge.Prorated` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -433,7 +433,7 @@ async resumeSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables
@@ -560,6 +560,12 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Pause Subscription
 
@@ -571,7 +577,7 @@ You may not place a subscription on hold if the `next_billing` date is within 24
 
 ```ts
 async pauseSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: PauseRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -581,7 +587,7 @@ async pauseSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`PauseRequest \| undefined`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -592,7 +598,7 @@ async pauseSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: PauseRequest = {
   hold: {
@@ -747,7 +753,7 @@ Alternately, you can change the `automatically_resume_at` to `null` if you would
 
 ```ts
 async updateAutomaticSubscriptionResumption(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: PauseRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -757,7 +763,7 @@ async updateAutomaticSubscriptionResumption(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`PauseRequest \| undefined`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -768,11 +774,11 @@ async updateAutomaticSubscriptionResumption(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: PauseRequest = {
   hold: {
-    automaticallyResumeAt: '2019-01-20',
+    automaticallyResumeAt: '2019-01-20T00:00:00',
   },
 };
 
@@ -916,6 +922,12 @@ try {
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Reactivate Subscription
@@ -1082,7 +1094,7 @@ PUT request sent to:
 
 ```ts
 async reactivateSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: ReactivateSubscriptionRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -1092,7 +1104,7 @@ async reactivateSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`ReactivateSubscriptionRequest \| undefined`](../../doc/models/reactivate-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1103,7 +1115,7 @@ async reactivateSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: ReactivateSubscriptionRequest = {
   calendarBilling: {
@@ -1262,7 +1274,7 @@ Note that you cannot set `cancel_at_end_of_period` at subscription creation, or 
 
 ```ts
 async initiateDelayedCancellation(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: CancellationRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<DelayedCancellationResponse>>
@@ -1272,7 +1284,7 @@ async initiateDelayedCancellation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CancellationRequest \| undefined`](../../doc/models/cancellation-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1283,7 +1295,7 @@ async initiateDelayedCancellation(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -1316,7 +1328,7 @@ This endpoint is idempotent. If the subscription was not set to cancel in the fu
 
 ```ts
 async stopDelayedCancellation(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<DelayedCancellationResponse>>
 ```
@@ -1325,7 +1337,7 @@ async stopDelayedCancellation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1335,7 +1347,7 @@ async stopDelayedCancellation(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -1374,7 +1386,7 @@ If a subscription is currently in dunning, the subscription will be set to activ
 
 ```ts
 async cancelDunning(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
 ```
@@ -1383,7 +1395,7 @@ async cancelDunning(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1393,7 +1405,7 @@ async cancelDunning(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -1439,7 +1451,7 @@ You can request a `POST` to obtain this data from the endpoint without any side 
 
 ```ts
 async previewRenewal(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: RenewalPreviewRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<RenewalPreviewResponse>>
@@ -1449,7 +1461,7 @@ async previewRenewal(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`RenewalPreviewRequest \| undefined`](../../doc/models/renewal-preview-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1460,7 +1472,7 @@ async previewRenewal(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: RenewalPreviewRequest = {
   components: [

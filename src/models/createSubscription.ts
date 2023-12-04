@@ -27,10 +27,6 @@ import {
 } from './bankAccountAttributes';
 import { CalendarBilling, calendarBillingSchema } from './calendarBilling';
 import {
-  CreateSubscriptionComponents,
-  createSubscriptionComponentsSchema,
-} from './containers/createSubscriptionComponents';
-import {
   CreateSubscriptionGroup2,
   createSubscriptionGroup2Schema,
 } from './containers/createSubscriptionGroup2';
@@ -39,13 +35,13 @@ import {
   createSubscriptionOfferIdSchema,
 } from './containers/createSubscriptionOfferId';
 import {
+  CreateSubscriptionComponent,
+  createSubscriptionComponentSchema,
+} from './createSubscriptionComponent';
+import {
   CustomerAttributes,
   customerAttributesSchema,
 } from './customerAttributes';
-import {
-  CustomPriceUsedForSubscriptionCreateUpdate,
-  customPriceUsedForSubscriptionCreateUpdateSchema,
-} from './customPriceUsedForSubscriptionCreateUpdate';
 import {
   PaymentCollectionMethod,
   paymentCollectionMethodSchema,
@@ -54,6 +50,10 @@ import {
   PaymentProfileAttributes,
   paymentProfileAttributesSchema,
 } from './paymentProfileAttributes';
+import {
+  SubscriptionCustomPrice,
+  subscriptionCustomPriceSchema,
+} from './subscriptionCustomPrice';
 import {
   UpsertPrepaidConfiguration,
   upsertPrepaidConfigurationSchema,
@@ -69,7 +69,7 @@ export interface CreateSubscription {
   /** The ID of the particular price point on the product. */
   productPricePointId?: number;
   /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
-  customPrice?: CustomPriceUsedForSubscriptionCreateUpdate;
+  customPrice?: SubscriptionCustomPrice;
   /** (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. */
   couponCode?: string;
   /** An array for all the coupons attached to the subscription. */
@@ -100,7 +100,7 @@ export interface CreateSubscription {
   creditCardAttributes?: PaymentProfileAttributes;
   bankAccountAttributes?: BankAccountAttributes;
   /** (Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) for more information. */
-  components?: CreateSubscriptionComponents[];
+  components?: CreateSubscriptionComponent[];
   /** (Optional). Cannot be used when also specifying next_billing_at */
   calendarBilling?: CalendarBilling;
   /** (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. */
@@ -160,7 +160,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   productPricePointId: ['product_price_point_id', optional(number())],
   customPrice: [
     'custom_price',
-    optional(lazy(() => customPriceUsedForSubscriptionCreateUpdateSchema)),
+    optional(lazy(() => subscriptionCustomPriceSchema)),
   ],
   couponCode: ['coupon_code', optional(string())],
   couponCodes: ['coupon_codes', optional(array(string()))],
@@ -198,7 +198,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   ],
   components: [
     'components',
-    optional(array(lazy(() => createSubscriptionComponentsSchema))),
+    optional(array(lazy(() => createSubscriptionComponentSchema))),
   ],
   calendarBilling: [
     'calendar_billing',

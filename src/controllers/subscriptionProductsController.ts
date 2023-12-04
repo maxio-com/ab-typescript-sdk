@@ -22,7 +22,7 @@ import {
   SubscriptionResponse,
   subscriptionResponseSchema,
 } from '../models/subscriptionResponse';
-import { optional, string } from '../schema';
+import { number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionProductsController extends BaseController {
@@ -125,13 +125,13 @@ export class SubscriptionProductsController extends BaseController {
    * @return Response from the API call
    */
   async migrateSubscriptionProduct(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: SubscriptionProductMigrationRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(subscriptionProductMigrationRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -155,13 +155,13 @@ export class SubscriptionProductsController extends BaseController {
    * @return Response from the API call
    */
   async previewSubscriptionProductMigration(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: SubscriptionMigrationPreviewRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionMigrationPreviewResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(subscriptionMigrationPreviewRequestSchema)],
     });
     req.header('Content-Type', 'application/json');

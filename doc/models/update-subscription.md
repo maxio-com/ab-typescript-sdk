@@ -22,7 +22,7 @@
 | `netTerms` | [`UpdateSubscriptionNetTerms \| undefined`](../../doc/models/containers/update-subscription-net-terms.md) | Optional | This is a container for one-of cases. |
 | `storedCredentialTransactionId` | `number \| undefined` | Optional | - |
 | `reference` | `string \| undefined` | Optional | - |
-| `customPrice` | [`CustomPriceUsedForSubscriptionCreateUpdate \| undefined`](../../doc/models/custom-price-used-for-subscription-create-update.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
+| `customPrice` | [`SubscriptionCustomPrice \| undefined`](../../doc/models/subscription-custom-price.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `components` | [`UpdateSubscriptionComponent[] \| undefined`](../../doc/models/update-subscription-component.md) | Optional | (Optional) An array of component ids and custom prices to be added to the subscription. |
 | `dunningCommunicationDelayEnabled` | `boolean \| null \| undefined` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `false` |
 | `dunningCommunicationDelayTimeZone` | `string \| null \| undefined` | Optional | Time zone for the Dunning Communication Delay feature. |

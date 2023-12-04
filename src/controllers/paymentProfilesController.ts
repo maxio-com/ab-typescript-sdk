@@ -584,13 +584,13 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async deleteSubscriptionsPaymentProfile(
-    subscriptionId: string,
+    subscriptionId: number,
     paymentProfileId: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       paymentProfileId: [paymentProfileId, string()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}.json`;
@@ -659,13 +659,13 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async updateSubscriptionDefaultPaymentProfile(
-    subscriptionId: string,
+    subscriptionId: number,
     paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
@@ -748,12 +748,12 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async sendRequestUpdatePaymentEmail(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/request_payment_profiles_update.json`;
     req.throwOn(404, ApiError, 'Not Found');

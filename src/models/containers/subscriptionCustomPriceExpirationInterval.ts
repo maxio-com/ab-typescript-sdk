@@ -7,13 +7,13 @@
 import { number, oneOf, Schema, string } from '../../schema';
 
 /** This is a container type for one-of types. */
-export type CustomPriceUsedForSubscriptionCreateUpdateInterval = string | number;
+export type SubscriptionCustomPriceExpirationInterval = string | number;
 
-export const customPriceUsedForSubscriptionCreateUpdateIntervalSchema: Schema<CustomPriceUsedForSubscriptionCreateUpdateInterval> = oneOf(
+export const subscriptionCustomPriceExpirationIntervalSchema: Schema<SubscriptionCustomPriceExpirationInterval> = oneOf(
   [string(), number()]
 );
 
-export namespace CustomPriceUsedForSubscriptionCreateUpdateInterval {
+export namespace SubscriptionCustomPriceExpirationInterval {
   /**
   * Validation method to narrow down union type to string type case.
   *

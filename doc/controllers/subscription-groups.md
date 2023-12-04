@@ -618,7 +618,7 @@ To create a new subscription into a subscription group, please reference the fol
 
 ```ts
 async createSubscriptionGroupHierarchy(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: AddSubscriptionToAGroup,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionGroupResponse>>
@@ -628,7 +628,7 @@ async createSubscriptionGroupHierarchy(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`AddSubscriptionToAGroup \| undefined`](../../doc/models/add-subscription-to-a-group.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -639,7 +639,7 @@ async createSubscriptionGroupHierarchy(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: AddSubscriptionToAGroup = {
   group: {
@@ -703,7 +703,7 @@ For sites making use of the [Relationship Billing](https://chargify.zendesk.com/
 
 ```ts
 async removeSubscriptionFromGroup(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
@@ -712,7 +712,7 @@ async removeSubscriptionFromGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -722,7 +722,7 @@ async removeSubscriptionFromGroup(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables

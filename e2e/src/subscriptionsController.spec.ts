@@ -269,7 +269,7 @@ describe('Subscriptions Controller', () => {
       ).result;
 
       const updateResponse = await subscriptionsController.updateSubscription(
-        String(subscriptionsResponse.subscription?.id),
+        subscriptionsResponse.subscription?.id || 0,
         {
           subscription: {
             creditCardAttributes: {
@@ -293,7 +293,7 @@ describe('Subscriptions Controller', () => {
       ).result;
 
       const promise = subscriptionsController.updateSubscription(
-        String(subscriptionsResponse.subscription?.id),
+        subscriptionsResponse.subscription?.id || 0,
         {
           subscription: {
             creditCardAttributes: {
@@ -323,14 +323,14 @@ describe('Subscriptions Controller', () => {
       ).result;
 
       const readResponse = await subscriptionsController.readSubscription(
-        String(subscriptionsResponse.subscription?.id)
+        subscriptionsResponse.subscription?.id || 0
       );
 
       expect(readResponse.statusCode).toBe(200);
     });
 
     test('should throw a 404 error when user try to read a subscription does not exist', async () => {
-      const promise = subscriptionsController.readSubscription('2001');
+      const promise = subscriptionsController.readSubscription(2001);
       expect(promise).rejects.toThrowError();
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(404);

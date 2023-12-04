@@ -759,7 +759,7 @@ This will delete a payment profile belonging to the customer on the subscription
 
 ```ts
 async deleteSubscriptionsPaymentProfile(
-  subscriptionId: string,
+  subscriptionId: number,
   paymentProfileId: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
@@ -769,7 +769,7 @@ async deleteSubscriptionsPaymentProfile(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -780,7 +780,7 @@ async deleteSubscriptionsPaymentProfile(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const paymentProfileId = 'payment_profile_id2';
 
@@ -956,7 +956,7 @@ You must elect to change the existing payment profile to a new payment profile I
 
 ```ts
 async updateSubscriptionDefaultPaymentProfile(
-  subscriptionId: string,
+  subscriptionId: number,
   paymentProfileId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaymentProfileResponse>>
@@ -966,7 +966,7 @@ async updateSubscriptionDefaultPaymentProfile(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -977,7 +977,7 @@ async updateSubscriptionDefaultPaymentProfile(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const paymentProfileId = 198;
 
@@ -1192,7 +1192,7 @@ These error responses are designed to prevent excessive or invalid requests, and
 
 ```ts
 async sendRequestUpdatePaymentEmail(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
@@ -1201,7 +1201,7 @@ async sendRequestUpdatePaymentEmail(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1211,7 +1211,7 @@ async sendRequestUpdatePaymentEmail(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables

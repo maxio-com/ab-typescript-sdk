@@ -24,7 +24,7 @@ We recommend using either the create or preview endpoints for proforma invoices 
 
 ```ts
 async issueAdvanceInvoice(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: IssueAdvanceInvoiceRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Invoice>>
@@ -34,7 +34,7 @@ async issueAdvanceInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`IssueAdvanceInvoiceRequest \| undefined`](../../doc/models/issue-advance-invoice-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -45,7 +45,7 @@ async issueAdvanceInvoice(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: IssueAdvanceInvoiceRequest = {
   force: true,
@@ -85,7 +85,7 @@ Once an advance invoice has been generated for a subscription's upcoming renewal
 
 ```ts
 async readAdvanceInvoice(
-  subscriptionId: string,
+  subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Invoice>>
 ```
@@ -94,7 +94,7 @@ async readAdvanceInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -104,7 +104,7 @@ async readAdvanceInvoice(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables
@@ -137,7 +137,7 @@ A `reason` is required in order to void, and the invoice must have an open statu
 
 ```ts
 async voidAdvanceInvoice(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: VoidInvoiceRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Invoice>>
@@ -147,7 +147,7 @@ async voidAdvanceInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`VoidInvoiceRequest \| undefined`](../../doc/models/void-invoice-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -158,7 +158,7 @@ async voidAdvanceInvoice(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 try {
   // @ts-expect-error: unused variables

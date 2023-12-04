@@ -59,12 +59,12 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * @return Response from the API call
    */
   async readAccountBalances(
-    subscriptionId: string,
+    subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<AccountBalances>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/account_balances.json`;
     return req.callAsJson(accountBalancesSchema, requestOptions);
@@ -88,13 +88,13 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * @return Response from the API call
    */
   async createPrepayment(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: CreatePrepaymentRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CreatePrepaymentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(createPrepaymentRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -139,7 +139,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     filterStartDate,
     filterEndDate,
   }: {
-    subscriptionId: string,
+    subscriptionId: number,
     page?: number,
     perPage?: number,
     filterDateField?: BasicDateField,
@@ -150,7 +150,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
   ): Promise<ApiResponse<PrepaymentsResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       filterDateField: [filterDateField, optional(basicDateFieldSchema)],
@@ -178,13 +178,13 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * @return Response from the API call
    */
   async issueServiceCredit(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: IssueServiceCreditRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ServiceCredit>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(issueServiceCreditRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -202,13 +202,13 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * @return Response from the API call
    */
   async deductServiceCredit(
-    subscriptionId: string,
+    subscriptionId: number,
     body?: DeductServiceCreditRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       body: [body, optional(deductServiceCreditRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -232,14 +232,14 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * @return Response from the API call
    */
   async refundPrepayment(
-    subscriptionId: string,
+    subscriptionId: number,
     prepaymentId: string,
     body?: RefundPrepaymentRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PrepaymentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
+      subscriptionId: [subscriptionId, number()],
       prepaymentId: [prepaymentId, string()],
       body: [body, optional(refundPrepaymentRequestSchema)],
     });

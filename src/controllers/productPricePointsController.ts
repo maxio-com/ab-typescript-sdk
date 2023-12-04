@@ -47,6 +47,10 @@ import {
   productPricePointResponseSchema,
 } from '../models/productPricePointResponse';
 import {
+  ProductResponse,
+  productResponseSchema,
+} from '../models/productResponse';
+import {
   SortingDirection,
   sortingDirectionSchema,
 } from '../models/sortingDirection';
@@ -225,6 +229,7 @@ export class ProductPricePointsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -258,18 +263,18 @@ export class ProductPricePointsController extends BaseController {
    * @param pricePointId   The Chargify id of the product price point
    * @return Response from the API call
    */
-  async setDefaultPricePointForProduct(
+  async promoteProductPricePointToDefault(
     productId: number,
     pricePointId: number,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointResponse>> {
+  ): Promise<ApiResponse<ProductResponse>> {
     const req = this.createRequest('PATCH');
     const mapped = req.prepareArgs({
       productId: [productId, number()],
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/default.json`;
-    return req.callAsJson(productPricePointResponseSchema, requestOptions);
+    return req.callAsJson(productResponseSchema, requestOptions);
   }
 
   /**
@@ -350,7 +355,7 @@ export class ProductPricePointsController extends BaseController {
     productPricePointId: number,
     body?: UpdateCurrencyPricesRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointCurrencyPrice[]>> {
+  ): Promise<ApiResponse<ProductPricePointCurrencyPrice>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       productPricePointId: [productPricePointId, number()],
@@ -359,10 +364,8 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    return req.callAsJson(
-      array(productPricePointCurrencyPriceSchema),
-      requestOptions
-    );
+    req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
+    return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
   }
 
   /**

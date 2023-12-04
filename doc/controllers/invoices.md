@@ -1984,7 +1984,7 @@ Only ungrouped or primary subscriptions may be paid using the "bulk" payment req
 
 ```ts
 async recordPaymentForSubscription(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: RecordPaymentRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaymentResponse>>
@@ -1994,7 +1994,7 @@ async recordPaymentForSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`RecordPaymentRequest \| undefined`](../../doc/models/record-payment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -2005,7 +2005,7 @@ async recordPaymentForSubscription(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: RecordPaymentRequest = {
   payment: {
@@ -2691,7 +2691,7 @@ By default, invoices will be created with open status. Possible alternative is `
 
 ```ts
 async createInvoice(
-  subscriptionId: string,
+  subscriptionId: number,
   body?: CreateInvoiceRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<InvoiceResponse>>
@@ -2701,7 +2701,7 @@ async createInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `string` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CreateInvoiceRequest \| undefined`](../../doc/models/create-invoice-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -2712,7 +2712,7 @@ async createInvoice(
 ## Example Usage
 
 ```ts
-const subscriptionId = 'subscription_id0';
+const subscriptionId = 222;
 
 const body: CreateInvoiceRequest = {
   invoice: {
