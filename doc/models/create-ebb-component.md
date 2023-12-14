@@ -29,7 +29,7 @@
         "unit_price": 23.26
       }
     ],
-    "upgrade_charge": "upgrade_charge0",
+    "upgrade_charge": "full",
     "event_based_billing_metric_id": 68
   }
 }

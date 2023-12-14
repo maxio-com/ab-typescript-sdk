@@ -18,6 +18,7 @@ import {
   AllocationPayment2,
   allocationPayment2Schema,
 } from './containers/allocationPayment2';
+import { CreditType, creditTypeSchema } from './creditType';
 
 export interface Allocation {
   /** The integer component ID for the allocation. This references a component that you have created in your Product setup */
@@ -42,10 +43,16 @@ export interface Allocation {
   previousPricePointId?: number;
   /** If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. */
   accrueCharge?: boolean;
-  /** The type of charge to be created if the change in cost is an upgrade. */
-  upgradeCharge?: string;
-  /** The type of credit to be created if the change in cost is a downgrade. */
-  downgradeCredit?: string;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  upgradeCharge?: CreditType | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  downgradeCredit?: CreditType | null;
   payment?: AllocationPayment2 | null;
 }
 
@@ -63,8 +70,8 @@ export const allocationSchema: Schema<Allocation> = object({
   pricePointHandle: ['price_point_handle', optional(string())],
   previousPricePointId: ['previous_price_point_id', optional(number())],
   accrueCharge: ['accrue_charge', optional(boolean())],
-  upgradeCharge: ['upgrade_charge', optional(string())],
-  downgradeCredit: ['downgrade_credit', optional(string())],
+  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
   payment: [
     'payment',
     optional(nullable(lazy(() => allocationPayment2Schema))),

@@ -1,9 +1,9 @@
 
-# Status 1
+# Create Invoice Status
 
 ## Enumeration
 
-`Status1`
+`CreateInvoiceStatus`
 
 ## Fields
 

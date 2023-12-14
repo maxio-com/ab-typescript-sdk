@@ -417,7 +417,7 @@ async archiveComponent(
   productFamilyId: number,
   componentId: string,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ComponentResponse>>
+): Promise<ApiResponse<Component>>
 ```
 
 ## Parameters
@@ -430,7 +430,7 @@ async archiveComponent(
 
 ## Response Type
 
-[`ComponentResponse`](../../doc/models/component-response.md)
+[`Component`](../../doc/models/component.md)
 
 ## Example Usage
 
@@ -462,27 +462,25 @@ try {
 
 ```json
 {
-  "component": {
-    "id": 25407138,
-    "name": "cillum aute",
-    "pricing_scheme": "in incididu",
-    "unit_name": "nulla in",
-    "unit_price": "Excepteur veniam",
-    "product_family_id": -56705047,
-    "kind": "prepaid_usage_component",
-    "archived": true,
-    "taxable": false,
-    "description": "reprehenderit laborum qui fugiat",
-    "default_price_point_id": -64328176,
-    "price_point_count": 15252407,
-    "price_points_url": "dolor mollit consequat",
-    "tax_code": "ea nisi",
-    "recurring": false,
-    "created_at": "dolor qui deserunt tempor",
-    "default_price_point_name": "cupidatat Lorem non aliqua",
-    "product_family_name": "do elit",
-    "hide_date_range_on_invoice": false
-  }
+  "id": 25407138,
+  "name": "cillum aute",
+  "pricing_scheme": "stairstep",
+  "unit_name": "nulla in",
+  "unit_price": "Excepteur veniam",
+  "product_family_id": -56705047,
+  "kind": "prepaid_usage_component",
+  "archived": true,
+  "taxable": false,
+  "description": "reprehenderit laborum qui fugiat",
+  "default_price_point_id": -64328176,
+  "price_point_count": 15252407,
+  "price_points_url": "dolor mollit consequat",
+  "tax_code": "ea nisi",
+  "recurring": false,
+  "created_at": "dolor qui deserunt tempor",
+  "default_price_point_name": "cupidatat Lorem non aliqua",
+  "product_family_name": "do elit",
+  "hide_date_range_on_invoice": false
 }
 ```
 
@@ -665,7 +663,7 @@ async updateComponent(
   componentId: string,
   body?: UpdateComponentRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -678,7 +676,7 @@ async updateComponent(
 
 ## Response Type
 
-`void`
+[`ComponentResponse`](../../doc/models/component-response.md)
 
 ## Example Usage
 
@@ -710,6 +708,42 @@ try {
 }
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "component": {
+    "id": 399853,
+    "name": "Annual Support Services",
+    "pricing_scheme": null,
+    "unit_name": "on/off",
+    "unit_price": "100.0",
+    "product_family_id": 997233,
+    "price_per_unit_in_cents": null,
+    "kind": "on_off_component",
+    "archived": false,
+    "taxable": true,
+    "description": "Prepay for support services",
+    "default_price_point_id": 121003,
+    "price_point_count": 4,
+    "price_points_url": "https://general-goods.chargify.com/components/399853/price_points",
+    "tax_code": "D0000000",
+    "recurring": true,
+    "upgrade_charge": null,
+    "downgrade_credit": null,
+    "created_at": "2019-08-02T05:54:53-04:00",
+    "default_price_point_name": "Original",
+    "product_family_name": "Chargify"
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Update Default Price Point for Component
 
@@ -724,7 +758,7 @@ async updateDefaultPricePointForComponent(
   componentId: number,
   pricePointId: number,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -737,7 +771,7 @@ async updateDefaultPricePointForComponent(
 
 ## Response Type
 
-`void`
+[`ComponentResponse`](../../doc/models/component-response.md)
 
 ## Example Usage
 
@@ -761,6 +795,39 @@ try {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "component": {
+    "id": 292609,
+    "name": "Text messages",
+    "pricing_scheme": "stairstep",
+    "unit_name": "text message",
+    "unit_price": null,
+    "product_family_id": 528484,
+    "price_per_unit_in_cents": null,
+    "kind": "metered_component",
+    "archived": false,
+    "taxable": false,
+    "description": null,
+    "created_at": "2019-08-02T05:54:53-04:00",
+    "prices": [
+      {
+        "id": 47,
+        "component_id": 292609,
+        "starting_quantity": 1,
+        "ending_quantity": null,
+        "unit_price": "1.0",
+        "price_point_id": 173,
+        "formatted_unit_price": "$1.00"
+      }
+    ],
+    "default_price_point_name": "Original"
   }
 }
 ```
@@ -962,7 +1029,7 @@ const componentId = 222;
 const body: CreateComponentPricePointRequest = {
   pricePoint: {
     name: 'Wholesale',
-    pricingScheme: 'stairstep',
+    pricingScheme: PricingScheme.Stairstep,
     prices: [
       {
         startingQuantity: '1',
@@ -1141,7 +1208,7 @@ const body: CreateComponentPricePointsRequest = {
   pricePoints: [
     {
       name: 'Wholesale',
-      pricingScheme: 'per_unit',
+      pricingScheme: PricingScheme.PerUnit,
       prices: [
         {
           startingQuantity: 1,
@@ -1152,7 +1219,7 @@ const body: CreateComponentPricePointsRequest = {
     },
     {
       name: 'MSRP',
-      pricingScheme: 'per_unit',
+      pricingScheme: PricingScheme.PerUnit,
       prices: [
         {
           startingQuantity: 1,
@@ -1163,7 +1230,7 @@ const body: CreateComponentPricePointsRequest = {
     },
     {
       name: 'Special Pricing',
-      pricingScheme: 'per_unit',
+      pricingScheme: PricingScheme.PerUnit,
       prices: [
         {
           startingQuantity: 1,

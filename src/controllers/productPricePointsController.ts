@@ -21,6 +21,38 @@ import {
   bulkCreateProductPricePointsResponseSchema,
 } from '../models/bulkCreateProductPricePointsResponse';
 import {
+  ArchiveProductPricePointPricePointId,
+  archiveProductPricePointPricePointIdSchema,
+} from '../models/containers/archiveProductPricePointPricePointId';
+import {
+  ArchiveProductPricePointProductId,
+  archiveProductPricePointProductIdSchema,
+} from '../models/containers/archiveProductPricePointProductId';
+import {
+  CreateProductPricePointProductId,
+  createProductPricePointProductIdSchema,
+} from '../models/containers/createProductPricePointProductId';
+import {
+  ListProductPricePointsInputProductId,
+  listProductPricePointsInputProductIdSchema,
+} from '../models/containers/listProductPricePointsInputProductId';
+import {
+  ReadProductPricePointPricePointId,
+  readProductPricePointPricePointIdSchema,
+} from '../models/containers/readProductPricePointPricePointId';
+import {
+  ReadProductPricePointProductId,
+  readProductPricePointProductIdSchema,
+} from '../models/containers/readProductPricePointProductId';
+import {
+  UpdateProductPricePointPricePointId,
+  updateProductPricePointPricePointIdSchema,
+} from '../models/containers/updateProductPricePointPricePointId';
+import {
+  UpdateProductPricePointProductId,
+  updateProductPricePointProductIdSchema,
+} from '../models/containers/updateProductPricePointProductId';
+import {
   CreateProductCurrencyPricesRequest,
   createProductCurrencyPricesRequestSchema,
 } from '../models/createProductCurrencyPricesRequest';
@@ -75,13 +107,13 @@ export class ProductPricePointsController extends BaseController {
    * @return Response from the API call
    */
   async createProductPricePoint(
-    productId: number,
+    productId: CreateProductPricePointProductId,
     body?: CreateProductPricePointRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductPricePointResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productId: [productId, number()],
+      productId: [productId, createProductPricePointProductIdSchema],
       body: [body, optional(createProductPricePointRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -94,25 +126,30 @@ export class ProductPricePointsController extends BaseController {
   /**
    * Use this endpoint to retrieve a list of product price points.
    *
-   * @param productId       The id or handle of the product. When using the handle, it must be
-   *                                            prefixed with `handle:`
-   * @param page            Result records are organized in pages. By default, the first page of
-   *                                            results is displayed. The page parameter specifies a page number of
-   *                                            results to fetch. You can start navigating through the pages to consume
-   *                                            the results. You do this by passing in a page parameter. Retrieve the
-   *                                            next page by adding ?page=2 to the query string. If there are no
-   *                                            results to return, then an empty result set will be returned. Use in
-   *                                            query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each request.
-   *                                            Default value is 10. The maximum allowed values is 200; any per_page
-   *                                            value over 200 will be changed to 200.
-   * @param currencyPrices  When fetching a product's price points, if you have defined multiple
-   *                                            currencies at the site level, you can optionally pass the ?
-   *                                            currency_prices=true query param to include an array of currency price
-   *                                            data in the response. If the product price point is set to
-   *                                            use_site_exchange_rate: true, it will return pricing based on the
-   *                                            current exchange rate. If the flag is set to false, it will return all
-   *                                            of the defined prices for each currency.
+   * @param productId       The id or handle of the product. When using the
+   *                                                                handle, it must be prefixed with `handle:`
+   * @param page            Result records are organized in pages. By default,
+   *                                                                the first page of results is displayed. The page
+   *                                                                parameter specifies a page number of results to
+   *                                                                fetch. You can start navigating through the pages
+   *                                                                to consume the results. You do this by passing in a
+   *                                                                page parameter. Retrieve the next page by adding ?
+   *                                                                page=2 to the query string. If there are no results
+   *                                                                to return, then an empty result set will be
+   *                                                                returned. Use in query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch
+   *                                                                in each request. Default value is 10. The maximum
+   *                                                                allowed values is 200; any per_page value over 200
+   *                                                                will be changed to 200.
+   * @param currencyPrices  When fetching a product's price points, if you
+   *                                                                have defined multiple currencies at the site level,
+   *                                                                you can optionally pass the ?currency_prices=true
+   *                                                                query param to include an array of currency price
+   *                                                                data in the response. If the product price point is
+   *                                                                set to use_site_exchange_rate: true, it will return
+   *                                                                pricing based on the current exchange rate. If the
+   *                                                                flag is set to false, it will return all of the
+   *                                                                defined prices for each currency.
    * @param filterType      Use in query: `filter[type]=catalog,default`.
    * @return Response from the API call
    */
@@ -123,7 +160,7 @@ export class ProductPricePointsController extends BaseController {
     currencyPrices,
     filterType,
   }: {
-    productId: number,
+    productId: ListProductPricePointsInputProductId,
     page?: number,
     perPage?: number,
     currencyPrices?: boolean,
@@ -133,7 +170,7 @@ export class ProductPricePointsController extends BaseController {
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      productId: [productId, number()],
+      productId: [productId, listProductPricePointsInputProductIdSchema],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       currencyPrices: [currencyPrices, optional(boolean())],
@@ -160,15 +197,15 @@ export class ProductPricePointsController extends BaseController {
    * @return Response from the API call
    */
   async updateProductPricePoint(
-    productId: number,
-    pricePointId: number,
+    productId: UpdateProductPricePointProductId,
+    pricePointId: UpdateProductPricePointPricePointId,
     body?: UpdateProductPricePointRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductPricePointResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      productId: [productId, number()],
-      pricePointId: [pricePointId, number()],
+      productId: [productId, updateProductPricePointProductIdSchema],
+      pricePointId: [pricePointId, updateProductPricePointPricePointIdSchema],
       body: [body, optional(updateProductPricePointRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -180,28 +217,31 @@ export class ProductPricePointsController extends BaseController {
   /**
    * Use this endpoint to retrieve details for a specific product price point.
    *
-   * @param productId       The id or handle of the product. When using the handle, it must be prefixed
-   *                                   with `handle:`
-   * @param pricePointId    The id or handle of the price point. When using the handle, it must be prefixed
-   *                                   with `handle:`
-   * @param currencyPrices  When fetching a product's price points, if you have defined multiple currencies
-   *                                   at the site level, you can optionally pass the ?currency_prices=true query param
-   *                                   to include an array of currency price data in the response. If the product price
-   *                                   point is set to use_site_exchange_rate: true, it will return pricing based on
-   *                                   the current exchange rate. If the flag is set to false, it will return all of
-   *                                   the defined prices for each currency.
+   * @param productId       The id or handle of the product. When using the
+   *                                                             handle, it must be prefixed with `handle:`
+   * @param pricePointId    The id or handle of the price point. When using the
+   *                                                             handle, it must be prefixed with `handle:`
+   * @param currencyPrices  When fetching a product's price points, if you have
+   *                                                             defined multiple currencies at the site level, you can
+   *                                                             optionally pass the ?currency_prices=true query param
+   *                                                             to include an array of currency price data in the
+   *                                                             response. If the product price point is set to
+   *                                                             use_site_exchange_rate: true, it will return pricing
+   *                                                             based on the current exchange rate. If the flag is set
+   *                                                             to false, it will return all of the defined prices for
+   *                                                             each currency.
    * @return Response from the API call
    */
   async readProductPricePoint(
-    productId: number,
-    pricePointId: number,
+    productId: ReadProductPricePointProductId,
+    pricePointId: ReadProductPricePointPricePointId,
     currencyPrices?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductPricePointResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      productId: [productId, number()],
-      pricePointId: [pricePointId, number()],
+      productId: [productId, readProductPricePointProductIdSchema],
+      pricePointId: [pricePointId, readProductPricePointPricePointIdSchema],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
     req.query('currency_prices', mapped.currencyPrices);
@@ -212,21 +252,21 @@ export class ProductPricePointsController extends BaseController {
   /**
    * Use this endpoint to archive a product price point.
    *
-   * @param productId      The id or handle of the product. When using the handle, it must be prefixed with
-   *                                 `handle:`
-   * @param pricePointId   The id or handle of the price point. When using the handle, it must be prefixed
-   *                                 with `handle:`
+   * @param productId      The id or handle of the product. When using the
+   *                                                               handle, it must be prefixed with `handle:`
+   * @param pricePointId   The id or handle of the price point. When using the
+   *                                                               handle, it must be prefixed with `handle:`
    * @return Response from the API call
    */
   async archiveProductPricePoint(
-    productId: number,
-    pricePointId: number,
+    productId: ArchiveProductPricePointProductId,
+    pricePointId: ArchiveProductPricePointPricePointId,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductPricePointResponse>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      productId: [productId, number()],
-      pricePointId: [pricePointId, number()],
+      productId: [productId, archiveProductPricePointProductIdSchema],
+      pricePointId: [pricePointId, archiveProductPricePointPricePointIdSchema],
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');

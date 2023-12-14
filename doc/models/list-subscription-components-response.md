@@ -19,7 +19,7 @@
     {
       "id": 138,
       "name": "name2",
-      "kind": "kind0",
+      "kind": "metered_component",
       "unit_name": "unit_name4",
       "enabled": false
     }

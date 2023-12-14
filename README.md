@@ -271,10 +271,10 @@ It is up to API consumers to parse the string into a decimal number representati
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install advanced-billing-sdk@0.0.3
+npm install @maxio-com/advanced-billing-sdk@0.0.3
 ```
 
-For additional package details, see the [Npm page for the advanced-billing-sdk@0.0.3 npm](https://www.npmjs.com/package/advanced-billing-sdk/v/0.0.3).
+For additional package details, see the [Npm page for the @maxio-com/advanced-billing-sdk@0.0.3 npm](https://www.npmjs.com/package/@maxio-com/advanced-billing-sdk/v/0.0.3).
 
 ## Initialize the API Client
 

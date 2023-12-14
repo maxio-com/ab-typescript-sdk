@@ -31,7 +31,7 @@ export interface Coupon {
   amount?: number | null;
   amountInCents?: number | null;
   productFamilyId?: number;
-  productFamilyName?: string;
+  productFamilyName?: string | null;
   startDate?: string;
   endDate?: string | null;
   percentage?: number | null;
@@ -40,7 +40,7 @@ export interface Coupon {
   durationPeriodCount?: number | null;
   durationInterval?: number | null;
   durationIntervalUnit?: string | null;
-  durationIntervalSpan?: string;
+  durationIntervalSpan?: string | null;
   allowNegativeBalance?: boolean;
   archivedAt?: string | null;
   conversionLimit?: string | null;
@@ -63,7 +63,7 @@ export const couponSchema: Schema<Coupon> = object({
   amount: ['amount', optional(nullable(number()))],
   amountInCents: ['amount_in_cents', optional(nullable(number()))],
   productFamilyId: ['product_family_id', optional(number())],
-  productFamilyName: ['product_family_name', optional(string())],
+  productFamilyName: ['product_family_name', optional(nullable(string()))],
   startDate: ['start_date', optional(string())],
   endDate: ['end_date', optional(nullable(string()))],
   percentage: ['percentage', optional(nullable(number()))],
@@ -75,7 +75,10 @@ export const couponSchema: Schema<Coupon> = object({
     'duration_interval_unit',
     optional(nullable(string())),
   ],
-  durationIntervalSpan: ['duration_interval_span', optional(string())],
+  durationIntervalSpan: [
+    'duration_interval_span',
+    optional(nullable(string())),
+  ],
   allowNegativeBalance: ['allow_negative_balance', optional(boolean())],
   archivedAt: ['archived_at', optional(nullable(string()))],
   conversionLimit: ['conversion_limit', optional(nullable(string()))],

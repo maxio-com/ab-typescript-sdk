@@ -18,8 +18,8 @@
 | `prorationUpgradeScheme` | `string \| undefined` | Optional | - |
 | `prorationDowngradeScheme` | `string \| undefined` | Optional | - |
 | `accrueCharge` | `boolean \| undefined` | Optional | - |
-| `upgradeCharge` | `string \| undefined` | Optional | - |
-| `downgradeCredit` | `string \| undefined` | Optional | - |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `previousPricePointId` | `number \| undefined` | Optional | - |
 | `componentHandle` | `string \| undefined` | Optional | - |

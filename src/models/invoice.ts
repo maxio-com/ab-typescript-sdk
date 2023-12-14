@@ -40,8 +40,8 @@ import {
 } from './invoicePreviousBalance';
 import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
 import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
+import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
-import { Status, statusSchema } from './status';
 
 export interface Invoice {
   id?: bigint;
@@ -80,7 +80,7 @@ export interface Invoice {
    */
   paidDate?: string | null;
   /** The current status of the invoice. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
-  status?: Status;
+  status?: InvoiceStatus;
   role?: string;
   parentInvoiceId?: number | null;
   /** The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant). */
@@ -168,7 +168,7 @@ export const invoiceSchema: Schema<Invoice> = object({
   issueDate: ['issue_date', optional(string())],
   dueDate: ['due_date', optional(string())],
   paidDate: ['paid_date', optional(nullable(string()))],
-  status: ['status', optional(statusSchema)],
+  status: ['status', optional(invoiceStatusSchema)],
   role: ['role', optional(string())],
   parentInvoiceId: ['parent_invoice_id', optional(nullable(number()))],
   collectionMethod: ['collection_method', optional(string())],

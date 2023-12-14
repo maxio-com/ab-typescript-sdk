@@ -19,7 +19,7 @@
     {
       "name": "name0",
       "handle": "handle6",
-      "pricing_scheme": "pricing_scheme8",
+      "pricing_scheme": "per_unit",
       "prices": [
         {
           "starting_quantity": 242,
@@ -42,7 +42,7 @@
     {
       "name": "name0",
       "handle": "handle6",
-      "pricing_scheme": "pricing_scheme8",
+      "pricing_scheme": "per_unit",
       "prices": [
         {
           "starting_quantity": 242,

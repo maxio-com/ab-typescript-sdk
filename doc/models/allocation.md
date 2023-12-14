@@ -22,8 +22,8 @@
 | `pricePointHandle` | `string \| undefined` | Optional | - |
 | `previousPricePointId` | `number \| undefined` | Optional | - |
 | `accrueCharge` | `boolean \| undefined` | Optional | If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. |
-| `upgradeCharge` | `string \| undefined` | Optional | The type of charge to be created if the change in cost is an upgrade. |
-| `downgradeCredit` | `string \| undefined` | Optional | The type of credit to be created if the change in cost is a downgrade. |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `payment` | [`AllocationPayment2 \| null \| undefined`](../../doc/models/containers/allocation-payment-2.md) | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)

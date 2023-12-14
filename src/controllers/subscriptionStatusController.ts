@@ -504,6 +504,7 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/renewals/preview.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(renewalPreviewResponseSchema, requestOptions);
   }
 }

@@ -13,7 +13,7 @@
 | `type` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `mDefault` | `boolean \| undefined` | Optional | Note: Refer to type attribute instead |
 | `name` | `string \| undefined` | Optional | - |
-| `pricingScheme` | `string \| undefined` | Optional | - |
+| `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `componentId` | `number \| undefined` | Optional | - |
 | `handle` | `string \| undefined` | Optional | - |
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
@@ -33,7 +33,7 @@
   "type": "custom",
   "default": false,
   "name": "name2",
-  "pricing_scheme": "pricing_scheme6"
+  "pricing_scheme": "stairstep"
 }
 ```
 

@@ -12,6 +12,7 @@ import { Schema, stringEnum } from '../schema';
 export enum InvoiceEventType {
   IssueInvoice = 'issue_invoice',
   ApplyCreditNote = 'apply_credit_note',
+  CreateCreditNote = 'create_credit_note',
   ApplyPayment = 'apply_payment',
   ApplyDebitNote = 'apply_debit_note',
   RefundInvoice = 'refund_invoice',
@@ -21,6 +22,8 @@ export enum InvoiceEventType {
   ChangeInvoiceStatus = 'change_invoice_status',
   ChangeInvoiceCollectionMethod = 'change_invoice_collection_method',
   RemovePayment = 'remove_payment',
+  FailedPayment = 'failed_payment',
+  ChangeChargebackStatus = 'change_chargeback_status',
 }
 
 /**

@@ -18,7 +18,10 @@
   "usage": {
     "quantity": 162.34,
     "price_point_id": "price_point_id0",
-    "memo": "memo2"
+    "memo": "memo2",
+    "billing_schedule": {
+      "initial_billing_at": "2016-03-13T12:52:32.123Z"
+    }
   }
 }
 ```

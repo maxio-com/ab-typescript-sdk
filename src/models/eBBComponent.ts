@@ -8,6 +8,7 @@ import {
   array,
   boolean,
   lazy,
+  nullable,
   number,
   object,
   optional,
@@ -22,6 +23,7 @@ import {
   EBBComponentUnitPrice,
   eBBComponentUnitPriceSchema,
 } from './containers/eBBComponentUnitPrice';
+import { CreditType, creditTypeSchema } from './creditType';
 import { Price, priceSchema } from './price';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
@@ -40,8 +42,16 @@ export interface EBBComponent {
   pricingScheme: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
-  upgradeCharge?: string;
-  downgradeCredit?: string;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  upgradeCharge?: CreditType | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  downgradeCredit?: CreditType | null;
   pricePoints?: ComponentPricePointItem[];
   /** The amount the customer will be charged per unit when the pricing scheme is “per_unit”. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065 */
   unitPrice?: EBBComponentUnitPrice;
@@ -63,8 +73,8 @@ export const eBBComponentSchema: Schema<EBBComponent> = object({
   taxable: ['taxable', optional(boolean())],
   pricingScheme: ['pricing_scheme', pricingSchemeSchema],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
-  upgradeCharge: ['upgrade_charge', optional(string())],
-  downgradeCredit: ['downgrade_credit', optional(string())],
+  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
   pricePoints: [
     'price_points',
     optional(array(lazy(() => componentPricePointItemSchema))),

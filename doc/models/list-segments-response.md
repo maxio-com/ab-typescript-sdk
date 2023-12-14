@@ -21,7 +21,7 @@
       "component_id": 160,
       "price_point_id": 184,
       "event_based_billing_metric_id": 244,
-      "pricing_scheme": "pricing_scheme8"
+      "pricing_scheme": "stairstep"
     }
   ]
 }

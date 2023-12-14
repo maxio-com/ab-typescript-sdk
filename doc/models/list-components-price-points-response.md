@@ -22,7 +22,7 @@
       "type": "default",
       "default": false,
       "name": "name2",
-      "pricing_scheme": "pricing_scheme4"
+      "pricing_scheme": "per_unit"
     }
   ]
 }

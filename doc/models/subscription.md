@@ -69,6 +69,8 @@
 | `scheduledCancellationAt` | `string \| null \| undefined` | Optional | - |
 | `creditBalanceInCents` | `bigint \| undefined` | Optional | - |
 | `prepaymentBalanceInCents` | `bigint \| undefined` | Optional | - |
+| `prepaidConfiguration` | [`PrepaidConfiguration \| undefined`](../../doc/models/prepaid-configuration.md) | Optional | - |
+| `selfServicePageToken` | `string \| undefined` | Optional | Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided. |
 
 ## Example (as JSON)
 
