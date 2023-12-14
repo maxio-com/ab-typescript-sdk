@@ -16,8 +16,8 @@
 | `taxable` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
-| `upgradeCharge` | `string \| undefined` | Optional | - |
-| `downgradeCredit` | `string \| undefined` | Optional | - |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `pricePoints` | [`ComponentPricePointItem[] \| undefined`](../../doc/models/component-price-point-item.md) | Optional | - |
 | `unitPrice` | [`QuantityBasedComponentUnitPrice \| undefined`](../../doc/models/containers/quantity-based-component-unit-price.md) | Optional | This is a container for one-of cases. |
 | `taxCode` | `string \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
@@ -45,7 +45,7 @@
       "unit_price": 23.26
     }
   ],
-  "upgrade_charge": "upgrade_charge0"
+  "upgrade_charge": "full"
 }
 ```
 

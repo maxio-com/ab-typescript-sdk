@@ -8,6 +8,7 @@ import {
   array,
   boolean,
   lazy,
+  nullable,
   number,
   object,
   optional,
@@ -18,6 +19,7 @@ import {
   PrepaidUsageComponentUnitPrice,
   prepaidUsageComponentUnitPriceSchema,
 } from './containers/prepaidUsageComponentUnitPrice';
+import { CreditType, creditTypeSchema } from './creditType';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { OveragePricing, overagePricingSchema } from './overagePricing';
 import {
@@ -42,8 +44,16 @@ export interface PrepaidUsageComponent {
   pricingScheme?: PricingScheme;
   /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
-  upgradeCharge?: string;
-  downgradeCredit?: string;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  upgradeCharge?: CreditType | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  downgradeCredit?: CreditType | null;
   pricePoints?: PrepaidComponentPricePoint[];
   /** The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065 */
   unitPrice?: PrepaidUsageComponentUnitPrice;
@@ -75,8 +85,8 @@ export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = object
     taxable: ['taxable', optional(boolean())],
     pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],
-    upgradeCharge: ['upgrade_charge', optional(string())],
-    downgradeCredit: ['downgrade_credit', optional(string())],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
     pricePoints: [
       'price_points',
       optional(array(lazy(() => prepaidComponentPricePointSchema))),

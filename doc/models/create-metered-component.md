@@ -39,7 +39,7 @@
         "unit_price": 23.26
       }
     ],
-    "upgrade_charge": "upgrade_charge2"
+    "upgrade_charge": "none"
   }
 }
 ```

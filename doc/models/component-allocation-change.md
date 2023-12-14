@@ -15,7 +15,7 @@
 | `componentHandle` | `string` | Required | - |
 | `memo` | `string` | Required | - |
 | `allocationId` | `number` | Required | - |
-| `allocatedQuantity` | `number \| undefined` | Optional | - |
+| `allocatedQuantity` | [`ComponentAllocationChangeAllocatedQuantity \| undefined`](../../doc/models/containers/component-allocation-change-allocated-quantity.md) | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 
@@ -27,7 +27,7 @@
   "component_handle": "component_handle8",
   "memo": "memo2",
   "allocation_id": 158,
-  "allocated_quantity": 182
+  "allocated_quantity": 104
 }
 ```
 

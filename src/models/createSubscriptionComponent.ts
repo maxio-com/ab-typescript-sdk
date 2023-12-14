@@ -10,6 +10,10 @@ import {
   componentCustomPriceSchema,
 } from './componentCustomPrice';
 import {
+  CreateSubscriptionComponentAllocatedQuantity,
+  createSubscriptionComponentAllocatedQuantitySchema,
+} from './containers/createSubscriptionComponentAllocatedQuantity';
+import {
   CreateSubscriptionComponentComponentId,
   createSubscriptionComponentComponentIdSchema,
 } from './containers/createSubscriptionComponentComponentId';
@@ -25,7 +29,7 @@ export interface CreateSubscriptionComponent {
   /** Used for metered and events based components. */
   unitBalance?: number;
   /** Used for quantity based components. */
-  allocatedQuantity?: number;
+  allocatedQuantity?: CreateSubscriptionComponentAllocatedQuantity;
   /** Deprecated. Use `allocated_quantity` instead. */
   quantity?: number;
   pricePointId?: CreateSubscriptionComponentPricePointId;
@@ -41,7 +45,10 @@ export const createSubscriptionComponentSchema: Schema<CreateSubscriptionCompone
     ],
     enabled: ['enabled', optional(boolean())],
     unitBalance: ['unit_balance', optional(number())],
-    allocatedQuantity: ['allocated_quantity', optional(number())],
+    allocatedQuantity: [
+      'allocated_quantity',
+      optional(createSubscriptionComponentAllocatedQuantitySchema),
+    ],
     quantity: ['quantity', optional(number())],
     pricePointId: [
       'price_point_id',

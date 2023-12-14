@@ -18,6 +18,11 @@ import {
 } from '../schema';
 import { ComponentKind, componentKindSchema } from './componentKind';
 import { ComponentPrice, componentPriceSchema } from './componentPrice';
+import {
+  ComponentPricingScheme,
+  componentPricingSchemeSchema,
+} from './containers/componentPricingScheme';
+import { CreditType, creditTypeSchema } from './creditType';
 import { ItemCategory, itemCategorySchema } from './itemCategory';
 
 export interface Component {
@@ -27,8 +32,7 @@ export interface Component {
   name?: string;
   /** The component API handle */
   handle?: string | null;
-  /** The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes. */
-  pricingScheme?: string | null;
+  pricingScheme?: ComponentPricingScheme | null;
   /** The name of the unit that the component’s usage is measured in. i.e. message */
   unitName?: string;
   /** The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. */
@@ -58,8 +62,16 @@ export interface Component {
   /** A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
   taxCode?: string | null;
   recurring?: boolean;
-  upgradeCharge?: string | null;
-  downgradeCredit?: string | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  upgradeCharge?: CreditType | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  downgradeCredit?: CreditType | null;
   /** Timestamp indicating when this component was created */
   createdAt?: string;
   /** Timestamp indicating when this component was updated */
@@ -82,7 +94,10 @@ export const componentSchema: Schema<Component> = object({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(nullable(string()))],
-  pricingScheme: ['pricing_scheme', optional(nullable(string()))],
+  pricingScheme: [
+    'pricing_scheme',
+    optional(nullable(componentPricingSchemeSchema)),
+  ],
   unitName: ['unit_name', optional(string())],
   unitPrice: ['unit_price', optional(nullable(string()))],
   productFamilyId: ['product_family_id', optional(number())],
@@ -105,8 +120,8 @@ export const componentSchema: Schema<Component> = object({
   defaultPricePointName: ['default_price_point_name', optional(string())],
   taxCode: ['tax_code', optional(nullable(string()))],
   recurring: ['recurring', optional(boolean())],
-  upgradeCharge: ['upgrade_charge', optional(nullable(string()))],
-  downgradeCredit: ['downgrade_credit', optional(nullable(string()))],
+  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
   archivedAt: ['archived_at', optional(nullable(string()))],

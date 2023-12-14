@@ -13,7 +13,7 @@
 | `componentId` | `number \| undefined` | Optional | - |
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `eventBasedBillingMetricId` | `number \| undefined` | Optional | - |
-| `pricingScheme` | `string \| undefined` | Optional | - |
+| `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `segmentProperty1Value` | [`SegmentSegmentProperty1Value \| undefined`](../../doc/models/containers/segment-segment-property-1-value.md) | Optional | This is a container for one-of cases. |
 | `segmentProperty2Value` | [`SegmentSegmentProperty2Value \| undefined`](../../doc/models/containers/segment-segment-property-2-value.md) | Optional | This is a container for one-of cases. |
 | `segmentProperty3Value` | [`SegmentSegmentProperty3Value \| undefined`](../../doc/models/containers/segment-segment-property-3-value.md) | Optional | This is a container for one-of cases. |
@@ -30,7 +30,7 @@
   "component_id": 116,
   "price_point_id": 140,
   "event_based_billing_metric_id": 200,
-  "pricing_scheme": "pricing_scheme0"
+  "pricing_scheme": "stairstep"
 }
 ```
 

@@ -11,19 +11,19 @@
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | - |
-| `kind` | `string \| undefined` | Optional | - |
+| `kind` | [`ComponentKind \| undefined`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
 | `unitName` | `string \| undefined` | Optional | - |
 | `enabled` | `boolean \| undefined` | Optional | (for on/off components) indicates if the component is enabled for the subscription |
 | `unitBalance` | `number \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
-| `allocatedQuantity` | `number \| undefined` | Optional | For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off. |
-| `pricingScheme` | `string \| null \| undefined` | Optional | - |
+| `allocatedQuantity` | [`SubscriptionComponentAllocatedQuantity \| undefined`](../../doc/models/containers/subscription-component-allocated-quantity.md) | Optional | This is a container for one-of cases. |
+| `pricingScheme` | [`SubscriptionComponentPricingScheme \| null \| undefined`](../../doc/models/containers/subscription-component-pricing-scheme.md) | Optional | This is a container for one-of cases. |
 | `componentId` | `number \| undefined` | Optional | - |
 | `componentHandle` | `string \| null \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
 | `recurring` | `boolean \| undefined` | Optional | - |
-| `upgradeCharge` | `string \| null \| undefined` | Optional | - |
-| `downgradeCredit` | `string \| null \| undefined` | Optional | - |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
 | `pricePointId` | `number \| null \| undefined` | Optional | - |
 | `pricePointHandle` | `string \| null \| undefined` | Optional | - |
@@ -45,7 +45,7 @@
 {
   "id": 20,
   "name": "name8",
-  "kind": "kind6",
+  "kind": "quantity_based_component",
   "unit_name": "unit_name0",
   "enabled": false
 }

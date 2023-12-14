@@ -18,12 +18,13 @@
 | `billingAddress` | [`CreateInvoiceAddress \| undefined`](../../doc/models/create-invoice-address.md) | Optional | Overrides the default for the customer |
 | `shippingAddress` | [`CreateInvoiceAddress \| undefined`](../../doc/models/create-invoice-address.md) | Optional | Overrides the default for the customer |
 | `coupons` | [`CreateInvoiceCoupon[] \| undefined`](../../doc/models/create-invoice-coupon.md) | Optional | - |
-| `status` | [`Status1 \| undefined`](../../doc/models/status-1.md) | Optional | **Default**: `Status1.Open` |
+| `status` | [`CreateInvoiceStatus \| undefined`](../../doc/models/create-invoice-status.md) | Optional | **Default**: `CreateInvoiceStatus.Open` |
 
 ## Example (as JSON)
 
 ```json
 {
+  "issue_date": "2024-01-01",
   "status": "draft",
   "line_items": [
     {
@@ -34,7 +35,6 @@
       "tax_code": "tax_code6"
     }
   ],
-  "issue_date": "issue_date2",
   "net_terms": 18,
   "payment_instructions": "payment_instructions0",
   "memo": "memo6"

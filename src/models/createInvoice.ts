@@ -22,7 +22,10 @@ import {
   createInvoiceCouponSchema,
 } from './createInvoiceCoupon';
 import { CreateInvoiceItem, createInvoiceItemSchema } from './createInvoiceItem';
-import { Status1, status1Schema } from './status1';
+import {
+  CreateInvoiceStatus,
+  createInvoiceStatusSchema,
+} from './createInvoiceStatus';
 
 export interface CreateInvoice {
   lineItems?: CreateInvoiceItem[];
@@ -39,7 +42,7 @@ export interface CreateInvoice {
   /** Overrides the default for the customer */
   shippingAddress?: CreateInvoiceAddress;
   coupons?: CreateInvoiceCoupon[];
-  status?: Status1;
+  status?: CreateInvoiceStatus;
 }
 
 export const createInvoiceSchema: Schema<CreateInvoice> = object({
@@ -64,5 +67,5 @@ export const createInvoiceSchema: Schema<CreateInvoice> = object({
     optional(lazy(() => createInvoiceAddressSchema)),
   ],
   coupons: ['coupons', optional(array(lazy(() => createInvoiceCouponSchema)))],
-  status: ['status', optional(status1Schema)],
+  status: ['status', optional(createInvoiceStatusSchema)],
 });

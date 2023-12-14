@@ -9,7 +9,7 @@ import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
 } from './invoiceConsolidationLevel';
-import { Status, statusSchema } from './status';
+import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 
 /** Example schema for an `issue_invoice` event */
 export interface IssueInvoiceEventData {
@@ -23,9 +23,9 @@ export interface IssueInvoiceEventData {
    */
   consolidationLevel?: InvoiceConsolidationLevel;
   /** The status of the invoice before event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
-  fromStatus?: Status;
+  fromStatus?: InvoiceStatus;
   /** The status of the invoice after event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
-  toStatus?: Status;
+  toStatus?: InvoiceStatus;
   /** Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`. */
   dueAmount?: string;
   /** The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.' */
@@ -38,8 +38,8 @@ export const issueInvoiceEventDataSchema: Schema<IssueInvoiceEventData> = object
       'consolidation_level',
       optional(invoiceConsolidationLevelSchema),
     ],
-    fromStatus: ['from_status', optional(statusSchema)],
-    toStatus: ['to_status', optional(statusSchema)],
+    fromStatus: ['from_status', optional(invoiceStatusSchema)],
+    toStatus: ['to_status', optional(invoiceStatusSchema)],
     dueAmount: ['due_amount', optional(string())],
     totalAmount: ['total_amount', optional(string())],
   }

@@ -47,6 +47,7 @@ import {
   InvoiceSortField,
   invoiceSortFieldSchema,
 } from '../models/invoiceSortField';
+import { InvoiceStatus, invoiceStatusSchema } from '../models/invoiceStatus';
 import {
   IssueInvoiceRequest,
   issueInvoiceRequestSchema,
@@ -83,7 +84,6 @@ import {
   SendInvoiceRequest,
   sendInvoiceRequestSchema,
 } from '../models/sendInvoiceRequest';
-import { Status, statusSchema } from '../models/status';
 import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
@@ -213,7 +213,7 @@ export class InvoicesController extends BaseController {
   }: {
     startDate?: string,
     endDate?: string,
-    status?: Status,
+    status?: InvoiceStatus,
     subscriptionId?: number,
     subscriptionGroupUid?: string,
     page?: number,
@@ -240,7 +240,7 @@ export class InvoicesController extends BaseController {
     const mapped = req.prepareArgs({
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
-      status: [status, optional(statusSchema)],
+      status: [status, optional(invoiceStatusSchema)],
       subscriptionId: [subscriptionId, optional(number())],
       subscriptionGroupUid: [subscriptionGroupUid, optional(string())],
       page: [page, optional(number())],
@@ -319,6 +319,10 @@ export class InvoicesController extends BaseController {
    * + change_invoice_status
    * + change_invoice_collection_method
    * + remove_payment
+   * + failed_payment
+   * + apply_debit_note
+   * + create_debit_note
+   * + change_chargeback_status
    *
    * Invoice events are returned in ascending order.
    *

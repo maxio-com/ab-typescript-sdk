@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `automaticallyResumeAt` | `string \| undefined` | Optional | - |
+| `automaticallyResumeAt` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

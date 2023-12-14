@@ -55,7 +55,7 @@ const pricePointId = 'price_point_id8';
 
 const body: CreateSegmentRequest = {
   segment: {
-    pricingScheme: 'volume',
+    pricingScheme: PricingScheme.Volume,
     segmentProperty1Value: 'France',
     segmentProperty2Value: 'Spain',
     prices: [

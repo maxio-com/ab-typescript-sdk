@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | - |
 | `handle` | `string \| undefined` | Optional | - |
-| `pricingScheme` | `string \| undefined` | Optional | - |
+| `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | - |
 
 ## Example (as JSON)
@@ -20,7 +20,7 @@
 {
   "name": "name6",
   "handle": "handle2",
-  "pricing_scheme": "pricing_scheme2",
+  "pricing_scheme": "per_unit",
   "prices": [
     {
       "starting_quantity": 242,

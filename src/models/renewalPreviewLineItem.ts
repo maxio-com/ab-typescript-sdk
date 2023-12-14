@@ -19,6 +19,8 @@ export interface RenewalPreviewLineItem {
   componentHandle?: string;
   componentName?: string;
   productHandle?: string;
+  periodRangeStart?: string;
+  periodRangeEnd?: string;
 }
 
 export const renewalPreviewLineItemSchema: Schema<RenewalPreviewLineItem> = object(
@@ -35,5 +37,7 @@ export const renewalPreviewLineItemSchema: Schema<RenewalPreviewLineItem> = obje
     componentHandle: ['component_handle', optional(string())],
     componentName: ['component_name', optional(string())],
     productHandle: ['product_handle', optional(string())],
+    periodRangeStart: ['period_range_start', optional(string())],
+    periodRangeEnd: ['period_range_end', optional(string())],
   }
 );

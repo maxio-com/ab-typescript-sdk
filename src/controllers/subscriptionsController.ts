@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, plainPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import {
@@ -46,6 +46,10 @@ import {
   SubscriptionInclude,
   subscriptionIncludeSchema,
 } from '../models/subscriptionInclude';
+import {
+  SubscriptionListInclude,
+  subscriptionListIncludeSchema,
+} from '../models/subscriptionListInclude';
 import {
   SubscriptionPreviewResponse,
   subscriptionPreviewResponseSchema,
@@ -178,8 +182,7 @@ export class SubscriptionsController extends BaseController {
    * ## Prepaid Subscription
    *
    * A prepaid subscription can be created with the usual subscription creation parameters, specifying
-   * `prepaid` as the `payment_collection_method` and including a nested
-   * `prepaid_subscription_configuration`.
+   * `prepaid` as the `payment_collection_method` and including a nested `prepaid_configuration`.
    *
    * After a prepaid subscription has been created, additional funds can be manually added to the
    * prepayment account through the [Create Prepayment Endpoint](https://developers.chargify.com/docs/api-
@@ -906,59 +909,66 @@ export class SubscriptionsController extends BaseController {
    * desired, the include[]=self_service_page_token parameter must be provided with the request.
    *
    * @param page                   Result records are organized in pages. By default, the
-   *                                                          first page of results is displayed. The page parameter
-   *                                                          specifies a page number of results to fetch. You can
-   *                                                          start navigating through the pages to consume the results.
-   *                                                          You do this by passing in a page parameter. Retrieve the
-   *                                                          next page by adding ?page=2 to the query string. If there
-   *                                                          are no results to return, then an empty result set will
-   *                                                          be returned. Use in query `page=1`.
+   *                                                            first page of results is displayed. The page parameter
+   *                                                            specifies a page number of results to fetch. You can
+   *                                                            start navigating through the pages to consume the
+   *                                                            results. You do this by passing in a page parameter.
+   *                                                            Retrieve the next page by adding ?page=2 to the query
+   *                                                            string. If there are no results to return, then an
+   *                                                            empty result set will be returned. Use in query
+   *                                                            `page=1`.
    * @param perPage                This parameter indicates how many records to fetch in
-   *                                                          each request. Default value is 20. The maximum allowed
-   *                                                          values is 200; any per_page value over 200 will be
-   *                                                          changed to 200. Use in query `per_page=200`.
+   *                                                            each request. Default value is 20. The maximum allowed
+   *                                                            values is 200; any per_page value over 200 will be
+   *                                                            changed to 200. Use in query `per_page=200`.
    * @param state                  The current state of the subscription
    * @param product                The product id of the subscription. (Note that the
-   *                                                          product handle cannot be used.)
-   * @param productPricePointId    The ID of the product price point. If supplied, product
-   *                                                          is required
+   *                                                            product handle cannot be used.)
+   * @param productPricePointId    The ID of the product price point. If supplied,
+   *                                                            product is required
    * @param coupon                 The numeric id of the coupon currently applied to the
-   *                                                          subscription. (This can be found in the URL when editing
-   *                                                          a coupon. Note that the coupon code cannot be used.)
+   *                                                            subscription. (This can be found in the URL when
+   *                                                            editing a coupon. Note that the coupon code cannot be
+   *                                                            used.)
    * @param dateField              The type of filter you'd like to apply to your search.
-   *                                                          Allowed Values: , current_period_ends_at,
-   *                                                          current_period_starts_at, created_at, activated_at,
-   *                                                          canceled_at, expires_at, trial_started_at, trial_ended_at,
-   *                                                          updated_at
-   * @param startDate              The start date (format YYYY-MM-DD) with which to filter
-   *                                                          the date_field. Returns subscriptions with a timestamp at
-   *                                                          or after midnight (12:00:00 AM) in your site’s time zone
-   *                                                          on the date specified. Use in query `start_date=2022-07-
-   *                                                          01`.
+   *                                                            Allowed Values: , current_period_ends_at,
+   *                                                            current_period_starts_at, created_at, activated_at,
+   *                                                            canceled_at, expires_at, trial_started_at,
+   *                                                            trial_ended_at, updated_at
+   * @param startDate              The start date (format YYYY-MM-DD) with which to
+   *                                                            filter the date_field. Returns subscriptions with a
+   *                                                            timestamp at or after midnight (12:00:00 AM) in your
+   *                                                            site’s time zone on the date specified. Use in query
+   *                                                            `start_date=2022-07-01`.
    * @param endDate                The end date (format YYYY-MM-DD) with which to filter
-   *                                                          the date_field. Returns subscriptions with a timestamp up
-   *                                                          to and including 11:59:59PM in your site’s time zone on
-   *                                                          the date specified. Use in query `end_date=2022-08-01`.
+   *                                                            the date_field. Returns subscriptions with a timestamp
+   *                                                            up to and including 11:59:59PM in your site’s time zone
+   *                                                            on the date specified. Use in query `end_date=2022-08-
+   *                                                            01`.
    * @param startDatetime          The start date and time (format YYYY-MM-DD HH:MM:SS)
-   *                                                          with which to filter the date_field. Returns
-   *                                                          subscriptions with a timestamp at or after exact time
-   *                                                          provided in query. You can specify timezone in query -
-   *                                                          otherwise your site's time zone will be used. If provided,
-   *                                                          this parameter will be used instead of start_date. Use
-   *                                                          in query `start_datetime=2022-07-01 09:00:05`.
-   * @param endDatetime            The end date and time (format YYYY-MM-DD HH:MM:SS) with
-   *                                                          which to filter the date_field. Returns subscriptions
-   *                                                          with a timestamp at or before exact time provided in
-   *                                                          query. You can specify timezone in query - otherwise your
-   *                                                          site's time zone will be used. If provided, this
-   *                                                          parameter will be used instead of end_date. Use in query
-   *                                                          `end_datetime=2022-08-01 10:00:05`.
+   *                                                            with which to filter the date_field. Returns
+   *                                                            subscriptions with a timestamp at or after exact time
+   *                                                            provided in query. You can specify timezone in query -
+   *                                                            otherwise your site's time zone will be used. If
+   *                                                            provided, this parameter will be used instead of
+   *                                                            start_date. Use in query `start_datetime=2022-07-01 09:
+   *                                                            00:05`.
+   * @param endDatetime            The end date and time (format YYYY-MM-DD HH:MM:SS)
+   *                                                            with which to filter the date_field. Returns
+   *                                                            subscriptions with a timestamp at or before exact time
+   *                                                            provided in query. You can specify timezone in query -
+   *                                                            otherwise your site's time zone will be used. If
+   *                                                            provided, this parameter will be used instead of
+   *                                                            end_date. Use in query `end_datetime=2022-08-01 10:00:
+   *                                                            05`.
    * @param metadata               The value of the metadata field specified in the
-   *                                                          parameter. Use in query `metadata[my-
-   *                                                          field]=value&metadata[other-field]=another_value`.
-   * @param direction              Controls the order in which results are returned. Use in
-   *                                                          query `direction=asc`.
+   *                                                            parameter. Use in query `metadata[my-
+   *                                                            field]=value&metadata[other-field]=another_value`.
+   * @param direction              Controls the order in which results are returned. Use
+   *                                                            in query `direction=asc`.
    * @param sort                   The attribute by which to sort
+   * @param include                Allows including additional data in the response. Use
+   *                                                            in query: `include[]=self_service_page_token`.
    * @return Response from the API call
    */
   async listSubscriptions({
@@ -976,6 +986,7 @@ export class SubscriptionsController extends BaseController {
     metadata,
     direction,
     sort,
+    include,
   }: {
     page?: number,
     perPage?: number,
@@ -991,6 +1002,7 @@ export class SubscriptionsController extends BaseController {
     metadata?: Record<string, string>,
     direction?: SortingDirection,
     sort?: SubscriptionSort,
+    include?: SubscriptionListInclude[],
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse[]>> {
@@ -1010,6 +1022,7 @@ export class SubscriptionsController extends BaseController {
       metadata: [metadata, optional(dict(string()))],
       direction: [direction, optional(sortingDirectionSchema)],
       sort: [sort, optional(subscriptionSortSchema)],
+      include: [include, optional(array(subscriptionListIncludeSchema))],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
@@ -1025,6 +1038,7 @@ export class SubscriptionsController extends BaseController {
     req.query(mapped.metadata);
     req.query('direction', mapped.direction);
     req.query('sort', mapped.sort);
+    req.query('include[]', mapped.include, commaPrefix);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
   }
 
