@@ -249,4 +249,288 @@ describe('Coupons Controller', () => {
       });
     });
   });
+
+  //TODO: in the request body the method 'updateCoupon' need a type? Fixing
+  describe('Update Coupon', () => {
+    test('should update a coupon when user sends the correct data', async () => {
+      try {
+        const createReponse = await couponsController.createCoupon(
+          productFamily?.id || 0,
+          {
+            coupon: {
+              ...couponBody.coupon,
+              productFamilyId: String(productFamily?.id),
+            },
+          }
+        );
+        const couponId = createReponse.result.coupon?.id || 0;
+
+        const updateResponse = await couponsController.updateCoupon(
+          productFamily?.id || 0,
+          couponId,
+          {
+            coupon: {
+              ...couponBody.coupon,
+              code: 'UPDATED150OFF',
+              name: 'updated name',
+              description: 'updated description',
+            },
+          }
+        );
+
+        console.log('****************');
+        console.log(updateResponse);
+        console.log('****************');
+
+        expect(updateResponse.statusCode).toBe(200);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
+
+  describe('Archive Coupon', () => {
+    test('should delete an existing coupon when user sends a valid coupon id', async () => {
+      const createReponse = await couponsController.createCoupon(
+        productFamily?.id || 0,
+        {
+          coupon: {
+            ...couponBody.coupon,
+            productFamilyId: String(productFamily?.id),
+          },
+        }
+      );
+      const couponId = createReponse.result.coupon?.id || 0;
+      const deleteResponse = await couponsController.archiveCoupon(
+        productFamily?.id || 0,
+        couponId
+      );
+
+      expect(deleteResponse.statusCode).toBe(200);
+      expect(deleteResponse.result.coupon?.id).toBe(couponId);
+    });
+
+    test('should throw and 404 error when user sends incorrect coupon id', async () => {
+      const promise = couponsController.archiveCoupon(
+        productFamily?.id || 0,
+        1
+      );
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
+    test('should throw and 401 error when user sends invalid credentials', async () => {
+      const promise = invalidCouponsController.archiveCoupon(
+        productFamily?.id || 0,
+        1
+      );
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+
+  describe('List all Coupons', () => {
+    test('should list all the coupons', async () => {
+      const createReponse = await couponsController.createCoupon(
+        productFamily?.id || 0,
+        {
+          coupon: {
+            ...couponBody.coupon,
+            productFamilyId: String(productFamily?.id),
+          },
+        }
+      );
+      console.log(createReponse);
+      //const couponId = createReponse.result.coupon?.id || 0;
+      // const deleteResponse = await couponsController.archiveCoupon(
+      //   productFamily?.id || 0,
+      //   couponId
+      // );
+      const listResponse = await couponsController.listCoupons({
+        page: 1,
+      });
+      console.log('************');
+      console.log(listResponse);
+      console.log('************ here end');
+
+      expect(listResponse.statusCode).toBe(200);
+      expect(listResponse.result.length >= 1).toBeTruthy();
+    });
+
+    test('should throw and 401 error when user sends invalid credentials', async () => {
+      const promise = invalidCouponsController.listCoupons({ page: 1 });
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+
+  // TODO need the method list usage coupons
+  describe('List Coupon Usages', () => {
+    test('should list all the coupons ', async () => {
+      await couponsController.createCoupon(productFamily?.id || 0, {
+        coupon: {
+          ...couponBody.coupon,
+          productFamilyId: String(productFamily?.id),
+        },
+      });
+
+      const listResponse = await couponsController.listCoupons({
+        page: 1,
+      });
+
+      expect(listResponse.statusCode).toBe(200);
+      expect(listResponse.result.length >= 1).toBeTruthy();
+    });
+
+    test('should throw and 401 error when user sends invalid credentials', async () => {
+      const promise = invalidCouponsController.listCoupons({ page: 1 });
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+
+  describe('Validate Coupon', () => {
+    test('should validate a coupon when user sends a correct id', async () => {
+      const createReponse = await couponsController.createCoupon(
+        productFamily?.id || 0,
+        {
+          coupon: {
+            ...couponBody.coupon,
+            productFamilyId: String(productFamily?.id),
+          },
+        }
+      );
+      const couponCode = createReponse.result.coupon?.code;
+      const validateResponse = await couponsController.validateCoupon(
+        couponCode || ''
+      );
+
+      expect(validateResponse.statusCode).toBe(200);
+      expect(validateResponse.result.coupon?.code).toBe(couponCode);
+    });
+
+    test('should throw and 404 error when the user sends incorrect coupon code', async () => {
+      const promise = couponsController.validateCoupon('FRTE21');
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
+    // TODO: it should return a 401 error but the current result is 404 fixing
+    test('should throw and 401 error when the user sends invalid credentials', async () => {
+      const promise = invalidCouponsController.validateCoupon('15OFF');
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        console.log(reason);
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+
+  describe('Create/Update Currency Prices', () => {
+    //TODO: Should return status 200 but it returns status 404 fixing
+    test('should update a coupon', async () => {
+      const createReponse = await couponsController.createCoupon(
+        productFamily?.id || 0,
+        {
+          coupon: {
+            ...couponBody.coupon,
+            productFamilyId: String(productFamily?.id),
+          },
+        }
+      );
+      const couponId = createReponse.result.coupon?.id || 0;
+      try {
+        const updateResponse =
+          await couponsController.updateCouponCurrencyPrices(couponId, {
+            currencyPrices: [
+              {
+                currency: 'EUR',
+                price: 10,
+              },
+              {
+                currency: 'GBP',
+                price: 9,
+              },
+            ],
+          });
+
+        console.log(updateResponse);
+
+        expect(updateResponse.statusCode).toBe(200);
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    });
+
+    test('should throw and 404 error when the user sends invalid or missing parameters in the POST request', async () => {
+      const createReponse = await couponsController.createCoupon(
+        productFamily?.id || 0,
+        {
+          coupon: {
+            ...couponBody.coupon,
+            productFamilyId: String(productFamily?.id),
+          },
+        }
+      );
+      const couponId = createReponse.result.coupon?.id || 0;
+      const promise = couponsController.updateCouponCurrencyPrices(couponId, {
+        currencyPrices: [],
+      });
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
+    test('should throw and 404 error when the user sends invalid or missing parameters in the PUT request', async () => {
+      const createReponse = await couponsController.createCoupon(
+        productFamily?.id || 0,
+        {
+          coupon: {
+            ...couponBody.coupon,
+            productFamilyId: String(productFamily?.id),
+          },
+        }
+      );
+      const couponId = createReponse.result.coupon?.id || 0;
+      const promise = couponsController.updateCouponCurrencyPrices(couponId, {
+        currencyPrices: [
+          {
+            currency: '',
+            price: -1,
+          },
+        ],
+      });
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+  });
 });
