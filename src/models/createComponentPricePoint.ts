@@ -14,11 +14,13 @@ import {
   string,
 } from '../schema';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface CreateComponentPricePoint {
   name: string;
   handle?: string;
-  pricingScheme: string;
+  /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
+  pricingScheme: PricingScheme;
   prices: Price[];
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
   useSiteExchangeRate?: boolean;
@@ -28,7 +30,7 @@ export const createComponentPricePointSchema: Schema<CreateComponentPricePoint> 
   {
     name: ['name', string()],
     handle: ['handle', optional(string())],
-    pricingScheme: ['pricing_scheme', string()],
+    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
     prices: ['prices', array(lazy(() => priceSchema))],
     useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
   }

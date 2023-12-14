@@ -6,25 +6,25 @@
 
 import { oneOf, Schema, validateAndMap } from '../../schema';
 import {
-  SubscriptionGroupInlined,
-  subscriptionGroupInlinedSchema,
-} from '../subscriptionGroupInlined';
+  NestedSubscriptionGroup,
+  nestedSubscriptionGroupSchema,
+} from '../nestedSubscriptionGroup';
 
 /** This is a container type for one-of types. */
-export type SubscriptionGroup2 = SubscriptionGroupInlined;
+export type SubscriptionGroup2 = NestedSubscriptionGroup;
 
 export const subscriptionGroup2Schema: Schema<SubscriptionGroup2> = oneOf([
-  subscriptionGroupInlinedSchema,
+  nestedSubscriptionGroupSchema,
 ]);
 
 export namespace SubscriptionGroup2 {
   /**
-  * Validation method to narrow down union type to SubscriptionGroupInlined type case.
+  * Validation method to narrow down union type to NestedSubscriptionGroup type case.
   *
-  * This is Subscription Group Inlined case.
+  * This is Nested Subscription Group case.
   */
-  export function isSubscriptionGroupInlined(value: unknown): value is SubscriptionGroupInlined {
-    const validationResult = validateAndMap(value, subscriptionGroupInlinedSchema);
+  export function isNestedSubscriptionGroup(value: unknown): value is NestedSubscriptionGroup {
+    const validationResult = validateAndMap(value, nestedSubscriptionGroupSchema);
     return validationResult.errors === false;
   }
 }

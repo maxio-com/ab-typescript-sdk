@@ -20,7 +20,7 @@
 ```json
 {
   "id": 78,
-  "event_type": "remove_payment",
+  "event_type": "void_invoice",
   "event_data": {
     "uid": "uid2",
     "credit_note_number": "credit_note_number4",

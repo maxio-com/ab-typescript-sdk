@@ -12,7 +12,7 @@
 | `id` | `number \| undefined` | Optional | The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. |
 | `name` | `string \| undefined` | Optional | The name of the Component, suitable for display on statements. i.e. Text Messages. |
 | `handle` | `string \| null \| undefined` | Optional | The component API handle |
-| `pricingScheme` | `string \| null \| undefined` | Optional | The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes. |
+| `pricingScheme` | [`ComponentPricingScheme \| null \| undefined`](../../doc/models/containers/component-pricing-scheme.md) | Optional | This is a container for one-of cases. |
 | `unitName` | `string \| undefined` | Optional | The name of the unit that the component’s usage is measured in. i.e. message |
 | `unitPrice` | `string \| null \| undefined` | Optional | The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. |
 | `productFamilyId` | `number \| undefined` | Optional | The id of the Product Family to which the Component belongs |
@@ -29,8 +29,8 @@
 | `defaultPricePointName` | `string \| undefined` | Optional | - |
 | `taxCode` | `string \| null \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
 | `recurring` | `boolean \| undefined` | Optional | - |
-| `upgradeCharge` | `string \| null \| undefined` | Optional | - |
-| `downgradeCredit` | `string \| null \| undefined` | Optional | - |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this component was created |
 | `updatedAt` | `string \| undefined` | Optional | Timestamp indicating when this component was updated |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this component was archived |
@@ -49,7 +49,7 @@
   "id": 24,
   "name": "name2",
   "handle": "handle8",
-  "pricing_scheme": "pricing_scheme6",
+  "pricing_scheme": "tiered",
   "unit_name": "unit_name4"
 }
 ```

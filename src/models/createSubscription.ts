@@ -27,10 +27,6 @@ import {
 } from './bankAccountAttributes';
 import { CalendarBilling, calendarBillingSchema } from './calendarBilling';
 import {
-  CreateSubscriptionGroup2,
-  createSubscriptionGroup2Schema,
-} from './containers/createSubscriptionGroup2';
-import {
   CreateSubscriptionOfferId,
   createSubscriptionOfferIdSchema,
 } from './containers/createSubscriptionOfferId';
@@ -42,6 +38,7 @@ import {
   CustomerAttributes,
   customerAttributesSchema,
 } from './customerAttributes';
+import { GroupSettings, groupSettingsSchema } from './groupSettings';
 import {
   PaymentCollectionMethod,
   paymentCollectionMethodSchema,
@@ -107,7 +104,7 @@ export interface CreateSubscription {
   metafields?: Record<string, string>;
   /** The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given. */
   customerReference?: string;
-  group?: CreateSubscriptionGroup2;
+  group?: GroupSettings;
   /** A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail. */
   ref?: string;
   /** (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation. */
@@ -134,7 +131,7 @@ export interface CreateSubscription {
   productChangeDelayed?: boolean;
   /** Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify id of the offer or its handle prefixed with `handle:`.er */
   offerId?: CreateSubscriptionOfferId;
-  prepaidSubscriptionConfiguration?: UpsertPrepaidConfiguration;
+  prepaidConfiguration?: UpsertPrepaidConfiguration;
   /** Providing a previous_billing_at that is in the past will set the current_period_starts_at when the subscription is created. It will also set activated_at if not explicitly passed during the subscription import. Can only be used if next_billing_at is also passed. Using this option will allow you to set the period start for the subscription so mid period component allocations have the correct prorated amount. */
   previousBillingAt?: string;
   /** Setting this attribute to true will cause the subscription's MRR to be added to your MRR analytics immediately. For this value to be honored, a next_billing_at must be present and set to a future date. This key/value will not be returned in the subscription response body. */
@@ -206,7 +203,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   ],
   metafields: ['metafields', optional(dict(string()))],
   customerReference: ['customer_reference', optional(string())],
-  group: ['group', optional(createSubscriptionGroup2Schema)],
+  group: ['group', optional(lazy(() => groupSettingsSchema))],
   ref: ['ref', optional(string())],
   cancellationMessage: ['cancellation_message', optional(string())],
   cancellationMethod: ['cancellation_method', optional(string())],
@@ -226,8 +223,8 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   reasonCode: ['reason_code', optional(string())],
   productChangeDelayed: ['product_change_delayed', optional(boolean())],
   offerId: ['offer_id', optional(createSubscriptionOfferIdSchema)],
-  prepaidSubscriptionConfiguration: [
-    'prepaid_subscription_configuration',
+  prepaidConfiguration: [
+    'prepaid_configuration',
     optional(lazy(() => upsertPrepaidConfigurationSchema)),
   ],
   previousBillingAt: ['previous_billing_at', optional(string())],

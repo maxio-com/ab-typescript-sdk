@@ -21,6 +21,8 @@
 | `componentHandle` | `string \| undefined` | Optional | - |
 | `componentName` | `string \| undefined` | Optional | - |
 | `productHandle` | `string \| undefined` | Optional | - |
+| `periodRangeStart` | `string \| undefined` | Optional | - |
+| `periodRangeEnd` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

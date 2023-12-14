@@ -18,7 +18,7 @@
   "component": {
     "id": 80,
     "name": "name8",
-    "kind": "kind6",
+    "kind": "quantity_based_component",
     "unit_name": "unit_name0",
     "enabled": false
   }

@@ -4,12 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { nullable, object, optional, Schema, string } from '../schema';
 
 export interface AutoResume {
-  automaticallyResumeAt?: string;
+  automaticallyResumeAt?: string | null;
 }
 
 export const autoResumeSchema: Schema<AutoResume> = object({
-  automaticallyResumeAt: ['automatically_resume_at', optional(string())],
+  automaticallyResumeAt: [
+    'automatically_resume_at',
+    optional(nullable(string())),
+  ],
 });

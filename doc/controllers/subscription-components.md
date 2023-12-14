@@ -195,9 +195,9 @@ try {
       "component_id": 0,
       "subscription_id": 0,
       "allocated_quantity": 0,
-      "pricing_scheme": "string",
+      "pricing_scheme": "per_unit",
       "name": "string",
-      "kind": "string",
+      "kind": "quantity_based_component",
       "unit_name": "string",
       "price_point_id": 0,
       "price_point_handle": "string",
@@ -206,8 +206,8 @@ try {
       "enabled": true,
       "unit_balance": 0,
       "id": 0,
-      "created_at": "string",
-      "updated_at": "string",
+      "created_at": "2022-02-22T14:07:00-05:00",
+      "updated_at": "2022-02-22T14:07:00-05:00",
       "component_handle": "string",
       "archived_at": "string"
     }
@@ -1232,7 +1232,7 @@ A. No. Usage should be reported as one API call per component on a single subscr
 ```ts
 async createUsage(
   subscriptionId: number,
-  componentId: number,
+  componentId: CreateUsageComponentId,
   body?: CreateUsageRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<UsageResponse>>
@@ -1243,7 +1243,7 @@ async createUsage(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `componentId` | `number` | Template, Required | Either the Chargify id for the component or the component's handle prefixed by `handle:` |
+| `componentId` | [`CreateUsageComponentId`](../../doc/models/containers/create-usage-component-id.md) | Template, Required | This is a container for one-of cases. |
 | `body` | [`CreateUsageRequest \| undefined`](../../doc/models/create-usage-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1256,7 +1256,7 @@ async createUsage(
 ```ts
 const subscriptionId = 222;
 
-const componentId = 222;
+const componentId: CreateUsageComponentId = 144;
 
 const body: CreateUsageRequest = {
   usage: {
@@ -1331,7 +1331,7 @@ Use this endpoint to read the previously recorded components for a subscription.
 ```ts
 async listUsages(
   subscriptionId: number,
-  componentId: number,
+  componentId: ListUsagesInputComponentId,
   sinceId?: number,
   maxId?: number,
   sinceDate?: string,
@@ -1347,7 +1347,7 @@ async listUsages(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `componentId` | `number` | Template, Required | Either the Chargify id for the component or the component's handle prefixed by `handle:` |
+| `componentId` | [`ListUsagesInputComponentId`](../../doc/models/containers/list-usages-input-component-id.md) | Template, Required | This is a container for one-of cases. |
 | `sinceId` | `number \| undefined` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
 | `maxId` | `number \| undefined` | Query, Optional | Returns usages with an id less than or equal to the one specified |
 | `sinceDate` | `string \| undefined` | Query, Optional | Returns usages with a created_at date greater than or equal to midnight (12:00 AM) on the date specified. |
@@ -1365,7 +1365,7 @@ async listUsages(
 ```ts
 const collect = {
   subscriptionId: 222,
-  componentId: 222,
+  componentId: 144,
   page: 2,
   perPage: 50
 }

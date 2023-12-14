@@ -16,6 +16,7 @@ import {
   createSubscriptionRequestSchema,
 } from '../models/createSubscriptionRequest';
 import { Direction, directionSchema } from '../models/direction';
+import { InvoiceStatus, invoiceStatusSchema } from '../models/invoiceStatus';
 import {
   ProformaInvoice,
   proformaInvoiceSchema,
@@ -28,7 +29,6 @@ import {
   SignupProformaPreviewResponse,
   signupProformaPreviewResponseSchema,
 } from '../models/signupProformaPreviewResponse';
-import { Status, statusSchema } from '../models/status';
 import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
@@ -147,19 +147,21 @@ export class ProformaInvoicesController extends BaseController {
    * include breakdowns, pass the specific field as a key in the query with a value set to `true`.
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param startDate       The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format.
-   * @param endDate         The ending date range for the invoice's Due Date, in the YYYY-MM-DD format.
+   * @param startDate       The beginning date range for the invoice's Due Date, in the YYYY-MM-DD
+   *                                         format.
+   * @param endDate         The ending date range for the invoice's Due Date, in the YYYY-MM-DD
+   *                                         format.
    * @param status          The current status of the invoice.  Allowed Values: draft, open, paid,
-   *                                     pending, voided
-   * @param page            Result records are organized in pages. By default, the first page of results
-   *                                     is displayed. The page parameter specifies a page number of results to fetch.
-   *                                     You can start navigating through the pages to consume the results. You do this
-   *                                     by passing in a page parameter. Retrieve the next page by adding ?page=2 to
-   *                                     the query string. If there are no results to return, then an empty result set
-   *                                     will be returned. Use in query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each request. Default
-   *                                     value is 20. The maximum allowed values is 200; any per_page value over 200
-   *                                     will be changed to 200. Use in query `per_page=200`.
+   *                                         pending, voided
+   * @param page            Result records are organized in pages. By default, the first page of
+   *                                         results is displayed. The page parameter specifies a page number of
+   *                                         results to fetch. You can start navigating through the pages to consume
+   *                                         the results. You do this by passing in a page parameter. Retrieve the next
+   *                                         page by adding ?page=2 to the query string. If there are no results to
+   *                                         return, then an empty result set will be returned. Use in query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each request.
+   *                                         Default value is 20. The maximum allowed values is 200; any per_page value
+   *                                         over 200 will be changed to 200. Use in query `per_page=200`.
    * @param direction       The sort direction of the returned invoices.
    * @param lineItems       Include line items data
    * @param discounts       Include discounts data
@@ -187,7 +189,7 @@ export class ProformaInvoicesController extends BaseController {
     subscriptionId: number,
     startDate?: string,
     endDate?: string,
-    status?: Status,
+    status?: InvoiceStatus,
     page?: number,
     perPage?: number,
     direction?: Direction,
@@ -205,7 +207,7 @@ export class ProformaInvoicesController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
-      status: [status, optional(statusSchema)],
+      status: [status, optional(invoiceStatusSchema)],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       direction: [direction, optional(directionSchema)],

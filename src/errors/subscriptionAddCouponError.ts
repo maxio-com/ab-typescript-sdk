@@ -11,6 +11,7 @@ import { ApiError } from '../core';
  */
 interface SubscriptionAddCoupon {
   codes?: string[];
+  coupon_code?: string[];
   coupon_codes?: string[];
   subscription?: string[];
 }

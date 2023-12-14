@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `number` | Required | The ID of the segment you want to update. |
-| `pricingScheme` | `string` | Required | The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes. |
+| `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`CreateOrUpdateSegmentPrice[]`](../../doc/models/create-or-update-segment-price.md) | Required | - |
 
 ## Example (as JSON)
@@ -18,7 +18,7 @@
 ```json
 {
   "id": 180,
-  "pricing_scheme": "pricing_scheme0",
+  "pricing_scheme": "per_unit",
   "prices": [
     {
       "starting_quantity": 64,

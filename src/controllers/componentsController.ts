@@ -7,6 +7,7 @@
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
+import { Component, componentSchema } from '../models/component';
 import {
   ComponentKindPath,
   componentKindPathSchema,
@@ -208,7 +209,7 @@ export class ComponentsController extends BaseController {
     productFamilyId: number,
     componentId: string,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ComponentResponse>> {
+  ): Promise<ApiResponse<Component>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
@@ -216,7 +217,7 @@ export class ComponentsController extends BaseController {
     });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components/${mapped.componentId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    return req.callAsJson(componentResponseSchema, requestOptions);
+    return req.callAsJson(componentSchema, requestOptions);
   }
 
   /**
@@ -332,7 +333,7 @@ export class ComponentsController extends BaseController {
     componentId: string,
     body?: UpdateComponentRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
+  ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       componentId: [componentId, string()],
@@ -341,7 +342,8 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}.json`;
-    return req.call(requestOptions);
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
   /**
@@ -361,14 +363,14 @@ export class ComponentsController extends BaseController {
     componentId: number,
     pricePointId: number,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
+  ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       componentId: [componentId, number()],
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/default.json`;
-    return req.call(requestOptions);
+    return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
   /**

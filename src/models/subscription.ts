@@ -30,6 +30,10 @@ import {
   paymentCollectionMethodSchema,
 } from './paymentCollectionMethod';
 import { PaymentProfile, paymentProfileSchema } from './paymentProfile';
+import {
+  PrepaidConfiguration,
+  prepaidConfigurationSchema,
+} from './prepaidConfiguration';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { Product, productSchema } from './product';
 import {
@@ -181,6 +185,9 @@ export interface Subscription {
   scheduledCancellationAt?: string | null;
   creditBalanceInCents?: bigint;
   prepaymentBalanceInCents?: bigint;
+  prepaidConfiguration?: PrepaidConfiguration;
+  /** Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided. */
+  selfServicePageToken?: string;
 }
 
 export const subscriptionSchema: Schema<Subscription> = object({
@@ -286,4 +293,9 @@ export const subscriptionSchema: Schema<Subscription> = object({
   ],
   creditBalanceInCents: ['credit_balance_in_cents', optional(bigint())],
   prepaymentBalanceInCents: ['prepayment_balance_in_cents', optional(bigint())],
+  prepaidConfiguration: [
+    'prepaid_configuration',
+    optional(lazy(() => prepaidConfigurationSchema)),
+  ],
+  selfServicePageToken: ['self_service_page_token', optional(string())],
 });

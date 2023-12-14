@@ -16,7 +16,7 @@
 | `amount` | `number \| null \| undefined` | Optional | - |
 | `amountInCents` | `number \| null \| undefined` | Optional | - |
 | `productFamilyId` | `number \| undefined` | Optional | - |
-| `productFamilyName` | `string \| undefined` | Optional | - |
+| `productFamilyName` | `string \| null \| undefined` | Optional | - |
 | `startDate` | `string \| undefined` | Optional | - |
 | `endDate` | `string \| null \| undefined` | Optional | - |
 | `percentage` | `number \| null \| undefined` | Optional | - |
@@ -25,7 +25,7 @@
 | `durationPeriodCount` | `number \| null \| undefined` | Optional | - |
 | `durationInterval` | `number \| null \| undefined` | Optional | - |
 | `durationIntervalUnit` | `string \| null \| undefined` | Optional | - |
-| `durationIntervalSpan` | `string \| undefined` | Optional | - |
+| `durationIntervalSpan` | `string \| null \| undefined` | Optional | - |
 | `allowNegativeBalance` | `boolean \| undefined` | Optional | - |
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
 | `conversionLimit` | `string \| null \| undefined` | Optional | - |

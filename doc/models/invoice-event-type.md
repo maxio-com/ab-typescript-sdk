@@ -13,6 +13,7 @@ Invoice Event Type
 |  --- |
 | `issueInvoice` |
 | `applyCreditNote` |
+| `createCreditNote` |
 | `applyPayment` |
 | `applyDebitNote` |
 | `refundInvoice` |
@@ -22,4 +23,6 @@ Invoice Event Type
 | `changeInvoiceStatus` |
 | `changeInvoiceCollectionMethod` |
 | `removePayment` |
+| `failedPayment` |
+| `changeChargebackStatus` |
 

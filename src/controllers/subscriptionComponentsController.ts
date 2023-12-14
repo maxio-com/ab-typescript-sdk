@@ -29,6 +29,14 @@ import {
   bulkComponentSPricePointAssignmentSchema,
 } from '../models/bulkComponentSPricePointAssignment';
 import {
+  CreateUsageComponentId,
+  createUsageComponentIdSchema,
+} from '../models/containers/createUsageComponentId';
+import {
+  ListUsagesInputComponentId,
+  listUsagesInputComponentIdSchema,
+} from '../models/containers/listUsagesInputComponentId';
+import {
   CreateAllocationRequest,
   createAllocationRequestSchema,
 } from '../models/createAllocationRequest';
@@ -686,14 +694,14 @@ export class SubscriptionComponentsController extends BaseController {
    */
   async createUsage(
     subscriptionId: number,
-    componentId: number,
+    componentId: CreateUsageComponentId,
     body?: CreateUsageRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<UsageResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
-      componentId: [componentId, number()],
+      componentId: [componentId, createUsageComponentIdSchema],
       body: [body, optional(createUsageRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -726,23 +734,28 @@ export class SubscriptionComponentsController extends BaseController {
    * the unique identifier for the component you are working with.
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param componentId     Either the Chargify id for the component or the component's handle prefixed by
-   *                                  `handle:`
-   * @param sinceId         Returns usages with an id greater than or equal to the one specified
-   * @param maxId           Returns usages with an id less than or equal to the one specified
-   * @param sinceDate       Returns usages with a created_at date greater than or equal to midnight (12:00
-   *                                  AM) on the date specified.
-   * @param untilDate       Returns usages with a created_at date less than or equal to midnight (12:00 AM)
-   *                                  on the date specified.
-   * @param page            Result records are organized in pages. By default, the first page of results is
-   *                                  displayed. The page parameter specifies a page number of results to fetch. You
-   *                                  can start navigating through the pages to consume the results. You do this by
-   *                                  passing in a page parameter. Retrieve the next page by adding ?page=2 to the
-   *                                  query string. If there are no results to return, then an empty result set will be
-   *                                  returned. Use in query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each request. Default
-   *                                  value is 20. The maximum allowed values is 200; any per_page value over 200 will
-   *                                  be changed to 200. Use in query `per_page=200`.
+   * @param componentId     Either the Chargify id for the component or the component's
+   *                                                      handle prefixed by `handle:`
+   * @param sinceId         Returns usages with an id greater than or equal to the one
+   *                                                      specified
+   * @param maxId           Returns usages with an id less than or equal to the one
+   *                                                      specified
+   * @param sinceDate       Returns usages with a created_at date greater than or equal
+   *                                                      to midnight (12:00 AM) on the date specified.
+   * @param untilDate       Returns usages with a created_at date less than or equal to
+   *                                                      midnight (12:00 AM) on the date specified.
+   * @param page            Result records are organized in pages. By default, the first
+   *                                                      page of results is displayed. The page parameter specifies a
+   *                                                      page number of results to fetch. You can start navigating
+   *                                                      through the pages to consume the results. You do this by
+   *                                                      passing in a page parameter. Retrieve the next page by adding
+   *                                                      ?page=2 to the query string. If there are no results to
+   *                                                      return, then an empty result set will be returned. Use in
+   *                                                      query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each
+   *                                                      request. Default value is 20. The maximum allowed values is
+   *                                                      200; any per_page value over 200 will be changed to 200. Use
+   *                                                      in query `per_page=200`.
    * @return Response from the API call
    */
   async listUsages({
@@ -756,7 +769,7 @@ export class SubscriptionComponentsController extends BaseController {
     perPage,
   }: {
     subscriptionId: number,
-    componentId: number,
+    componentId: ListUsagesInputComponentId,
     sinceId?: number,
     maxId?: number,
     sinceDate?: string,
@@ -769,7 +782,7 @@ export class SubscriptionComponentsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
-      componentId: [componentId, number()],
+      componentId: [componentId, listUsagesInputComponentIdSchema],
       sinceId: [sinceId, optional(number())],
       maxId: [maxId, optional(number())],
       sinceDate: [sinceDate, optional(string())],

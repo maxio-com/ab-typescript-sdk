@@ -6,17 +6,17 @@
 
 import { array, lazy, object, optional, Schema } from '../schema';
 import { Price, priceSchema } from './price';
-import { PricingScheme1, pricingScheme1Schema } from './pricingScheme1';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 /** Create or update custom pricing unique to the subscription. Used in place of `price_point_id`. */
 export interface ComponentCustomPrice {
   /** Omit for On/Off components */
-  pricingScheme?: PricingScheme1;
+  pricingScheme?: PricingScheme;
   /** On/off components only need one price bracket starting at 1 */
   prices?: Price[];
 }
 
 export const componentCustomPriceSchema: Schema<ComponentCustomPrice> = object({
-  pricingScheme: ['pricing_scheme', optional(pricingScheme1Schema)],
+  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
 });

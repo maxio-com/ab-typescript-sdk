@@ -251,7 +251,7 @@ async listProformaInvoices(
   subscriptionId: number,
   startDate?: string,
   endDate?: string,
-  status?: Status,
+  status?: InvoiceStatus,
   page?: number,
   perPage?: number,
   direction?: Direction,
@@ -272,7 +272,7 @@ async listProformaInvoices(
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `startDate` | `string \| undefined` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `endDate` | `string \| undefined` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
-| `status` | [`Status \| undefined`](../../doc/models/status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices.<br>**Default**: `Direction.Desc` |
