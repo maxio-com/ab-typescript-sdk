@@ -29,7 +29,7 @@ const productPricePointsController = new ProductPricePointsController(client);
 
 ```ts
 async createProductPricePoint(
-  productId: number,
+  productId: CreateProductPricePointProductId,
   body?: CreateProductPricePointRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductPricePointResponse>>
@@ -39,7 +39,7 @@ async createProductPricePoint(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
+| `productId` | [`CreateProductPricePointProductId`](../../doc/models/containers/create-product-price-point-product-id.md) | Template, Required | This is a container for one-of cases. |
 | `body` | [`CreateProductPricePointRequest \| undefined`](../../doc/models/create-product-price-point-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -50,7 +50,7 @@ async createProductPricePoint(
 ## Example Usage
 
 ```ts
-const productId = 202;
+const productId: CreateProductPricePointProductId = 124;
 
 const body: CreateProductPricePointRequest = {
   pricePoint: {
@@ -129,7 +129,7 @@ Use this endpoint to retrieve a list of product price points.
 
 ```ts
 async listProductPricePoints(
-  productId: number,
+  productId: ListProductPricePointsInputProductId,
   page?: number,
   perPage?: number,
   currencyPrices?: boolean,
@@ -142,7 +142,7 @@ async listProductPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
+| `productId` | [`ListProductPricePointsInputProductId`](../../doc/models/containers/list-product-price-points-input-product-id.md) | Template, Required | This is a container for one-of cases. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>**Default**: `10`<br>**Constraints**: `<= 200` |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency. |
@@ -157,7 +157,7 @@ async listProductPricePoints(
 
 ```ts
 const collect = {Liquid error: Value cannot be null. (Parameter 'key')
-  productId: 202,
+  productId: 124,
   page: 2,
   perPage: 10
 }
@@ -215,8 +215,8 @@ Note: Custom product price points are not able to be updated.
 
 ```ts
 async updateProductPricePoint(
-  productId: number,
-  pricePointId: number,
+  productId: UpdateProductPricePointProductId,
+  pricePointId: UpdateProductPricePointPricePointId,
   body?: UpdateProductPricePointRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductPricePointResponse>>
@@ -226,8 +226,8 @@ async updateProductPricePoint(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
-| `pricePointId` | `number` | Template, Required | The id or handle of the price point. When using the handle, it must be prefixed with `handle:` |
+| `productId` | [`UpdateProductPricePointProductId`](../../doc/models/containers/update-product-price-point-product-id.md) | Template, Required | This is a container for one-of cases. |
+| `pricePointId` | [`UpdateProductPricePointPricePointId`](../../doc/models/containers/update-product-price-point-price-point-id.md) | Template, Required | This is a container for one-of cases. |
 | `body` | [`UpdateProductPricePointRequest \| undefined`](../../doc/models/update-product-price-point-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -238,9 +238,9 @@ async updateProductPricePoint(
 ## Example Usage
 
 ```ts
-const productId = 202;
+const productId: UpdateProductPricePointProductId = 124;
 
-const pricePointId = 10;
+const pricePointId: UpdateProductPricePointPricePointId = 188;
 
 const body: UpdateProductPricePointRequest = {
   pricePoint: {
@@ -303,8 +303,8 @@ Use this endpoint to retrieve details for a specific product price point.
 
 ```ts
 async readProductPricePoint(
-  productId: number,
-  pricePointId: number,
+  productId: ReadProductPricePointProductId,
+  pricePointId: ReadProductPricePointPricePointId,
   currencyPrices?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductPricePointResponse>>
@@ -314,8 +314,8 @@ async readProductPricePoint(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
-| `pricePointId` | `number` | Template, Required | The id or handle of the price point. When using the handle, it must be prefixed with `handle:` |
+| `productId` | [`ReadProductPricePointProductId`](../../doc/models/containers/read-product-price-point-product-id.md) | Template, Required | This is a container for one-of cases. |
+| `pricePointId` | [`ReadProductPricePointPricePointId`](../../doc/models/containers/read-product-price-point-price-point-id.md) | Template, Required | This is a container for one-of cases. |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -326,9 +326,9 @@ async readProductPricePoint(
 ## Example Usage
 
 ```ts
-const productId = 202;
+const productId: ReadProductPricePointProductId = 124;
 
-const pricePointId = 10;
+const pricePointId: ReadProductPricePointPricePointId = 188;
 
 try {
   // @ts-expect-error: unused variables
@@ -383,8 +383,8 @@ Use this endpoint to archive a product price point.
 
 ```ts
 async archiveProductPricePoint(
-  productId: number,
-  pricePointId: number,
+  productId: ArchiveProductPricePointProductId,
+  pricePointId: ArchiveProductPricePointPricePointId,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductPricePointResponse>>
 ```
@@ -393,8 +393,8 @@ async archiveProductPricePoint(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
-| `pricePointId` | `number` | Template, Required | The id or handle of the price point. When using the handle, it must be prefixed with `handle:` |
+| `productId` | [`ArchiveProductPricePointProductId`](../../doc/models/containers/archive-product-price-point-product-id.md) | Template, Required | This is a container for one-of cases. |
+| `pricePointId` | [`ArchiveProductPricePointPricePointId`](../../doc/models/containers/archive-product-price-point-price-point-id.md) | Template, Required | This is a container for one-of cases. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -404,9 +404,9 @@ async archiveProductPricePoint(
 ## Example Usage
 
 ```ts
-const productId = 202;
+const productId: ArchiveProductPricePointProductId = 124;
 
-const pricePointId = 10;
+const pricePointId: ArchiveProductPricePointPricePointId = 188;
 
 try {
   // @ts-expect-error: unused variables

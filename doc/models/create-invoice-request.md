@@ -16,6 +16,7 @@
 ```json
 {
   "invoice": {
+    "issue_date": "2024-01-01",
     "status": "draft",
     "line_items": [
       {
@@ -40,7 +41,6 @@
         "tax_code": "tax_code6"
       }
     ],
-    "issue_date": "issue_date8",
     "net_terms": 144,
     "payment_instructions": "payment_instructions6",
     "memo": "memo0"

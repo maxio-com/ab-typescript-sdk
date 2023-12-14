@@ -13,6 +13,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CreditType, creditTypeSchema } from './creditType';
 
 export interface AllocationPreviewItem {
   componentId?: number;
@@ -24,8 +25,16 @@ export interface AllocationPreviewItem {
   prorationUpgradeScheme?: string;
   prorationDowngradeScheme?: string;
   accrueCharge?: boolean;
-  upgradeCharge?: string;
-  downgradeCredit?: string;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  upgradeCharge?: CreditType | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  downgradeCredit?: CreditType | null;
   pricePointId?: number;
   previousPricePointId?: number;
   componentHandle?: string;
@@ -45,8 +54,8 @@ export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = object
       optional(string()),
     ],
     accrueCharge: ['accrue_charge', optional(boolean())],
-    upgradeCharge: ['upgrade_charge', optional(string())],
-    downgradeCredit: ['downgrade_credit', optional(string())],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
     pricePointId: ['price_point_id', optional(number())],
     previousPricePointId: ['previous_price_point_id', optional(number())],
     componentHandle: ['component_handle', optional(string())],

@@ -103,7 +103,7 @@ By default, invoices returned on the index will only include totals, not detaile
 async listInvoices(
   startDate?: string,
   endDate?: string,
-  status?: Status,
+  status?: InvoiceStatus,
   subscriptionId?: number,
   subscriptionGroupUid?: string,
   page?: number,
@@ -133,7 +133,7 @@ async listInvoices(
 |  --- | --- | --- | --- |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `status` | [`Status \| undefined`](../../doc/models/status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `subscriptionId` | `number \| undefined` | Query, Optional | The subscription's ID. |
 | `subscriptionGroupUid` | `string \| undefined` | Query, Optional | The UID of the subscription group you want to fetch consolidated invoices for. This will return a paginated list of consolidated invoices for the specified group. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
@@ -652,6 +652,10 @@ Exposed event types are:
 + change_invoice_status
 + change_invoice_collection_method
 + remove_payment
++ failed_payment
++ apply_debit_note
++ create_debit_note
++ change_chargeback_status
 
 Invoice events are returned in ascending order.
 
@@ -3088,9 +3092,9 @@ try {
   "subscription_id": 12801726,
   "number": "dolore et ut",
   "sequence_number": -84210096,
-  "issue_date": "in e",
-  "due_date": "magna elit tempor occaecat amet",
-  "paid_date": "consectetur elit culpa magna sint",
+  "issue_date": "2017-01-01",
+  "due_date": "2017-01-30",
+  "paid_date": "2017-01-28",
   "status": "open",
   "collection_method": "Excepteur",
   "payment_instructions": "enim officia",

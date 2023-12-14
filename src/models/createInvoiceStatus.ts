@@ -7,18 +7,14 @@
 import { Schema, stringEnum } from '../schema';
 
 /**
- * Enum for Status
+ * Enum for CreateInvoiceStatus
  */
-export enum Status {
+export enum CreateInvoiceStatus {
   Draft = 'draft',
   Open = 'open',
-  Paid = 'paid',
-  Pending = 'pending',
-  Voided = 'voided',
-  Canceled = 'canceled',
 }
 
 /**
- * Schema for Status
+ * Schema for CreateInvoiceStatus
  */
-export const statusSchema: Schema<Status> = stringEnum(Status);
+export const createInvoiceStatusSchema: Schema<CreateInvoiceStatus> = stringEnum(CreateInvoiceStatus);

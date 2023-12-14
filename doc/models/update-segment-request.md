@@ -16,7 +16,7 @@
 ```json
 {
   "segment": {
-    "pricing_scheme": "pricing_scheme4",
+    "pricing_scheme": "stairstep",
     "prices": [
       {
         "starting_quantity": 64,

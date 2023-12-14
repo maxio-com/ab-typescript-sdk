@@ -17,11 +17,13 @@ import {
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { OveragePricing, overagePricingSchema } from './overagePricing';
 import { Price, priceSchema } from './price';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface PricePoint {
   name?: string;
   handle?: string;
-  pricingScheme?: string;
+  /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
+  pricingScheme?: PricingScheme;
   prices?: Price[];
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
   useSiteExchangeRate?: boolean;
@@ -38,7 +40,7 @@ export interface PricePoint {
 export const pricePointSchema: Schema<PricePoint> = object({
   name: ['name', optional(string())],
   handle: ['handle', optional(string())],
-  pricingScheme: ['pricing_scheme', optional(string())],
+  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
   useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
   overagePricing: [

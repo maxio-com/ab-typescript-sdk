@@ -25,7 +25,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "advanced-billing-sdk",
+  "name": "@maxio-com/advanced-billing-sdk",
   "description": "Ultimate billing and pricing flexibility for B2B SaaS.\nMaxio integrates directly into your product, so you can seamlessly manage your product catalog, bill customers, and collect payments.",
   "author": {
     "name": "MaxioSDK",
@@ -52,11 +52,15 @@
     "url": "https://github.com/maxio-com/ab-typescript-sdk.git"
   },
   "bugs": {
-    "email": "support@chargify.com"
+    "url": "https://maxio-saasoptics.zendesk.com/",
+    "email": "maxio-sdk@maxio.com"
   },
+  "homepage": "https://www.maxio.com/product/advanced-billing",
   "keywords": [
-    "advancedbillingsdk",
-    "maxio"
+    "Maxio",
+    "Advanced Billing",
+    "Subscription",
+    "Payments"
   ],
   "contributors": []
 }

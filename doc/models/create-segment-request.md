@@ -20,7 +20,7 @@
     "segment_property_2_value": "String3",
     "segment_property_3_value": "String1",
     "segment_property_4_value": "String5",
-    "pricing_scheme": "pricing_scheme4",
+    "pricing_scheme": "stairstep",
     "prices": [
       {
         "starting_quantity": 64,

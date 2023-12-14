@@ -14,10 +14,20 @@ import {
   Schema,
   string,
 } from '../schema';
+import { ComponentKind, componentKindSchema } from './componentKind';
+import {
+  SubscriptionComponentAllocatedQuantity,
+  subscriptionComponentAllocatedQuantitySchema,
+} from './containers/subscriptionComponentAllocatedQuantity';
 import {
   SubscriptionComponentPricePointType,
   subscriptionComponentPricePointTypeSchema,
 } from './containers/subscriptionComponentPricePointType';
+import {
+  SubscriptionComponentPricingScheme,
+  subscriptionComponentPricingSchemeSchema,
+} from './containers/subscriptionComponentPricingScheme';
+import { CreditType, creditTypeSchema } from './creditType';
 import {
   SubscriptionComponentSubscription,
   subscriptionComponentSubscriptionSchema,
@@ -26,21 +36,30 @@ import {
 export interface SubscriptionComponent {
   id?: number;
   name?: string;
-  kind?: string;
+  /** A handle for the component type */
+  kind?: ComponentKind;
   unitName?: string;
   /** (for on/off components) indicates if the component is enabled for the subscription */
   enabled?: boolean;
   unitBalance?: number;
   currency?: string;
   /** For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off. */
-  allocatedQuantity?: number;
-  pricingScheme?: string | null;
+  allocatedQuantity?: SubscriptionComponentAllocatedQuantity;
+  pricingScheme?: SubscriptionComponentPricingScheme | null;
   componentId?: number;
   componentHandle?: string | null;
   subscriptionId?: number;
   recurring?: boolean;
-  upgradeCharge?: string | null;
-  downgradeCredit?: string | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  upgradeCharge?: CreditType | null;
+  /**
+   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
+   * Available values: `full`, `prorated`, `none`.
+   */
+  downgradeCredit?: CreditType | null;
   archivedAt?: string | null;
   pricePointId?: number | null;
   pricePointHandle?: string | null;
@@ -62,19 +81,25 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = object
   {
     id: ['id', optional(number())],
     name: ['name', optional(string())],
-    kind: ['kind', optional(string())],
+    kind: ['kind', optional(componentKindSchema)],
     unitName: ['unit_name', optional(string())],
     enabled: ['enabled', optional(boolean())],
     unitBalance: ['unit_balance', optional(number())],
     currency: ['currency', optional(string())],
-    allocatedQuantity: ['allocated_quantity', optional(number())],
-    pricingScheme: ['pricing_scheme', optional(nullable(string()))],
+    allocatedQuantity: [
+      'allocated_quantity',
+      optional(subscriptionComponentAllocatedQuantitySchema),
+    ],
+    pricingScheme: [
+      'pricing_scheme',
+      optional(nullable(subscriptionComponentPricingSchemeSchema)),
+    ],
     componentId: ['component_id', optional(number())],
     componentHandle: ['component_handle', optional(nullable(string()))],
     subscriptionId: ['subscription_id', optional(number())],
     recurring: ['recurring', optional(boolean())],
-    upgradeCharge: ['upgrade_charge', optional(nullable(string()))],
-    downgradeCredit: ['downgrade_credit', optional(nullable(string()))],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
     archivedAt: ['archived_at', optional(nullable(string()))],
     pricePointId: ['price_point_id', optional(nullable(number()))],
     pricePointHandle: ['price_point_handle', optional(nullable(string()))],

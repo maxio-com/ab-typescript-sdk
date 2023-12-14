@@ -5,6 +5,10 @@
  */
 
 import { number, object, optional, Schema, string } from '../schema';
+import {
+  ComponentAllocationChangeAllocatedQuantity,
+  componentAllocationChangeAllocatedQuantitySchema,
+} from './containers/componentAllocationChangeAllocatedQuantity';
 
 export interface ComponentAllocationChange {
   previousAllocation: number;
@@ -13,7 +17,7 @@ export interface ComponentAllocationChange {
   componentHandle: string;
   memo: string;
   allocationId: number;
-  allocatedQuantity?: number;
+  allocatedQuantity?: ComponentAllocationChangeAllocatedQuantity;
 }
 
 export const componentAllocationChangeSchema: Schema<ComponentAllocationChange> = object(
@@ -24,6 +28,9 @@ export const componentAllocationChangeSchema: Schema<ComponentAllocationChange> 
     componentHandle: ['component_handle', string()],
     memo: ['memo', string()],
     allocationId: ['allocation_id', number()],
-    allocatedQuantity: ['allocated_quantity', optional(number())],
+    allocatedQuantity: [
+      'allocated_quantity',
+      optional(componentAllocationChangeAllocatedQuantitySchema),
+    ],
   }
 );

@@ -34,7 +34,7 @@
         "unit_price": 23.26
       }
     ],
-    "upgrade_charge": "upgrade_charge8"
+    "upgrade_charge": "prorated"
   }
 }
 ```

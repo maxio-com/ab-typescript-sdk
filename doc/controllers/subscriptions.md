@@ -86,7 +86,7 @@ On Relationship Invoicing Architecture use the `remittance` collection method.
 
 ## Prepaid Subscription
 
-A prepaid subscription can be created with the usual subscription creation parameters, specifying `prepaid` as the `payment_collection_method` and including a nested `prepaid_subscription_configuration`.
+A prepaid subscription can be created with the usual subscription creation parameters, specifying `prepaid` as the `payment_collection_method` and including a nested `prepaid_configuration`.
 
 After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](https://developers.chargify.com/docs/api-docs/7ec482de77ba7-create-prepayment).
 
@@ -882,6 +882,7 @@ async listSubscriptions(
   metadata?: Record<string, string>,
   direction?: SortingDirection,
   sort?: SubscriptionSort,
+  include?: SubscriptionListInclude[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse[]>>
 ```
@@ -904,6 +905,7 @@ async listSubscriptions(
 | `metadata` | `Record<string, string> \| undefined` | Query, Optional | The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`. |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `sort` | [`SubscriptionSort \| undefined`](../../doc/models/subscription-sort.md) | Query, Optional | The attribute by which to sort<br>**Default**: `SubscriptionSort.SignupDate` |
+| `include` | [`SubscriptionListInclude[] \| undefined`](../../doc/models/subscription-list-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=self_service_page_token`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -913,7 +915,7 @@ async listSubscriptions(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
   perPage: 50,
   startDate: '2022-07-01',

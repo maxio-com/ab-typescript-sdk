@@ -17,7 +17,7 @@
 {
   "price_point": {
     "name": "name0",
-    "pricing_scheme": "pricing_scheme8",
+    "pricing_scheme": "per_unit",
     "prices": [
       {
         "starting_quantity": 242,

@@ -20,6 +20,7 @@ import {
   componentPricePointPriceSchema,
 } from './componentPricePointPrice';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface ComponentPricePoint {
   id?: number;
@@ -33,7 +34,8 @@ export interface ComponentPricePoint {
   /** Note: Refer to type attribute instead */
   mDefault?: boolean;
   name?: string;
-  pricingScheme?: string;
+  /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
+  pricingScheme?: PricingScheme;
   componentId?: number;
   handle?: string;
   archivedAt?: string | null;
@@ -52,7 +54,7 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = object({
   type: ['type', optional(pricePointTypeSchema)],
   mDefault: ['default', optional(boolean())],
   name: ['name', optional(string())],
-  pricingScheme: ['pricing_scheme', optional(string())],
+  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
   componentId: ['component_id', optional(number())],
   handle: ['handle', optional(string())],
   archivedAt: ['archived_at', optional(nullable(string()))],

@@ -29,6 +29,7 @@ import {
   SegmentSegmentProperty4Value,
   segmentSegmentProperty4ValueSchema,
 } from './containers/segmentSegmentProperty4Value';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 import { SegmentPrice, segmentPriceSchema } from './segmentPrice';
 
 export interface Segment {
@@ -36,7 +37,8 @@ export interface Segment {
   componentId?: number;
   pricePointId?: number;
   eventBasedBillingMetricId?: number;
-  pricingScheme?: string;
+  /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
+  pricingScheme?: PricingScheme;
   segmentProperty1Value?: SegmentSegmentProperty1Value;
   segmentProperty2Value?: SegmentSegmentProperty2Value;
   segmentProperty3Value?: SegmentSegmentProperty3Value;
@@ -54,7 +56,7 @@ export const segmentSchema: Schema<Segment> = object({
     'event_based_billing_metric_id',
     optional(number()),
   ],
-  pricingScheme: ['pricing_scheme', optional(string())],
+  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
   segmentProperty1Value: [
     'segment_property_1_value',
     optional(segmentSegmentProperty1ValueSchema),

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema, string } from '../schema';
+import { array, lazy, object, optional, Schema } from '../schema';
 import {
   CreateSegmentSegmentProperty1Value,
   createSegmentSegmentProperty1ValueSchema,
@@ -25,6 +25,7 @@ import {
   CreateOrUpdateSegmentPrice,
   createOrUpdateSegmentPriceSchema,
 } from './createOrUpdateSegmentPrice';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface CreateSegment {
   /** A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric. */
@@ -35,8 +36,8 @@ export interface CreateSegment {
   segmentProperty3Value?: CreateSegmentSegmentProperty3Value;
   /** A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric. */
   segmentProperty4Value?: CreateSegmentSegmentProperty4Value;
-  /** The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes. */
-  pricingScheme: string;
+  /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
+  pricingScheme: PricingScheme;
   prices?: CreateOrUpdateSegmentPrice[];
 }
 
@@ -57,7 +58,7 @@ export const createSegmentSchema: Schema<CreateSegment> = object({
     'segment_property_4_value',
     optional(createSegmentSegmentProperty4ValueSchema),
   ],
-  pricingScheme: ['pricing_scheme', string()],
+  pricingScheme: ['pricing_scheme', pricingSchemeSchema],
   prices: [
     'prices',
     optional(array(lazy(() => createOrUpdateSegmentPriceSchema))),
