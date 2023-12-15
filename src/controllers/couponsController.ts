@@ -579,7 +579,7 @@ export class CouponsController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.appendTemplatePath`/coupon/${mapped.couponId}/currency_prices.json`;
+    req.appendTemplatePath`/coupons/${mapped.couponId}/currency_prices.json`;
     return req.callAsJson(array(couponCurrencySchema), requestOptions);
   }
 
