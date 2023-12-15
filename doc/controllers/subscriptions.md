@@ -1395,10 +1395,10 @@ const subscriptionId = 222;
 
 const body: OverrideSubscriptionRequest = {
   subscription: {
-    activatedAt: '1999-12-01',
-    canceledAt: '2000-12-31',
+    activatedAt: '1999-12-01T10:28:34-05:00',
+    canceledAt: '2000-12-31T10:28:34-05:00',
     cancellationMessage: 'Original cancellation in 2000',
-    expiresAt: '2001-07-15',
+    expiresAt: '2001-07-15T10:28:34-05:00',
   },
 };
 
@@ -1426,7 +1426,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Bad Request | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseError`](../../doc/models/single-error-response-error.md) |
 
 
 # Read Subscription by Reference
