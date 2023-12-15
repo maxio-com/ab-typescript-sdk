@@ -8,6 +8,7 @@ import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import {
   SubscriptionAddCouponError,
 } from '../errors/subscriptionAddCouponError';
@@ -1214,7 +1215,7 @@ export class SubscriptionsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/override.json`;
     req.throwOn(400, ApiError, 'Bad Request');
-    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, SingleErrorResponseError, 'Unprocessable Entity (WebDAV)');
     return req.call(requestOptions);
   }
 
