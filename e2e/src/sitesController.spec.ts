@@ -12,7 +12,7 @@ describe('SitesController', () => {
       subdomain: 'tp-sdk',
       currency: 'USD',
       sellerId: 722159,
-      nonPrimaryCurrencies: ['EUR'],
+      nonPrimaryCurrencies: ['EUR', 'GBP'],
       relationshipInvoicingEnabled: true,
       customerHierarchyEnabled: false,
       whopaysEnabled: false,
@@ -47,6 +47,9 @@ describe('SitesController', () => {
       },
       test: true,
     };
+
+    console.log(response);
+
     expect(response.statusCode).toBe(200);
     expect(response.result.site).toEqual(expectedSite);
   });
