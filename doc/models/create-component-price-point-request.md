@@ -26,7 +26,9 @@
       }
     ],
     "use_site_exchange_rate": true,
-    "handle": "handle6"
+    "handle": "handle6",
+    "interval": 24,
+    "interval_unit": "day"
   }
 }
 ```

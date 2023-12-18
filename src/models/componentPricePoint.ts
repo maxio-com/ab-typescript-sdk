@@ -19,6 +19,7 @@ import {
   ComponentPricePointPrice,
   componentPricePointPriceSchema,
 } from './componentPricePointPrice';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
@@ -47,6 +48,10 @@ export interface ComponentPricePoint {
   /** (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for. */
   subscriptionId?: number;
   taxIncluded?: boolean;
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
 }
 
 export const componentPricePointSchema: Schema<ComponentPricePoint> = object({
@@ -67,4 +72,6 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = object({
   useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
   subscriptionId: ['subscription_id', optional(number())],
   taxIncluded: ['tax_included', optional(boolean())],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
 });
