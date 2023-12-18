@@ -17,6 +17,8 @@
 {
   "price_point": {
     "name": "name0",
+    "interval": 44,
+    "interval_unit": "day",
     "prices": [
       {
         "id": 18,

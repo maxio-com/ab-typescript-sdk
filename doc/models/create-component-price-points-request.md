@@ -37,7 +37,9 @@
           "unit_price": 23.26
         }
       ],
-      "use_site_exchange_rate": false
+      "use_site_exchange_rate": false,
+      "interval": 24,
+      "interval_unit": "day"
     },
     {
       "name": "name0",
@@ -60,7 +62,9 @@
           "unit_price": 23.26
         }
       ],
-      "use_site_exchange_rate": false
+      "use_site_exchange_rate": false,
+      "interval": 24,
+      "interval_unit": "day"
     }
   ]
 }

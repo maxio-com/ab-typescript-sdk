@@ -938,7 +938,7 @@ async updateCouponCurrencyPrices(
   couponId: number,
   body?: CouponCurrencyRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponCurrency[]>>
+): Promise<ApiResponse<CouponCurrencyResponse>>
 ```
 
 ## Parameters
@@ -951,7 +951,7 @@ async updateCouponCurrencyPrices(
 
 ## Response Type
 
-[`CouponCurrency[]`](../../doc/models/coupon-currency.md)
+[`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md)
 
 ## Example Usage
 

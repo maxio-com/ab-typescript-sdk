@@ -24,6 +24,7 @@ import {
   eBBComponentUnitPriceSchema,
 } from './containers/eBBComponentUnitPrice';
 import { CreditType, creditTypeSchema } from './creditType';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { Price, priceSchema } from './price';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
@@ -63,6 +64,10 @@ export interface EBBComponent {
   priceInCents?: string;
   /** The ID of an event based billing metric that will be attached to this component. */
   eventBasedBillingMetricId: number;
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
 }
 
 export const eBBComponentSchema: Schema<EBBComponent> = object({
@@ -84,4 +89,6 @@ export const eBBComponentSchema: Schema<EBBComponent> = object({
   hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
   priceInCents: ['price_in_cents', optional(string())],
   eventBasedBillingMetricId: ['event_based_billing_metric_id', number()],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
 });
