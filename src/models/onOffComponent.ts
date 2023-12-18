@@ -24,6 +24,7 @@ import {
   onOffComponentUnitPriceSchema,
 } from './containers/onOffComponentUnitPrice';
 import { CreditType, creditTypeSchema } from './creditType';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { Price, priceSchema } from './price';
 
 export interface OnOffComponent {
@@ -61,6 +62,10 @@ export interface OnOffComponent {
   displayOnHostedPage?: boolean;
   allowFractionalQuantities?: boolean;
   publicSignupPageIds?: number[];
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
 }
 
 export const onOffComponentSchema: Schema<OnOffComponent> = object({
@@ -86,4 +91,6 @@ export const onOffComponentSchema: Schema<OnOffComponent> = object({
     optional(boolean()),
   ],
   publicSignupPageIds: ['public_signup_page_ids', optional(array(number()))],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
 });

@@ -27,6 +27,10 @@ export interface PricePoint {
   prices?: Price[];
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
   useSiteExchangeRate?: boolean;
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
   overagePricing?: OveragePricing;
   /** Boolean which controls whether or not remaining units should be rolled over to the next period */
   rolloverPrepaidRemainder?: boolean;
@@ -43,6 +47,8 @@ export const pricePointSchema: Schema<PricePoint> = object({
   pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
   prices: ['prices', optional(array(lazy(() => priceSchema)))],
   useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
   overagePricing: [
     'overage_pricing',
     optional(lazy(() => overagePricingSchema)),

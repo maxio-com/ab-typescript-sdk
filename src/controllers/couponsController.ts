@@ -11,11 +11,14 @@ import {
   SingleStringErrorResponseError,
 } from '../errors/singleStringErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
-import { CouponCurrency, couponCurrencySchema } from '../models/couponCurrency';
 import {
   CouponCurrencyRequest,
   couponCurrencyRequestSchema,
 } from '../models/couponCurrencyRequest';
+import {
+  CouponCurrencyResponse,
+  couponCurrencyResponseSchema,
+} from '../models/couponCurrencyResponse';
 import { CouponResponse, couponResponseSchema } from '../models/couponResponse';
 import { CouponSubcodes, couponSubcodesSchema } from '../models/couponSubcodes';
 import {
@@ -571,7 +574,7 @@ export class CouponsController extends BaseController {
     couponId: number,
     body?: CouponCurrencyRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponCurrency[]>> {
+  ): Promise<ApiResponse<CouponCurrencyResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       couponId: [couponId, number()],
@@ -580,7 +583,7 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/coupons/${mapped.couponId}/currency_prices.json`;
-    return req.callAsJson(array(couponCurrencySchema), requestOptions);
+    return req.callAsJson(couponCurrencyResponseSchema, requestOptions);
   }
 
   /**

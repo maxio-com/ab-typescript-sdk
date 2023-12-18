@@ -23,6 +23,7 @@ import {
   componentPricingSchemeSchema,
 } from './containers/componentPricingScheme';
 import { CreditType, creditTypeSchema } from './creditType';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { ItemCategory, itemCategorySchema } from './itemCategory';
 
 export interface Component {
@@ -88,6 +89,10 @@ export interface Component {
   accountingCode?: string | null;
   /** (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events. */
   eventBasedBillingMetricId?: number;
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
 }
 
 export const componentSchema: Schema<Component> = object({
@@ -140,4 +145,6 @@ export const componentSchema: Schema<Component> = object({
     'event_based_billing_metric_id',
     optional(number()),
   ],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
 });
