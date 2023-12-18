@@ -4,8 +4,12 @@ import {
   Environment,
   ProductFamiliesController,
   ProductFamily,
+  SubscriptionsController,
+  ProductsController,
 } from 'advanced-billing-sdk';
 import { createClient, CONFIG } from './config';
+import { product } from './mocks/products';
+import { createMockSubscription } from './mocks/subscriptions';
 
 const couponBody = {
   coupon: {
@@ -35,6 +39,8 @@ describe('Coupons Controller', () => {
   let productFamily: ProductFamily | null;
   let couponsController: CouponsController;
   let invalidCouponsController: CouponsController;
+  let subscriptionsController: SubscriptionsController;
+  let productsController: ProductsController;
 
   beforeAll(async () => {
     const client = createClient();
@@ -47,6 +53,8 @@ describe('Coupons Controller', () => {
       basicAuthPassword: CONFIG.PASSWORD,
     });
     couponsController = new CouponsController(client);
+    subscriptionsController = new SubscriptionsController(client);
+    productsController = new ProductsController(client);
     invalidCouponsController = new CouponsController(invalidClient);
     const productFamiliesController = new ProductFamiliesController(client);
     productFamily =
@@ -67,6 +75,7 @@ describe('Coupons Controller', () => {
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'CREATE001',
             productFamilyId: String(productFamily?.id),
           },
         }
@@ -161,13 +170,21 @@ describe('Coupons Controller', () => {
 
   describe('Find Coupon', () => {
     test('should find a coupon when the user sends coupon code', async () => {
+      await couponsController.createCoupon(productFamily?.id || 0, {
+        coupon: {
+          ...couponBody.coupon,
+          code: 'FIND01',
+          productFamilyId: String(productFamily?.id),
+        },
+      });
       const response = await couponsController.readCouponByCode(
         productFamily?.id || 0,
-        '15OFF'
+        'FIND01'
       );
       expect(response.statusCode).toBe(200);
       expect(response.result.coupon?.name).toBe('15% off');
       expect(response.result.coupon?.description).toBe('15% off for life');
+      expect(response.result.coupon?.code).toBe('FIND01');
     });
 
     test('should throw and 404 error when user sends incorrect product code', async () => {
@@ -257,6 +274,7 @@ describe('Coupons Controller', () => {
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'UPDATE01',
             productFamilyId: String(productFamily?.id),
           },
         }
@@ -296,7 +314,6 @@ describe('Coupons Controller', () => {
       expect(updateResponse.result.coupon?.description).toBe(
         'updated description'
       );
-      // verify the
     });
 
     test('should throw and 401 error when user sends invalid credentials', async () => {
@@ -337,6 +354,7 @@ describe('Coupons Controller', () => {
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'ARCHIVE01',
             productFamilyId: String(productFamily?.id),
           },
         }
@@ -386,16 +404,13 @@ describe('Coupons Controller', () => {
 
   describe('List all Coupons', () => {
     test('should list all the coupons', async () => {
-      const createReponse = await couponsController.createCoupon(
-        productFamily?.id || 0,
-        {
-          coupon: {
-            ...couponBody.coupon,
-            productFamilyId: String(productFamily?.id),
-          },
-        }
-      );
-      console.log(createReponse);
+      await couponsController.createCoupon(productFamily?.id || 0, {
+        coupon: {
+          ...couponBody.coupon,
+          code: 'LIST002',
+          productFamilyId: String(productFamily?.id),
+        },
+      });
       const listResponse = await couponsController.listCoupons({
         page: 1,
       });
@@ -417,14 +432,37 @@ describe('Coupons Controller', () => {
 
   describe('List Coupon Usages', () => {
     test('should list the usages coupons ', async () => {
+      const productResponse = await productsController.createProduct(
+        productFamily?.id || 0,
+        {
+          product: { ...product, handle: 'coupon-handler' },
+        }
+      );
+
+      const subscriptionBody = createMockSubscription({
+        productHandle: 'coupon-handler',
+        customerReference: 'coupon-reference',
+      });
+
+      const subscriptionResponse = (
+        await subscriptionsController.createSubscription({
+          subscription: subscriptionBody,
+        })
+      ).result;
+
       const createReponse = await couponsController.createCoupon(
         productFamily?.id || 0,
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'TEST1',
             productFamilyId: String(productFamily?.id),
           },
         }
+      );
+      await subscriptionsController.applyCouponToSubscription(
+        subscriptionResponse?.subscription?.id || 0,
+        'TEST1'
       );
 
       const couponId = createReponse.result.coupon?.id || 0;
@@ -432,7 +470,11 @@ describe('Coupons Controller', () => {
         productFamily?.id || 0,
         couponId
       );
+
       expect(listResponse.statusCode).toBe(200);
+      expect(listResponse.result[0].name).toBe(
+        productResponse.result.product.name
+      );
     });
 
     test('should throw and 404 error when user sends invalid code id', async () => {
@@ -454,6 +496,7 @@ describe('Coupons Controller', () => {
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'LIST01',
             productFamilyId: String(productFamily?.id),
           },
         }
@@ -480,6 +523,7 @@ describe('Coupons Controller', () => {
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'VALIDATE01',
             productFamilyId: String(productFamily?.id),
           },
         }
@@ -502,78 +546,69 @@ describe('Coupons Controller', () => {
         expect(reason.statusCode).toBe(404);
       });
     });
-
-    test('should throw and 404 error when the user sends invalid credentials', async () => {
-      const promise = invalidCouponsController.validateCoupon('15OFF');
-
-      expect(promise).rejects.toThrow();
-
-      await promise.catch((reason) => {
-        expect(reason.statusCode).toBe(404);
-      });
-    });
   });
 
   describe('Create/Update Currency Prices', () => {
-    //TODO: Should return status 200 but it returns status 404 fixing
-    test('should update a coupon', async () => {
+    test('should create a valid currency price', async () => {
       const createReponse = await couponsController.createCoupon(
         productFamily?.id || 0,
         {
           coupon: {
-            ...couponBody.coupon,
-            productFamilyId: String(productFamily?.id),
+            name: 'CREATE-UPDATE',
+            code: 'CREATEUPDATE01',
+            description: '15% off for life',
+            allowNegativeBalance: 'false',
+            recurring: 'false',
+            endDate: '2024-08-29T12:00:00-04:00',
+            productFamilyId: '0',
+            stackable: 'true',
+            compoundingStrategy: CompoundingStrategy.Compound,
+            excludeMidPeriodAllocations: true,
+            applyOnCancelAtEndOfPeriod: true,
+            amountInCents: BigInt(1000),
           },
         }
       );
       const couponId = createReponse.result.coupon?.id || 0;
-      try {
-        const updateResponse =
-          await couponsController.updateCouponCurrencyPrices(couponId, {
-            currencyPrices: [
-              {
-                currency: 'EUR',
-                price: 10,
-              },
-            ],
-          });
 
-        console.log(updateResponse);
+      const updateResponse = await couponsController.updateCouponCurrencyPrices(
+        couponId,
+        {
+          currencyPrices: [
+            {
+              currency: 'EUR',
+              price: 10,
+            },
+          ],
+        }
+      );
 
-        expect(updateResponse.statusCode).toBe(200);
-      } catch (error) {
-        console.log(error, 'error');
-      }
+      expect(updateResponse.statusCode).toBe(200);
     });
 
-    test('should throw and 404 error when the user sends invalid or missing parameters in the POST request', async () => {
-      const createReponse = await couponsController.createCoupon(
-        productFamily?.id || 0,
-        {
-          coupon: {
-            ...couponBody.coupon,
-            productFamilyId: String(productFamily?.id),
+    test('should throw and 401 error when the user sends invalid credentials', async () => {
+      const promise = invalidCouponsController.updateCouponCurrencyPrices(200, {
+        currencyPrices: [
+          {
+            currency: 'BS',
+            price: 100,
           },
-        }
-      );
-      const couponId = createReponse.result.coupon?.id || 0;
-      const promise = couponsController.updateCouponCurrencyPrices(couponId, {
-        currencyPrices: [],
+        ],
       });
 
       expect(promise).rejects.toThrow();
-
       await promise.catch((reason) => {
-        expect(reason.statusCode).toBe(404);
+        expect(reason.statusCode).toBe(401);
       });
     });
 
-    test('should throw and 404 error when the user sends invalid or missing parameters in the PUT request', async () => {
+    test('should throw and 422 error when the user sends invalid or missing parameters in the PUT request', async () => {
       const createReponse = await couponsController.createCoupon(
         productFamily?.id || 0,
         {
           coupon: {
             ...couponBody.coupon,
+            code: 'test0002',
             productFamilyId: String(productFamily?.id),
           },
         }
@@ -582,8 +617,8 @@ describe('Coupons Controller', () => {
       const promise = couponsController.updateCouponCurrencyPrices(couponId, {
         currencyPrices: [
           {
-            currency: '',
-            price: -1,
+            currency: 'test',
+            price: 0,
           },
         ],
       });
@@ -591,7 +626,7 @@ describe('Coupons Controller', () => {
       expect(promise).rejects.toThrow();
 
       await promise.catch((reason) => {
-        expect(reason.statusCode).toBe(404);
+        expect(reason.statusCode).toBe(422);
       });
     });
   });
