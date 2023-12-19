@@ -5,12 +5,17 @@
  */
 
 import { array, lazy, object, optional, Schema } from '../schema';
-import { CurrencyPrice, currencyPriceSchema } from './currencyPrice';
+import { CouponCurrency, couponCurrencySchema } from './couponCurrency';
 
 export interface CouponCurrencyResponse {
-  offers?: CurrencyPrice[];
+  currencyPrices?: CouponCurrency[];
 }
 
 export const couponCurrencyResponseSchema: Schema<CouponCurrencyResponse> = object(
-  { offers: ['offers', optional(array(lazy(() => currencyPriceSchema)))] }
+  {
+    currencyPrices: [
+      'currency_prices',
+      optional(array(lazy(() => couponCurrencySchema))),
+    ],
+  }
 );
