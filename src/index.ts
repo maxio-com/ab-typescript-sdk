@@ -149,6 +149,7 @@ export { CompoundingStrategy } from './models/compoundingStrategy';
 export type { ConsolidatedInvoice } from './models/consolidatedInvoice';
 export type { CountResponse } from './models/countResponse';
 export type { Coupon } from './models/coupon';
+export type { CouponCurrency } from './models/couponCurrency';
 export type { CouponCurrencyRequest } from './models/couponCurrencyRequest';
 export type { CouponCurrencyResponse } from './models/couponCurrencyResponse';
 export type { CouponResponse } from './models/couponResponse';
