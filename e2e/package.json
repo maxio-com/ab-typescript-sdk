@@ -47,6 +47,6 @@
   ],
   "contributors": [],
   "dependencies": {
-    "advanced-billing-sdk": "../" 
+    "advanced-billing-sdk": "../"
   }
 }
