@@ -517,8 +517,7 @@ describe('Coupons Controller', () => {
   });
 
   describe('Validate Coupon', () => {
-    //TODO: Find the reason why this is start to failing for SDK-0.0.3 version
-    test.skip('should validate a coupon when user sends a correct id', async () => {
+    test('should validate a coupon when user sends a correct id', async () => {
       const createReponse = await couponsController.createCoupon(
         productFamily?.id || 0,
         {
@@ -531,7 +530,8 @@ describe('Coupons Controller', () => {
       );
       const couponCode = createReponse.result.coupon?.code;
       const validateResponse = await couponsController.validateCoupon(
-        couponCode || ''
+        couponCode || '',
+        productFamily?.id
       );
 
       expect(validateResponse.statusCode).toBe(200);
