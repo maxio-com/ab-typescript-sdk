@@ -14,7 +14,7 @@ export interface Event {
   id: number;
   key: string;
   message: string;
-  subscriptionId: number;
+  subscriptionId: number | null;
   customerId: number;
   createdAt: string;
   eventSpecificData: EventEventSpecificData | null;
@@ -24,7 +24,7 @@ export const eventSchema: Schema<Event> = object({
   id: ['id', number()],
   key: ['key', string()],
   message: ['message', string()],
-  subscriptionId: ['subscription_id', number()],
+  subscriptionId: ['subscription_id', nullable(number())],
   customerId: ['customer_id', number()],
   createdAt: ['created_at', string()],
   eventSpecificData: [

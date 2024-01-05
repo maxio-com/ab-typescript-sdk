@@ -395,6 +395,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(allocationResponseSchema, requestOptions);
   }
 
@@ -448,7 +449,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
     req.throwOn(401, ApiError, 'Unauthorized');
     req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
     return req.callAsJson(array(allocationResponseSchema), requestOptions);
   }
 
@@ -494,7 +495,7 @@ export class SubscriptionComponentsController extends BaseController {
    *
    * When the allocation uses multiple different types of `upgrade_charge`s or `downgrade_credit`s, the
    * Allocation is viewed as an Allocation which uses "Fine-Grained Component Control". As a result, the
-   * response will not include `direction` and `proration` within the `allocation_preview` at the
+   * response will not include `direction` and `proration` within the `allocation_preview`, but at the
    * `line_items` and `allocations` level respectfully.
    *
    * See example below for Fine-Grained Component Control response.

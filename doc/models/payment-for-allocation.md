@@ -1,11 +1,11 @@
 
-# Allocation Payment
+# Payment for Allocation
 
 Information for captured payment, if applicable
 
 ## Structure
 
-`AllocationPayment`
+`PaymentForAllocation`
 
 ## Fields
 
@@ -20,10 +20,10 @@ Information for captured payment, if applicable
 
 ```json
 {
-  "id": 146,
-  "amount_in_cents": 232,
+  "id": 72,
+  "amount_in_cents": 158,
   "success": false,
-  "memo": "memo2"
+  "memo": "memo6"
 }
 ```
 

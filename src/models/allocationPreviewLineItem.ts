@@ -5,29 +5,47 @@
  */
 
 import { bigint, number, object, optional, Schema, string } from '../schema';
+import {
+  AllocationPreviewDirection,
+  allocationPreviewDirectionSchema,
+} from './allocationPreviewDirection';
+import {
+  AllocationPreviewLineItemKind,
+  allocationPreviewLineItemKindSchema,
+} from './allocationPreviewLineItemKind';
+import {
+  LineItemTransactionType,
+  lineItemTransactionTypeSchema,
+} from './lineItemTransactionType';
 
 export interface AllocationPreviewLineItem {
-  transactionType?: string;
-  kind?: string;
+  /** A handle for the line item transaction type */
+  transactionType?: LineItemTransactionType;
+  /** A handle for the line item kind for allocation preview */
+  kind?: AllocationPreviewLineItemKind;
   amountInCents?: bigint;
   memo?: string;
   discountAmountInCents?: bigint;
   taxableAmountInCents?: bigint;
   componentId?: number;
   componentHandle?: string;
-  direction?: string;
+  /** Visible when using Fine-grained Component Control */
+  direction?: AllocationPreviewDirection;
 }
 
 export const allocationPreviewLineItemSchema: Schema<AllocationPreviewLineItem> = object(
   {
-    transactionType: ['transaction_type', optional(string())],
-    kind: ['kind', optional(string())],
+    transactionType: [
+      'transaction_type',
+      optional(lineItemTransactionTypeSchema),
+    ],
+    kind: ['kind', optional(allocationPreviewLineItemKindSchema)],
     amountInCents: ['amount_in_cents', optional(bigint())],
     memo: ['memo', optional(string())],
     discountAmountInCents: ['discount_amount_in_cents', optional(bigint())],
     taxableAmountInCents: ['taxable_amount_in_cents', optional(bigint())],
     componentId: ['component_id', optional(number())],
     componentHandle: ['component_handle', optional(string())],
-    direction: ['direction', optional(string())],
+    direction: ['direction', optional(allocationPreviewDirectionSchema)],
   }
 );

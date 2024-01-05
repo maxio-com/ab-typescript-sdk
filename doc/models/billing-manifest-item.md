@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `transactionType` | `string \| undefined` | Optional | - |
-| `kind` | `string \| undefined` | Optional | - |
+| `transactionType` | [`LineItemTransactionType \| undefined`](../../doc/models/line-item-transaction-type.md) | Optional | A handle for the line item transaction type |
+| `kind` | [`LineItemKind \| undefined`](../../doc/models/line-item-kind.md) | Optional | A handle for the line item kind |
 | `amountInCents` | `bigint \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
 | `discountAmountInCents` | `bigint \| undefined` | Optional | - |
@@ -28,8 +28,8 @@
 
 ```json
 {
-  "transaction_type": "transaction_type2",
-  "kind": "kind8",
+  "transaction_type": "info_transaction",
+  "kind": "coupon",
   "amount_in_cents": 216,
   "memo": "memo4",
   "discount_amount_in_cents": 236

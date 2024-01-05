@@ -11,6 +11,8 @@
 |  --- | --- | --- | --- |
 | `allocations` | [`CreateAllocation[]`](../../doc/models/create-allocation.md) | Required | - |
 | `effectiveProrationDate` | `string \| undefined` | Optional | To calculate proration amounts for a future time. Only within a current subscription period. Only ISO8601 format is supported. |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 
 ## Example (as JSON)
 
@@ -26,7 +28,9 @@
       "accrue_charge": false
     }
   ],
-  "effective_proration_date": "2023-12-01"
+  "effective_proration_date": "2023-12-01",
+  "upgrade_charge": "none",
+  "downgrade_credit": "prorated"
 }
 ```
 
