@@ -30,6 +30,8 @@ Used in place of `price_point_id` to define a custom price point unique to the s
   "overage_pricing": [
     {
       "pricing_scheme": "stairstep",
+      "interval": 230,
+      "interval_unit": "day",
       "prices": [
         {
           "starting_quantity": 242,

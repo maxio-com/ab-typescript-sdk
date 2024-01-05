@@ -13,14 +13,22 @@ import {
   Schema,
   string,
 } from '../schema';
+import {
+  AllocationPreviewItemPreviousQuantity,
+  allocationPreviewItemPreviousQuantitySchema,
+} from './containers/allocationPreviewItemPreviousQuantity';
+import {
+  AllocationPreviewItemQuantity,
+  allocationPreviewItemQuantitySchema,
+} from './containers/allocationPreviewItemQuantity';
 import { CreditType, creditTypeSchema } from './creditType';
 
 export interface AllocationPreviewItem {
   componentId?: number;
   subscriptionId?: number;
-  quantity?: number;
-  previousQuantity?: number;
-  memo?: string;
+  quantity?: AllocationPreviewItemQuantity;
+  previousQuantity?: AllocationPreviewItemPreviousQuantity;
+  memo?: string | null;
   timestamp?: string | null;
   prorationUpgradeScheme?: string;
   prorationDowngradeScheme?: string;
@@ -37,16 +45,21 @@ export interface AllocationPreviewItem {
   downgradeCredit?: CreditType | null;
   pricePointId?: number;
   previousPricePointId?: number;
-  componentHandle?: string;
+  pricePointHandle?: string;
+  pricePointName?: string;
+  componentHandle?: string | null;
 }
 
 export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = object(
   {
     componentId: ['component_id', optional(number())],
     subscriptionId: ['subscription_id', optional(number())],
-    quantity: ['quantity', optional(number())],
-    previousQuantity: ['previous_quantity', optional(number())],
-    memo: ['memo', optional(string())],
+    quantity: ['quantity', optional(allocationPreviewItemQuantitySchema)],
+    previousQuantity: [
+      'previous_quantity',
+      optional(allocationPreviewItemPreviousQuantitySchema),
+    ],
+    memo: ['memo', optional(nullable(string()))],
     timestamp: ['timestamp', optional(nullable(string()))],
     prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
     prorationDowngradeScheme: [
@@ -58,6 +71,8 @@ export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = object
     downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
     pricePointId: ['price_point_id', optional(number())],
     previousPricePointId: ['previous_price_point_id', optional(number())],
-    componentHandle: ['component_handle', optional(string())],
+    pricePointHandle: ['price_point_handle', optional(string())],
+    pricePointName: ['price_point_name', optional(string())],
+    componentHandle: ['component_handle', optional(nullable(string()))],
   }
 );

@@ -21,14 +21,14 @@
 | `lineReferences` | `string \| undefined` | Optional | - |
 | `pricingDetailsIndex` | `number \| null \| undefined` | Optional | - |
 | `pricingDetails` | [`InvoiceLineItemPricingDetail[] \| undefined`](../../doc/models/invoice-line-item-pricing-detail.md) | Optional | - |
-| `taxCode` | `string \| undefined` | Optional | - |
+| `taxCode` | `string \| null \| undefined` | Optional | - |
 | `taxAmount` | `string \| undefined` | Optional | - |
 | `productId` | `number \| undefined` | Optional | - |
 | `productPricePointId` | `number \| undefined` | Optional | - |
 | `pricePointId` | `number \| null \| undefined` | Optional | - |
 | `componentId` | `number \| null \| undefined` | Optional | - |
 | `billingScheduleItemId` | `number \| null \| undefined` | Optional | - |
-| `customItem` | `boolean \| undefined` | Optional | - |
+| `customItem` | `boolean \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

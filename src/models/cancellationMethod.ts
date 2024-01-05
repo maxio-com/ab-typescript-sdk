@@ -14,6 +14,7 @@ export enum CancellationMethod {
   MerchantApi = 'merchant_api',
   Dunning = 'dunning',
   BillingPortal = 'billing_portal',
+  Unknown = 'unknown',
 }
 
 /**

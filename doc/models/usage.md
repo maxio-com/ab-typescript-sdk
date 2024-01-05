@@ -25,7 +25,7 @@
 {
   "id": 252,
   "memo": "memo8",
-  "created_at": "created_at2",
+  "created_at": "2016-03-13T12:52:32.123Z",
   "price_point_id": 126,
   "quantity": 130
 }
