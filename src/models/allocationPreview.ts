@@ -15,6 +15,10 @@ import {
   string,
 } from '../schema';
 import {
+  AllocationPreviewDirection,
+  allocationPreviewDirectionSchema,
+} from './allocationPreviewDirection';
+import {
   AllocationPreviewItem,
   allocationPreviewItemSchema,
 } from './allocationPreviewItem';
@@ -30,7 +34,7 @@ export interface AllocationPreview {
   totalTaxInCents?: bigint;
   totalDiscountInCents?: bigint;
   totalInCents?: bigint;
-  direction?: string;
+  direction?: AllocationPreviewDirection;
   prorationScheme?: string;
   lineItems?: AllocationPreviewLineItem[];
   accrueCharge?: boolean;
@@ -47,7 +51,7 @@ export const allocationPreviewSchema: Schema<AllocationPreview> = object({
   totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
   totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
   totalInCents: ['total_in_cents', optional(bigint())],
-  direction: ['direction', optional(string())],
+  direction: ['direction', optional(allocationPreviewDirectionSchema)],
   prorationScheme: ['proration_scheme', optional(string())],
   lineItems: [
     'line_items',

@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `transactionType` | `string \| undefined` | Optional | - |
-| `kind` | `string \| undefined` | Optional | - |
+| `transactionType` | [`LineItemTransactionType \| undefined`](../../doc/models/line-item-transaction-type.md) | Optional | A handle for the line item transaction type |
+| `kind` | [`LineItemKind \| undefined`](../../doc/models/line-item-kind.md) | Optional | A handle for the line item kind |
 | `amountInCents` | `bigint \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
 | `discountAmountInCents` | `bigint \| undefined` | Optional | - |
@@ -28,8 +28,8 @@
 
 ```json
 {
-  "transaction_type": "transaction_type8",
-  "kind": "kind4",
+  "transaction_type": "charge",
+  "kind": "prepaid_usage_component",
   "amount_in_cents": 154,
   "memo": "memo0",
   "discount_amount_in_cents": 214

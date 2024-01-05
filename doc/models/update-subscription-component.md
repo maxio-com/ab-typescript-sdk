@@ -19,6 +19,8 @@
   "component_id": 244,
   "custom_price": {
     "pricing_scheme": "stairstep",
+    "interval": 66,
+    "interval_unit": "day",
     "prices": [
       {
         "starting_quantity": 242,

@@ -15,7 +15,7 @@
 | `totalTaxInCents` | `bigint \| undefined` | Optional | - |
 | `totalDiscountInCents` | `bigint \| undefined` | Optional | - |
 | `totalInCents` | `bigint \| undefined` | Optional | - |
-| `direction` | `string \| undefined` | Optional | - |
+| `direction` | [`AllocationPreviewDirection \| undefined`](../../doc/models/allocation-preview-direction.md) | Optional | - |
 | `prorationScheme` | `string \| undefined` | Optional | - |
 | `lineItems` | [`AllocationPreviewLineItem[] \| undefined`](../../doc/models/allocation-preview-line-item.md) | Optional | - |
 | `accrueCharge` | `boolean \| undefined` | Optional | - |

@@ -14,10 +14,7 @@ import {
   Schema,
   string,
 } from '../schema';
-import {
-  CreateAllocationRequest,
-  createAllocationRequestSchema,
-} from './createAllocationRequest';
+import { CreateAllocation, createAllocationSchema } from './createAllocation';
 import { CreditType, creditTypeSchema } from './creditType';
 import {
   PaymentCollectionMethod1,
@@ -27,7 +24,7 @@ import {
 export interface AllocateComponents {
   prorationUpgradeScheme?: string;
   prorationDowngradeScheme?: string;
-  allocations?: CreateAllocationRequest[];
+  allocations?: CreateAllocation[];
   accrueCharge?: boolean;
   /**
    * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
@@ -41,6 +38,11 @@ export interface AllocateComponents {
   downgradeCredit?: CreditType | null;
   /** (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription */
   paymentCollectionMethod?: PaymentCollectionMethod1;
+  /**
+   * If true, if the immediate component payment fails, initiate dunning for the subscription.
+   * Otherwise, leave the charges on the subscription to pay for at renewal.
+   */
+  initiateDunning?: boolean;
 }
 
 export const allocateComponentsSchema: Schema<AllocateComponents> = object({
@@ -48,7 +50,7 @@ export const allocateComponentsSchema: Schema<AllocateComponents> = object({
   prorationDowngradeScheme: ['proration_downgrade_scheme', optional(string())],
   allocations: [
     'allocations',
-    optional(array(lazy(() => createAllocationRequestSchema))),
+    optional(array(lazy(() => createAllocationSchema))),
   ],
   accrueCharge: ['accrue_charge', optional(boolean())],
   upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
@@ -57,4 +59,5 @@ export const allocateComponentsSchema: Schema<AllocateComponents> = object({
     'payment_collection_method',
     optional(paymentCollectionMethod1Schema),
   ],
+  initiateDunning: ['initiate_dunning', optional(boolean())],
 });

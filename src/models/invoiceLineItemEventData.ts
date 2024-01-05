@@ -33,14 +33,14 @@ export interface InvoiceLineItemEventData {
   lineReferences?: string;
   pricingDetailsIndex?: number | null;
   pricingDetails?: InvoiceLineItemPricingDetail[];
-  taxCode?: string;
+  taxCode?: string | null;
   taxAmount?: string;
   productId?: number;
   productPricePointId?: number;
   pricePointId?: number | null;
   componentId?: number | null;
   billingScheduleItemId?: number | null;
-  customItem?: boolean;
+  customItem?: boolean | null;
 }
 
 export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = object(
@@ -63,7 +63,7 @@ export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = 
       'pricing_details',
       optional(array(lazy(() => invoiceLineItemPricingDetailSchema))),
     ],
-    taxCode: ['tax_code', optional(string())],
+    taxCode: ['tax_code', optional(nullable(string()))],
     taxAmount: ['tax_amount', optional(string())],
     productId: ['product_id', optional(number())],
     productPricePointId: ['product_price_point_id', optional(number())],
@@ -73,6 +73,6 @@ export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = 
       'billing_schedule_item_id',
       optional(nullable(number())),
     ],
-    customItem: ['custom_item', optional(boolean())],
+    customItem: ['custom_item', optional(nullable(boolean()))],
   }
 );

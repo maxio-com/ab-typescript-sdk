@@ -15,14 +15,14 @@ import {
 } from '../schema';
 
 /** Information for captured payment, if applicable */
-export interface AllocationPayment {
+export interface PaymentForAllocation {
   id?: number;
   amountInCents?: bigint;
   success?: boolean;
   memo?: string;
 }
 
-export const allocationPaymentSchema: Schema<AllocationPayment> = object({
+export const paymentForAllocationSchema: Schema<PaymentForAllocation> = object({
   id: ['id', optional(number())],
   amountInCents: ['amount_in_cents', optional(bigint())],
   success: ['success', optional(boolean())],
