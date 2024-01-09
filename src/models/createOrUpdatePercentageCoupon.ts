@@ -21,11 +21,11 @@ export interface CreateOrUpdatePercentageCoupon {
   code: string;
   description?: string;
   percentage: CreateOrUpdatePercentageCouponPercentage;
-  allowNegativeBalance?: string;
-  recurring?: string;
+  allowNegativeBalance?: boolean;
+  recurring?: boolean;
   endDate?: string;
   productFamilyId?: string;
-  stackable?: string;
+  stackable?: boolean;
   compoundingStrategy?: CompoundingStrategy;
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
@@ -37,11 +37,11 @@ export const createOrUpdatePercentageCouponSchema: Schema<CreateOrUpdatePercenta
     code: ['code', string()],
     description: ['description', optional(string())],
     percentage: ['percentage', createOrUpdatePercentageCouponPercentageSchema],
-    allowNegativeBalance: ['allow_negative_balance', optional(string())],
-    recurring: ['recurring', optional(string())],
+    allowNegativeBalance: ['allow_negative_balance', optional(boolean())],
+    recurring: ['recurring', optional(boolean())],
     endDate: ['end_date', optional(string())],
     productFamilyId: ['product_family_id', optional(string())],
-    stackable: ['stackable', optional(string())],
+    stackable: ['stackable', optional(boolean())],
     compoundingStrategy: [
       'compounding_strategy',
       optional(compoundingStrategySchema),

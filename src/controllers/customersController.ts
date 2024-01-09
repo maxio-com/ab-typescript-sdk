@@ -87,6 +87,7 @@ export class CustomersController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, CustomerErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
@@ -186,6 +187,7 @@ export class CustomersController extends BaseController {
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
     req.query('q', mapped.q);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(customerResponseSchema), requestOptions);
   }
 
@@ -202,6 +204,7 @@ export class CustomersController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ id: [id, number()] });
     req.appendTemplatePath`/customers/${mapped.id}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
@@ -227,6 +230,7 @@ export class CustomersController extends BaseController {
     req.appendTemplatePath`/customers/${mapped.id}.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, CustomerErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
@@ -243,6 +247,7 @@ export class CustomersController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ id: [id, number()] });
     req.appendTemplatePath`/customers/${mapped.id}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -260,6 +265,7 @@ export class CustomersController extends BaseController {
     const req = this.createRequest('GET', '/customers/lookup.json');
     const mapped = req.prepareArgs({ reference: [reference, string()] });
     req.query('reference', mapped.reference);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
@@ -276,6 +282,7 @@ export class CustomersController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ customerId: [customerId, number()] });
     req.appendTemplatePath`/customers/${mapped.customerId}/subscriptions.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
   }
 }

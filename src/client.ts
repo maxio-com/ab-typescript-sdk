@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { basicAuthenticationProvider } from './authentication';
+import { createAuthProviderFromConfig } from './authProvider';
 import {
   AuthParams,
   ClientInterface,
@@ -50,12 +50,20 @@ export class Client implements ClientInterface {
       typeof this._config.httpClientOptions?.timeout != 'undefined'
         ? this._config.httpClientOptions.timeout
         : this._config.timeout;
+    let clonedConfig = {
+      ...this._config,
+      basicAuthCredentials: this._config.basicAuthCredentials || {
+        username: this._config.basicAuthUserName || '', 
+        password: this._config.basicAuthPassword || '', 
+      }
+    }
+
     this._userAgent = updateUserAgent(
       'AB SDK TypeScript:0.0.4 on OS {os-info}',
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
       server => getBaseUri(server, this._config),
-      basicAuthenticationProvider(this._config.basicAuthUserName, this._config.basicAuthPassword),
+      createAuthProviderFromConfig(clonedConfig),
       new HttpClient(AbortError, {
         timeout: this._timeout,
         clientConfigOverrides: this._config.unstable_httpClientOptions,
@@ -147,5 +155,5 @@ function withUserAgent(userAgent: string) {
 }
 
 function withAuthenticationByDefault(rb: SdkRequestBuilder) {
-  rb.authenticate(true);
+  rb.authenticate([{ basicAuth: true }]); 
 }

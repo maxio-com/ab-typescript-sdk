@@ -40,6 +40,7 @@ export class SitesController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SiteResponse>> {
     const req = this.createRequest('GET', '/site.json');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(siteResponseSchema, requestOptions);
   }
 
@@ -68,6 +69,7 @@ export class SitesController extends BaseController {
     });
     req.query('cleanup_scope', mapped.cleanupScope);
     req.throwOn(403, ApiError, 'Forbidden');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -100,6 +102,7 @@ export class SitesController extends BaseController {
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listPublicKeysResponseSchema, requestOptions);
   }
 }

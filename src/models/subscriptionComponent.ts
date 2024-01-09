@@ -28,6 +28,7 @@ import {
   subscriptionComponentPricingSchemeSchema,
 } from './containers/subscriptionComponentPricingScheme';
 import { CreditType, creditTypeSchema } from './creditType';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import {
   SubscriptionComponentSubscription,
   subscriptionComponentSubscriptionSchema,
@@ -75,6 +76,10 @@ export interface SubscriptionComponent {
   /** An optional object, will be returned if provided `include=subscription` query param. */
   subscription?: SubscriptionComponentSubscription;
   displayOnHostedPage?: boolean;
+  /** The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
 }
 
 export const subscriptionComponentSchema: Schema<SubscriptionComponent> = object(
@@ -126,5 +131,7 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = object
       optional(lazy(() => subscriptionComponentSubscriptionSchema)),
     ],
     displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
   }
 );

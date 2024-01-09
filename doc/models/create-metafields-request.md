@@ -16,7 +16,6 @@
 ```json
 {
   "metafields": {
-    "id": 0,
     "name": "my_field",
     "scope": {
       "csv": "0",

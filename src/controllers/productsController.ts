@@ -50,6 +50,7 @@ export class ProductsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -66,6 +67,7 @@ export class ProductsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ productId: [productId, number()] });
     req.appendTemplatePath`/products/${mapped.productId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -101,6 +103,7 @@ export class ProductsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -122,6 +125,7 @@ export class ProductsController extends BaseController {
     const mapped = req.prepareArgs({ productId: [productId, number()] });
     req.appendTemplatePath`/products/${mapped.productId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -138,6 +142,7 @@ export class ProductsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ apiHandle: [apiHandle, string()] });
     req.appendTemplatePath`/products/handle/${mapped.apiHandle}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -312,6 +317,7 @@ export class ProductsController extends BaseController {
     req.query('include', mapped.include);
     req.query('filter[prepaid_product_price_point][product_price_point_id]', mapped.filterPrepaidProductPricePointProductPricePointId);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productResponseSchema), requestOptions);
   }
 }
