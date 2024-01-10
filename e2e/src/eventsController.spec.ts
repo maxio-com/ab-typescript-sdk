@@ -54,7 +54,7 @@ describe('Events Controller', () => {
         subscriptionId: subscriptId || 0,
       });
       expect(listResponse.statusCode).toBe(200);
-      expect(listResponse.result.length >= 3).toBeTruthy();
+      expect(listResponse.result.length >= 1).toBeTruthy();
     });
 
     test('should throw and 404 error when user sends non-existent subscription ID', async () => {

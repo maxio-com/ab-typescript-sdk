@@ -75,6 +75,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, EventBasedBillingSegmentErrorsError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(segmentResponseSchema, requestOptions);
   }
 
@@ -171,6 +172,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, EventBasedBillingListSegmentsErrorsError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
 
@@ -208,6 +210,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, EventBasedBillingSegmentErrorsError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(segmentResponseSchema, requestOptions);
   }
 
@@ -239,6 +242,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -277,6 +281,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, EventBasedBillingSegmentError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
 
@@ -315,6 +320,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, EventBasedBillingSegmentError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
 }

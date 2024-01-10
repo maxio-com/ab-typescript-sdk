@@ -49,6 +49,7 @@ export class SubscriptionGroupStatusController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/cancel.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -70,6 +71,7 @@ export class SubscriptionGroupStatusController extends BaseController {
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -89,6 +91,7 @@ export class SubscriptionGroupStatusController extends BaseController {
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -149,6 +152,7 @@ export class SubscriptionGroupStatusController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/reactivate.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       reactivateSubscriptionGroupResponseSchema,
       requestOptions

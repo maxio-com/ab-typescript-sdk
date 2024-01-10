@@ -38,6 +38,8 @@
 | `allowFractionalQuantities` | `boolean \| undefined` | Optional | - |
 | `subscription` | [`SubscriptionComponentSubscription \| undefined`](../../doc/models/subscription-component-subscription.md) | Optional | An optional object, will be returned if provided `include=subscription` query param. |
 | `displayOnHostedPage` | `boolean \| undefined` | Optional | - |
+| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 
 ## Example (as JSON)
 

@@ -120,6 +120,7 @@ export class ProductPricePointsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
     req.throwOn(422, ProductPricePointErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -181,6 +182,7 @@ export class ProductPricePointsController extends BaseController {
     req.query('currency_prices', mapped.currencyPrices);
     req.query('filter[type]', mapped.filterType, commaPrefix);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
   }
 
@@ -211,6 +213,7 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -246,6 +249,7 @@ export class ProductPricePointsController extends BaseController {
     });
     req.query('currency_prices', mapped.currencyPrices);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -270,6 +274,7 @@ export class ProductPricePointsController extends BaseController {
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -291,6 +296,7 @@ export class ProductPricePointsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/unarchive.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
 
@@ -314,6 +320,7 @@ export class ProductPricePointsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/default.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
 
@@ -339,6 +346,7 @@ export class ProductPricePointsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/bulk.json`;
     req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       bulkCreateProductPricePointsResponseSchema,
       requestOptions
@@ -374,6 +382,7 @@ export class ProductPricePointsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
     req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
   }
 
@@ -405,6 +414,7 @@ export class ProductPricePointsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
     req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
   }
 
@@ -521,6 +531,7 @@ export class ProductPricePointsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
   }
 }

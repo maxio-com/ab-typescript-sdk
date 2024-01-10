@@ -120,6 +120,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/refunds.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -283,6 +284,7 @@ export class InvoicesController extends BaseController {
     req.query('number', mapped.mNumber, commaPrefix);
     req.query('product_ids', mapped.productIds, commaPrefix);
     req.query('sort', mapped.sort);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listInvoicesResponseSchema, requestOptions);
   }
 
@@ -300,6 +302,7 @@ export class InvoicesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/invoices/${mapped.uid}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -397,6 +400,7 @@ export class InvoicesController extends BaseController {
     req.query('invoice_uid', mapped.invoiceUid);
     req.query('with_change_invoice_status', mapped.withChangeInvoiceStatus);
     req.query('event_types', mapped.eventTypes, commaPrefix);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listInvoiceEventsResponseSchema, requestOptions);
   }
 
@@ -474,6 +478,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/payments.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -521,6 +526,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(multiInvoicePaymentResponseSchema, requestOptions);
   }
 
@@ -588,6 +594,7 @@ export class InvoicesController extends BaseController {
     req.query('taxes', mapped.taxes);
     req.query('refunds', mapped.refunds);
     req.query('applications', mapped.applications);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listCreditNotesResponseSchema, requestOptions);
   }
 
@@ -604,6 +611,7 @@ export class InvoicesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/credit_notes/${mapped.uid}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(creditNoteSchema, requestOptions);
   }
 
@@ -636,6 +644,7 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payments.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentResponseSchema, requestOptions);
   }
 
@@ -673,6 +682,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/reopen.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -700,6 +710,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/void.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -744,6 +755,7 @@ export class InvoicesController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/invoices/${mapped.invoiceUid}/segments.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(consolidatedInvoiceSchema, requestOptions);
   }
 
@@ -947,6 +959,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/invoices.json`;
     req.throwOn(401, ApiError, 'Unauthorized');
     req.throwOn(422, NestedErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceResponseSchema, requestOptions);
   }
 
@@ -984,6 +997,7 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/deliveries.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -1008,6 +1022,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/customer_information/preview.json`;
     req.throwOn(404, ErrorListResponseError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerChangesPreviewResponseSchema, requestOptions);
   }
 
@@ -1032,6 +1047,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/customer_information.json`;
     req.throwOn(404, ErrorListResponseError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -1082,6 +1098,7 @@ export class InvoicesController extends BaseController {
     req.throwOn(401, ApiError, 'Unauthorized');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 }

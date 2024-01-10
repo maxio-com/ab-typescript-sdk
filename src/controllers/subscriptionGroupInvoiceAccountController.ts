@@ -63,6 +63,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       subscriptionGroupPrepaymentResponseSchema,
       requestOptions
@@ -144,6 +145,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.throwOn(401, ApiError, 'Unauthorized');
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listSubscriptionGroupPrepaymentResponseSchema,
       requestOptions
@@ -173,6 +175,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credits.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditResponseSchema, requestOptions);
   }
 
@@ -198,6 +201,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credit_deductions.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }
 }

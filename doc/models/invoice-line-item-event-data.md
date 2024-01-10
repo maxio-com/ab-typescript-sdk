@@ -24,7 +24,7 @@
 | `taxCode` | `string \| null \| undefined` | Optional | - |
 | `taxAmount` | `string \| undefined` | Optional | - |
 | `productId` | `number \| undefined` | Optional | - |
-| `productPricePointId` | `number \| undefined` | Optional | - |
+| `productPricePointId` | `number \| null \| undefined` | Optional | - |
 | `pricePointId` | `number \| null \| undefined` | Optional | - |
 | `componentId` | `number \| null \| undefined` | Optional | - |
 | `billingScheduleItemId` | `number \| null \| undefined` | Optional | - |

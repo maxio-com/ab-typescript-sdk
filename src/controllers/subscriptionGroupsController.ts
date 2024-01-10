@@ -86,6 +86,7 @@ export class SubscriptionGroupsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, SubscriptionGroupSignupErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       subscriptionGroupSignupResponseSchema,
       requestOptions
@@ -109,6 +110,7 @@ export class SubscriptionGroupsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, SingleStringErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
   }
 
@@ -154,6 +156,7 @@ export class SubscriptionGroupsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('include', mapped.include);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSubscriptionGroupsResponseSchema, requestOptions);
   }
 
@@ -175,6 +178,7 @@ export class SubscriptionGroupsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
   }
 
@@ -202,6 +206,7 @@ export class SubscriptionGroupsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
     req.throwOn(422, SubscriptionGroupUpdateErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
   }
 
@@ -220,6 +225,7 @@ export class SubscriptionGroupsController extends BaseController {
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       deleteSubscriptionGroupResponseSchema,
       requestOptions
@@ -244,6 +250,7 @@ export class SubscriptionGroupsController extends BaseController {
     });
     req.query('subscription_id', mapped.subscriptionId);
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
   }
 
@@ -293,6 +300,7 @@ export class SubscriptionGroupsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/group.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
   }
 
@@ -316,6 +324,7 @@ export class SubscriptionGroupsController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/group.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 }

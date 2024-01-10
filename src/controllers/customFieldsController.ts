@@ -6,6 +6,7 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, plainPrefix, RequestOptions } from '../core';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateMetadataRequest,
@@ -101,6 +102,8 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
+    req.throwOn(422, SingleErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -152,6 +155,7 @@ export class CustomFieldsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listMetafieldsResponseSchema, requestOptions);
   }
 
@@ -186,6 +190,7 @@ export class CustomFieldsController extends BaseController {
     req.query('current_name', mapped.currentName);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -212,6 +217,7 @@ export class CustomFieldsController extends BaseController {
     req.query('name', mapped.name);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -274,6 +280,8 @@ export class CustomFieldsController extends BaseController {
     req.query('value', mapped.value);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
+    req.throwOn(422, SingleErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
@@ -322,6 +330,7 @@ export class CustomFieldsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
   }
 
@@ -353,6 +362,7 @@ export class CustomFieldsController extends BaseController {
     req.query('value', mapped.value);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
@@ -408,6 +418,7 @@ export class CustomFieldsController extends BaseController {
     req.query('names[]', mapped.names, plainPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -514,6 +525,7 @@ export class CustomFieldsController extends BaseController {
     req.query('resource_ids[]', mapped.resourceIds, plainPrefix);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metadata.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
   }
 }

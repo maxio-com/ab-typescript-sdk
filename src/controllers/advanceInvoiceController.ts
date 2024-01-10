@@ -54,6 +54,7 @@ export class AdvanceInvoiceController extends BaseController {
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -75,6 +76,7 @@ export class AdvanceInvoiceController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice.json`;
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -104,6 +106,7 @@ export class AdvanceInvoiceController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice/void.json`;
     req.throwOn(403, ApiError, 'Forbidden');
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 }

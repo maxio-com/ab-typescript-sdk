@@ -4,20 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  array,
-  lazy,
-  number,
-  object,
-  optional,
-  Schema,
-  string,
-} from '../schema';
+import { array, lazy, object, optional, Schema, string } from '../schema';
 import { MetafieldInput, metafieldInputSchema } from './metafieldInput';
 import { MetafieldScope, metafieldScopeSchema } from './metafieldScope';
 
 export interface CreateMetafield {
-  id?: number;
   name?: string;
   /** Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings. */
   scope?: MetafieldScope;
@@ -28,7 +19,6 @@ export interface CreateMetafield {
 }
 
 export const createMetafieldSchema: Schema<CreateMetafield> = object({
-  id: ['id', optional(number())],
   name: ['name', optional(string())],
   scope: ['scope', optional(lazy(() => metafieldScopeSchema))],
   inputType: ['input_type', optional(metafieldInputSchema)],

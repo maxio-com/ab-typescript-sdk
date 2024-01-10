@@ -36,7 +36,7 @@ export interface InvoiceLineItemEventData {
   taxCode?: string | null;
   taxAmount?: string;
   productId?: number;
-  productPricePointId?: number;
+  productPricePointId?: number | null;
   pricePointId?: number | null;
   componentId?: number | null;
   billingScheduleItemId?: number | null;
@@ -66,7 +66,10 @@ export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = 
     taxCode: ['tax_code', optional(nullable(string()))],
     taxAmount: ['tax_amount', optional(string())],
     productId: ['product_id', optional(number())],
-    productPricePointId: ['product_price_point_id', optional(number())],
+    productPricePointId: [
+      'product_price_point_id',
+      optional(nullable(number())),
+    ],
     pricePointId: ['price_point_id', optional(nullable(number()))],
     componentId: ['component_id', optional(nullable(number()))],
     billingScheduleItemId: [
