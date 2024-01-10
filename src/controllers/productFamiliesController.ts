@@ -6,6 +6,7 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateProductFamilyRequest,
@@ -206,6 +207,7 @@ export class ProductFamiliesController extends BaseController {
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productResponseSchema), requestOptions);
   }
 
@@ -229,6 +231,8 @@ export class ProductFamiliesController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
+    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productFamilyResponseSchema, requestOptions);
   }
 
@@ -283,6 +287,7 @@ export class ProductFamiliesController extends BaseController {
     req.query('end_date', mapped.endDate);
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productFamilyResponseSchema), requestOptions);
   }
 
@@ -302,6 +307,7 @@ export class ProductFamiliesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ id: [id, number()] });
     req.appendTemplatePath`/product_families/${mapped.id}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productFamilyResponseSchema, requestOptions);
   }
 }

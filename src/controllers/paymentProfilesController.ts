@@ -380,6 +380,7 @@ export class PaymentProfilesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(createPaymentProfileResponseSchema, requestOptions);
   }
 
@@ -419,6 +420,7 @@ export class PaymentProfilesController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('customer_id', mapped.customerId);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       array(listPaymentProfilesResponseSchema),
       requestOptions
@@ -475,6 +477,7 @@ export class PaymentProfilesController extends BaseController {
       paymentProfileId: [paymentProfileId, string()],
     });
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(readPaymentProfileResponseSchema, requestOptions);
   }
 
@@ -543,6 +546,7 @@ export class PaymentProfilesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(updatePaymentProfileResponseSchema, requestOptions);
   }
 
@@ -565,6 +569,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -594,6 +599,7 @@ export class PaymentProfilesController extends BaseController {
       paymentProfileId: [paymentProfileId, string()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -620,6 +626,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/bank_accounts/${mapped.bankAccountId}/verification.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(bankAccountResponseSchema, requestOptions);
   }
 
@@ -644,6 +651,7 @@ export class PaymentProfilesController extends BaseController {
       paymentProfileId: [paymentProfileId, string()],
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -670,6 +678,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -699,6 +708,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -725,6 +735,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/one_time_tokens/${mapped.chargifyToken}.json`;
     req.throwOn(404, ErrorListResponseError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(getOneTimeTokenRequestSchema, requestOptions);
   }
 
@@ -758,6 +769,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/request_payment_profiles_update.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 }

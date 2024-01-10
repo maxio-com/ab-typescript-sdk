@@ -22,9 +22,9 @@
     "code": "code8",
     "description": "description0",
     "percentage": 11.02,
-    "allow_negative_balance": "allow_negative_balance8",
-    "recurring": "recurring4",
-    "end_date": "end_date0",
+    "allow_negative_balance": false,
+    "recurring": false,
+    "end_date": "2016-03-13T12:52:32.123Z",
     "product_family_id": "product_family_id6"
   },
   "restricted_products": {

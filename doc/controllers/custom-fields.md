@@ -140,6 +140,12 @@ try {
 ]
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseError`](../../doc/models/single-error-response-error.md) |
+
 
 # List Metafields
 
@@ -422,6 +428,12 @@ try {
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseError`](../../doc/models/single-error-response-error.md) |
 
 
 # Read Metadata

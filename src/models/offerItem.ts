@@ -15,6 +15,7 @@ import {
   string,
 } from '../schema';
 import { CurrencyPrice, currencyPriceSchema } from './currencyPrice';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 export interface OfferItem {
   componentId?: number;
@@ -25,6 +26,10 @@ export interface OfferItem {
   componentName?: string;
   pricePointName?: string;
   currencyPrices?: CurrencyPrice[];
+  /** The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
 }
 
 export const offerItemSchema: Schema<OfferItem> = object({
@@ -39,4 +44,6 @@ export const offerItemSchema: Schema<OfferItem> = object({
     'currency_prices',
     optional(array(lazy(() => currencyPriceSchema))),
   ],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
 });

@@ -119,6 +119,7 @@ export class ComponentsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/${mapped.componentKind}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
@@ -136,6 +137,7 @@ export class ComponentsController extends BaseController {
     const req = this.createRequest('GET', '/components/lookup.json');
     const mapped = req.prepareArgs({ handle: [handle, string()] });
     req.query('handle', mapped.handle);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
@@ -161,6 +163,7 @@ export class ComponentsController extends BaseController {
       componentId: [componentId, string()],
     });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components/${mapped.componentId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
@@ -193,6 +196,7 @@ export class ComponentsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components/${mapped.componentId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
@@ -217,6 +221,7 @@ export class ComponentsController extends BaseController {
     });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components/${mapped.componentId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentSchema, requestOptions);
   }
 
@@ -316,6 +321,7 @@ export class ComponentsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(componentResponseSchema), requestOptions);
   }
 
@@ -343,6 +349,7 @@ export class ComponentsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}.json`;
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
@@ -370,6 +377,7 @@ export class ComponentsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/default.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
 
@@ -475,6 +483,7 @@ export class ComponentsController extends BaseController {
     req.query('start_datetime', mapped.startDatetime);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(componentResponseSchema), requestOptions);
   }
 
@@ -498,6 +507,7 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
 
@@ -557,6 +567,7 @@ export class ComponentsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('filter[type]', mapped.filterType, commaPrefix);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointsResponseSchema, requestOptions);
   }
 
@@ -581,6 +592,7 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/bulk.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointsResponseSchema, requestOptions);
   }
 
@@ -616,6 +628,7 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
 
@@ -638,6 +651,7 @@ export class ComponentsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
 
@@ -659,6 +673,7 @@ export class ComponentsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/unarchive.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
 
@@ -689,6 +704,7 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/price_points/${mapped.pricePointId}/currency_prices.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(currencyPriceSchema), requestOptions);
   }
 
@@ -715,6 +731,7 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/price_points/${mapped.pricePointId}/currency_prices.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(currencyPriceSchema), requestOptions);
   }
 
@@ -834,6 +851,7 @@ export class ComponentsController extends BaseController {
     req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('filter[archived_at]', mapped.filterArchivedAt);
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listComponentsPricePointsResponseSchema,
       requestOptions

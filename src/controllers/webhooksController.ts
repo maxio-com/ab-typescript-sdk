@@ -121,6 +121,7 @@ export class WebhooksController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('order', mapped.order);
     req.query('subscription', mapped.subscription);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(webhookResponseSchema), requestOptions);
   }
 
@@ -140,6 +141,7 @@ export class WebhooksController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(enableWebhooksResponseSchema, requestOptions);
   }
 
@@ -162,6 +164,7 @@ export class WebhooksController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(replayWebhooksResponseSchema, requestOptions);
   }
 
@@ -187,6 +190,7 @@ export class WebhooksController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(endpointResponseSchema, requestOptions);
   }
 
@@ -199,6 +203,7 @@ export class WebhooksController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Endpoint[]>> {
     const req = this.createRequest('GET', '/endpoints.json');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(endpointSchema), requestOptions);
   }
 
@@ -235,6 +240,7 @@ export class WebhooksController extends BaseController {
     req.appendTemplatePath`/endpoints/${mapped.endpointId}.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(endpointResponseSchema, requestOptions);
   }
 }
