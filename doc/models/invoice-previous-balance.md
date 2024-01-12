@@ -9,14 +9,14 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `captureDate` | `string \| undefined` | Optional | - |
+| `capturedAt` | `string \| undefined` | Optional | - |
 | `invoices` | [`InvoiceBalanceItem[] \| undefined`](../../doc/models/invoice-balance-item.md) | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "capture_date": "capture_date2",
+  "captured_at": "2016-03-13T12:52:32.123Z",
   "invoices": [
     {
       "uid": "uid6",

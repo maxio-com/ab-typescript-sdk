@@ -114,8 +114,7 @@ export class SubscriptionComponentsController extends BaseController {
       componentId: [componentId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(subscriptionComponentResponseSchema, requestOptions);
   }
 
@@ -247,7 +246,6 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.query('filter[currencies]', mapped.filterCurrencies, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       array(subscriptionComponentResponseSchema),
       requestOptions
@@ -280,8 +278,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/price_points.json`;
-    req.throwOn(422, ComponentPricePointError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ComponentPricePointError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(
       bulkComponentSPricePointAssignmentSchema,
       requestOptions
@@ -306,7 +303,6 @@ export class SubscriptionComponentsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/price_points/reset.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -399,8 +395,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(allocationResponseSchema, requestOptions);
   }
 
@@ -452,10 +447,8 @@ export class SubscriptionComponentsController extends BaseController {
     });
     req.query('page', mapped.page);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(array(allocationResponseSchema), requestOptions);
   }
 
@@ -486,10 +479,8 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/allocations.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(array(allocationResponseSchema), requestOptions);
   }
 
@@ -524,8 +515,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/allocations/preview.json`;
-    req.throwOn(422, ComponentAllocationError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(allocationPreviewResponseSchema, requestOptions);
   }
 
@@ -570,8 +560,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations/${mapped.allocationId}.json`;
-    req.throwOn(422, SubscriptionComponentAllocationError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, SubscriptionComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
 
@@ -616,8 +605,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations/${mapped.allocationId}.json`;
-    req.throwOn(422, SubscriptionComponentAllocationError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, SubscriptionComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
 
@@ -718,8 +706,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/usages.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(usageResponseSchema, requestOptions);
   }
 
@@ -809,7 +796,6 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/usages.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(usageResponseSchema), requestOptions);
   }
 
@@ -842,7 +828,6 @@ export class SubscriptionComponentsController extends BaseController {
       componentId: [componentId, number()],
     });
     req.appendTemplatePath`/event_based_billing/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/activate.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -865,7 +850,6 @@ export class SubscriptionComponentsController extends BaseController {
       componentId: [componentId, number()],
     });
     req.appendTemplatePath`/event_based_billing/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/deactivate.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -919,7 +903,6 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('store_uid', mapped.storeUid);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.subdomain}/events/${mapped.apiHandle}.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -957,7 +940,6 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('store_uid', mapped.storeUid);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.subdomain}/events/${mapped.apiHandle}/bulk.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -1245,7 +1227,6 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('filter[subscription][start_datetime]', mapped.filterSubscriptionStartDatetime);
     req.query('filter[subscription][end_date]', mapped.filterSubscriptionEndDate);
     req.query('filter[subscription][end_datetime]', mapped.filterSubscriptionEndDatetime);
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listSubscriptionComponentsResponseSchema,
       requestOptions

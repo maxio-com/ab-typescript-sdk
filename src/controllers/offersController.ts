@@ -4,7 +4,6 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorMapResponseError } from '../errors/errorMapResponseError';
 import {
@@ -52,8 +51,7 @@ export class OffersController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(offerResponseSchema, requestOptions);
   }
 
@@ -92,7 +90,6 @@ export class OffersController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('include_archived', mapped.includeArchived);
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listOffersResponseSchema, requestOptions);
   }
 
@@ -110,8 +107,6 @@ export class OffersController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ offerId: [offerId, number()] });
     req.appendTemplatePath`/offers/${mapped.offerId}.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(offerResponseSchema, requestOptions);
   }
 
@@ -128,8 +123,6 @@ export class OffersController extends BaseController {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({ offerId: [offerId, number()] });
     req.appendTemplatePath`/offers/${mapped.offerId}/archive.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -147,8 +140,6 @@ export class OffersController extends BaseController {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({ offerId: [offerId, number()] });
     req.appendTemplatePath`/offers/${mapped.offerId}/unarchive.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 }

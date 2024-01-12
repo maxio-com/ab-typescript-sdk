@@ -15,10 +15,10 @@ const customFieldsController = new CustomFieldsController(client);
 * [Update Metafield](../../doc/controllers/custom-fields.md#update-metafield)
 * [Delete Metafield](../../doc/controllers/custom-fields.md#delete-metafield)
 * [Create Metadata](../../doc/controllers/custom-fields.md#create-metadata)
-* [Read Metadata](../../doc/controllers/custom-fields.md#read-metadata)
+* [List Metadata](../../doc/controllers/custom-fields.md#list-metadata)
 * [Update Metadata](../../doc/controllers/custom-fields.md#update-metadata)
 * [Delete Metadata](../../doc/controllers/custom-fields.md#delete-metadata)
-* [List Metadata](../../doc/controllers/custom-fields.md#list-metadata)
+* [List Metadata for Resource Type](../../doc/controllers/custom-fields.md#list-metadata-for-resource-type)
 
 
 # Create Metafields
@@ -368,7 +368,6 @@ Please pay special attention to the resource you use when creating metadata.
 async createMetadata(
   resourceType: ResourceType,
   resourceId: string,
-  value?: string,
   body?: CreateMetadataRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Metadata[]>>
@@ -380,7 +379,6 @@ async createMetadata(
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `value` | `string \| undefined` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`CreateMetadataRequest \| undefined`](../../doc/models/create-metadata-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -414,7 +412,6 @@ try {
   const { result, ...httpResponse } = await customFieldsController.createMetadata(
   resourceType,
   resourceId,
-  undefined,
   body
 );
   // Get more response info...
@@ -436,7 +433,7 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseError`](../../doc/models/single-error-response-error.md) |
 
 
-# Read Metadata
+# List Metadata
 
 This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
 
@@ -445,7 +442,7 @@ This request will list all of the metadata belonging to a particular resource (i
 This endpoint will also display the current stats of your metadata to use as a tool for pagination.
 
 ```ts
-async readMetadata(
+async listMetadata(
   resourceType: ResourceType,
   resourceId: string,
   page?: number,
@@ -480,7 +477,7 @@ const collect = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customFieldsController.readMetadata(collect);
+  const { result, ...httpResponse } = await customFieldsController.listMetadata(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -502,7 +499,6 @@ This method allows you to update the existing metadata associated with a subscri
 async updateMetadata(
   resourceType: ResourceType,
   resourceId: string,
-  value?: string,
   body?: UpdateMetadataRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Metadata[]>>
@@ -514,7 +510,6 @@ async updateMetadata(
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `value` | `string \| undefined` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`UpdateMetadataRequest \| undefined`](../../doc/models/update-metadata-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -632,7 +627,7 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
 | 404 | Not Found | `ApiError` |
 
 
-# List Metadata
+# List Metadata for Resource Type
 
 This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
 
@@ -649,7 +644,7 @@ This endpoint will also display the current stats of your metadata to use as a t
 This endpoint will list the number of pages of metadata information that are contained within a site.
 
 ```ts
-async listMetadata(
+async listMetadataForResourceType(
   resourceType: ResourceType,
   page?: number,
   perPage?: number,
@@ -698,7 +693,7 @@ const collect = {Liquid error: Value cannot be null. (Parameter 'key')
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customFieldsController.listMetadata(collect);
+  const { result, ...httpResponse } = await customFieldsController.listMetadataForResourceType(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

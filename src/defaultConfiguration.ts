@@ -13,6 +13,8 @@ export const DEFAULT_CONFIGURATION: Configuration = {
   environment: Environment.Production,
   subdomain: 'subdomain',
   domain: 'chargify.com',
+  basicAuthUserName: 'TODO access token',
+  basicAuthPassword: 'TODO access token',
 };
 
 /** Default values for retry configuration parameters. */

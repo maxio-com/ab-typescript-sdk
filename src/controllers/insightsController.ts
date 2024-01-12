@@ -47,7 +47,6 @@ export class InsightsController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SiteSummary>> {
     const req = this.createRequest('GET', '/stats.json');
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(siteSummarySchema, requestOptions);
   }
 
@@ -72,7 +71,6 @@ export class InsightsController extends BaseController {
     req.query('at_time', mapped.atTime);
     req.query('subscription_id', mapped.subscriptionId);
     req.deprecated('InsightsController.readMrr');
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(mRRResponseSchema, requestOptions);
   }
 
@@ -146,7 +144,6 @@ export class InsightsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.deprecated('InsightsController.readMrrMovements');
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listMRRResponseSchema, requestOptions);
   }
 
@@ -203,8 +200,7 @@ export class InsightsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.deprecated('InsightsController.listMrrPerSubscription');
-    req.throwOn(400, SubscriptionsMrrErrorResponseError, 'Bad Request');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(400, SubscriptionsMrrErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionMRRResponseSchema, requestOptions);
   }
 }

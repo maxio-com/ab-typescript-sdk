@@ -64,8 +64,7 @@ export class SubscriptionStatusController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/retry.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -90,9 +89,8 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -122,8 +120,7 @@ export class SubscriptionStatusController extends BaseController {
     });
     req.query('calendar_billing[\'resumption_charge\']', mapped.calendarBillingResumptionCharge);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/resume.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -151,8 +148,7 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/hold.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -185,8 +181,7 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/hold.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -379,8 +374,7 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/reactivate.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -411,8 +405,7 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/delayed_cancel.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(delayedCancellationResponseSchema, requestOptions);
   }
 
@@ -436,8 +429,7 @@ export class SubscriptionStatusController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/delayed_cancel.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(delayedCancellationResponseSchema, requestOptions);
   }
 
@@ -457,7 +449,6 @@ export class SubscriptionStatusController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/cancel_dunning.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -513,8 +504,7 @@ export class SubscriptionStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/renewals/preview.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(renewalPreviewResponseSchema, requestOptions);
   }
 }

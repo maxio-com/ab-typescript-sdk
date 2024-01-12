@@ -61,8 +61,7 @@ export class ProformaInvoicesController extends BaseController {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
 
@@ -84,9 +83,7 @@ export class ProformaInvoicesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -109,9 +106,7 @@ export class ProformaInvoicesController extends BaseController {
       proformaInvoiceUid: [proformaInvoiceUid, number()],
     });
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -139,9 +134,7 @@ export class ProformaInvoicesController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -235,7 +228,6 @@ export class ProformaInvoicesController extends BaseController {
     req.query('payments', mapped.payments);
     req.query('custom_fields', mapped.customFields);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(proformaInvoiceSchema), requestOptions);
   }
 
@@ -270,10 +262,8 @@ export class ProformaInvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}/void.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -306,10 +296,8 @@ export class ProformaInvoicesController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices/preview.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(proformaInvoicePreviewSchema, requestOptions);
   }
 
@@ -344,10 +332,8 @@ export class ProformaInvoicesController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(400, ProformaBadRequestErrorResponseError, 'Bad Request');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -389,10 +375,8 @@ export class ProformaInvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.query('include=next_proforma_invoice', mapped.includeNextProformaInvoice);
     req.json(mapped.body);
-    req.throwOn(400, ProformaBadRequestErrorResponseError, 'Bad Request');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(422, ErrorMapResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(signupProformaPreviewResponseSchema, requestOptions);
   }
 }

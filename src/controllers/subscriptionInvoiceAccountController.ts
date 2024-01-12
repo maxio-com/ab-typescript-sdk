@@ -67,7 +67,6 @@ export class SubscriptionInvoiceAccountController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/account_balances.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(accountBalancesSchema, requestOptions);
   }
 
@@ -101,7 +100,6 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(createPrepaymentResponseSchema, requestOptions);
   }
 
@@ -165,10 +163,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.query('filter[start_date]', mapped.filterStartDate);
     req.query('filter[end_date]', mapped.filterEndDate);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(prepaymentsResponseSchema, requestOptions);
   }
 
@@ -193,7 +188,6 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credits.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }
 
@@ -218,8 +212,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credit_deductions.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
 
@@ -251,10 +244,9 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments/${mapped.prepaymentId}/refunds.json`;
-    req.throwOn(400, RefundPrepaymentBaseErrorsResponseError, 'Bad Request');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, RefundPrepaymentAggregatedErrorsResponseError, 'Unprocessable Entity');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(400, RefundPrepaymentBaseErrorsResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, RefundPrepaymentAggregatedErrorsResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(prepaymentResponseSchema, requestOptions);
   }
 }

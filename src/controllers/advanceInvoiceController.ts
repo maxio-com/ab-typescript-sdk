@@ -51,10 +51,8 @@ export class AdvanceInvoiceController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice/issue.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -74,9 +72,7 @@ export class AdvanceInvoiceController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -104,9 +100,7 @@ export class AdvanceInvoiceController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice/void.json`;
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 }

@@ -11,13 +11,13 @@ import {
 } from './invoiceBalanceItem';
 
 export interface InvoicePreviousBalance {
-  captureDate?: string;
+  capturedAt?: string;
   invoices?: InvoiceBalanceItem[];
 }
 
 export const invoicePreviousBalanceSchema: Schema<InvoicePreviousBalance> = object(
   {
-    captureDate: ['capture_date', optional(string())],
+    capturedAt: ['captured_at', optional(string())],
     invoices: [
       'invoices',
       optional(array(lazy(() => invoiceBalanceItemSchema))),

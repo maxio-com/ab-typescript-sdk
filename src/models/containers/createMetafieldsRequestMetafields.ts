@@ -4,13 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, array, Schema, validateAndMap } from '../../schema';
+import { array, oneOf, Schema, validateAndMap } from '../../schema';
 import { CreateMetafield, createMetafieldSchema } from '../createMetafield';
 
-/** This is a container type for any-of types. */
+/** This is a container type for one-of types. */
 export type CreateMetafieldsRequestMetafields = CreateMetafield | CreateMetafield[];
 
-export const createMetafieldsRequestMetafieldsSchema: Schema<CreateMetafieldsRequestMetafields> = anyOf(
+export const createMetafieldsRequestMetafieldsSchema: Schema<CreateMetafieldsRequestMetafields> = oneOf(
   [createMetafieldSchema, array(createMetafieldSchema)]
 );
 

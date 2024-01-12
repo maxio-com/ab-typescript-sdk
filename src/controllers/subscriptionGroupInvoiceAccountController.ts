@@ -62,8 +62,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(
       subscriptionGroupPrepaymentResponseSchema,
       requestOptions
@@ -142,10 +141,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(
       listSubscriptionGroupPrepaymentResponseSchema,
       requestOptions
@@ -174,8 +170,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credits.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(serviceCreditResponseSchema, requestOptions);
   }
 
@@ -200,8 +195,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credit_deductions.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }
 }

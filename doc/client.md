@@ -11,7 +11,8 @@ The following parameters are configurable for the API Client:
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `30000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
-| `basicAuthCredentials` | [`BasicAuthCredentials`]($a/basic-authentication.md) | The credential object for basicAuth |
+| `basicAuthUserName` | `string` | The username to use with basic authentication |
+| `basicAuthPassword` | `string` | The password to use with basic authentication |
 
 ## HttpClientOptions
 
@@ -38,12 +39,10 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
-  basicAuthCredentials: {
-    username: 'BasicAuthUserName',
-    password: 'BasicAuthPassword'
-  },
   timeout: 30000,
   environment: Environment.Production,
+  basicAuthUserName: 'BasicAuthUserName',
+  basicAuthPassword: 'BasicAuthPassword',
 });
 ```
 

@@ -111,6 +111,7 @@ export type { BatchJobResponse } from './models/batchJobResponse';
 export type { BillingAddress } from './models/billingAddress';
 export type { BillingManifest } from './models/billingManifest';
 export type { BillingManifestItem } from './models/billingManifestItem';
+export { BillingManifestLineItemKind } from './models/billingManifestLineItemKind';
 export type { BillingSchedule } from './models/billingSchedule';
 export type { Breakouts } from './models/breakouts';
 export type { BulkComponentSPricePointAssignment } from './models/bulkComponentSPricePointAssignment';
@@ -359,8 +360,6 @@ export type { ListSubscriptionGroupsResponse } from './models/listSubscriptionGr
 export type { Metadata } from './models/metadata';
 export type { Metafield } from './models/metafield';
 export { MetafieldInput } from './models/metafieldInput';
-export type { Metafields } from './models/metafields';
-export type { Metafields1 } from './models/metafields1';
 export type { MetafieldScope } from './models/metafieldScope';
 export type { MeteredComponent } from './models/meteredComponent';
 export type { MeteredUsage } from './models/meteredUsage';

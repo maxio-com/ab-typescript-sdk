@@ -1042,6 +1042,7 @@ const body: CreateComponentPricePointRequest = {
       }
     ],
     handle: 'wholesale-handle',
+    useSiteExchangeRate: false,
   },
 };
 

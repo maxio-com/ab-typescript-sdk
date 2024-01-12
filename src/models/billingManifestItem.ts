@@ -5,7 +5,10 @@
  */
 
 import { bigint, number, object, optional, Schema, string } from '../schema';
-import { LineItemKind, lineItemKindSchema } from './lineItemKind';
+import {
+  BillingManifestLineItemKind,
+  billingManifestLineItemKindSchema,
+} from './billingManifestLineItemKind';
 import {
   LineItemTransactionType,
   lineItemTransactionTypeSchema,
@@ -14,8 +17,8 @@ import {
 export interface BillingManifestItem {
   /** A handle for the line item transaction type */
   transactionType?: LineItemTransactionType;
-  /** A handle for the line item kind */
-  kind?: LineItemKind;
+  /** A handle for the billing manifest line item kind */
+  kind?: BillingManifestLineItemKind;
   amountInCents?: bigint;
   memo?: string;
   discountAmountInCents?: bigint;
@@ -35,7 +38,7 @@ export const billingManifestItemSchema: Schema<BillingManifestItem> = object({
     'transaction_type',
     optional(lineItemTransactionTypeSchema),
   ],
-  kind: ['kind', optional(lineItemKindSchema)],
+  kind: ['kind', optional(billingManifestLineItemKindSchema)],
   amountInCents: ['amount_in_cents', optional(bigint())],
   memo: ['memo', optional(string())],
   discountAmountInCents: ['discount_amount_in_cents', optional(bigint())],
