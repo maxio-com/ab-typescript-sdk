@@ -14,7 +14,7 @@
 | `usesAllowed` | `number \| undefined` | Optional | - |
 | `expiresAt` | `string \| null \| undefined` | Optional | - |
 | `recurring` | `boolean \| undefined` | Optional | - |
-| `amountInCents` | `bigint \| null \| undefined` | Optional | - |
+| `amountInCents` | `bigint \| null \| undefined` | Optional | **Constraints**: `>= 0` |
 | `percentage` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)

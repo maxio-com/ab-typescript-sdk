@@ -162,30 +162,20 @@ export class CustomFieldsController extends BaseController {
    * metadata after the fact.
    *
    * @param resourceType  the resource type to which the metafields belong
-   * @param name          Name of the custom field.
-   * @param currentName   This only applies when you are updating an existing record
-   *                                                        and you wish to rename the field. Note you must supply name
-   *                                                        and current_name to rename the field
    * @param body
    * @return Response from the API call
    */
   async updateMetafield(
     resourceType: ResourceType,
-    name: string,
-    currentName?: string,
     body?: UpdateMetafieldsRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Metafield[]>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
-      name: [name, string()],
-      currentName: [currentName, optional(string())],
       body: [body, optional(updateMetafieldsRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('name', mapped.name);
-    req.query('current_name', mapped.currentName);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     return req.callAsJson(array(metafieldSchema), requestOptions);

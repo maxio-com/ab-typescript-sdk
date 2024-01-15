@@ -237,8 +237,6 @@ Use the following method to update metafields for your Site. Metafields can be p
 ```ts
 async updateMetafield(
   resourceType: ResourceType,
-  name: string,
-  currentName?: string,
   body?: UpdateMetafieldsRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Metafield[]>>
@@ -249,8 +247,6 @@ async updateMetafield(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
-| `name` | `string` | Query, Required | Name of the custom field. |
-| `currentName` | `string \| undefined` | Query, Optional | This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field |
 | `body` | [`UpdateMetafieldsRequest \| undefined`](../../doc/models/update-metafields-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -263,15 +259,10 @@ async updateMetafield(
 ```ts
 const resourceType = ResourceType.Subscriptions;
 
-const name = 'name0';
-
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customFieldsController.updateMetafield(
-  resourceType,
-  name
-);
+  const { result, ...httpResponse } = await customFieldsController.updateMetafield(resourceType);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
