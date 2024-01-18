@@ -27,6 +27,7 @@ import {
   allocationQuantitySchema,
 } from './containers/allocationQuantity';
 import { CreditType, creditTypeSchema } from './creditType';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 export interface Allocation {
   /** The allocation unique id */
@@ -54,6 +55,10 @@ export interface Allocation {
   pricePointId?: number;
   pricePointName?: string;
   pricePointHandle?: string;
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
   previousPricePointId?: number;
   /** If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. */
   accrueCharge?: boolean;
@@ -93,6 +98,8 @@ export const allocationSchema: Schema<Allocation> = object({
   pricePointId: ['price_point_id', optional(number())],
   pricePointName: ['price_point_name', optional(string())],
   pricePointHandle: ['price_point_handle', optional(string())],
+  interval: ['interval', optional(number())],
+  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
   previousPricePointId: ['previous_price_point_id', optional(number())],
   accrueCharge: ['accrue_charge', optional(boolean())],
   initiateDunning: ['initiate_dunning', optional(boolean())],

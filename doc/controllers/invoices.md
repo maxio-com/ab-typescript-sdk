@@ -2856,7 +2856,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`NestedErrorResponseError`](../../doc/models/nested-error-response-error.md) |
 
 
@@ -3256,7 +3255,7 @@ try {
   ],
   "public_url": "dolo",
   "previous_balance_data": {
-    "capture_date": "aliqua velit quis voluptate",
+    "captured_at": "2024-01-09T11:22:23-05:00",
     "invoices": [
       {
         "number": "veniam dolore labore ipsum cupidatat",
@@ -3345,7 +3344,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 

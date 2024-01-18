@@ -17,7 +17,6 @@
 {
   "on_off_component": {
     "name": "name6",
-    "unit_name": "unit_name8",
     "description": "description6",
     "handle": "handle2",
     "taxable": false,
@@ -27,7 +26,8 @@
         "ending_quantity": 40,
         "unit_price": 23.26
       }
-    ]
+    ],
+    "upgrade_charge": "full"
   }
 }
 ```

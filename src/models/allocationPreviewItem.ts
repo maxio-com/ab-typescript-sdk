@@ -22,6 +22,7 @@ import {
   allocationPreviewItemQuantitySchema,
 } from './containers/allocationPreviewItemQuantity';
 import { CreditType, creditTypeSchema } from './creditType';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 export interface AllocationPreviewItem {
   componentId?: number;
@@ -44,6 +45,10 @@ export interface AllocationPreviewItem {
    */
   downgradeCredit?: CreditType | null;
   pricePointId?: number;
+  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit;
   previousPricePointId?: number;
   pricePointHandle?: string;
   pricePointName?: string;
@@ -70,6 +75,8 @@ export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = object
     upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
     downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
     pricePointId: ['price_point_id', optional(number())],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
     previousPricePointId: ['previous_price_point_id', optional(number())],
     pricePointHandle: ['price_point_handle', optional(string())],
     pricePointName: ['price_point_name', optional(string())],

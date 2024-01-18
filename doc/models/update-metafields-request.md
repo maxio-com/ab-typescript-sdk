@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `metafields` | [`UpdateMetafieldsRequestMetafields \| undefined`](../../doc/models/containers/update-metafields-request-metafields.md) | Optional | This is a container for any-of cases. |
+| `metafields` | [`UpdateMetafieldsRequestMetafields \| undefined`](../../doc/models/containers/update-metafields-request-metafields.md) | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

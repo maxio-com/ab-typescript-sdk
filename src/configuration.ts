@@ -12,14 +12,8 @@ export interface Configuration {
   environment: Environment;
   subdomain: string;
   domain: string;
-  /** @deprecated use basicAuthCredentials field instead */
-  basicAuthUserName?: string;
-  /** @deprecated use basicAuthCredentials field instead */
-  basicAuthPassword?: string;
-  basicAuthCredentials?: {
-    username: string;
-    password: string;
-  };
+  basicAuthUserName: string;
+  basicAuthPassword: string;
   httpClientOptions?: Partial<HttpClientOptions>;
   unstable_httpClientOptions?: any;
 }

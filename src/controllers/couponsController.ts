@@ -75,8 +75,7 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
 
@@ -200,7 +199,6 @@ export class CouponsController extends BaseController {
     req.query('currency_prices', mapped.currencyPrices);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponResponseSchema), requestOptions);
   }
 
@@ -228,7 +226,6 @@ export class CouponsController extends BaseController {
     });
     req.query('product_family_id', mapped.productFamilyId);
     req.query('code', mapped.code);
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
 
@@ -260,7 +257,6 @@ export class CouponsController extends BaseController {
       couponId: [couponId, number()],
     });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
 
@@ -294,7 +290,6 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
 
@@ -319,7 +314,6 @@ export class CouponsController extends BaseController {
       couponId: [couponId, number()],
     });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
 
@@ -488,7 +482,6 @@ export class CouponsController extends BaseController {
     req.query('filter[start_datetime]', mapped.filterStartDatetime);
     req.query('filter[date_field]', mapped.filterDateField);
     req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponResponseSchema), requestOptions);
   }
 
@@ -510,7 +503,6 @@ export class CouponsController extends BaseController {
       couponId: [couponId, number()],
     });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}/usage.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponUsageSchema), requestOptions);
   }
 
@@ -563,7 +555,6 @@ export class CouponsController extends BaseController {
     req.query('code', mapped.code);
     req.query('product_family_id', mapped.productFamilyId);
     req.throwOn(404, SingleStringErrorResponseError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
 
@@ -592,7 +583,6 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/coupons/${mapped.couponId}/currency_prices.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponCurrencyResponseSchema, requestOptions);
   }
 
@@ -663,7 +653,6 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponSubcodesResponseSchema, requestOptions);
   }
 
@@ -702,7 +691,6 @@ export class CouponsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponSubcodesSchema, requestOptions);
   }
 
@@ -738,7 +726,6 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponSubcodesResponseSchema, requestOptions);
   }
 
@@ -784,8 +771,7 @@ export class CouponsController extends BaseController {
       subcode: [subcode, string()],
     });
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes/${mapped.subcode}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.call(requestOptions);
   }
 }

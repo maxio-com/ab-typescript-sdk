@@ -59,8 +59,7 @@ export class APIExportsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('page', mapped.page);
     req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(array(proformaInvoiceSchema), requestOptions);
   }
 
@@ -101,8 +100,7 @@ export class APIExportsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('page', mapped.page);
     req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(array(invoiceSchema), requestOptions);
   }
 
@@ -144,8 +142,7 @@ export class APIExportsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('page', mapped.page);
     req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(array(subscriptionSchema), requestOptions);
   }
 
@@ -163,9 +160,8 @@ export class APIExportsController extends BaseController {
       'POST',
       '/api_exports/proforma_invoices.json'
     );
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(409, SingleErrorResponseError, 'Conflict');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 
@@ -178,9 +174,8 @@ export class APIExportsController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<BatchJobResponse>> {
     const req = this.createRequest('POST', '/api_exports/invoices.json');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(409, SingleErrorResponseError, 'Conflict');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 
@@ -193,8 +188,7 @@ export class APIExportsController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<BatchJobResponse>> {
     const req = this.createRequest('POST', '/api_exports/subscriptions.json');
-    req.throwOn(409, SingleErrorResponseError, 'Conflict');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 
@@ -211,8 +205,7 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 
@@ -229,8 +222,7 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 
@@ -247,8 +239,7 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 }

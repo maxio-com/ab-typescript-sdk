@@ -223,8 +223,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 
 

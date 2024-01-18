@@ -20,7 +20,7 @@
     "line_items": [
       {
         "transaction_type": "credit",
-        "kind": "metered_component",
+        "kind": "component",
         "amount_in_cents": 24,
         "memo": "memo2",
         "discount_amount_in_cents": 172
@@ -35,21 +35,21 @@
     "line_items": [
       {
         "transaction_type": "credit",
-        "kind": "metered_component",
+        "kind": "component",
         "amount_in_cents": 24,
         "memo": "memo2",
         "discount_amount_in_cents": 172
       },
       {
         "transaction_type": "credit",
-        "kind": "metered_component",
+        "kind": "component",
         "amount_in_cents": 24,
         "memo": "memo2",
         "discount_amount_in_cents": 172
       },
       {
         "transaction_type": "credit",
-        "kind": "metered_component",
+        "kind": "component",
         "amount_in_cents": 24,
         "memo": "memo2",
         "discount_amount_in_cents": 172

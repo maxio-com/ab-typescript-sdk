@@ -23,6 +23,8 @@
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `pricePointName` | `string \| undefined` | Optional | - |
 | `pricePointHandle` | `string \| undefined` | Optional | - |
+| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 | `previousPricePointId` | `number \| undefined` | Optional | - |
 | `accrueCharge` | `boolean \| undefined` | Optional | If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. |
 | `initiateDunning` | `boolean \| undefined` | Optional | If true, if the immediate component payment fails, initiate dunning for the subscription.<br>Otherwise, leave the charges on the subscription to pay for at renewal. |

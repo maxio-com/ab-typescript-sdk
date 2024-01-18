@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, plainPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
 import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
@@ -102,8 +102,7 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.throwOn(422, SingleErrorResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -155,7 +154,6 @@ export class CustomFieldsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listMetafieldsResponseSchema, requestOptions);
   }
 
@@ -164,33 +162,22 @@ export class CustomFieldsController extends BaseController {
    * metadata after the fact.
    *
    * @param resourceType  the resource type to which the metafields belong
-   * @param name          Name of the custom field.
-   * @param currentName   This only applies when you are updating an existing record
-   *                                                        and you wish to rename the field. Note you must supply name
-   *                                                        and current_name to rename the field
    * @param body
    * @return Response from the API call
    */
   async updateMetafield(
     resourceType: ResourceType,
-    name: string,
-    currentName?: string,
     body?: UpdateMetafieldsRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Metafield[]>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
-      name: [name, string()],
-      currentName: [currentName, optional(string())],
       body: [body, optional(updateMetafieldsRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('name', mapped.name);
-    req.query('current_name', mapped.currentName);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -216,8 +203,7 @@ export class CustomFieldsController extends BaseController {
     });
     req.query('name', mapped.name);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.call(requestOptions);
   }
 
@@ -258,14 +244,12 @@ export class CustomFieldsController extends BaseController {
    * @param resourceType  the resource type to which the metafields belong
    * @param resourceId    The Chargify id of the customer or the subscription for
    *                                                      which the metadata applies
-   * @param value         Can be a single item or a list of metadata
    * @param body
    * @return Response from the API call
    */
   async createMetadata(
     resourceType: ResourceType,
     resourceId: string,
-    value?: string,
     body?: CreateMetadataRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Metadata[]>> {
@@ -273,15 +257,12 @@ export class CustomFieldsController extends BaseController {
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
       resourceId: [resourceId, string()],
-      value: [value, optional(string())],
       body: [body, optional(createMetadataRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('value', mapped.value);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(422, SingleErrorResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
@@ -307,7 +288,7 @@ export class CustomFieldsController extends BaseController {
    *                                      will be changed to 200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async readMetadata({
+  async listMetadata({
     resourceType,
     resourceId,
     page,
@@ -330,7 +311,6 @@ export class CustomFieldsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
   }
 
@@ -340,14 +320,12 @@ export class CustomFieldsController extends BaseController {
    * @param resourceType  the resource type to which the metafields belong
    * @param resourceId    The Chargify id of the customer or the subscription for
    *                                                      which the metadata applies
-   * @param value         Can be a single item or a list of metadata
    * @param body
    * @return Response from the API call
    */
   async updateMetadata(
     resourceType: ResourceType,
     resourceId: string,
-    value?: string,
     body?: UpdateMetadataRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Metadata[]>> {
@@ -355,14 +333,11 @@ export class CustomFieldsController extends BaseController {
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
       resourceId: [resourceId, string()],
-      value: [value, optional(string())],
       body: [body, optional(updateMetadataRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('value', mapped.value);
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
@@ -417,8 +392,7 @@ export class CustomFieldsController extends BaseController {
     req.query('name', mapped.name);
     req.query('names[]', mapped.names, plainPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.call(requestOptions);
   }
 
@@ -473,7 +447,7 @@ export class CustomFieldsController extends BaseController {
    *                                           `direction=asc`.
    * @return Response from the API call
    */
-  async listMetadata({
+  async listMetadataForResourceType({
     resourceType,
     page,
     perPage,
@@ -522,10 +496,9 @@ export class CustomFieldsController extends BaseController {
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
     req.query('with_deleted', mapped.withDeleted);
-    req.query('resource_ids[]', mapped.resourceIds, plainPrefix);
+    req.query('resource_ids[]', mapped.resourceIds, commaPrefix);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metadata.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
   }
 }

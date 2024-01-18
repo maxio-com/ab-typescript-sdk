@@ -1,5 +1,5 @@
+import { Environment, SitesController } from 'advanced-billing-sdk';
 import { CONFIG, createClient } from './config';
-import { SitesController, Environment } from 'advanced-billing-sdk';
 
 describe('SitesController', () => {
   test('should get site data throw configured client when SiteController read a site', async () => {
@@ -18,9 +18,9 @@ describe('SitesController', () => {
       whopaysEnabled: false,
       whopaysDefaultPayer: 'self-ungrouped',
       allocationSettings: {
+        accrueCharge: 'true',
         upgradeCharge: 'prorated',
         downgradeCredit: 'none',
-        accrueCharge: true,
       },
       defaultPaymentCollectionMethod: 'automatic',
       organizationAddress: {

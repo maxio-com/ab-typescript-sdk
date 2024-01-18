@@ -40,8 +40,7 @@ export class ReferralCodesController extends BaseController {
     const req = this.createRequest('GET', '/referral_codes/validate.json');
     const mapped = req.prepareArgs({ code: [code, string()] });
     req.query('code', mapped.code);
-    req.throwOn(404, SingleStringErrorResponseError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, SingleStringErrorResponseError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(referralValidationResponseSchema, requestOptions);
   }
 }

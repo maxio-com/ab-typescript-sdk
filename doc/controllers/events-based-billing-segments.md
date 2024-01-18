@@ -96,8 +96,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsError`](../../doc/models/event-based-billing-segment-errors-error.md) |
 
@@ -171,8 +169,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingListSegmentsErrorsError`](../../doc/models/event-based-billing-list-segments-errors-error.md) |
 
@@ -240,8 +236,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsError`](../../doc/models/event-based-billing-segment-errors-error.md) |
 
@@ -307,8 +301,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
@@ -373,8 +365,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
 
@@ -439,8 +429,6 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-| 403 | Forbidden | `ApiError` |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
 

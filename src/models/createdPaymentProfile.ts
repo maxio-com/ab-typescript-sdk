@@ -43,6 +43,7 @@ export interface CreatedPaymentProfile {
   verified?: boolean;
   siteGatewaySettingId?: number;
   gatewayHandle?: string;
+  disabled?: boolean;
 }
 
 export const createdPaymentProfileSchema: Schema<CreatedPaymentProfile> = object(
@@ -73,5 +74,6 @@ export const createdPaymentProfileSchema: Schema<CreatedPaymentProfile> = object
     verified: ['verified', optional(boolean())],
     siteGatewaySettingId: ['site_gateway_setting_id', optional(number())],
     gatewayHandle: ['gateway_handle', optional(string())],
+    disabled: ['disabled', optional(boolean())],
   }
 );

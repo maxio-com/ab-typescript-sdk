@@ -35,6 +35,7 @@
 | `verified` | `boolean \| undefined` | Optional | - |
 | `siteGatewaySettingId` | `number \| undefined` | Optional | - |
 | `gatewayHandle` | `string \| undefined` | Optional | - |
+| `disabled` | `boolean \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

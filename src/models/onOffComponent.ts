@@ -30,8 +30,6 @@ import { Price, priceSchema } from './price';
 export interface OnOffComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */
   name: string;
-  /** The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item */
-  unitName?: string;
   /** A description for the component that will be displayed to the user on the hosted signup page. */
   description?: string;
   /** A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'. */
@@ -70,7 +68,6 @@ export interface OnOffComponent {
 
 export const onOffComponentSchema: Schema<OnOffComponent> = object({
   name: ['name', string()],
-  unitName: ['unit_name', optional(string())],
   description: ['description', optional(string())],
   handle: ['handle', optional(string())],
   taxable: ['taxable', optional(boolean())],

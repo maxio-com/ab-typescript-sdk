@@ -71,11 +71,8 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, EventBasedBillingSegmentErrorsError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, EventBasedBillingSegmentErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(segmentResponseSchema, requestOptions);
   }
 
@@ -168,11 +165,8 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.query('filter[segment_property_3_value]', mapped.filterSegmentProperty3Value);
     req.query('filter[segment_property_4_value]', mapped.filterSegmentProperty4Value);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, EventBasedBillingListSegmentsErrorsError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, EventBasedBillingListSegmentsErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
 
@@ -206,11 +200,8 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/${mapped.id}.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, EventBasedBillingSegmentErrorsError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, EventBasedBillingSegmentErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(segmentResponseSchema, requestOptions);
   }
 
@@ -238,11 +229,8 @@ export class EventsBasedBillingSegmentsController extends BaseController {
       id: [id, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/${mapped.id}.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
 
@@ -277,11 +265,8 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/bulk.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, EventBasedBillingSegmentError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, EventBasedBillingSegmentError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
 
@@ -316,11 +301,8 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/bulk.json`;
-    req.throwOn(401, ApiError, 'Unauthorized');
-    req.throwOn(403, ApiError, 'Forbidden');
-    req.throwOn(404, ApiError, 'Not Found');
-    req.throwOn(422, EventBasedBillingSegmentError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, EventBasedBillingSegmentError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
 }

@@ -61,8 +61,7 @@ export class ReasonCodesController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
 
@@ -96,7 +95,6 @@ export class ReasonCodesController extends BaseController {
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(reasonCodeResponseSchema), requestOptions);
   }
 
@@ -114,8 +112,7 @@ export class ReasonCodesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ reasonCodeId: [reasonCodeId, number()] });
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
 
@@ -139,8 +136,7 @@ export class ReasonCodesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
 
@@ -158,8 +154,7 @@ export class ReasonCodesController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ reasonCodeId: [reasonCodeId, number()] });
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, 'Not Found');
-    req.authenticate([{ basicAuth: true }]);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(reasonCodesJsonResponseSchema, requestOptions);
   }
 }

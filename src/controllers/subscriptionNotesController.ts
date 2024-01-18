@@ -4,7 +4,6 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
 import {
   SubscriptionNoteResponse,
@@ -47,7 +46,6 @@ export class SubscriptionNotesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
   }
 
@@ -87,7 +85,6 @@ export class SubscriptionNotesController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       array(subscriptionNoteResponseSchema),
       requestOptions
@@ -113,7 +110,6 @@ export class SubscriptionNotesController extends BaseController {
       noteId: [noteId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
   }
 
@@ -140,7 +136,6 @@ export class SubscriptionNotesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
-    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
   }
 
@@ -162,8 +157,6 @@ export class SubscriptionNotesController extends BaseController {
       noteId: [noteId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
-    req.throwOn(422, ApiError, 'Unprocessable Entity (WebDAV)');
-    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 }

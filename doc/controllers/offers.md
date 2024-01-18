@@ -288,12 +288,6 @@ try {
 }
 ```
 
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-
 
 # Archive Offer
 
@@ -338,12 +332,6 @@ try {
 }
 ```
 
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
-
 
 # Unarchive Offer
 
@@ -387,10 +375,4 @@ try {
   }
 }
 ```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | Unauthorized | `ApiError` |
 
