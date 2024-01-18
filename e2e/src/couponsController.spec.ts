@@ -98,8 +98,8 @@ describe('Coupons Controller', () => {
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(422);
         expect(reason.result.errors).toEqual([
-          'Code: cannot be blank.',
           'Name: cannot be blank.',
+          'Code: cannot be blank.',
         ]);
       });
     });
