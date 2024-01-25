@@ -10,10 +10,70 @@ const billingPortalController = new BillingPortalController(client);
 
 ## Methods
 
+* [Revoke Billing Portal Access](../../doc/controllers/billing-portal.md#revoke-billing-portal-access)
 * [Enable Billing Portal for Customer](../../doc/controllers/billing-portal.md#enable-billing-portal-for-customer)
 * [Read Billing Portal Link](../../doc/controllers/billing-portal.md#read-billing-portal-link)
 * [Resend Billing Portal Invitation](../../doc/controllers/billing-portal.md#resend-billing-portal-invitation)
-* [Revoke Billing Portal Access](../../doc/controllers/billing-portal.md#revoke-billing-portal-access)
+
+
+# Revoke Billing Portal Access
+
+You can revoke a customer's Billing Portal invitation.
+
+If you attempt to revoke an invitation when the Billing Portal is already disabled for a Customer, you will receive a 422 error response.
+
+## Limitations
+
+This endpoint will only return a JSON response.
+
+```ts
+async revokeBillingPortalAccess(
+  customerId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<RevokedInvitation>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `customerId` | `number` | Template, Required | The Chargify id of the customer |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`RevokedInvitation`](../../doc/models/revoked-invitation.md)
+
+## Example Usage
+
+```ts
+const customerId = 150;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await billingPortalController.revokeBillingPortalAccess(customerId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "last_sent_at": "Not Invited",
+  "last_accepted_at": "Invite Revoked",
+  "uninvited_count": 8
+}
+```
 
 
 # Enable Billing Portal for Customer
@@ -226,64 +286,4 @@ try {
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
-# Revoke Billing Portal Access
-
-You can revoke a customer's Billing Portal invitation.
-
-If you attempt to revoke an invitation when the Billing Portal is already disabled for a Customer, you will receive a 422 error response.
-
-## Limitations
-
-This endpoint will only return a JSON response.
-
-```ts
-async revokeBillingPortalAccess(
-  customerId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<RevokedInvitation>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `customerId` | `number` | Template, Required | The Chargify id of the customer |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`RevokedInvitation`](../../doc/models/revoked-invitation.md)
-
-## Example Usage
-
-```ts
-const customerId = 150;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await billingPortalController.revokeBillingPortalAccess(customerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "last_sent_at": "Not Invited",
-  "last_accepted_at": "Invite Revoked",
-  "uninvited_count": 8
-}
-```
 

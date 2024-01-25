@@ -11,9 +11,9 @@ const insightsController = new InsightsController(client);
 ## Methods
 
 * [Read Site Stats](../../doc/controllers/insights.md#read-site-stats)
+* [List Mrr Per Subscription](../../doc/controllers/insights.md#list-mrr-per-subscription)
 * [Read Mrr](../../doc/controllers/insights.md#read-mrr)
 * [Read Mrr Movements](../../doc/controllers/insights.md#read-mrr-movements)
-* [List Mrr Per Subscription](../../doc/controllers/insights.md#list-mrr-per-subscription)
 
 
 # Read Site Stats
@@ -81,6 +81,70 @@ try {
   }
 }
 ```
+
+
+# List Mrr Per Subscription
+
+**This endpoint is deprecated.**
+
+This endpoint returns your site's current MRR, including plan and usage breakouts split per subscription.
+
+```ts
+async listMrrPerSubscription(
+  filterSubscriptionIds?: number[],
+  atTime?: string,
+  page?: number,
+  perPage?: number,
+  direction?: Direction,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionMRRResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `filterSubscriptionIds` | `number[] \| undefined` | Query, Optional | Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`. |
+| `atTime` | `string \| undefined` | Query, Optional | Submit a timestamp in ISO8601 format to request MRR for a historic time. Use in query: `at_time=2022-01-10T10:00:00-05:00`. |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default. Use in query `direction=desc`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SubscriptionMRRResponse`](../../doc/models/subscription-mrr-response.md)
+
+## Example Usage
+
+```ts
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+  atTime: 'at_time=2022-01-10T10:00:00-05:00',
+  page: 2,
+  perPage: 50,
+  direction: Direction.Desc
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await insightsController.listMrrPerSubscription(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request | [`SubscriptionsMrrErrorResponseError`](../../doc/models/subscriptions-mrr-error-response-error.md) |
 
 
 # Read Mrr
@@ -276,68 +340,4 @@ try {
   }
 }
 ```
-
-
-# List Mrr Per Subscription
-
-**This endpoint is deprecated.**
-
-This endpoint returns your site's current MRR, including plan and usage breakouts split per subscription.
-
-```ts
-async listMrrPerSubscription(
-  filterSubscriptionIds?: number[],
-  atTime?: string,
-  page?: number,
-  perPage?: number,
-  direction?: Direction,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionMRRResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `filterSubscriptionIds` | `number[] \| undefined` | Query, Optional | Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`. |
-| `atTime` | `string \| undefined` | Query, Optional | Submit a timestamp in ISO8601 format to request MRR for a historic time. Use in query: `at_time=2022-01-10T10:00:00-05:00`. |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default. Use in query `direction=desc`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SubscriptionMRRResponse`](../../doc/models/subscription-mrr-response.md)
-
-## Example Usage
-
-```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')
-  atTime: 'at_time=2022-01-10T10:00:00-05:00',
-  page: 2,
-  perPage: 50,
-  direction: Direction.Desc
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await insightsController.listMrrPerSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsMrrErrorResponseError`](../../doc/models/subscriptions-mrr-error-response-error.md) |
 

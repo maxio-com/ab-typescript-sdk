@@ -41,35 +41,6 @@ import { BaseController } from './baseController';
 
 export class SubscriptionGroupInvoiceAccountController extends BaseController {
   /**
-   * A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint
-   * requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to
-   * the group's prepayment balance.
-   *
-   * @param uid          The uid of the subscription group
-   * @param body
-   * @return Response from the API call
-   */
-  async createSubscriptionGroupPrepayment(
-    uid: string,
-    body?: SubscriptionGroupPrepaymentRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      uid: [uid, string()],
-      body: [body, optional(subscriptionGroupPrepaymentRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(
-      subscriptionGroupPrepaymentResponseSchema,
-      requestOptions
-    );
-  }
-
-  /**
    * This request will list a subscription group's prepayments.
    *
    * @param uid                The uid of the subscription group
@@ -149,29 +120,32 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
   }
 
   /**
-   * Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added
-   * to the group in the amount specified in the request body. The credit will be applied to group member
-   * invoices as they are generated.
+   * A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint
+   * requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to
+   * the group's prepayment balance.
    *
    * @param uid          The uid of the subscription group
    * @param body
    * @return Response from the API call
    */
-  async issueSubscriptionGroupServiceCredits(
+  async createSubscriptionGroupPrepayment(
     uid: string,
-    body?: IssueServiceCreditRequest,
+    body?: SubscriptionGroupPrepaymentRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ServiceCreditResponse>> {
+  ): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       uid: [uid, string()],
-      body: [body, optional(issueServiceCreditRequestSchema)],
+      body: [body, optional(subscriptionGroupPrepaymentRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credits.json`;
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(serviceCreditResponseSchema, requestOptions);
+    return req.callAsJson(
+      subscriptionGroupPrepaymentResponseSchema,
+      requestOptions
+    );
   }
 
   /**
@@ -197,5 +171,31 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credit_deductions.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(serviceCreditSchema, requestOptions);
+  }
+
+  /**
+   * Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added
+   * to the group in the amount specified in the request body. The credit will be applied to group member
+   * invoices as they are generated.
+   *
+   * @param uid          The uid of the subscription group
+   * @param body
+   * @return Response from the API call
+   */
+  async issueSubscriptionGroupServiceCredits(
+    uid: string,
+    body?: IssueServiceCreditRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ServiceCreditResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      uid: [uid, string()],
+      body: [body, optional(issueServiceCreditRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credits.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(serviceCreditResponseSchema, requestOptions);
   }
 }

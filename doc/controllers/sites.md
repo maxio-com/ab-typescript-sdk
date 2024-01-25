@@ -10,9 +10,123 @@ const sitesController = new SitesController(client);
 
 ## Methods
 
-* [Read Site](../../doc/controllers/sites.md#read-site)
-* [Clear Site](../../doc/controllers/sites.md#clear-site)
 * [List Chargify Js Public Keys](../../doc/controllers/sites.md#list-chargify-js-public-keys)
+* [Clear Site](../../doc/controllers/sites.md#clear-site)
+* [Read Site](../../doc/controllers/sites.md#read-site)
+
+
+# List Chargify Js Public Keys
+
+This endpoint returns public keys used for Chargify.js.
+
+```ts
+async listChargifyJsPublicKeys(
+  page?: number,
+  perPage?: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListPublicKeysResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ListPublicKeysResponse`](../../doc/models/list-public-keys-response.md)
+
+## Example Usage
+
+```ts
+const collect = {
+  page: 2,
+  perPage: 50
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await sitesController.listChargifyJsPublicKeys(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "chargify_js_keys": [
+    {
+      "public_key": "chjs_ftrxt7c4fv6f74wchjs_5zyn7gnwv",
+      "requires_security_token": false,
+      "created_at": "2021-01-01T05:00:00-04:00"
+    }
+  ],
+  "meta": {
+    "total_count": 1,
+    "current_page": 1,
+    "total_pages": 1,
+    "per_page": 10
+  }
+}
+```
+
+
+# Clear Site
+
+This call is asynchronous and there may be a delay before the site data is fully deleted. If you are clearing site data for an automated test, you will need to build in a delay and/or check that there are no products, etc., in the site before proceeding.
+
+**This functionality will only work on sites in TEST mode. Attempts to perform this on sites in “live” mode will result in a response of 403 FORBIDDEN.**
+
+```ts
+async clearSite(
+  cleanupScope?: CleanupScope,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `cleanupScope` | [`CleanupScope \| undefined`](../../doc/models/cleanup-scope.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const cleanupScope = CleanupScope.All;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await sitesController.clearSite(cleanupScope);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
 
 
 # Read Site
@@ -115,120 +229,6 @@ try {
       "downgrade_credit": "none",
       "accrue_charge": "true"
     }
-  }
-}
-```
-
-
-# Clear Site
-
-This call is asynchronous and there may be a delay before the site data is fully deleted. If you are clearing site data for an automated test, you will need to build in a delay and/or check that there are no products, etc., in the site before proceeding.
-
-**This functionality will only work on sites in TEST mode. Attempts to perform this on sites in “live” mode will result in a response of 403 FORBIDDEN.**
-
-```ts
-async clearSite(
-  cleanupScope?: CleanupScope,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `cleanupScope` | [`CleanupScope \| undefined`](../../doc/models/cleanup-scope.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const cleanupScope = CleanupScope.All;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await sitesController.clearSite(cleanupScope);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# List Chargify Js Public Keys
-
-This endpoint returns public keys used for Chargify.js.
-
-```ts
-async listChargifyJsPublicKeys(
-  page?: number,
-  perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListPublicKeysResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ListPublicKeysResponse`](../../doc/models/list-public-keys-response.md)
-
-## Example Usage
-
-```ts
-const collect = {
-  page: 2,
-  perPage: 50
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await sitesController.listChargifyJsPublicKeys(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "chargify_js_keys": [
-    {
-      "public_key": "chjs_ftrxt7c4fv6f74wchjs_5zyn7gnwv",
-      "requires_security_token": false,
-      "created_at": "2021-01-01T05:00:00-04:00"
-    }
-  ],
-  "meta": {
-    "total_count": 1,
-    "current_page": 1,
-    "total_pages": 1,
-    "per_page": 10
   }
 }
 ```

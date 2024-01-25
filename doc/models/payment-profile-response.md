@@ -9,33 +9,23 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `paymentProfile` | [`PaymentProfile`](../../doc/models/payment-profile.md) | Required | - |
+| `paymentProfile` | [`PaymentProfileResponsePaymentProfile`](../../doc/models/containers/payment-profile-response-payment-profile.md) | Required | This is a container for one-of cases. |
 
 ## Example (as JSON)
 
 ```json
 {
   "payment_profile": {
-    "id": 10088716,
-    "first_name": "Test",
-    "last_name": "Subscription",
-    "masked_card_number": "XXXX-XXXX-XXXX-1",
-    "card_type": "bogus",
-    "expiration_month": 1,
-    "expiration_year": 2022,
-    "customer_id": 14543792,
-    "current_vault": "bogus",
-    "vault_token": "1",
-    "billing_address": "123 Montana Way",
-    "billing_city": "Billings",
-    "billing_state": "MT",
-    "billing_zip": "59101",
-    "billing_country": "US",
-    "customer_vault_token": null,
-    "billing_address_2": "",
+    "masked_bank_routing_number": "masked_bank_routing_number8",
+    "masked_bank_account_number": "masked_bank_account_number8",
+    "bank_account_type": "checking",
     "payment_type": "credit_card",
-    "site_gateway_setting_id": 1,
-    "gateway_handle": null
+    "verified": false,
+    "id": 188,
+    "first_name": "first_name6",
+    "last_name": "last_name4",
+    "customer_id": 226,
+    "current_vault": "authorizenet"
   }
 }
 ```

@@ -10,34 +10,21 @@ const reasonCodesController = new ReasonCodesController(client);
 
 ## Methods
 
-* [Create Reason Code](../../doc/controllers/reason-codes.md#create-reason-code)
-* [List Reason Codes](../../doc/controllers/reason-codes.md#list-reason-codes)
-* [Read Reason Code](../../doc/controllers/reason-codes.md#read-reason-code)
 * [Update Reason Code](../../doc/controllers/reason-codes.md#update-reason-code)
+* [List Reason Codes](../../doc/controllers/reason-codes.md#list-reason-codes)
+* [Create Reason Code](../../doc/controllers/reason-codes.md#create-reason-code)
+* [Read Reason Code](../../doc/controllers/reason-codes.md#read-reason-code)
 * [Delete Reason Code](../../doc/controllers/reason-codes.md#delete-reason-code)
 
 
-# Create Reason Code
+# Update Reason Code
 
-# Reason Codes Intro
-
-ReasonCodes are a way to gain a high level view of why your customers are cancelling the subcription to your product or service.
-
-Add a set of churn reason codes to be displayed in-app and/or the Chargify Billing Portal. As your subscribers decide to cancel their subscription, learn why they decided to cancel.
-
-## Reason Code Documentation
-
-Full documentation on how Reason Codes operate within Chargify can be located under the following links.
-
-[Churn Reason Codes](https://chargify.zendesk.com/hc/en-us/articles/4407896775579#churn-reason-codes)
-
-## Create Reason Code
-
-This method gives a merchant the option to create a reason codes for a given Site.
+This method gives a merchant the option to update an existing reason code for a given site.
 
 ```ts
-async createReasonCode(
-  body?: CreateReasonCodeRequest,
+async updateReasonCode(
+  reasonCodeId: number,
+  body?: UpdateReasonCodeRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
@@ -46,7 +33,8 @@ async createReasonCode(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`CreateReasonCodeRequest \| undefined`](../../doc/models/create-reason-code-request.md) | Body, Optional | - |
+| `reasonCodeId` | `number` | Template, Required | The Chargify id of the reason code |
+| `body` | [`UpdateReasonCodeRequest \| undefined`](../../doc/models/update-reason-code-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -56,18 +44,12 @@ async createReasonCode(
 ## Example Usage
 
 ```ts
-const body: CreateReasonCodeRequest = {
-  reasonCode: {
-    code: 'NOTHANKYOU',
-    description: 'No thank you!',
-    position: 5,
-  },
-};
+const reasonCodeId = 32;
 
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await reasonCodesController.createReasonCode(body);
+  const { result, ...httpResponse } = await reasonCodesController.updateReasonCode(reasonCodeId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -84,7 +66,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+| 404 | Not Found | `ApiError` |
 
 
 # List Reason Codes
@@ -175,6 +157,76 @@ try {
 ```
 
 
+# Create Reason Code
+
+# Reason Codes Intro
+
+ReasonCodes are a way to gain a high level view of why your customers are cancelling the subcription to your product or service.
+
+Add a set of churn reason codes to be displayed in-app and/or the Chargify Billing Portal. As your subscribers decide to cancel their subscription, learn why they decided to cancel.
+
+## Reason Code Documentation
+
+Full documentation on how Reason Codes operate within Chargify can be located under the following links.
+
+[Churn Reason Codes](https://chargify.zendesk.com/hc/en-us/articles/4407896775579#churn-reason-codes)
+
+## Create Reason Code
+
+This method gives a merchant the option to create a reason codes for a given Site.
+
+```ts
+async createReasonCode(
+  body?: CreateReasonCodeRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReasonCodeResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateReasonCodeRequest \| undefined`](../../doc/models/create-reason-code-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ReasonCodeResponse`](../../doc/models/reason-code-response.md)
+
+## Example Usage
+
+```ts
+const body: CreateReasonCodeRequest = {
+  reasonCode: {
+    code: 'NOTHANKYOU',
+    description: 'No thank you!',
+    position: 5,
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await reasonCodesController.createReasonCode(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
 # Read Reason Code
 
 This method gives a merchant the option to retrieve a list of a particular code for a given Site by providing the unique numerical ID of the code.
@@ -206,58 +258,6 @@ try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await reasonCodesController.readReasonCode(reasonCodeId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-
-
-# Update Reason Code
-
-This method gives a merchant the option to update an existing reason code for a given site.
-
-```ts
-async updateReasonCode(
-  reasonCodeId: number,
-  body?: UpdateReasonCodeRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ReasonCodeResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `reasonCodeId` | `number` | Template, Required | The Chargify id of the reason code |
-| `body` | [`UpdateReasonCodeRequest \| undefined`](../../doc/models/update-reason-code-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ReasonCodeResponse`](../../doc/models/reason-code-response.md)
-
-## Example Usage
-
-```ts
-const reasonCodeId = 32;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await reasonCodesController.updateReasonCode(reasonCodeId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

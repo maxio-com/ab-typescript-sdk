@@ -8,6 +8,9 @@ import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
+  ErrorStringMapResponseError,
+} from '../errors/errorStringMapResponseError';
+import {
   BankAccountResponse,
   bankAccountResponseSchema,
 } from '../models/bankAccountResponse';
@@ -20,37 +23,148 @@ import {
   createPaymentProfileRequestSchema,
 } from '../models/createPaymentProfileRequest';
 import {
-  CreatePaymentProfileResponse,
-  createPaymentProfileResponseSchema,
-} from '../models/createPaymentProfileResponse';
-import {
   GetOneTimeTokenRequest,
   getOneTimeTokenRequestSchema,
 } from '../models/getOneTimeTokenRequest';
-import {
-  ListPaymentProfilesResponse,
-  listPaymentProfilesResponseSchema,
-} from '../models/listPaymentProfilesResponse';
 import {
   PaymentProfileResponse,
   paymentProfileResponseSchema,
 } from '../models/paymentProfileResponse';
 import {
-  ReadPaymentProfileResponse,
-  readPaymentProfileResponseSchema,
-} from '../models/readPaymentProfileResponse';
-import {
   UpdatePaymentProfileRequest,
   updatePaymentProfileRequestSchema,
 } from '../models/updatePaymentProfileRequest';
-import {
-  UpdatePaymentProfileResponse,
-  updatePaymentProfileResponseSchema,
-} from '../models/updatePaymentProfileResponse';
 import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class PaymentProfilesController extends BaseController {
+  /**
+   * ## Partial Card Updates
+   *
+   * In the event that you are using the Authorize.net, Stripe, Cybersource, Forte or Braintree Blue
+   * payment gateways, you can update just the billing and contact information for a payment method. Note
+   * the lack of credit-card related data contained in the JSON payload.
+   *
+   * In this case, the following JSON is acceptable:
+   *
+   * ```
+   * {
+   * "payment_profile": {
+   * "first_name": "Kelly",
+   * "last_name": "Test",
+   * "billing_address": "789 Juniper Court",
+   * "billing_city": "Boulder",
+   * "billing_state": "CO",
+   * "billing_zip": "80302",
+   * "billing_country": "US",
+   * "billing_address_2": null
+   * }
+   * }
+   * ```
+   *
+   * The result will be that you have updated the billing information for the card, yet retained the
+   * original card number data.
+   *
+   * ## Specific notes on updating payment profiles
+   *
+   * - Merchants with **Authorize.net**, **Cybersource**, **Forte**, **Braintree Blue** or **Stripe** as
+   * their payment gateway can update their Customer’s credit cards without passing in the full credit
+   * card number and CVV.
+   *
+   * - If you are using **Authorize.net**, **Cybersource**, **Forte**, **Braintree Blue** or **Stripe**,
+   * Chargify will ignore the credit card number and CVV when processing an update via the API, and
+   * attempt a partial update instead. If you wish to change the card number on a payment profile, you
+   * will need to create a new payment profile for the given customer.
+   *
+   * - A Payment Profile cannot be updated with the attributes of another type of Payment Profile. For
+   * example, if the payment profile you are attempting to update is a credit card, you cannot pass in
+   * bank account attributes (like `bank_account_number`), and vice versa.
+   *
+   * - Updating a payment profile directly will not trigger an attempt to capture a past-due balance. If
+   * this is the intent, update the card details via the Subscription instead.
+   *
+   * - If you are using Authorize.net or Stripe, you may elect to manually trigger a retry for a past due
+   * subscription after a partial update.
+   *
+   * @param paymentProfileId   The Chargify id of the payment profile
+   * @param body
+   * @return Response from the API call
+   */
+  async updatePaymentProfile(
+    paymentProfileId: number,
+    body?: UpdatePaymentProfileRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      paymentProfileId: [paymentProfileId, number()],
+      body: [body, optional(updatePaymentProfileRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.throwOn(404, ApiError, 'Not Found');
+    req.throwOn(422, ErrorStringMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
+  }
+
+  /**
+   * This will delete a Payment Profile belonging to a Subscription Group.
+   *
+   * **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it
+   * will be removed from all of them.
+   *
+   * @param uid                The uid of the subscription group
+   * @param paymentProfileId   The Chargify id of the payment profile
+   * @return Response from the API call
+   */
+  async deleteSubscriptionGroupPaymentProfile(
+    uid: string,
+    paymentProfileId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      uid: [uid, string()],
+      paymentProfileId: [paymentProfileId, number()],
+    });
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}.json`;
+    return req.call(requestOptions);
+  }
+
+  /**
+   * You can send a "request payment update" email to the customer associated with the subscription.
+   *
+   * If you attempt to send a "request payment update" email more than five times within a 30-minute
+   * period, you will receive a `422` response with an error message in the body. This error message will
+   * indicate that the request has been rejected due to excessive attempts, and will provide instructions
+   * on how to resubmit the request.
+   *
+   * Additionally, if you attempt to send a "request payment update" email for a subscription that does
+   * not exist, you will receive a `404` error response. This error message will indicate that the
+   * subscription could not be found, and will provide instructions on how to correct the error and
+   * resubmit the request.
+   *
+   * These error responses are designed to prevent excessive or invalid requests, and to provide clear
+   * and helpful information to users who encounter errors during the request process.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @return Response from the API call
+   */
+  async sendRequestUpdatePaymentEmail(
+    subscriptionId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+    });
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/request_payment_profiles_update.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.call(requestOptions);
+  }
+
   /**
    * Use this endpoint to create a payment profile for a customer.
    *
@@ -372,7 +486,7 @@ export class PaymentProfilesController extends BaseController {
   async createPaymentProfile(
     body?: CreatePaymentProfileRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CreatePaymentProfileResponse>> {
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('POST', '/payment_profiles.json');
     const mapped = req.prepareArgs({
       body: [body, optional(createPaymentProfileRequestSchema)],
@@ -381,7 +495,7 @@ export class PaymentProfilesController extends BaseController {
     req.json(mapped.body);
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(createPaymentProfileResponseSchema, requestOptions);
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
   /**
@@ -410,7 +524,7 @@ export class PaymentProfilesController extends BaseController {
     customerId?: number,
   },
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ListPaymentProfilesResponse[]>> {
+  ): Promise<ApiResponse<PaymentProfileResponse[]>> {
     const req = this.createRequest('GET', '/payment_profiles.json');
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
@@ -420,10 +534,7 @@ export class PaymentProfilesController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('customer_id', mapped.customerId);
-    return req.callAsJson(
-      array(listPaymentProfilesResponseSchema),
-      requestOptions
-    );
+    return req.callAsJson(array(paymentProfileResponseSchema), requestOptions);
   }
 
   /**
@@ -468,105 +579,16 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async readPaymentProfile(
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ReadPaymentProfileResponse>> {
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
-    return req.callAsJson(readPaymentProfileResponseSchema, requestOptions);
-  }
-
-  /**
-   * ## Partial Card Updates
-   *
-   * In the event that you are using the Authorize.net, Stripe, Cybersource, Forte or Braintree Blue
-   * payment gateways, you can update just the billing and contact information for a payment method. Note
-   * the lack of credit-card related data contained in the JSON payload.
-   *
-   * In this case, the following JSON is acceptable:
-   *
-   * ```
-   * {
-   * "payment_profile": {
-   * "first_name": "Kelly",
-   * "last_name": "Test",
-   * "billing_address": "789 Juniper Court",
-   * "billing_city": "Boulder",
-   * "billing_state": "CO",
-   * "billing_zip": "80302",
-   * "billing_country": "US",
-   * "billing_address_2": null
-   * }
-   * }
-   * ```
-   *
-   * The result will be that you have updated the billing information for the card, yet retained the
-   * original card number data.
-   *
-   * ## Specific notes on updating payment profiles
-   *
-   * - Merchants with **Authorize.net**, **Cybersource**, **Forte**, **Braintree Blue** or **Stripe** as
-   * their payment gateway can update their Customer’s credit cards without passing in the full credit
-   * card number and CVV.
-   *
-   * - If you are using **Authorize.net**, **Cybersource**, **Forte**, **Braintree Blue** or **Stripe**,
-   * Chargify will ignore the credit card number and CVV when processing an update via the API, and
-   * attempt a partial update instead. If you wish to change the card number on a payment profile, you
-   * will need to create a new payment profile for the given customer.
-   *
-   * - A Payment Profile cannot be updated with the attributes of another type of Payment Profile. For
-   * example, if the payment profile you are attempting to update is a credit card, you cannot pass in
-   * bank account attributes (like `bank_account_number`), and vice versa.
-   *
-   * - Updating a payment profile directly will not trigger an attempt to capture a past-due balance. If
-   * this is the intent, update the card details via the Subscription instead.
-   *
-   * - If you are using Authorize.net or Stripe, you may elect to manually trigger a retry for a past due
-   * subscription after a partial update.
-   *
-   * @param paymentProfileId   The Chargify id of the payment profile
-   * @param body
-   * @return Response from the API call
-   */
-  async updatePaymentProfile(
-    paymentProfileId: string,
-    body?: UpdatePaymentProfileRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<UpdatePaymentProfileResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      paymentProfileId: [paymentProfileId, string()],
-      body: [body, optional(updatePaymentProfileRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
-    return req.callAsJson(updatePaymentProfileResponseSchema, requestOptions);
-  }
-
-  /**
-   * Deletes an unused payment profile.
-   *
-   * If the payment profile is in use by one or more subscriptions or groups, a 422 and error message
-   * will be returned.
-   *
-   * @param paymentProfileId   The Chargify id of the payment profile
-   * @return Response from the API call
-   */
-  async deleteUnusedPaymentProfile(
-    paymentProfileId: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      paymentProfileId: [paymentProfileId, string()],
-    });
-    req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
+    req.throwOn(404, ApiError, 'Not Found');
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
   /**
@@ -586,15 +608,65 @@ export class PaymentProfilesController extends BaseController {
    */
   async deleteSubscriptionsPaymentProfile(
     subscriptionId: number,
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}.json`;
+    return req.call(requestOptions);
+  }
+
+  /**
+   * This will change the default payment profile on the subscription to the existing payment profile
+   * with the id specified.
+   *
+   * You must elect to change the existing payment profile to a new payment profile ID in order to
+   * receive a satisfactory response from this endpoint.
+   *
+   * @param subscriptionId     The Chargify id of the subscription
+   * @param paymentProfileId   The Chargify id of the payment profile
+   * @return Response from the API call
+   */
+  async updateSubscriptionDefaultPaymentProfile(
+    subscriptionId: number,
+    paymentProfileId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      paymentProfileId: [paymentProfileId, number()],
+    });
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
+    req.throwOn(404, ApiError, 'Not Found');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
+  }
+
+  /**
+   * Deletes an unused payment profile.
+   *
+   * If the payment profile is in use by one or more subscriptions or groups, a 422 and error message
+   * will be returned.
+   *
+   * @param paymentProfileId   The Chargify id of the payment profile
+   * @return Response from the API call
+   */
+  async deleteUnusedPaymentProfile(
+    paymentProfileId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      paymentProfileId: [paymentProfileId, number()],
+    });
+    req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.throwOn(404, ApiError, 'Not Found');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
 
@@ -625,56 +697,6 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * This will delete a Payment Profile belonging to a Subscription Group.
-   *
-   * **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it
-   * will be removed from all of them.
-   *
-   * @param uid                The uid of the subscription group
-   * @param paymentProfileId   The Chargify id of the payment profile
-   * @return Response from the API call
-   */
-  async deleteSubscriptionGroupPaymentProfile(
-    uid: string,
-    paymentProfileId: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      uid: [uid, string()],
-      paymentProfileId: [paymentProfileId, string()],
-    });
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}.json`;
-    return req.call(requestOptions);
-  }
-
-  /**
-   * This will change the default payment profile on the subscription to the existing payment profile
-   * with the id specified.
-   *
-   * You must elect to change the existing payment profile to a new payment profile ID in order to
-   * receive a satisfactory response from this endpoint.
-   *
-   * @param subscriptionId     The Chargify id of the subscription
-   * @param paymentProfileId   The Chargify id of the payment profile
-   * @return Response from the API call
-   */
-  async updateSubscriptionDefaultPaymentProfile(
-    subscriptionId: number,
-    paymentProfileId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<PaymentProfileResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      paymentProfileId: [paymentProfileId, number()],
-    });
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
-  }
-
-  /**
    * This will change the default payment profile on the subscription group to the existing payment
    * profile with the id specified.
    *
@@ -690,13 +712,13 @@ export class PaymentProfilesController extends BaseController {
    */
   async updateSubscriptionGroupDefaultPaymentProfile(
     uid: string,
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       uid: [uid, string()],
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
@@ -727,38 +749,5 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/one_time_tokens/${mapped.chargifyToken}.json`;
     req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(getOneTimeTokenRequestSchema, requestOptions);
-  }
-
-  /**
-   * You can send a "request payment update" email to the customer associated with the subscription.
-   *
-   * If you attempt to send a "request payment update" email more than five times within a 30-minute
-   * period, you will receive a `422` response with an error message in the body. This error message will
-   * indicate that the request has been rejected due to excessive attempts, and will provide instructions
-   * on how to resubmit the request.
-   *
-   * Additionally, if you attempt to send a "request payment update" email for a subscription that does
-   * not exist, you will receive a `404` error response. This error message will indicate that the
-   * subscription could not be found, and will provide instructions on how to correct the error and
-   * resubmit the request.
-   *
-   * These error responses are designed to prevent excessive or invalid requests, and to provide clear
-   * and helpful information to users who encounter errors during the request process.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @return Response from the API call
-   */
-  async sendRequestUpdatePaymentEmail(
-    subscriptionId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-    });
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/request_payment_profiles_update.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
   }
 }

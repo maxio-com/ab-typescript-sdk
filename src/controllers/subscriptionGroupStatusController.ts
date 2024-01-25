@@ -53,6 +53,25 @@ export class SubscriptionGroupStatusController extends BaseController {
   }
 
   /**
+   * Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not
+   * get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to
+   * false on each member in the group.
+   *
+   * @param uid The uid of the subscription group
+   * @return Response from the API call
+   */
+  async stopDelayedCancellationForGroup(
+    uid: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.call(requestOptions);
+  }
+
+  /**
    * This endpoint will schedule all subscriptions within the specified group to be canceled at the end
    * of their billing period. The group is identified by it's uid passed in the URL.
    *
@@ -67,25 +86,6 @@ export class SubscriptionGroupStatusController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not
-   * get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to
-   * false on each member in the group.
-   *
-   * @param uid The uid of the subscription group
-   * @return Response from the API call
-   */
-  async stopDelayedCancellationForGroup(
-    uid: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');

@@ -93,23 +93,24 @@ export class SubscriptionGroupsController extends BaseController {
   }
 
   /**
-   * Creates a subscription group with given members.
+   * Use this endpoint to find subscription group associated with subscription.
    *
-   * @param body
+   * If the subscription is not in a group endpoint will return 404 code.
+   *
+   * @param subscriptionId  The Chargify id of the subscription associated with the subscription group
    * @return Response from the API call
    */
-  async createSubscriptionGroup(
-    body?: CreateSubscriptionGroupRequest,
+  async readSubscriptionGroupBySubscriptionId(
+    subscriptionId: string,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionGroupResponse>> {
-    const req = this.createRequest('POST', '/subscription_groups.json');
+  ): Promise<ApiResponse<FullSubscriptionGroupResponse>> {
+    const req = this.createRequest('GET', '/subscription_groups/lookup.json');
     const mapped = req.prepareArgs({
-      body: [body, optional(createSubscriptionGroupRequestSchema)],
+      subscriptionId: [subscriptionId, string()],
     });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(422, SingleStringErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
+    req.query('subscription_id', mapped.subscriptionId);
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
   }
 
   /**
@@ -158,54 +159,6 @@ export class SubscriptionGroupsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to find subscription group details.
-   *
-   * #### Current Billing Amount in Cents
-   *
-   * Current billing amount for the subscription group is not returned by default. If this information is
-   * desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
-   *
-   * @param uid The uid of the subscription group
-   * @return Response from the API call
-   */
-  async readSubscriptionGroup(
-    uid: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<FullSubscriptionGroupResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
-    return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to update subscription group members.
-   * `"member_ids": []` should contain an array of both subscription IDs to set as group members and
-   * subscription IDs already present in the groups. Not including them will result in removing them from
-   * subscription group. To clean up members, just leave the array empty.
-   *
-   * @param uid          The uid of the subscription group
-   * @param body
-   * @return Response from the API call
-   */
-  async updateSubscriptionGroupMembers(
-    uid: string,
-    body?: UpdateSubscriptionGroupRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionGroupResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      uid: [uid, string()],
-      body: [body, optional(updateSubscriptionGroupRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
-    req.throwOn(422, SubscriptionGroupUpdateErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
-  }
-
-  /**
    * Use this endpoint to delete subscription group.
    * Only groups without members can be deleted
    *
@@ -224,27 +177,6 @@ export class SubscriptionGroupsController extends BaseController {
       deleteSubscriptionGroupResponseSchema,
       requestOptions
     );
-  }
-
-  /**
-   * Use this endpoint to find subscription group associated with subscription.
-   *
-   * If the subscription is not in a group endpoint will return 404 code.
-   *
-   * @param subscriptionId  The Chargify id of the subscription associated with the subscription group
-   * @return Response from the API call
-   */
-  async readSubscriptionGroupBySubscriptionId(
-    subscriptionId: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<FullSubscriptionGroupResponse>> {
-    const req = this.createRequest('GET', '/subscription_groups/lookup.json');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, string()],
-    });
-    req.query('subscription_id', mapped.subscriptionId);
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
   }
 
   /**
@@ -293,6 +225,74 @@ export class SubscriptionGroupsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/group.json`;
+    return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
+  }
+
+  /**
+   * Creates a subscription group with given members.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async createSubscriptionGroup(
+    body?: CreateSubscriptionGroupRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionGroupResponse>> {
+    const req = this.createRequest('POST', '/subscription_groups.json');
+    const mapped = req.prepareArgs({
+      body: [body, optional(createSubscriptionGroupRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(422, SingleStringErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to find subscription group details.
+   *
+   * #### Current Billing Amount in Cents
+   *
+   * Current billing amount for the subscription group is not returned by default. If this information is
+   * desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
+   *
+   * @param uid The uid of the subscription group
+   * @return Response from the API call
+   */
+  async readSubscriptionGroup(
+    uid: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<FullSubscriptionGroupResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
+    return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to update subscription group members.
+   * `"member_ids": []` should contain an array of both subscription IDs to set as group members and
+   * subscription IDs already present in the groups. Not including them will result in removing them from
+   * subscription group. To clean up members, just leave the array empty.
+   *
+   * @param uid          The uid of the subscription group
+   * @param body
+   * @return Response from the API call
+   */
+  async updateSubscriptionGroupMembers(
+    uid: string,
+    body?: UpdateSubscriptionGroupRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionGroupResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      uid: [uid, string()],
+      body: [body, optional(updateSubscriptionGroupRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
+    req.throwOn(422, SubscriptionGroupUpdateErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
   }
 

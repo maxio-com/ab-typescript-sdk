@@ -5,6 +5,7 @@
  */
 
 import { object, optional, Schema, string } from '../schema';
+import { CardType, cardTypeSchema } from './cardType';
 import {
   SubscriptionGroupCreditCardExpirationMonth,
   subscriptionGroupCreditCardExpirationMonthSchema,
@@ -37,7 +38,8 @@ export interface SubscriptionGroupCreditCard {
   billingZip?: string;
   billingCountry?: string;
   lastFour?: string;
-  cardType?: string;
+  /** The type of card used. */
+  cardType?: CardType;
   customerVaultToken?: string;
   cvv?: string;
   paymentType?: string;
@@ -70,7 +72,7 @@ export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCa
     billingZip: ['billing_zip', optional(string())],
     billingCountry: ['billing_country', optional(string())],
     lastFour: ['last_four', optional(string())],
-    cardType: ['card_type', optional(string())],
+    cardType: ['card_type', optional(cardTypeSchema)],
     customerVaultToken: ['customer_vault_token', optional(string())],
     cvv: ['cvv', optional(string())],
     paymentType: ['payment_type', optional(string())],

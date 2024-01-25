@@ -34,7 +34,7 @@ export interface Coupon {
   productFamilyName?: string | null;
   startDate?: string;
   endDate?: string | null;
-  percentage?: number | null;
+  percentage?: string | null;
   recurring?: boolean;
   recurringScheme?: RecurringScheme;
   durationPeriodCount?: number | null;
@@ -66,7 +66,7 @@ export const couponSchema: Schema<Coupon> = object({
   productFamilyName: ['product_family_name', optional(nullable(string()))],
   startDate: ['start_date', optional(string())],
   endDate: ['end_date', optional(nullable(string()))],
-  percentage: ['percentage', optional(nullable(number()))],
+  percentage: ['percentage', optional(nullable(string()))],
   recurring: ['recurring', optional(boolean())],
   recurringScheme: ['recurring_scheme', optional(recurringSchemeSchema)],
   durationPeriodCount: ['duration_period_count', optional(nullable(number()))],

@@ -10,211 +10,16 @@ const subscriptionStatusController = new SubscriptionStatusController(client);
 
 ## Methods
 
-* [Retry Subscription](../../doc/controllers/subscription-status.md#retry-subscription)
 * [Cancel Subscription](../../doc/controllers/subscription-status.md#cancel-subscription)
 * [Resume Subscription](../../doc/controllers/subscription-status.md#resume-subscription)
 * [Pause Subscription](../../doc/controllers/subscription-status.md#pause-subscription)
-* [Update Automatic Subscription Resumption](../../doc/controllers/subscription-status.md#update-automatic-subscription-resumption)
-* [Reactivate Subscription](../../doc/controllers/subscription-status.md#reactivate-subscription)
 * [Initiate Delayed Cancellation](../../doc/controllers/subscription-status.md#initiate-delayed-cancellation)
 * [Stop Delayed Cancellation](../../doc/controllers/subscription-status.md#stop-delayed-cancellation)
+* [Retry Subscription](../../doc/controllers/subscription-status.md#retry-subscription)
+* [Update Automatic Subscription Resumption](../../doc/controllers/subscription-status.md#update-automatic-subscription-resumption)
+* [Reactivate Subscription](../../doc/controllers/subscription-status.md#reactivate-subscription)
 * [Cancel Dunning](../../doc/controllers/subscription-status.md#cancel-dunning)
 * [Preview Renewal](../../doc/controllers/subscription-status.md#preview-renewal)
-
-
-# Retry Subscription
-
-Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
-
-## Successful Reactivation
-
-The response will be `200 OK` with the updated Subscription.
-
-## Failed Reactivation
-
-The response will be `422 "Unprocessable Entity`.
-
-```ts
-async retrySubscription(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SubscriptionResponse`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionStatusController.retrySubscription(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 46330,
-    "state": "active",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2018-10-22T13:10:46-06:00",
-    "created_at": "2018-10-22T13:10:46-06:00",
-    "updated_at": "2021-06-10T09:23:43-06:00",
-    "expires_at": null,
-    "balance_in_cents": 18600,
-    "current_period_ends_at": "2021-06-22T13:10:46-06:00",
-    "next_assessment_at": "2021-06-22T13:10:46-06:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": null,
-    "payment_collection_method": "automatic",
-    "snap_day": null,
-    "cancellation_method": null,
-    "product_price_point_id": 3464,
-    "next_product_price_point_id": null,
-    "receives_invoice_emails": null,
-    "net_terms": null,
-    "locale": null,
-    "currency": "USD",
-    "reference": null,
-    "scheduled_cancellation_at": null,
-    "current_period_started_at": "2021-05-22T13:10:46-06:00",
-    "previous_state": "past_due",
-    "signup_payment_id": 651268,
-    "signup_revenue": "6.00",
-    "delayed_cancel_at": null,
-    "coupon_code": null,
-    "total_revenue_in_cents": 600,
-    "product_price_in_cents": 600,
-    "product_version_number": 501,
-    "payment_type": null,
-    "referral_code": "rzqvrx",
-    "coupon_use_count": null,
-    "coupon_uses_allowed": null,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "coupon_codes": [],
-    "offer_id": null,
-    "credit_balance_in_cents": 0,
-    "prepayment_balance_in_cents": 0,
-    "payer_id": 142365,
-    "stored_credential_transaction_id": null,
-    "next_product_handle": null,
-    "on_hold_at": null,
-    "prepaid_dunning": false,
-    "customer": {
-      "id": 142365,
-      "first_name": "Lavern",
-      "last_name": "Fahey",
-      "organization": null,
-      "email": "millie2@example.com",
-      "created_at": "2018-10-22T13:10:46-06:00",
-      "updated_at": "2018-10-22T13:10:46-06:00",
-      "reference": null,
-      "address": null,
-      "address_2": null,
-      "city": null,
-      "state": null,
-      "zip": null,
-      "country": null,
-      "phone": null,
-      "portal_invite_last_sent_at": null,
-      "portal_invite_last_accepted_at": null,
-      "verified": false,
-      "portal_customer_created_at": "2018-10-22T13:10:46-06:00",
-      "vat_number": null,
-      "cc_emails": "john@example.com, sue@example.com",
-      "tax_exempt": false,
-      "parent_id": null,
-      "locale": null
-    },
-    "product": {
-      "id": 8080,
-      "name": "Pro Versions",
-      "handle": null,
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "month",
-      "created_at": "2019-02-15T10:15:00-07:00",
-      "updated_at": "2019-02-15T10:30:34-07:00",
-      "price_in_cents": 600,
-      "interval": 1,
-      "interval_unit": "month",
-      "initial_charge_in_cents": null,
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": true,
-      "return_params": "",
-      "require_shipping_address": false,
-      "request_billing_address": false,
-      "require_billing_address": false,
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "default_product_price_point_id": 3464,
-      "version_number": 501,
-      "update_return_params": "",
-      "product_price_point_id": 3464,
-      "product_price_point_name": "Default",
-      "product_price_point_handle": "uuid:5305c3f0-1375-0137-5619-065dfbfdc636",
-      "product_family": {
-        "id": 37,
-        "name": "Acme Projects",
-        "description": null,
-        "handle": "acme-projects",
-        "accounting_code": null,
-        "created_at": "2013-02-20T15:05:51-07:00",
-        "updated_at": "2013-02-20T15:05:51-07:00"
-      },
-      "public_signup_pages": [
-        {
-          "id": 1540,
-          "return_url": null,
-          "return_params": "",
-          "url": "https://acme-test.staging-chargifypay.com/subscribe/2f6y53rrqgsf"
-        }
-      ]
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Cancel Subscription
@@ -727,6 +532,317 @@ try {
           "return_url": "",
           "return_params": "",
           "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
+        }
+      ]
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Initiate Delayed Cancellation
+
+Chargify offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
+
+Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period` flag to true.
+
+Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
+
+```ts
+async initiateDelayedCancellation(
+  subscriptionId: number,
+  body?: CancellationRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<DelayedCancellationResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `body` | [`CancellationRequest \| undefined`](../../doc/models/cancellation-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionStatusController.initiateDelayedCancellation(subscriptionId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+
+
+# Stop Delayed Cancellation
+
+Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
+
+This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
+
+```ts
+async stopDelayedCancellation(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<DelayedCancellationResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionStatusController.stopDelayedCancellation(subscriptionId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "message": "This subscription will no longer be canceled"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+
+
+# Retry Subscription
+
+Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
+
+## Successful Reactivation
+
+The response will be `200 OK` with the updated Subscription.
+
+## Failed Reactivation
+
+The response will be `422 "Unprocessable Entity`.
+
+```ts
+async retrySubscription(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SubscriptionResponse`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionStatusController.retrySubscription(subscriptionId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 46330,
+    "state": "active",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2018-10-22T13:10:46-06:00",
+    "created_at": "2018-10-22T13:10:46-06:00",
+    "updated_at": "2021-06-10T09:23:43-06:00",
+    "expires_at": null,
+    "balance_in_cents": 18600,
+    "current_period_ends_at": "2021-06-22T13:10:46-06:00",
+    "next_assessment_at": "2021-06-22T13:10:46-06:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": null,
+    "payment_collection_method": "automatic",
+    "snap_day": null,
+    "cancellation_method": null,
+    "product_price_point_id": 3464,
+    "next_product_price_point_id": null,
+    "receives_invoice_emails": null,
+    "net_terms": null,
+    "locale": null,
+    "currency": "USD",
+    "reference": null,
+    "scheduled_cancellation_at": null,
+    "current_period_started_at": "2021-05-22T13:10:46-06:00",
+    "previous_state": "past_due",
+    "signup_payment_id": 651268,
+    "signup_revenue": "6.00",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": 600,
+    "product_price_in_cents": 600,
+    "product_version_number": 501,
+    "payment_type": null,
+    "referral_code": "rzqvrx",
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "coupon_codes": [],
+    "offer_id": null,
+    "credit_balance_in_cents": 0,
+    "prepayment_balance_in_cents": 0,
+    "payer_id": 142365,
+    "stored_credential_transaction_id": null,
+    "next_product_handle": null,
+    "on_hold_at": null,
+    "prepaid_dunning": false,
+    "customer": {
+      "id": 142365,
+      "first_name": "Lavern",
+      "last_name": "Fahey",
+      "organization": null,
+      "email": "millie2@example.com",
+      "created_at": "2018-10-22T13:10:46-06:00",
+      "updated_at": "2018-10-22T13:10:46-06:00",
+      "reference": null,
+      "address": null,
+      "address_2": null,
+      "city": null,
+      "state": null,
+      "zip": null,
+      "country": null,
+      "phone": null,
+      "portal_invite_last_sent_at": null,
+      "portal_invite_last_accepted_at": null,
+      "verified": false,
+      "portal_customer_created_at": "2018-10-22T13:10:46-06:00",
+      "vat_number": null,
+      "cc_emails": "john@example.com, sue@example.com",
+      "tax_exempt": false,
+      "parent_id": null,
+      "locale": null
+    },
+    "product": {
+      "id": 8080,
+      "name": "Pro Versions",
+      "handle": null,
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "month",
+      "created_at": "2019-02-15T10:15:00-07:00",
+      "updated_at": "2019-02-15T10:30:34-07:00",
+      "price_in_cents": 600,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": true,
+      "return_params": "",
+      "require_shipping_address": false,
+      "request_billing_address": false,
+      "require_billing_address": false,
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "default_product_price_point_id": 3464,
+      "version_number": 501,
+      "update_return_params": "",
+      "product_price_point_id": 3464,
+      "product_price_point_name": "Default",
+      "product_price_point_handle": "uuid:5305c3f0-1375-0137-5619-065dfbfdc636",
+      "product_family": {
+        "id": 37,
+        "name": "Acme Projects",
+        "description": null,
+        "handle": "acme-projects",
+        "accounting_code": null,
+        "created_at": "2013-02-20T15:05:51-07:00",
+        "updated_at": "2013-02-20T15:05:51-07:00"
+      },
+      "public_signup_pages": [
+        {
+          "id": 1540,
+          "return_url": null,
+          "return_params": "",
+          "url": "https://acme-test.staging-chargifypay.com/subscribe/2f6y53rrqgsf"
         }
       ]
     }
@@ -1262,122 +1378,6 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
-# Initiate Delayed Cancellation
-
-Chargify offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
-
-Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period` flag to true.
-
-Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
-
-```ts
-async initiateDelayedCancellation(
-  subscriptionId: number,
-  body?: CancellationRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<DelayedCancellationResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `body` | [`CancellationRequest \| undefined`](../../doc/models/cancellation-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionStatusController.initiateDelayedCancellation(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-
-
-# Stop Delayed Cancellation
-
-Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
-
-This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
-
-```ts
-async stopDelayedCancellation(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<DelayedCancellationResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionStatusController.stopDelayedCancellation(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "message": "This subscription will no longer be canceled"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
 
 
 # Cancel Dunning

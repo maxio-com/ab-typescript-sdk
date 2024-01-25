@@ -44,39 +44,6 @@ import { BaseController } from './baseController';
 
 export class EventsBasedBillingSegmentsController extends BaseController {
   /**
-   * This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify
-   * properties to bill upon and prices for each Segment. You can only pass as many "property_values" as
-   * the related Metric has segmenting properties defined.
-   *
-   * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
-   * syntax.
-   *
-   * @param componentId    ID or Handle for the Component
-   * @param pricePointId   ID or Handle for the Price Point belonging to the Component
-   * @param body
-   * @return Response from the API call
-   */
-  async createSegment(
-    componentId: string,
-    pricePointId: string,
-    body?: CreateSegmentRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SegmentResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      componentId: [componentId, string()],
-      pricePointId: [pricePointId, string()],
-      body: [body, optional(createSegmentRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingSegmentErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(segmentResponseSchema, requestOptions);
-  }
-
-  /**
    * This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in
    * the order of creation.
    *
@@ -171,6 +138,35 @@ export class EventsBasedBillingSegmentsController extends BaseController {
   }
 
   /**
+   * This endpoint allows you to delete a Segment with specified ID.
+   *
+   * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
+   * syntax.
+   *
+   * @param componentId    ID or Handle of the Component
+   * @param pricePointId   ID or Handle of the Price Point belonging to the Component
+   * @param id             The ID of the Segment
+   * @return Response from the API call
+   */
+  async deleteSegment(
+    componentId: string,
+    pricePointId: string,
+    id: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      componentId: [componentId, string()],
+      pricePointId: [pricePointId, string()],
+      id: [id, number()],
+    });
+    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/${mapped.id}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.call(requestOptions);
+  }
+
+  /**
    * This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to
    * update the pricing for the segment.
    *
@@ -206,32 +202,72 @@ export class EventsBasedBillingSegmentsController extends BaseController {
   }
 
   /**
-   * This endpoint allows you to delete a Segment with specified ID.
+   * This endpoint allows you to update multiple segments in one request. The array of segments can
+   * contain up to `1000` records.
+   *
+   * If any of the records contain an error the whole request would fail and none of the requested
+   * segments get updated. The error response contains a message for only the one segment that failed
+   * validation, with the corresponding index in the array.
    *
    * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
    *
-   * @param componentId    ID or Handle of the Component
-   * @param pricePointId   ID or Handle of the Price Point belonging to the Component
-   * @param id             The ID of the Segment
+   * @param componentId    ID or Handle for the Component
+   * @param pricePointId   ID or Handle for the Price Point belonging to the Component
+   * @param body
    * @return Response from the API call
    */
-  async deleteSegment(
+  async updateSegments(
     componentId: string,
     pricePointId: string,
-    id: number,
+    body?: BulkUpdateSegments,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
+  ): Promise<ApiResponse<ListSegmentsResponse>> {
+    const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       componentId: [componentId, string()],
       pricePointId: [pricePointId, string()],
-      id: [id, number()],
+      body: [body, optional(bulkUpdateSegmentsSchema)],
     });
-    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/${mapped.id}.json`;
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/bulk.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
+    req.throwOn(422, EventBasedBillingSegmentError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(listSegmentsResponseSchema, requestOptions);
+  }
+
+  /**
+   * This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify
+   * properties to bill upon and prices for each Segment. You can only pass as many "property_values" as
+   * the related Metric has segmenting properties defined.
+   *
+   * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
+   * syntax.
+   *
+   * @param componentId    ID or Handle for the Component
+   * @param pricePointId   ID or Handle for the Price Point belonging to the Component
+   * @param body
+   * @return Response from the API call
+   */
+  async createSegment(
+    componentId: string,
+    pricePointId: string,
+    body?: CreateSegmentRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SegmentResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      componentId: [componentId, string()],
+      pricePointId: [pricePointId, string()],
+      body: [body, optional(createSegmentRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, EventBasedBillingSegmentErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(segmentResponseSchema, requestOptions);
   }
 
   /**
@@ -261,42 +297,6 @@ export class EventsBasedBillingSegmentsController extends BaseController {
       componentId: [componentId, string()],
       pricePointId: [pricePointId, string()],
       body: [body, optional(bulkCreateSegmentsSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/bulk.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingSegmentError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(listSegmentsResponseSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint allows you to update multiple segments in one request. The array of segments can
-   * contain up to `1000` records.
-   *
-   * If any of the records contain an error the whole request would fail and none of the requested
-   * segments get updated. The error response contains a message for only the one segment that failed
-   * validation, with the corresponding index in the array.
-   *
-   * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
-   * syntax.
-   *
-   * @param componentId    ID or Handle for the Component
-   * @param pricePointId   ID or Handle for the Price Point belonging to the Component
-   * @param body
-   * @return Response from the API call
-   */
-  async updateSegments(
-    componentId: string,
-    pricePointId: string,
-    body?: BulkUpdateSegments,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ListSegmentsResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      componentId: [componentId, string()],
-      pricePointId: [pricePointId, string()],
-      body: [body, optional(bulkUpdateSegmentsSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);

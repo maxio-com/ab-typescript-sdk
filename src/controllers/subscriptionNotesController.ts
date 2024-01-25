@@ -50,6 +50,27 @@ export class SubscriptionNotesController extends BaseController {
   }
 
   /**
+   * Use the following method to delete a note for a Subscription.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param noteId          The Chargify id of the note
+   * @return Response from the API call
+   */
+  async deleteSubscriptionNote(
+    subscriptionId: number,
+    noteId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      noteId: [noteId, number()],
+    });
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
+    return req.call(requestOptions);
+  }
+
+  /**
    * Use this method to retrieve a list of Notes associated with a Subscription. The response will be an
    * array of Notes.
    *
@@ -137,26 +158,5 @@ export class SubscriptionNotesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use the following method to delete a note for a Subscription.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param noteId          The Chargify id of the note
-   * @return Response from the API call
-   */
-  async deleteSubscriptionNote(
-    subscriptionId: number,
-    noteId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      noteId: [noteId, number()],
-    });
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
-    return req.call(requestOptions);
   }
 }

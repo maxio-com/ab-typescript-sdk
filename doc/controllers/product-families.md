@@ -10,10 +10,163 @@ const productFamiliesController = new ProductFamiliesController(client);
 
 ## Methods
 
-* [List Products for Product Family](../../doc/controllers/product-families.md#list-products-for-product-family)
-* [Create Product Family](../../doc/controllers/product-families.md#create-product-family)
 * [List Product Families](../../doc/controllers/product-families.md#list-product-families)
+* [Create Product Family](../../doc/controllers/product-families.md#create-product-family)
+* [List Products for Product Family](../../doc/controllers/product-families.md#list-products-for-product-family)
 * [Read Product Family](../../doc/controllers/product-families.md#read-product-family)
+
+
+# List Product Families
+
+This method allows to retrieve a list of Product Families for a site.
+
+```ts
+async listProductFamilies(
+  dateField?: BasicDateField,
+  startDate?: string,
+  endDate?: string,
+  startDatetime?: string,
+  endDatetime?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductFamilyResponse[]>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
+| `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
+| `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
+| `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
+| `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ProductFamilyResponse[]`](../../doc/models/product-family-response.md)
+
+## Example Usage
+
+```ts
+const collect = {
+  dateField: BasicDateField.UpdatedAt
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await productFamiliesController.listProductFamilies(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "product_family": {
+      "id": 37,
+      "name": "Acme Projects",
+      "description": null,
+      "handle": "acme-projects",
+      "accounting_code": null,
+      "created_at": "2013-02-20T15:05:51-07:00",
+      "updated_at": "2013-02-20T15:05:51-07:00"
+    }
+  },
+  {
+    "product_family": {
+      "id": 155,
+      "name": "Bat Family",
+      "description": "Another family.",
+      "handle": "bat-family",
+      "accounting_code": null,
+      "created_at": "2014-04-16T12:41:13-06:00",
+      "updated_at": "2014-04-16T12:41:13-06:00"
+    }
+  }
+]
+```
+
+
+# Create Product Family
+
+This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
+
+Full documentation on how Product Families operate within the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
+
+```ts
+async createProductFamily(
+  body?: CreateProductFamilyRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductFamilyResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateProductFamilyRequest \| undefined`](../../doc/models/create-product-family-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ProductFamilyResponse`](../../doc/models/product-family-response.md)
+
+## Example Usage
+
+```ts
+const body: CreateProductFamilyRequest = {
+  productFamily: {
+    name: 'Acme Projects',
+    description: 'Amazing project management tool',
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await productFamiliesController.createProductFamily(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product_family": {
+    "id": 933860,
+    "name": "Acme Projects",
+    "description": "Amazing project management tool",
+    "handle": "acme-projects",
+    "accounting_code": null
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # List Products for Product Family
@@ -190,159 +343,6 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-
-
-# Create Product Family
-
-This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
-
-Full documentation on how Product Families operate within the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
-
-```ts
-async createProductFamily(
-  body?: CreateProductFamilyRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductFamilyResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`CreateProductFamilyRequest \| undefined`](../../doc/models/create-product-family-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ProductFamilyResponse`](../../doc/models/product-family-response.md)
-
-## Example Usage
-
-```ts
-const body: CreateProductFamilyRequest = {
-  productFamily: {
-    name: 'Acme Projects',
-    description: 'Amazing project management tool',
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productFamiliesController.createProductFamily(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product_family": {
-    "id": 933860,
-    "name": "Acme Projects",
-    "description": "Amazing project management tool",
-    "handle": "acme-projects",
-    "accounting_code": null
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
-# List Product Families
-
-This method allows to retrieve a list of Product Families for a site.
-
-```ts
-async listProductFamilies(
-  dateField?: BasicDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductFamilyResponse[]>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
-| `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
-| `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ProductFamilyResponse[]`](../../doc/models/product-family-response.md)
-
-## Example Usage
-
-```ts
-const collect = {
-  dateField: BasicDateField.UpdatedAt
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productFamiliesController.listProductFamilies(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "product_family": {
-      "id": 37,
-      "name": "Acme Projects",
-      "description": null,
-      "handle": "acme-projects",
-      "accounting_code": null,
-      "created_at": "2013-02-20T15:05:51-07:00",
-      "updated_at": "2013-02-20T15:05:51-07:00"
-    }
-  },
-  {
-    "product_family": {
-      "id": 155,
-      "name": "Bat Family",
-      "description": "Another family.",
-      "handle": "bat-family",
-      "accounting_code": null,
-      "created_at": "2014-04-16T12:41:13-06:00",
-      "updated_at": "2014-04-16T12:41:13-06:00"
-    }
-  }
-]
-```
 
 
 # Read Product Family

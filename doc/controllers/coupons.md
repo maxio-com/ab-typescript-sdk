@@ -11,18 +11,18 @@ const couponsController = new CouponsController(client);
 ## Methods
 
 * [Create Coupon](../../doc/controllers/coupons.md#create-coupon)
-* [List Coupons for Product Family](../../doc/controllers/coupons.md#list-coupons-for-product-family)
-* [Read Coupon by Code](../../doc/controllers/coupons.md#read-coupon-by-code)
-* [Read Coupon](../../doc/controllers/coupons.md#read-coupon)
 * [Update Coupon](../../doc/controllers/coupons.md#update-coupon)
-* [Archive Coupon](../../doc/controllers/coupons.md#archive-coupon)
 * [List Coupons](../../doc/controllers/coupons.md#list-coupons)
 * [Read Coupon Usage](../../doc/controllers/coupons.md#read-coupon-usage)
-* [Validate Coupon](../../doc/controllers/coupons.md#validate-coupon)
-* [Update Coupon Currency Prices](../../doc/controllers/coupons.md#update-coupon-currency-prices)
 * [Create Coupon Subcodes](../../doc/controllers/coupons.md#create-coupon-subcodes)
+* [Read Coupon by Code](../../doc/controllers/coupons.md#read-coupon-by-code)
+* [Archive Coupon](../../doc/controllers/coupons.md#archive-coupon)
 * [List Coupon Subcodes](../../doc/controllers/coupons.md#list-coupon-subcodes)
+* [Read Coupon](../../doc/controllers/coupons.md#read-coupon)
+* [Validate Coupon](../../doc/controllers/coupons.md#validate-coupon)
 * [Update Coupon Subcodes](../../doc/controllers/coupons.md#update-coupon-subcodes)
+* [List Coupons for Product Family](../../doc/controllers/coupons.md#list-coupons-for-product-family)
+* [Update Coupon Currency Prices](../../doc/controllers/coupons.md#update-coupon-currency-prices)
 * [Delete Coupon Subcode](../../doc/controllers/coupons.md#delete-coupon-subcode)
 
 
@@ -72,7 +72,7 @@ const body: CreateOrUpdateCoupon = {
   coupon: {
     name: '15% off',
     code: '15OFF',
-    percentage: '15',
+    percentage: 15,
     description: '15% off for life',
     allowNegativeBalance: false,
     recurring: false,
@@ -118,303 +118,6 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# List Coupons for Product Family
-
-List coupons for a specific Product Family in a Site.
-
-If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
-
-```ts
-async listCouponsForProductFamily(
-  productFamilyId: number,
-  page?: number,
-  perPage?: number,
-  filterDateField?: BasicDateField,
-  filterEndDate?: string,
-  filterEndDatetime?: string,
-  filterStartDate?: string,
-  filterStartDatetime?: string,
-  filterIds?: number[],
-  filterCodes?: string[],
-  currencyPrices?: boolean,
-  filterUseSiteExchangeRate?: boolean,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponResponse[]>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. |
-| `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[date_field]=2011-12-15`. |
-| `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `?filter[end_datetime]=2011-12-1T10:15:30+01:00`. |
-| `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-17`. |
-| `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching coupons with matching id based on provided values. Use in query `filter[ids]=1,2,3`. |
-| `filterCodes` | `string[] \| undefined` | Query, Optional | Allows fetching coupons with matching codes based on provided values. Use in query `filter[codes]=free,free_trial`. |
-| `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
-| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CouponResponse[]`](../../doc/models/coupon-response.md)
-
-## Example Usage
-
-```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-  productFamilyId: 140,
-  page: 2,
-  perPage: 50,
-  currencyPrices: true
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.listCouponsForProductFamily(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "coupon": {
-      "id": 999999,
-      "name": "50% coupon",
-      "code": "50PERCENT",
-      "description": "50 PERCENT OFF",
-      "amount_in_cents": null,
-      "product_family_id": 527890,
-      "created_at": "2016-10-21T17:02:08-04:00",
-      "updated_at": "2016-10-21T17:06:11-04:00",
-      "start_date": "2016-10-21T17:02:08-04:00",
-      "end_date": null,
-      "percentage": 50,
-      "recurring": true,
-      "duration_period_count": null,
-      "duration_interval": 1,
-      "duration_interval_unit": "day",
-      "allow_negative_balance": true,
-      "archived_at": null,
-      "conversion_limit": "100",
-      "stackable": false,
-      "compounding_strategy": "compound",
-      "coupon_restrictions": [],
-      "use_site_exchange_rate": true
-    }
-  },
-  {
-    "coupon": {
-      "id": 123456,
-      "name": "100% coupon",
-      "code": "100PERCENT",
-      "description": "100 PERCENT OFF",
-      "amount_in_cents": null,
-      "product_family_id": 527890,
-      "created_at": "2016-10-21T17:02:08-04:00",
-      "updated_at": "2016-10-21T17:06:11-04:00",
-      "start_date": "2016-10-21T17:02:08-04:00",
-      "end_date": null,
-      "percentage": 50,
-      "recurring": true,
-      "duration_period_count": null,
-      "duration_interval": 1,
-      "duration_interval_unit": "day",
-      "allow_negative_balance": true,
-      "archived_at": null,
-      "conversion_limit": "100",
-      "stackable": false,
-      "compounding_strategy": "compound",
-      "coupon_restrictions": [],
-      "use_site_exchange_rate": true
-    }
-  },
-  {
-    "coupon": {
-      "id": 888888,
-      "name": "25% coupon",
-      "code": "25PERCENT",
-      "description": "25 PERCENT OFF",
-      "amount_in_cents": null,
-      "product_family_id": 527890,
-      "created_at": "2016-10-21T17:02:08-04:00",
-      "updated_at": "2016-10-21T17:06:11-04:00",
-      "start_date": "2016-10-21T17:02:08-04:00",
-      "end_date": null,
-      "percentage": 25,
-      "recurring": true,
-      "duration_period_count": null,
-      "duration_interval": 1,
-      "duration_interval_unit": "day",
-      "allow_negative_balance": true,
-      "archived_at": null,
-      "conversion_limit": "100",
-      "stackable": false,
-      "compounding_strategy": "compound",
-      "coupon_restrictions": [
-        {
-          "id": 37,
-          "item_type": "Component",
-          "item_id": 519,
-          "name": "test",
-          "handle": null
-        }
-      ],
-      "use_site_exchange_rate": true
-    }
-  }
-]
-```
-
-
-# Read Coupon by Code
-
-You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
-
-If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
-
-```ts
-async readCouponByCode(
-  productFamilyId?: number,
-  code?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productFamilyId` | `number \| undefined` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
-| `code` | `string \| undefined` | Query, Optional | The code of the coupon |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CouponResponse`](../../doc/models/coupon-response.md)
-
-## Example Usage
-
-```ts
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.readCouponByCode();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# Read Coupon
-
-You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
-If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
-
-When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
-
-If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
-
-```ts
-async readCoupon(
-  productFamilyId: number,
-  couponId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `couponId` | `number` | Template, Required | The Chargify id of the coupon |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CouponResponse`](../../doc/models/coupon-response.md)
-
-## Example Usage
-
-```ts
-const productFamilyId = 140;
-
-const couponId = 162;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.readCoupon(
-  productFamilyId,
-  couponId
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "coupon": {
-    "id": 67,
-    "name": "Foo Bar",
-    "code": "YEPPER99934",
-    "description": "my cool coupon",
-    "amount_in_cents": null,
-    "product_family_id": 4,
-    "product_family_name": "Billing Plans",
-    "created_at": "2017-11-08T10:01:15-05:00",
-    "updated_at": "2017-11-08T10:01:15-05:00",
-    "start_date": "2017-11-08T10:01:15-05:00",
-    "end_date": null,
-    "percentage": 33.3333,
-    "duration_period_count": null,
-    "duration_interval": null,
-    "duration_interval_unit": null,
-    "allow_negative_balance": false,
-    "archived_at": null,
-    "conversion_limit": null,
-    "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
-  }
-}
-```
-
-
 # Update Coupon
 
 ## Update Coupon
@@ -457,7 +160,7 @@ const body: CreateOrUpdateCoupon = {
   coupon: {
     name: '15% off',
     code: '15OFF',
-    percentage: '15',
+    percentage: 15,
     description: '15% off for life',
     allowNegativeBalance: false,
     recurring: false,
@@ -517,89 +220,6 @@ try {
     "duration_interval_unit": null,
     "allow_negative_balance": false,
     "archived_at": null,
-    "conversion_limit": null,
-    "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
-  }
-}
-```
-
-
-# Archive Coupon
-
-You can archive a Coupon via the API with the archive method.
-Archiving makes that Coupon unavailable for future use, but allows it to remain attached and functional on existing Subscriptions that are using it.
-The `archived_at` date and time will be assigned.
-
-```ts
-async archiveCoupon(
-  productFamilyId: number,
-  couponId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `couponId` | `number` | Template, Required | The Chargify id of the coupon |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CouponResponse`](../../doc/models/coupon-response.md)
-
-## Example Usage
-
-```ts
-const productFamilyId = 140;
-
-const couponId = 162;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.archiveCoupon(
-  productFamilyId,
-  couponId
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "coupon": {
-    "id": 67,
-    "name": "Foo Bar",
-    "code": "YEPPER99934",
-    "description": "my cool coupon",
-    "amount_in_cents": 10000,
-    "product_family_id": 4,
-    "created_at": "2017-11-08T10:01:15-05:00",
-    "updated_at": "2017-11-08T10:01:15-05:00",
-    "start_date": "2017-11-08T10:01:15-05:00",
-    "end_date": null,
-    "percentage": null,
-    "recurring": false,
-    "duration_period_count": null,
-    "duration_interval": null,
-    "duration_interval_unit": null,
-    "allow_negative_balance": false,
-    "archived_at": "2016-12-02T13:09:33-05:00",
     "conversion_limit": null,
     "stackable": true,
     "compounding_strategy": "compound",
@@ -707,7 +327,7 @@ try {
       "product_family_name": "string",
       "start_date": "string",
       "end_date": "string",
-      "percentage": 0,
+      "percentage": "10",
       "recurring": true,
       "recurring_scheme": "do_not_recur",
       "duration_period_count": 0,
@@ -825,172 +445,6 @@ try {
 ```
 
 
-# Validate Coupon
-
-You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
-
-If the coupon is invalid, the status code will be 404 and the response will say why it is invalid. If the coupon is valid, the status code will be 200 and the coupon will be returned. The following reasons for invalidity are supported:
-
-+ Coupon not found
-+ Coupon is invalid
-+ Coupon expired
-
-If you have more than one product family and if the coupon you are validating does not belong to the first product family in your site, then you will need to specify the product family, either in the url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-family` format.
-
-Eg.
-
-```
-https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.<format>?code=<coupon_code>
-```
-
-Or:
-
-```
-https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon_code>&product_family_id=<id>
-```
-
-```ts
-async validateCoupon(
-  code: string,
-  productFamilyId?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `code` | `string` | Query, Required | The code of the coupon |
-| `productFamilyId` | `number \| undefined` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CouponResponse`](../../doc/models/coupon-response.md)
-
-## Example Usage
-
-```ts
-const code = 'code8';
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.validateCoupon(code);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "coupon": {
-    "id": 66,
-    "name": "Foo Bar",
-    "code": "YEPPER9993",
-    "description": "my cool coupon",
-    "amount_in_cents": 10000,
-    "product_family_id": 4,
-    "created_at": "2017-11-07T14:51:52-05:00",
-    "updated_at": "2017-11-07T15:14:24-05:00",
-    "start_date": "2017-11-07T14:51:52-05:00",
-    "end_date": null,
-    "percentage": null,
-    "recurring": false,
-    "duration_period_count": null,
-    "duration_interval": null,
-    "duration_interval_unit": null,
-    "allow_negative_balance": false,
-    "archived_at": null,
-    "conversion_limit": null,
-    "stackable": true,
-    "compounding_strategy": "full-price",
-    "coupon_restrictions": []
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | [`SingleStringErrorResponseError`](../../doc/models/single-string-error-response-error.md) |
-
-
-# Update Coupon Currency Prices
-
-This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
-
-Currency pricing for coupons must mirror the setup of the primary coupon pricing - if the primary coupon is percentage based, you will not be able to define pricing in non-primary currencies.
-
-```ts
-async updateCouponCurrencyPrices(
-  couponId: number,
-  body?: CouponCurrencyRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CouponCurrencyResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `couponId` | `number` | Template, Required | The Chargify id of the coupon |
-| `body` | [`CouponCurrencyRequest \| undefined`](../../doc/models/coupon-currency-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md)
-
-## Example Usage
-
-```ts
-const couponId = 162;
-
-const body: CouponCurrencyRequest = {
-  currencyPrices: [
-    {
-      currency: 'EUR',
-      price: 10,
-    },
-    {
-      currency: 'GBP',
-      price: 9,
-    }
-  ],
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await couponsController.updateCouponCurrencyPrices(
-  couponId,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
 # Create Coupon Subcodes
 
 ## Coupon Subcodes Intro
@@ -1101,6 +555,135 @@ try {
 ```
 
 
+# Read Coupon by Code
+
+You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
+
+If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
+
+```ts
+async readCouponByCode(
+  productFamilyId?: number,
+  code?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productFamilyId` | `number \| undefined` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
+| `code` | `string \| undefined` | Query, Optional | The code of the coupon |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CouponResponse`](../../doc/models/coupon-response.md)
+
+## Example Usage
+
+```ts
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await couponsController.readCouponByCode();
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# Archive Coupon
+
+You can archive a Coupon via the API with the archive method.
+Archiving makes that Coupon unavailable for future use, but allows it to remain attached and functional on existing Subscriptions that are using it.
+The `archived_at` date and time will be assigned.
+
+```ts
+async archiveCoupon(
+  productFamilyId: number,
+  couponId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
+| `couponId` | `number` | Template, Required | The Chargify id of the coupon |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CouponResponse`](../../doc/models/coupon-response.md)
+
+## Example Usage
+
+```ts
+const productFamilyId = 140;
+
+const couponId = 162;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await couponsController.archiveCoupon(
+  productFamilyId,
+  couponId
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "coupon": {
+    "id": 67,
+    "name": "Foo Bar",
+    "code": "YEPPER99934",
+    "description": "my cool coupon",
+    "amount_in_cents": 10000,
+    "product_family_id": 4,
+    "created_at": "2017-11-08T10:01:15-05:00",
+    "updated_at": "2017-11-08T10:01:15-05:00",
+    "start_date": "2017-11-08T10:01:15-05:00",
+    "end_date": null,
+    "percentage": null,
+    "recurring": false,
+    "duration_period_count": null,
+    "duration_interval": null,
+    "duration_interval_unit": null,
+    "allow_negative_balance": false,
+    "archived_at": "2016-12-02T13:09:33-05:00",
+    "conversion_limit": null,
+    "stackable": true,
+    "compounding_strategy": "compound",
+    "coupon_restrictions": []
+  }
+}
+```
+
+
 # List Coupon Subcodes
 
 This request allows you to request the subcodes that are attached to a coupon.
@@ -1181,6 +764,194 @@ try {
 ```
 
 
+# Read Coupon
+
+You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
+If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
+
+When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
+
+If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+
+```ts
+async readCoupon(
+  productFamilyId: number,
+  couponId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
+| `couponId` | `number` | Template, Required | The Chargify id of the coupon |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CouponResponse`](../../doc/models/coupon-response.md)
+
+## Example Usage
+
+```ts
+const productFamilyId = 140;
+
+const couponId = 162;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await couponsController.readCoupon(
+  productFamilyId,
+  couponId
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "coupon": {
+    "id": 67,
+    "name": "Foo Bar",
+    "code": "YEPPER99934",
+    "description": "my cool coupon",
+    "amount_in_cents": null,
+    "product_family_id": 4,
+    "product_family_name": "Billing Plans",
+    "created_at": "2017-11-08T10:01:15-05:00",
+    "updated_at": "2017-11-08T10:01:15-05:00",
+    "start_date": "2017-11-08T10:01:15-05:00",
+    "end_date": null,
+    "percentage": "33.3333",
+    "duration_period_count": null,
+    "duration_interval": null,
+    "duration_interval_unit": null,
+    "allow_negative_balance": false,
+    "archived_at": null,
+    "conversion_limit": null,
+    "stackable": true,
+    "compounding_strategy": "compound",
+    "coupon_restrictions": []
+  }
+}
+```
+
+
+# Validate Coupon
+
+You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
+
+If the coupon is invalid, the status code will be 404 and the response will say why it is invalid. If the coupon is valid, the status code will be 200 and the coupon will be returned. The following reasons for invalidity are supported:
+
++ Coupon not found
++ Coupon is invalid
++ Coupon expired
+
+If you have more than one product family and if the coupon you are validating does not belong to the first product family in your site, then you will need to specify the product family, either in the url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-family` format.
+
+Eg.
+
+```
+https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.<format>?code=<coupon_code>
+```
+
+Or:
+
+```
+https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon_code>&product_family_id=<id>
+```
+
+```ts
+async validateCoupon(
+  code: string,
+  productFamilyId?: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `code` | `string` | Query, Required | The code of the coupon |
+| `productFamilyId` | `number \| undefined` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CouponResponse`](../../doc/models/coupon-response.md)
+
+## Example Usage
+
+```ts
+const code = 'code8';
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await couponsController.validateCoupon(code);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "coupon": {
+    "id": 66,
+    "name": "Foo Bar",
+    "code": "YEPPER9993",
+    "description": "my cool coupon",
+    "amount_in_cents": 10000,
+    "product_family_id": 4,
+    "created_at": "2017-11-07T14:51:52-05:00",
+    "updated_at": "2017-11-07T15:14:24-05:00",
+    "start_date": "2017-11-07T14:51:52-05:00",
+    "end_date": null,
+    "percentage": null,
+    "recurring": false,
+    "duration_period_count": null,
+    "duration_interval": null,
+    "duration_interval_unit": null,
+    "allow_negative_balance": false,
+    "archived_at": null,
+    "conversion_limit": null,
+    "stackable": true,
+    "compounding_strategy": "full-price",
+    "coupon_restrictions": []
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | [`SingleStringErrorResponseError`](../../doc/models/single-string-error-response-error.md) |
+
+
 # Update Coupon Subcodes
 
 You can update the subcodes for the given Coupon via the API with a PUT request to the resource endpoint.
@@ -1232,6 +1003,235 @@ try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.updateCouponSubcodes(
+  couponId,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# List Coupons for Product Family
+
+List coupons for a specific Product Family in a Site.
+
+If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+
+```ts
+async listCouponsForProductFamily(
+  productFamilyId: number,
+  page?: number,
+  perPage?: number,
+  filterDateField?: BasicDateField,
+  filterEndDate?: string,
+  filterEndDatetime?: string,
+  filterStartDate?: string,
+  filterStartDatetime?: string,
+  filterIds?: number[],
+  filterCodes?: string[],
+  currencyPrices?: boolean,
+  filterUseSiteExchangeRate?: boolean,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse[]>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. |
+| `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[date_field]=2011-12-15`. |
+| `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `?filter[end_datetime]=2011-12-1T10:15:30+01:00`. |
+| `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-17`. |
+| `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
+| `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching coupons with matching id based on provided values. Use in query `filter[ids]=1,2,3`. |
+| `filterCodes` | `string[] \| undefined` | Query, Optional | Allows fetching coupons with matching codes based on provided values. Use in query `filter[codes]=free,free_trial`. |
+| `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
+| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CouponResponse[]`](../../doc/models/coupon-response.md)
+
+## Example Usage
+
+```ts
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  productFamilyId: 140,
+  page: 2,
+  perPage: 50,
+  currencyPrices: true
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await couponsController.listCouponsForProductFamily(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "coupon": {
+      "id": 999999,
+      "name": "50% coupon",
+      "code": "50PERCENT",
+      "description": "50 PERCENT OFF",
+      "amount_in_cents": null,
+      "product_family_id": 527890,
+      "created_at": "2016-10-21T17:02:08-04:00",
+      "updated_at": "2016-10-21T17:06:11-04:00",
+      "start_date": "2016-10-21T17:02:08-04:00",
+      "end_date": null,
+      "percentage": "50",
+      "recurring": true,
+      "duration_period_count": null,
+      "duration_interval": 1,
+      "duration_interval_unit": "day",
+      "allow_negative_balance": true,
+      "archived_at": null,
+      "conversion_limit": "100",
+      "stackable": false,
+      "compounding_strategy": "compound",
+      "coupon_restrictions": [],
+      "use_site_exchange_rate": true
+    }
+  },
+  {
+    "coupon": {
+      "id": 123456,
+      "name": "100% coupon",
+      "code": "100PERCENT",
+      "description": "100 PERCENT OFF",
+      "amount_in_cents": null,
+      "product_family_id": 527890,
+      "created_at": "2016-10-21T17:02:08-04:00",
+      "updated_at": "2016-10-21T17:06:11-04:00",
+      "start_date": "2016-10-21T17:02:08-04:00",
+      "end_date": null,
+      "percentage": "50",
+      "recurring": true,
+      "duration_period_count": null,
+      "duration_interval": 1,
+      "duration_interval_unit": "day",
+      "allow_negative_balance": true,
+      "archived_at": null,
+      "conversion_limit": "100",
+      "stackable": false,
+      "compounding_strategy": "compound",
+      "coupon_restrictions": [],
+      "use_site_exchange_rate": true
+    }
+  },
+  {
+    "coupon": {
+      "id": 888888,
+      "name": "25% coupon",
+      "code": "25PERCENT",
+      "description": "25 PERCENT OFF",
+      "amount_in_cents": null,
+      "product_family_id": 527890,
+      "created_at": "2016-10-21T17:02:08-04:00",
+      "updated_at": "2016-10-21T17:06:11-04:00",
+      "start_date": "2016-10-21T17:02:08-04:00",
+      "end_date": null,
+      "percentage": "25",
+      "recurring": true,
+      "duration_period_count": null,
+      "duration_interval": 1,
+      "duration_interval_unit": "day",
+      "allow_negative_balance": true,
+      "archived_at": null,
+      "conversion_limit": "100",
+      "stackable": false,
+      "compounding_strategy": "compound",
+      "coupon_restrictions": [
+        {
+          "id": 37,
+          "item_type": "Component",
+          "item_id": 519,
+          "name": "test",
+          "handle": null
+        }
+      ],
+      "use_site_exchange_rate": true
+    }
+  }
+]
+```
+
+
+# Update Coupon Currency Prices
+
+This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
+
+Currency pricing for coupons must mirror the setup of the primary coupon pricing - if the primary coupon is percentage based, you will not be able to define pricing in non-primary currencies.
+
+```ts
+async updateCouponCurrencyPrices(
+  couponId: number,
+  body?: CouponCurrencyRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponCurrencyResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `couponId` | `number` | Template, Required | The Chargify id of the coupon |
+| `body` | [`CouponCurrencyRequest \| undefined`](../../doc/models/coupon-currency-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md)
+
+## Example Usage
+
+```ts
+const couponId = 162;
+
+const body: CouponCurrencyRequest = {
+  currencyPrices: [
+    {
+      currency: 'EUR',
+      price: 10,
+    },
+    {
+      currency: 'GBP',
+      price: 9,
+    }
+  ],
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await couponsController.updateCouponCurrencyPrices(
   couponId,
   body
 );

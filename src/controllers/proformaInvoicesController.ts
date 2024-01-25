@@ -6,8 +6,10 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ErrorMapResponseError } from '../errors/errorMapResponseError';
 import {
   ProformaBadRequestErrorResponseError,
 } from '../errors/proformaBadRequestErrorResponseError';
@@ -38,31 +40,75 @@ import { BaseController } from './baseController';
 
 export class ProformaInvoicesController extends BaseController {
   /**
-   * This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will
-   * return a 201 with no message, or a 422 with any errors. To find and view the new consolidated
-   * proforma invoice, you may poll the subscription group listing for proforma invoices; only one
-   * consolidated proforma invoice may be created per group at a time.
-   *
-   * If the information becomes outdated, simply void the old consolidated proforma invoice and generate
-   * a new one.
+   * This endpoint will void a proforma invoice that has the status "draft".
    *
    * ## Restrictions
    *
-   * Proforma invoices are only available on Relationship Invoicing sites. To create a proforma invoice,
-   * the subscription must not be prepaid, and must be in a live state.
+   * Proforma invoices are only available on Relationship Invoicing sites.
    *
-   * @param uid The uid of the subscription group
+   * Only proforma invoices that have the appropriate status may be reopened. If the invoice identified
+   * by {uid} does not have the appropriate status, the response will have HTTP status code 422 and an
+   * error message.
+   *
+   * A reason for the void operation is required to be included in the request body. If one is not
+   * provided, the response will have HTTP status code 422 and an error message.
+   *
+   * @param proformaInvoiceUid   The uid of the proforma invoice
+   * @param body
    * @return Response from the API call
    */
-  async createConsolidatedProformaInvoice(
-    uid: string,
+  async voidProformaInvoice(
+    proformaInvoiceUid: string,
+    body?: VoidInvoiceRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
+  ): Promise<ApiResponse<ProformaInvoice>> {
     const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
+    const mapped = req.prepareArgs({
+      proformaInvoiceUid: [proformaInvoiceUid, string()],
+      body: [body, optional(voidInvoiceRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}/void.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
+    return req.callAsJson(proformaInvoiceSchema, requestOptions);
+  }
+
+  /**
+   * This endpoint is only available for Relationship Invoicing sites. It cannot be used to create
+   * consolidated proforma invoices or preview prepaid subscriptions.
+   *
+   * Create a proforma invoice to preview costs before a subscription's signup. Like other proforma
+   * invoices, it can be emailed to the customer, voided, and publicly viewed on the chargifypay domain.
+   *
+   * Pass a payload that resembles a subscription create or signup preview request. For example, you can
+   * specify components, coupons/a referral, offers, custom pricing, and an existing customer or payment
+   * profile to populate a shipping or billing address.
+   *
+   * A product and customer first name, last name, and email are the minimum requirements. We recommend
+   * associating the proforma invoice with a customer_id to easily find their proforma invoices, since
+   * the subscription_id will always be blank.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async createSignupProformaInvoice(
+    body?: CreateSubscriptionRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProformaInvoice>> {
+    const req = this.createRequest(
+      'POST',
+      '/subscriptions/proforma_invoices.json'
+    );
+    const mapped = req.prepareArgs({
+      body: [body, optional(createSubscriptionRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
   /**
@@ -83,29 +129,6 @@ export class ProformaInvoicesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(proformaInvoiceSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to read the details of an existing proforma invoice.
-   *
-   * ## Restrictions
-   *
-   * Proforma invoices are only available on Relationship Invoicing sites.
-   *
-   * @param proformaInvoiceUid   The uid of the proforma invoice
-   * @return Response from the API call
-   */
-  async readProformaInvoice(
-    proformaInvoiceUid: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoice>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      proformaInvoiceUid: [proformaInvoiceUid, number()],
-    });
-    req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
@@ -135,6 +158,29 @@ export class ProformaInvoicesController extends BaseController {
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(proformaInvoiceSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to read the details of an existing proforma invoice.
+   *
+   * ## Restrictions
+   *
+   * Proforma invoices are only available on Relationship Invoicing sites.
+   *
+   * @param proformaInvoiceUid   The uid of the proforma invoice
+   * @return Response from the API call
+   */
+  async readProformaInvoice(
+    proformaInvoiceUid: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProformaInvoice>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      proformaInvoiceUid: [proformaInvoiceUid, number()],
+    });
+    req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -232,39 +278,31 @@ export class ProformaInvoicesController extends BaseController {
   }
 
   /**
-   * This endpoint will void a proforma invoice that has the status "draft".
+   * This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will
+   * return a 201 with no message, or a 422 with any errors. To find and view the new consolidated
+   * proforma invoice, you may poll the subscription group listing for proforma invoices; only one
+   * consolidated proforma invoice may be created per group at a time.
+   *
+   * If the information becomes outdated, simply void the old consolidated proforma invoice and generate
+   * a new one.
    *
    * ## Restrictions
    *
-   * Proforma invoices are only available on Relationship Invoicing sites.
+   * Proforma invoices are only available on Relationship Invoicing sites. To create a proforma invoice,
+   * the subscription must not be prepaid, and must be in a live state.
    *
-   * Only proforma invoices that have the appropriate status may be reopened. If the invoice identified
-   * by {uid} does not have the appropriate status, the response will have HTTP status code 422 and an
-   * error message.
-   *
-   * A reason for the void operation is required to be included in the request body. If one is not
-   * provided, the response will have HTTP status code 422 and an error message.
-   *
-   * @param proformaInvoiceUid   The uid of the proforma invoice
-   * @param body
+   * @param uid The uid of the subscription group
    * @return Response from the API call
    */
-  async voidProformaInvoice(
-    proformaInvoiceUid: string,
-    body?: VoidInvoiceRequest,
+  async createConsolidatedProformaInvoice(
+    uid: string,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoice>> {
+  ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      proformaInvoiceUid: [proformaInvoiceUid, string()],
-      body: [body, optional(voidInvoiceRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}/void.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(proformaInvoiceSchema, requestOptions);
+    return req.call(requestOptions);
   }
 
   /**
@@ -299,42 +337,6 @@ export class ProformaInvoicesController extends BaseController {
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(proformaInvoicePreviewSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint is only available for Relationship Invoicing sites. It cannot be used to create
-   * consolidated proforma invoices or preview prepaid subscriptions.
-   *
-   * Create a proforma invoice to preview costs before a subscription's signup. Like other proforma
-   * invoices, it can be emailed to the customer, voided, and publicly viewed on the chargifypay domain.
-   *
-   * Pass a payload that resembles a subscription create or signup preview request. For example, you can
-   * specify components, coupons/a referral, offers, custom pricing, and an existing customer or payment
-   * profile to populate a shipping or billing address.
-   *
-   * A product and customer first name, last name, and email are the minimum requirements. We recommend
-   * associating the proforma invoice with a customer_id to easily find their proforma invoices, since
-   * the subscription_id will always be blank.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async createSignupProformaInvoice(
-    body?: CreateSubscriptionRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoice>> {
-    const req = this.createRequest(
-      'POST',
-      '/subscriptions/proforma_invoices.json'
-    );
-    const mapped = req.prepareArgs({
-      body: [body, optional(createSubscriptionRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
   /**
@@ -376,7 +378,7 @@ export class ProformaInvoicesController extends BaseController {
     req.query('include=next_proforma_invoice', mapped.includeNextProformaInvoice);
     req.json(mapped.body);
     req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(signupProformaPreviewResponseSchema, requestOptions);
   }
 }

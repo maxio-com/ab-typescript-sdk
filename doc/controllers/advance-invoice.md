@@ -11,8 +11,8 @@ const advanceInvoiceController = new AdvanceInvoiceController(client);
 ## Methods
 
 * [Issue Advance Invoice](../../doc/controllers/advance-invoice.md#issue-advance-invoice)
-* [Read Advance Invoice](../../doc/controllers/advance-invoice.md#read-advance-invoice)
 * [Void Advance Invoice](../../doc/controllers/advance-invoice.md#void-advance-invoice)
+* [Read Advance Invoice](../../doc/controllers/advance-invoice.md#read-advance-invoice)
 
 
 # Issue Advance Invoice
@@ -78,56 +78,6 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Read Advance Invoice
-
-Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.
-
-```ts
-async readAdvanceInvoice(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Invoice>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await advanceInvoiceController.readAdvanceInvoice(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-
-
 # Void Advance Invoice
 
 Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
@@ -162,6 +112,56 @@ try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await advanceInvoiceController.voidAdvanceInvoice(subscriptionId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+
+
+# Read Advance Invoice
+
+Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.
+
+```ts
+async readAdvanceInvoice(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await advanceInvoiceController.readAdvanceInvoice(subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

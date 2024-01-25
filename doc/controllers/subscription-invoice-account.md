@@ -10,56 +10,12 @@ const subscriptionInvoiceAccountController = new SubscriptionInvoiceAccountContr
 
 ## Methods
 
-* [Read Account Balances](../../doc/controllers/subscription-invoice-account.md#read-account-balances)
 * [Create Prepayment](../../doc/controllers/subscription-invoice-account.md#create-prepayment)
+* [Read Account Balances](../../doc/controllers/subscription-invoice-account.md#read-account-balances)
 * [List Prepayments](../../doc/controllers/subscription-invoice-account.md#list-prepayments)
 * [Issue Service Credit](../../doc/controllers/subscription-invoice-account.md#issue-service-credit)
 * [Deduct Service Credit](../../doc/controllers/subscription-invoice-account.md#deduct-service-credit)
 * [Refund Prepayment](../../doc/controllers/subscription-invoice-account.md#refund-prepayment)
-
-
-# Read Account Balances
-
-Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
-
-```ts
-async readAccountBalances(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<AccountBalances>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`AccountBalances`](../../doc/models/account-balances.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.readAccountBalances(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
 
 
 # Create Prepayment
@@ -137,6 +93,50 @@ try {
     "created_at": "2020-07-31T05:52:32-04:00",
     "starting_balance_in_cents": 0,
     "ending_balance_in_cents": -10000
+  }
+}
+```
+
+
+# Read Account Balances
+
+Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
+
+```ts
+async readAccountBalances(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<AccountBalances>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`AccountBalances`](../../doc/models/account-balances.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.readAccountBalances(subscriptionId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
   }
 }
 ```

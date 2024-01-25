@@ -125,6 +125,79 @@ export class WebhooksController extends BaseController {
   }
 
   /**
+   * The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions
+   * (events) to it.
+   *
+   * You can check available events here.
+   * [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-
+   * Reference#example-payloads)
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async createEndpoint(
+    body?: UpdateEndpointRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<EndpointResponse>> {
+    const req = this.createRequest('POST', '/endpoints.json');
+    const mapped = req.prepareArgs({
+      body: [body, optional(updateEndpointRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(endpointResponseSchema, requestOptions);
+  }
+
+  /**
+   * You can update an Endpoint via the API with a PUT request to the resource endpoint.
+   *
+   * You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.
+   * Check available [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404448450317-
+   * Webhooks#configure-webhook-url).
+   *
+   * Always send a complete list of events which you want subscribe/watch.
+   * Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end
+   * with unsubscribe from all events.
+   *
+   * If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the
+   * specific event key.
+   *
+   * @param endpointId   The Chargify id for the endpoint that should be updated
+   * @param body
+   * @return Response from the API call
+   */
+  async updateEndpoint(
+    endpointId: number,
+    body?: UpdateEndpointRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<EndpointResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      endpointId: [endpointId, number()],
+      body: [body, optional(updateEndpointRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/endpoints/${mapped.endpointId}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(endpointResponseSchema, requestOptions);
+  }
+
+  /**
+   * This method returns created endpoints for site.
+   *
+   * @return Response from the API call
+   */
+  async listEndpoints(
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Endpoint[]>> {
+    const req = this.createRequest('GET', '/endpoints.json');
+    return req.callAsJson(array(endpointSchema), requestOptions);
+  }
+
+  /**
    * This method allows you to enable webhooks via API for your site
    *
    * @param body
@@ -163,78 +236,5 @@ export class WebhooksController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     return req.callAsJson(replayWebhooksResponseSchema, requestOptions);
-  }
-
-  /**
-   * The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions
-   * (events) to it.
-   *
-   * You can check available events here.
-   * [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-
-   * Reference#example-payloads)
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async createEndpoint(
-    body?: UpdateEndpointRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<EndpointResponse>> {
-    const req = this.createRequest('POST', '/endpoints.json');
-    const mapped = req.prepareArgs({
-      body: [body, optional(updateEndpointRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(endpointResponseSchema, requestOptions);
-  }
-
-  /**
-   * This method returns created endpoints for site.
-   *
-   * @return Response from the API call
-   */
-  async listEndpoints(
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Endpoint[]>> {
-    const req = this.createRequest('GET', '/endpoints.json');
-    return req.callAsJson(array(endpointSchema), requestOptions);
-  }
-
-  /**
-   * You can update an Endpoint via the API with a PUT request to the resource endpoint.
-   *
-   * You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.
-   * Check available [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404448450317-
-   * Webhooks#configure-webhook-url).
-   *
-   * Always send a complete list of events which you want subscribe/watch.
-   * Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end
-   * with unsubscribe from all events.
-   *
-   * If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the
-   * specific event key.
-   *
-   * @param endpointId   The Chargify id for the endpoint that should be updated
-   * @param body
-   * @return Response from the API call
-   */
-  async updateEndpoint(
-    endpointId: number,
-    body?: UpdateEndpointRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<EndpointResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      endpointId: [endpointId, number()],
-      body: [body, optional(updateEndpointRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/endpoints/${mapped.endpointId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(endpointResponseSchema, requestOptions);
   }
 }

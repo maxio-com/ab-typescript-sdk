@@ -13,7 +13,10 @@ import {
   Schema,
   string,
 } from '../schema';
-import { AppliedCreditNote, appliedCreditNoteSchema } from './appliedCreditNote';
+import {
+  AppliedCreditNoteData,
+  appliedCreditNoteDataSchema,
+} from './appliedCreditNoteData';
 
 /** Example schema for an `apply_credit_note` event */
 export interface ApplyCreditNoteEventData {
@@ -36,7 +39,7 @@ export interface ApplyCreditNoteEventData {
   /** Shows whether it was applied to consolidated invoice or not */
   consolidatedInvoice?: boolean;
   /** List of credit notes applied to children invoices (if consolidated invoice) */
-  appliedCreditNotes?: AppliedCreditNote[];
+  appliedCreditNotes?: AppliedCreditNoteData[];
 }
 
 export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = object(
@@ -52,7 +55,7 @@ export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = 
     consolidatedInvoice: ['consolidated_invoice', optional(boolean())],
     appliedCreditNotes: [
       'applied_credit_notes',
-      optional(array(lazy(() => appliedCreditNoteSchema))),
+      optional(array(lazy(() => appliedCreditNoteDataSchema))),
     ],
   }
 );

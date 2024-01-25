@@ -28,6 +28,63 @@ import { BaseController } from './baseController';
 
 export class ReasonCodesController extends BaseController {
   /**
+   * This method gives a merchant the option to update an existing reason code for a given site.
+   *
+   * @param reasonCodeId   The Chargify id of the reason code
+   * @param body
+   * @return Response from the API call
+   */
+  async updateReasonCode(
+    reasonCodeId: number,
+    body?: UpdateReasonCodeRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ReasonCodeResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      reasonCodeId: [reasonCodeId, number()],
+      body: [body, optional(updateReasonCodeRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    return req.callAsJson(reasonCodeResponseSchema, requestOptions);
+  }
+
+  /**
+   * This method gives a merchant the option to retrieve a list of all of the current churn codes for a
+   * given site.
+   *
+   * @param page     Result records are organized in pages. By default, the first page of results is
+   *                           displayed. The page parameter specifies a page number of results to fetch. You can start
+   *                           navigating through the pages to consume the results. You do this by passing in a page
+   *                           parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no
+   *                           results to return, then an empty result set will be returned. Use in query `page=1`.
+   * @param perPage  This parameter indicates how many records to fetch in each request. Default value is 20.
+   *                           The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+   *                           Use in query `per_page=200`.
+   * @return Response from the API call
+   */
+  async listReasonCodes({
+    page,
+    perPage,
+  }: {
+    page?: number,
+    perPage?: number,
+  },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ReasonCodeResponse[]>> {
+    const req = this.createRequest('GET', '/reason_codes.json');
+    const mapped = req.prepareArgs({
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+    });
+    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage);
+    return req.callAsJson(array(reasonCodeResponseSchema), requestOptions);
+  }
+
+  /**
    * # Reason Codes Intro
    *
    * ReasonCodes are a way to gain a high level view of why your customers are cancelling the subcription
@@ -66,39 +123,6 @@ export class ReasonCodesController extends BaseController {
   }
 
   /**
-   * This method gives a merchant the option to retrieve a list of all of the current churn codes for a
-   * given site.
-   *
-   * @param page     Result records are organized in pages. By default, the first page of results is
-   *                           displayed. The page parameter specifies a page number of results to fetch. You can start
-   *                           navigating through the pages to consume the results. You do this by passing in a page
-   *                           parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no
-   *                           results to return, then an empty result set will be returned. Use in query `page=1`.
-   * @param perPage  This parameter indicates how many records to fetch in each request. Default value is 20.
-   *                           The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-   *                           Use in query `per_page=200`.
-   * @return Response from the API call
-   */
-  async listReasonCodes({
-    page,
-    perPage,
-  }: {
-    page?: number,
-    perPage?: number,
-  },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ReasonCodeResponse[]>> {
-    const req = this.createRequest('GET', '/reason_codes.json');
-    const mapped = req.prepareArgs({
-      page: [page, optional(number())],
-      perPage: [perPage, optional(number())],
-    });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    return req.callAsJson(array(reasonCodeResponseSchema), requestOptions);
-  }
-
-  /**
    * This method gives a merchant the option to retrieve a list of a particular code for a given Site by
    * providing the unique numerical ID of the code.
    *
@@ -111,30 +135,6 @@ export class ReasonCodesController extends BaseController {
   ): Promise<ApiResponse<ReasonCodeResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ reasonCodeId: [reasonCodeId, number()] });
-    req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(reasonCodeResponseSchema, requestOptions);
-  }
-
-  /**
-   * This method gives a merchant the option to update an existing reason code for a given site.
-   *
-   * @param reasonCodeId   The Chargify id of the reason code
-   * @param body
-   * @return Response from the API call
-   */
-  async updateReasonCode(
-    reasonCodeId: number,
-    body?: UpdateReasonCodeRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ReasonCodeResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      reasonCodeId: [reasonCodeId, number()],
-      body: [body, optional(updateReasonCodeRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);

@@ -64,47 +64,6 @@ export class APIExportsController extends BaseController {
   }
 
   /**
-   * This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to
-   * pagination in order to control responses from the server.
-   *
-   * Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&page=1`.
-   *
-   * @param batchId  Id of a Batch Job.
-   * @param perPage  This parameter indicates how many records to fetch in each request.  Default value is
-   *                           100.  The maximum allowed values is 10000; any per_page value over 10000 will be changed
-   *                           to 10000.
-   * @param page     Result records are organized in pages. By default, the first page of results is
-   *                           displayed. The page parameter specifies a page number of results to fetch. You can start
-   *                           navigating through the pages to consume the results. You do this by passing in a page
-   *                           parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no
-   *                           results to return, then an empty result set will be returned. Use in query `page=1`.
-   * @return Response from the API call
-   */
-  async listExportedInvoices({
-    batchId,
-    perPage,
-    page,
-  }: {
-    batchId: string,
-    perPage?: number,
-    page?: number,
-  },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Invoice[]>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      batchId: [batchId, string()],
-      perPage: [perPage, optional(number())],
-      page: [page, optional(number())],
-    });
-    req.query('per_page', mapped.perPage);
-    req.query('page', mapped.page);
-    req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(array(invoiceSchema), requestOptions);
-  }
-
-  /**
    * This API returns an array of exported subscriptions for a provided `batch_id`. Pay close attention
    * to pagination in order to control responses from the server.
    *
@@ -147,6 +106,47 @@ export class APIExportsController extends BaseController {
   }
 
   /**
+   * This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to
+   * pagination in order to control responses from the server.
+   *
+   * Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&page=1`.
+   *
+   * @param batchId  Id of a Batch Job.
+   * @param perPage  This parameter indicates how many records to fetch in each request.  Default value is
+   *                           100.  The maximum allowed values is 10000; any per_page value over 10000 will be changed
+   *                           to 10000.
+   * @param page     Result records are organized in pages. By default, the first page of results is
+   *                           displayed. The page parameter specifies a page number of results to fetch. You can start
+   *                           navigating through the pages to consume the results. You do this by passing in a page
+   *                           parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no
+   *                           results to return, then an empty result set will be returned. Use in query `page=1`.
+   * @return Response from the API call
+   */
+  async listExportedInvoices({
+    batchId,
+    perPage,
+    page,
+  }: {
+    batchId: string,
+    perPage?: number,
+    page?: number,
+  },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Invoice[]>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      batchId: [batchId, string()],
+      perPage: [perPage, optional(number())],
+      page: [page, optional(number())],
+    });
+    req.query('per_page', mapped.perPage);
+    req.query('page', mapped.page);
+    req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}/rows.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    return req.callAsJson(array(invoiceSchema), requestOptions);
+  }
+
+  /**
    * This API creates a proforma invoices export and returns a batchjob object.
    *
    * It is only available for Relationship Invoicing architecture.
@@ -162,6 +162,40 @@ export class APIExportsController extends BaseController {
     );
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(batchJobResponseSchema, requestOptions);
+  }
+
+  /**
+   * This API returns a batchjob object for subscriptions export.
+   *
+   * @param batchId  Id of a Batch Job.
+   * @return Response from the API call
+   */
+  async readSubscriptionsExport(
+    batchId: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<BatchJobResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ batchId: [batchId, string()] });
+    req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    return req.callAsJson(batchJobResponseSchema, requestOptions);
+  }
+
+  /**
+   * This API returns a batchjob object for proforma invoices export.
+   *
+   * @param batchId  Id of a Batch Job.
+   * @return Response from the API call
+   */
+  async readProformaInvoicesExport(
+    batchId: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<BatchJobResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ batchId: [batchId, string()] });
+    req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
 
@@ -193,23 +227,6 @@ export class APIExportsController extends BaseController {
   }
 
   /**
-   * This API returns a batchjob object for proforma invoices export.
-   *
-   * @param batchId  Id of a Batch Job.
-   * @return Response from the API call
-   */
-  async readProformaInvoicesExport(
-    batchId: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<BatchJobResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ batchId: [batchId, string()] });
-    req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(batchJobResponseSchema, requestOptions);
-  }
-
-  /**
    * This API returns a batchjob object for invoices export.
    *
    * @param batchId  Id of a Batch Job.
@@ -222,23 +239,6 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(batchJobResponseSchema, requestOptions);
-  }
-
-  /**
-   * This API returns a batchjob object for subscriptions export.
-   *
-   * @param batchId  Id of a Batch Job.
-   * @return Response from the API call
-   */
-  async readSubscriptionsExport(
-    batchId: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<BatchJobResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ batchId: [batchId, string()] });
-    req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }

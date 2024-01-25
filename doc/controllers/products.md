@@ -10,330 +10,12 @@ const productsController = new ProductsController(client);
 
 ## Methods
 
-* [Create Product](../../doc/controllers/products.md#create-product)
-* [Read Product](../../doc/controllers/products.md#read-product)
-* [Update Product](../../doc/controllers/products.md#update-product)
 * [Archive Product](../../doc/controllers/products.md#archive-product)
 * [Read Product by Handle](../../doc/controllers/products.md#read-product-by-handle)
 * [List Products](../../doc/controllers/products.md#list-products)
-
-
-# Create Product
-
-Use this method to create a product within your Chargify site.
-
-+ [Products Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709)
-+ [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
-
-```ts
-async createProduct(
-  productFamilyId: number,
-  body?: CreateOrUpdateProductRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the product belongs |
-| `body` | [`CreateOrUpdateProductRequest \| undefined`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ProductResponse`](../../doc/models/product-response.md)
-
-## Example Usage
-
-```ts
-const productFamilyId = 140;
-
-const body: CreateOrUpdateProductRequest = {
-  product: {
-    name: 'Gold Plan',
-    description: 'This is our gold plan.',
-    priceInCents: BigInt(1000),
-    interval: 1,
-    intervalUnit: IntervalUnit.Month,
-    handle: 'gold',
-    accountingCode: '123',
-    requireCreditCard: true,
-    autoCreateSignupPage: true,
-    taxCode: 'D0000000',
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productsController.createProduct(
-  productFamilyId,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product": {
-    "id": 4364984,
-    "name": "Gold Plan",
-    "handle": "gold",
-    "description": "This is our gold plan.",
-    "accounting_code": "123",
-    "request_credit_card": true,
-    "created_at": "2016-11-04T16:31:15-04:00",
-    "updated_at": "2016-11-04T16:31:15-04:00",
-    "price_in_cents": 1000,
-    "interval": 1,
-    "interval_unit": "month",
-    "expiration_interval_unit": null,
-    "initial_charge_in_cents": null,
-    "trial_price_in_cents": null,
-    "trial_interval": null,
-    "trial_interval_unit": null,
-    "archived_at": null,
-    "require_credit_card": true,
-    "return_params": null,
-    "taxable": false,
-    "update_return_url": null,
-    "initial_charge_after_trial": false,
-    "version_number": 1,
-    "update_return_params": null,
-    "product_family": {
-      "id": 527890,
-      "name": "Acme Projects",
-      "description": "",
-      "handle": "billing-plans",
-      "accounting_code": null
-    },
-    "public_signup_pages": [
-      {
-        "id": 301078,
-        "return_url": null,
-        "return_params": null,
-        "url": "https://general-goods.chargify.com/subscribe/ftgbpq7f5qpr/gold"
-      }
-    ],
-    "product_price_point_name": "Default"
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
-# Read Product
-
-This endpoint allows you to read the current details of a product that you've created in Chargify.
-
-```ts
-async readProduct(
-  productId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ProductResponse`](../../doc/models/product-response.md)
-
-## Example Usage
-
-```ts
-const productId = 202;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productsController.readProduct(productId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product": {
-    "id": 4535635,
-    "name": "Paid Annual Seats",
-    "handle": "paid-annual-seats",
-    "description": "Paid annual seats for our commercial enterprise product",
-    "accounting_code": "paid-annual-seats",
-    "request_credit_card": true,
-    "expiration_interval": 1,
-    "expiration_interval_unit": "day",
-    "created_at": "2017-08-25T10:25:31-05:00",
-    "updated_at": "2018-01-16T12:58:04-06:00",
-    "price_in_cents": 10000,
-    "interval": 12,
-    "interval_unit": "month",
-    "initial_charge_in_cents": 4900,
-    "trial_price_in_cents": 1000,
-    "trial_interval": 14,
-    "trial_interval_unit": "day",
-    "archived_at": null,
-    "require_credit_card": true,
-    "return_params": "id={subscription_id}&ref={customer_reference}",
-    "taxable": true,
-    "update_return_url": "http://www.example.com",
-    "tax_code": "D0000000",
-    "initial_charge_after_trial": false,
-    "version_number": 4,
-    "update_return_params": "id={subscription_id}&ref={customer_reference}",
-    "product_family": {
-      "id": 1025627,
-      "name": "Acme Products",
-      "description": "",
-      "handle": "acme-products",
-      "accounting_code": null
-    },
-    "public_signup_pages": [],
-    "product_price_point_name": "Default"
-  }
-}
-```
-
-
-# Update Product
-
-Use this method to change aspects of an existing product.
-
-### Input Attributes Update Notes
-
-+ `update_return_params` The parameters we will append to your `update_return_url`. See Return URLs and Parameters
-
-### Product Price Point
-
-Updating a product using this endpoint will create a new price point and set it as the default price point for this product. If you should like to update an existing product price point, that must be done separately.
-
-```ts
-async updateProduct(
-  productId: number,
-  body?: CreateOrUpdateProductRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product |
-| `body` | [`CreateOrUpdateProductRequest \| undefined`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ProductResponse`](../../doc/models/product-response.md)
-
-## Example Usage
-
-```ts
-const productId = 202;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productsController.updateProduct(productId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product": {
-    "id": 4365034,
-    "name": "Platinum Plan",
-    "handle": "platinum",
-    "description": "This is our platinum plan.",
-    "accounting_code": "123",
-    "request_credit_card": true,
-    "created_at": "2016-11-04T16:34:29-04:00",
-    "updated_at": "2016-11-04T16:37:11-04:00",
-    "price_in_cents": 1000,
-    "interval": 1,
-    "interval_unit": "month",
-    "initial_charge_in_cents": null,
-    "trial_price_in_cents": null,
-    "trial_interval": null,
-    "trial_interval_unit": null,
-    "archived_at": null,
-    "require_credit_card": true,
-    "return_params": null,
-    "taxable": false,
-    "update_return_url": null,
-    "initial_charge_after_trial": false,
-    "version_number": 1,
-    "update_return_params": null,
-    "product_family": {
-      "id": 527890,
-      "name": "Acme Projects",
-      "description": "",
-      "handle": "billing-plans",
-      "accounting_code": null
-    },
-    "public_signup_pages": [
-      {
-        "id": 301079,
-        "return_url": null,
-        "return_params": null,
-        "url": "https://general-goods.chargify.com/subscribe/wgyd96tb5pj9/platinum"
-      }
-    ],
-    "product_price_point_name": "Original"
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+* [Read Product](../../doc/controllers/products.md#read-product)
+* [Update Product](../../doc/controllers/products.md#update-product)
+* [Create Product](../../doc/controllers/products.md#create-product)
 
 
 # Archive Product
@@ -671,4 +353,322 @@ try {
   }
 ]
 ```
+
+
+# Read Product
+
+This endpoint allows you to read the current details of a product that you've created in Chargify.
+
+```ts
+async readProduct(
+  productId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productId` | `number` | Template, Required | The Chargify id of the product |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ProductResponse`](../../doc/models/product-response.md)
+
+## Example Usage
+
+```ts
+const productId = 202;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await productsController.readProduct(productId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product": {
+    "id": 4535635,
+    "name": "Paid Annual Seats",
+    "handle": "paid-annual-seats",
+    "description": "Paid annual seats for our commercial enterprise product",
+    "accounting_code": "paid-annual-seats",
+    "request_credit_card": true,
+    "expiration_interval": 1,
+    "expiration_interval_unit": "day",
+    "created_at": "2017-08-25T10:25:31-05:00",
+    "updated_at": "2018-01-16T12:58:04-06:00",
+    "price_in_cents": 10000,
+    "interval": 12,
+    "interval_unit": "month",
+    "initial_charge_in_cents": 4900,
+    "trial_price_in_cents": 1000,
+    "trial_interval": 14,
+    "trial_interval_unit": "day",
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": "id={subscription_id}&ref={customer_reference}",
+    "taxable": true,
+    "update_return_url": "http://www.example.com",
+    "tax_code": "D0000000",
+    "initial_charge_after_trial": false,
+    "version_number": 4,
+    "update_return_params": "id={subscription_id}&ref={customer_reference}",
+    "product_family": {
+      "id": 1025627,
+      "name": "Acme Products",
+      "description": "",
+      "handle": "acme-products",
+      "accounting_code": null
+    },
+    "public_signup_pages": [],
+    "product_price_point_name": "Default"
+  }
+}
+```
+
+
+# Update Product
+
+Use this method to change aspects of an existing product.
+
+### Input Attributes Update Notes
+
++ `update_return_params` The parameters we will append to your `update_return_url`. See Return URLs and Parameters
+
+### Product Price Point
+
+Updating a product using this endpoint will create a new price point and set it as the default price point for this product. If you should like to update an existing product price point, that must be done separately.
+
+```ts
+async updateProduct(
+  productId: number,
+  body?: CreateOrUpdateProductRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productId` | `number` | Template, Required | The Chargify id of the product |
+| `body` | [`CreateOrUpdateProductRequest \| undefined`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ProductResponse`](../../doc/models/product-response.md)
+
+## Example Usage
+
+```ts
+const productId = 202;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await productsController.updateProduct(productId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product": {
+    "id": 4365034,
+    "name": "Platinum Plan",
+    "handle": "platinum",
+    "description": "This is our platinum plan.",
+    "accounting_code": "123",
+    "request_credit_card": true,
+    "created_at": "2016-11-04T16:34:29-04:00",
+    "updated_at": "2016-11-04T16:37:11-04:00",
+    "price_in_cents": 1000,
+    "interval": 1,
+    "interval_unit": "month",
+    "initial_charge_in_cents": null,
+    "trial_price_in_cents": null,
+    "trial_interval": null,
+    "trial_interval_unit": null,
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": null,
+    "taxable": false,
+    "update_return_url": null,
+    "initial_charge_after_trial": false,
+    "version_number": 1,
+    "update_return_params": null,
+    "product_family": {
+      "id": 527890,
+      "name": "Acme Projects",
+      "description": "",
+      "handle": "billing-plans",
+      "accounting_code": null
+    },
+    "public_signup_pages": [
+      {
+        "id": 301079,
+        "return_url": null,
+        "return_params": null,
+        "url": "https://general-goods.chargify.com/subscribe/wgyd96tb5pj9/platinum"
+      }
+    ],
+    "product_price_point_name": "Original"
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Create Product
+
+Use this method to create a product within your Chargify site.
+
++ [Products Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709)
++ [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
+
+```ts
+async createProduct(
+  productFamilyId: number,
+  body?: CreateOrUpdateProductRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the product belongs |
+| `body` | [`CreateOrUpdateProductRequest \| undefined`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ProductResponse`](../../doc/models/product-response.md)
+
+## Example Usage
+
+```ts
+const productFamilyId = 140;
+
+const body: CreateOrUpdateProductRequest = {
+  product: {
+    name: 'Gold Plan',
+    description: 'This is our gold plan.',
+    priceInCents: BigInt(1000),
+    interval: 1,
+    intervalUnit: IntervalUnit.Month,
+    handle: 'gold',
+    accountingCode: '123',
+    requireCreditCard: true,
+    autoCreateSignupPage: true,
+    taxCode: 'D0000000',
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await productsController.createProduct(
+  productFamilyId,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product": {
+    "id": 4364984,
+    "name": "Gold Plan",
+    "handle": "gold",
+    "description": "This is our gold plan.",
+    "accounting_code": "123",
+    "request_credit_card": true,
+    "created_at": "2016-11-04T16:31:15-04:00",
+    "updated_at": "2016-11-04T16:31:15-04:00",
+    "price_in_cents": 1000,
+    "interval": 1,
+    "interval_unit": "month",
+    "expiration_interval_unit": null,
+    "initial_charge_in_cents": null,
+    "trial_price_in_cents": null,
+    "trial_interval": null,
+    "trial_interval_unit": null,
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": null,
+    "taxable": false,
+    "update_return_url": null,
+    "initial_charge_after_trial": false,
+    "version_number": 1,
+    "update_return_params": null,
+    "product_family": {
+      "id": 527890,
+      "name": "Acme Projects",
+      "description": "",
+      "handle": "billing-plans",
+      "accounting_code": null
+    },
+    "public_signup_pages": [
+      {
+        "id": 301078,
+        "return_url": null,
+        "return_params": null,
+        "url": "https://general-goods.chargify.com/subscribe/ftgbpq7f5qpr/gold"
+      }
+    ],
+    "product_price_point_name": "Default"
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 

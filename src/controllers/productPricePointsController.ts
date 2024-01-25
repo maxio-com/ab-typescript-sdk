@@ -6,8 +6,10 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ErrorMapResponseError } from '../errors/errorMapResponseError';
 import {
   ProductPricePointErrorResponseError,
 } from '../errors/productPricePointErrorResponseError';
@@ -60,6 +62,10 @@ import {
   CreateProductPricePointRequest,
   createProductPricePointRequestSchema,
 } from '../models/createProductPricePointRequest';
+import {
+  CurrencyPricesResponse,
+  currencyPricesResponseSchema,
+} from '../models/currencyPricesResponse';
 import { IncludeNotNull, includeNotNullSchema } from '../models/includeNotNull';
 import {
   ListProductPricePointsResponse,
@@ -70,10 +76,6 @@ import {
   listProductsPricePointsIncludeSchema,
 } from '../models/listProductsPricePointsInclude';
 import { PricePointType, pricePointTypeSchema } from '../models/pricePointType';
-import {
-  ProductPricePointCurrencyPrice,
-  productPricePointCurrencyPriceSchema,
-} from '../models/productPricePointCurrencyPrice';
 import {
   ProductPricePointResponse,
   productPricePointResponseSchema,
@@ -121,6 +123,281 @@ export class ProductPricePointsController extends BaseController {
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
     req.throwOn(422, ProductPricePointErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to archive a product price point.
+   *
+   * @param productId      The id or handle of the product. When using the
+   *                                                               handle, it must be prefixed with `handle:`
+   * @param pricePointId   The id or handle of the price point. When using the
+   *                                                               handle, it must be prefixed with `handle:`
+   * @return Response from the API call
+   */
+  async archiveProductPricePoint(
+    productId: ArchiveProductPricePointProductId,
+    pricePointId: ArchiveProductPricePointPricePointId,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProductPricePointResponse>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      productId: [productId, archiveProductPricePointProductIdSchema],
+      pricePointId: [pricePointId, archiveProductPricePointPricePointIdSchema],
+    });
+    req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(productPricePointResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to unarchive an archived product price point.
+   *
+   * @param productId      The Chargify id of the product to which the price point belongs
+   * @param pricePointId   The Chargify id of the product price point
+   * @return Response from the API call
+   */
+  async unarchiveProductPricePoint(
+    productId: number,
+    pricePointId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProductPricePointResponse>> {
+    const req = this.createRequest('PATCH');
+    const mapped = req.prepareArgs({
+      productId: [productId, number()],
+      pricePointId: [pricePointId, number()],
+    });
+    req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/unarchive.json`;
+    return req.callAsJson(productPricePointResponseSchema, requestOptions);
+  }
+
+  /**
+   * This method allows retrieval of a list of Products Price Points belonging to a Site.
+   *
+   * @param direction              Controls the order in which results are returned.
+   *                                                                 Use in query `direction=asc`.
+   * @param filterArchivedAt       Allows fetching price points only if archived_at
+   *                                                                 is present or not. Use in query:
+   *                                                                 `filter[archived_at]=not_null`.
+   * @param filterDateField        The type of filter you would like to apply to
+   *                                                                 your search. Use in query:
+   *                                                                 `filter[date_field]=created_at`.
+   * @param filterEndDate          The end date (format YYYY-MM-DD) with which to
+   *                                                                 filter the date_field. Returns price points with a
+   *                                                                 timestamp up to and including 11:59:59PM in your
+   *                                                                 site’s time zone on the date specified.
+   * @param filterEndDatetime      The end date and time (format YYYY-MM-DD HH:MM:
+   *                                                                 SS) with which to filter the date_field. Returns
+   *                                                                 price points with a timestamp at or before exact
+   *                                                                 time provided in query. You can specify timezone
+   *                                                                 in query - otherwise your site's time zone will be
+   *                                                                 used. If provided, this parameter will be used
+   *                                                                 instead of end_date.
+   * @param filterIds              Allows fetching price points with matching id
+   *                                                                 based on provided values. Use in query:
+   *                                                                 `filter[ids]=1,2,3`.
+   * @param filterStartDate        The start date (format YYYY-MM-DD) with which to
+   *                                                                 filter the date_field. Returns price points with a
+   *                                                                 timestamp at or after midnight (12:00:00 AM) in
+   *                                                                 your site’s time zone on the date specified.
+   * @param filterStartDatetime    The start date and time (format YYYY-MM-DD HH:MM:
+   *                                                                 SS) with which to filter the date_field. Returns
+   *                                                                 price points with a timestamp at or after exact
+   *                                                                 time provided in query. You can specify timezone
+   *                                                                 in query - otherwise your site's time zone will be
+   *                                                                 used. If provided, this parameter will be used
+   *                                                                 instead of start_date.
+   * @param filterType             Allows fetching price points with matching type.
+   *                                                                 Use in query: `filter[type]=catalog,custom`.
+   * @param include                Allows including additional data in the response.
+   *                                                                 Use in query: `include=currency_prices`.
+   * @param page                   Result records are organized in pages. By default,
+   *                                                                 the first page of results is displayed. The page
+   *                                                                 parameter specifies a page number of results to
+   *                                                                 fetch. You can start navigating through the pages
+   *                                                                 to consume the results. You do this by passing in
+   *                                                                 a page parameter. Retrieve the next page by adding
+   *                                                                 ?page=2 to the query string. If there are no
+   *                                                                 results to return, then an empty result set will
+   *                                                                 be returned. Use in query `page=1`.
+   * @param perPage                This parameter indicates how many records to
+   *                                                                 fetch in each request. Default value is 20. The
+   *                                                                 maximum allowed values is 200; any per_page value
+   *                                                                 over 200 will be changed to 200. Use in query
+   *                                                                 `per_page=200`.
+   * @return Response from the API call
+   */
+  async listAllProductPricePoints({
+    direction,
+    filterArchivedAt,
+    filterDateField,
+    filterEndDate,
+    filterEndDatetime,
+    filterIds,
+    filterStartDate,
+    filterStartDatetime,
+    filterType,
+    include,
+    page,
+    perPage,
+  }: {
+    direction?: SortingDirection,
+    filterArchivedAt?: IncludeNotNull,
+    filterDateField?: BasicDateField,
+    filterEndDate?: string,
+    filterEndDatetime?: string,
+    filterIds?: number[],
+    filterStartDate?: string,
+    filterStartDatetime?: string,
+    filterType?: PricePointType[],
+    include?: ListProductsPricePointsInclude,
+    page?: number,
+    perPage?: number,
+  },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ListProductPricePointsResponse>> {
+    const req = this.createRequest('GET', '/products_price_points.json');
+    const mapped = req.prepareArgs({
+      direction: [direction, optional(sortingDirectionSchema)],
+      filterArchivedAt: [filterArchivedAt, optional(includeNotNullSchema)],
+      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
+      filterEndDate: [filterEndDate, optional(string())],
+      filterEndDatetime: [filterEndDatetime, optional(string())],
+      filterIds: [filterIds, optional(array(number()))],
+      filterStartDate: [filterStartDate, optional(string())],
+      filterStartDatetime: [filterStartDatetime, optional(string())],
+      filterType: [filterType, optional(array(pricePointTypeSchema))],
+      include: [include, optional(listProductsPricePointsIncludeSchema)],
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+    });
+    req.query('direction', mapped.direction);
+    req.query('filter[archived_at]', mapped.filterArchivedAt);
+    req.query('filter[date_field]', mapped.filterDateField);
+    req.query('filter[end_date]', mapped.filterEndDate);
+    req.query('filter[end_datetime]', mapped.filterEndDatetime);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[start_date]', mapped.filterStartDate);
+    req.query('filter[start_datetime]', mapped.filterStartDatetime);
+    req.query('filter[type]', mapped.filterType, commaPrefix);
+    req.query('include', mapped.include);
+    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
+  }
+
+  /**
+   * This endpoint allows you to update the `price`s of currency prices for a given currency that exists
+   * on the product price point.
+   *
+   * When updating the pricing, it needs to mirror the structure of your primary pricing. If the product
+   * price point defines a trial and/or setup fee, each currency must also define a trial and/or setup
+   * fee.
+   *
+   * Note: Currency Prices are not able to be updated for custom product price points.
+   *
+   * @param productPricePointId    The Chargify id of the product price point
+   * @param body
+   * @return Response from the API call
+   */
+  async updateProductCurrencyPrices(
+    productPricePointId: number,
+    body?: UpdateCurrencyPricesRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CurrencyPricesResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      productPricePointId: [productPricePointId, number()],
+      body: [body, optional(updateCurrencyPricesRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(currencyPricesResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to make a product price point the default for the product.
+   *
+   * Note: Custom product price points are not able to be set as the default for a product.
+   *
+   * @param productId      The Chargify id of the product to which the price point belongs
+   * @param pricePointId   The Chargify id of the product price point
+   * @return Response from the API call
+   */
+  async promoteProductPricePointToDefault(
+    productId: number,
+    pricePointId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProductResponse>> {
+    const req = this.createRequest('PATCH');
+    const mapped = req.prepareArgs({
+      productId: [productId, number()],
+      pricePointId: [pricePointId, number()],
+    });
+    req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/default.json`;
+    return req.callAsJson(productResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to create multiple product price points in one request.
+   *
+   * @param productId    The Chargify id of the product to which the
+   *                                                                   price points belong
+   * @param body
+   * @return Response from the API call
+   */
+  async createProductPricePoints(
+    productId: number,
+    body?: BulkCreateProductPricePointsRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<BulkCreateProductPricePointsResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      productId: [productId, number()],
+      body: [body, optional(bulkCreateProductPricePointsRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/products/${mapped.productId}/price_points/bulk.json`;
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(
+      bulkCreateProductPricePointsResponseSchema,
+      requestOptions
+    );
+  }
+
+  /**
+   * This endpoint allows you to create currency prices for a given currency that has been defined on the
+   * site level in your settings.
+   *
+   * When creating currency prices, they need to mirror the structure of your primary pricing. If the
+   * product price point defines a trial and/or setup fee, each currency must also define a trial and/or
+   * setup fee.
+   *
+   * Note: Currency Prices are not able to be created for custom product price points.
+   *
+   * @param productPricePointId    The Chargify id of the product price
+   *                                                                            point
+   * @param body
+   * @return Response from the API call
+   */
+  async createProductCurrencyPrices(
+    productPricePointId: number,
+    body?: CreateProductCurrencyPricesRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CurrencyPricesResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      productPricePointId: [productPricePointId, number()],
+      body: [body, optional(createProductCurrencyPricesRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(currencyPricesResponseSchema, requestOptions);
   }
 
   /**
@@ -247,280 +524,5 @@ export class ProductPricePointsController extends BaseController {
     req.query('currency_prices', mapped.currencyPrices);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to archive a product price point.
-   *
-   * @param productId      The id or handle of the product. When using the
-   *                                                               handle, it must be prefixed with `handle:`
-   * @param pricePointId   The id or handle of the price point. When using the
-   *                                                               handle, it must be prefixed with `handle:`
-   * @return Response from the API call
-   */
-  async archiveProductPricePoint(
-    productId: ArchiveProductPricePointProductId,
-    pricePointId: ArchiveProductPricePointPricePointId,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointResponse>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      productId: [productId, archiveProductPricePointProductIdSchema],
-      pricePointId: [pricePointId, archiveProductPricePointPricePointIdSchema],
-    });
-    req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(productPricePointResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to unarchive an archived product price point.
-   *
-   * @param productId      The Chargify id of the product to which the price point belongs
-   * @param pricePointId   The Chargify id of the product price point
-   * @return Response from the API call
-   */
-  async unarchiveProductPricePoint(
-    productId: number,
-    pricePointId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointResponse>> {
-    const req = this.createRequest('PATCH');
-    const mapped = req.prepareArgs({
-      productId: [productId, number()],
-      pricePointId: [pricePointId, number()],
-    });
-    req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/unarchive.json`;
-    return req.callAsJson(productPricePointResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to make a product price point the default for the product.
-   *
-   * Note: Custom product price points are not able to be set as the default for a product.
-   *
-   * @param productId      The Chargify id of the product to which the price point belongs
-   * @param pricePointId   The Chargify id of the product price point
-   * @return Response from the API call
-   */
-  async promoteProductPricePointToDefault(
-    productId: number,
-    pricePointId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductResponse>> {
-    const req = this.createRequest('PATCH');
-    const mapped = req.prepareArgs({
-      productId: [productId, number()],
-      pricePointId: [pricePointId, number()],
-    });
-    req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}/default.json`;
-    return req.callAsJson(productResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to create multiple product price points in one request.
-   *
-   * @param productId    The Chargify id of the product to which the
-   *                                                                   price points belong
-   * @param body
-   * @return Response from the API call
-   */
-  async createProductPricePoints(
-    productId: number,
-    body?: BulkCreateProductPricePointsRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<BulkCreateProductPricePointsResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      productId: [productId, number()],
-      body: [body, optional(bulkCreateProductPricePointsRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/products/${mapped.productId}/price_points/bulk.json`;
-    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(
-      bulkCreateProductPricePointsResponseSchema,
-      requestOptions
-    );
-  }
-
-  /**
-   * This endpoint allows you to create currency prices for a given currency that has been defined on the
-   * site level in your settings.
-   *
-   * When creating currency prices, they need to mirror the structure of your primary pricing. If the
-   * product price point defines a trial and/or setup fee, each currency must also define a trial and/or
-   * setup fee.
-   *
-   * Note: Currency Prices are not able to be created for custom product price points.
-   *
-   * @param productPricePointId    The Chargify id of the product price
-   *                                                                            point
-   * @param body
-   * @return Response from the API call
-   */
-  async createProductCurrencyPrices(
-    productPricePointId: number,
-    body?: CreateProductCurrencyPricesRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointCurrencyPrice>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      productPricePointId: [productPricePointId, number()],
-      body: [body, optional(createProductCurrencyPricesRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint allows you to update the `price`s of currency prices for a given currency that exists
-   * on the product price point.
-   *
-   * When updating the pricing, it needs to mirror the structure of your primary pricing. If the product
-   * price point defines a trial and/or setup fee, each currency must also define a trial and/or setup
-   * fee.
-   *
-   * Note: Currency Prices are not able to be updated for custom product price points.
-   *
-   * @param productPricePointId    The Chargify id of the product price point
-   * @param body
-   * @return Response from the API call
-   */
-  async updateProductCurrencyPrices(
-    productPricePointId: number,
-    body?: UpdateCurrencyPricesRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointCurrencyPrice>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      productPricePointId: [productPricePointId, number()],
-      body: [body, optional(updateCurrencyPricesRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
-  }
-
-  /**
-   * This method allows retrieval of a list of Products Price Points belonging to a Site.
-   *
-   * @param direction              Controls the order in which results are returned.
-   *                                                                 Use in query `direction=asc`.
-   * @param filterArchivedAt       Allows fetching price points only if archived_at
-   *                                                                 is present or not. Use in query:
-   *                                                                 `filter[archived_at]=not_null`.
-   * @param filterDateField        The type of filter you would like to apply to
-   *                                                                 your search. Use in query:
-   *                                                                 `filter[date_field]=created_at`.
-   * @param filterEndDate          The end date (format YYYY-MM-DD) with which to
-   *                                                                 filter the date_field. Returns price points with a
-   *                                                                 timestamp up to and including 11:59:59PM in your
-   *                                                                 site’s time zone on the date specified.
-   * @param filterEndDatetime      The end date and time (format YYYY-MM-DD HH:MM:
-   *                                                                 SS) with which to filter the date_field. Returns
-   *                                                                 price points with a timestamp at or before exact
-   *                                                                 time provided in query. You can specify timezone
-   *                                                                 in query - otherwise your site's time zone will be
-   *                                                                 used. If provided, this parameter will be used
-   *                                                                 instead of end_date.
-   * @param filterIds              Allows fetching price points with matching id
-   *                                                                 based on provided values. Use in query:
-   *                                                                 `filter[ids]=1,2,3`.
-   * @param filterStartDate        The start date (format YYYY-MM-DD) with which to
-   *                                                                 filter the date_field. Returns price points with a
-   *                                                                 timestamp at or after midnight (12:00:00 AM) in
-   *                                                                 your site’s time zone on the date specified.
-   * @param filterStartDatetime    The start date and time (format YYYY-MM-DD HH:MM:
-   *                                                                 SS) with which to filter the date_field. Returns
-   *                                                                 price points with a timestamp at or after exact
-   *                                                                 time provided in query. You can specify timezone
-   *                                                                 in query - otherwise your site's time zone will be
-   *                                                                 used. If provided, this parameter will be used
-   *                                                                 instead of start_date.
-   * @param filterType             Allows fetching price points with matching type.
-   *                                                                 Use in query: `filter[type]=catalog,custom`.
-   * @param include                Allows including additional data in the response.
-   *                                                                 Use in query: `include=currency_prices`.
-   * @param page                   Result records are organized in pages. By default,
-   *                                                                 the first page of results is displayed. The page
-   *                                                                 parameter specifies a page number of results to
-   *                                                                 fetch. You can start navigating through the pages
-   *                                                                 to consume the results. You do this by passing in
-   *                                                                 a page parameter. Retrieve the next page by adding
-   *                                                                 ?page=2 to the query string. If there are no
-   *                                                                 results to return, then an empty result set will
-   *                                                                 be returned. Use in query `page=1`.
-   * @param perPage                This parameter indicates how many records to
-   *                                                                 fetch in each request. Default value is 20. The
-   *                                                                 maximum allowed values is 200; any per_page value
-   *                                                                 over 200 will be changed to 200. Use in query
-   *                                                                 `per_page=200`.
-   * @return Response from the API call
-   */
-  async listAllProductPricePoints({
-    direction,
-    filterArchivedAt,
-    filterDateField,
-    filterEndDate,
-    filterEndDatetime,
-    filterIds,
-    filterStartDate,
-    filterStartDatetime,
-    filterType,
-    include,
-    page,
-    perPage,
-  }: {
-    direction?: SortingDirection,
-    filterArchivedAt?: IncludeNotNull,
-    filterDateField?: BasicDateField,
-    filterEndDate?: string,
-    filterEndDatetime?: string,
-    filterIds?: number[],
-    filterStartDate?: string,
-    filterStartDatetime?: string,
-    filterType?: PricePointType[],
-    include?: ListProductsPricePointsInclude,
-    page?: number,
-    perPage?: number,
-  },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ListProductPricePointsResponse>> {
-    const req = this.createRequest('GET', '/products_price_points.json');
-    const mapped = req.prepareArgs({
-      direction: [direction, optional(sortingDirectionSchema)],
-      filterArchivedAt: [filterArchivedAt, optional(includeNotNullSchema)],
-      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
-      filterEndDate: [filterEndDate, optional(string())],
-      filterEndDatetime: [filterEndDatetime, optional(string())],
-      filterIds: [filterIds, optional(array(number()))],
-      filterStartDate: [filterStartDate, optional(string())],
-      filterStartDatetime: [filterStartDatetime, optional(string())],
-      filterType: [filterType, optional(array(pricePointTypeSchema))],
-      include: [include, optional(listProductsPricePointsIncludeSchema)],
-      page: [page, optional(number())],
-      perPage: [perPage, optional(number())],
-    });
-    req.query('direction', mapped.direction);
-    req.query('filter[archived_at]', mapped.filterArchivedAt);
-    req.query('filter[date_field]', mapped.filterDateField);
-    req.query('filter[end_date]', mapped.filterEndDate);
-    req.query('filter[end_datetime]', mapped.filterEndDatetime);
-    req.query('filter[ids]', mapped.filterIds, commaPrefix);
-    req.query('filter[start_date]', mapped.filterStartDate);
-    req.query('filter[start_datetime]', mapped.filterStartDatetime);
-    req.query('filter[type]', mapped.filterType, commaPrefix);
-    req.query('include', mapped.include);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
   }
 }

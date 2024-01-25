@@ -27,6 +27,7 @@
     ],
     "use_site_exchange_rate": true,
     "handle": "handle6",
+    "tax_included": false,
     "interval": 24,
     "interval_unit": "day"
   }

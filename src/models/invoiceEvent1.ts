@@ -14,7 +14,10 @@ import {
   Schema,
   string,
 } from '../schema';
-import { AppliedCreditNote, appliedCreditNoteSchema } from './appliedCreditNote';
+import {
+  AppliedCreditNoteData,
+  appliedCreditNoteDataSchema,
+} from './appliedCreditNoteData';
 import {
   InvoiceEvent1PaymentMethod,
   invoiceEvent1PaymentMethodSchema,
@@ -47,7 +50,7 @@ export interface InvoiceEvent1 {
   /** Shows whether it was applied to consolidated invoice or not */
   consolidatedInvoice?: boolean;
   /** List of credit notes applied to children invoices (if consolidated invoice) */
-  appliedCreditNotes?: AppliedCreditNote[];
+  appliedCreditNotes?: AppliedCreditNoteData[];
   /** A unique, identifying string that appears on the debit note and in places it is referenced. */
   debitNoteNumber?: string;
   /** Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. */
@@ -104,7 +107,7 @@ export const invoiceEvent1Schema: Schema<InvoiceEvent1> = object({
   consolidatedInvoice: ['consolidated_invoice', optional(boolean())],
   appliedCreditNotes: [
     'applied_credit_notes',
-    optional(array(lazy(() => appliedCreditNoteSchema))),
+    optional(array(lazy(() => appliedCreditNoteDataSchema))),
   ],
   debitNoteNumber: ['debit_note_number', optional(string())],
   debitNoteUid: ['debit_note_uid', optional(string())],

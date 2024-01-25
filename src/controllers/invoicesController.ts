@@ -6,8 +6,10 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import {
   ConsolidatedInvoice,
   consolidatedInvoiceSchema,
@@ -120,7 +122,199 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/refunds.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * Credit Notes are like inverse invoices. They reduce the amount a customer owes.
+   *
+   * By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`,
+   * `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field
+   * as a key in the query with a value set to `true`.
+   *
+   * @param subscriptionId  The subscription's Chargify id
+   * @param page            Result records are organized in pages. By default, the first page of results is
+   *                                   displayed. The page parameter specifies a page number of results to fetch. You
+   *                                   can start navigating through the pages to consume the results. You do this by
+   *                                   passing in a page parameter. Retrieve the next page by adding ?page=2 to the
+   *                                   query string. If there are no results to return, then an empty result set will
+   *                                   be returned. Use in query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each request. Default
+   *                                   value is 20. The maximum allowed values is 200; any per_page value over 200 will
+   *                                   be changed to 200. Use in query `per_page=200`.
+   * @param lineItems       Include line items data
+   * @param discounts       Include discounts data
+   * @param taxes           Include taxes data
+   * @param refunds         Include refunds data
+   * @param applications    Include applications data
+   * @return Response from the API call
+   */
+  async listCreditNotes({
+    subscriptionId,
+    page,
+    perPage,
+    lineItems,
+    discounts,
+    taxes,
+    refunds,
+    applications,
+  }: {
+    subscriptionId?: number,
+    page?: number,
+    perPage?: number,
+    lineItems?: boolean,
+    discounts?: boolean,
+    taxes?: boolean,
+    refunds?: boolean,
+    applications?: boolean,
+  },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ListCreditNotesResponse>> {
+    const req = this.createRequest('GET', '/credit_notes.json');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, optional(number())],
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+      lineItems: [lineItems, optional(boolean())],
+      discounts: [discounts, optional(boolean())],
+      taxes: [taxes, optional(boolean())],
+      refunds: [refunds, optional(boolean())],
+      applications: [applications, optional(boolean())],
+    });
+    req.query('subscription_id', mapped.subscriptionId);
+    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage);
+    req.query('line_items', mapped.lineItems);
+    req.query('discounts', mapped.discounts);
+    req.query('taxes', mapped.taxes);
+    req.query('refunds', mapped.refunds);
+    req.query('applications', mapped.applications);
+    return req.callAsJson(listCreditNotesResponseSchema, requestOptions);
+  }
+
+  /**
+   * This API call should be used when you want to record a payment of a given type against a specific
+   * invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment
+   * endpoint.
+   *
+   * ## Create a Payment from the existing payment profile
+   *
+   * In order to apply a payment to an invoice using an existing payment profile, specify `type` as
+   * `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID
+   * of a payment profile might be retrieved via the Payment Profiles API endpoint.
+   *
+   * ```
+   * {
+   * "type": "payment",
+   * "payment": {
+   * "amount": 10.00,
+   * "payment_profile_id": 123
+   * }
+   * }
+   * ```
+   *
+   * ## Create a Payment from the Subscription's Prepayment Account
+   *
+   * In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
+   *
+   * ```
+   * {
+   * "type": "prepayment",
+   * "payment": {
+   * "amount": 10.00
+   * }
+   * }
+   * ```
+   *
+   * Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
+   *
+   * ## Create a Payment from the Subscription's Service Credit Account
+   *
+   * In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also
+   * the `amount`:
+   *
+   *
+   * ```
+   * {
+   * "type": "service_credit",
+   * "payment": {
+   * "amount": 10.00
+   * }
+   * }
+   * ```
+   *
+   * Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's
+   * Service Credit account. At this time, partial payments from a Service Credit Account are only
+   * allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service
+   * Credit account balance must be greater than or equal to the invoice's `due_amount`.
+   *
+   * @param uid          The unique identifier for the invoice, this does not
+   *                                                           refer to the public facing invoice number.
+   * @param body
+   * @return Response from the API call
+   */
+  async recordPaymentForInvoice(
+    uid: string,
+    body?: CreateInvoicePaymentRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Invoice>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      uid: [uid, string()],
+      body: [body, optional(createInvoicePaymentRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/invoices/${mapped.uid}/payments.json`;
+    return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * This API call should be used when you want to record an external payment against multiple invoices.
+   *
+   * In order apply a payment to multiple invoices, at minimum, specify the `amount` and `applications`
+   * (i.e., `invoice_uid` and `amount`) details.
+   *
+   * ```
+   * {
+   * "payment": {
+   * "memo": "to pay the bills",
+   * "details": "check number 8675309",
+   * "method": "check",
+   * "amount": "250.00",
+   * "applications": [
+   * {
+   * "invoice_uid": "inv_8gk5bwkct3gqt",
+   * "amount": "100.00"
+   * },
+   * {
+   * "invoice_uid": "inv_7bc6bwkct3lyt",
+   * "amount": "150.00"
+   * }
+   * ]
+   * }
+   * }
+   * ```
+   *
+   * Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal
+   * to invoices payment amount sum.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async recordExternalPaymentForInvoices(
+    body?: CreateMultiInvoicePaymentRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<MultiInvoicePaymentResponse>> {
+    const req = this.createRequest('POST', '/invoices/payments.json');
+    const mapped = req.prepareArgs({
+      body: [body, optional(createMultiInvoicePaymentRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(multiInvoicePaymentResponseSchema, requestOptions);
   }
 
   /**
@@ -401,282 +595,6 @@ export class InvoicesController extends BaseController {
   }
 
   /**
-   * This API call should be used when you want to record a payment of a given type against a specific
-   * invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment
-   * endpoint.
-   *
-   * ## Create a Payment from the existing payment profile
-   *
-   * In order to apply a payment to an invoice using an existing payment profile, specify `type` as
-   * `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID
-   * of a payment profile might be retrieved via the Payment Profiles API endpoint.
-   *
-   * ```
-   * {
-   * "type": "payment",
-   * "payment": {
-   * "amount": 10.00,
-   * "payment_profile_id": 123
-   * }
-   * }
-   * ```
-   *
-   * ## Create a Payment from the Subscription's Prepayment Account
-   *
-   * In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
-   *
-   * ```
-   * {
-   * "type": "prepayment",
-   * "payment": {
-   * "amount": 10.00
-   * }
-   * }
-   * ```
-   *
-   * Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
-   *
-   * ## Create a Payment from the Subscription's Service Credit Account
-   *
-   * In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also
-   * the `amount`:
-   *
-   *
-   * ```
-   * {
-   * "type": "service_credit",
-   * "payment": {
-   * "amount": 10.00
-   * }
-   * }
-   * ```
-   *
-   * Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's
-   * Service Credit account. At this time, partial payments from a Service Credit Account are only
-   * allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service
-   * Credit account balance must be greater than or equal to the invoice's `due_amount`.
-   *
-   * @param uid          The unique identifier for the invoice, this does not
-   *                                                           refer to the public facing invoice number.
-   * @param body
-   * @return Response from the API call
-   */
-  async recordPaymentForInvoice(
-    uid: string,
-    body?: CreateInvoicePaymentRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Invoice>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      uid: [uid, string()],
-      body: [body, optional(createInvoicePaymentRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/invoices/${mapped.uid}/payments.json`;
-    return req.callAsJson(invoiceSchema, requestOptions);
-  }
-
-  /**
-   * This API call should be used when you want to record an external payment against multiple invoices.
-   *
-   * In order apply a payment to multiple invoices, at minimum, specify the `amount` and `applications`
-   * (i.e., `invoice_uid` and `amount`) details.
-   *
-   * ```
-   * {
-   * "payment": {
-   * "memo": "to pay the bills",
-   * "details": "check number 8675309",
-   * "method": "check",
-   * "amount": "250.00",
-   * "applications": [
-   * {
-   * "invoice_uid": "inv_8gk5bwkct3gqt",
-   * "amount": "100.00"
-   * },
-   * {
-   * "invoice_uid": "inv_7bc6bwkct3lyt",
-   * "amount": "150.00"
-   * }
-   * ]
-   * }
-   * }
-   * ```
-   *
-   * Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal
-   * to invoices payment amount sum.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async recordExternalPaymentForInvoices(
-    body?: CreateMultiInvoicePaymentRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<MultiInvoicePaymentResponse>> {
-    const req = this.createRequest('POST', '/invoices/payments.json');
-    const mapped = req.prepareArgs({
-      body: [body, optional(createMultiInvoicePaymentRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(multiInvoicePaymentResponseSchema, requestOptions);
-  }
-
-  /**
-   * Credit Notes are like inverse invoices. They reduce the amount a customer owes.
-   *
-   * By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`,
-   * `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field
-   * as a key in the query with a value set to `true`.
-   *
-   * @param subscriptionId  The subscription's Chargify id
-   * @param page            Result records are organized in pages. By default, the first page of results is
-   *                                   displayed. The page parameter specifies a page number of results to fetch. You
-   *                                   can start navigating through the pages to consume the results. You do this by
-   *                                   passing in a page parameter. Retrieve the next page by adding ?page=2 to the
-   *                                   query string. If there are no results to return, then an empty result set will
-   *                                   be returned. Use in query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each request. Default
-   *                                   value is 20. The maximum allowed values is 200; any per_page value over 200 will
-   *                                   be changed to 200. Use in query `per_page=200`.
-   * @param lineItems       Include line items data
-   * @param discounts       Include discounts data
-   * @param taxes           Include taxes data
-   * @param refunds         Include refunds data
-   * @param applications    Include applications data
-   * @return Response from the API call
-   */
-  async listCreditNotes({
-    subscriptionId,
-    page,
-    perPage,
-    lineItems,
-    discounts,
-    taxes,
-    refunds,
-    applications,
-  }: {
-    subscriptionId?: number,
-    page?: number,
-    perPage?: number,
-    lineItems?: boolean,
-    discounts?: boolean,
-    taxes?: boolean,
-    refunds?: boolean,
-    applications?: boolean,
-  },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ListCreditNotesResponse>> {
-    const req = this.createRequest('GET', '/credit_notes.json');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, optional(number())],
-      page: [page, optional(number())],
-      perPage: [perPage, optional(number())],
-      lineItems: [lineItems, optional(boolean())],
-      discounts: [discounts, optional(boolean())],
-      taxes: [taxes, optional(boolean())],
-      refunds: [refunds, optional(boolean())],
-      applications: [applications, optional(boolean())],
-    });
-    req.query('subscription_id', mapped.subscriptionId);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('line_items', mapped.lineItems);
-    req.query('discounts', mapped.discounts);
-    req.query('taxes', mapped.taxes);
-    req.query('refunds', mapped.refunds);
-    req.query('applications', mapped.applications);
-    return req.callAsJson(listCreditNotesResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to retrieve the details for a credit note.
-   *
-   * @param uid The unique identifier of the credit note
-   * @return Response from the API call
-   */
-  async readCreditNote(
-    uid: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CreditNote>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/credit_notes/${mapped.uid}.json`;
-    return req.callAsJson(creditNoteSchema, requestOptions);
-  }
-
-  /**
-   * Record an external payment made against a subscription that will pay partially or in full one or
-   * more invoices.
-   *
-   * Payment will be applied starting with the oldest open invoice and then next oldest, and so on until
-   * the amount of the payment is fully consumed.
-   *
-   * Excess payment will result in the creation of a prepayment on the Invoice Account.
-   *
-   * Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param body
-   * @return Response from the API call
-   */
-  async recordPaymentForSubscription(
-    subscriptionId: number,
-    body?: RecordPaymentRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<PaymentResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      body: [body, optional(recordPaymentRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payments.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(paymentResponseSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled"
-   * status if they were open at the time the subscription was canceled (whether through dunning or an
-   * intentional cancellation).
-   *
-   * Invoices with "canceled" status are no longer considered to be due. Once reopened, they are
-   * considered due for payment. Payment may then be captured in one of the following ways:
-   *
-   * - Reactivating the subscription, which will capture all open invoices (See note below about
-   * automatic reopening of invoices.)
-   * - Recording a payment directly against the invoice
-   *
-   * A note about reactivations: any canceled invoices from the most recent active period are
-   * automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to
-   * reactivation is only necessary when you wish to capture older invoices from previous periods during
-   * the reactivation.
-   *
-   * ### Reopening Consolidated Invoices
-   *
-   * When reopening a consolidated invoice, all of its canceled segments will also be reopened.
-   *
-   * @param uid The unique identifier for the invoice, this does not refer to the public facing invoice
-   *                      number.
-   * @return Response from the API call
-   */
-  async reopenInvoice(
-    uid: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Invoice>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/invoices/${mapped.uid}/reopen.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(invoiceSchema, requestOptions);
-  }
-
-  /**
    * This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also
    * allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
    *
@@ -701,6 +619,30 @@ export class InvoicesController extends BaseController {
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * Customer information may change after an invoice is issued which may lead to a mismatch between
+   * customer information that are present on an open invoice and actual customer information. This
+   * endpoint allows to preview these differences, if any.
+   *
+   * The endpoint doesn't accept a request body. Customer information differences are calculated on the
+   * application side.
+   *
+   * @param uid The unique identifier for the invoice, this does not refer to the public facing invoice
+   *                      number.
+   * @return Response from the API call
+   */
+  async previewCustomerInformationChanges(
+    uid: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CustomerChangesPreviewResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/invoices/${mapped.uid}/customer_information/preview.json`;
+    req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(customerChangesPreviewResponseSchema, requestOptions);
   }
 
   /**
@@ -945,93 +887,8 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/invoices.json`;
-    req.throwOn(422, NestedErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceResponseSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports
-   * the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint
-   * supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy
-   * (bcc) recipients.
-   *
-   * Please note that if no recipient email addresses are specified in the request, then the
-   * subscription's default email configuration will be used. For example, if `recipient_emails` is left
-   * blank, then the invoice will be delivered to the subscription's customer email address.
-   *
-   * On success, a 204 no-content response will be returned. Please note that this does not indicate that
-   * email(s) have been delivered, but instead indicates that emails have been successfully queued for
-   * delivery. If _any_ invalid or malformed email address is found in the request body, the entire
-   * request will be rejected and a 422 response will be returned.
-   *
-   * @param uid          The unique identifier for the invoice, this does not refer to
-   *                                                  the public facing invoice number.
-   * @param body
-   * @return Response from the API call
-   */
-  async sendInvoice(
-    uid: string,
-    body?: SendInvoiceRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      uid: [uid, string()],
-      body: [body, optional(sendInvoiceRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/invoices/${mapped.uid}/deliveries.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Customer information may change after an invoice is issued which may lead to a mismatch between
-   * customer information that are present on an open invoice and actual customer information. This
-   * endpoint allows to preview these differences, if any.
-   *
-   * The endpoint doesn't accept a request body. Customer information differences are calculated on the
-   * application side.
-   *
-   * @param uid The unique identifier for the invoice, this does not refer to the public facing invoice
-   *                      number.
-   * @return Response from the API call
-   */
-  async previewCustomerInformationChanges(
-    uid: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CustomerChangesPreviewResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/invoices/${mapped.uid}/customer_information/preview.json`;
-    req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(customerChangesPreviewResponseSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint updates customer information on an open invoice and returns the updated invoice. If
-   * you would like to preview changes that will be applied, use the
-   * `/invoices/{uid}/customer_information/preview.json` endpoint before.
-   *
-   * The endpoint doesn't accept a request body. Customer information differences are calculated on the
-   * application side.
-   *
-   * @param uid The unique identifier for the invoice, this does not refer to the public facing invoice
-   *                      number.
-   * @return Response from the API call
-   */
-  async updateCustomerInformation(
-    uid: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Invoice>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
-    req.appendTemplatePath`/invoices/${mapped.uid}/customer_information.json`;
-    req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(invoiceSchema, requestOptions);
   }
 
   /**
@@ -1081,5 +938,151 @@ export class InvoicesController extends BaseController {
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to retrieve the details for a credit note.
+   *
+   * @param uid The unique identifier of the credit note
+   * @return Response from the API call
+   */
+  async readCreditNote(
+    uid: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CreditNote>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/credit_notes/${mapped.uid}.json`;
+    return req.callAsJson(creditNoteSchema, requestOptions);
+  }
+
+  /**
+   * Record an external payment made against a subscription that will pay partially or in full one or
+   * more invoices.
+   *
+   * Payment will be applied starting with the oldest open invoice and then next oldest, and so on until
+   * the amount of the payment is fully consumed.
+   *
+   * Excess payment will result in the creation of a prepayment on the Invoice Account.
+   *
+   * Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param body
+   * @return Response from the API call
+   */
+  async recordPaymentForSubscription(
+    subscriptionId: number,
+    body?: RecordPaymentRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<PaymentResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      body: [body, optional(recordPaymentRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payments.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(paymentResponseSchema, requestOptions);
+  }
+
+  /**
+   * This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled"
+   * status if they were open at the time the subscription was canceled (whether through dunning or an
+   * intentional cancellation).
+   *
+   * Invoices with "canceled" status are no longer considered to be due. Once reopened, they are
+   * considered due for payment. Payment may then be captured in one of the following ways:
+   *
+   * - Reactivating the subscription, which will capture all open invoices (See note below about
+   * automatic reopening of invoices.)
+   * - Recording a payment directly against the invoice
+   *
+   * A note about reactivations: any canceled invoices from the most recent active period are
+   * automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to
+   * reactivation is only necessary when you wish to capture older invoices from previous periods during
+   * the reactivation.
+   *
+   * ### Reopening Consolidated Invoices
+   *
+   * When reopening a consolidated invoice, all of its canceled segments will also be reopened.
+   *
+   * @param uid The unique identifier for the invoice, this does not refer to the public facing invoice
+   *                      number.
+   * @return Response from the API call
+   */
+  async reopenInvoice(
+    uid: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Invoice>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/invoices/${mapped.uid}/reopen.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * This endpoint updates customer information on an open invoice and returns the updated invoice. If
+   * you would like to preview changes that will be applied, use the
+   * `/invoices/{uid}/customer_information/preview.json` endpoint before.
+   *
+   * The endpoint doesn't accept a request body. Customer information differences are calculated on the
+   * application side.
+   *
+   * @param uid The unique identifier for the invoice, this does not refer to the public facing invoice
+   *                      number.
+   * @return Response from the API call
+   */
+  async updateCustomerInformation(
+    uid: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Invoice>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    req.appendTemplatePath`/invoices/${mapped.uid}/customer_information.json`;
+    req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports
+   * the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint
+   * supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy
+   * (bcc) recipients.
+   *
+   * Please note that if no recipient email addresses are specified in the request, then the
+   * subscription's default email configuration will be used. For example, if `recipient_emails` is left
+   * blank, then the invoice will be delivered to the subscription's customer email address.
+   *
+   * On success, a 204 no-content response will be returned. Please note that this does not indicate that
+   * email(s) have been delivered, but instead indicates that emails have been successfully queued for
+   * delivery. If _any_ invalid or malformed email address is found in the request body, the entire
+   * request will be rejected and a 422 response will be returned.
+   *
+   * @param uid          The unique identifier for the invoice, this does not refer to
+   *                                                  the public facing invoice number.
+   * @param body
+   * @return Response from the API call
+   */
+  async sendInvoice(
+    uid: string,
+    body?: SendInvoiceRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      uid: [uid, string()],
+      body: [body, optional(sendInvoiceRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/invoices/${mapped.uid}/deliveries.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.call(requestOptions);
   }
 }

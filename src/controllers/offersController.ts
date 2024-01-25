@@ -5,7 +5,9 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorMapResponseError } from '../errors/errorMapResponseError';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import {
   CreateOfferRequest,
   createOfferRequestSchema,
@@ -19,6 +21,56 @@ import { boolean, number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class OffersController extends BaseController {
+  /**
+   * This method allows you to list a specific offer's attributes. This is different than list all offers
+   * for a site, as it requires an `offer_id`.
+   *
+   * @param offerId  The Chargify id of the offer
+   * @return Response from the API call
+   */
+  async readOffers(
+    offerId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<OfferResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ offerId: [offerId, number()] });
+    req.appendTemplatePath`/offers/${mapped.offerId}.json`;
+    return req.callAsJson(offerResponseSchema, requestOptions);
+  }
+
+  /**
+   * Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the
+   * correct item.
+   *
+   * @param offerId  The Chargify id of the offer
+   * @return Response from the API call
+   */
+  async unarchiveOffer(
+    offerId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({ offerId: [offerId, number()] });
+    req.appendTemplatePath`/offers/${mapped.offerId}/unarchive.json`;
+    return req.call(requestOptions);
+  }
+
+  /**
+   * Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+   *
+   * @param offerId  The Chargify id of the offer
+   * @return Response from the API call
+   */
+  async archiveOffer(
+    offerId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({ offerId: [offerId, number()] });
+    req.appendTemplatePath`/offers/${mapped.offerId}/archive.json`;
+    return req.call(requestOptions);
+  }
+
   /**
    * Create an offer within your Chargify site by sending a POST request.
    *
@@ -51,7 +103,7 @@ export class OffersController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(offerResponseSchema, requestOptions);
   }
 
@@ -91,55 +143,5 @@ export class OffersController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('include_archived', mapped.includeArchived);
     return req.callAsJson(listOffersResponseSchema, requestOptions);
-  }
-
-  /**
-   * This method allows you to list a specific offer's attributes. This is different than list all offers
-   * for a site, as it requires an `offer_id`.
-   *
-   * @param offerId  The Chargify id of the offer
-   * @return Response from the API call
-   */
-  async readOffers(
-    offerId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<OfferResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ offerId: [offerId, number()] });
-    req.appendTemplatePath`/offers/${mapped.offerId}.json`;
-    return req.callAsJson(offerResponseSchema, requestOptions);
-  }
-
-  /**
-   * Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
-   *
-   * @param offerId  The Chargify id of the offer
-   * @return Response from the API call
-   */
-  async archiveOffer(
-    offerId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({ offerId: [offerId, number()] });
-    req.appendTemplatePath`/offers/${mapped.offerId}/archive.json`;
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the
-   * correct item.
-   *
-   * @param offerId  The Chargify id of the offer
-   * @return Response from the API call
-   */
-  async unarchiveOffer(
-    offerId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({ offerId: [offerId, number()] });
-    req.appendTemplatePath`/offers/${mapped.offerId}/unarchive.json`;
-    return req.call(requestOptions);
   }
 }

@@ -91,6 +91,80 @@ export class CustomersController extends BaseController {
   }
 
   /**
+   * This method allows to update the Customer.
+   *
+   * @param id           The Chargify id of the customer
+   * @param body
+   * @return Response from the API call
+   */
+  async updateCustomer(
+    id: number,
+    body?: UpdateCustomerRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CustomerResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      id: [id, number()],
+      body: [body, optional(updateCustomerRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/customers/${mapped.id}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, CustomerErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(customerResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this method to return the customer object if you have the unique **Reference ID (Your App)**
+   * value handy. It will return a single match.
+   *
+   * @param reference Customer reference
+   * @return Response from the API call
+   */
+  async readCustomerByReference(
+    reference: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CustomerResponse>> {
+    const req = this.createRequest('GET', '/customers/lookup.json');
+    const mapped = req.prepareArgs({ reference: [reference, string()] });
+    req.query('reference', mapped.reference);
+    return req.callAsJson(customerResponseSchema, requestOptions);
+  }
+
+  /**
+   * This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
+   *
+   * @param id The Chargify id of the customer
+   * @return Response from the API call
+   */
+  async readCustomer(
+    id: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CustomerResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ id: [id, number()] });
+    req.appendTemplatePath`/customers/${mapped.id}.json`;
+    return req.callAsJson(customerResponseSchema, requestOptions);
+  }
+
+  /**
+   * This method allows you to delete the Customer.
+   *
+   * @param id The Chargify id of the customer
+   * @return Response from the API call
+   */
+  async deleteCustomer(
+    id: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({ id: [id, number()] });
+    req.appendTemplatePath`/customers/${mapped.id}.json`;
+    return req.call(requestOptions);
+  }
+
+  /**
    * This request will by default list all customers associated with your Site.
    *
    * ## Find Customer
@@ -187,80 +261,6 @@ export class CustomersController extends BaseController {
     req.query('end_datetime', mapped.endDatetime);
     req.query('q', mapped.q);
     return req.callAsJson(array(customerResponseSchema), requestOptions);
-  }
-
-  /**
-   * This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
-   *
-   * @param id The Chargify id of the customer
-   * @return Response from the API call
-   */
-  async readCustomer(
-    id: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CustomerResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ id: [id, number()] });
-    req.appendTemplatePath`/customers/${mapped.id}.json`;
-    return req.callAsJson(customerResponseSchema, requestOptions);
-  }
-
-  /**
-   * This method allows to update the Customer.
-   *
-   * @param id           The Chargify id of the customer
-   * @param body
-   * @return Response from the API call
-   */
-  async updateCustomer(
-    id: number,
-    body?: UpdateCustomerRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CustomerResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      id: [id, number()],
-      body: [body, optional(updateCustomerRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/customers/${mapped.id}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, CustomerErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(customerResponseSchema, requestOptions);
-  }
-
-  /**
-   * This method allows you to delete the Customer.
-   *
-   * @param id The Chargify id of the customer
-   * @return Response from the API call
-   */
-  async deleteCustomer(
-    id: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({ id: [id, number()] });
-    req.appendTemplatePath`/customers/${mapped.id}.json`;
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Use this method to return the customer object if you have the unique **Reference ID (Your App)**
-   * value handy. It will return a single match.
-   *
-   * @param reference Customer reference
-   * @return Response from the API call
-   */
-  async readCustomerByReference(
-    reference: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CustomerResponse>> {
-    const req = this.createRequest('GET', '/customers/lookup.json');
-    const mapped = req.prepareArgs({ reference: [reference, string()] });
-    req.query('reference', mapped.reference);
-    return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
   /**

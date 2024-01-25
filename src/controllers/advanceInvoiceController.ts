@@ -57,26 +57,6 @@ export class AdvanceInvoiceController extends BaseController {
   }
 
   /**
-   * Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed
-   * through this endpoint. There can only be one advance invoice per subscription per billing cycle.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @return Response from the API call
-   */
-  async readAdvanceInvoice(
-    subscriptionId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Invoice>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-    });
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    return req.callAsJson(invoiceSchema, requestOptions);
-  }
-
-  /**
    * Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
    * A `reason` is required in order to void, and the invoice must have an open status. Voiding will
    * cause any prepayments and credits that were applied to the invoice to be returned to the
@@ -100,6 +80,26 @@ export class AdvanceInvoiceController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice/void.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    return req.callAsJson(invoiceSchema, requestOptions);
+  }
+
+  /**
+   * Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed
+   * through this endpoint. There can only be one advance invoice per subscription per billing cycle.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @return Response from the API call
+   */
+  async readAdvanceInvoice(
+    subscriptionId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Invoice>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+    });
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     return req.callAsJson(invoiceSchema, requestOptions);
   }

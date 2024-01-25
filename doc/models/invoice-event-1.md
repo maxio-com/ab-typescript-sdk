@@ -20,7 +20,7 @@ The event data is the data that, when combined with the command, results in the 
 | `memo` | `string \| undefined` | Optional | The credit note memo. |
 | `role` | `string \| undefined` | Optional | The role of the credit note (e.g. 'general') |
 | `consolidatedInvoice` | `boolean \| undefined` | Optional | Shows whether it was applied to consolidated invoice or not |
-| `appliedCreditNotes` | [`AppliedCreditNote[] \| undefined`](../../doc/models/applied-credit-note.md) | Optional | List of credit notes applied to children invoices (if consolidated invoice) |
+| `appliedCreditNotes` | [`AppliedCreditNoteData[] \| undefined`](../../doc/models/applied-credit-note-data.md) | Optional | List of credit notes applied to children invoices (if consolidated invoice) |
 | `debitNoteNumber` | `string \| undefined` | Optional | A unique, identifying string that appears on the debit note and in places it is referenced. |
 | `debitNoteUid` | `string \| undefined` | Optional | Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. |
 | `paymentMethod` | [`InvoiceEvent1PaymentMethod \| undefined`](../../doc/models/containers/invoice-event-1-payment-method.md) | Optional | This is a container for one-of cases. |

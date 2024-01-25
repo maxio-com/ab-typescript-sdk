@@ -11,10 +11,10 @@ const subscriptionNotesController = new SubscriptionNotesController(client);
 ## Methods
 
 * [Create Subscription Note](../../doc/controllers/subscription-notes.md#create-subscription-note)
+* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 * [List Subscription Notes](../../doc/controllers/subscription-notes.md#list-subscription-notes)
 * [Read Subscription Note](../../doc/controllers/subscription-notes.md#read-subscription-note)
 * [Update Subscription Note](../../doc/controllers/subscription-notes.md#update-subscription-note)
-* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 
 
 # Create Subscription Note
@@ -67,6 +67,57 @@ try {
   const { result, ...httpResponse } = await subscriptionNotesController.createSubscriptionNote(
   subscriptionId,
   body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# Delete Subscription Note
+
+Use the following method to delete a note for a Subscription.
+
+```ts
+async deleteSubscriptionNote(
+  subscriptionId: number,
+  noteId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `noteId` | `number` | Template, Required | The Chargify id of the note |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const noteId = 66;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionNotesController.deleteSubscriptionNote(
+  subscriptionId,
+  noteId
 );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
@@ -272,57 +323,6 @@ try {
   subscriptionId,
   noteId,
   body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# Delete Subscription Note
-
-Use the following method to delete a note for a Subscription.
-
-```ts
-async deleteSubscriptionNote(
-  subscriptionId: number,
-  noteId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `noteId` | `number` | Template, Required | The Chargify id of the note |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-const noteId = 66;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionNotesController.deleteSubscriptionNote(
-  subscriptionId,
-  noteId
 );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;

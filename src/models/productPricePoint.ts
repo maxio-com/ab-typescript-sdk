@@ -5,8 +5,10 @@
  */
 
 import {
+  array,
   bigint,
   boolean,
+  lazy,
   nullable,
   number,
   object,
@@ -14,6 +16,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CurrencyPrice, currencyPriceSchema } from './currencyPrice';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 
@@ -61,6 +64,8 @@ export interface ProductPricePoint {
   taxIncluded?: boolean;
   /** The subscription id this price point belongs to */
   subscriptionId?: number | null;
+  /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
+  currencyPrices?: CurrencyPrice[];
 }
 
 export const productPricePointSchema: Schema<ProductPricePoint> = object({
@@ -90,4 +95,8 @@ export const productPricePointSchema: Schema<ProductPricePoint> = object({
   type: ['type', optional(pricePointTypeSchema)],
   taxIncluded: ['tax_included', optional(boolean())],
   subscriptionId: ['subscription_id', optional(nullable(number()))],
+  currencyPrices: [
+    'currency_prices',
+    optional(array(lazy(() => currencyPriceSchema))),
+  ],
 });

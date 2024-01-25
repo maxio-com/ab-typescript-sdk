@@ -30,6 +30,84 @@ import { BaseController } from './baseController';
 
 export class ProductFamiliesController extends BaseController {
   /**
+   * This method allows to retrieve a list of Product Families for a site.
+   *
+   * @param dateField      The type of filter you would like to apply to your search. Use in query:
+   *                                         `date_field=created_at`.
+   * @param startDate      The start date (format YYYY-MM-DD) with which to filter the date_field.
+   *                                         Returns products with a timestamp at or after midnight (12:00:00 AM) in
+   *                                         your site’s time zone on the date specified.
+   * @param endDate        The end date (format YYYY-MM-DD) with which to filter the date_field.
+   *                                         Returns products with a timestamp up to and including 11:59:59PM in your
+   *                                         site’s time zone on the date specified.
+   * @param startDatetime  The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter
+   *                                         the date_field. Returns products with a timestamp at or after exact time
+   *                                         provided in query. You can specify timezone in query - otherwise your
+   *                                         site's time zone will be used. If provided, this parameter will be used
+   *                                         instead of start_date.
+   * @param endDatetime    The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter
+   *                                         the date_field. Returns products with a timestamp at or before exact time
+   *                                         provided in query. You can specify timezone in query - otherwise your
+   *                                         site's time zone will be used. If provided, this parameter will be used
+   *                                         instead of end_date.
+   * @return Response from the API call
+   */
+  async listProductFamilies({
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+  }: {
+    dateField?: BasicDateField,
+    startDate?: string,
+    endDate?: string,
+    startDatetime?: string,
+    endDatetime?: string,
+  },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProductFamilyResponse[]>> {
+    const req = this.createRequest('GET', '/product_families.json');
+    const mapped = req.prepareArgs({
+      dateField: [dateField, optional(basicDateFieldSchema)],
+      startDate: [startDate, optional(string())],
+      endDate: [endDate, optional(string())],
+      startDatetime: [startDatetime, optional(string())],
+      endDatetime: [endDatetime, optional(string())],
+    });
+    req.query('date_field', mapped.dateField);
+    req.query('start_date', mapped.startDate);
+    req.query('end_date', mapped.endDate);
+    req.query('start_datetime', mapped.startDatetime);
+    req.query('end_datetime', mapped.endDatetime);
+    return req.callAsJson(array(productFamilyResponseSchema), requestOptions);
+  }
+
+  /**
+   * This method will create a Product Family within your Chargify site. Create a Product Family to act
+   * as a container for your products, components and coupons.
+   *
+   * Full documentation on how Product Families operate within the Chargify UI can be located
+   * [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async createProductFamily(
+    body?: CreateProductFamilyRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProductFamilyResponse>> {
+    const req = this.createRequest('POST', '/product_families.json');
+    const mapped = req.prepareArgs({
+      body: [body, optional(createProductFamilyRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(productFamilyResponseSchema, requestOptions);
+  }
+
+  /**
    * This method allows to retrieve a list of Products belonging to a Product Family.
    *
    * @param productFamilyId                                             The Chargify id of the
@@ -208,84 +286,6 @@ export class ProductFamiliesController extends BaseController {
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
     req.throwOn(404, ApiError, 'Not Found');
     return req.callAsJson(array(productResponseSchema), requestOptions);
-  }
-
-  /**
-   * This method will create a Product Family within your Chargify site. Create a Product Family to act
-   * as a container for your products, components and coupons.
-   *
-   * Full documentation on how Product Families operate within the Chargify UI can be located
-   * [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async createProductFamily(
-    body?: CreateProductFamilyRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductFamilyResponse>> {
-    const req = this.createRequest('POST', '/product_families.json');
-    const mapped = req.prepareArgs({
-      body: [body, optional(createProductFamilyRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(productFamilyResponseSchema, requestOptions);
-  }
-
-  /**
-   * This method allows to retrieve a list of Product Families for a site.
-   *
-   * @param dateField      The type of filter you would like to apply to your search. Use in query:
-   *                                         `date_field=created_at`.
-   * @param startDate      The start date (format YYYY-MM-DD) with which to filter the date_field.
-   *                                         Returns products with a timestamp at or after midnight (12:00:00 AM) in
-   *                                         your site’s time zone on the date specified.
-   * @param endDate        The end date (format YYYY-MM-DD) with which to filter the date_field.
-   *                                         Returns products with a timestamp up to and including 11:59:59PM in your
-   *                                         site’s time zone on the date specified.
-   * @param startDatetime  The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter
-   *                                         the date_field. Returns products with a timestamp at or after exact time
-   *                                         provided in query. You can specify timezone in query - otherwise your
-   *                                         site's time zone will be used. If provided, this parameter will be used
-   *                                         instead of start_date.
-   * @param endDatetime    The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter
-   *                                         the date_field. Returns products with a timestamp at or before exact time
-   *                                         provided in query. You can specify timezone in query - otherwise your
-   *                                         site's time zone will be used. If provided, this parameter will be used
-   *                                         instead of end_date.
-   * @return Response from the API call
-   */
-  async listProductFamilies({
-    dateField,
-    startDate,
-    endDate,
-    startDatetime,
-    endDatetime,
-  }: {
-    dateField?: BasicDateField,
-    startDate?: string,
-    endDate?: string,
-    startDatetime?: string,
-    endDatetime?: string,
-  },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductFamilyResponse[]>> {
-    const req = this.createRequest('GET', '/product_families.json');
-    const mapped = req.prepareArgs({
-      dateField: [dateField, optional(basicDateFieldSchema)],
-      startDate: [startDate, optional(string())],
-      endDate: [endDate, optional(string())],
-      startDatetime: [startDatetime, optional(string())],
-      endDatetime: [endDatetime, optional(string())],
-    });
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
-    return req.callAsJson(array(productFamilyResponseSchema), requestOptions);
   }
 
   /**

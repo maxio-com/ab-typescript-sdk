@@ -11,11 +11,11 @@ const customersController = new CustomersController(client);
 ## Methods
 
 * [Create Customer](../../doc/controllers/customers.md#create-customer)
-* [List Customers](../../doc/controllers/customers.md#list-customers)
-* [Read Customer](../../doc/controllers/customers.md#read-customer)
 * [Update Customer](../../doc/controllers/customers.md#update-customer)
-* [Delete Customer](../../doc/controllers/customers.md#delete-customer)
 * [Read Customer by Reference](../../doc/controllers/customers.md#read-customer-by-reference)
+* [Read Customer](../../doc/controllers/customers.md#read-customer)
+* [Delete Customer](../../doc/controllers/customers.md#delete-customer)
+* [List Customers](../../doc/controllers/customers.md#list-customers)
 * [List Customer Subscriptions](../../doc/controllers/customers.md#list-customer-subscriptions)
 
 
@@ -142,6 +142,233 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseError`](../../doc/models/customer-error-response-error.md) |
+
+
+# Update Customer
+
+This method allows to update the Customer.
+
+```ts
+async updateCustomer(
+  id: number,
+  body?: UpdateCustomerRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `number` | Template, Required | The Chargify id of the customer |
+| `body` | [`UpdateCustomerRequest \| undefined`](../../doc/models/update-customer-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CustomerResponse`](../../doc/models/customer-response.md)
+
+## Example Usage
+
+```ts
+const id = 112;
+
+const body: UpdateCustomerRequest = {
+  customer: {
+    firstName: 'Martha',
+    lastName: 'Washington',
+    email: 'martha.washington@example.com',
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await customersController.updateCustomer(
+  id,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "customer": {
+    "first_name": "Martha",
+    "last_name": "Washington",
+    "email": "martha.washington@example.com",
+    "cc_emails": "george.washington@example.com",
+    "organization": null,
+    "reference": null,
+    "id": 14967442,
+    "created_at": "2016-12-05T10:33:07-05:00",
+    "updated_at": "2016-12-05T10:38:00-05:00",
+    "address": null,
+    "address_2": null,
+    "city": null,
+    "state": null,
+    "zip": null,
+    "country": null,
+    "phone": null,
+    "verified": false,
+    "portal_customer_created_at": null,
+    "portal_invite_last_sent_at": null,
+    "portal_invite_last_accepted_at": null,
+    "tax_exempt": false,
+    "vat_number": "012345678"
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseError`](../../doc/models/customer-error-response-error.md) |
+
+
+# Read Customer by Reference
+
+Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
+
+```ts
+async readCustomerByReference(
+  reference: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `reference` | `string` | Query, Required | Customer reference |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CustomerResponse`](../../doc/models/customer-response.md)
+
+## Example Usage
+
+```ts
+const reference = 'reference4';
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await customersController.readCustomerByReference(reference);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# Read Customer
+
+This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
+
+```ts
+async readCustomer(
+  id: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `number` | Template, Required | The Chargify id of the customer |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CustomerResponse`](../../doc/models/customer-response.md)
+
+## Example Usage
+
+```ts
+const id = 112;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await customersController.readCustomer(id);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# Delete Customer
+
+This method allows you to delete the Customer.
+
+```ts
+async deleteCustomer(
+  id: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `number` | Template, Required | The Chargify id of the customer |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const id = 112;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await customersController.deleteCustomer(id);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
 
 
 # List Customers
@@ -302,233 +529,6 @@ try {
     }
   }
 ]
-```
-
-
-# Read Customer
-
-This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
-
-```ts
-async readCustomer(
-  id: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CustomerResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the customer |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CustomerResponse`](../../doc/models/customer-response.md)
-
-## Example Usage
-
-```ts
-const id = 112;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customersController.readCustomer(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# Update Customer
-
-This method allows to update the Customer.
-
-```ts
-async updateCustomer(
-  id: number,
-  body?: UpdateCustomerRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CustomerResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the customer |
-| `body` | [`UpdateCustomerRequest \| undefined`](../../doc/models/update-customer-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CustomerResponse`](../../doc/models/customer-response.md)
-
-## Example Usage
-
-```ts
-const id = 112;
-
-const body: UpdateCustomerRequest = {
-  customer: {
-    firstName: 'Martha',
-    lastName: 'Washington',
-    email: 'martha.washington@example.com',
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customersController.updateCustomer(
-  id,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "customer": {
-    "first_name": "Martha",
-    "last_name": "Washington",
-    "email": "martha.washington@example.com",
-    "cc_emails": "george.washington@example.com",
-    "organization": null,
-    "reference": null,
-    "id": 14967442,
-    "created_at": "2016-12-05T10:33:07-05:00",
-    "updated_at": "2016-12-05T10:38:00-05:00",
-    "address": null,
-    "address_2": null,
-    "city": null,
-    "state": null,
-    "zip": null,
-    "country": null,
-    "phone": null,
-    "verified": false,
-    "portal_customer_created_at": null,
-    "portal_invite_last_sent_at": null,
-    "portal_invite_last_accepted_at": null,
-    "tax_exempt": false,
-    "vat_number": "012345678"
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseError`](../../doc/models/customer-error-response-error.md) |
-
-
-# Delete Customer
-
-This method allows you to delete the Customer.
-
-```ts
-async deleteCustomer(
-  id: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the customer |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const id = 112;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customersController.deleteCustomer(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# Read Customer by Reference
-
-Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
-
-```ts
-async readCustomerByReference(
-  reference: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CustomerResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `reference` | `string` | Query, Required | Customer reference |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CustomerResponse`](../../doc/models/customer-response.md)
-
-## Example Usage
-
-```ts
-const reference = 'reference4';
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await customersController.readCustomerByReference(reference);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
 ```
 
 

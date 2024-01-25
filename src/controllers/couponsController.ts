@@ -80,187 +80,6 @@ export class CouponsController extends BaseController {
   }
 
   /**
-   * List coupons for a specific Product Family in a Site.
-   *
-   * If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current
-   * exchange rate. If the flag is set to false, it will return all of the defined prices for each
-   * currency.
-   *
-   * @param productFamilyId                The Chargify id of the product family to which the coupon
-   *                                                         belongs
-   * @param page                           Result records are organized in pages. By default, the
-   *                                                         first page of results is displayed. The page parameter
-   *                                                         specifies a page number of results to fetch. You can start
-   *                                                         navigating through the pages to consume the results. You
-   *                                                         do this by passing in a page parameter. Retrieve the next
-   *                                                         page by adding ?page=2 to the query string. If there are
-   *                                                         no results to return, then an empty result set will be
-   *                                                         returned. Use in query `page=1`.
-   * @param perPage                        This parameter indicates how many records to fetch in
-   *                                                         each request. Default value is 30. The maximum allowed
-   *                                                         values is 200; any per_page value over 200 will be changed
-   *                                                         to 200. Use in query `per_page=200`.
-   * @param filterDateField                The type of filter you would like to apply to your search.
-   *                                                         Use in query `filter[date_field]=created_at`.
-   * @param filterEndDate                  The end date (format YYYY-MM-DD) with which to filter the
-   *                                                         date_field. Returns coupons with a timestamp up to and
-   *                                                         including 11:59:59PM in your site’s time zone on the date
-   *                                                         specified. Use in query `filter[date_field]=2011-12-15`.
-   * @param filterEndDatetime              The end date and time (format YYYY-MM-DD HH:MM:SS) with
-   *                                                         which to filter the date_field. Returns coupons with a
-   *                                                         timestamp at or before exact time provided in query. You
-   *                                                         can specify timezone in query - otherwise your site's time
-   *                                                         zone will be used. If provided, this parameter will be
-   *                                                         used instead of end_date. Use in query `?
-   *                                                         filter[end_datetime]=2011-12-1T10:15:30+01:00`.
-   * @param filterStartDate                The start date (format YYYY-MM-DD) with which to filter
-   *                                                         the date_field. Returns coupons with a timestamp at or
-   *                                                         after midnight (12:00:00 AM) in your site’s time zone on
-   *                                                         the date specified. Use in query `filter[start_date]=2011-
-   *                                                         12-17`.
-   * @param filterStartDatetime            The start date and time (format YYYY-MM-DD HH:MM:SS) with
-   *                                                         which to filter the date_field. Returns coupons with a
-   *                                                         timestamp at or after exact time provided in query. You
-   *                                                         can specify timezone in query - otherwise your site's time
-   *                                                         zone will be used. If provided, this parameter will be
-   *                                                         used instead of start_date. Use in query
-   *                                                         `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
-   * @param filterIds                      Allows fetching coupons with matching id based on
-   *                                                         provided values. Use in query `filter[ids]=1,2,3`.
-   * @param filterCodes                    Allows fetching coupons with matching codes based on
-   *                                                         provided values. Use in query `filter[codes]=free,
-   *                                                         free_trial`.
-   * @param currencyPrices                 When fetching coupons, if you have defined multiple
-   *                                                         currencies at the site level, you can optionally pass the
-   *                                                         `?currency_prices=true` query param to include an array of
-   *                                                         currency price data in the response. Use in query
-   *                                                         `currency_prices=true`.
-   * @param filterUseSiteExchangeRate      Allows fetching coupons with matching
-   *                                                         use_site_exchange_rate based on provided value. Use in
-   *                                                         query `filter[use_site_exchange_rate]=true`.
-   * @return Response from the API call
-   */
-  async listCouponsForProductFamily({
-    productFamilyId,
-    page,
-    perPage,
-    filterDateField,
-    filterEndDate,
-    filterEndDatetime,
-    filterStartDate,
-    filterStartDatetime,
-    filterIds,
-    filterCodes,
-    currencyPrices,
-    filterUseSiteExchangeRate,
-  }: {
-    productFamilyId: number,
-    page?: number,
-    perPage?: number,
-    filterDateField?: BasicDateField,
-    filterEndDate?: string,
-    filterEndDatetime?: string,
-    filterStartDate?: string,
-    filterStartDatetime?: string,
-    filterIds?: number[],
-    filterCodes?: string[],
-    currencyPrices?: boolean,
-    filterUseSiteExchangeRate?: boolean,
-  },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponResponse[]>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
-      page: [page, optional(number())],
-      perPage: [perPage, optional(number())],
-      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
-      filterEndDate: [filterEndDate, optional(string())],
-      filterEndDatetime: [filterEndDatetime, optional(string())],
-      filterStartDate: [filterStartDate, optional(string())],
-      filterStartDatetime: [filterStartDatetime, optional(string())],
-      filterIds: [filterIds, optional(array(number()))],
-      filterCodes: [filterCodes, optional(array(string()))],
-      currencyPrices: [currencyPrices, optional(boolean())],
-      filterUseSiteExchangeRate: [
-        filterUseSiteExchangeRate,
-        optional(boolean()),
-      ],
-    });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('filter[date_field]', mapped.filterDateField);
-    req.query('filter[end_date]', mapped.filterEndDate);
-    req.query('filter[end_datetime]', mapped.filterEndDatetime);
-    req.query('filter[start_date]', mapped.filterStartDate);
-    req.query('filter[start_datetime]', mapped.filterStartDatetime);
-    req.query('filter[ids]', mapped.filterIds, commaPrefix);
-    req.query('filter[codes]', mapped.filterCodes, commaPrefix);
-    req.query('currency_prices', mapped.currencyPrices);
-    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
-    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
-    return req.callAsJson(array(couponResponseSchema), requestOptions);
-  }
-
-  /**
-   * You can search for a coupon via the API with the find method. By passing a code parameter, the find
-   * will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
-   *
-   * If you have more than one product family and if the coupon you are trying to find does not belong to
-   * the default product family in your site, then you will need to specify (either in the url or as a
-   * query string param) the product family id.
-   *
-   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
-   * @param code              The code of the coupon
-   * @return Response from the API call
-   */
-  async readCouponByCode(
-    productFamilyId?: number,
-    code?: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponResponse>> {
-    const req = this.createRequest('GET', '/coupons/find.json');
-    const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, optional(number())],
-      code: [code, optional(string())],
-    });
-    req.query('product_family_id', mapped.productFamilyId);
-    req.query('code', mapped.code);
-    return req.callAsJson(couponResponseSchema, requestOptions);
-  }
-
-  /**
-   * You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this
-   * call by the ID parameter that Chargify assigns.
-   * If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
-   *
-   * When fetching a coupon, if you have defined multiple currencies at the site level, you can
-   * optionally pass the `?currency_prices=true` query param to include an array of currency price data
-   * in the response.
-   *
-   * If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current
-   * exchange rate. If the flag is set to false, it will return all of the defined prices for each
-   * currency.
-   *
-   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
-   * @param couponId          The Chargify id of the coupon
-   * @return Response from the API call
-   */
-  async readCoupon(
-    productFamilyId: number,
-    couponId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
-      couponId: [couponId, number()],
-    });
-    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
-    return req.callAsJson(couponResponseSchema, requestOptions);
-  }
-
-  /**
    * ## Update Coupon
    *
    * You can update a Coupon via the API with a PUT request to the resource endpoint.
@@ -289,30 +108,6 @@ export class CouponsController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
-    return req.callAsJson(couponResponseSchema, requestOptions);
-  }
-
-  /**
-   * You can archive a Coupon via the API with the archive method.
-   * Archiving makes that Coupon unavailable for future use, but allows it to remain attached and
-   * functional on existing Subscriptions that are using it.
-   * The `archived_at` date and time will be assigned.
-   *
-   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
-   * @param couponId          The Chargify id of the coupon
-   * @return Response from the API call
-   */
-  async archiveCoupon(
-    productFamilyId: number,
-    couponId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponResponse>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
-      couponId: [couponId, number()],
-    });
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
@@ -507,86 +302,6 @@ export class CouponsController extends BaseController {
   }
 
   /**
-   * You can verify if a specific coupon code is valid using the `validate` method. This method is useful
-   * for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the
-   * coupon will be returned with a 200 status code.
-   *
-   * If the coupon is invalid, the status code will be 404 and the response will say why it is invalid.
-   * If the coupon is valid, the status code will be 200 and the coupon will be returned. The following
-   * reasons for invalidity are supported:
-   *
-   * + Coupon not found
-   * + Coupon is invalid
-   * + Coupon expired
-   *
-   * If you have more than one product family and if the coupon you are validating does not belong to the
-   * first product family in your site, then you will need to specify the product family, either in the
-   * url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-
-   * family` format.
-   *
-   * Eg.
-   *
-   * ```
-   * https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.
-   * <format>?code=<coupon_code>
-   * ```
-   *
-   * Or:
-   *
-   * ```
-   * https://<subdomain>.chargify.com/coupons/validate.<format>?
-   * code=<coupon_code>&product_family_id=<id>
-   * ```
-   *
-   * @param code              The code of the coupon
-   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
-   * @return Response from the API call
-   */
-  async validateCoupon(
-    code: string,
-    productFamilyId?: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponResponse>> {
-    const req = this.createRequest('GET', '/coupons/validate.json');
-    const mapped = req.prepareArgs({
-      code: [code, string()],
-      productFamilyId: [productFamilyId, optional(number())],
-    });
-    req.query('code', mapped.code);
-    req.query('product_family_id', mapped.productFamilyId);
-    req.throwOn(404, SingleStringErrorResponseError, 'Not Found');
-    return req.callAsJson(couponResponseSchema, requestOptions);
-  }
-
-  /**
-   * This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple
-   * prices can be created or updated in a single request but each of the currencies must be defined on
-   * the site level already and the coupon must be an amount-based coupon, not percentage.
-   *
-   * Currency pricing for coupons must mirror the setup of the primary coupon pricing - if the primary
-   * coupon is percentage based, you will not be able to define pricing in non-primary currencies.
-   *
-   * @param couponId     The Chargify id of the coupon
-   * @param body
-   * @return Response from the API call
-   */
-  async updateCouponCurrencyPrices(
-    couponId: number,
-    body?: CouponCurrencyRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CouponCurrencyResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      couponId: [couponId, number()],
-      body: [body, optional(couponCurrencyRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/coupons/${mapped.couponId}/currency_prices.json`;
-    return req.callAsJson(couponCurrencyResponseSchema, requestOptions);
-  }
-
-  /**
    * ## Coupon Subcodes Intro
    *
    * Coupon Subcodes allow you to create a set of unique codes that allow you to expand the use of one
@@ -657,6 +372,57 @@ export class CouponsController extends BaseController {
   }
 
   /**
+   * You can search for a coupon via the API with the find method. By passing a code parameter, the find
+   * will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
+   *
+   * If you have more than one product family and if the coupon you are trying to find does not belong to
+   * the default product family in your site, then you will need to specify (either in the url or as a
+   * query string param) the product family id.
+   *
+   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
+   * @param code              The code of the coupon
+   * @return Response from the API call
+   */
+  async readCouponByCode(
+    productFamilyId?: number,
+    code?: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CouponResponse>> {
+    const req = this.createRequest('GET', '/coupons/find.json');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, optional(number())],
+      code: [code, optional(string())],
+    });
+    req.query('product_family_id', mapped.productFamilyId);
+    req.query('code', mapped.code);
+    return req.callAsJson(couponResponseSchema, requestOptions);
+  }
+
+  /**
+   * You can archive a Coupon via the API with the archive method.
+   * Archiving makes that Coupon unavailable for future use, but allows it to remain attached and
+   * functional on existing Subscriptions that are using it.
+   * The `archived_at` date and time will be assigned.
+   *
+   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
+   * @param couponId          The Chargify id of the coupon
+   * @return Response from the API call
+   */
+  async archiveCoupon(
+    productFamilyId: number,
+    couponId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CouponResponse>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      couponId: [couponId, number()],
+    });
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
+    return req.callAsJson(couponResponseSchema, requestOptions);
+  }
+
+  /**
    * This request allows you to request the subcodes that are attached to a coupon.
    *
    * @param couponId  The Chargify id of the coupon
@@ -695,6 +461,89 @@ export class CouponsController extends BaseController {
   }
 
   /**
+   * You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this
+   * call by the ID parameter that Chargify assigns.
+   * If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
+   *
+   * When fetching a coupon, if you have defined multiple currencies at the site level, you can
+   * optionally pass the `?currency_prices=true` query param to include an array of currency price data
+   * in the response.
+   *
+   * If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current
+   * exchange rate. If the flag is set to false, it will return all of the defined prices for each
+   * currency.
+   *
+   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
+   * @param couponId          The Chargify id of the coupon
+   * @return Response from the API call
+   */
+  async readCoupon(
+    productFamilyId: number,
+    couponId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CouponResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      couponId: [couponId, number()],
+    });
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
+    return req.callAsJson(couponResponseSchema, requestOptions);
+  }
+
+  /**
+   * You can verify if a specific coupon code is valid using the `validate` method. This method is useful
+   * for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the
+   * coupon will be returned with a 200 status code.
+   *
+   * If the coupon is invalid, the status code will be 404 and the response will say why it is invalid.
+   * If the coupon is valid, the status code will be 200 and the coupon will be returned. The following
+   * reasons for invalidity are supported:
+   *
+   * + Coupon not found
+   * + Coupon is invalid
+   * + Coupon expired
+   *
+   * If you have more than one product family and if the coupon you are validating does not belong to the
+   * first product family in your site, then you will need to specify the product family, either in the
+   * url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-
+   * family` format.
+   *
+   * Eg.
+   *
+   * ```
+   * https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.
+   * <format>?code=<coupon_code>
+   * ```
+   *
+   * Or:
+   *
+   * ```
+   * https://<subdomain>.chargify.com/coupons/validate.<format>?
+   * code=<coupon_code>&product_family_id=<id>
+   * ```
+   *
+   * @param code              The code of the coupon
+   * @param productFamilyId   The Chargify id of the product family to which the coupon belongs
+   * @return Response from the API call
+   */
+  async validateCoupon(
+    code: string,
+    productFamilyId?: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CouponResponse>> {
+    const req = this.createRequest('GET', '/coupons/validate.json');
+    const mapped = req.prepareArgs({
+      code: [code, string()],
+      productFamilyId: [productFamilyId, optional(number())],
+    });
+    req.query('code', mapped.code);
+    req.query('product_family_id', mapped.productFamilyId);
+    req.throwOn(404, SingleStringErrorResponseError, 'Not Found');
+    return req.callAsJson(couponResponseSchema, requestOptions);
+  }
+
+  /**
    * You can update the subcodes for the given Coupon via the API with a PUT request to the resource
    * endpoint.
    * Send an array of new coupon subcodes.
@@ -727,6 +576,157 @@ export class CouponsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes.json`;
     return req.callAsJson(couponSubcodesResponseSchema, requestOptions);
+  }
+
+  /**
+   * List coupons for a specific Product Family in a Site.
+   *
+   * If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current
+   * exchange rate. If the flag is set to false, it will return all of the defined prices for each
+   * currency.
+   *
+   * @param productFamilyId                The Chargify id of the product family to which the coupon
+   *                                                         belongs
+   * @param page                           Result records are organized in pages. By default, the
+   *                                                         first page of results is displayed. The page parameter
+   *                                                         specifies a page number of results to fetch. You can start
+   *                                                         navigating through the pages to consume the results. You
+   *                                                         do this by passing in a page parameter. Retrieve the next
+   *                                                         page by adding ?page=2 to the query string. If there are
+   *                                                         no results to return, then an empty result set will be
+   *                                                         returned. Use in query `page=1`.
+   * @param perPage                        This parameter indicates how many records to fetch in
+   *                                                         each request. Default value is 30. The maximum allowed
+   *                                                         values is 200; any per_page value over 200 will be changed
+   *                                                         to 200. Use in query `per_page=200`.
+   * @param filterDateField                The type of filter you would like to apply to your search.
+   *                                                         Use in query `filter[date_field]=created_at`.
+   * @param filterEndDate                  The end date (format YYYY-MM-DD) with which to filter the
+   *                                                         date_field. Returns coupons with a timestamp up to and
+   *                                                         including 11:59:59PM in your site’s time zone on the date
+   *                                                         specified. Use in query `filter[date_field]=2011-12-15`.
+   * @param filterEndDatetime              The end date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns coupons with a
+   *                                                         timestamp at or before exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of end_date. Use in query `?
+   *                                                         filter[end_datetime]=2011-12-1T10:15:30+01:00`.
+   * @param filterStartDate                The start date (format YYYY-MM-DD) with which to filter
+   *                                                         the date_field. Returns coupons with a timestamp at or
+   *                                                         after midnight (12:00:00 AM) in your site’s time zone on
+   *                                                         the date specified. Use in query `filter[start_date]=2011-
+   *                                                         12-17`.
+   * @param filterStartDatetime            The start date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns coupons with a
+   *                                                         timestamp at or after exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of start_date. Use in query
+   *                                                         `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
+   * @param filterIds                      Allows fetching coupons with matching id based on
+   *                                                         provided values. Use in query `filter[ids]=1,2,3`.
+   * @param filterCodes                    Allows fetching coupons with matching codes based on
+   *                                                         provided values. Use in query `filter[codes]=free,
+   *                                                         free_trial`.
+   * @param currencyPrices                 When fetching coupons, if you have defined multiple
+   *                                                         currencies at the site level, you can optionally pass the
+   *                                                         `?currency_prices=true` query param to include an array of
+   *                                                         currency price data in the response. Use in query
+   *                                                         `currency_prices=true`.
+   * @param filterUseSiteExchangeRate      Allows fetching coupons with matching
+   *                                                         use_site_exchange_rate based on provided value. Use in
+   *                                                         query `filter[use_site_exchange_rate]=true`.
+   * @return Response from the API call
+   */
+  async listCouponsForProductFamily({
+    productFamilyId,
+    page,
+    perPage,
+    filterDateField,
+    filterEndDate,
+    filterEndDatetime,
+    filterStartDate,
+    filterStartDatetime,
+    filterIds,
+    filterCodes,
+    currencyPrices,
+    filterUseSiteExchangeRate,
+  }: {
+    productFamilyId: number,
+    page?: number,
+    perPage?: number,
+    filterDateField?: BasicDateField,
+    filterEndDate?: string,
+    filterEndDatetime?: string,
+    filterStartDate?: string,
+    filterStartDatetime?: string,
+    filterIds?: number[],
+    filterCodes?: string[],
+    currencyPrices?: boolean,
+    filterUseSiteExchangeRate?: boolean,
+  },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CouponResponse[]>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
+      filterEndDate: [filterEndDate, optional(string())],
+      filterEndDatetime: [filterEndDatetime, optional(string())],
+      filterStartDate: [filterStartDate, optional(string())],
+      filterStartDatetime: [filterStartDatetime, optional(string())],
+      filterIds: [filterIds, optional(array(number()))],
+      filterCodes: [filterCodes, optional(array(string()))],
+      currencyPrices: [currencyPrices, optional(boolean())],
+      filterUseSiteExchangeRate: [
+        filterUseSiteExchangeRate,
+        optional(boolean()),
+      ],
+    });
+    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage);
+    req.query('filter[date_field]', mapped.filterDateField);
+    req.query('filter[end_date]', mapped.filterEndDate);
+    req.query('filter[end_datetime]', mapped.filterEndDatetime);
+    req.query('filter[start_date]', mapped.filterStartDate);
+    req.query('filter[start_datetime]', mapped.filterStartDatetime);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[codes]', mapped.filterCodes, commaPrefix);
+    req.query('currency_prices', mapped.currencyPrices);
+    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
+    return req.callAsJson(array(couponResponseSchema), requestOptions);
+  }
+
+  /**
+   * This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple
+   * prices can be created or updated in a single request but each of the currencies must be defined on
+   * the site level already and the coupon must be an amount-based coupon, not percentage.
+   *
+   * Currency pricing for coupons must mirror the setup of the primary coupon pricing - if the primary
+   * coupon is percentage based, you will not be able to define pricing in non-primary currencies.
+   *
+   * @param couponId     The Chargify id of the coupon
+   * @param body
+   * @return Response from the API call
+   */
+  async updateCouponCurrencyPrices(
+    couponId: number,
+    body?: CouponCurrencyRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CouponCurrencyResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      couponId: [couponId, number()],
+      body: [body, optional(couponCurrencyRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/coupons/${mapped.couponId}/currency_prices.json`;
+    return req.callAsJson(couponCurrencyResponseSchema, requestOptions);
   }
 
   /**

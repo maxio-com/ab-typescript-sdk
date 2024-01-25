@@ -10,74 +10,10 @@ const subscriptionGroupInvoiceAccountController = new SubscriptionGroupInvoiceAc
 
 ## Methods
 
-* [Create Subscription Group Prepayment](../../doc/controllers/subscription-group-invoice-account.md#create-subscription-group-prepayment)
 * [List Prepayments for Subscription Group](../../doc/controllers/subscription-group-invoice-account.md#list-prepayments-for-subscription-group)
-* [Issue Subscription Group Service Credits](../../doc/controllers/subscription-group-invoice-account.md#issue-subscription-group-service-credits)
+* [Create Subscription Group Prepayment](../../doc/controllers/subscription-group-invoice-account.md#create-subscription-group-prepayment)
 * [Deduct Subscription Group Service Credits](../../doc/controllers/subscription-group-invoice-account.md#deduct-subscription-group-service-credits)
-
-
-# Create Subscription Group Prepayment
-
-A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
-
-```ts
-async createSubscriptionGroupPrepayment(
-  uid: string,
-  body?: SubscriptionGroupPrepaymentRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `string` | Template, Required | The uid of the subscription group |
-| `body` | [`SubscriptionGroupPrepaymentRequest \| undefined`](../../doc/models/subscription-group-prepayment-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SubscriptionGroupPrepaymentResponse`](../../doc/models/subscription-group-prepayment-response.md)
-
-## Example Usage
-
-```ts
-const uid = 'uid0';
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.createSubscriptionGroupPrepayment(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "id": 6049554,
-  "amount_in_cents": 10000,
-  "ending_balance_in_cents": 5000,
-  "entry_type": "Debit",
-  "memo": "Debit from invoice account."
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+* [Issue Subscription Group Service Credits](../../doc/controllers/subscription-group-invoice-account.md#issue-subscription-group-service-credits)
 
 
 # List Prepayments for Subscription Group
@@ -165,16 +101,16 @@ try {
 | 404 | Not Found | `ApiError` |
 
 
-# Issue Subscription Group Service Credits
+# Create Subscription Group Prepayment
 
-Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
+A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
 
 ```ts
-async issueSubscriptionGroupServiceCredits(
+async createSubscriptionGroupPrepayment(
   uid: string,
-  body?: IssueServiceCreditRequest,
+  body?: SubscriptionGroupPrepaymentRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ServiceCreditResponse>>
+): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>>
 ```
 
 ## Parameters
@@ -182,32 +118,22 @@ async issueSubscriptionGroupServiceCredits(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The uid of the subscription group |
-| `body` | [`IssueServiceCreditRequest \| undefined`](../../doc/models/issue-service-credit-request.md) | Body, Optional | - |
+| `body` | [`SubscriptionGroupPrepaymentRequest \| undefined`](../../doc/models/subscription-group-prepayment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ServiceCreditResponse`](../../doc/models/service-credit-response.md)
+[`SubscriptionGroupPrepaymentResponse`](../../doc/models/subscription-group-prepayment-response.md)
 
 ## Example Usage
 
 ```ts
 const uid = 'uid0';
 
-const body: IssueServiceCreditRequest = {
-  serviceCredit: {
-    amount: 10,
-    memo: 'Credit the group account',
-  },
-};
-
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.issueSubscriptionGroupServiceCredits(
-  uid,
-  body
-);
+  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.createSubscriptionGroupPrepayment(uid);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -224,13 +150,11 @@ try {
 
 ```json
 {
-  "service_credit": {
-    "id": 101,
-    "amount_in_cents": 1000,
-    "ending_balance_in_cents": 2000,
-    "entry_type": "Credit",
-    "memo": "Credit to group account"
-  }
+  "id": 6049554,
+  "amount_in_cents": 10000,
+  "ending_balance_in_cents": 5000,
+  "entry_type": "Debit",
+  "memo": "Debit from invoice account."
 }
 ```
 
@@ -305,6 +229,82 @@ try {
   "ending_balance_in_cents": 0,
   "entry_type": "Debit",
   "memo": "Debit from group account"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Issue Subscription Group Service Credits
+
+Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
+
+```ts
+async issueSubscriptionGroupServiceCredits(
+  uid: string,
+  body?: IssueServiceCreditRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ServiceCreditResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `string` | Template, Required | The uid of the subscription group |
+| `body` | [`IssueServiceCreditRequest \| undefined`](../../doc/models/issue-service-credit-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ServiceCreditResponse`](../../doc/models/service-credit-response.md)
+
+## Example Usage
+
+```ts
+const uid = 'uid0';
+
+const body: IssueServiceCreditRequest = {
+  serviceCredit: {
+    amount: 10,
+    memo: 'Credit the group account',
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.issueSubscriptionGroupServiceCredits(
+  uid,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "service_credit": {
+    "id": 101,
+    "amount_in_cents": 1000,
+    "ending_balance_in_cents": 2000,
+    "entry_type": "Credit",
+    "memo": "Credit to group account"
+  }
 }
 ```
 

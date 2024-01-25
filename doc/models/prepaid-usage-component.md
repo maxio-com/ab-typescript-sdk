@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". |
+| `name` | `string` | Required | A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". |
 | `unitName` | `string \| undefined` | Optional | The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item |
 | `description` | `string \| undefined` | Optional | A description for the component that will be displayed to the user on the hosted signup page. |
 | `handle` | `string \| undefined` | Optional | A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
@@ -40,7 +40,8 @@
   "unit_name": "unit_name4",
   "description": "description8",
   "handle": "handle8",
-  "taxable": false
+  "taxable": false,
+  "pricing_scheme": "stairstep"
 }
 ```
 

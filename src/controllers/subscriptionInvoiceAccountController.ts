@@ -52,25 +52,6 @@ import { BaseController } from './baseController';
 
 export class SubscriptionInvoiceAccountController extends BaseController {
   /**
-   * Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and
-   * Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @return Response from the API call
-   */
-  async readAccountBalances(
-    subscriptionId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<AccountBalances>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-    });
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/account_balances.json`;
-    return req.callAsJson(accountBalancesSchema, requestOptions);
-  }
-
-  /**
    * ## Create Prepayment
    *
    * In order to specify a prepayment made against a subscription, specify the `amount, memo, details,
@@ -101,6 +82,25 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
     return req.callAsJson(createPrepaymentResponseSchema, requestOptions);
+  }
+
+  /**
+   * Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and
+   * Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @return Response from the API call
+   */
+  async readAccountBalances(
+    subscriptionId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<AccountBalances>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+    });
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/account_balances.json`;
+    return req.callAsJson(accountBalancesSchema, requestOptions);
   }
 
   /**

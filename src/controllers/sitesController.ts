@@ -16,30 +16,35 @@ import { BaseController } from './baseController';
 
 export class SitesController extends BaseController {
   /**
-   * This endpoint allows you to fetch some site data.
+   * This endpoint returns public keys used for Chargify.js.
    *
-   * Full documentation on Sites in the Chargify UI can be located [here](https://chargify.zendesk.
-   * com/hc/en-us/articles/4407870738587).
-   *
-   * Specifically, the [Clearing Site Data](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405428327309) section is extremely relevant to this endpoint documentation.
-   *
-   * #### Relationship invoicing enabled
-   * If site has RI enabled then you will see more settings like:
-   *
-   * "customer_hierarchy_enabled": true,
-   * "whopays_enabled": true,
-   * "whopays_default_payer": "self"
-   * You can read more about these settings here:
-   * [Who Pays & Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291)
-   *
+   * @param page     Result records are organized in pages. By default, the first page of results is
+   *                           displayed. The page parameter specifies a page number of results to fetch. You can start
+   *                           navigating through the pages to consume the results. You do this by passing in a page
+   *                           parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no
+   *                           results to return, then an empty result set will be returned. Use in query `page=1`.
+   * @param perPage  This parameter indicates how many records to fetch in each request. Default value is 20.
+   *                           The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+   *                           Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async readSite(
+  async listChargifyJsPublicKeys({
+    page,
+    perPage,
+  }: {
+    page?: number,
+    perPage?: number,
+  },
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SiteResponse>> {
-    const req = this.createRequest('GET', '/site.json');
-    return req.callAsJson(siteResponseSchema, requestOptions);
+  ): Promise<ApiResponse<ListPublicKeysResponse>> {
+    const req = this.createRequest('GET', '/chargify_js_keys.json');
+    const mapped = req.prepareArgs({
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+    });
+    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage);
+    return req.callAsJson(listPublicKeysResponseSchema, requestOptions);
   }
 
   /**
@@ -70,34 +75,29 @@ export class SitesController extends BaseController {
   }
 
   /**
-   * This endpoint returns public keys used for Chargify.js.
+   * This endpoint allows you to fetch some site data.
    *
-   * @param page     Result records are organized in pages. By default, the first page of results is
-   *                           displayed. The page parameter specifies a page number of results to fetch. You can start
-   *                           navigating through the pages to consume the results. You do this by passing in a page
-   *                           parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no
-   *                           results to return, then an empty result set will be returned. Use in query `page=1`.
-   * @param perPage  This parameter indicates how many records to fetch in each request. Default value is 20.
-   *                           The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-   *                           Use in query `per_page=200`.
+   * Full documentation on Sites in the Chargify UI can be located [here](https://chargify.zendesk.
+   * com/hc/en-us/articles/4407870738587).
+   *
+   * Specifically, the [Clearing Site Data](https://maxio-chargify.zendesk.com/hc/en-
+   * us/articles/5405428327309) section is extremely relevant to this endpoint documentation.
+   *
+   * #### Relationship invoicing enabled
+   * If site has RI enabled then you will see more settings like:
+   *
+   * "customer_hierarchy_enabled": true,
+   * "whopays_enabled": true,
+   * "whopays_default_payer": "self"
+   * You can read more about these settings here:
+   * [Who Pays & Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291)
+   *
    * @return Response from the API call
    */
-  async listChargifyJsPublicKeys({
-    page,
-    perPage,
-  }: {
-    page?: number,
-    perPage?: number,
-  },
+  async readSite(
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ListPublicKeysResponse>> {
-    const req = this.createRequest('GET', '/chargify_js_keys.json');
-    const mapped = req.prepareArgs({
-      page: [page, optional(number())],
-      perPage: [perPage, optional(number())],
-    });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    return req.callAsJson(listPublicKeysResponseSchema, requestOptions);
+  ): Promise<ApiResponse<SiteResponse>> {
+    const req = this.createRequest('GET', '/site.json');
+    return req.callAsJson(siteResponseSchema, requestOptions);
   }
 }

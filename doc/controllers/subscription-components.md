@@ -10,210 +10,23 @@ const subscriptionComponentsController = new SubscriptionComponentsController(cl
 
 ## Methods
 
-* [Read Subscription Component](../../doc/controllers/subscription-components.md#read-subscription-component)
-* [List Subscription Components](../../doc/controllers/subscription-components.md#list-subscription-components)
 * [Update Subscription Components Price Points](../../doc/controllers/subscription-components.md#update-subscription-components-price-points)
-* [Reset Subscription Components Price Points](../../doc/controllers/subscription-components.md#reset-subscription-components-price-points)
 * [Allocate Component](../../doc/controllers/subscription-components.md#allocate-component)
-* [List Allocations](../../doc/controllers/subscription-components.md#list-allocations)
+* [Update Prepaid Usage Allocation](../../doc/controllers/subscription-components.md#update-prepaid-usage-allocation)
+* [Record Event](../../doc/controllers/subscription-components.md#record-event)
 * [Allocate Components](../../doc/controllers/subscription-components.md#allocate-components)
 * [Preview Allocations](../../doc/controllers/subscription-components.md#preview-allocations)
-* [Update Prepaid Usage Allocation](../../doc/controllers/subscription-components.md#update-prepaid-usage-allocation)
-* [Delete Prepaid Usage Allocation](../../doc/controllers/subscription-components.md#delete-prepaid-usage-allocation)
 * [Create Usage](../../doc/controllers/subscription-components.md#create-usage)
+* [Read Subscription Component](../../doc/controllers/subscription-components.md#read-subscription-component)
+* [List Subscription Components](../../doc/controllers/subscription-components.md#list-subscription-components)
+* [Deactivate Event Based Component](../../doc/controllers/subscription-components.md#deactivate-event-based-component)
+* [List Subscription Components for Site](../../doc/controllers/subscription-components.md#list-subscription-components-for-site)
+* [Reset Subscription Components Price Points](../../doc/controllers/subscription-components.md#reset-subscription-components-price-points)
+* [List Allocations](../../doc/controllers/subscription-components.md#list-allocations)
+* [Delete Prepaid Usage Allocation](../../doc/controllers/subscription-components.md#delete-prepaid-usage-allocation)
 * [List Usages](../../doc/controllers/subscription-components.md#list-usages)
 * [Activate Event Based Component](../../doc/controllers/subscription-components.md#activate-event-based-component)
-* [Deactivate Event Based Component](../../doc/controllers/subscription-components.md#deactivate-event-based-component)
-* [Record Event](../../doc/controllers/subscription-components.md#record-event)
 * [Record Events](../../doc/controllers/subscription-components.md#record-events)
-* [List Subscription Components for Site](../../doc/controllers/subscription-components.md#list-subscription-components-for-site)
-
-
-# Read Subscription Component
-
-This request will list information regarding a specific component owned by a subscription.
-
-```ts
-async readSubscriptionComponent(
-  subscriptionId: number,
-  componentId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionComponentResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `componentId` | `number` | Template, Required | The Chargify id of the component. Alternatively, the component's handle prefixed by `handle:` |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SubscriptionComponentResponse`](../../doc/models/subscription-component-response.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-const componentId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.readSubscriptionComponent(
-  subscriptionId,
-  componentId
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "component": {
-    "component_id": 193028,
-    "subscription_id": 14593192,
-    "allocated_quantity": 1,
-    "pricing_scheme": "per_unit",
-    "name": "Users",
-    "kind": "quantity_based_component",
-    "unit_name": "Users",
-    "price_point_id": 1,
-    "price_point_handle": "top-tier",
-    "enabled": true
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-
-
-# List Subscription Components
-
-This request will list a subscription's applied components.
-
-## Archived Components
-
-When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
-
-```ts
-async listSubscriptionComponents(
-  subscriptionId: number,
-  dateField?: SubscriptionListDateField,
-  direction?: SortingDirection,
-  endDate?: string,
-  endDatetime?: string,
-  pricePointIds?: IncludeNotNull,
-  productFamilyIds?: number[],
-  sort?: ListSubscriptionComponentsSort,
-  startDate?: string,
-  startDatetime?: string,
-  include?: ListSubscriptionComponentsInclude,
-  filterUseSiteExchangeRate?: boolean,
-  filterCurrencies?: string[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionComponentResponse[]>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
-| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
-| `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
-| `productFamilyIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
-| `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query `sort=updated_at`. |
-| `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
-| `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
-| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
-| `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=EUR,USD`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SubscriptionComponentResponse[]`](../../doc/models/subscription-component-response.md)
-
-## Example Usage
-
-```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-  subscriptionId: 222,
-  dateField: SubscriptionListDateField.UpdatedAt,
-  pricePointIds: IncludeNotNull.NotNull,
-  productFamilyIds: [
-    1,
-    2,
-    3
-  ],
-  sort: ListSubscriptionComponentsSort.UpdatedAt,
-  include: ListSubscriptionComponentsInclude.Subscription
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.listSubscriptionComponents(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "component": {
-      "component_id": 0,
-      "subscription_id": 0,
-      "allocated_quantity": 0,
-      "pricing_scheme": "per_unit",
-      "name": "string",
-      "kind": "quantity_based_component",
-      "unit_name": "string",
-      "price_point_id": 0,
-      "price_point_handle": "string",
-      "price_point_type": "default",
-      "price_point_name": "string",
-      "enabled": true,
-      "unit_balance": 0,
-      "id": 0,
-      "created_at": "2022-02-22T14:07:00-05:00",
-      "updated_at": "2022-02-22T14:07:00-05:00",
-      "component_handle": "string",
-      "archived_at": "string"
-    }
-  }
-]
-```
 
 
 # Update Subscription Components Price Points
@@ -309,153 +122,6 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ComponentPricePointError`](../../doc/models/component-price-point-error.md) |
-
-
-# Reset Subscription Components Price Points
-
-Resets all of a subscription's components to use the current default.
-
-**Note**: this will update the price point for all of the subscription's components, even ones that have not been allocated yet.
-
-```ts
-async resetSubscriptionComponentsPricePoints(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SubscriptionResponse`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.resetSubscriptionComponentsPricePoints(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": -80293620,
-    "state": "active",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2023-11-23T10:28:34-05:00",
-    "created_at": "2023-11-23T10:28:34-05:00",
-    "updated_at": "2023-11-23T10:28:34-05:00",
-    "expires_at": null,
-    "balance_in_cents": 50504234,
-    "current_period_ends_at": "2023-11-23T10:28:34-05:00",
-    "next_assessment_at": "2023-11-23T10:28:34-05:00",
-    "canceled_at": null,
-    "cancellation_message": "lorem ipsum",
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "remittance",
-    "snap_day": null,
-    "cancellation_method": "dunning",
-    "current_period_started_at": "2023-11-23T10:28:34-05:00",
-    "previous_state": "active",
-    "signup_payment_id": -45156092,
-    "signup_revenue": "do aliquip ea",
-    "delayed_cancel_at": null,
-    "coupon_code": null,
-    "total_revenue_in_cents": -49740952,
-    "product_price_in_cents": 87617888,
-    "product_version_number": 13656635,
-    "payment_type": null,
-    "referral_code": null,
-    "coupon_use_count": null,
-    "coupon_uses_allowed": null,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "current_billing_amount_in_cents": -26151968,
-    "customer": {
-      "id": 15208337,
-      "first_name": "ipsum culpa in labore eiusmod",
-      "last_name": "esse",
-      "organization": null,
-      "email": "ex eiusmod",
-      "created_at": "ad occaecat cillum",
-      "updated_at": "ut aute proident est",
-      "reference": "laboris ea cupidatat",
-      "address": null,
-      "address_2": null,
-      "city": "id eiusmod proident",
-      "state": "magna eiusmod anim non",
-      "zip": null,
-      "country": null,
-      "phone": null,
-      "portal_invite_last_sent_at": null,
-      "portal_invite_last_accepted_at": "reprehenderit labore voluptate",
-      "portal_customer_created_at": "nisi aute reprehenderit Excepteur Duis",
-      "cc_emails": "eiusmod sunt",
-      "tax_exempt": true
-    },
-    "product": {
-      "id": -74447756,
-      "name": "eu mollit nulla ut aute",
-      "handle": "esse dolor anim",
-      "description": "Lorem ut et non",
-      "accounting_code": "nisi",
-      "request_credit_card": false,
-      "expiration_interval": 1,
-      "expiration_interval_unit": "day",
-      "created_at": "2022-11-23T10:28:34-05:00",
-      "updated_at": "2022-11-23T10:28:34-05:00",
-      "price_in_cents": -4151649,
-      "interval": 20680876,
-      "interval_unit": "day",
-      "initial_charge_in_cents": null,
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "day",
-      "archived_at": null,
-      "require_credit_card": true,
-      "return_params": "magna eu",
-      "taxable": true,
-      "update_return_url": "exercitation in",
-      "tax_code": "Excepteur aliqua sunt in",
-      "initial_charge_after_trial": true,
-      "version_number": 41642597,
-      "update_return_params": "dolore labore",
-      "product_family": {
-        "id": -5356997,
-        "name": "officia amet Lorem proident enim",
-        "description": "Duis",
-        "handle": "ea dolore dolore sunt",
-        "accounting_code": null
-      },
-      "public_signup_pages": []
-    }
-  }
-}
-```
 
 
 # Allocate Component
@@ -601,36 +267,28 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# List Allocations
+# Update Prepaid Usage Allocation
 
-This endpoint returns the 50 most recent Allocations, ordered by most recent first.
+When the expiration interval options are selected on a prepaid usage component price point, all allocations will be created with an expiration date. This expiration date can be changed after the fact to allow for extending or shortening the allocation's active window.
 
-## On/Off Components
+In order to change a prepaid usage allocation's expiration date, a PUT call must be made to the allocation's endpoint with a new expiration date.
 
-When a subscription's on/off component has been toggled to on (`1`) or off (`0`), usage will be logged in this response.
+## Limitations
 
-## Querying data via Chargify gem
+A few limitations exist when changing an allocation's expiration date:
 
-You can also query the current quantity via the [official Chargify Gem.](http://github.com/chargify/chargify_api_ares)
-
-```# First way
-component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
-puts component.allocated_quantity
-# => 23
-
-# Second way
-component = Chargify::Subscription.find(7).component(1)
-puts component.allocated_quantity
-# => 23
-```
+- An expiration date can only be changed for an allocation that belongs to a price point with expiration interval options explicitly set.
+- An expiration date can be changed towards the future with no limitations.
+- An expiration date can be changed towards the past (essentially expiring it) up to the subscription's current period beginning date.
 
 ```ts
-async listAllocations(
+async updatePrepaidUsageAllocation(
   subscriptionId: number,
   componentId: number,
-  page?: number,
+  allocationId: number,
+  body?: UpdateAllocationExpirationDate,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<AllocationResponse[]>>
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -639,12 +297,13 @@ async listAllocations(
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `componentId` | `number` | Template, Required | The Chargify id of the component |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `allocationId` | `number` | Template, Required | The Chargify id of the allocation |
+| `body` | [`UpdateAllocationExpirationDate \| undefined`](../../doc/models/update-allocation-expiration-date.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`AllocationResponse[]`](../../doc/models/allocation-response.md)
+`void`
 
 ## Example Usage
 
@@ -653,15 +312,22 @@ const subscriptionId = 222;
 
 const componentId = 222;
 
-const page = 2;
+const allocationId = 24;
+
+const body: UpdateAllocationExpirationDate = {
+  allocation: {
+    expiresAt: '05/07/2021',
+  },
+};
 
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.listAllocations(
+  const { result, ...httpResponse } = await subscriptionComponentsController.updatePrepaidUsageAllocation(
   subscriptionId,
   componentId,
-  page
+  allocationId,
+  body
 );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
@@ -675,43 +341,93 @@ try {
 }
 ```
 
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "allocation": {
-      "memo": "moving to 7",
-      "timestamp": "2012-11-20T22:00:37Z",
-      "quantity": 7,
-      "previous_quantity": 3,
-      "component_id": 11960,
-      "subscription_id": 2585595,
-      "proration_upgrade_scheme": "no-prorate",
-      "proration_downgrade_scheme": "no-prorate"
-    }
-  },
-  {
-    "allocation": {
-      "memo": null,
-      "timestamp": "2012-11-20T21:48:09Z",
-      "quantity": 3,
-      "previous_quantity": 0,
-      "component_id": 11960,
-      "subscription_id": 2585595,
-      "proration_upgrade_scheme": "no-prorate",
-      "proration_downgrade_scheme": "no-prorate"
-    }
-  }
-]
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionComponentAllocationError`](../../doc/models/subscription-component-allocation-error.md) |
+
+
+# Record Event
+
+## Documentation
+
+Events-Based Billing is an evolved form of metered billing that is based on data-rich events streamed in real-time from your system to Chargify.
+
+These events can then be transformed, enriched, or analyzed to form the computed totals of usage charges billed to your customers.
+
+This API allows you to stream events into the Chargify data ingestion engine.
+
+Learn more about the feature in general in the [Events-Based Billing help docs](https://chargify.zendesk.com/hc/en-us/articles/4407720613403).
+
+## Record Event
+
+Use this endpoint to record a single event.
+
+*Note: this endpoint differs from the standard Chargify endpoints in that the URL subdomain will be `events` and your site subdomain will be included in the URL path. For example:*
+
+```
+https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
+```
+
+```ts
+async recordEvent(
+  subdomain: string,
+  apiHandle: string,
+  storeUid?: string,
+  body?: EBBEvent,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subdomain` | `string` | Template, Required | Your site's subdomain |
+| `apiHandle` | `string` | Template, Required | Identifies the Stream for which the event should be published. |
+| `storeUid` | `string \| undefined` | Query, Optional | If you've attached your own Keen project as a Chargify event data-store, use this parameter to indicate the data-store. |
+| `body` | [`EBBEvent \| undefined`](../../doc/models/ebb-event.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const subdomain = 'subdomain4';
+
+const apiHandle = 'api_handle6';
+
+const body: EBBEvent = {
+  chargify: {
+    timestamp: '2020-02-27T17:45:50-05:00',
+    subscriptionId: 1,
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.recordEvent(
+  subdomain,
+  apiHandle,
+  undefined,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
 
 
 # Allocate Components
@@ -1012,164 +728,6 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ComponentAllocationError`](../../doc/models/component-allocation-error.md) |
 
 
-# Update Prepaid Usage Allocation
-
-When the expiration interval options are selected on a prepaid usage component price point, all allocations will be created with an expiration date. This expiration date can be changed after the fact to allow for extending or shortening the allocation's active window.
-
-In order to change a prepaid usage allocation's expiration date, a PUT call must be made to the allocation's endpoint with a new expiration date.
-
-## Limitations
-
-A few limitations exist when changing an allocation's expiration date:
-
-- An expiration date can only be changed for an allocation that belongs to a price point with expiration interval options explicitly set.
-- An expiration date can be changed towards the future with no limitations.
-- An expiration date can be changed towards the past (essentially expiring it) up to the subscription's current period beginning date.
-
-```ts
-async updatePrepaidUsageAllocation(
-  subscriptionId: number,
-  componentId: number,
-  allocationId: number,
-  body?: UpdateAllocationExpirationDate,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `componentId` | `number` | Template, Required | The Chargify id of the component |
-| `allocationId` | `number` | Template, Required | The Chargify id of the allocation |
-| `body` | [`UpdateAllocationExpirationDate \| undefined`](../../doc/models/update-allocation-expiration-date.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-const componentId = 222;
-
-const allocationId = 24;
-
-const body: UpdateAllocationExpirationDate = {
-  allocation: {
-    expiresAt: '05/07/2021',
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.updatePrepaidUsageAllocation(
-  subscriptionId,
-  componentId,
-  allocationId,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionComponentAllocationError`](../../doc/models/subscription-component-allocation-error.md) |
-
-
-# Delete Prepaid Usage Allocation
-
-Prepaid Usage components are unique in that their allocations are always additive. In order to reduce a subscription's allocated quantity for a prepaid usage component each allocation must be destroyed individually via this endpoint.
-
-## Credit Scheme
-
-By default, destroying an allocation will generate a service credit on the subscription. This behavior can be modified with the optional `credit_scheme` parameter on this endpoint. The accepted values are:
-
-1. `none`: The allocation will be destroyed and the balances will be updated but no service credit or refund will be created.
-2. `credit`: The allocation will be destroyed and the balances will be updated and a service credit will be generated. This is also the default behavior if the `credit_scheme` param is not passed.
-3. `refund`: The allocation will be destroyed and the balances will be updated and a refund will be issued along with a Credit Note.
-
-```ts
-async deletePrepaidUsageAllocation(
-  subscriptionId: number,
-  componentId: number,
-  allocationId: number,
-  body?: CreditSchemeRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `componentId` | `number` | Template, Required | The Chargify id of the component |
-| `allocationId` | `number` | Template, Required | The Chargify id of the allocation |
-| `body` | [`CreditSchemeRequest \| undefined`](../../doc/models/credit-scheme-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-const componentId = 222;
-
-const allocationId = 24;
-
-const body: CreditSchemeRequest = {
-  creditScheme: CreditScheme.None,
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.deletePrepaidUsageAllocation(
-  subscriptionId,
-  componentId,
-  allocationId,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionComponentAllocationError`](../../doc/models/subscription-component-allocation-error.md) |
-
-
 # Create Usage
 
 ## Documentation
@@ -1308,6 +866,681 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Read Subscription Component
+
+This request will list information regarding a specific component owned by a subscription.
+
+```ts
+async readSubscriptionComponent(
+  subscriptionId: number,
+  componentId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionComponentResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `componentId` | `number` | Template, Required | The Chargify id of the component. Alternatively, the component's handle prefixed by `handle:` |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SubscriptionComponentResponse`](../../doc/models/subscription-component-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const componentId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.readSubscriptionComponent(
+  subscriptionId,
+  componentId
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "component": {
+    "component_id": 193028,
+    "subscription_id": 14593192,
+    "allocated_quantity": 1,
+    "pricing_scheme": "per_unit",
+    "name": "Users",
+    "kind": "quantity_based_component",
+    "unit_name": "Users",
+    "price_point_id": 1,
+    "price_point_handle": "top-tier",
+    "enabled": true
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+
+
+# List Subscription Components
+
+This request will list a subscription's applied components.
+
+## Archived Components
+
+When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
+
+```ts
+async listSubscriptionComponents(
+  subscriptionId: number,
+  dateField?: SubscriptionListDateField,
+  direction?: SortingDirection,
+  endDate?: string,
+  endDatetime?: string,
+  pricePointIds?: IncludeNotNull,
+  productFamilyIds?: number[],
+  sort?: ListSubscriptionComponentsSort,
+  startDate?: string,
+  startDatetime?: string,
+  include?: ListSubscriptionComponentsInclude,
+  filterUseSiteExchangeRate?: boolean,
+  filterCurrencies?: string[],
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionComponentResponse[]>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
+| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
+| `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
+| `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
+| `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
+| `productFamilyIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
+| `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query `sort=updated_at`. |
+| `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
+| `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. |
+| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
+| `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=EUR,USD`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SubscriptionComponentResponse[]`](../../doc/models/subscription-component-response.md)
+
+## Example Usage
+
+```ts
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  subscriptionId: 222,
+  dateField: SubscriptionListDateField.UpdatedAt,
+  pricePointIds: IncludeNotNull.NotNull,
+  productFamilyIds: [
+    1,
+    2,
+    3
+  ],
+  sort: ListSubscriptionComponentsSort.UpdatedAt,
+  include: ListSubscriptionComponentsInclude.Subscription
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.listSubscriptionComponents(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "component": {
+      "component_id": 0,
+      "subscription_id": 0,
+      "allocated_quantity": 0,
+      "pricing_scheme": "per_unit",
+      "name": "string",
+      "kind": "quantity_based_component",
+      "unit_name": "string",
+      "price_point_id": 0,
+      "price_point_handle": "string",
+      "price_point_type": "default",
+      "price_point_name": "string",
+      "enabled": true,
+      "unit_balance": 0,
+      "id": 0,
+      "created_at": "2022-02-22T14:07:00-05:00",
+      "updated_at": "2022-02-22T14:07:00-05:00",
+      "component_handle": "string",
+      "archived_at": "string"
+    }
+  }
+]
+```
+
+
+# Deactivate Event Based Component
+
+Use this endpoint to deactivate an event-based component for a single subscription. Deactivating the event-based component causes Chargify to ignore related events at subscription renewal.
+
+```ts
+async deactivateEventBasedComponent(
+  subscriptionId: number,
+  componentId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `componentId` | `number` | Template, Required | The Chargify id of the component |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const componentId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.deactivateEventBasedComponent(
+  subscriptionId,
+  componentId
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# List Subscription Components for Site
+
+This request will list components applied to each subscription.
+
+```ts
+async listSubscriptionComponentsForSite(
+  page?: number,
+  perPage?: number,
+  sort?: ListSubscriptionComponentsSort,
+  direction?: SortingDirection,
+  dateField?: SubscriptionListDateField,
+  startDate?: string,
+  startDatetime?: string,
+  endDate?: string,
+  endDatetime?: string,
+  subscriptionIds?: number[],
+  pricePointIds?: IncludeNotNull,
+  productFamilyIds?: number[],
+  include?: ListSubscriptionComponentsInclude,
+  filterUseSiteExchangeRate?: boolean,
+  filterCurrencies?: string[],
+  filterSubscriptionStates?: SubscriptionStateFilter[],
+  filterSubscriptionDateField?: SubscriptionListDateField,
+  filterSubscriptionStartDate?: string,
+  filterSubscriptionStartDatetime?: string,
+  filterSubscriptionEndDate?: string,
+  filterSubscriptionEndDatetime?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListSubscriptionComponentsResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
+| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
+| `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
+| `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2011-12-15`. |
+| `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
+| `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2011-12-16`. |
+| `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `end_datetime=2022-07-01 09:00:05`. |
+| `subscriptionIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching subscription id based on provided ids. Use in query `subscription_ids=1,2,3`. |
+| `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
+| `productFamilyIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
+| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
+| `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=USD,EUR`. |
+| `filterSubscriptionStates` | [`SubscriptionStateFilter[] \| undefined`](../../doc/models/subscription-state-filter.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
+| `filterSubscriptionDateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ListSubscriptionComponentsResponse`](../../doc/models/list-subscription-components-response.md)
+
+## Example Usage
+
+```ts
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+  page: 2,
+  perPage: 50,
+  sort: ListSubscriptionComponentsSort.UpdatedAt,
+  dateField: SubscriptionListDateField.UpdatedAt,
+  subscriptionIds: [
+    1,
+    2,
+    3
+  ],
+  pricePointIds: IncludeNotNull.NotNull,
+  productFamilyIds: [
+    1,
+    2,
+    3
+  ],
+  include: ListSubscriptionComponentsInclude.Subscription
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.listSubscriptionComponentsForSite(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# Reset Subscription Components Price Points
+
+Resets all of a subscription's components to use the current default.
+
+**Note**: this will update the price point for all of the subscription's components, even ones that have not been allocated yet.
+
+```ts
+async resetSubscriptionComponentsPricePoints(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SubscriptionResponse`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.resetSubscriptionComponentsPricePoints(subscriptionId);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": -80293620,
+    "state": "active",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2023-11-23T10:28:34-05:00",
+    "created_at": "2023-11-23T10:28:34-05:00",
+    "updated_at": "2023-11-23T10:28:34-05:00",
+    "expires_at": null,
+    "balance_in_cents": 50504234,
+    "current_period_ends_at": "2023-11-23T10:28:34-05:00",
+    "next_assessment_at": "2023-11-23T10:28:34-05:00",
+    "canceled_at": null,
+    "cancellation_message": "lorem ipsum",
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "remittance",
+    "snap_day": null,
+    "cancellation_method": "dunning",
+    "current_period_started_at": "2023-11-23T10:28:34-05:00",
+    "previous_state": "active",
+    "signup_payment_id": -45156092,
+    "signup_revenue": "do aliquip ea",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": -49740952,
+    "product_price_in_cents": 87617888,
+    "product_version_number": 13656635,
+    "payment_type": null,
+    "referral_code": null,
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "current_billing_amount_in_cents": -26151968,
+    "customer": {
+      "id": 15208337,
+      "first_name": "ipsum culpa in labore eiusmod",
+      "last_name": "esse",
+      "organization": null,
+      "email": "ex eiusmod",
+      "created_at": "ad occaecat cillum",
+      "updated_at": "ut aute proident est",
+      "reference": "laboris ea cupidatat",
+      "address": null,
+      "address_2": null,
+      "city": "id eiusmod proident",
+      "state": "magna eiusmod anim non",
+      "zip": null,
+      "country": null,
+      "phone": null,
+      "portal_invite_last_sent_at": null,
+      "portal_invite_last_accepted_at": "reprehenderit labore voluptate",
+      "portal_customer_created_at": "nisi aute reprehenderit Excepteur Duis",
+      "cc_emails": "eiusmod sunt",
+      "tax_exempt": true
+    },
+    "product": {
+      "id": -74447756,
+      "name": "eu mollit nulla ut aute",
+      "handle": "esse dolor anim",
+      "description": "Lorem ut et non",
+      "accounting_code": "nisi",
+      "request_credit_card": false,
+      "expiration_interval": 1,
+      "expiration_interval_unit": "day",
+      "created_at": "2022-11-23T10:28:34-05:00",
+      "updated_at": "2022-11-23T10:28:34-05:00",
+      "price_in_cents": -4151649,
+      "interval": 20680876,
+      "interval_unit": "day",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "day",
+      "archived_at": null,
+      "require_credit_card": true,
+      "return_params": "magna eu",
+      "taxable": true,
+      "update_return_url": "exercitation in",
+      "tax_code": "Excepteur aliqua sunt in",
+      "initial_charge_after_trial": true,
+      "version_number": 41642597,
+      "update_return_params": "dolore labore",
+      "product_family": {
+        "id": -5356997,
+        "name": "officia amet Lorem proident enim",
+        "description": "Duis",
+        "handle": "ea dolore dolore sunt",
+        "accounting_code": null
+      },
+      "public_signup_pages": []
+    }
+  }
+}
+```
+
+
+# List Allocations
+
+This endpoint returns the 50 most recent Allocations, ordered by most recent first.
+
+## On/Off Components
+
+When a subscription's on/off component has been toggled to on (`1`) or off (`0`), usage will be logged in this response.
+
+## Querying data via Chargify gem
+
+You can also query the current quantity via the [official Chargify Gem.](http://github.com/chargify/chargify_api_ares)
+
+```# First way
+component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
+puts component.allocated_quantity
+# => 23
+
+# Second way
+component = Chargify::Subscription.find(7).component(1)
+puts component.allocated_quantity
+# => 23
+```
+
+```ts
+async listAllocations(
+  subscriptionId: number,
+  componentId: number,
+  page?: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<AllocationResponse[]>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `componentId` | `number` | Template, Required | The Chargify id of the component |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`AllocationResponse[]`](../../doc/models/allocation-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const componentId = 222;
+
+const page = 2;
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.listAllocations(
+  subscriptionId,
+  componentId,
+  page
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "allocation": {
+      "memo": "moving to 7",
+      "timestamp": "2012-11-20T22:00:37Z",
+      "quantity": 7,
+      "previous_quantity": 3,
+      "component_id": 11960,
+      "subscription_id": 2585595,
+      "proration_upgrade_scheme": "no-prorate",
+      "proration_downgrade_scheme": "no-prorate"
+    }
+  },
+  {
+    "allocation": {
+      "memo": null,
+      "timestamp": "2012-11-20T21:48:09Z",
+      "quantity": 3,
+      "previous_quantity": 0,
+      "component_id": 11960,
+      "subscription_id": 2585595,
+      "proration_upgrade_scheme": "no-prorate",
+      "proration_downgrade_scheme": "no-prorate"
+    }
+  }
+]
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Delete Prepaid Usage Allocation
+
+Prepaid Usage components are unique in that their allocations are always additive. In order to reduce a subscription's allocated quantity for a prepaid usage component each allocation must be destroyed individually via this endpoint.
+
+## Credit Scheme
+
+By default, destroying an allocation will generate a service credit on the subscription. This behavior can be modified with the optional `credit_scheme` parameter on this endpoint. The accepted values are:
+
+1. `none`: The allocation will be destroyed and the balances will be updated but no service credit or refund will be created.
+2. `credit`: The allocation will be destroyed and the balances will be updated and a service credit will be generated. This is also the default behavior if the `credit_scheme` param is not passed.
+3. `refund`: The allocation will be destroyed and the balances will be updated and a refund will be issued along with a Credit Note.
+
+```ts
+async deletePrepaidUsageAllocation(
+  subscriptionId: number,
+  componentId: number,
+  allocationId: number,
+  body?: CreditSchemeRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `componentId` | `number` | Template, Required | The Chargify id of the component |
+| `allocationId` | `number` | Template, Required | The Chargify id of the allocation |
+| `body` | [`CreditSchemeRequest \| undefined`](../../doc/models/credit-scheme-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const componentId = 222;
+
+const allocationId = 24;
+
+const body: CreditSchemeRequest = {
+  creditScheme: CreditScheme.None,
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await subscriptionComponentsController.deletePrepaidUsageAllocation(
+  subscriptionId,
+  componentId,
+  allocationId,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionComponentAllocationError`](../../doc/models/subscription-component-allocation-error.md) |
 
 
 # List Usages
@@ -1474,139 +1707,6 @@ try {
 ```
 
 
-# Deactivate Event Based Component
-
-Use this endpoint to deactivate an event-based component for a single subscription. Deactivating the event-based component causes Chargify to ignore related events at subscription renewal.
-
-```ts
-async deactivateEventBasedComponent(
-  subscriptionId: number,
-  componentId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `componentId` | `number` | Template, Required | The Chargify id of the component |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-const componentId = 222;
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.deactivateEventBasedComponent(
-  subscriptionId,
-  componentId
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# Record Event
-
-## Documentation
-
-Events-Based Billing is an evolved form of metered billing that is based on data-rich events streamed in real-time from your system to Chargify.
-
-These events can then be transformed, enriched, or analyzed to form the computed totals of usage charges billed to your customers.
-
-This API allows you to stream events into the Chargify data ingestion engine.
-
-Learn more about the feature in general in the [Events-Based Billing help docs](https://chargify.zendesk.com/hc/en-us/articles/4407720613403).
-
-## Record Event
-
-Use this endpoint to record a single event.
-
-*Note: this endpoint differs from the standard Chargify endpoints in that the URL subdomain will be `events` and your site subdomain will be included in the URL path. For example:*
-
-```
-https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
-```
-
-```ts
-async recordEvent(
-  subdomain: string,
-  apiHandle: string,
-  storeUid?: string,
-  body?: EBBEvent,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subdomain` | `string` | Template, Required | Your site's subdomain |
-| `apiHandle` | `string` | Template, Required | Identifies the Stream for which the event should be published. |
-| `storeUid` | `string \| undefined` | Query, Optional | If you've attached your own Keen project as a Chargify event data-store, use this parameter to indicate the data-store. |
-| `body` | [`EBBEvent \| undefined`](../../doc/models/ebb-event.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```ts
-const subdomain = 'subdomain4';
-
-const apiHandle = 'api_handle6';
-
-const body: EBBEvent = {
-  chargify: {
-    timestamp: '2020-02-27T17:45:50-05:00',
-    subscriptionId: 1,
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.recordEvent(
-  subdomain,
-  apiHandle,
-  undefined,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
 # Record Events
 
 Use this endpoint to record a collection of events.
@@ -1664,106 +1764,6 @@ try {
   undefined,
   body
 );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# List Subscription Components for Site
-
-This request will list components applied to each subscription.
-
-```ts
-async listSubscriptionComponentsForSite(
-  page?: number,
-  perPage?: number,
-  sort?: ListSubscriptionComponentsSort,
-  direction?: SortingDirection,
-  dateField?: SubscriptionListDateField,
-  startDate?: string,
-  startDatetime?: string,
-  endDate?: string,
-  endDatetime?: string,
-  subscriptionIds?: number[],
-  pricePointIds?: IncludeNotNull,
-  productFamilyIds?: number[],
-  include?: ListSubscriptionComponentsInclude,
-  filterUseSiteExchangeRate?: boolean,
-  filterCurrencies?: string[],
-  filterSubscriptionStates?: SubscriptionStateFilter[],
-  filterSubscriptionDateField?: SubscriptionListDateField,
-  filterSubscriptionStartDate?: string,
-  filterSubscriptionStartDatetime?: string,
-  filterSubscriptionEndDate?: string,
-  filterSubscriptionEndDatetime?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListSubscriptionComponentsResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
-| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
-| `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
-| `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2011-12-15`. |
-| `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
-| `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2011-12-16`. |
-| `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `end_datetime=2022-07-01 09:00:05`. |
-| `subscriptionIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching subscription id based on provided ids. Use in query `subscription_ids=1,2,3`. |
-| `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
-| `productFamilyIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
-| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
-| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
-| `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=USD,EUR`. |
-| `filterSubscriptionStates` | [`SubscriptionStateFilter[] \| undefined`](../../doc/models/subscription-state-filter.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
-| `filterSubscriptionDateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
-| `filterSubscriptionStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
-| `filterSubscriptionStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`. |
-| `filterSubscriptionEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
-| `filterSubscriptionEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ListSubscriptionComponentsResponse`](../../doc/models/list-subscription-components-response.md)
-
-## Example Usage
-
-```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-  page: 2,
-  perPage: 50,
-  sort: ListSubscriptionComponentsSort.UpdatedAt,
-  dateField: SubscriptionListDateField.UpdatedAt,
-  subscriptionIds: [
-    1,
-    2,
-    3
-  ],
-  pricePointIds: IncludeNotNull.NotNull,
-  productFamilyIds: [
-    1,
-    2,
-    3
-  ],
-  include: ListSubscriptionComponentsInclude.Subscription
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionComponentsController.listSubscriptionComponentsForSite(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

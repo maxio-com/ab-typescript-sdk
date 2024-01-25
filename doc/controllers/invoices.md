@@ -11,22 +11,22 @@ const invoicesController = new InvoicesController(client);
 ## Methods
 
 * [Refund Invoice](../../doc/controllers/invoices.md#refund-invoice)
+* [List Credit Notes](../../doc/controllers/invoices.md#list-credit-notes)
+* [Record Payment for Invoice](../../doc/controllers/invoices.md#record-payment-for-invoice)
+* [Record External Payment for Invoices](../../doc/controllers/invoices.md#record-external-payment-for-invoices)
 * [List Invoices](../../doc/controllers/invoices.md#list-invoices)
 * [Read Invoice](../../doc/controllers/invoices.md#read-invoice)
 * [List Invoice Events](../../doc/controllers/invoices.md#list-invoice-events)
-* [Record Payment for Invoice](../../doc/controllers/invoices.md#record-payment-for-invoice)
-* [Record External Payment for Invoices](../../doc/controllers/invoices.md#record-external-payment-for-invoices)
-* [List Credit Notes](../../doc/controllers/invoices.md#list-credit-notes)
+* [Void Invoice](../../doc/controllers/invoices.md#void-invoice)
+* [Preview Customer Information Changes](../../doc/controllers/invoices.md#preview-customer-information-changes)
+* [List Invoice Segments](../../doc/controllers/invoices.md#list-invoice-segments)
+* [Create Invoice](../../doc/controllers/invoices.md#create-invoice)
+* [Issue Invoice](../../doc/controllers/invoices.md#issue-invoice)
 * [Read Credit Note](../../doc/controllers/invoices.md#read-credit-note)
 * [Record Payment for Subscription](../../doc/controllers/invoices.md#record-payment-for-subscription)
 * [Reopen Invoice](../../doc/controllers/invoices.md#reopen-invoice)
-* [Void Invoice](../../doc/controllers/invoices.md#void-invoice)
-* [List Invoice Segments](../../doc/controllers/invoices.md#list-invoice-segments)
-* [Create Invoice](../../doc/controllers/invoices.md#create-invoice)
-* [Send Invoice](../../doc/controllers/invoices.md#send-invoice)
-* [Preview Customer Information Changes](../../doc/controllers/invoices.md#preview-customer-information-changes)
 * [Update Customer Information](../../doc/controllers/invoices.md#update-customer-information)
-* [Issue Invoice](../../doc/controllers/invoices.md#issue-invoice)
+* [Send Invoice](../../doc/controllers/invoices.md#send-invoice)
 
 
 # Refund Invoice
@@ -93,6 +93,577 @@ try {
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# List Credit Notes
+
+Credit Notes are like inverse invoices. They reduce the amount a customer owes.
+
+By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`, `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field as a key in the query with a value set to `true`.
+
+```ts
+async listCreditNotes(
+  subscriptionId?: number,
+  page?: number,
+  perPage?: number,
+  lineItems?: boolean,
+  discounts?: boolean,
+  taxes?: boolean,
+  refunds?: boolean,
+  applications?: boolean,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListCreditNotesResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number \| undefined` | Query, Optional | The subscription's Chargify id |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data |
+| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data |
+| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data |
+| `refunds` | `boolean \| undefined` | Query, Optional | Include refunds data |
+| `applications` | `boolean \| undefined` | Query, Optional | Include applications data |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`ListCreditNotesResponse`](../../doc/models/list-credit-notes-response.md)
+
+## Example Usage
+
+```ts
+const collect = {
+  page: 2,
+  perPage: 50,
+  lineItems: false,
+  discounts: false,
+  taxes: false,
+  refunds: false,
+  applications: false
+}
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await invoicesController.listCreditNotes(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "credit_notes": [
+    {
+      "uid": "cn_8m9vbd5kkv7kr",
+      "site_id": 20,
+      "customer_id": 3,
+      "subscription_id": 2,
+      "number": "77",
+      "sequence_number": 78,
+      "issue_date": "2018-12-31",
+      "applied_date": "2018-12-31",
+      "status": "applied",
+      "currency": "USD",
+      "memo": "Refund for overpayment",
+      "seller": {
+        "name": "Acme, Inc.",
+        "address": {
+          "street": "122 E Houston St",
+          "line2": "Suite 105",
+          "city": "San Antonio",
+          "state": "TX",
+          "zip": "78205",
+          "country": "US"
+        },
+        "phone": "555-555-1234 x137"
+      },
+      "customer": {
+        "chargify_id": 3,
+        "first_name": "Marty",
+        "last_name": "McFly",
+        "organization": "Time Travellers, Inc.",
+        "email": "timetraveller1985@example.com",
+        "reference": null
+      },
+      "billing_address": {
+        "street": "200 Billing Rd.",
+        "line2": "Suite 100",
+        "city": "Needham",
+        "state": "MA",
+        "zip": "02494",
+        "country": "US"
+      },
+      "shipping_address": {
+        "street": "100 Shipping St.",
+        "line2": "Apt 200",
+        "city": "Pleasantville",
+        "state": "NC",
+        "zip": "12345",
+        "country": "US"
+      },
+      "subtotal_amount": "208.69341779",
+      "discount_amount": "20.87125167",
+      "tax_amount": "12.67783387",
+      "total_amount": "200.5",
+      "applied_amount": "200.5",
+      "remaining_amount": "0.0",
+      "line_items": [
+        {
+          "uid": "cnli_8k5jvdzct4h9x",
+          "title": "IP Addresses: 5 to 10 addresses",
+          "description": "38.2% credit",
+          "quantity": "0.9855",
+          "unit_price": "2.0",
+          "subtotal_amount": "1.971004",
+          "discount_amount": "0.19862831",
+          "tax_amount": "0.11963536",
+          "total_amount": "1.89201105",
+          "tiered_unit_price": false,
+          "period_range_start": "2018-11-30",
+          "period_range_end": "2018-11-30",
+          "product_id": 85,
+          "product_version": 1,
+          "component_id": 81,
+          "price_point_id": 165
+        },
+        {
+          "uid": "cnli_8kjttvjcjx8b4",
+          "title": "Professional Plan",
+          "description": "38.2% credit",
+          "quantity": "0.382",
+          "unit_price": "299.0",
+          "subtotal_amount": "114.21127834",
+          "discount_amount": "11.42112783",
+          "tax_amount": "6.93833516",
+          "total_amount": "109.72848567",
+          "tiered_unit_price": false,
+          "period_range_start": "2018-12-30",
+          "period_range_end": "2018-12-30",
+          "product_id": 85,
+          "product_version": 1,
+          "component_id": null,
+          "price_point_id": null
+        },
+        {
+          "uid": "cnli_8kjttvjknzhx7",
+          "title": "Small Instance (Hourly)",
+          "description": "38.2% credit",
+          "quantity": "74.8676",
+          "unit_price": "0.12244898",
+          "subtotal_amount": "9.16746047",
+          "discount_amount": "0.91674605",
+          "tax_amount": "0.55692322",
+          "total_amount": "8.80763764",
+          "tiered_unit_price": true,
+          "period_range_start": "2018-11-30",
+          "period_range_end": "2018-11-30",
+          "product_id": 85,
+          "product_version": 1,
+          "component_id": 78,
+          "price_point_id": null
+        },
+        {
+          "uid": "cnli_8kjttvjnmh25w",
+          "title": "Large Instance (Hourly)",
+          "description": "38.2% credit",
+          "quantity": "183.3492",
+          "unit_price": "0.39583333",
+          "subtotal_amount": "72.57572871",
+          "discount_amount": "7.25757287",
+          "tax_amount": "4.40897552",
+          "total_amount": "69.72713136",
+          "tiered_unit_price": true,
+          "period_range_start": "2018-11-30",
+          "period_range_end": "2018-11-30",
+          "product_id": 85,
+          "product_version": 1,
+          "component_id": 79,
+          "price_point_id": null
+        },
+        {
+          "uid": "cnli_8kjttvjqn86kc",
+          "title": "Email Messages",
+          "description": "38.2% credit",
+          "quantity": "10076.9489",
+          "unit_price": "0.00031045",
+          "subtotal_amount": "3.12839588",
+          "discount_amount": "0.31322157",
+          "tax_amount": "0.19002427",
+          "total_amount": "3.00519858",
+          "tiered_unit_price": true,
+          "period_range_start": "2018-11-30",
+          "period_range_end": "2018-11-30",
+          "product_id": 85,
+          "product_version": 1,
+          "component_id": 80,
+          "price_point_id": null
+        },
+        {
+          "uid": "cnli_8kjttvjtxxbdd",
+          "title": "IP Addresses",
+          "description": "38.2% credit",
+          "quantity": "3.8198",
+          "unit_price": "2.0",
+          "subtotal_amount": "7.63955039",
+          "discount_amount": "0.76395504",
+          "tax_amount": "0.46410269",
+          "total_amount": "7.33969804",
+          "tiered_unit_price": false,
+          "period_range_start": "2018-12-30",
+          "period_range_end": "2018-12-30",
+          "product_id": 85,
+          "product_version": 1,
+          "component_id": 81,
+          "price_point_id": 165
+        }
+      ],
+      "discounts": [
+        {
+          "uid": "cndli_8k5jvdzct4h9y",
+          "title": "Multi-service discount (10%)",
+          "code": "MULTI3",
+          "source_type": "Coupon",
+          "source_id": 40,
+          "discount_type": "percentage",
+          "percentage": "10.0",
+          "eligible_amount": "208.69341779",
+          "discount_amount": "20.87125167",
+          "line_item_breakouts": [
+            {
+              "uid": "cnli_8k5jvdzct4h9x",
+              "eligible_amount": "1.971004",
+              "discount_amount": "0.19862831"
+            },
+            {
+              "uid": "cnli_8kjttvjcjx8b4",
+              "eligible_amount": "114.21127834",
+              "discount_amount": "11.42112783"
+            },
+            {
+              "uid": "cnli_8kjttvjknzhx7",
+              "eligible_amount": "9.16746047",
+              "discount_amount": "0.91674605"
+            },
+            {
+              "uid": "cnli_8kjttvjnmh25w",
+              "eligible_amount": "72.57572871",
+              "discount_amount": "7.25757287"
+            },
+            {
+              "uid": "cnli_8kjttvjqn86kc",
+              "eligible_amount": "3.12839588",
+              "discount_amount": "0.31322157"
+            },
+            {
+              "uid": "cnli_8kjttvjtxxbdd",
+              "eligible_amount": "7.63955039",
+              "discount_amount": "0.76395504"
+            }
+          ]
+        }
+      ],
+      "taxes": [
+        {
+          "uid": "cntli_8k5jvdzct4h9z",
+          "title": "NC Sales Tax",
+          "source_type": "Tax",
+          "source_id": 1,
+          "percentage": "6.75",
+          "taxable_amount": "187.82216613",
+          "tax_amount": "12.67783387",
+          "line_item_breakouts": [
+            {
+              "uid": "cnli_8k5jvdzct4h9x",
+              "taxable_amount": "1.77237569",
+              "tax_amount": "0.11963536"
+            },
+            {
+              "uid": "cnli_8kjttvjcjx8b4",
+              "taxable_amount": "102.7901505",
+              "tax_amount": "6.93833516"
+            },
+            {
+              "uid": "cnli_8kjttvjknzhx7",
+              "taxable_amount": "8.25071442",
+              "tax_amount": "0.55692322"
+            },
+            {
+              "uid": "cnli_8kjttvjnmh25w",
+              "taxable_amount": "65.31815584",
+              "tax_amount": "4.40897552"
+            },
+            {
+              "uid": "cnli_8kjttvjqn86kc",
+              "taxable_amount": "2.81517432",
+              "tax_amount": "0.19002427"
+            },
+            {
+              "uid": "cnli_8kjttvjtxxbdd",
+              "taxable_amount": "6.87559535",
+              "tax_amount": "0.46410269"
+            }
+          ]
+        }
+      ],
+      "applications": [
+        {
+          "uid": "cdt_8m9vbdbdwd28n",
+          "transaction_time": "2018-12-31T21:19:28Z",
+          "invoice_uid": "inv_8k5jvdzct4hb2",
+          "memo": "Refund for overpayment",
+          "applied_amount": "200.5"
+        }
+      ],
+      "refunds": [
+        {
+          "transaction_id": 329,
+          "payment_id": 39,
+          "memo": "Refund for overpayment",
+          "original_amount": "524.9",
+          "applied_amount": "200.5"
+        }
+      ]
+    }
+  ]
+}
+```
+
+
+# Record Payment for Invoice
+
+This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
+
+## Create a Payment from the existing payment profile
+
+In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID of a payment profile might be retrieved via the Payment Profiles API endpoint.
+
+```
+{
+  "type": "payment",
+  "payment": {
+    "amount": 10.00,
+    "payment_profile_id": 123
+  }
+}
+```
+
+## Create a Payment from the Subscription's Prepayment Account
+
+In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
+
+```
+{
+  "type": "prepayment",
+  "payment": {
+    "amount": 10.00
+  }
+}
+```
+
+Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
+
+## Create a Payment from the Subscription's Service Credit Account
+
+In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also the `amount`:
+
+```
+{
+  "type": "service_credit",
+  "payment": {
+    "amount": 10.00
+  }
+}
+```
+
+Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+
+```ts
+async recordPaymentForInvoice(
+  uid: string,
+  body?: CreateInvoicePaymentRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `body` | [`CreateInvoicePaymentRequest \| undefined`](../../doc/models/create-invoice-payment-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```ts
+const uid = 'uid0';
+
+const body: CreateInvoicePaymentRequest = {
+  payment: {
+    amount: 124.33,
+    memo: 'for John Smith',
+    method: InvoicePaymentMethodType.Check,
+    details: '#0102',
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await invoicesController.recordPaymentForInvoice(
+  uid,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+
+# Record External Payment for Invoices
+
+This API call should be used when you want to record an external payment against multiple invoices.
+
+In order apply a payment to multiple invoices, at minimum, specify the `amount` and `applications` (i.e., `invoice_uid` and `amount`) details.
+
+```
+{
+  "payment": {
+    "memo": "to pay the bills",
+    "details": "check number 8675309",
+    "method": "check",
+    "amount": "250.00",
+    "applications": [
+      {
+        "invoice_uid": "inv_8gk5bwkct3gqt",
+        "amount": "100.00"
+      },
+      {
+        "invoice_uid": "inv_7bc6bwkct3lyt",
+        "amount": "150.00"
+      }
+    ]
+  }
+}
+```
+
+Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal to invoices payment amount sum.
+
+```ts
+async recordExternalPaymentForInvoices(
+  body?: CreateMultiInvoicePaymentRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<MultiInvoicePaymentResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateMultiInvoicePaymentRequest \| undefined`](../../doc/models/create-multi-invoice-payment-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`MultiInvoicePaymentResponse`](../../doc/models/multi-invoice-payment-response.md)
+
+## Example Usage
+
+```ts
+const body: CreateMultiInvoicePaymentRequest = {
+  payment: {
+    amount: '100.00',
+    applications: [
+      {
+        invoiceUid: 'inv_8gk5bwkct3gqt',
+        amount: '50.00',
+      },
+      {
+        invoiceUid: 'inv_7bc6bwkct3lyt',
+        amount: '50.00',
+      }
+    ],
+    memo: 'to pay the bills',
+    details: 'check number 8675309',
+    method: InvoicePaymentMethodType.Check,
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await invoicesController.recordExternalPaymentForInvoices(body);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "payment": {
+    "transaction_id": 1,
+    "total_amount": "100.00",
+    "currency_code": "USD",
+    "applications": [
+      {
+        "invoice_uid": "inv_8gk5bwkct3gqt",
+        "application_uid": "pmt_1tr0hgsct3ybx",
+        "applied_amount": "50.00"
+      },
+      {
+        "invoice_uid": "inv_7bc6bwkct3lyt",
+        "application_uid": "pmt_2",
+        "applied_amount": "50.00"
+      }
+    ]
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # List Invoices
@@ -1091,1049 +1662,6 @@ try {
 ```
 
 
-# Record Payment for Invoice
-
-This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
-
-## Create a Payment from the existing payment profile
-
-In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID of a payment profile might be retrieved via the Payment Profiles API endpoint.
-
-```
-{
-  "type": "payment",
-  "payment": {
-    "amount": 10.00,
-    "payment_profile_id": 123
-  }
-}
-```
-
-## Create a Payment from the Subscription's Prepayment Account
-
-In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
-
-```
-{
-  "type": "prepayment",
-  "payment": {
-    "amount": 10.00
-  }
-}
-```
-
-Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
-
-## Create a Payment from the Subscription's Service Credit Account
-
-In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also the `amount`:
-
-```
-{
-  "type": "service_credit",
-  "payment": {
-    "amount": 10.00
-  }
-}
-```
-
-Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
-
-```ts
-async recordPaymentForInvoice(
-  uid: string,
-  body?: CreateInvoicePaymentRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Invoice>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`CreateInvoicePaymentRequest \| undefined`](../../doc/models/create-invoice-payment-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```ts
-const uid = 'uid0';
-
-const body: CreateInvoicePaymentRequest = {
-  payment: {
-    amount: 124.33,
-    memo: 'for John Smith',
-    method: InvoicePaymentMethodType.Check,
-    details: '#0102',
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.recordPaymentForInvoice(
-  uid,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-
-# Record External Payment for Invoices
-
-This API call should be used when you want to record an external payment against multiple invoices.
-
-In order apply a payment to multiple invoices, at minimum, specify the `amount` and `applications` (i.e., `invoice_uid` and `amount`) details.
-
-```
-{
-  "payment": {
-    "memo": "to pay the bills",
-    "details": "check number 8675309",
-    "method": "check",
-    "amount": "250.00",
-    "applications": [
-      {
-        "invoice_uid": "inv_8gk5bwkct3gqt",
-        "amount": "100.00"
-      },
-      {
-        "invoice_uid": "inv_7bc6bwkct3lyt",
-        "amount": "150.00"
-      }
-    ]
-  }
-}
-```
-
-Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal to invoices payment amount sum.
-
-```ts
-async recordExternalPaymentForInvoices(
-  body?: CreateMultiInvoicePaymentRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<MultiInvoicePaymentResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`CreateMultiInvoicePaymentRequest \| undefined`](../../doc/models/create-multi-invoice-payment-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`MultiInvoicePaymentResponse`](../../doc/models/multi-invoice-payment-response.md)
-
-## Example Usage
-
-```ts
-const body: CreateMultiInvoicePaymentRequest = {
-  payment: {
-    amount: '100.00',
-    applications: [
-      {
-        invoiceUid: 'inv_8gk5bwkct3gqt',
-        amount: '50.00',
-      },
-      {
-        invoiceUid: 'inv_7bc6bwkct3lyt',
-        amount: '50.00',
-      }
-    ],
-    memo: 'to pay the bills',
-    details: 'check number 8675309',
-    method: InvoicePaymentMethodType.Check,
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.recordExternalPaymentForInvoices(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "payment": {
-    "transaction_id": 1,
-    "total_amount": "100.00",
-    "currency_code": "USD",
-    "applications": [
-      {
-        "invoice_uid": "inv_8gk5bwkct3gqt",
-        "application_uid": "pmt_1tr0hgsct3ybx",
-        "applied_amount": "50.00"
-      },
-      {
-        "invoice_uid": "inv_7bc6bwkct3lyt",
-        "application_uid": "pmt_2",
-        "applied_amount": "50.00"
-      }
-    ]
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
-# List Credit Notes
-
-Credit Notes are like inverse invoices. They reduce the amount a customer owes.
-
-By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`, `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field as a key in the query with a value set to `true`.
-
-```ts
-async listCreditNotes(
-  subscriptionId?: number,
-  page?: number,
-  perPage?: number,
-  lineItems?: boolean,
-  discounts?: boolean,
-  taxes?: boolean,
-  refunds?: boolean,
-  applications?: boolean,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListCreditNotesResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number \| undefined` | Query, Optional | The subscription's Chargify id |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data |
-| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data |
-| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data |
-| `refunds` | `boolean \| undefined` | Query, Optional | Include refunds data |
-| `applications` | `boolean \| undefined` | Query, Optional | Include applications data |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`ListCreditNotesResponse`](../../doc/models/list-credit-notes-response.md)
-
-## Example Usage
-
-```ts
-const collect = {
-  page: 2,
-  perPage: 50,
-  lineItems: false,
-  discounts: false,
-  taxes: false,
-  refunds: false,
-  applications: false
-}
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.listCreditNotes(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "credit_notes": [
-    {
-      "uid": "cn_8m9vbd5kkv7kr",
-      "site_id": 20,
-      "customer_id": 3,
-      "subscription_id": 2,
-      "number": "77",
-      "sequence_number": 78,
-      "issue_date": "2018-12-31",
-      "applied_date": "2018-12-31",
-      "status": "applied",
-      "currency": "USD",
-      "memo": "Refund for overpayment",
-      "seller": {
-        "name": "Acme, Inc.",
-        "address": {
-          "street": "122 E Houston St",
-          "line2": "Suite 105",
-          "city": "San Antonio",
-          "state": "TX",
-          "zip": "78205",
-          "country": "US"
-        },
-        "phone": "555-555-1234 x137"
-      },
-      "customer": {
-        "chargify_id": 3,
-        "first_name": "Marty",
-        "last_name": "McFly",
-        "organization": "Time Travellers, Inc.",
-        "email": "timetraveller1985@example.com",
-        "reference": null
-      },
-      "billing_address": {
-        "street": "200 Billing Rd.",
-        "line2": "Suite 100",
-        "city": "Needham",
-        "state": "MA",
-        "zip": "02494",
-        "country": "US"
-      },
-      "shipping_address": {
-        "street": "100 Shipping St.",
-        "line2": "Apt 200",
-        "city": "Pleasantville",
-        "state": "NC",
-        "zip": "12345",
-        "country": "US"
-      },
-      "subtotal_amount": "208.69341779",
-      "discount_amount": "20.87125167",
-      "tax_amount": "12.67783387",
-      "total_amount": "200.5",
-      "applied_amount": "200.5",
-      "remaining_amount": "0.0",
-      "line_items": [
-        {
-          "uid": "cnli_8k5jvdzct4h9x",
-          "title": "IP Addresses: 5 to 10 addresses",
-          "description": "38.2% credit",
-          "quantity": "0.9855",
-          "unit_price": "2.0",
-          "subtotal_amount": "1.971004",
-          "discount_amount": "0.19862831",
-          "tax_amount": "0.11963536",
-          "total_amount": "1.89201105",
-          "tiered_unit_price": false,
-          "period_range_start": "2018-11-30",
-          "period_range_end": "2018-11-30",
-          "product_id": 85,
-          "product_version": 1,
-          "component_id": 81,
-          "price_point_id": 165
-        },
-        {
-          "uid": "cnli_8kjttvjcjx8b4",
-          "title": "Professional Plan",
-          "description": "38.2% credit",
-          "quantity": "0.382",
-          "unit_price": "299.0",
-          "subtotal_amount": "114.21127834",
-          "discount_amount": "11.42112783",
-          "tax_amount": "6.93833516",
-          "total_amount": "109.72848567",
-          "tiered_unit_price": false,
-          "period_range_start": "2018-12-30",
-          "period_range_end": "2018-12-30",
-          "product_id": 85,
-          "product_version": 1,
-          "component_id": null,
-          "price_point_id": null
-        },
-        {
-          "uid": "cnli_8kjttvjknzhx7",
-          "title": "Small Instance (Hourly)",
-          "description": "38.2% credit",
-          "quantity": "74.8676",
-          "unit_price": "0.12244898",
-          "subtotal_amount": "9.16746047",
-          "discount_amount": "0.91674605",
-          "tax_amount": "0.55692322",
-          "total_amount": "8.80763764",
-          "tiered_unit_price": true,
-          "period_range_start": "2018-11-30",
-          "period_range_end": "2018-11-30",
-          "product_id": 85,
-          "product_version": 1,
-          "component_id": 78,
-          "price_point_id": null
-        },
-        {
-          "uid": "cnli_8kjttvjnmh25w",
-          "title": "Large Instance (Hourly)",
-          "description": "38.2% credit",
-          "quantity": "183.3492",
-          "unit_price": "0.39583333",
-          "subtotal_amount": "72.57572871",
-          "discount_amount": "7.25757287",
-          "tax_amount": "4.40897552",
-          "total_amount": "69.72713136",
-          "tiered_unit_price": true,
-          "period_range_start": "2018-11-30",
-          "period_range_end": "2018-11-30",
-          "product_id": 85,
-          "product_version": 1,
-          "component_id": 79,
-          "price_point_id": null
-        },
-        {
-          "uid": "cnli_8kjttvjqn86kc",
-          "title": "Email Messages",
-          "description": "38.2% credit",
-          "quantity": "10076.9489",
-          "unit_price": "0.00031045",
-          "subtotal_amount": "3.12839588",
-          "discount_amount": "0.31322157",
-          "tax_amount": "0.19002427",
-          "total_amount": "3.00519858",
-          "tiered_unit_price": true,
-          "period_range_start": "2018-11-30",
-          "period_range_end": "2018-11-30",
-          "product_id": 85,
-          "product_version": 1,
-          "component_id": 80,
-          "price_point_id": null
-        },
-        {
-          "uid": "cnli_8kjttvjtxxbdd",
-          "title": "IP Addresses",
-          "description": "38.2% credit",
-          "quantity": "3.8198",
-          "unit_price": "2.0",
-          "subtotal_amount": "7.63955039",
-          "discount_amount": "0.76395504",
-          "tax_amount": "0.46410269",
-          "total_amount": "7.33969804",
-          "tiered_unit_price": false,
-          "period_range_start": "2018-12-30",
-          "period_range_end": "2018-12-30",
-          "product_id": 85,
-          "product_version": 1,
-          "component_id": 81,
-          "price_point_id": 165
-        }
-      ],
-      "discounts": [
-        {
-          "uid": "cndli_8k5jvdzct4h9y",
-          "title": "Multi-service discount (10%)",
-          "code": "MULTI3",
-          "source_type": "Coupon",
-          "source_id": 40,
-          "discount_type": "percentage",
-          "percentage": "10.0",
-          "eligible_amount": "208.69341779",
-          "discount_amount": "20.87125167",
-          "line_item_breakouts": [
-            {
-              "uid": "cnli_8k5jvdzct4h9x",
-              "eligible_amount": "1.971004",
-              "discount_amount": "0.19862831"
-            },
-            {
-              "uid": "cnli_8kjttvjcjx8b4",
-              "eligible_amount": "114.21127834",
-              "discount_amount": "11.42112783"
-            },
-            {
-              "uid": "cnli_8kjttvjknzhx7",
-              "eligible_amount": "9.16746047",
-              "discount_amount": "0.91674605"
-            },
-            {
-              "uid": "cnli_8kjttvjnmh25w",
-              "eligible_amount": "72.57572871",
-              "discount_amount": "7.25757287"
-            },
-            {
-              "uid": "cnli_8kjttvjqn86kc",
-              "eligible_amount": "3.12839588",
-              "discount_amount": "0.31322157"
-            },
-            {
-              "uid": "cnli_8kjttvjtxxbdd",
-              "eligible_amount": "7.63955039",
-              "discount_amount": "0.76395504"
-            }
-          ]
-        }
-      ],
-      "taxes": [
-        {
-          "uid": "cntli_8k5jvdzct4h9z",
-          "title": "NC Sales Tax",
-          "source_type": "Tax",
-          "source_id": 1,
-          "percentage": "6.75",
-          "taxable_amount": "187.82216613",
-          "tax_amount": "12.67783387",
-          "line_item_breakouts": [
-            {
-              "uid": "cnli_8k5jvdzct4h9x",
-              "taxable_amount": "1.77237569",
-              "tax_amount": "0.11963536"
-            },
-            {
-              "uid": "cnli_8kjttvjcjx8b4",
-              "taxable_amount": "102.7901505",
-              "tax_amount": "6.93833516"
-            },
-            {
-              "uid": "cnli_8kjttvjknzhx7",
-              "taxable_amount": "8.25071442",
-              "tax_amount": "0.55692322"
-            },
-            {
-              "uid": "cnli_8kjttvjnmh25w",
-              "taxable_amount": "65.31815584",
-              "tax_amount": "4.40897552"
-            },
-            {
-              "uid": "cnli_8kjttvjqn86kc",
-              "taxable_amount": "2.81517432",
-              "tax_amount": "0.19002427"
-            },
-            {
-              "uid": "cnli_8kjttvjtxxbdd",
-              "taxable_amount": "6.87559535",
-              "tax_amount": "0.46410269"
-            }
-          ]
-        }
-      ],
-      "applications": [
-        {
-          "uid": "cdt_8m9vbdbdwd28n",
-          "transaction_time": "2018-12-31T21:19:28Z",
-          "invoice_uid": "inv_8k5jvdzct4hb2",
-          "memo": "Refund for overpayment",
-          "applied_amount": "200.5"
-        }
-      ],
-      "refunds": [
-        {
-          "transaction_id": 329,
-          "payment_id": 39,
-          "memo": "Refund for overpayment",
-          "original_amount": "524.9",
-          "applied_amount": "200.5"
-        }
-      ]
-    }
-  ]
-}
-```
-
-
-# Read Credit Note
-
-Use this endpoint to retrieve the details for a credit note.
-
-```ts
-async readCreditNote(
-  uid: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CreditNote>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `string` | Template, Required | The unique identifier of the credit note |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`CreditNote`](../../doc/models/credit-note.md)
-
-## Example Usage
-
-```ts
-const uid = 'uid0';
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.readCreditNote(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "uid": "cn_8m9vbd5kkv7kr",
-  "site_id": 20,
-  "customer_id": 3,
-  "subscription_id": 2,
-  "number": "77",
-  "sequence_number": 78,
-  "issue_date": "2018-12-31",
-  "applied_date": "2018-12-31",
-  "status": "applied",
-  "currency": "USD",
-  "memo": "Refund for overpayment",
-  "seller": {
-    "name": "Acme, Inc.",
-    "address": {
-      "street": "122 E Houston St",
-      "line2": "Suite 105",
-      "city": "San Antonio",
-      "state": "TX",
-      "zip": "78205",
-      "country": "US"
-    },
-    "phone": "555-555-1234 x137"
-  },
-  "customer": {
-    "chargify_id": 3,
-    "first_name": "Marty",
-    "last_name": "McFly",
-    "organization": "Time Travellers, Inc.",
-    "email": "timetraveller1985@example.com",
-    "reference": null
-  },
-  "billing_address": {
-    "street": "200 Billing Rd.",
-    "line2": "Suite 100",
-    "city": "Needham",
-    "state": "MA",
-    "zip": "02494",
-    "country": "US"
-  },
-  "shipping_address": {
-    "street": "100 Shipping St.",
-    "line2": "Apt 200",
-    "city": "Pleasantville",
-    "state": "NC",
-    "zip": "12345",
-    "country": "US"
-  },
-  "subtotal_amount": "208.69341779",
-  "discount_amount": "20.87125167",
-  "tax_amount": "12.67783387",
-  "total_amount": "200.5",
-  "applied_amount": "200.5",
-  "remaining_amount": "0.0",
-  "line_items": [
-    {
-      "uid": "cnli_8k5jvdzct4h9x",
-      "title": "IP Addresses: 5 to 10 addresses",
-      "description": "38.2% credit",
-      "quantity": "0.9855",
-      "unit_price": "2.0",
-      "subtotal_amount": "1.971004",
-      "discount_amount": "0.19862831",
-      "tax_amount": "0.11963536",
-      "total_amount": "1.89201105",
-      "tiered_unit_price": false,
-      "period_range_start": "2018-11-30",
-      "period_range_end": "2018-11-30",
-      "product_id": 85,
-      "product_version": 1,
-      "component_id": 81,
-      "price_point_id": 165
-    },
-    {
-      "uid": "cnli_8kjttvjcjx8b4",
-      "title": "Professional Plan",
-      "description": "38.2% credit",
-      "quantity": "0.382",
-      "unit_price": "299.0",
-      "subtotal_amount": "114.21127834",
-      "discount_amount": "11.42112783",
-      "tax_amount": "6.93833516",
-      "total_amount": "109.72848567",
-      "tiered_unit_price": false,
-      "period_range_start": "2018-12-30",
-      "period_range_end": "2018-12-30",
-      "product_id": 85,
-      "product_version": 1,
-      "component_id": null,
-      "price_point_id": null
-    },
-    {
-      "uid": "cnli_8kjttvjknzhx7",
-      "title": "Small Instance (Hourly)",
-      "description": "38.2% credit",
-      "quantity": "74.8676",
-      "unit_price": "0.12244898",
-      "subtotal_amount": "9.16746047",
-      "discount_amount": "0.91674605",
-      "tax_amount": "0.55692322",
-      "total_amount": "8.80763764",
-      "tiered_unit_price": true,
-      "period_range_start": "2018-11-30",
-      "period_range_end": "2018-11-30",
-      "product_id": 85,
-      "product_version": 1,
-      "component_id": 78,
-      "price_point_id": null
-    },
-    {
-      "uid": "cnli_8kjttvjnmh25w",
-      "title": "Large Instance (Hourly)",
-      "description": "38.2% credit",
-      "quantity": "183.3492",
-      "unit_price": "0.39583333",
-      "subtotal_amount": "72.57572871",
-      "discount_amount": "7.25757287",
-      "tax_amount": "4.40897552",
-      "total_amount": "69.72713136",
-      "tiered_unit_price": true,
-      "period_range_start": "2018-11-30",
-      "period_range_end": "2018-11-30",
-      "product_id": 85,
-      "product_version": 1,
-      "component_id": 79,
-      "price_point_id": null
-    },
-    {
-      "uid": "cnli_8kjttvjqn86kc",
-      "title": "Email Messages",
-      "description": "38.2% credit",
-      "quantity": "10076.9489",
-      "unit_price": "0.00031045",
-      "subtotal_amount": "3.12839588",
-      "discount_amount": "0.31322157",
-      "tax_amount": "0.19002427",
-      "total_amount": "3.00519858",
-      "tiered_unit_price": true,
-      "period_range_start": "2018-11-30",
-      "period_range_end": "2018-11-30",
-      "product_id": 85,
-      "product_version": 1,
-      "component_id": 80,
-      "price_point_id": null
-    },
-    {
-      "uid": "cnli_8kjttvjtxxbdd",
-      "title": "IP Addresses",
-      "description": "38.2% credit",
-      "quantity": "3.8198",
-      "unit_price": "2.0",
-      "subtotal_amount": "7.63955039",
-      "discount_amount": "0.76395504",
-      "tax_amount": "0.46410269",
-      "total_amount": "7.33969804",
-      "tiered_unit_price": false,
-      "period_range_start": "2018-12-30",
-      "period_range_end": "2018-12-30",
-      "product_id": 85,
-      "product_version": 1,
-      "component_id": 81,
-      "price_point_id": 165
-    }
-  ],
-  "discounts": [
-    {
-      "uid": "cndli_8k5jvdzct4h9y",
-      "title": "Multi-service discount (10%)",
-      "code": "MULTI3",
-      "source_type": "Coupon",
-      "source_id": 40,
-      "discount_type": "percentage",
-      "percentage": "10.0",
-      "eligible_amount": "208.69341779",
-      "discount_amount": "20.87125167",
-      "line_item_breakouts": [
-        {
-          "uid": "cnli_8k5jvdzct4h9x",
-          "eligible_amount": "1.971004",
-          "discount_amount": "0.19862831"
-        },
-        {
-          "uid": "cnli_8kjttvjcjx8b4",
-          "eligible_amount": "114.21127834",
-          "discount_amount": "11.42112783"
-        },
-        {
-          "uid": "cnli_8kjttvjknzhx7",
-          "eligible_amount": "9.16746047",
-          "discount_amount": "0.91674605"
-        },
-        {
-          "uid": "cnli_8kjttvjnmh25w",
-          "eligible_amount": "72.57572871",
-          "discount_amount": "7.25757287"
-        },
-        {
-          "uid": "cnli_8kjttvjqn86kc",
-          "eligible_amount": "3.12839588",
-          "discount_amount": "0.31322157"
-        },
-        {
-          "uid": "cnli_8kjttvjtxxbdd",
-          "eligible_amount": "7.63955039",
-          "discount_amount": "0.76395504"
-        }
-      ]
-    }
-  ],
-  "taxes": [
-    {
-      "uid": "cntli_8k5jvdzct4h9z",
-      "title": "NC Sales Tax",
-      "source_type": "Tax",
-      "source_id": 1,
-      "percentage": "6.75",
-      "taxable_amount": "187.82216613",
-      "tax_amount": "12.67783387",
-      "line_item_breakouts": [
-        {
-          "uid": "cnli_8k5jvdzct4h9x",
-          "taxable_amount": "1.77237569",
-          "tax_amount": "0.11963536"
-        },
-        {
-          "uid": "cnli_8kjttvjcjx8b4",
-          "taxable_amount": "102.7901505",
-          "tax_amount": "6.93833516"
-        },
-        {
-          "uid": "cnli_8kjttvjknzhx7",
-          "taxable_amount": "8.25071442",
-          "tax_amount": "0.55692322"
-        },
-        {
-          "uid": "cnli_8kjttvjnmh25w",
-          "taxable_amount": "65.31815584",
-          "tax_amount": "4.40897552"
-        },
-        {
-          "uid": "cnli_8kjttvjqn86kc",
-          "taxable_amount": "2.81517432",
-          "tax_amount": "0.19002427"
-        },
-        {
-          "uid": "cnli_8kjttvjtxxbdd",
-          "taxable_amount": "6.87559535",
-          "tax_amount": "0.46410269"
-        }
-      ]
-    }
-  ],
-  "applications": [
-    {
-      "uid": "cdt_8m9vbdbdwd28n",
-      "transaction_time": "2018-12-31T21:19:28Z",
-      "invoice_uid": "inv_8k5jvdzct4hb2",
-      "memo": "Refund for overpayment",
-      "applied_amount": "200.5"
-    }
-  ],
-  "refunds": [
-    {
-      "transaction_id": 329,
-      "payment_id": 39,
-      "memo": "Refund for overpayment",
-      "original_amount": "524.9",
-      "applied_amount": "200.5"
-    }
-  ]
-}
-```
-
-
-# Record Payment for Subscription
-
-Record an external payment made against a subscription that will pay partially or in full one or more invoices.
-
-Payment will be applied starting with the oldest open invoice and then next oldest, and so on until the amount of the payment is fully consumed.
-
-Excess payment will result in the creation of a prepayment on the Invoice Account.
-
-Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
-
-```ts
-async recordPaymentForSubscription(
-  subscriptionId: number,
-  body?: RecordPaymentRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PaymentResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `body` | [`RecordPaymentRequest \| undefined`](../../doc/models/record-payment-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`PaymentResponse`](../../doc/models/payment-response.md)
-
-## Example Usage
-
-```ts
-const subscriptionId = 222;
-
-const body: RecordPaymentRequest = {
-  payment: {
-    amount: '10.0',
-    memo: 'to pay the bills',
-    paymentDetails: 'check number 8675309',
-    paymentMethod: 'check',
-  },
-};
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.recordPaymentForSubscription(
-  subscriptionId,
-  body
-);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "paid_invoices": [
-    {
-      "invoice_uid": "xyz_012345678",
-      "status": "paid",
-      "due_amount": "0.0",
-      "paid_amount": "50.0"
-    },
-    {
-      "invoice_uid": "xyz_012345678",
-      "status": "paid",
-      "due_amount": "0.0",
-      "paid_amount": "50.0"
-    }
-  ],
-  "prepayment": {
-    "subscription_id": "123456",
-    "amount_in_cents": "5000",
-    "ending_balance_in_cents": "5000"
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
-# Reopen Invoice
-
-This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
-
-Invoices with "canceled" status are no longer considered to be due. Once reopened, they are considered due for payment. Payment may then be captured in one of the following ways:
-
-- Reactivating the subscription, which will capture all open invoices (See note below about automatic reopening of invoices.)
-- Recording a payment directly against the invoice
-
-A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
-
-### Reopening Consolidated Invoices
-
-When reopening a consolidated invoice, all of its canceled segments will also be reopened.
-
-```ts
-async reopenInvoice(
-  uid: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Invoice>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```ts
-const uid = 'uid0';
-
-try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.reopenInvoice(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
 # Void Invoice
 
 This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
@@ -2193,6 +1721,112 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Preview Customer Information Changes
+
+Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
+
+The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
+
+```ts
+async previewCustomerInformationChanges(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerChangesPreviewResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`CustomerChangesPreviewResponse`](../../doc/models/customer-changes-preview-response.md)
+
+## Example Usage
+
+```ts
+const uid = 'uid0';
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await invoicesController.previewCustomerInformationChanges(uid);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "changes": {
+    "payer": {
+      "before": {
+        "last_name": "Beatty"
+      },
+      "after": {
+        "last_name": "Doe"
+      }
+    },
+    "shipping_address": {
+      "before": {
+        "line2": "Suite 703"
+      },
+      "after": {
+        "line2": "Suite 702"
+      }
+    },
+    "billing_address": {
+      "before": {
+        "line2": "Suite 703"
+      },
+      "after": {
+        "line2": "Suite 702"
+      }
+    },
+    "custom_fields": {
+      "before": [
+        {
+          "owner_id": 1002,
+          "owner_type": "Customer",
+          "name": "Color",
+          "value": "blue",
+          "metadatum_id": 20
+        }
+      ],
+      "after": [
+        {
+          "owner_id": 1002,
+          "owner_type": "Customer",
+          "name": "Color",
+          "value": "green",
+          "metadatum_id": 20
+        }
+      ]
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
@@ -2856,23 +2490,29 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`NestedErrorResponseError`](../../doc/models/nested-error-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseError`](../../doc/models/error-array-map-response-error.md) |
 
 
-# Send Invoice
+# Issue Invoice
 
-This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
+This endpoint allows you to issue an invoice that is in "pending" status. For example, you can issue an invoice that was created when allocating new quantity on a component and using "accrue charges" option.
 
-Please note that if no recipient email addresses are specified in the request, then the subscription's default email configuration will be used. For example, if `recipient_emails` is left blank, then the invoice will be delivered to the subscription's customer email address.
+You cannot issue a pending child invoice that was created for a member subscription in a group.
 
-On success, a 204 no-content response will be returned. Please note that this does not indicate that email(s) have been delivered, but instead indicates that emails have been successfully queued for delivery. If _any_ invalid or malformed email address is found in the request body, the entire request will be rejected and a 422 response will be returned.
+For Remittance subscriptions, the invoice will go into "open" status and payment won't be attempted. The value for `on_failed_payment` would be rejected if sent. Any prepayments or service credits that exist on subscription will be automatically applied. Additionally, if setting is on, an email will be sent for issued invoice.
+
+For Automatic subscriptions, prepayments and service credits will apply to the invoice and before payment is attempted. On successful payment, the invoice will go into "paid" status and email will be sent to the customer (if setting applies). When payment fails, the next event depends on the `on_failed_payment` value:
+
+- `leave_open_invoice` - prepayments and credits applied to invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history. This is the default option.
+- `rollback_to_pending` - prepayments and credits not applied; invoice remains in "pending" status; no email sent to the customer; payment failure recorded in the invoice history.
+- `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
 
 ```ts
-async sendInvoice(
+async issueInvoice(
   uid: string,
-  body?: SendInvoiceRequest,
+  body?: IssueInvoiceRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -2880,34 +2520,26 @@ async sendInvoice(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`SendInvoiceRequest \| undefined`](../../doc/models/send-invoice-request.md) | Body, Optional | - |
+| `body` | [`IssueInvoiceRequest \| undefined`](../../doc/models/issue-invoice-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-`void`
+[`Invoice`](../../doc/models/invoice.md)
 
 ## Example Usage
 
 ```ts
 const uid = 'uid0';
 
-const body: SendInvoiceRequest = {
-  recipientEmails: [
-    'user0@example.com'
-  ],
-  ccRecipientEmails: [
-    'user1@example.com'
-  ],
-  bccRecipientEmails: [
-    'user2@example.com'
-  ],
+const body: IssueInvoiceRequest = {
+  onFailedPayment: FailedPaymentAction.LeaveOpenInvoice,
 };
 
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.sendInvoice(
+  const { result, ...httpResponse } = await invoicesController.issueInvoice(
   uid,
   body
 );
@@ -2927,32 +2559,31 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Preview Customer Information Changes
+# Read Credit Note
 
-Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
-
-The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
+Use this endpoint to retrieve the details for a credit note.
 
 ```ts
-async previewCustomerInformationChanges(
+async readCreditNote(
   uid: string,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<CustomerChangesPreviewResponse>>
+): Promise<ApiResponse<CreditNote>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `uid` | `string` | Template, Required | The unique identifier of the credit note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CustomerChangesPreviewResponse`](../../doc/models/customer-changes-preview-response.md)
+[`CreditNote`](../../doc/models/credit-note.md)
 
 ## Example Usage
 
@@ -2962,7 +2593,7 @@ const uid = 'uid0';
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.previewCustomerInformationChanges(uid);
+  const { result, ...httpResponse } = await invoicesController.readCreditNote(uid);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2979,51 +2610,364 @@ try {
 
 ```json
 {
-  "changes": {
-    "payer": {
-      "before": {
-        "last_name": "Beatty"
-      },
-      "after": {
-        "last_name": "Doe"
-      }
+  "uid": "cn_8m9vbd5kkv7kr",
+  "site_id": 20,
+  "customer_id": 3,
+  "subscription_id": 2,
+  "number": "77",
+  "sequence_number": 78,
+  "issue_date": "2018-12-31",
+  "applied_date": "2018-12-31",
+  "status": "applied",
+  "currency": "USD",
+  "memo": "Refund for overpayment",
+  "seller": {
+    "name": "Acme, Inc.",
+    "address": {
+      "street": "122 E Houston St",
+      "line2": "Suite 105",
+      "city": "San Antonio",
+      "state": "TX",
+      "zip": "78205",
+      "country": "US"
     },
-    "shipping_address": {
-      "before": {
-        "line2": "Suite 703"
-      },
-      "after": {
-        "line2": "Suite 702"
-      }
+    "phone": "555-555-1234 x137"
+  },
+  "customer": {
+    "chargify_id": 3,
+    "first_name": "Marty",
+    "last_name": "McFly",
+    "organization": "Time Travellers, Inc.",
+    "email": "timetraveller1985@example.com",
+    "reference": null
+  },
+  "billing_address": {
+    "street": "200 Billing Rd.",
+    "line2": "Suite 100",
+    "city": "Needham",
+    "state": "MA",
+    "zip": "02494",
+    "country": "US"
+  },
+  "shipping_address": {
+    "street": "100 Shipping St.",
+    "line2": "Apt 200",
+    "city": "Pleasantville",
+    "state": "NC",
+    "zip": "12345",
+    "country": "US"
+  },
+  "subtotal_amount": "208.69341779",
+  "discount_amount": "20.87125167",
+  "tax_amount": "12.67783387",
+  "total_amount": "200.5",
+  "applied_amount": "200.5",
+  "remaining_amount": "0.0",
+  "line_items": [
+    {
+      "uid": "cnli_8k5jvdzct4h9x",
+      "title": "IP Addresses: 5 to 10 addresses",
+      "description": "38.2% credit",
+      "quantity": "0.9855",
+      "unit_price": "2.0",
+      "subtotal_amount": "1.971004",
+      "discount_amount": "0.19862831",
+      "tax_amount": "0.11963536",
+      "total_amount": "1.89201105",
+      "tiered_unit_price": false,
+      "period_range_start": "2018-11-30",
+      "period_range_end": "2018-11-30",
+      "product_id": 85,
+      "product_version": 1,
+      "component_id": 81,
+      "price_point_id": 165
     },
-    "billing_address": {
-      "before": {
-        "line2": "Suite 703"
-      },
-      "after": {
-        "line2": "Suite 702"
-      }
+    {
+      "uid": "cnli_8kjttvjcjx8b4",
+      "title": "Professional Plan",
+      "description": "38.2% credit",
+      "quantity": "0.382",
+      "unit_price": "299.0",
+      "subtotal_amount": "114.21127834",
+      "discount_amount": "11.42112783",
+      "tax_amount": "6.93833516",
+      "total_amount": "109.72848567",
+      "tiered_unit_price": false,
+      "period_range_start": "2018-12-30",
+      "period_range_end": "2018-12-30",
+      "product_id": 85,
+      "product_version": 1,
+      "component_id": null,
+      "price_point_id": null
     },
-    "custom_fields": {
-      "before": [
+    {
+      "uid": "cnli_8kjttvjknzhx7",
+      "title": "Small Instance (Hourly)",
+      "description": "38.2% credit",
+      "quantity": "74.8676",
+      "unit_price": "0.12244898",
+      "subtotal_amount": "9.16746047",
+      "discount_amount": "0.91674605",
+      "tax_amount": "0.55692322",
+      "total_amount": "8.80763764",
+      "tiered_unit_price": true,
+      "period_range_start": "2018-11-30",
+      "period_range_end": "2018-11-30",
+      "product_id": 85,
+      "product_version": 1,
+      "component_id": 78,
+      "price_point_id": null
+    },
+    {
+      "uid": "cnli_8kjttvjnmh25w",
+      "title": "Large Instance (Hourly)",
+      "description": "38.2% credit",
+      "quantity": "183.3492",
+      "unit_price": "0.39583333",
+      "subtotal_amount": "72.57572871",
+      "discount_amount": "7.25757287",
+      "tax_amount": "4.40897552",
+      "total_amount": "69.72713136",
+      "tiered_unit_price": true,
+      "period_range_start": "2018-11-30",
+      "period_range_end": "2018-11-30",
+      "product_id": 85,
+      "product_version": 1,
+      "component_id": 79,
+      "price_point_id": null
+    },
+    {
+      "uid": "cnli_8kjttvjqn86kc",
+      "title": "Email Messages",
+      "description": "38.2% credit",
+      "quantity": "10076.9489",
+      "unit_price": "0.00031045",
+      "subtotal_amount": "3.12839588",
+      "discount_amount": "0.31322157",
+      "tax_amount": "0.19002427",
+      "total_amount": "3.00519858",
+      "tiered_unit_price": true,
+      "period_range_start": "2018-11-30",
+      "period_range_end": "2018-11-30",
+      "product_id": 85,
+      "product_version": 1,
+      "component_id": 80,
+      "price_point_id": null
+    },
+    {
+      "uid": "cnli_8kjttvjtxxbdd",
+      "title": "IP Addresses",
+      "description": "38.2% credit",
+      "quantity": "3.8198",
+      "unit_price": "2.0",
+      "subtotal_amount": "7.63955039",
+      "discount_amount": "0.76395504",
+      "tax_amount": "0.46410269",
+      "total_amount": "7.33969804",
+      "tiered_unit_price": false,
+      "period_range_start": "2018-12-30",
+      "period_range_end": "2018-12-30",
+      "product_id": 85,
+      "product_version": 1,
+      "component_id": 81,
+      "price_point_id": 165
+    }
+  ],
+  "discounts": [
+    {
+      "uid": "cndli_8k5jvdzct4h9y",
+      "title": "Multi-service discount (10%)",
+      "code": "MULTI3",
+      "source_type": "Coupon",
+      "source_id": 40,
+      "discount_type": "percentage",
+      "percentage": "10.0",
+      "eligible_amount": "208.69341779",
+      "discount_amount": "20.87125167",
+      "line_item_breakouts": [
         {
-          "owner_id": 1002,
-          "owner_type": "Customer",
-          "name": "Color",
-          "value": "blue",
-          "metadatum_id": 20
-        }
-      ],
-      "after": [
+          "uid": "cnli_8k5jvdzct4h9x",
+          "eligible_amount": "1.971004",
+          "discount_amount": "0.19862831"
+        },
         {
-          "owner_id": 1002,
-          "owner_type": "Customer",
-          "name": "Color",
-          "value": "green",
-          "metadatum_id": 20
+          "uid": "cnli_8kjttvjcjx8b4",
+          "eligible_amount": "114.21127834",
+          "discount_amount": "11.42112783"
+        },
+        {
+          "uid": "cnli_8kjttvjknzhx7",
+          "eligible_amount": "9.16746047",
+          "discount_amount": "0.91674605"
+        },
+        {
+          "uid": "cnli_8kjttvjnmh25w",
+          "eligible_amount": "72.57572871",
+          "discount_amount": "7.25757287"
+        },
+        {
+          "uid": "cnli_8kjttvjqn86kc",
+          "eligible_amount": "3.12839588",
+          "discount_amount": "0.31322157"
+        },
+        {
+          "uid": "cnli_8kjttvjtxxbdd",
+          "eligible_amount": "7.63955039",
+          "discount_amount": "0.76395504"
         }
       ]
     }
+  ],
+  "taxes": [
+    {
+      "uid": "cntli_8k5jvdzct4h9z",
+      "title": "NC Sales Tax",
+      "source_type": "Tax",
+      "source_id": 1,
+      "percentage": "6.75",
+      "taxable_amount": "187.82216613",
+      "tax_amount": "12.67783387",
+      "line_item_breakouts": [
+        {
+          "uid": "cnli_8k5jvdzct4h9x",
+          "taxable_amount": "1.77237569",
+          "tax_amount": "0.11963536"
+        },
+        {
+          "uid": "cnli_8kjttvjcjx8b4",
+          "taxable_amount": "102.7901505",
+          "tax_amount": "6.93833516"
+        },
+        {
+          "uid": "cnli_8kjttvjknzhx7",
+          "taxable_amount": "8.25071442",
+          "tax_amount": "0.55692322"
+        },
+        {
+          "uid": "cnli_8kjttvjnmh25w",
+          "taxable_amount": "65.31815584",
+          "tax_amount": "4.40897552"
+        },
+        {
+          "uid": "cnli_8kjttvjqn86kc",
+          "taxable_amount": "2.81517432",
+          "tax_amount": "0.19002427"
+        },
+        {
+          "uid": "cnli_8kjttvjtxxbdd",
+          "taxable_amount": "6.87559535",
+          "tax_amount": "0.46410269"
+        }
+      ]
+    }
+  ],
+  "applications": [
+    {
+      "uid": "cdt_8m9vbdbdwd28n",
+      "transaction_time": "2018-12-31T21:19:28Z",
+      "invoice_uid": "inv_8k5jvdzct4hb2",
+      "memo": "Refund for overpayment",
+      "applied_amount": "200.5"
+    }
+  ],
+  "refunds": [
+    {
+      "transaction_id": 329,
+      "payment_id": 39,
+      "memo": "Refund for overpayment",
+      "original_amount": "524.9",
+      "applied_amount": "200.5"
+    }
+  ]
+}
+```
+
+
+# Record Payment for Subscription
+
+Record an external payment made against a subscription that will pay partially or in full one or more invoices.
+
+Payment will be applied starting with the oldest open invoice and then next oldest, and so on until the amount of the payment is fully consumed.
+
+Excess payment will result in the creation of a prepayment on the Invoice Account.
+
+Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
+
+```ts
+async recordPaymentForSubscription(
+  subscriptionId: number,
+  body?: RecordPaymentRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `body` | [`RecordPaymentRequest \| undefined`](../../doc/models/record-payment-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`PaymentResponse`](../../doc/models/payment-response.md)
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const body: RecordPaymentRequest = {
+  payment: {
+    amount: '10.0',
+    memo: 'to pay the bills',
+    paymentDetails: 'check number 8675309',
+    paymentMethod: 'check',
+  },
+};
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await invoicesController.recordPaymentForSubscription(
+  subscriptionId,
+  body
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "paid_invoices": [
+    {
+      "invoice_uid": "xyz_012345678",
+      "status": "paid",
+      "due_amount": "0.0",
+      "paid_amount": "50.0"
+    },
+    {
+      "invoice_uid": "xyz_012345678",
+      "status": "paid",
+      "due_amount": "0.0",
+      "paid_amount": "50.0"
+    }
+  ],
+  "prepayment": {
+    "subscription_id": "123456",
+    "amount_in_cents": "5000",
+    "ending_balance_in_cents": "5000"
   }
 }
 ```
@@ -3032,7 +2976,68 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 404 | Not Found | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Reopen Invoice
+
+This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
+
+Invoices with "canceled" status are no longer considered to be due. Once reopened, they are considered due for payment. Payment may then be captured in one of the following ways:
+
+- Reactivating the subscription, which will capture all open invoices (See note below about automatic reopening of invoices.)
+- Recording a payment directly against the invoice
+
+A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
+
+### Reopening Consolidated Invoices
+
+When reopening a consolidated invoice, all of its canceled segments will also be reopened.
+
+```ts
+async reopenInvoice(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```ts
+const uid = 'uid0';
+
+try {
+  // @ts-expect-error: unused variables
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { result, ...httpResponse } = await invoicesController.reopenInvoice(uid);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    // @ts-expect-error: unused variables
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
@@ -3139,7 +3144,7 @@ try {
   "line_items": [
     {
       "description": "qui",
-      "price_point_id": -95020509,
+      "price_point_id": 123,
       "tax_amount": "occaecat deserunt veniam",
       "subtotal_amount": "commodo consequat tempor et Duis"
     },
@@ -3150,15 +3155,15 @@ try {
     {
       "price_point_id": 94750853,
       "product_id": 79058036,
-      "tax_amount": "Duis",
-      "subtotal_amount": "irure officia ipsum"
+      "tax_amount": "1.0",
+      "subtotal_amount": "128.5"
     },
     {
       "unit_price": "eiusmod consequat ut nostrud",
       "tax_amount": "quis nulla proident"
     },
     {
-      "period_range_end": "ut dolor",
+      "period_range_end": "2022-02-02",
       "product_id": 57352537,
       "description": "minim in dolore Ut Excepteur",
       "uid": "sit qui in ullamco anim"
@@ -3191,7 +3196,7 @@ try {
   "credits": [
     {
       "uid": "exercitation eiusmod",
-      "transaction_time": "Lorem ea",
+      "transaction_time": "2024-01-23T13:51:27Z",
       "credit_note_number": "qui fugiat labore laborum",
       "credit_note_uid": "ipsum sunt"
     },
@@ -3213,7 +3218,7 @@ try {
       "memo": "enim Excepteur Lorem magna sit"
     },
     {
-      "transaction_time": "deserunt",
+      "transaction_time": "2024-01-23T13:51:27Z",
       "prepayment": false,
       "payment_method": {
         "details": "labore ut et",
@@ -3278,26 +3283,20 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Issue Invoice
+# Send Invoice
 
-This endpoint allows you to issue an invoice that is in "pending" status. For example, you can issue an invoice that was created when allocating new quantity on a component and using "accrue charges" option.
+This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
 
-You cannot issue a pending child invoice that was created for a member subscription in a group.
+Please note that if no recipient email addresses are specified in the request, then the subscription's default email configuration will be used. For example, if `recipient_emails` is left blank, then the invoice will be delivered to the subscription's customer email address.
 
-For Remittance subscriptions, the invoice will go into "open" status and payment won't be attempted. The value for `on_failed_payment` would be rejected if sent. Any prepayments or service credits that exist on subscription will be automatically applied. Additionally, if setting is on, an email will be sent for issued invoice.
-
-For Automatic subscriptions, prepayments and service credits will apply to the invoice and before payment is attempted. On successful payment, the invoice will go into "paid" status and email will be sent to the customer (if setting applies). When payment fails, the next event depends on the `on_failed_payment` value:
-
-- `leave_open_invoice` - prepayments and credits applied to invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history. This is the default option.
-- `rollback_to_pending` - prepayments and credits not applied; invoice remains in "pending" status; no email sent to the customer; payment failure recorded in the invoice history.
-- `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
+On success, a 204 no-content response will be returned. Please note that this does not indicate that email(s) have been delivered, but instead indicates that emails have been successfully queued for delivery. If _any_ invalid or malformed email address is found in the request body, the entire request will be rejected and a 422 response will be returned.
 
 ```ts
-async issueInvoice(
+async sendInvoice(
   uid: string,
-  body?: IssueInvoiceRequest,
+  body?: SendInvoiceRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<Invoice>>
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -3305,26 +3304,34 @@ async issueInvoice(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`IssueInvoiceRequest \| undefined`](../../doc/models/issue-invoice-request.md) | Body, Optional | - |
+| `body` | [`SendInvoiceRequest \| undefined`](../../doc/models/send-invoice-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`Invoice`](../../doc/models/invoice.md)
+`void`
 
 ## Example Usage
 
 ```ts
 const uid = 'uid0';
 
-const body: IssueInvoiceRequest = {
-  onFailedPayment: FailedPaymentAction.LeaveOpenInvoice,
+const body: SendInvoiceRequest = {
+  recipientEmails: [
+    'user0@example.com'
+  ],
+  ccRecipientEmails: [
+    'user1@example.com'
+  ],
+  bccRecipientEmails: [
+    'user2@example.com'
+  ],
 };
 
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.issueInvoice(
+  const { result, ...httpResponse } = await invoicesController.sendInvoice(
   uid,
   body
 );
@@ -3344,6 +3351,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 

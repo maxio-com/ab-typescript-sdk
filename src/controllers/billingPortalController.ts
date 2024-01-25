@@ -32,6 +32,29 @@ import { BaseController } from './baseController';
 
 export class BillingPortalController extends BaseController {
   /**
+   * You can revoke a customer's Billing Portal invitation.
+   *
+   * If you attempt to revoke an invitation when the Billing Portal is already disabled for a Customer,
+   * you will receive a 422 error response.
+   *
+   * ## Limitations
+   *
+   * This endpoint will only return a JSON response.
+   *
+   * @param customerId  The Chargify id of the customer
+   * @return Response from the API call
+   */
+  async revokeBillingPortalAccess(
+    customerId: number,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<RevokedInvitation>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({ customerId: [customerId, number()] });
+    req.appendTemplatePath`/portal/customers/${mapped.customerId}/invitations/revoke.json`;
+    return req.callAsJson(revokedInvitationSchema, requestOptions);
+  }
+
+  /**
    * ## Billing Portal Documentation
    *
    * Full documentation on how the Billing Portal operates within the Chargify UI can be located
@@ -141,28 +164,5 @@ export class BillingPortalController extends BaseController {
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(resentInvitationSchema, requestOptions);
-  }
-
-  /**
-   * You can revoke a customer's Billing Portal invitation.
-   *
-   * If you attempt to revoke an invitation when the Billing Portal is already disabled for a Customer,
-   * you will receive a 422 error response.
-   *
-   * ## Limitations
-   *
-   * This endpoint will only return a JSON response.
-   *
-   * @param customerId  The Chargify id of the customer
-   * @return Response from the API call
-   */
-  async revokeBillingPortalAccess(
-    customerId: number,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<RevokedInvitation>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({ customerId: [customerId, number()] });
-    req.appendTemplatePath`/portal/customers/${mapped.customerId}/invitations/revoke.json`;
-    return req.callAsJson(revokedInvitationSchema, requestOptions);
   }
 }

@@ -9,9 +9,14 @@ import {
   ComponentPricePoint,
   componentPricePointSchema,
 } from './componentPricePoint';
+import {
+  ListPublicKeysMeta,
+  listPublicKeysMetaSchema,
+} from './listPublicKeysMeta';
 
 export interface ComponentPricePointsResponse {
   pricePoints?: ComponentPricePoint[];
+  meta?: ListPublicKeysMeta;
 }
 
 export const componentPricePointsResponseSchema: Schema<ComponentPricePointsResponse> = object(
@@ -20,5 +25,6 @@ export const componentPricePointsResponseSchema: Schema<ComponentPricePointsResp
       'price_points',
       optional(array(lazy(() => componentPricePointSchema))),
     ],
+    meta: ['meta', optional(lazy(() => listPublicKeysMetaSchema))],
   }
 );

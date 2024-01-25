@@ -5,8 +5,10 @@
  */
 
 import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import {
   SubscriptionAddCouponError,
@@ -82,6 +84,359 @@ import { array, dict, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionsController extends BaseController {
+  /**
+   * Use this endpoint to find a subscription by its reference.
+   *
+   * @param reference Subscription reference
+   * @return Response from the API call
+   */
+  async readSubscriptionByReference(
+    reference?: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionResponse>> {
+    const req = this.createRequest('GET', '/subscriptions/lookup.json');
+    const mapped = req.prepareArgs({
+      reference: [reference, optional(string())],
+    });
+    req.query('reference', mapped.reference);
+    return req.callAsJson(subscriptionResponseSchema, requestOptions);
+  }
+
+  /**
+   * An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if
+   * each coupon is stackable. For more information on stackable coupons, we recommend reviewing our
+   * [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-
+   * coupons)
+   *
+   * ## Query Parameters vs Request Body Parameters
+   *
+   * Passing in a coupon code as a query parameter will add the code to the subscription, completely
+   * replacing all existing coupon codes on the subscription.
+   *
+   * For this reason, using this query parameter on this endpoint has been deprecated in favor of using
+   * the request body parameters as described below. When passing in request body parameters, the list of
+   * coupon codes will simply be added to any existing list of codes on the subscription.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param code            A code for the coupon that would be applied to a subscription
+   * @param body
+   * @return Response from the API call
+   */
+  async applyCouponToSubscription(
+    subscriptionId: number,
+    code?: string,
+    body?: AddCouponsRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      code: [code, optional(string())],
+      body: [body, optional(addCouponsRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.query('code', mapped.code);
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/add_coupon.json`;
+    req.throwOn(422, SubscriptionAddCouponError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(subscriptionResponseSchema, requestOptions);
+  }
+
+  /**
+   * The subscription endpoint allows you to instantly update one or many attributes about a subscription
+   * in a single call.
+   *
+   * ## Update Subscription Payment Method
+   *
+   * Change the card that your Subscriber uses for their subscription. You can also use this method to
+   * simply change the expiration date of the card **if your gateway allows**.
+   *
+   * Note that partial card updates for **Authorize.Net** are not allowed via this endpoint. The existing
+   * Payment Profile must be directly updated instead.
+   *
+   * You also use this method to change the subscription to a different product by setting a new value
+   * for product_handle. A product change can be done in two different ways, **product change** or
+   * **delayed product change**.
+   *
+   * ## Product Change
+   *
+   * This endpoint may be used to change a subscription's product. The new payment amount is calculated
+   * and charged at the normal start of the next period. If you desire complex product changes or
+   * prorated upgrades and downgrades instead, please see the documentation on Migrating Subscription
+   * Products.
+   *
+   * To perform a product change, simply set either the `product_handle` or `product_id` attribute to
+   * that of a different product from the same site as the subscription. You can also change the price
+   * point by passing in either `product_price_point_id` or `product_price_point_handle` - otherwise the
+   * new product's default price point will be used.
+   *
+   * ### Delayed Product Change
+   *
+   * This method also changes the product and/or price point, and the new payment amount is calculated
+   * and charged at the normal start of the next period.
+   *
+   * This method schedules the product change to happen automatically at the subscription’s next renewal
+   * date. To perform a Delayed Product Change, set the `product_handle` attribute as you would in a
+   * regular product change, but also set the `product_change_delayed` attribute to `true`. No proration
+   * applies in this case.
+   *
+   * You can also perform a delayed change to the price point by passing in either
+   * `product_price_point_id` or `product_price_point_handle`
+   *
+   * **Note: To cancel a delayed product change, set `next_product_id` to an empty string.**
+   *
+   * ## Billing Date Changes
+   *
+   * ### Regular Billing Date Changes
+   *
+   * Send the `next_billing_at` to set the next billing date for the subscription. After that date passes
+   * and the subscription is processed, the following billing date will be set according to the
+   * subscription's product period.
+   *
+   * Note that if you pass an invalid date, we will automatically interpret and set the correct date. For
+   * example, when February 30 is entered, the next billing will be set to March 2nd in a non-leap year.
+   *
+   * The server response will not return data under the key/value pair of `next_billing`. Please view the
+   * key/value pair of `current_period_ends_at` to verify that the `next_billing` date has been changed
+   * successfully.
+   *
+   * ### Snap Day Changes
+   *
+   * For a subscription using Calendar Billing, setting the next billing date is a bit different. Send
+   * the `snap_day` attribute to change the calendar billing date for **a subscription using a product
+   * eligible for calendar billing**.
+   *
+   * Note: If you change the product associated with a subscription that contains a `snap_date` and
+   * immediately `READ/GET` the subscription data, it will still contain evidence of the existing
+   * `snap_date`. This is due to the fact that a product change is instantanous and only affects the
+   * product associated with a subscription. After the `next_billing` date arrives, the `snap_day`
+   * associated with the subscription will return to `null.` Another way of looking at this is that you
+   * willl have to wait for the next billing cycle to arrive before the `snap_date` will reset to `null`.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param body
+   * @return Response from the API call
+   */
+  async updateSubscription(
+    subscriptionId: number,
+    body?: UpdateSubscriptionRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionResponse>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      body: [body, optional(updateSubscriptionRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(subscriptionResponseSchema, requestOptions);
+  }
+
+  /**
+   * For sites in test mode, you may purge individual subscriptions.
+   *
+   * Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string
+   * `ack` parameter. You may also delete the customer record and/or payment profiles by passing
+   * `cascade` parameters. For example, to delete just the customer record, the query params would be: `?
+   * ack={customer_id}&cascade[]=customer`
+   *
+   * If you need to remove subscriptions from a live site, please contact support to discuss your use
+   * case.
+   *
+   * ### Delete customer and payment profile
+   *
+   * The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param ack             id of the customer.
+   * @param cascade         Options are "customer" or "payment_profile". Use in query:
+   *                                                   `cascade[]=customer&cascade[]=payment_profile`.
+   * @return Response from the API call
+   */
+  async purgeSubscription(
+    subscriptionId: number,
+    ack: number,
+    cascade?: SubscriptionPurgeType[],
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      ack: [ack, number()],
+      cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
+    });
+    req.query('ack', mapped.ack);
+    req.query('cascade[]', mapped.cascade, plainPrefix);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
+    return req.call(requestOptions);
+  }
+
+  /**
+   * The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a
+   * subscription creation.
+   *
+   * The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For
+   * more information, please see our documentation [here](https://chargify.zendesk.com/hc/en-
+   * us/articles/4407884887835#next-billing).
+   *
+   * ## Side effects
+   *
+   * A subscription will not be created by sending a POST to this endpoint. It is meant to serve as a
+   * prediction.
+   *
+   * ## Taxable Subscriptions
+   *
+   * This endpoint will preview taxes applicable to a purchase. In order for taxes to be previewed, the
+   * following conditions must be met:
+   *
+   * + Taxes must be configured on the subscription
+   * + The preview must be for the purchase of a taxable product or component, or combination of the two.
+   * + The subscription payload must contain a full billing or shipping address in order to calculate
+   * tax
+   *
+   * For more information about creating taxable previews, please see our documentation guide on how to
+   * create [taxable subscriptions.](https://chargify.zendesk.com/hc/en-
+   * us/articles/4407904217755#creating-taxable-subscriptions)
+   *
+   * You do **not** need to include a card number to generate tax information when you are previewing a
+   * subscription. However, please note that when you actually want to create the subscription, you must
+   * include the credit card information if you want the billing address to be stored in Chargify. The
+   * billing address and the credit card information are stored together within the payment profile
+   * object. Also, you may not send a billing address to Chargify without payment profile information, as
+   * the address is stored on the card.
+   *
+   * You can pass shipping and billing addresses and still decide not to calculate taxes. To do that,
+   * pass `skip_billing_manifest_taxes: true` attribute.
+   *
+   * ## Non-taxable Subscriptions
+   *
+   * If you'd like to calculate subscriptions that do not include tax, please feel free to leave off the
+   * billing information.
+   *
+   * @param body
+   * @return Response from the API call
+   */
+  async previewSubscription(
+    body?: CreateSubscriptionRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionPreviewResponse>> {
+    const req = this.createRequest('POST', '/subscriptions/preview.json');
+    const mapped = req.prepareArgs({
+      body: [body, optional(createSubscriptionRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    return req.callAsJson(subscriptionPreviewResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to find subscription details.
+   *
+   * ## Self-Service Page token
+   *
+   * Self-Service Page token for the subscription is not returned by default. If this information is
+   * desired, the include[]=self_service_page_token parameter must be provided with the request.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param include         Allows including additional data in the response. Use in query:
+   *                                                 `include[]=coupons&include[]=self_service_page_token`.
+   * @return Response from the API call
+   */
+  async readSubscription(
+    subscriptionId: number,
+    include?: SubscriptionInclude[],
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SubscriptionResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      include: [include, optional(array(subscriptionIncludeSchema))],
+    });
+    req.query('include[]', mapped.include, plainPrefix);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
+    return req.callAsJson(subscriptionResponseSchema, requestOptions);
+  }
+
+  /**
+   * This API endpoint allows you to set certain subscription fields that are usually managed for you
+   * automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can
+   * only be set using this endpoint.
+   *
+   * This endpoint is provided for cases where you need to “align” Chargify data with data that happened
+   * in your system, perhaps before you started using Chargify. For example, you may choose to import
+   * your historical subscription data, and would like the activation and cancellation dates in Chargify
+   * to match your existing historical dates. Chargify does not backfill historical events (i.e. from the
+   * Events API), but some static data can be changed via this API.
+   *
+   * Why are some fields only settable from this endpoint, and not the normal subscription create and
+   * update endpoints? Because we want users of this endpoint to be aware that these fields are usually
+   * managed by Chargify, and using this API means **you are stepping out on your own.**
+   *
+   * Changing these fields will not affect any other attributes. For example, adding an expiration date
+   * will not affect the next assessment date on the subscription.
+   *
+   * If you regularly need to override the current_period_starts_at for new subscriptions, this can also
+   * be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation.
+   * See the documentation on [Importing Subscriptions](./b3A6MTQxMDgzODg-create-
+   * subscription#subscriptions-import) for more information.
+   *
+   * ## Limitations
+   *
+   * When passing `current_period_starts_at` some validations are made:
+   *
+   * 1. The subscription needs to be unbilled (no statements or invoices).
+   * 2. The value passed must be a valid date/time. We recommend using the iso 8601 format.
+   * 3. The value passed must be before the current date/time.
+   *
+   * If unpermitted parameters are sent, a 400 HTTP response is sent along with a string giving the
+   * reason for the problem.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param body            Only these fields are available to be set.
+   * @return Response from the API call
+   */
+  async overrideSubscription(
+    subscriptionId: number,
+    body?: OverrideSubscriptionRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('PUT');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      body: [body, optional(overrideSubscriptionRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/override.json`;
+    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.call(requestOptions);
+  }
+
+  /**
+   * Use this endpoint to update a subscription's prepaid configuration.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param body
+   * @return Response from the API call
+   */
+  async createPrepaidSubscription(
+    subscriptionId: number,
+    body?: UpsertPrepaidConfigurationRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<PrepaidConfigurationResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      body: [body, optional(upsertPrepaidConfigurationRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepaid_configurations.json`;
+    return req.callAsJson(prepaidConfigurationResponseSchema, requestOptions);
+  }
+
   /**
    * Full documentation on how subscriptions operate within Chargify can be located under the following
    * topics:
@@ -1043,386 +1398,6 @@ export class SubscriptionsController extends BaseController {
   }
 
   /**
-   * The subscription endpoint allows you to instantly update one or many attributes about a subscription
-   * in a single call.
-   *
-   * ## Update Subscription Payment Method
-   *
-   * Change the card that your Subscriber uses for their subscription. You can also use this method to
-   * simply change the expiration date of the card **if your gateway allows**.
-   *
-   * Note that partial card updates for **Authorize.Net** are not allowed via this endpoint. The existing
-   * Payment Profile must be directly updated instead.
-   *
-   * You also use this method to change the subscription to a different product by setting a new value
-   * for product_handle. A product change can be done in two different ways, **product change** or
-   * **delayed product change**.
-   *
-   * ## Product Change
-   *
-   * This endpoint may be used to change a subscription's product. The new payment amount is calculated
-   * and charged at the normal start of the next period. If you desire complex product changes or
-   * prorated upgrades and downgrades instead, please see the documentation on Migrating Subscription
-   * Products.
-   *
-   * To perform a product change, simply set either the `product_handle` or `product_id` attribute to
-   * that of a different product from the same site as the subscription. You can also change the price
-   * point by passing in either `product_price_point_id` or `product_price_point_handle` - otherwise the
-   * new product's default price point will be used.
-   *
-   * ### Delayed Product Change
-   *
-   * This method also changes the product and/or price point, and the new payment amount is calculated
-   * and charged at the normal start of the next period.
-   *
-   * This method schedules the product change to happen automatically at the subscription’s next renewal
-   * date. To perform a Delayed Product Change, set the `product_handle` attribute as you would in a
-   * regular product change, but also set the `product_change_delayed` attribute to `true`. No proration
-   * applies in this case.
-   *
-   * You can also perform a delayed change to the price point by passing in either
-   * `product_price_point_id` or `product_price_point_handle`
-   *
-   * **Note: To cancel a delayed product change, set `next_product_id` to an empty string.**
-   *
-   * ## Billing Date Changes
-   *
-   * ### Regular Billing Date Changes
-   *
-   * Send the `next_billing_at` to set the next billing date for the subscription. After that date passes
-   * and the subscription is processed, the following billing date will be set according to the
-   * subscription's product period.
-   *
-   * Note that if you pass an invalid date, we will automatically interpret and set the correct date. For
-   * example, when February 30 is entered, the next billing will be set to March 2nd in a non-leap year.
-   *
-   * The server response will not return data under the key/value pair of `next_billing`. Please view the
-   * key/value pair of `current_period_ends_at` to verify that the `next_billing` date has been changed
-   * successfully.
-   *
-   * ### Snap Day Changes
-   *
-   * For a subscription using Calendar Billing, setting the next billing date is a bit different. Send
-   * the `snap_day` attribute to change the calendar billing date for **a subscription using a product
-   * eligible for calendar billing**.
-   *
-   * Note: If you change the product associated with a subscription that contains a `snap_date` and
-   * immediately `READ/GET` the subscription data, it will still contain evidence of the existing
-   * `snap_date`. This is due to the fact that a product change is instantanous and only affects the
-   * product associated with a subscription. After the `next_billing` date arrives, the `snap_day`
-   * associated with the subscription will return to `null.` Another way of looking at this is that you
-   * willl have to wait for the next billing cycle to arrive before the `snap_date` will reset to `null`.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param body
-   * @return Response from the API call
-   */
-  async updateSubscription(
-    subscriptionId: number,
-    body?: UpdateSubscriptionRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionResponse>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      body: [body, optional(updateSubscriptionRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(subscriptionResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to find subscription details.
-   *
-   * ## Self-Service Page token
-   *
-   * Self-Service Page token for the subscription is not returned by default. If this information is
-   * desired, the include[]=self_service_page_token parameter must be provided with the request.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param include         Allows including additional data in the response. Use in query:
-   *                                                 `include[]=coupons&include[]=self_service_page_token`.
-   * @return Response from the API call
-   */
-  async readSubscription(
-    subscriptionId: number,
-    include?: SubscriptionInclude[],
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      include: [include, optional(array(subscriptionIncludeSchema))],
-    });
-    req.query('include[]', mapped.include, plainPrefix);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
-    return req.callAsJson(subscriptionResponseSchema, requestOptions);
-  }
-
-  /**
-   * This API endpoint allows you to set certain subscription fields that are usually managed for you
-   * automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can
-   * only be set using this endpoint.
-   *
-   * This endpoint is provided for cases where you need to “align” Chargify data with data that happened
-   * in your system, perhaps before you started using Chargify. For example, you may choose to import
-   * your historical subscription data, and would like the activation and cancellation dates in Chargify
-   * to match your existing historical dates. Chargify does not backfill historical events (i.e. from the
-   * Events API), but some static data can be changed via this API.
-   *
-   * Why are some fields only settable from this endpoint, and not the normal subscription create and
-   * update endpoints? Because we want users of this endpoint to be aware that these fields are usually
-   * managed by Chargify, and using this API means **you are stepping out on your own.**
-   *
-   * Changing these fields will not affect any other attributes. For example, adding an expiration date
-   * will not affect the next assessment date on the subscription.
-   *
-   * If you regularly need to override the current_period_starts_at for new subscriptions, this can also
-   * be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation.
-   * See the documentation on [Importing Subscriptions](./b3A6MTQxMDgzODg-create-
-   * subscription#subscriptions-import) for more information.
-   *
-   * ## Limitations
-   *
-   * When passing `current_period_starts_at` some validations are made:
-   *
-   * 1. The subscription needs to be unbilled (no statements or invoices).
-   * 2. The value passed must be a valid date/time. We recommend using the iso 8601 format.
-   * 3. The value passed must be before the current date/time.
-   *
-   * If unpermitted parameters are sent, a 400 HTTP response is sent along with a string giving the
-   * reason for the problem.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param body            Only these fields are available to be set.
-   * @return Response from the API call
-   */
-  async overrideSubscription(
-    subscriptionId: number,
-    body?: OverrideSubscriptionRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('PUT');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      body: [body, optional(overrideSubscriptionRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/override.json`;
-    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Use this endpoint to find a subscription by its reference.
-   *
-   * @param reference Subscription reference
-   * @return Response from the API call
-   */
-  async readSubscriptionByReference(
-    reference?: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionResponse>> {
-    const req = this.createRequest('GET', '/subscriptions/lookup.json');
-    const mapped = req.prepareArgs({
-      reference: [reference, optional(string())],
-    });
-    req.query('reference', mapped.reference);
-    return req.callAsJson(subscriptionResponseSchema, requestOptions);
-  }
-
-  /**
-   * For sites in test mode, you may purge individual subscriptions.
-   *
-   * Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string
-   * `ack` parameter. You may also delete the customer record and/or payment profiles by passing
-   * `cascade` parameters. For example, to delete just the customer record, the query params would be: `?
-   * ack={customer_id}&cascade[]=customer`
-   *
-   * If you need to remove subscriptions from a live site, please contact support to discuss your use
-   * case.
-   *
-   * ### Delete customer and payment profile
-   *
-   * The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param ack             id of the customer.
-   * @param cascade         Options are "customer" or "payment_profile". Use in query:
-   *                                                   `cascade[]=customer&cascade[]=payment_profile`.
-   * @return Response from the API call
-   */
-  async purgeSubscription(
-    subscriptionId: number,
-    ack: number,
-    cascade?: SubscriptionPurgeType[],
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      ack: [ack, number()],
-      cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
-    });
-    req.query('ack', mapped.ack);
-    req.query('cascade[]', mapped.cascade, plainPrefix);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Use this endpoint to update a subscription's prepaid configuration.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param body
-   * @return Response from the API call
-   */
-  async createPrepaidSubscription(
-    subscriptionId: number,
-    body?: UpsertPrepaidConfigurationRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<PrepaidConfigurationResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      body: [body, optional(upsertPrepaidConfigurationRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepaid_configurations.json`;
-    return req.callAsJson(prepaidConfigurationResponseSchema, requestOptions);
-  }
-
-  /**
-   * The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a
-   * subscription creation.
-   *
-   * The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For
-   * more information, please see our documentation [here](https://chargify.zendesk.com/hc/en-
-   * us/articles/4407884887835#next-billing).
-   *
-   * ## Side effects
-   *
-   * A subscription will not be created by sending a POST to this endpoint. It is meant to serve as a
-   * prediction.
-   *
-   * ## Taxable Subscriptions
-   *
-   * This endpoint will preview taxes applicable to a purchase. In order for taxes to be previewed, the
-   * following conditions must be met:
-   *
-   * + Taxes must be configured on the subscription
-   * + The preview must be for the purchase of a taxable product or component, or combination of the two.
-   * + The subscription payload must contain a full billing or shipping address in order to calculate
-   * tax
-   *
-   * For more information about creating taxable previews, please see our documentation guide on how to
-   * create [taxable subscriptions.](https://chargify.zendesk.com/hc/en-
-   * us/articles/4407904217755#creating-taxable-subscriptions)
-   *
-   * You do **not** need to include a card number to generate tax information when you are previewing a
-   * subscription. However, please note that when you actually want to create the subscription, you must
-   * include the credit card information if you want the billing address to be stored in Chargify. The
-   * billing address and the credit card information are stored together within the payment profile
-   * object. Also, you may not send a billing address to Chargify without payment profile information, as
-   * the address is stored on the card.
-   *
-   * You can pass shipping and billing addresses and still decide not to calculate taxes. To do that,
-   * pass `skip_billing_manifest_taxes: true` attribute.
-   *
-   * ## Non-taxable Subscriptions
-   *
-   * If you'd like to calculate subscriptions that do not include tax, please feel free to leave off the
-   * billing information.
-   *
-   * @param body
-   * @return Response from the API call
-   */
-  async previewSubscription(
-    body?: CreateSubscriptionRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionPreviewResponse>> {
-    const req = this.createRequest('POST', '/subscriptions/preview.json');
-    const mapped = req.prepareArgs({
-      body: [body, optional(createSubscriptionRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    return req.callAsJson(subscriptionPreviewResponseSchema, requestOptions);
-  }
-
-  /**
-   * An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if
-   * each coupon is stackable. For more information on stackable coupons, we recommend reviewing our
-   * [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-
-   * coupons)
-   *
-   * ## Query Parameters vs Request Body Parameters
-   *
-   * Passing in a coupon code as a query parameter will add the code to the subscription, completely
-   * replacing all existing coupon codes on the subscription.
-   *
-   * For this reason, using this query parameter on this endpoint has been deprecated in favor of using
-   * the request body parameters as described below. When passing in request body parameters, the list of
-   * coupon codes will simply be added to any existing list of codes on the subscription.
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param code            A code for the coupon that would be applied to a subscription
-   * @param body
-   * @return Response from the API call
-   */
-  async applyCouponToSubscription(
-    subscriptionId: number,
-    code?: string,
-    body?: AddCouponsRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SubscriptionResponse>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      code: [code, optional(string())],
-      body: [body, optional(addCouponsRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.query('code', mapped.code);
-    req.json(mapped.body);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/add_coupon.json`;
-    req.throwOn(422, SubscriptionAddCouponError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(subscriptionResponseSchema, requestOptions);
-  }
-
-  /**
-   * Use this endpoint to remove a coupon from an existing subscription.
-   *
-   * For more information on the expected behaviour of removing a coupon from a subscription, please see
-   * our documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407896488987#removing-a-
-   * coupon)
-   *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param couponCode      The coupon code
-   * @return Response from the API call
-   */
-  async deleteCouponFromSubscription(
-    subscriptionId: number,
-    couponCode?: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<string>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
-      couponCode: [couponCode, optional(string())],
-    });
-    req.query('coupon_code', mapped.couponCode);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/remove_coupon.json`;
-    req.throwOn(422, SubscriptionRemoveCouponErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsText(requestOptions);
-  }
-
-  /**
    * Chargify offers the ability to activate awaiting signup and trialing subscriptions. This feature is
    * only available on the Relationship Invoicing architecture. Subscriptions in a group may not be
    * activated immediately.
@@ -1496,7 +1471,34 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/activate.json`;
-    req.throwOn(400, NestedErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(400, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
+  }
+
+  /**
+   * Use this endpoint to remove a coupon from an existing subscription.
+   *
+   * For more information on the expected behaviour of removing a coupon from a subscription, please see
+   * our documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407896488987#removing-a-
+   * coupon)
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param couponCode      The coupon code
+   * @return Response from the API call
+   */
+  async deleteCouponFromSubscription(
+    subscriptionId: number,
+    couponCode?: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<string>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      couponCode: [couponCode, optional(string())],
+    });
+    req.query('coupon_code', mapped.couponCode);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/remove_coupon.json`;
+    req.throwOn(422, SubscriptionRemoveCouponErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsText(requestOptions);
   }
 }
