@@ -38,12 +38,12 @@ import {
   voidInvoiceEventDataSchema,
 } from '../voidInvoiceEventData';
 import {
-  VoidInvoiceEventData1,
-  voidInvoiceEventData1Schema,
-} from '../voidInvoiceEventData1';
+  VoidRemainderEventData,
+  voidRemainderEventDataSchema,
+} from '../voidRemainderEventData';
 
 /** This is a container type for any-of types. */
-export type InvoiceEventEventData = ApplyCreditNoteEventData | ApplyDebitNoteEventData | ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData | IssueInvoiceEventData | RefundInvoiceEventData | RemovePaymentEventData | VoidInvoiceEventData | VoidInvoiceEventData1;
+export type InvoiceEventEventData = ApplyCreditNoteEventData | ApplyDebitNoteEventData | ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData | IssueInvoiceEventData | RefundInvoiceEventData | RemovePaymentEventData | VoidInvoiceEventData | VoidRemainderEventData;
 
 export const invoiceEventEventDataSchema: Schema<InvoiceEventEventData> = anyOf(
   [
@@ -55,7 +55,7 @@ export const invoiceEventEventDataSchema: Schema<InvoiceEventEventData> = anyOf(
     refundInvoiceEventDataSchema,
     removePaymentEventDataSchema,
     voidInvoiceEventDataSchema,
-    voidInvoiceEventData1Schema,
+    voidRemainderEventDataSchema,
   ]
 );
 
@@ -141,12 +141,12 @@ export namespace InvoiceEventEventData {
   }
 
   /**
-  * Validation method to narrow down union type to VoidInvoiceEventData1 type case.
+  * Validation method to narrow down union type to VoidRemainderEventData type case.
   *
-  * This is Void Invoice Event Data1 case.
+  * This is Void Remainder Event Data case.
   */
-  export function isVoidInvoiceEventData1(value: unknown): value is VoidInvoiceEventData1 {
-    const validationResult = validateAndMap(value, voidInvoiceEventData1Schema);
+  export function isVoidRemainderEventData(value: unknown): value is VoidRemainderEventData {
+    const validationResult = validateAndMap(value, voidRemainderEventDataSchema);
     return validationResult.errors === false;
   }
 }

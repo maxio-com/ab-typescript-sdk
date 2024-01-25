@@ -22,7 +22,7 @@ export interface InvoiceEvent {
   invoice?: Invoice;
 }
 
-export const invoiceEventSchema: Schema<InvoiceEvent> = object({
+export const invoiceEventSchema: Schema<any> = object({
   id: ['id', optional(number())],
   eventType: ['event_type', optional(invoiceEventTypeSchema)],
   eventData: ['event_data', optional(lazy(() => invoiceEventEventDataSchema))],

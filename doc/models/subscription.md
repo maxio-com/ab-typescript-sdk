@@ -34,12 +34,12 @@
 | `delayedCancelAt` | `string \| null \| undefined` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `couponCode` | `string \| null \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `snapDay` | `string \| null \| undefined` | Optional | The day of the month that the subscription will charge according to calendar billing rules, if used. |
-| `paymentCollectionMethod` | [`PaymentCollectionMethod \| undefined`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `PaymentCollectionMethod.Automatic` |
+| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `CollectionMethod.Automatic` |
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
-| `creditCard` | [`PaymentProfile \| undefined`](../../doc/models/payment-profile.md) | Optional | - |
+| `creditCard` | [`CreditCardPaymentProfile \| undefined`](../../doc/models/credit-card-payment-profile.md) | Optional | - |
 | `group` | [`SubscriptionGroup2 \| null \| undefined`](../../doc/models/containers/subscription-group-2.md) | Optional | This is a container for one-of cases. |
-| `bankAccount` | [`SubscriptionBankAccount \| undefined`](../../doc/models/subscription-bank-account.md) | Optional | - |
+| `bankAccount` | [`BankAccountPaymentProfile \| undefined`](../../doc/models/bank-account-payment-profile.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |
 | `nextProductId` | `number \| null \| undefined` | Optional | If a delayed product change is scheduled, the ID of the product that the subscription will be changed to at the next renewal. |

@@ -11,11 +11,11 @@ Example schema for an `void_invoice` event
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `creditNoteAttributes` | [`CreditNote \| undefined`](../../doc/models/credit-note.md) | Optional | - |
-| `memo` | `string \| undefined` | Optional | The memo provided during invoice voiding. |
-| `appliedAmount` | `string \| undefined` | Optional | The amount of the void. |
-| `transactionTime` | `string \| undefined` | Optional | The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" |
-| `isAdvanceInvoice` | `boolean \| undefined` | Optional | If true, the invoice is an advance invoice. |
+| `creditNoteAttributes` | [`CreditNote`](../../doc/models/credit-note.md) | Required | - |
+| `memo` | `string` | Required | The memo provided during invoice voiding. |
+| `appliedAmount` | `string` | Required | The amount of the void. |
+| `transactionTime` | `string` | Required | The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" |
+| `isAdvanceInvoice` | `boolean` | Required | If true, the invoice is an advance invoice. |
 
 ## Example (as JSON)
 

@@ -17,29 +17,29 @@ import {
   string,
 } from '../schema';
 import {
+  BankAccountPaymentProfile,
+  bankAccountPaymentProfileSchema,
+} from './bankAccountPaymentProfile';
+import {
   CancellationMethod,
   cancellationMethodSchema,
 } from './cancellationMethod';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import {
   SubscriptionGroup2,
   subscriptionGroup2Schema,
 } from './containers/subscriptionGroup2';
-import { Customer, customerSchema } from './customer';
 import {
-  PaymentCollectionMethod,
-  paymentCollectionMethodSchema,
-} from './paymentCollectionMethod';
-import { PaymentProfile, paymentProfileSchema } from './paymentProfile';
+  CreditCardPaymentProfile,
+  creditCardPaymentProfileSchema,
+} from './creditCardPaymentProfile';
+import { Customer, customerSchema } from './customer';
 import {
   PrepaidConfiguration,
   prepaidConfigurationSchema,
 } from './prepaidConfiguration';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { Product, productSchema } from './product';
-import {
-  SubscriptionBankAccount,
-  subscriptionBankAccountSchema,
-} from './subscriptionBankAccount';
 import {
   SubscriptionIncludedCoupon,
   subscriptionIncludedCouponSchema,
@@ -119,12 +119,12 @@ export interface Subscription {
   /** The day of the month that the subscription will charge according to calendar billing rules, if used. */
   snapDay?: string | null;
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
-  paymentCollectionMethod?: PaymentCollectionMethod;
+  paymentCollectionMethod?: CollectionMethod;
   customer?: Customer;
   product?: Product;
-  creditCard?: PaymentProfile;
+  creditCard?: CreditCardPaymentProfile;
   group?: SubscriptionGroup2 | null;
-  bankAccount?: SubscriptionBankAccount;
+  bankAccount?: BankAccountPaymentProfile;
   /** The payment profile type for the active profile on file. */
   paymentType?: string | null;
   /** The subscription's unique code that can be given to referrals. */
@@ -224,15 +224,18 @@ export const subscriptionSchema: Schema<Subscription> = object({
   snapDay: ['snap_day', optional(nullable(string()))],
   paymentCollectionMethod: [
     'payment_collection_method',
-    optional(paymentCollectionMethodSchema),
+    optional(collectionMethodSchema),
   ],
   customer: ['customer', optional(lazy(() => customerSchema))],
   product: ['product', optional(lazy(() => productSchema))],
-  creditCard: ['credit_card', optional(lazy(() => paymentProfileSchema))],
+  creditCard: [
+    'credit_card',
+    optional(lazy(() => creditCardPaymentProfileSchema)),
+  ],
   group: ['group', optional(nullable(lazy(() => subscriptionGroup2Schema)))],
   bankAccount: [
     'bank_account',
-    optional(lazy(() => subscriptionBankAccountSchema)),
+    optional(lazy(() => bankAccountPaymentProfileSchema)),
   ],
   paymentType: ['payment_type', optional(nullable(string()))],
   referralCode: ['referral_code', optional(nullable(string()))],

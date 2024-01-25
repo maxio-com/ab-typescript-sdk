@@ -52,7 +52,9 @@ export interface Component {
   taxable?: boolean;
   /** The description of the component. */
   description?: string | null;
-  defaultPricePointId?: number;
+  defaultPricePointId?: number | null;
+  /** An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. */
+  overagePrices?: ComponentPrice[] | null;
   /** An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. */
   prices?: ComponentPrice[] | null;
   /** Count for the number of price points associated with the component */
@@ -115,7 +117,11 @@ export const componentSchema: Schema<Component> = object({
   archived: ['archived', optional(boolean())],
   taxable: ['taxable', optional(boolean())],
   description: ['description', optional(nullable(string()))],
-  defaultPricePointId: ['default_price_point_id', optional(number())],
+  defaultPricePointId: ['default_price_point_id', optional(nullable(number()))],
+  overagePrices: [
+    'overage_prices',
+    optional(nullable(array(lazy(() => componentPriceSchema)))),
+  ],
   prices: [
     'prices',
     optional(nullable(array(lazy(() => componentPriceSchema)))),

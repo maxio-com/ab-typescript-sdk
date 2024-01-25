@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number \| undefined` | Optional | - |
+| `id` | `bigint \| undefined` | Optional | **Constraints**: `>= 0` |
 | `memo` | `string \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `pricePointId` | `number \| undefined` | Optional | - |

@@ -5,12 +5,18 @@
  */
 
 import { lazy, object, Schema } from '../schema';
-import { BankAccount, bankAccountSchema } from './bankAccount';
+import {
+  BankAccountPaymentProfile,
+  bankAccountPaymentProfileSchema,
+} from './bankAccountPaymentProfile';
 
 export interface BankAccountResponse {
-  paymentProfile: BankAccount;
+  paymentProfile: BankAccountPaymentProfile;
 }
 
 export const bankAccountResponseSchema: Schema<BankAccountResponse> = object({
-  paymentProfile: ['payment_profile', lazy(() => bankAccountSchema)],
+  paymentProfile: [
+    'payment_profile',
+    lazy(() => bankAccountPaymentProfileSchema),
+  ],
 });

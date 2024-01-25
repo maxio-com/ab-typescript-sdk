@@ -21,7 +21,7 @@
     "name": "name0",
     "code": "code8",
     "description": "description0",
-    "percentage": 11.02,
+    "percentage": "String9",
     "allow_negative_balance": false,
     "recurring": false,
     "end_date": "2016-03-13T12:52:32.123Z",

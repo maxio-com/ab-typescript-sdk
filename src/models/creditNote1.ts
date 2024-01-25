@@ -22,6 +22,7 @@ import {
   CreditNoteLineItem,
   creditNoteLineItemSchema,
 } from './creditNoteLineItem';
+import { CreditNoteStatus, creditNoteStatusSchema } from './creditNoteStatus';
 import { Customer1, customer1Schema } from './customer1';
 import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
 import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
@@ -57,12 +58,8 @@ export interface CreditNote1 {
    * The format is `"YYYY-MM-DD"`.
    */
   appliedDate?: string;
-  /**
-   * Current status of the credit note. Valid values:
-   * * open
-   * * applied
-   */
-  status?: string;
+  /** Current status of the credit note. */
+  status?: CreditNoteStatus;
   /** The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields. */
   currency?: string;
   /** The memo printed on credit note, which is a description of the reason for the credit. */
@@ -102,7 +99,7 @@ export const creditNote1Schema: Schema<CreditNote1> = object({
   sequenceNumber: ['sequence_number', optional(number())],
   issueDate: ['issue_date', optional(string())],
   appliedDate: ['applied_date', optional(string())],
-  status: ['status', optional(string())],
+  status: ['status', optional(creditNoteStatusSchema)],
   currency: ['currency', optional(string())],
   memo: ['memo', optional(string())],
   seller: ['seller', optional(lazy(() => sellerSchema))],

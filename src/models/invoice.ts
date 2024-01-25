@@ -15,6 +15,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
 import {
   InvoiceConsolidationLevel,
@@ -39,6 +40,7 @@ import {
   invoicePreviousBalanceSchema,
 } from './invoicePreviousBalance';
 import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
+import { InvoiceRole, invoiceRoleSchema } from './invoiceRole';
 import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
 import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
@@ -81,10 +83,10 @@ export interface Invoice {
   paidDate?: string | null;
   /** The current status of the invoice. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
   status?: InvoiceStatus;
-  role?: string;
+  role?: InvoiceRole;
   parentInvoiceId?: number | null;
-  /** The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant). */
-  collectionMethod?: string;
+  /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
+  collectionMethod?: CollectionMethod;
   /** A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant. */
   paymentInstructions?: string;
   /** The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. */
@@ -169,9 +171,9 @@ export const invoiceSchema: Schema<Invoice> = object({
   dueDate: ['due_date', optional(string())],
   paidDate: ['paid_date', optional(nullable(string()))],
   status: ['status', optional(invoiceStatusSchema)],
-  role: ['role', optional(string())],
+  role: ['role', optional(invoiceRoleSchema)],
   parentInvoiceId: ['parent_invoice_id', optional(nullable(number()))],
-  collectionMethod: ['collection_method', optional(string())],
+  collectionMethod: ['collection_method', optional(collectionMethodSchema)],
   paymentInstructions: ['payment_instructions', optional(string())],
   currency: ['currency', optional(string())],
   consolidationLevel: [

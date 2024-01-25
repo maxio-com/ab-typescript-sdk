@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { oneOf, Schema, validateAndMap } from '../../schema';
+import { anyOf, Schema, validateAndMap } from '../../schema';
 import {
   PaymentMethodApplePayType,
   paymentMethodApplePayTypeSchema,
@@ -26,10 +26,10 @@ import {
   paymentMethodPaypalTypeSchema,
 } from '../paymentMethodPaypalType';
 
-/** This is a container type for one-of types. */
+/** This is a container type for any-of types. */
 export type InvoiceEvent1PaymentMethod = PaymentMethodApplePayType | PaymentMethodBankAccountType | PaymentMethodCreditCardType | PaymentMethodExternalType | PaymentMethodPaypalType;
 
-export const invoiceEvent1PaymentMethodSchema: Schema<InvoiceEvent1PaymentMethod> = oneOf(
+export const invoiceEvent1PaymentMethodSchema: Schema<InvoiceEvent1PaymentMethod> = anyOf(
   [
     paymentMethodApplePayTypeSchema,
     paymentMethodBankAccountTypeSchema,

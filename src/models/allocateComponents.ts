@@ -14,12 +14,9 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import { CreateAllocation, createAllocationSchema } from './createAllocation';
 import { CreditType, creditTypeSchema } from './creditType';
-import {
-  PaymentCollectionMethod1,
-  paymentCollectionMethod1Schema,
-} from './paymentCollectionMethod1';
 
 export interface AllocateComponents {
   prorationUpgradeScheme?: string;
@@ -37,7 +34,7 @@ export interface AllocateComponents {
    */
   downgradeCredit?: CreditType | null;
   /** (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription */
-  paymentCollectionMethod?: PaymentCollectionMethod1;
+  paymentCollectionMethod?: CollectionMethod;
   /**
    * If true, if the immediate component payment fails, initiate dunning for the subscription.
    * Otherwise, leave the charges on the subscription to pay for at renewal.
@@ -57,7 +54,7 @@ export const allocateComponentsSchema: Schema<AllocateComponents> = object({
   downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
   paymentCollectionMethod: [
     'payment_collection_method',
-    optional(paymentCollectionMethod1Schema),
+    optional(collectionMethodSchema),
   ],
   initiateDunning: ['initiate_dunning', optional(boolean())],
 });

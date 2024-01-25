@@ -5,7 +5,13 @@
  */
 
 import { object, optional, Schema, string } from '../schema';
+import {
+  BankAccountHolderType,
+  bankAccountHolderTypeSchema,
+} from './bankAccountHolderType';
+import { BankAccountType, bankAccountTypeSchema } from './bankAccountType';
 import { BankAccountVault, bankAccountVaultSchema } from './bankAccountVault';
+import { PaymentType, paymentTypeSchema } from './paymentType';
 
 export interface BankAccountAttributes {
   chargifyToken?: string;
@@ -15,13 +21,15 @@ export interface BankAccountAttributes {
   bankRoutingNumber?: string;
   /** (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number */
   bankAccountNumber?: string;
-  bankAccountType?: string;
+  /** Defaults to checking */
+  bankAccountType?: BankAccountType;
   /** (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided */
   bankBranchCode?: string;
   /** (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided */
   bankIban?: string;
-  bankAccountHolderType?: string;
-  paymentType?: string;
+  /** Defaults to personal */
+  bankAccountHolderType?: BankAccountHolderType;
+  paymentType?: PaymentType;
   /** The vault that stores the payment profile with the provided vault_token. */
   currentVault?: BankAccountVault;
   vaultToken?: string;
@@ -35,11 +43,14 @@ export const bankAccountAttributesSchema: Schema<BankAccountAttributes> = object
     bankName: ['bank_name', optional(string())],
     bankRoutingNumber: ['bank_routing_number', optional(string())],
     bankAccountNumber: ['bank_account_number', optional(string())],
-    bankAccountType: ['bank_account_type', optional(string())],
+    bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
     bankBranchCode: ['bank_branch_code', optional(string())],
     bankIban: ['bank_iban', optional(string())],
-    bankAccountHolderType: ['bank_account_holder_type', optional(string())],
-    paymentType: ['payment_type', optional(string())],
+    bankAccountHolderType: [
+      'bank_account_holder_type',
+      optional(bankAccountHolderTypeSchema),
+    ],
+    paymentType: ['payment_type', optional(paymentTypeSchema)],
     currentVault: ['current_vault', optional(bankAccountVaultSchema)],
     vaultToken: ['vault_token', optional(string())],
     customerVaultToken: ['customer_vault_token', optional(string())],

@@ -262,7 +262,7 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.throwOn(422, SingleErrorResponseError, 'Unprocessable Entity (WebDAV)');
+    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
