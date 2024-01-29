@@ -15,14 +15,13 @@
 | `accrueCharge` | `boolean \| undefined` | Optional | - |
 | `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
-| `paymentCollectionMethod` | [`PaymentCollectionMethod1 \| undefined`](../../doc/models/payment-collection-method-1.md) | Optional | (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription<br>**Default**: `PaymentCollectionMethod1.Automatic` |
+| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | (Optional) If not passed, the allocation(s) will use the payment collection method on the subscription |
 | `initiateDunning` | `boolean \| undefined` | Optional | If true, if the immediate component payment fails, initiate dunning for the subscription.<br>Otherwise, leave the charges on the subscription to pay for at renewal. |
 
 ## Example (as JSON)
 
 ```json
 {
-  "payment_collection_method": "automatic",
   "proration_upgrade_scheme": "proration_upgrade_scheme2",
   "proration_downgrade_scheme": "proration_downgrade_scheme0",
   "allocations": [

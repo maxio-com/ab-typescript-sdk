@@ -27,7 +27,21 @@
         "credit_note_number": "credit_note_number4",
         "credit_note_uid": "credit_note_uid4",
         "original_amount": "original_amount6",
-        "applied_amount": "applied_amount6"
+        "applied_amount": "applied_amount6",
+        "transaction_time": "2016-03-13T12:52:32.123Z",
+        "memo": "memo6",
+        "role": "role4",
+        "consolidated_invoice": false,
+        "applied_credit_notes": [
+          {
+            "uid": "uid4",
+            "number": "number8"
+          },
+          {
+            "uid": "uid4",
+            "number": "number8"
+          }
+        ]
       },
       "timestamp": "timestamp8",
       "invoice": {

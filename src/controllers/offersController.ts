@@ -5,7 +5,9 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorMapResponseError } from '../errors/errorMapResponseError';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import {
   CreateOfferRequest,
   createOfferRequestSchema,
@@ -51,7 +53,7 @@ export class OffersController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(offerResponseSchema, requestOptions);
   }
 

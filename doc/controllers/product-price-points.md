@@ -778,7 +778,7 @@ async createProductCurrencyPrices(
   productPricePointId: number,
   body?: CreateProductCurrencyPricesRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointCurrencyPrice>>
+): Promise<ApiResponse<CurrencyPricesResponse>>
 ```
 
 ## Parameters
@@ -791,7 +791,7 @@ async createProductCurrencyPrices(
 
 ## Response Type
 
-[`ProductPricePointCurrencyPrice`](../../doc/models/product-price-point-currency-price.md)
+[`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md)
 
 ## Example Usage
 
@@ -843,9 +843,9 @@ try {
 {
   "currency_prices": [
     {
-      "id": 123,
+      "id": 100,
       "currency": "EUR",
-      "price": 100,
+      "price": 123,
       "formatted_price": "€123,00",
       "product_price_point_id": 32669,
       "role": "baseline"
@@ -858,7 +858,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseError`](../../doc/models/error-array-map-response-error.md) |
 
 
 # Update Product Currency Prices
@@ -874,7 +874,7 @@ async updateProductCurrencyPrices(
   productPricePointId: number,
   body?: UpdateCurrencyPricesRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointCurrencyPrice>>
+): Promise<ApiResponse<CurrencyPricesResponse>>
 ```
 
 ## Parameters
@@ -887,7 +887,7 @@ async updateProductCurrencyPrices(
 
 ## Response Type
 
-[`ProductPricePointCurrencyPrice`](../../doc/models/product-price-point-currency-price.md)
+[`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md)
 
 ## Example Usage
 
@@ -947,7 +947,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseError`](../../doc/models/error-map-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseError`](../../doc/models/error-array-map-response-error.md) |
 
 
 # List All Product Price Points

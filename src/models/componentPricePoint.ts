@@ -16,10 +16,14 @@ import {
   string,
 } from '../schema';
 import {
-  ComponentPricePointPrice,
-  componentPricePointPriceSchema,
-} from './componentPricePointPrice';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+  ComponentCurrencyPrice,
+  componentCurrencyPriceSchema,
+} from './componentCurrencyPrice';
+import { ComponentPrice, componentPriceSchema } from './componentPrice';
+import {
+  ComponentPricePointIntervalUnit,
+  componentPricePointIntervalUnitSchema,
+} from './containers/componentPricePointIntervalUnit';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
@@ -42,16 +46,18 @@ export interface ComponentPricePoint {
   archivedAt?: string | null;
   createdAt?: string;
   updatedAt?: string;
-  prices?: ComponentPricePointPrice[];
+  prices?: ComponentPrice[];
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
   useSiteExchangeRate?: boolean;
   /** (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for. */
   subscriptionId?: number;
   taxIncluded?: boolean;
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
-  interval?: number;
+  interval?: number | null;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
-  intervalUnit?: IntervalUnit;
+  intervalUnit?: ComponentPricePointIntervalUnit | null;
+  /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
+  currencyPrices?: ComponentCurrencyPrice[];
 }
 
 export const componentPricePointSchema: Schema<ComponentPricePoint> = object({
@@ -65,13 +71,17 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = object({
   archivedAt: ['archived_at', optional(nullable(string()))],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
-  prices: [
-    'prices',
-    optional(array(lazy(() => componentPricePointPriceSchema))),
-  ],
+  prices: ['prices', optional(array(lazy(() => componentPriceSchema)))],
   useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
   subscriptionId: ['subscription_id', optional(number())],
   taxIncluded: ['tax_included', optional(boolean())],
-  interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
+  interval: ['interval', optional(nullable(number()))],
+  intervalUnit: [
+    'interval_unit',
+    optional(nullable(componentPricePointIntervalUnitSchema)),
+  ],
+  currencyPrices: [
+    'currency_prices',
+    optional(array(lazy(() => componentCurrencyPriceSchema))),
+  ],
 });

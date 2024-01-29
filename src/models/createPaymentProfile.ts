@@ -5,6 +5,11 @@
  */
 
 import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  BankAccountHolderType,
+  bankAccountHolderTypeSchema,
+} from './bankAccountHolderType';
+import { BankAccountType, bankAccountTypeSchema } from './bankAccountType';
 import { CardType, cardTypeSchema } from './cardType';
 import {
   CreatePaymentProfileExpirationMonth,
@@ -73,8 +78,10 @@ export interface CreatePaymentProfile {
   bankAccountNumber?: string;
   /** (Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided */
   bankBranchCode?: string;
-  bankAccountType?: string;
-  bankAccountHolderType?: string;
+  /** Defaults to checking */
+  bankAccountType?: BankAccountType;
+  /** Defaults to personal */
+  bankAccountHolderType?: BankAccountHolderType;
   /** (Optional) Used for creating subscription with payment profile imported using vault_token, for proper display in Advanced Billing UI */
   lastFour?: string;
 }
@@ -115,7 +122,10 @@ export const createPaymentProfileSchema: Schema<CreatePaymentProfile> = object({
   bankRoutingNumber: ['bank_routing_number', optional(string())],
   bankAccountNumber: ['bank_account_number', optional(string())],
   bankBranchCode: ['bank_branch_code', optional(string())],
-  bankAccountType: ['bank_account_type', optional(string())],
-  bankAccountHolderType: ['bank_account_holder_type', optional(string())],
+  bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
+  bankAccountHolderType: [
+    'bank_account_holder_type',
+    optional(bankAccountHolderTypeSchema),
+  ],
   lastFour: ['last_four', optional(string())],
 });

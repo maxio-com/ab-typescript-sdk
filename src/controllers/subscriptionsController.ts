@@ -5,8 +5,10 @@
  */
 
 import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import {
   SubscriptionAddCouponError,
@@ -1496,7 +1498,7 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/activate.json`;
-    req.throwOn(400, NestedErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(400, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 }

@@ -13,6 +13,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CardType, cardTypeSchema } from './cardType';
 import { CurrentVault, currentVaultSchema } from './currentVault';
 
 export interface GetOneTimeTokenPaymentProfile {
@@ -20,7 +21,8 @@ export interface GetOneTimeTokenPaymentProfile {
   firstName: string;
   lastName: string;
   maskedCardNumber: string;
-  cardType: string;
+  /** The type of card used. */
+  cardType: CardType;
   expirationMonth: number;
   expirationYear: number;
   customerId?: string | null;
@@ -46,7 +48,7 @@ export const getOneTimeTokenPaymentProfileSchema: Schema<GetOneTimeTokenPaymentP
     firstName: ['first_name', string()],
     lastName: ['last_name', string()],
     maskedCardNumber: ['masked_card_number', string()],
-    cardType: ['card_type', string()],
+    cardType: ['card_type', cardTypeSchema],
     expirationMonth: ['expiration_month', number()],
     expirationYear: ['expiration_year', number()],
     customerId: ['customer_id', optional(nullable(string()))],

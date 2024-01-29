@@ -26,6 +26,8 @@ export interface CreateComponentPricePoint {
   prices: Price[];
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
   useSiteExchangeRate?: boolean;
+  /** Whether or not the price point includes tax */
+  taxIncluded?: boolean;
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this price point, either month or day. This property is only available for sites with Multifrequency enabled. */
@@ -39,6 +41,7 @@ export const createComponentPricePointSchema: Schema<CreateComponentPricePoint> 
     pricingScheme: ['pricing_scheme', pricingSchemeSchema],
     prices: ['prices', array(lazy(() => priceSchema))],
     useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+    taxIncluded: ['tax_included', optional(boolean())],
     interval: ['interval', optional(number())],
     intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
   }

@@ -4,14 +4,18 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
+import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import { Component, componentSchema } from '../models/component';
 import {
-  ComponentKindPath,
-  componentKindPathSchema,
-} from '../models/componentKindPath';
+  ComponentCurrencyPricesResponse,
+  componentCurrencyPricesResponseSchema,
+} from '../models/componentCurrencyPricesResponse';
 import {
   ComponentPricePointResponse,
   componentPricePointResponseSchema,
@@ -25,10 +29,6 @@ import {
   componentResponseSchema,
 } from '../models/componentResponse';
 import {
-  CreateComponentBody,
-  createComponentBodySchema,
-} from '../models/containers/createComponentBody';
-import {
   CreateComponentPricePointRequest,
   createComponentPricePointRequestSchema,
 } from '../models/createComponentPricePointRequest';
@@ -40,7 +40,26 @@ import {
   CreateCurrencyPricesRequest,
   createCurrencyPricesRequestSchema,
 } from '../models/createCurrencyPricesRequest';
-import { CurrencyPrice, currencyPriceSchema } from '../models/currencyPrice';
+import {
+  CreateEBBComponent,
+  createEBBComponentSchema,
+} from '../models/createEBBComponent';
+import {
+  CreateMeteredComponent,
+  createMeteredComponentSchema,
+} from '../models/createMeteredComponent';
+import {
+  CreateOnOffComponent,
+  createOnOffComponentSchema,
+} from '../models/createOnOffComponent';
+import {
+  CreatePrepaidComponent,
+  createPrepaidComponentSchema,
+} from '../models/createPrepaidComponent';
+import {
+  CreateQuantityBasedComponent,
+  createQuantityBasedComponentSchema,
+} from '../models/createQuantityBasedComponent';
 import { IncludeNotNull, includeNotNullSchema } from '../models/includeNotNull';
 import {
   ListComponentsPricePointsInclude,
@@ -72,52 +91,191 @@ import { BaseController } from './baseController';
 
 export class ComponentsController extends BaseController {
   /**
-   * This request will create a component definition under the specified product family. These component
-   * definitions determine what components are named, how they are measured, and how much they cost.
+   * This request will create a component definition of kind **metered_component** under the specified
+   * product family. Metered component can then be added and “allocated” for a subscription.
    *
-   * Components can then be added and “allocated” for each subscription to a product in the product
-   * family. These component line-items affect how much a subscription will be charged, depending on the
-   * current allocations (i.e. 4 IP Addresses, or SSL “enabled”)
+   * Metered components are used to bill for any type of unit that resets to 0 at the end of the billing
+   * period (think daily Google Adwords clicks or monthly cell phone minutes). This is most commonly
+   * associated with usage-based billing and many other pricing schemes.
    *
-   * This documentation covers both component definitions and component line-items. Please understand the
-   * difference.
-   *
-   * Please note that you may not edit components via API. To do so, please log into the application.
-   *
-   * ### Component Documentation
+   * Note that this is different from recurring quantity-based components, which DO NOT reset to zero at
+   * the start of every billing period. If you want to bill for a quantity of something that does not
+   * change unless you change it, then you want quantity components, instead.
    *
    * For more information on components, please see our documentation [here](https://maxio-chargify.
    * zendesk.com/hc/en-us/articles/5405020625677).
    *
-   * For information on how to record component usage against a subscription, please see the following
-   * resources:
-   *
-   * + [Proration and Component Allocations](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405020625677#applying-proration-and-recording-components)
-   * + [Recording component usage against a subscription](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5404606587917#recording-component-usage)
-   *
-   * @param productFamilyId   The Chargify id of the product family to which the component
-   *                                                 belongs
-   * @param componentKind     The component kind
+   * @param productFamilyId   The Chargify id of the product family to which the
+   *                                                           component belongs
    * @param body
    * @return Response from the API call
    */
-  async createComponent(
+  async createMeteredComponent(
     productFamilyId: number,
-    componentKind: ComponentKindPath,
-    body?: CreateComponentBody,
+    body?: CreateMeteredComponent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
-      componentKind: [componentKind, componentKindPathSchema],
-      body: [body, optional(createComponentBodySchema)],
+      body: [body, optional(createMeteredComponentSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/${mapped.componentKind}.json`;
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/metered_components.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(componentResponseSchema, requestOptions);
+  }
+
+  /**
+   * This request will create a component definition of kind **quantity_based_component** under the
+   * specified product family. Quantity Based component can then be added and “allocated” for a
+   * subscription.
+   *
+   * When defining Quantity Based component, You can choose one of 2 types:
+   * #### Recurring
+   * Recurring quantity-based components are used to bill for the number of some unit (think monthly
+   * software user licenses or the number of pairs of socks in a box-a-month club). This is most commonly
+   * associated with billing for user licenses, number of users, number of employees, etc.
+   *
+   * #### One-time
+   * One-time quantity-based components are used to create ad hoc usage charges that do not recur. For
+   * example, at the time of signup, you might want to charge your customer a one-time fee for onboarding
+   * or other services.
+   *
+   * The allocated quantity for one-time quantity-based components immediately gets reset back to zero
+   * after the allocation is made.
+   *
+   * For more information on components, please see our documentation [here](https://maxio-chargify.
+   * zendesk.com/hc/en-us/articles/5405020625677).
+   *
+   * @param productFamilyId   The Chargify id of the product family to which
+   *                                                                 the component belongs
+   * @param body
+   * @return Response from the API call
+   */
+  async createQuantityBasedComponent(
+    productFamilyId: number,
+    body?: CreateQuantityBasedComponent,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ComponentResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      body: [body, optional(createQuantityBasedComponentSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/quantity_based_components.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(componentResponseSchema, requestOptions);
+  }
+
+  /**
+   * This request will create a component definition of kind **on_off_component** under the specified
+   * product family. On/Off component can then be added and “allocated” for a subscription.
+   *
+   * On/off components are used for any flat fee, recurring add on (think $99/month for tech support or a
+   * flat add on shipping fee).
+   *
+   * For more information on components, please see our documentation [here](https://maxio-chargify.
+   * zendesk.com/hc/en-us/articles/5405020625677).
+   *
+   * @param productFamilyId   The Chargify id of the product family to which the
+   *                                                         component belongs
+   * @param body
+   * @return Response from the API call
+   */
+  async createOnOffComponent(
+    productFamilyId: number,
+    body?: CreateOnOffComponent,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ComponentResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      body: [body, optional(createOnOffComponentSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/on_off_components.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(componentResponseSchema, requestOptions);
+  }
+
+  /**
+   * This request will create a component definition of kind **prepaid_usage_component** under the
+   * specified product family. Prepaid component can then be added and “allocated” for a subscription.
+   *
+   * Prepaid components allow customers to pre-purchase units that can be used up over time on their
+   * subscription. In a sense, they are the mirror image of metered components; while metered components
+   * charge at the end of the period for the amount of units used, prepaid components are charged for at
+   * the time of purchase, and we subsequently keep track of the usage against the amount purchased.
+   *
+   * For more information on components, please see our documentation [here](https://maxio-chargify.
+   * zendesk.com/hc/en-us/articles/5405020625677).
+   *
+   * @param productFamilyId   The Chargify id of the product family to which the
+   *                                                           component belongs
+   * @param body
+   * @return Response from the API call
+   */
+  async createPrepaidUsageComponent(
+    productFamilyId: number,
+    body?: CreatePrepaidComponent,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ComponentResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      body: [body, optional(createPrepaidComponentSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/prepaid_usage_components.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(componentResponseSchema, requestOptions);
+  }
+
+  /**
+   * This request will create a component definition of kind **event_based_component** under the
+   * specified product family. Event-based component can then be added and “allocated” for a subscription.
+   *
+   * Event-based components are similar to other component types, in that you define the component
+   * parameters (such as name and taxability) and the pricing. A key difference for the event-based
+   * component is that it must be attached to a metric. This is because the metric provides the component
+   * with the actual quantity used in computing what and how much will be billed each period for each
+   * subscription.
+   *
+   * So, instead of reporting usage directly for each component (as you would with metered components),
+   * the usage is derived from analysis of your events.
+   *
+   * For more information on components, please see our documentation [here](https://maxio-chargify.
+   * zendesk.com/hc/en-us/articles/5405020625677).
+   *
+   * @param productFamilyId   The Chargify id of the product family to which the
+   *                                                       component belongs
+   * @param body
+   * @return Response from the API call
+   */
+  async createEventBasedComponent(
+    productFamilyId: number,
+    body?: CreateEBBComponent,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ComponentResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      productFamilyId: [productFamilyId, number()],
+      body: [body, optional(createEBBComponentSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/product_families/${mapped.productFamilyId}/event_based_components.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
@@ -616,6 +774,7 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
 
@@ -638,6 +797,7 @@ export class ComponentsController extends BaseController {
       pricePointId: [pricePointId, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
 
@@ -680,7 +840,7 @@ export class ComponentsController extends BaseController {
     pricePointId: number,
     body?: CreateCurrencyPricesRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CurrencyPrice[]>> {
+  ): Promise<ApiResponse<ComponentCurrencyPricesResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       pricePointId: [pricePointId, number()],
@@ -689,7 +849,11 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/price_points/${mapped.pricePointId}/currency_prices.json`;
-    return req.callAsJson(array(currencyPriceSchema), requestOptions);
+    req.throwOn(422, ErrorArrayMapResponseError, 'Unprocessable Entity (WebDAV)');
+    return req.callAsJson(
+      componentCurrencyPricesResponseSchema,
+      requestOptions
+    );
   }
 
   /**
@@ -706,7 +870,7 @@ export class ComponentsController extends BaseController {
     pricePointId: number,
     body?: UpdateCurrencyPricesRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CurrencyPrice[]>> {
+  ): Promise<ApiResponse<ComponentCurrencyPricesResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       pricePointId: [pricePointId, number()],
@@ -715,7 +879,11 @@ export class ComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/price_points/${mapped.pricePointId}/currency_prices.json`;
-    return req.callAsJson(array(currencyPriceSchema), requestOptions);
+    req.throwOn(422, ErrorArrayMapResponseError, 'Unprocessable Entity (WebDAV)');
+    return req.callAsJson(
+      componentCurrencyPricesResponseSchema,
+      requestOptions
+    );
   }
 
   /**

@@ -13,11 +13,8 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import { PayerAttributes, payerAttributesSchema } from './payerAttributes';
-import {
-  PaymentCollectionMethod,
-  paymentCollectionMethodSchema,
-} from './paymentCollectionMethod';
 import {
   SubscriptionGroupBankAccount,
   subscriptionGroupBankAccountSchema,
@@ -36,7 +33,7 @@ export interface SubscriptionGroupSignup {
   payerId?: number;
   payerReference?: string;
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
-  paymentCollectionMethod?: PaymentCollectionMethod;
+  paymentCollectionMethod?: CollectionMethod;
   payerAttributes?: PayerAttributes;
   creditCardAttributes?: SubscriptionGroupCreditCard;
   bankAccountAttributes?: SubscriptionGroupBankAccount;
@@ -50,7 +47,7 @@ export const subscriptionGroupSignupSchema: Schema<SubscriptionGroupSignup> = ob
     payerReference: ['payer_reference', optional(string())],
     paymentCollectionMethod: [
       'payment_collection_method',
-      optional(paymentCollectionMethodSchema),
+      optional(collectionMethodSchema),
     ],
     payerAttributes: [
       'payer_attributes',

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { object, Schema, string } from '../schema';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
@@ -21,26 +21,26 @@ export interface IssueInvoiceEventData {
    * "Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.
    * See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).
    */
-  consolidationLevel?: InvoiceConsolidationLevel;
+  consolidationLevel: InvoiceConsolidationLevel;
   /** The status of the invoice before event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
-  fromStatus?: InvoiceStatus;
+  fromStatus: InvoiceStatus;
   /** The status of the invoice after event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
-  toStatus?: InvoiceStatus;
+  toStatus: InvoiceStatus;
   /** Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`. */
-  dueAmount?: string;
+  dueAmount: string;
   /** The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.' */
-  totalAmount?: string;
+  totalAmount: string;
 }
 
 export const issueInvoiceEventDataSchema: Schema<IssueInvoiceEventData> = object(
   {
     consolidationLevel: [
       'consolidation_level',
-      optional(invoiceConsolidationLevelSchema),
+      invoiceConsolidationLevelSchema,
     ],
-    fromStatus: ['from_status', optional(invoiceStatusSchema)],
-    toStatus: ['to_status', optional(invoiceStatusSchema)],
-    dueAmount: ['due_amount', optional(string())],
-    totalAmount: ['total_amount', optional(string())],
+    fromStatus: ['from_status', invoiceStatusSchema],
+    toStatus: ['to_status', invoiceStatusSchema],
+    dueAmount: ['due_amount', string()],
+    totalAmount: ['total_amount', string()],
   }
 );

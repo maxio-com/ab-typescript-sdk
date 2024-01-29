@@ -19,7 +19,7 @@
 | `productFamilyName` | `string \| null \| undefined` | Optional | - |
 | `startDate` | `string \| undefined` | Optional | - |
 | `endDate` | `string \| null \| undefined` | Optional | - |
-| `percentage` | `number \| null \| undefined` | Optional | - |
+| `percentage` | `string \| null \| undefined` | Optional | - |
 | `recurring` | `boolean \| undefined` | Optional | - |
 | `recurringScheme` | [`RecurringScheme \| undefined`](../../doc/models/recurring-scheme.md) | Optional | - |
 | `durationPeriodCount` | `number \| null \| undefined` | Optional | - |

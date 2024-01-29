@@ -17,7 +17,7 @@
 | `sequenceNumber` | `number \| undefined` | Optional | A monotonically increasing number assigned to credit notes as they are created.  This number is unique within a site and can be used to sort and order credit notes. |
 | `issueDate` | `string \| undefined` | Optional | Date the credit note was issued to the customer.  This is the date that the credit was made available for application, and may come before it is fully applied.<br><br>The format is `"YYYY-MM-DD"`. |
 | `appliedDate` | `string \| undefined` | Optional | Credit notes are applied to invoices to offset invoiced amounts - they reduce the amount due. This field is the date the credit note became fully applied to invoices.<br><br>If the credit note has been partially applied, this field will not have a value until it has been fully applied.<br><br>The format is `"YYYY-MM-DD"`. |
-| `status` | `string \| undefined` | Optional | Current status of the credit note. Valid values:<br><br>* open<br>* applied |
+| `status` | [`CreditNoteStatus \| undefined`](../../doc/models/credit-note-status.md) | Optional | Current status of the credit note. |
 | `currency` | `string \| undefined` | Optional | The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields. |
 | `memo` | `string \| undefined` | Optional | The memo printed on credit note, which is a description of the reason for the credit. |
 | `seller` | [`InvoiceSeller \| undefined`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the credit note. |

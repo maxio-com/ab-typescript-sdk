@@ -14,10 +14,7 @@ import {
   Schema,
   string,
 } from '../schema';
-import {
-  PaymentCollectionMethod,
-  paymentCollectionMethodSchema,
-} from './paymentCollectionMethod';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import {
   SubscriptionGroupItem,
   subscriptionGroupItemSchema,
@@ -35,7 +32,7 @@ export interface SubscriptionGroupSignupResponse {
   cancelAtEndOfPeriod?: boolean;
   subscriptions?: SubscriptionGroupItem[];
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
-  paymentCollectionMethod?: PaymentCollectionMethod;
+  paymentCollectionMethod?: CollectionMethod;
 }
 
 export const subscriptionGroupSignupResponseSchema: Schema<SubscriptionGroupSignupResponse> = object(
@@ -55,7 +52,7 @@ export const subscriptionGroupSignupResponseSchema: Schema<SubscriptionGroupSign
     ],
     paymentCollectionMethod: [
       'payment_collection_method',
-      optional(paymentCollectionMethodSchema),
+      optional(collectionMethodSchema),
     ],
   }
 );
