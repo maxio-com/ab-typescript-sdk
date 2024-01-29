@@ -17,7 +17,7 @@
 | `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided |
 | `bankIban` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided |
 | `bankAccountHolderType` | [`BankAccountHolderType \| undefined`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
-| `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | **Default**: `PaymentType.CreditCard` |
+| `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | - |
 | `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
 | `vaultToken` | `string \| undefined` | Optional | - |
 | `customerVaultToken` | `string \| undefined` | Optional | (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token |
@@ -27,7 +27,6 @@
 ```json
 {
   "bank_account_type": "checking",
-  "payment_type": "credit_card",
   "chargify_token": "chargify_token0",
   "bank_name": "bank_name2",
   "bank_routing_number": "bank_routing_number8",

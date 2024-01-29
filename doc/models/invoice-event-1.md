@@ -39,6 +39,7 @@ The event data is the data that, when combined with the command, results in the 
 | `refundId` | `number \| undefined` | Optional | The ID of the refund transaction. |
 | `prepayment` | `boolean \| undefined` | Optional | The flag that shows whether the original payment was a prepayment or not |
 | `isAdvanceInvoice` | `boolean \| undefined` | Optional | If true, the invoice is an advance invoice. |
+| `reason` | `string \| undefined` | Optional | The reason for the void. |
 
 ## Example (as JSON)
 

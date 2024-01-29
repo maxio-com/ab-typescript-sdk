@@ -178,6 +178,7 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
+    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -249,14 +250,14 @@ export class CustomFieldsController extends BaseController {
    */
   async createMetadata(
     resourceType: ResourceType,
-    resourceId: string,
+    resourceId: number,
     body?: CreateMetadataRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Metadata[]>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
-      resourceId: [resourceId, string()],
+      resourceId: [resourceId, number()],
       body: [body, optional(createMetadataRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -295,7 +296,7 @@ export class CustomFieldsController extends BaseController {
     perPage,
   }: {
     resourceType: ResourceType,
-    resourceId: string,
+    resourceId: number,
     page?: number,
     perPage?: number,
   },
@@ -304,7 +305,7 @@ export class CustomFieldsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
-      resourceId: [resourceId, string()],
+      resourceId: [resourceId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
@@ -325,14 +326,14 @@ export class CustomFieldsController extends BaseController {
    */
   async updateMetadata(
     resourceType: ResourceType,
-    resourceId: string,
+    resourceId: number,
     body?: UpdateMetadataRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Metadata[]>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
-      resourceId: [resourceId, string()],
+      resourceId: [resourceId, number()],
       body: [body, optional(updateMetadataRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -377,7 +378,7 @@ export class CustomFieldsController extends BaseController {
    */
   async deleteMetadata(
     resourceType: ResourceType,
-    resourceId: string,
+    resourceId: number,
     name?: string,
     names?: string[],
     requestOptions?: RequestOptions
@@ -385,7 +386,7 @@ export class CustomFieldsController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
       resourceType: [resourceType, resourceTypeSchema],
-      resourceId: [resourceId, string()],
+      resourceId: [resourceId, number()],
       name: [name, optional(string())],
       names: [names, optional(array(string()))],
     });

@@ -222,7 +222,7 @@ try {
         "public_edit": "0"
       },
       "data_count": 0,
-      "input_type": "string",
+      "input_type": "text",
       "enum": null
     }
   ]
@@ -274,6 +274,12 @@ try {
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseError`](../../doc/models/single-error-response-error.md) |
 
 
 # Delete Metafield
@@ -358,7 +364,7 @@ Please pay special attention to the resource you use when creating metadata.
 ```ts
 async createMetadata(
   resourceType: ResourceType,
-  resourceId: string,
+  resourceId: number,
   body?: CreateMetadataRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Metadata[]>>
@@ -369,7 +375,7 @@ async createMetadata(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
-| `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
+| `resourceId` | `number` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `body` | [`CreateMetadataRequest \| undefined`](../../doc/models/create-metadata-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -382,7 +388,7 @@ async createMetadata(
 ```ts
 const resourceType = ResourceType.Subscriptions;
 
-const resourceId = 'resource_id4';
+const resourceId = 60;
 
 const body: CreateMetadataRequest = {
   metadata: [
@@ -435,7 +441,7 @@ This endpoint will also display the current stats of your metadata to use as a t
 ```ts
 async listMetadata(
   resourceType: ResourceType,
-  resourceId: string,
+  resourceId: number,
   page?: number,
   perPage?: number,
   requestOptions?: RequestOptions
@@ -447,7 +453,7 @@ async listMetadata(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
-| `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
+| `resourceId` | `number` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -461,7 +467,7 @@ async listMetadata(
 ```ts
 const collect = {
   resourceType: ResourceType.Subscriptions,
-  resourceId: 'resource_id4',
+  resourceId: 60,
   page: 2,
   perPage: 50
 }
@@ -489,7 +495,7 @@ This method allows you to update the existing metadata associated with a subscri
 ```ts
 async updateMetadata(
   resourceType: ResourceType,
-  resourceId: string,
+  resourceId: number,
   body?: UpdateMetadataRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Metadata[]>>
@@ -500,7 +506,7 @@ async updateMetadata(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
-| `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
+| `resourceId` | `number` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `body` | [`UpdateMetadataRequest \| undefined`](../../doc/models/update-metadata-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -513,7 +519,7 @@ async updateMetadata(
 ```ts
 const resourceType = ResourceType.Subscriptions;
 
-const resourceId = 'resource_id4';
+const resourceId = 60;
 
 try {
   // @ts-expect-error: unused variables
@@ -564,7 +570,7 @@ When a failed response is encountered, you will receive a `404` response and the
 ```ts
 async deleteMetadata(
   resourceType: ResourceType,
-  resourceId: string,
+  resourceId: number,
   name?: string,
   names?: string[],
   requestOptions?: RequestOptions
@@ -576,7 +582,7 @@ async deleteMetadata(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `resourceType` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
-| `resourceId` | `string` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
+| `resourceId` | `number` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `name` | `string \| undefined` | Query, Optional | Name of field to be removed. |
 | `names` | `string[] \| undefined` | Query, Optional | Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -590,7 +596,7 @@ async deleteMetadata(
 ```ts
 const resourceType = ResourceType.Subscriptions;
 
-const resourceId = 'resource_id4';
+const resourceId = 60;
 
 Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables
