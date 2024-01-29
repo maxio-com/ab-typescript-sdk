@@ -714,3 +714,4 @@ export * from './models/containers/updateProductPricePointProductId';
 export * from './models/containers/updateSubscriptionNetTerms';
 export * from './models/containers/updateSubscriptionSnapDay';
 export * from './models/containers/usageQuantity';
+export * from './models/containers/voidInvoiceEventDataCreditNoteAttributes';

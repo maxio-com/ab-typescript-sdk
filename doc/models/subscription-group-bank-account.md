@@ -16,7 +16,7 @@
 | `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided |
 | `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking<br>**Default**: `BankAccountType.Checking` |
 | `bankAccountHolderType` | [`BankAccountHolderType \| undefined`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
-| `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | **Default**: `PaymentType.CreditCard` |
+| `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | - |
 | `billingAddress` | `string \| undefined` | Optional | - |
 | `billingCity` | `string \| undefined` | Optional | - |
 | `billingState` | `string \| undefined` | Optional | - |
@@ -31,7 +31,6 @@
 ```json
 {
   "bank_account_type": "checking",
-  "payment_type": "credit_card",
   "bank_name": "bank_name2",
   "bank_account_number": "bank_account_number4",
   "bank_routing_number": "bank_routing_number8",

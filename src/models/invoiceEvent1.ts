@@ -93,6 +93,8 @@ export interface InvoiceEvent1 {
   prepayment?: boolean;
   /** If true, the invoice is an advance invoice. */
   isAdvanceInvoice?: boolean;
+  /** The reason for the void. */
+  reason?: string;
 }
 
 export const invoiceEvent1Schema: Schema<any> = object({
@@ -136,4 +138,5 @@ export const invoiceEvent1Schema: Schema<any> = object({
   refundId: ['refund_id', optional(number())],
   prepayment: ['prepayment', optional(boolean())],
   isAdvanceInvoice: ['is_advance_invoice', optional(boolean())],
+  reason: ['reason', optional(string())],
 });

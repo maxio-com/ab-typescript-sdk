@@ -18,8 +18,8 @@ importers:
         specifier: ^0.10.4
         version: 0.10.4
       '@apimatic/schema':
-        specifier: ^0.7.0
-        version: 0.7.5
+        specifier: ^0.7.6
+        version: 0.7.6
     devDependencies:
       '@types/jest':
         specifier: ^29.4.0
@@ -51,9 +51,6 @@ importers:
       advanced-billing-sdk:
         specifier: ../
         version: link:..
-      dotenv:
-        specifier: ^16.3.1
-        version: 16.3.1
     devDependencies:
       '@types/jest':
         specifier: ^29.4.0
@@ -127,7 +124,7 @@ packages:
       '@apimatic/http-headers': 0.3.1
       '@apimatic/http-query': 0.3.1
       '@apimatic/json-bigint': 1.2.0
-      '@apimatic/schema': 0.7.5
+      '@apimatic/schema': 0.7.6
       axios: 0.21.4
       detect-browser: 5.3.0
       detect-node: 2.1.0
@@ -167,7 +164,7 @@ packages:
       '@apimatic/http-headers': 0.3.1
       '@apimatic/http-query': 0.3.1
       '@apimatic/json-bigint': 1.2.0
-      '@apimatic/schema': 0.7.5
+      '@apimatic/schema': 0.7.6
       axios: 0.21.4
       detect-browser: 5.3.0
       detect-node: 2.1.0
@@ -206,8 +203,8 @@ packages:
     resolution: {integrity: sha512-+bmVzYMdZu0Ya5L+my4FXFUih54OvQA/qlZsFOYdOoostyUuB27UDrVWQs/WVCmS0ADdo5vTU0eeTrrBkHoySw==}
     dev: false
 
-  /@apimatic/schema@0.7.5:
-    resolution: {integrity: sha512-NJMoSzOvDkuWSA2t2WUCsxUGvJ2HQPfd3NXmIZuLiGUYSIoiid+NsYI4Z81EhAP6k7M4sr0x2S32fq7eeDuN0g==}
+  /@apimatic/schema@0.7.6:
+    resolution: {integrity: sha512-0h2WPULh1lYa9nzNQufXL6JDRm2ykr57mSKneF7surtFiUYZ+bubskBxaP9YoH8zzrshPLBqs/R9TY0QhK5YJQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       tslib: 2.6.2
@@ -1567,11 +1564,6 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
-
-  /dotenv@16.3.1:
-    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
-    engines: {node: '>=12'}
-    dev: false
 
   /electron-to-chromium@1.4.635:
     resolution: {integrity: sha512-iu/2D0zolKU3iDGXXxdOzNf72Jnokn+K1IN6Kk4iV6l1Tr2g/qy+mvmtfAiBwZe5S3aB5r92vp+zSZ69scYRrg==}

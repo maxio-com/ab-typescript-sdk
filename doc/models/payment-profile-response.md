@@ -19,7 +19,6 @@
     "masked_bank_routing_number": "masked_bank_routing_number8",
     "masked_bank_account_number": "masked_bank_account_number8",
     "bank_account_type": "checking",
-    "payment_type": "credit_card",
     "verified": false,
     "id": 188,
     "first_name": "first_name6",
