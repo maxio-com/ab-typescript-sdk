@@ -44,8 +44,8 @@
   "dependencies": {
     "@apimatic/authentication-adapters": "^0.5.0",
     "@apimatic/axios-client-adapter": "^0.2.0",
-    "@apimatic/core": "^0.10.0",
-    "@apimatic/schema": "^0.7.0"
+    "@apimatic/core": "^0.10.4",
+    "@apimatic/schema": "^0.7.6"
   },
   "repository": {
     "type": "git",
