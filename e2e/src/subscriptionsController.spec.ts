@@ -9,6 +9,7 @@ import {
   ProductResponse,
   IntervalUnit,
   SubscriptionStateFilter,
+  BankAccountHolderType,
 } from 'advanced-billing-sdk';
 import { createClient } from './config';
 
@@ -139,7 +140,7 @@ describe('Subscriptions Controller', () => {
             bankRoutingNumber: '21000089',
             bankAccountNumber: '111111111111',
             bankAccountType: BankAccountType.Checking,
-            bankAccountHolderType: 'business',
+            bankAccountHolderType: BankAccountHolderType.Business,
             paymentType: PaymentType.CreditCard,
           },
           creditCardAttributes,

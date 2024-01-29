@@ -6,8 +6,10 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ErrorMapResponseError } from '../errors/errorMapResponseError';
 import {
   ProductPricePointErrorResponseError,
 } from '../errors/productPricePointErrorResponseError';
@@ -60,6 +62,10 @@ import {
   CreateProductPricePointRequest,
   createProductPricePointRequestSchema,
 } from '../models/createProductPricePointRequest';
+import {
+  CurrencyPricesResponse,
+  currencyPricesResponseSchema,
+} from '../models/currencyPricesResponse';
 import { IncludeNotNull, includeNotNullSchema } from '../models/includeNotNull';
 import {
   ListProductPricePointsResponse,
@@ -70,10 +76,6 @@ import {
   listProductsPricePointsIncludeSchema,
 } from '../models/listProductsPricePointsInclude';
 import { PricePointType, pricePointTypeSchema } from '../models/pricePointType';
-import {
-  ProductPricePointCurrencyPrice,
-  productPricePointCurrencyPriceSchema,
-} from '../models/productPricePointCurrencyPrice';
 import {
   ProductPricePointResponse,
   productPricePointResponseSchema,
@@ -364,7 +366,7 @@ export class ProductPricePointsController extends BaseController {
     productPricePointId: number,
     body?: CreateProductCurrencyPricesRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointCurrencyPrice>> {
+  ): Promise<ApiResponse<CurrencyPricesResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       productPricePointId: [productPricePointId, number()],
@@ -373,8 +375,8 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(currencyPricesResponseSchema, requestOptions);
   }
 
   /**
@@ -395,7 +397,7 @@ export class ProductPricePointsController extends BaseController {
     productPricePointId: number,
     body?: UpdateCurrencyPricesRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProductPricePointCurrencyPrice>> {
+  ): Promise<ApiResponse<CurrencyPricesResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       productPricePointId: [productPricePointId, number()],
@@ -404,8 +406,8 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(productPricePointCurrencyPriceSchema, requestOptions);
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(currencyPricesResponseSchema, requestOptions);
   }
 
   /**

@@ -9,6 +9,6 @@
 
 | Type |
 |  --- |
-| `number` |
 | `string` |
+| `number` |
 

@@ -22,7 +22,7 @@ import {
 /** Example schema for an `refund_invoice` event */
 export interface RefundInvoiceEventData {
   /** If true, credit was created and applied it to the invoice. */
-  applyCredit?: boolean;
+  applyCredit: boolean;
   /**
    * Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:
    * * "none": A normal invoice with no consolidation.
@@ -32,37 +32,37 @@ export interface RefundInvoiceEventData {
    * See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).
    */
   consolidationLevel?: InvoiceConsolidationLevel;
-  creditNoteAttributes?: CreditNote;
+  creditNoteAttributes: CreditNote;
   /** The refund memo. */
   memo?: string;
   /** The full, original amount of the refund. */
   originalAmount?: string;
   /** The ID of the payment transaction to be refunded. */
-  paymentId?: number;
+  paymentId: number;
   /** The amount of the refund. */
-  refundAmount?: string;
+  refundAmount: string;
   /** The ID of the refund transaction. */
-  refundId?: number;
+  refundId: number;
   /** The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" */
-  transactionTime?: string;
+  transactionTime: string;
 }
 
 export const refundInvoiceEventDataSchema: Schema<RefundInvoiceEventData> = object(
   {
-    applyCredit: ['apply_credit', optional(boolean())],
+    applyCredit: ['apply_credit', boolean()],
     consolidationLevel: [
       'consolidation_level',
       optional(invoiceConsolidationLevelSchema),
     ],
     creditNoteAttributes: [
       'credit_note_attributes',
-      optional(lazy(() => creditNoteSchema)),
+      lazy(() => creditNoteSchema),
     ],
     memo: ['memo', optional(string())],
     originalAmount: ['original_amount', optional(string())],
-    paymentId: ['payment_id', optional(number())],
-    refundAmount: ['refund_amount', optional(string())],
-    refundId: ['refund_id', optional(number())],
-    transactionTime: ['transaction_time', optional(string())],
+    paymentId: ['payment_id', number()],
+    refundAmount: ['refund_amount', string()],
+    refundId: ['refund_id', number()],
+    transactionTime: ['transaction_time', string()],
   }
 );

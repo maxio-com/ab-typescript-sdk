@@ -94,6 +94,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # List Invoices
 
@@ -2856,7 +2862,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`NestedErrorResponseError`](../../doc/models/nested-error-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseError`](../../doc/models/error-array-map-response-error.md) |
 
 
 # Send Invoice
@@ -3095,7 +3101,7 @@ try {
   "due_date": "2017-01-30",
   "paid_date": "2017-01-28",
   "status": "open",
-  "collection_method": "Excepteur",
+  "collection_method": "automatic",
   "payment_instructions": "enim officia",
   "currency": "dolore",
   "consolidation_level": "none",
@@ -3139,7 +3145,7 @@ try {
   "line_items": [
     {
       "description": "qui",
-      "price_point_id": -95020509,
+      "price_point_id": 123,
       "tax_amount": "occaecat deserunt veniam",
       "subtotal_amount": "commodo consequat tempor et Duis"
     },
@@ -3150,15 +3156,15 @@ try {
     {
       "price_point_id": 94750853,
       "product_id": 79058036,
-      "tax_amount": "Duis",
-      "subtotal_amount": "irure officia ipsum"
+      "tax_amount": "1.0",
+      "subtotal_amount": "128.5"
     },
     {
       "unit_price": "eiusmod consequat ut nostrud",
       "tax_amount": "quis nulla proident"
     },
     {
-      "period_range_end": "ut dolor",
+      "period_range_end": "2022-02-02",
       "product_id": 57352537,
       "description": "minim in dolore Ut Excepteur",
       "uid": "sit qui in ullamco anim"
@@ -3191,7 +3197,7 @@ try {
   "credits": [
     {
       "uid": "exercitation eiusmod",
-      "transaction_time": "Lorem ea",
+      "transaction_time": "2024-01-23T13:51:27Z",
       "credit_note_number": "qui fugiat labore laborum",
       "credit_note_uid": "ipsum sunt"
     },
@@ -3213,7 +3219,7 @@ try {
       "memo": "enim Excepteur Lorem magna sit"
     },
     {
-      "transaction_time": "deserunt",
+      "transaction_time": "2024-01-23T13:51:27Z",
       "prepayment": false,
       "payment_method": {
         "details": "labore ut et",

@@ -11,10 +11,10 @@ Example schema for an `apply_debit_note` event
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `debitNoteNumber` | `string \| undefined` | Optional | A unique, identifying string that appears on the debit note and in places it is referenced. |
-| `debitNoteUid` | `string \| undefined` | Optional | Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. |
-| `originalAmount` | `string \| undefined` | Optional | The full, original amount of the debit note. |
-| `appliedAmount` | `string \| undefined` | Optional | The amount of the debit note applied to invoice. |
+| `debitNoteNumber` | `string` | Required | A unique, identifying string that appears on the debit note and in places it is referenced. |
+| `debitNoteUid` | `string` | Required | Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. |
+| `originalAmount` | `string` | Required | The full, original amount of the debit note. |
+| `appliedAmount` | `string` | Required | The amount of the debit note applied to invoice. |
 
 ## Example (as JSON)
 

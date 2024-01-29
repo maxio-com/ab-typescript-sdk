@@ -26,6 +26,7 @@ import {
   bankAccountAttributesSchema,
 } from './bankAccountAttributes';
 import { CalendarBilling, calendarBillingSchema } from './calendarBilling';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import {
   CreateSubscriptionOfferId,
   createSubscriptionOfferIdSchema,
@@ -39,10 +40,6 @@ import {
   customerAttributesSchema,
 } from './customerAttributes';
 import { GroupSettings, groupSettingsSchema } from './groupSettings';
-import {
-  PaymentCollectionMethod,
-  paymentCollectionMethodSchema,
-} from './paymentCollectionMethod';
 import {
   PaymentProfileAttributes,
   paymentProfileAttributesSchema,
@@ -72,7 +69,7 @@ export interface CreateSubscription {
   /** An array for all the coupons attached to the subscription. */
   couponCodes?: string[];
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
-  paymentCollectionMethod?: PaymentCollectionMethod;
+  paymentCollectionMethod?: CollectionMethod;
   /** (Optional) Default: True - Whether or not this subscription is set to receive emails related to this subscription. */
   receivesInvoiceEmails?: string;
   /** (Optional) Default: null The number of days after renewal (on invoice billing) that a subscription is due. A value between 0 (due immediately) and 180. */
@@ -163,7 +160,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = object({
   couponCodes: ['coupon_codes', optional(array(string()))],
   paymentCollectionMethod: [
     'payment_collection_method',
-    optional(paymentCollectionMethodSchema),
+    optional(collectionMethodSchema),
   ],
   receivesInvoiceEmails: ['receives_invoice_emails', optional(string())],
   netTerms: ['net_terms', optional(string())],

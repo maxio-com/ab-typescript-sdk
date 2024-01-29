@@ -11,8 +11,8 @@ Example schema for an `change_invoice_collection_method` event
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `fromCollectionMethod` | `string \| undefined` | Optional | The previous collection method of the invoice. |
-| `toCollectionMethod` | `string \| undefined` | Optional | The new collection method of the invoice. |
+| `fromCollectionMethod` | `string` | Required | The previous collection method of the invoice. |
+| `toCollectionMethod` | `string` | Required | The new collection method of the invoice. |
 
 ## Example (as JSON)
 

@@ -8,6 +8,9 @@ import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
+  ErrorStringMapResponseError,
+} from '../errors/errorStringMapResponseError';
+import {
   BankAccountResponse,
   bankAccountResponseSchema,
 } from '../models/bankAccountResponse';
@@ -20,33 +23,17 @@ import {
   createPaymentProfileRequestSchema,
 } from '../models/createPaymentProfileRequest';
 import {
-  CreatePaymentProfileResponse,
-  createPaymentProfileResponseSchema,
-} from '../models/createPaymentProfileResponse';
-import {
   GetOneTimeTokenRequest,
   getOneTimeTokenRequestSchema,
 } from '../models/getOneTimeTokenRequest';
-import {
-  ListPaymentProfilesResponse,
-  listPaymentProfilesResponseSchema,
-} from '../models/listPaymentProfilesResponse';
 import {
   PaymentProfileResponse,
   paymentProfileResponseSchema,
 } from '../models/paymentProfileResponse';
 import {
-  ReadPaymentProfileResponse,
-  readPaymentProfileResponseSchema,
-} from '../models/readPaymentProfileResponse';
-import {
   UpdatePaymentProfileRequest,
   updatePaymentProfileRequestSchema,
 } from '../models/updatePaymentProfileRequest';
-import {
-  UpdatePaymentProfileResponse,
-  updatePaymentProfileResponseSchema,
-} from '../models/updatePaymentProfileResponse';
 import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
@@ -372,7 +359,7 @@ export class PaymentProfilesController extends BaseController {
   async createPaymentProfile(
     body?: CreatePaymentProfileRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CreatePaymentProfileResponse>> {
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('POST', '/payment_profiles.json');
     const mapped = req.prepareArgs({
       body: [body, optional(createPaymentProfileRequestSchema)],
@@ -381,7 +368,7 @@ export class PaymentProfilesController extends BaseController {
     req.json(mapped.body);
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(createPaymentProfileResponseSchema, requestOptions);
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
   /**
@@ -410,7 +397,7 @@ export class PaymentProfilesController extends BaseController {
     customerId?: number,
   },
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ListPaymentProfilesResponse[]>> {
+  ): Promise<ApiResponse<PaymentProfileResponse[]>> {
     const req = this.createRequest('GET', '/payment_profiles.json');
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
@@ -420,10 +407,7 @@ export class PaymentProfilesController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('customer_id', mapped.customerId);
-    return req.callAsJson(
-      array(listPaymentProfilesResponseSchema),
-      requestOptions
-    );
+    return req.callAsJson(array(paymentProfileResponseSchema), requestOptions);
   }
 
   /**
@@ -468,15 +452,16 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async readPaymentProfile(
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ReadPaymentProfileResponse>> {
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
-    return req.callAsJson(readPaymentProfileResponseSchema, requestOptions);
+    req.throwOn(404, ApiError, 'Not Found');
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
   /**
@@ -532,19 +517,21 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async updatePaymentProfile(
-    paymentProfileId: string,
+    paymentProfileId: number,
     body?: UpdatePaymentProfileRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<UpdatePaymentProfileResponse>> {
+  ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
       body: [body, optional(updatePaymentProfileRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
-    return req.callAsJson(updatePaymentProfileResponseSchema, requestOptions);
+    req.throwOn(404, ApiError, 'Not Found');
+    req.throwOn(422, ErrorStringMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
   /**
@@ -557,14 +544,15 @@ export class PaymentProfilesController extends BaseController {
    * @return Response from the API call
    */
   async deleteUnusedPaymentProfile(
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.call(requestOptions);
   }
@@ -586,13 +574,13 @@ export class PaymentProfilesController extends BaseController {
    */
   async deleteSubscriptionsPaymentProfile(
     subscriptionId: number,
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}.json`;
     return req.call(requestOptions);
@@ -636,13 +624,13 @@ export class PaymentProfilesController extends BaseController {
    */
   async deleteSubscriptionGroupPaymentProfile(
     uid: string,
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
       uid: [uid, string()],
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}.json`;
     return req.call(requestOptions);
@@ -670,6 +658,7 @@ export class PaymentProfilesController extends BaseController {
       paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
+    req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
@@ -690,13 +679,13 @@ export class PaymentProfilesController extends BaseController {
    */
   async updateSubscriptionGroupDefaultPaymentProfile(
     uid: string,
-    paymentProfileId: string,
+    paymentProfileId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaymentProfileResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       uid: [uid, string()],
-      paymentProfileId: [paymentProfileId, string()],
+      paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');

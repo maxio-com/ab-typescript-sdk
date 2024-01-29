@@ -6,8 +6,10 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ErrorMapResponseError } from '../errors/errorMapResponseError';
 import {
   ProformaBadRequestErrorResponseError,
 } from '../errors/proformaBadRequestErrorResponseError';
@@ -333,7 +335,7 @@ export class ProformaInvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -376,7 +378,7 @@ export class ProformaInvoicesController extends BaseController {
     req.query('include=next_proforma_invoice', mapped.includeNextProformaInvoice);
     req.json(mapped.body);
     req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, ErrorMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(signupProformaPreviewResponseSchema, requestOptions);
   }
 }

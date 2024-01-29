@@ -6,8 +6,10 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import {
+  ErrorArrayMapResponseError,
+} from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { NestedErrorResponseError } from '../errors/nestedErrorResponseError';
 import {
   ConsolidatedInvoice,
   consolidatedInvoiceSchema,
@@ -120,6 +122,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/refunds.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -945,7 +948,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/invoices.json`;
-    req.throwOn(422, NestedErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceResponseSchema, requestOptions);
   }
 

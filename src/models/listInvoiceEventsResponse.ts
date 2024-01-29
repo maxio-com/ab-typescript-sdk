@@ -14,11 +14,9 @@ export interface ListInvoiceEventsResponse {
   totalPages?: number;
 }
 
-export const listInvoiceEventsResponseSchema: Schema<ListInvoiceEventsResponse> = object(
-  {
-    events: ['events', optional(array(lazy(() => invoiceEventSchema)))],
-    page: ['page', optional(number())],
-    perPage: ['per_page', optional(number())],
-    totalPages: ['total_pages', optional(number())],
-  }
-);
+export const listInvoiceEventsResponseSchema: Schema<any> = object({
+  events: ['events', optional(array(lazy(() => invoiceEventSchema)))],
+  page: ['page', optional(number())],
+  perPage: ['per_page', optional(number())],
+  totalPages: ['total_pages', optional(number())],
+});

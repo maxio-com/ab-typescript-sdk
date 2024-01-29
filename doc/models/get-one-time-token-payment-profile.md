@@ -13,7 +13,7 @@
 | `firstName` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `lastName` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `maskedCardNumber` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
-| `cardType` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
+| `cardType` | [`CardType`](../../doc/models/card-type.md) | Required | The type of card used. |
 | `expirationMonth` | `number` | Required | - |
 | `expirationYear` | `number` | Required | - |
 | `customerId` | `string \| null \| undefined` | Optional | - |
@@ -39,7 +39,7 @@
   "first_name": "first_name2",
   "last_name": "last_name0",
   "masked_card_number": "masked_card_number0",
-  "card_type": "card_type8",
+  "card_type": "routex",
   "expiration_month": 187.78,
   "expiration_year": 164.44,
   "customer_id": "customer_id0",

@@ -275,7 +275,7 @@ You may wish to redirect customers to different pages depending on whether their
 async createPaymentProfile(
   body?: CreatePaymentProfileRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<CreatePaymentProfileResponse>>
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
@@ -287,7 +287,7 @@ async createPaymentProfile(
 
 ## Response Type
 
-[`CreatePaymentProfileResponse`](../../doc/models/create-payment-profile-response.md)
+[`PaymentProfileResponse`](../../doc/models/payment-profile-response.md)
 
 ## Example Usage
 
@@ -299,8 +299,8 @@ const body: CreatePaymentProfileRequest = {
     bankName: 'Best Bank',
     bankRoutingNumber: '021000089',
     bankAccountNumber: '111111111111',
-    bankAccountType: 'checking',
-    bankAccountHolderType: 'business',
+    bankAccountType: BankAccountType.Checking,
+    bankAccountHolderType: BankAccountHolderType.Business,
   },
 };
 
@@ -328,6 +328,7 @@ try {
     "first_name": "Jessica",
     "last_name": "Test",
     "card_type": "visa",
+    "masked_card_number": "XXXX-XXXX-XXXX-1111",
     "expiration_month": 10,
     "expiration_year": 2018,
     "customer_id": 19195410,
@@ -366,7 +367,7 @@ async listPaymentProfiles(
   perPage?: number,
   customerId?: number,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ListPaymentProfilesResponse[]>>
+): Promise<ApiResponse<PaymentProfileResponse[]>>
 ```
 
 ## Parameters
@@ -380,7 +381,7 @@ async listPaymentProfiles(
 
 ## Response Type
 
-[`ListPaymentProfilesResponse[]`](../../doc/models/list-payment-profiles-response.md)
+[`PaymentProfileResponse[]`](../../doc/models/payment-profile-response.md)
 
 ## Example Usage
 
@@ -430,6 +431,7 @@ try {
       "bank_account_type": "checking",
       "bank_account_holder_type": "personal",
       "payment_type": "bank_account",
+      "verified": true,
       "site_gateway_setting_id": 1,
       "gateway_handle": "handle"
     }
@@ -455,6 +457,7 @@ try {
       "bank_account_type": "checking",
       "bank_account_holder_type": "personal",
       "payment_type": "bank_account",
+      "verified": true,
       "site_gateway_setting_id": 1,
       "gateway_handle": "handle"
     }
@@ -503,26 +506,26 @@ Example response for Bank Account:
 
 ```ts
 async readPaymentProfile(
-  paymentProfileId: string,
+  paymentProfileId: number,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ReadPaymentProfileResponse>>
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
+| `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ReadPaymentProfileResponse`](../../doc/models/read-payment-profile-response.md)
+[`PaymentProfileResponse`](../../doc/models/payment-profile-response.md)
 
 ## Example Usage
 
 ```ts
-const paymentProfileId = 'payment_profile_id2';
+const paymentProfileId = 198;
 
 try {
   // @ts-expect-error: unused variables
@@ -569,6 +572,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+
 
 # Update Payment Profile
 
@@ -609,28 +618,28 @@ The result will be that you have updated the billing information for the card, y
 
 ```ts
 async updatePaymentProfile(
-  paymentProfileId: string,
+  paymentProfileId: number,
   body?: UpdatePaymentProfileRequest,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<UpdatePaymentProfileResponse>>
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
+| `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `body` | [`UpdatePaymentProfileRequest \| undefined`](../../doc/models/update-payment-profile-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`UpdatePaymentProfileResponse`](../../doc/models/update-payment-profile-response.md)
+[`PaymentProfileResponse`](../../doc/models/payment-profile-response.md)
 
 ## Example Usage
 
 ```ts
-const paymentProfileId = 'payment_profile_id2';
+const paymentProfileId = 198;
 
 const body: UpdatePaymentProfileRequest = {
   paymentProfile: {
@@ -698,6 +707,13 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorStringMapResponseError`](../../doc/models/error-string-map-response-error.md) |
+
 
 # Delete Unused Payment Profile
 
@@ -707,7 +723,7 @@ If the payment profile is in use by one or more subscriptions or groups, a 422 a
 
 ```ts
 async deleteUnusedPaymentProfile(
-  paymentProfileId: string,
+  paymentProfileId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
@@ -716,7 +732,7 @@ async deleteUnusedPaymentProfile(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
+| `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -726,7 +742,7 @@ async deleteUnusedPaymentProfile(
 ## Example Usage
 
 ```ts
-const paymentProfileId = 'payment_profile_id2';
+const paymentProfileId = 198;
 
 try {
   // @ts-expect-error: unused variables
@@ -748,6 +764,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
@@ -762,7 +779,7 @@ This will delete a payment profile belonging to the customer on the subscription
 ```ts
 async deleteSubscriptionsPaymentProfile(
   subscriptionId: number,
-  paymentProfileId: string,
+  paymentProfileId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
@@ -772,7 +789,7 @@ async deleteSubscriptionsPaymentProfile(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
+| `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -784,7 +801,7 @@ async deleteSubscriptionsPaymentProfile(
 ```ts
 const subscriptionId = 222;
 
-const paymentProfileId = 'payment_profile_id2';
+const paymentProfileId = 198;
 
 try {
   // @ts-expect-error: unused variables
@@ -906,7 +923,7 @@ This will delete a Payment Profile belonging to a Subscription Group.
 ```ts
 async deleteSubscriptionGroupPaymentProfile(
   uid: string,
-  paymentProfileId: string,
+  paymentProfileId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
@@ -916,7 +933,7 @@ async deleteSubscriptionGroupPaymentProfile(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The uid of the subscription group |
-| `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
+| `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -928,7 +945,7 @@ async deleteSubscriptionGroupPaymentProfile(
 ```ts
 const uid = 'uid0';
 
-const paymentProfileId = 'payment_profile_id2';
+const paymentProfileId = 198;
 
 try {
   // @ts-expect-error: unused variables
@@ -1035,6 +1052,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
@@ -1049,7 +1067,7 @@ The new payment profile must belong to the subscription group's customer, otherw
 ```ts
 async updateSubscriptionGroupDefaultPaymentProfile(
   uid: string,
-  paymentProfileId: string,
+  paymentProfileId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaymentProfileResponse>>
 ```
@@ -1059,7 +1077,7 @@ async updateSubscriptionGroupDefaultPaymentProfile(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The uid of the subscription group |
-| `paymentProfileId` | `string` | Template, Required | The Chargify id of the payment profile |
+| `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1071,7 +1089,7 @@ async updateSubscriptionGroupDefaultPaymentProfile(
 ```ts
 const uid = 'uid0';
 
-const paymentProfileId = 'payment_profile_id2';
+const paymentProfileId = 198;
 
 try {
   // @ts-expect-error: unused variables

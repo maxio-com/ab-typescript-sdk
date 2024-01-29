@@ -38,6 +38,7 @@
         }
       ],
       "use_site_exchange_rate": false,
+      "tax_included": false,
       "interval": 24,
       "interval_unit": "day"
     },
@@ -63,6 +64,7 @@
         }
       ],
       "use_site_exchange_rate": false,
+      "tax_included": false,
       "interval": 24,
       "interval_unit": "day"
     }

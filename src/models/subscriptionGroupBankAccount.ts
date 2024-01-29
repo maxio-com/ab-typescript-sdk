@@ -5,9 +5,13 @@
  */
 
 import { object, optional, Schema, string } from '../schema';
+import {
+  BankAccountHolderType,
+  bankAccountHolderTypeSchema,
+} from './bankAccountHolderType';
 import { BankAccountType, bankAccountTypeSchema } from './bankAccountType';
 import { BankAccountVault, bankAccountVaultSchema } from './bankAccountVault';
-import { HolderType, holderTypeSchema } from './holderType';
+import { PaymentType, paymentTypeSchema } from './paymentType';
 
 export interface SubscriptionGroupBankAccount {
   /** (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides */
@@ -20,9 +24,11 @@ export interface SubscriptionGroupBankAccount {
   bankIban?: string;
   /** (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided */
   bankBranchCode?: string;
+  /** Defaults to checking */
   bankAccountType?: BankAccountType;
-  bankAccountHolderType?: HolderType;
-  paymentType?: string;
+  /** Defaults to personal */
+  bankAccountHolderType?: BankAccountHolderType;
+  paymentType?: PaymentType;
   billingAddress?: string;
   billingCity?: string;
   billingState?: string;
@@ -44,9 +50,9 @@ export const subscriptionGroupBankAccountSchema: Schema<SubscriptionGroupBankAcc
     bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
     bankAccountHolderType: [
       'bank_account_holder_type',
-      optional(holderTypeSchema),
+      optional(bankAccountHolderTypeSchema),
     ],
-    paymentType: ['payment_type', optional(string())],
+    paymentType: ['payment_type', optional(paymentTypeSchema)],
     billingAddress: ['billing_address', optional(string())],
     billingCity: ['billing_city', optional(string())],
     billingState: ['billing_state', optional(string())],

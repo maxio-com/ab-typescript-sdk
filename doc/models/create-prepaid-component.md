@@ -20,7 +20,8 @@
     "unit_name": "unit_name4",
     "description": "description2",
     "handle": "handle8",
-    "taxable": false
+    "taxable": false,
+    "pricing_scheme": "per_unit"
   }
 }
 ```

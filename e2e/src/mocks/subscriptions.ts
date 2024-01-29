@@ -1,4 +1,9 @@
-import { BankAccountType, CardType, PaymentType } from 'advanced-billing-sdk';
+import {
+  BankAccountHolderType,
+  BankAccountType,
+  CardType,
+  PaymentType,
+} from 'advanced-billing-sdk';
 
 export const customerAttributes = {
   firstName: 'Joe',
@@ -36,7 +41,7 @@ export const bankAccountAttributes = {
   bankRoutingNumber: '21000089',
   bankAccountNumber: '111111111111',
   bankAccountType: BankAccountType.Checking,
-  bankAccountHolderType: 'business',
+  bankAccountHolderType: BankAccountHolderType.Business,
   paymentType: PaymentType.CreditCard,
 };
 

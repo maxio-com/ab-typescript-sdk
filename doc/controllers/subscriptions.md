@@ -2167,5 +2167,5 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`NestedErrorResponseError`](../../doc/models/nested-error-response-error.md) |
+| 400 | Bad Request | [`ErrorArrayMapResponseError`](../../doc/models/error-array-map-response-error.md) |
 

@@ -18,7 +18,7 @@
 ```json
 {
   "currency": "currency2",
-  "price": 16,
+  "price": 10.4,
   "price_id": 54
 }
 ```
