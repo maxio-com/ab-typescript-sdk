@@ -1,8 +1,6 @@
-import { CONFIG, createClient } from '../config';
+import { createClient } from '../config';
 import {
-  CustomersController,
   CustomFieldsController,
-  Environment,
   ResourceType,
   Metafield,
   MetafieldInput,
@@ -40,13 +38,13 @@ export const textData = {
 export const dropdownData = {
   name: 'customDropDownName',
   inputType: MetafieldInput.Dropdown,
-  mEnum: [...defaultEnum],
+  mEnum: defaultEnum,
 };
 
 export const radioData = {
   name: 'customRadioName',
   inputType: MetafieldInput.Radio,
-  mEnum: [...defaultEnum],
+  mEnum: defaultEnum,
 };
 
 export const includeScope = {
@@ -75,17 +73,6 @@ export const switchedScope = {
   publicEdit: IncludeOption.Include,
   publicShow: IncludeOption.Exclude,
 };
-
-export function createInvalidClient() {
-  return createClient({
-    timeout: 0,
-    domain: CONFIG.DOMAIN,
-    environment: Environment.Production,
-    subdomain: CONFIG.SUBDOMAIN,
-    basicAuthUserName: 'invalidKey',
-    basicAuthPassword: CONFIG.PASSWORD,
-  });
-}
 
 export async function removeCustomerCustomList() {
   const {
@@ -148,20 +135,4 @@ export async function createRadioSubscriptionField() {
     }
   );
   return createdRadioField;
-}
-
-export async function createCustomer() {
-  const validClient = createClient();
-  const customersController = new CustomersController(validClient);
-  const {
-    result: { customer },
-  } = await customersController.createCustomer({
-    customer: {
-      firstName: 'Martha',
-      lastName: 'Washington',
-      email: 'martha@example.com',
-      ccEmails: 'george@example.com',
-    },
-  });
-  return customer;
 }

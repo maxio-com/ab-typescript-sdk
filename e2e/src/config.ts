@@ -20,3 +20,14 @@ export function createClient(options = defaultOptions) {
   const client = new Client(options);
   return client;
 }
+
+export function createInvalidClient() {
+  return createClient({
+    timeout: 0,
+    domain: CONFIG.DOMAIN,
+    environment: Environment.Production,
+    subdomain: CONFIG.SUBDOMAIN,
+    basicAuthUserName: 'invalidKey',
+    basicAuthPassword: CONFIG.PASSWORD,
+  });
+}

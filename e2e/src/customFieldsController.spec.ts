@@ -6,12 +6,10 @@ import {
   ResourceType,
   SortingDirection,
 } from 'advanced-billing-sdk';
-import { createClient } from './config';
+import { createClient, createInvalidClient } from './config';
 
 import {
-  createCustomer,
   createDropdownSubscriptionField,
-  createInvalidClient,
   createRadioSubscriptionField,
   createTextCustomersField,
   createTextSubscriptionField,
@@ -26,6 +24,7 @@ import {
   switchedScope,
   textData,
 } from './utils/customFieldsController';
+import { createCustomer } from './utils/customers';
 
 describe('Custom Fields Controller', () => {
   const validClient = createClient();
@@ -173,7 +172,7 @@ describe('Custom Fields Controller', () => {
       test('should create a meta fields with include scope and input_type=text', async () => {
         const payload = {
           metafields: {
-            scope: { ...includeScope },
+            scope: includeScope,
             ...textData,
           },
         };
@@ -498,7 +497,7 @@ describe('Custom Fields Controller', () => {
       const nameToUpdate = 'updatedName2';
       const payloadToUpdate = {
         metafields: {
-          scope: { ...includeScope },
+          scope: includeScope,
           currentName: customTextField.name,
           name: nameToUpdate,
         },
