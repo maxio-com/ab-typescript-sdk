@@ -8,6 +8,7 @@ import {
   array,
   boolean,
   lazy,
+  nullable,
   number,
   object,
   optional,
@@ -19,9 +20,9 @@ import {
   appliedCreditNoteDataSchema,
 } from './appliedCreditNoteData';
 import {
-  InvoiceEvent1PaymentMethod,
-  invoiceEvent1PaymentMethodSchema,
-} from './containers/invoiceEvent1PaymentMethod';
+  InvoiceEventDataPaymentMethod,
+  invoiceEventDataPaymentMethodSchema,
+} from './containers/invoiceEventDataPaymentMethod';
 import { CreditNote1, creditNote1Schema } from './creditNote1';
 import {
   InvoiceConsolidationLevel,
@@ -30,7 +31,7 @@ import {
 import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 
 /** The event data is the data that, when combined with the command, results in the output invoice found in the invoice field. */
-export interface InvoiceEvent1 {
+export interface InvoiceEventData {
   /** Unique identifier for the credit note application. It is generated automatically by Chargify and has the prefix "cdt_" followed by alphanumeric characters. */
   uid?: string;
   /** A unique, identifying string that appears on the credit note and in places it is referenced. */
@@ -56,9 +57,14 @@ export interface InvoiceEvent1 {
   /** Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. */
   debitNoteUid?: string;
   /** A nested data structure detailing the method of payment */
-  paymentMethod?: InvoiceEvent1PaymentMethod;
+  paymentMethod?: InvoiceEventDataPaymentMethod;
   /** The Chargify id of the original payment */
   transactionId?: number;
+  parentInvoiceNumber?: number | null;
+  remainingPrepaymentAmount?: string | null;
+  /** The flag that shows whether the original payment was a prepayment or not */
+  prepayment?: boolean;
+  external?: boolean;
   /** The previous collection method of the invoice. */
   fromCollectionMethod?: string;
   /** The new collection method of the invoice. */
@@ -89,15 +95,13 @@ export interface InvoiceEvent1 {
   refundAmount?: string;
   /** The ID of the refund transaction. */
   refundId?: number;
-  /** The flag that shows whether the original payment was a prepayment or not */
-  prepayment?: boolean;
   /** If true, the invoice is an advance invoice. */
   isAdvanceInvoice?: boolean;
   /** The reason for the void. */
   reason?: string;
 }
 
-export const invoiceEvent1Schema: Schema<any> = object({
+export const invoiceEventDataSchema: Schema<any> = object({
   uid: ['uid', optional(string())],
   creditNoteNumber: ['credit_note_number', optional(string())],
   creditNoteUid: ['credit_note_uid', optional(string())],
@@ -115,9 +119,16 @@ export const invoiceEvent1Schema: Schema<any> = object({
   debitNoteUid: ['debit_note_uid', optional(string())],
   paymentMethod: [
     'payment_method',
-    optional(lazy(() => invoiceEvent1PaymentMethodSchema)),
+    optional(lazy(() => invoiceEventDataPaymentMethodSchema)),
   ],
   transactionId: ['transaction_id', optional(number())],
+  parentInvoiceNumber: ['parent_invoice_number', optional(nullable(number()))],
+  remainingPrepaymentAmount: [
+    'remaining_prepayment_amount',
+    optional(nullable(string())),
+  ],
+  prepayment: ['prepayment', optional(boolean())],
+  external: ['external', optional(boolean())],
   fromCollectionMethod: ['from_collection_method', optional(string())],
   toCollectionMethod: ['to_collection_method', optional(string())],
   consolidationLevel: [
@@ -136,7 +147,6 @@ export const invoiceEvent1Schema: Schema<any> = object({
   paymentId: ['payment_id', optional(number())],
   refundAmount: ['refund_amount', optional(string())],
   refundId: ['refund_id', optional(number())],
-  prepayment: ['prepayment', optional(boolean())],
   isAdvanceInvoice: ['is_advance_invoice', optional(boolean())],
   reason: ['reason', optional(string())],
 });

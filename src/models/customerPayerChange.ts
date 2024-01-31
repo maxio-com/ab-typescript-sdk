@@ -4,14 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, unknown } from '../schema';
+import { lazy, object, optional, Schema } from '../schema';
+import { PayerAttributes, payerAttributesSchema } from './payerAttributes';
 
 export interface CustomerPayerChange {
-  before?: unknown;
-  after?: unknown;
+  before?: PayerAttributes;
+  after?: PayerAttributes;
 }
 
 export const customerPayerChangeSchema: Schema<CustomerPayerChange> = object({
-  before: ['before', optional(unknown())],
-  after: ['after', optional(unknown())],
+  before: ['before', optional(lazy(() => payerAttributesSchema))],
+  after: ['after', optional(lazy(() => payerAttributesSchema))],
 });

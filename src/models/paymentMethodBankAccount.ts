@@ -5,17 +5,21 @@
  */
 
 import { object, Schema, string } from '../schema';
+import {
+  InvoiceEventPaymentMethod,
+  invoiceEventPaymentMethodSchema,
+} from './invoiceEventPaymentMethod';
 
-export interface PaymentMethodBankAccountType {
+export interface PaymentMethodBankAccount {
   maskedAccountNumber: string;
   maskedRoutingNumber: string;
-  type: string;
+  type: InvoiceEventPaymentMethod;
 }
 
-export const paymentMethodBankAccountTypeSchema: Schema<PaymentMethodBankAccountType> = object(
+export const paymentMethodBankAccountSchema: Schema<PaymentMethodBankAccount> = object(
   {
     maskedAccountNumber: ['masked_account_number', string()],
     maskedRoutingNumber: ['masked_routing_number', string()],
-    type: ['type', string()],
+    type: ['type', invoiceEventPaymentMethodSchema],
   }
 );

@@ -7,19 +7,19 @@
 import { nullable, number, object, optional, Schema, string } from '../schema';
 
 export interface Metadata {
-  id?: number;
-  value?: string;
-  resourceId?: number;
+  id?: number | null;
+  value?: string | null;
+  resourceId?: number | null;
   name?: string;
   deletedAt?: string | null;
-  metafieldId?: number;
+  metafieldId?: number | null;
 }
 
 export const metadataSchema: Schema<Metadata> = object({
-  id: ['id', optional(number())],
-  value: ['value', optional(string())],
-  resourceId: ['resource_id', optional(number())],
+  id: ['id', optional(nullable(number()))],
+  value: ['value', optional(nullable(string()))],
+  resourceId: ['resource_id', optional(nullable(number()))],
   name: ['name', optional(string())],
   deletedAt: ['deleted_at', optional(nullable(string()))],
-  metafieldId: ['metafield_id', optional(number())],
+  metafieldId: ['metafield_id', optional(nullable(number()))],
 });

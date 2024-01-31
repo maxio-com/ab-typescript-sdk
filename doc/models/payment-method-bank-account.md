@@ -1,9 +1,9 @@
 
-# Payment Method Bank Account Type
+# Payment Method Bank Account
 
 ## Structure
 
-`PaymentMethodBankAccountType`
+`PaymentMethodBankAccount`
 
 ## Fields
 
@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `maskedAccountNumber` | `string` | Required | - |
 | `maskedRoutingNumber` | `string` | Required | - |
-| `type` | `string` | Required | **Default**: `'bank_account'` |
+| `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
 ## Example (as JSON)
 
@@ -19,7 +19,7 @@
 {
   "masked_account_number": "masked_account_number2",
   "masked_routing_number": "masked_routing_number2",
-  "type": "bank_account"
+  "type": "paypal_account"
 }
 ```
 
