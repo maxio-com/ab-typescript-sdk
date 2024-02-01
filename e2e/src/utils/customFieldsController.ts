@@ -20,8 +20,8 @@ async function deleteCustomFields(
 ) {
   Promise.all(
     customFieldList.map(
-      async (customField = {}) =>
-        await deleteCustomField(resourceType, customField.name || '')
+      async ({ name = '' }: Metafield = {}) =>
+        await deleteCustomField(resourceType, name)
     )
   );
 }
@@ -92,34 +92,47 @@ export async function removeSubscriptionsCustomList() {
   await deleteCustomFields(metafields, ResourceType.Subscriptions);
 }
 
-export async function createTextCustomersField() {
+export async function createTextCustomersField(textName = '') {
+  const name = textName == '' ? textData.name : textName;
   const {
     result: [createdTextField],
   } = await customFieldsController.createMetafields(ResourceType.Customers, {
-    metafields: { ...textData },
+    metafields: { ...textData, name },
   });
   return createdTextField;
 }
 
-export async function createTextSubscriptionField() {
+export async function createTextSubscriptionField(textName = '') {
+  const name = textName == '' ? textData.name : textName;
   const {
     result: [createdTextField],
   } = await customFieldsController.createMetafields(
     ResourceType.Subscriptions,
     {
-      metafields: { ...textData },
+      metafields: { ...textData, name },
     }
   );
   return createdTextField;
 }
 
-export async function createDropdownSubscriptionField() {
+export async function createDropdownCustomersField(textName = '') {
+  const name = textName == '' ? dropdownData.name : textName;
+  const {
+    result: [createdDropDownField],
+  } = await customFieldsController.createMetafields(ResourceType.Customers, {
+    metafields: { ...dropdownData, name },
+  });
+  return createdDropDownField;
+}
+
+export async function createDropdownSubscriptionField(textName = '') {
+  const name = textName == '' ? dropdownData.name : textName;
   const {
     result: [createdDropDownField],
   } = await customFieldsController.createMetafields(
     ResourceType.Subscriptions,
     {
-      metafields: { ...dropdownData },
+      metafields: { ...dropdownData, name },
     }
   );
   return createdDropDownField;
