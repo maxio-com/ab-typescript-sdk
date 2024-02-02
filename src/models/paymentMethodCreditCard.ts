@@ -5,21 +5,25 @@
  */
 
 import { nullable, object, optional, Schema, string } from '../schema';
+import {
+  InvoiceEventPaymentMethod,
+  invoiceEventPaymentMethodSchema,
+} from './invoiceEventPaymentMethod';
 
-export interface PaymentMethodCreditCardType {
+export interface PaymentMethodCreditCard {
   cardBrand: string;
   cardExpiration?: string;
   lastFour?: string | null;
   maskedCardNumber: string;
-  type: string;
+  type: InvoiceEventPaymentMethod;
 }
 
-export const paymentMethodCreditCardTypeSchema: Schema<PaymentMethodCreditCardType> = object(
+export const paymentMethodCreditCardSchema: Schema<PaymentMethodCreditCard> = object(
   {
     cardBrand: ['card_brand', string()],
     cardExpiration: ['card_expiration', optional(string())],
     lastFour: ['last_four', optional(nullable(string()))],
     maskedCardNumber: ['masked_card_number', string()],
-    type: ['type', string()],
+    type: ['type', invoiceEventPaymentMethodSchema],
   }
 );

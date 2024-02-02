@@ -5,24 +5,24 @@
  */
 
 import { discriminatedObject, Schema } from '../schema';
-import { paymentMethodNestedDataSchema } from './paymentMethodNestedData';
-import { paymentMethodNestedData1Schema } from './paymentMethodNestedData1';
+import { invoiceEventPaymentSchema } from './invoiceEventPayment';
+import { invoiceEventPayment1Schema } from './invoiceEventPayment1';
 
-export const discriminatedPaymentMethodNestedDataSchema: Schema<any> = discriminatedObject(
+export const discriminatedInvoiceEventPaymentSchema: Schema<any> = discriminatedObject(
   'type',
   'type',
   {
-    'Payment Method Nested Data': paymentMethodNestedDataSchema,
+    'Invoice Event Payment': invoiceEventPaymentSchema,
  },
-  'Payment Method Nested Data'
+  'Invoice Event Payment'
 );
 
-export const discriminatedPaymentMethodNestedData1Schema: Schema<any> = discriminatedObject(
+export const discriminatedInvoiceEventPayment1Schema: Schema<any> = discriminatedObject(
   'type',
   'type',
   {
-    'Payment Method Nested Data1': paymentMethodNestedData1Schema,
+    'Invoice Event Payment1': invoiceEventPayment1Schema,
  },
-  'Payment Method Nested Data1'
+  'Invoice Event Payment1'
 );
 

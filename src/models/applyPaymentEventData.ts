@@ -4,11 +4,20 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
 import {
-  ApplyPaymentEventDataPaymentMethod,
-  applyPaymentEventDataPaymentMethodSchema,
-} from './containers/applyPaymentEventDataPaymentMethod';
+  boolean,
+  lazy,
+  nullable,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+} from '../schema';
+import {
+  InvoiceEventPayment,
+  invoiceEventPaymentSchema,
+} from './containers/invoiceEventPayment';
 
 /** Example schema for an `apply_payment` event */
 export interface ApplyPaymentEventData {
@@ -21,9 +30,13 @@ export interface ApplyPaymentEventData {
   /** The time the payment was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" */
   transactionTime: string;
   /** A nested data structure detailing the method of payment */
-  paymentMethod: ApplyPaymentEventDataPaymentMethod;
+  paymentMethod: InvoiceEventPayment;
   /** The Chargify id of the original payment */
   transactionId?: number;
+  parentInvoiceNumber?: number | null;
+  remainingPrepaymentAmount?: string | null;
+  prepayment?: boolean;
+  external?: boolean;
 }
 
 export const applyPaymentEventDataSchema: Schema<any> = object({
@@ -31,9 +44,13 @@ export const applyPaymentEventDataSchema: Schema<any> = object({
   originalAmount: ['original_amount', string()],
   appliedAmount: ['applied_amount', string()],
   transactionTime: ['transaction_time', string()],
-  paymentMethod: [
-    'payment_method',
-    lazy(() => applyPaymentEventDataPaymentMethodSchema),
-  ],
+  paymentMethod: ['payment_method', lazy(() => invoiceEventPaymentSchema)],
   transactionId: ['transaction_id', optional(number())],
+  parentInvoiceNumber: ['parent_invoice_number', optional(nullable(number()))],
+  remainingPrepaymentAmount: [
+    'remaining_prepayment_amount',
+    optional(nullable(string())),
+  ],
+  prepayment: ['prepayment', optional(boolean())],
+  external: ['external', optional(boolean())],
 });

@@ -18,32 +18,50 @@
   "changes": {
     "payer": {
       "before": {
-        "key1": "val1",
-        "key2": "val2"
+        "first_name": "first_name0",
+        "last_name": "last_name8",
+        "email": "email6",
+        "cc_emails": "cc_emails0",
+        "organization": "organization4"
       },
       "after": {
-        "key1": "val1",
-        "key2": "val2"
+        "first_name": "first_name2",
+        "last_name": "last_name0",
+        "email": "email4",
+        "cc_emails": "cc_emails8",
+        "organization": "organization4"
       }
     },
     "shipping_address": {
       "before": {
-        "key1": "val1",
-        "key2": "val2"
+        "street": "street0",
+        "line2": "line24",
+        "city": "city0",
+        "state": "state6",
+        "zip": "zip4"
       },
       "after": {
-        "key1": "val1",
-        "key2": "val2"
+        "street": "street2",
+        "line2": "line26",
+        "city": "city8",
+        "state": "state2",
+        "zip": "zip4"
       }
     },
     "billing_address": {
       "before": {
-        "key1": "val1",
-        "key2": "val2"
+        "street": "street0",
+        "line2": "line24",
+        "city": "city0",
+        "state": "state6",
+        "zip": "zip4"
       },
       "after": {
-        "key1": "val1",
-        "key2": "val2"
+        "street": "street2",
+        "line2": "line26",
+        "city": "city8",
+        "state": "state2",
+        "zip": "zip4"
       }
     },
     "custom_fields": {

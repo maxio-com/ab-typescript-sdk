@@ -1,11 +1,11 @@
 
-# Payment Method Nested Data 1
+# Invoice Event Payment 1
 
 A nested data structure detailing the method of payment
 
 ## Structure
 
-`PaymentMethodNestedData1`
+`InvoiceEventPayment1`
 
 ## Fields
 
@@ -18,26 +18,26 @@ A nested data structure detailing the method of payment
 | `cardExpiration` | `string \| undefined` | Optional | - |
 | `lastFour` | `string \| null \| undefined` | Optional | - |
 | `maskedCardNumber` | `string` | Required | - |
-| `details` | `string` | Required | - |
+| `details` | `string \| null` | Required | - |
 | `kind` | `string` | Required | - |
-| `memo` | `string` | Required | - |
+| `memo` | `string \| null` | Required | - |
 | `email` | `string` | Required | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "type": "Payment Method Nested Data1",
-  "masked_account_number": "masked_account_number8",
-  "masked_routing_number": "masked_routing_number8",
-  "card_brand": "card_brand4",
-  "card_expiration": "card_expiration2",
-  "last_four": "last_four6",
-  "masked_card_number": "masked_card_number0",
-  "details": "details2",
-  "kind": "kind0",
-  "memo": "memo6",
-  "email": "email4"
+  "type": "Invoice Event Payment1",
+  "masked_account_number": "masked_account_number4",
+  "masked_routing_number": "masked_routing_number4",
+  "card_brand": "card_brand8",
+  "card_expiration": "card_expiration4",
+  "last_four": "last_four2",
+  "masked_card_number": "masked_card_number6",
+  "details": "details8",
+  "kind": "kind6",
+  "memo": "memo2",
+  "email": "email8"
 }
 ```
 
