@@ -14,9 +14,9 @@ import {
   string,
 } from '../schema';
 import {
-  RemovePaymentEventDataPaymentMethod,
-  removePaymentEventDataPaymentMethodSchema,
-} from './containers/removePaymentEventDataPaymentMethod';
+  InvoiceEventPayment,
+  invoiceEventPaymentSchema,
+} from './containers/invoiceEventPayment';
 
 /** Example schema for an `remove_payment` event */
 export interface RemovePaymentEventData {
@@ -31,7 +31,7 @@ export interface RemovePaymentEventData {
   /** Transaction time of the original payment, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" */
   transactionTime: string;
   /** A nested data structure detailing the method of payment */
-  paymentMethod: RemovePaymentEventDataPaymentMethod;
+  paymentMethod: InvoiceEventPayment;
   /** The flag that shows whether the original payment was a prepayment or not */
   prepayment: boolean;
 }
@@ -42,9 +42,6 @@ export const removePaymentEventDataSchema: Schema<any> = object({
   originalAmount: ['original_amount', optional(string())],
   appliedAmount: ['applied_amount', string()],
   transactionTime: ['transaction_time', string()],
-  paymentMethod: [
-    'payment_method',
-    lazy(() => removePaymentEventDataPaymentMethodSchema),
-  ],
+  paymentMethod: ['payment_method', lazy(() => invoiceEventPaymentSchema)],
   prepayment: ['prepayment', boolean()],
 });

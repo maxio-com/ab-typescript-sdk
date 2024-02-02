@@ -1,11 +1,11 @@
 
-# Invoice Event 1
+# Invoice Event Data
 
 The event data is the data that, when combined with the command, results in the output invoice found in the invoice field.
 
 ## Structure
 
-`InvoiceEvent1`
+`InvoiceEventData`
 
 ## Fields
 
@@ -23,8 +23,12 @@ The event data is the data that, when combined with the command, results in the 
 | `appliedCreditNotes` | [`AppliedCreditNoteData[] \| undefined`](../../doc/models/applied-credit-note-data.md) | Optional | List of credit notes applied to children invoices (if consolidated invoice) |
 | `debitNoteNumber` | `string \| undefined` | Optional | A unique, identifying string that appears on the debit note and in places it is referenced. |
 | `debitNoteUid` | `string \| undefined` | Optional | Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. |
-| `paymentMethod` | [`InvoiceEvent1PaymentMethod \| undefined`](../../doc/models/containers/invoice-event-1-payment-method.md) | Optional | This is a container for any-of cases. |
+| `paymentMethod` | [`InvoiceEventDataPaymentMethod \| undefined`](../../doc/models/containers/invoice-event-data-payment-method.md) | Optional | This is a container for any-of cases. |
 | `transactionId` | `number \| undefined` | Optional | The Chargify id of the original payment |
+| `parentInvoiceNumber` | `number \| null \| undefined` | Optional | - |
+| `remainingPrepaymentAmount` | `string \| null \| undefined` | Optional | - |
+| `prepayment` | `boolean \| undefined` | Optional | The flag that shows whether the original payment was a prepayment or not |
+| `external` | `boolean \| undefined` | Optional | - |
 | `fromCollectionMethod` | `string \| undefined` | Optional | The previous collection method of the invoice. |
 | `toCollectionMethod` | `string \| undefined` | Optional | The new collection method of the invoice. |
 | `consolidationLevel` | [`InvoiceConsolidationLevel \| undefined`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835). |
@@ -37,7 +41,6 @@ The event data is the data that, when combined with the command, results in the 
 | `paymentId` | `number \| undefined` | Optional | The ID of the payment transaction to be refunded. |
 | `refundAmount` | `string \| undefined` | Optional | The amount of the refund. |
 | `refundId` | `number \| undefined` | Optional | The ID of the refund transaction. |
-| `prepayment` | `boolean \| undefined` | Optional | The flag that shows whether the original payment was a prepayment or not |
 | `isAdvanceInvoice` | `boolean \| undefined` | Optional | If true, the invoice is an advance invoice. |
 | `reason` | `string \| undefined` | Optional | The reason for the void. |
 
@@ -46,8 +49,8 @@ The event data is the data that, when combined with the command, results in the 
 ```json
 {
   "uid": "uid0",
-  "credit_note_number": "credit_note_number4",
-  "credit_note_uid": "credit_note_uid4",
+  "credit_note_number": "credit_note_number6",
+  "credit_note_uid": "credit_note_uid6",
   "original_amount": "original_amount4",
   "applied_amount": "applied_amount8"
 }

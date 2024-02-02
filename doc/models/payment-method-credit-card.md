@@ -1,9 +1,9 @@
 
-# Payment Method Credit Card Type
+# Payment Method Credit Card
 
 ## Structure
 
-`PaymentMethodCreditCardType`
+`PaymentMethodCreditCard`
 
 ## Fields
 
@@ -13,17 +13,17 @@
 | `cardExpiration` | `string \| undefined` | Optional | - |
 | `lastFour` | `string \| null \| undefined` | Optional | - |
 | `maskedCardNumber` | `string` | Required | - |
-| `type` | `string` | Required | **Default**: `'credit_card'` |
+| `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "card_brand": "card_brand0",
-  "masked_card_number": "masked_card_number4",
-  "type": "credit_card",
-  "card_expiration": "card_expiration8",
-  "last_four": "last_four0"
+  "card_brand": "card_brand4",
+  "card_expiration": "card_expiration2",
+  "last_four": "last_four4",
+  "masked_card_number": "masked_card_number0",
+  "type": "external"
 }
 ```
 

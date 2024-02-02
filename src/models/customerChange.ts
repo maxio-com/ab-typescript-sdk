@@ -5,10 +5,7 @@
  */
 
 import { lazy, object, optional, Schema } from '../schema';
-import {
-  CustomerBillingAddressChange,
-  customerBillingAddressChangeSchema,
-} from './customerBillingAddressChange';
+import { AddressChange, addressChangeSchema } from './addressChange';
 import {
   CustomerCustomFieldsChange,
   customerCustomFieldsChangeSchema,
@@ -17,15 +14,11 @@ import {
   CustomerPayerChange,
   customerPayerChangeSchema,
 } from './customerPayerChange';
-import {
-  CustomerShippingAddressChange,
-  customerShippingAddressChangeSchema,
-} from './customerShippingAddressChange';
 
 export interface CustomerChange {
   payer?: CustomerPayerChange;
-  shippingAddress?: CustomerShippingAddressChange;
-  billingAddress?: CustomerBillingAddressChange;
+  shippingAddress?: AddressChange;
+  billingAddress?: AddressChange;
   customFields?: CustomerCustomFieldsChange;
 }
 
@@ -33,11 +26,11 @@ export const customerChangeSchema: Schema<CustomerChange> = object({
   payer: ['payer', optional(lazy(() => customerPayerChangeSchema))],
   shippingAddress: [
     'shipping_address',
-    optional(lazy(() => customerShippingAddressChangeSchema)),
+    optional(lazy(() => addressChangeSchema)),
   ],
   billingAddress: [
     'billing_address',
-    optional(lazy(() => customerBillingAddressChangeSchema)),
+    optional(lazy(() => addressChangeSchema)),
   ],
   customFields: [
     'custom_fields',

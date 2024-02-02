@@ -9,12 +9,12 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number \| undefined` | Optional | - |
-| `value` | `string \| undefined` | Optional | - |
-| `resourceId` | `number \| undefined` | Optional | - |
+| `id` | `number \| null \| undefined` | Optional | - |
+| `value` | `string \| null \| undefined` | Optional | - |
+| `resourceId` | `number \| null \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | - |
 | `deletedAt` | `string \| null \| undefined` | Optional | - |
-| `metafieldId` | `number \| undefined` | Optional | - |
+| `metafieldId` | `number \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
