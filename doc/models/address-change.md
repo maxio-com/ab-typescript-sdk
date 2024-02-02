@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `before` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
-| `after` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | - |
+| `before` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Required | - |
+| `after` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Required | - |
 
 ## Example (as JSON)
 

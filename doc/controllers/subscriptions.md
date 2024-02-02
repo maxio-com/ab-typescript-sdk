@@ -15,12 +15,12 @@ const subscriptionsController = new SubscriptionsController(client);
 * [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription)
 * [Read Subscription](../../doc/controllers/subscriptions.md#read-subscription)
 * [Override Subscription](../../doc/controllers/subscriptions.md#override-subscription)
-* [Read Subscription by Reference](../../doc/controllers/subscriptions.md#read-subscription-by-reference)
+* [Find Subscription](../../doc/controllers/subscriptions.md#find-subscription)
 * [Purge Subscription](../../doc/controllers/subscriptions.md#purge-subscription)
-* [Create Prepaid Subscription](../../doc/controllers/subscriptions.md#create-prepaid-subscription)
+* [Update Prepaid Subscription Configuration](../../doc/controllers/subscriptions.md#update-prepaid-subscription-configuration)
 * [Preview Subscription](../../doc/controllers/subscriptions.md#preview-subscription)
-* [Apply Coupon to Subscription](../../doc/controllers/subscriptions.md#apply-coupon-to-subscription)
-* [Delete Coupon From Subscription](../../doc/controllers/subscriptions.md#delete-coupon-from-subscription)
+* [Apply Coupons to Subscription](../../doc/controllers/subscriptions.md#apply-coupons-to-subscription)
+* [Remove Coupon From Subscription](../../doc/controllers/subscriptions.md#remove-coupon-from-subscription)
 * [Activate Subscription](../../doc/controllers/subscriptions.md#activate-subscription)
 
 
@@ -1428,12 +1428,12 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseError`](../../doc/models/single-error-response-error.md) |
 
 
-# Read Subscription by Reference
+# Find Subscription
 
 Use this endpoint to find a subscription by its reference.
 
 ```ts
-async readSubscriptionByReference(
+async findSubscription(
   reference?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse>>
@@ -1456,7 +1456,7 @@ async readSubscriptionByReference(
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionsController.readSubscriptionByReference();
+  const { result, ...httpResponse } = await subscriptionsController.findSubscription();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1531,12 +1531,12 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
 ```
 
 
-# Create Prepaid Subscription
+# Update Prepaid Subscription Configuration
 
 Use this endpoint to update a subscription's prepaid configuration.
 
 ```ts
-async createPrepaidSubscription(
+async updatePrepaidSubscriptionConfiguration(
   subscriptionId: number,
   body?: UpsertPrepaidConfigurationRequest,
   requestOptions?: RequestOptions
@@ -1572,7 +1572,7 @@ const body: UpsertPrepaidConfigurationRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionsController.createPrepaidSubscription(
+  const { result, ...httpResponse } = await subscriptionsController.updatePrepaidSubscriptionConfiguration(
   subscriptionId,
   body
 );
@@ -1795,7 +1795,7 @@ try {
 ```
 
 
-# Apply Coupon to Subscription
+# Apply Coupons to Subscription
 
 An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-coupons)
 
@@ -1806,7 +1806,7 @@ Passing in a coupon code as a query parameter will add the code to the subscript
 For this reason, using this query parameter on this endpoint has been deprecated in favor of using the request body parameters as described below. When passing in request body parameters, the list of coupon codes will simply be added to any existing list of codes on the subscription.
 
 ```ts
-async applyCouponToSubscription(
+async applyCouponsToSubscription(
   subscriptionId: number,
   code?: string,
   body?: AddCouponsRequest,
@@ -1842,7 +1842,7 @@ const body: AddCouponsRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionsController.applyCouponToSubscription(
+  const { result, ...httpResponse } = await subscriptionsController.applyCouponsToSubscription(
   subscriptionId,
   undefined,
   body
@@ -2016,14 +2016,14 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`SubscriptionAddCouponError`](../../doc/models/subscription-add-coupon-error.md) |
 
 
-# Delete Coupon From Subscription
+# Remove Coupon From Subscription
 
 Use this endpoint to remove a coupon from an existing subscription.
 
 For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407896488987#removing-a-coupon)
 
 ```ts
-async deleteCouponFromSubscription(
+async removeCouponFromSubscription(
   subscriptionId: number,
   couponCode?: string,
   requestOptions?: RequestOptions
@@ -2050,7 +2050,7 @@ const subscriptionId = 222;
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionsController.deleteCouponFromSubscription(subscriptionId);
+  const { result, ...httpResponse } = await subscriptionsController.removeCouponFromSubscription(subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

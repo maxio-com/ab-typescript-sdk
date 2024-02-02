@@ -157,7 +157,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async issueSubscriptionGroupServiceCredits(
+  async issueSubscriptionGroupServiceCredit(
     uid: string,
     body?: IssueServiceCreditRequest,
     requestOptions?: RequestOptions
@@ -182,7 +182,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async deductSubscriptionGroupServiceCredits(
+  async deductSubscriptionGroupServiceCredit(
     uid: string,
     body?: DeductServiceCreditRequest,
     requestOptions?: RequestOptions

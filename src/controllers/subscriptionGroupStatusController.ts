@@ -81,7 +81,7 @@ export class SubscriptionGroupStatusController extends BaseController {
    * @param uid The uid of the subscription group
    * @return Response from the API call
    */
-  async stopDelayedCancellationForGroup(
+  async cancelDelayedCancellationForGroup(
     uid: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {

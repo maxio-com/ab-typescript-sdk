@@ -9,10 +9,14 @@ const validClient = createClient();
 const customFieldsController = new CustomFieldsController(validClient);
 
 async function deleteCustomMetadata(
-  { resourceId = 0, name = '' }: Metadata,
+  { resourceId, name = '' }: Metadata,
   resourceType: ResourceType
 ) {
-  await customFieldsController.deleteMetadata(resourceType, resourceId, name);
+  await customFieldsController.deleteMetadata(
+    resourceType,
+    resourceId || 0,
+    name
+  );
 }
 
 async function deleteAllCustomData(

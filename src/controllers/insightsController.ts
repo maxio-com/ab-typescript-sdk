@@ -119,7 +119,7 @@ export class InsightsController extends BaseController {
    * @return Response from the API call
    * @deprecated
    */
-  async readMrrMovements({
+  async listMrrMovements({
     subscriptionId,
     page,
     perPage,
@@ -143,7 +143,7 @@ export class InsightsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
-    req.deprecated('InsightsController.readMrrMovements');
+    req.deprecated('InsightsController.listMrrMovements');
     return req.callAsJson(listMRRResponseSchema, requestOptions);
   }
 

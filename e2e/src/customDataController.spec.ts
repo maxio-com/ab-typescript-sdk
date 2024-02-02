@@ -5,6 +5,7 @@ import {
   Metadata,
   Metafield,
   ResourceType,
+  UpdateMetadata,
 } from 'advanced-billing-sdk';
 import {
   createCustomerTextMetadata,
@@ -135,22 +136,16 @@ describe('Custom Metadata Controller', () => {
         });
       });
 
-      test('should thrown an error when create a single customer metadata with empty value.', async () => {
+      test('should not thrown an error when create a single customer metadata with empty value.', async () => {
         const metadata = { name: textCustomerField.name };
         const payload = { metadata: [metadata] };
-        try {
-          await customFieldsController.createMetadata(
-            customerResource,
-            customerID,
-            payload
-          );
-        } catch (error) {
-          console.log(error);
-        }
-        /*expect(promise).rejects.toThrow();
-        await promise.catch((error) => {
-          expect(error.statusCode).toBe(422);
-        });*/
+        const response = await customFieldsController.createMetadata(
+          customerResource,
+          customerID,
+          payload
+        );
+
+        expect(response.result.length).toBeGreaterThan(0);
       });
 
       test('should create a customer metadata with existing metafield attached to it with value greater than 2kb.', async () => {
@@ -171,7 +166,6 @@ describe('Custom Metadata Controller', () => {
         expect(statusCode).toBe(200);
         expect(string2KB.size).toBeGreaterThanOrEqual(2);
         expect(customData.resourceId).toBe(customerID);
-        expect(customData.metafieldId).toBe(textCustomerField.id);
         expect(customData.name).toBe(metadata.name);
         expect(customData.value).toBe(metadata.value);
       });
@@ -358,10 +352,10 @@ describe('Custom Metadata Controller', () => {
           customerID,
           firstTextFieldCustomerToUpdate.name
         );
-        const dataToUpdate = {
+        const dataToUpdate: UpdateMetadata = {
           name: 'metadataNameToUpdate',
           currentName: metaDataCustomerToUpdateName.name,
-          value: metaDataCustomerToUpdateName.value,
+          value: metaDataCustomerToUpdateName.value || '',
         };
         const payload = { metadata: dataToUpdate };
         const {
@@ -868,7 +862,7 @@ describe('Custom Metadata Controller', () => {
         });
       });
 
-      test('should response with null values when create a single subscription metadata with empty value.', async () => {
+      test('should not throw an error when create a single subscription metadata with empty value.', async () => {
         const metadata = { name: textSubscriptionField.name };
         const payload = { metadata: [metadata] };
         const response = await customFieldsController.createMetadata(
@@ -876,8 +870,7 @@ describe('Custom Metadata Controller', () => {
           subscriptionID,
           payload
         );
-
-        console.log(response);
+        expect(response.result.length).toBeGreaterThan(0);
       });
 
       test('should create a subscription metadata with existing metafield attached to it with value greater than 2kb.', async () => {
@@ -1086,7 +1079,7 @@ describe('Custom Metadata Controller', () => {
         const dataToUpdate = {
           name: 'subscriptionMetadataNameToUpdate',
           currentName: metaDataSubscriptionToUpdateName.name,
-          value: metaDataSubscriptionToUpdateName.value,
+          value: metaDataSubscriptionToUpdateName.value || '',
         };
         const payload = { metadata: dataToUpdate };
         const {

@@ -12,7 +12,7 @@ const insightsController = new InsightsController(client);
 
 * [Read Site Stats](../../doc/controllers/insights.md#read-site-stats)
 * [Read Mrr](../../doc/controllers/insights.md#read-mrr)
-* [Read Mrr Movements](../../doc/controllers/insights.md#read-mrr-movements)
+* [List Mrr Movements](../../doc/controllers/insights.md#list-mrr-movements)
 * [List Mrr Per Subscription](../../doc/controllers/insights.md#list-mrr-per-subscription)
 
 
@@ -149,7 +149,7 @@ try {
 ```
 
 
-# Read Mrr Movements
+# List Mrr Movements
 
 **This endpoint is deprecated.**
 
@@ -179,7 +179,7 @@ Usage includes revenue from:
 * Prepaid Usage Components
 
 ```ts
-async readMrrMovements(
+async listMrrMovements(
   subscriptionId?: number,
   page?: number,
   perPage?: number,
@@ -212,7 +212,7 @@ const collect = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await insightsController.readMrrMovements(collect);
+  const { result, ...httpResponse } = await insightsController.listMrrMovements(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

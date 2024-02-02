@@ -5,17 +5,20 @@
  */
 
 import { number, object, optional, Schema, string } from '../schema';
+import { CustomFieldOwner, customFieldOwnerSchema } from './customFieldOwner';
 
 export interface InvoiceCustomField {
+  ownerId?: number;
+  ownerType?: CustomFieldOwner;
   name?: string;
   value?: string;
-  ownerId?: number;
-  ownerType?: string;
+  metadatumId?: number;
 }
 
 export const invoiceCustomFieldSchema: Schema<InvoiceCustomField> = object({
+  ownerId: ['owner_id', optional(number())],
+  ownerType: ['owner_type', optional(customFieldOwnerSchema)],
   name: ['name', optional(string())],
   value: ['value', optional(string())],
-  ownerId: ['owner_id', optional(number())],
-  ownerType: ['owner_type', optional(string())],
+  metadatumId: ['metadatum_id', optional(number())],
 });

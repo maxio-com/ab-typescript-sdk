@@ -15,13 +15,13 @@ const invoicesController = new InvoicesController(client);
 * [Read Invoice](../../doc/controllers/invoices.md#read-invoice)
 * [List Invoice Events](../../doc/controllers/invoices.md#list-invoice-events)
 * [Record Payment for Invoice](../../doc/controllers/invoices.md#record-payment-for-invoice)
-* [Record External Payment for Invoices](../../doc/controllers/invoices.md#record-external-payment-for-invoices)
+* [Record Payment for Multiple Invoices](../../doc/controllers/invoices.md#record-payment-for-multiple-invoices)
 * [List Credit Notes](../../doc/controllers/invoices.md#list-credit-notes)
 * [Read Credit Note](../../doc/controllers/invoices.md#read-credit-note)
 * [Record Payment for Subscription](../../doc/controllers/invoices.md#record-payment-for-subscription)
 * [Reopen Invoice](../../doc/controllers/invoices.md#reopen-invoice)
 * [Void Invoice](../../doc/controllers/invoices.md#void-invoice)
-* [List Invoice Segments](../../doc/controllers/invoices.md#list-invoice-segments)
+* [List Consolidated Invoice Segments](../../doc/controllers/invoices.md#list-consolidated-invoice-segments)
 * [Create Invoice](../../doc/controllers/invoices.md#create-invoice)
 * [Send Invoice](../../doc/controllers/invoices.md#send-invoice)
 * [Preview Customer Information Changes](../../doc/controllers/invoices.md#preview-customer-information-changes)
@@ -1199,7 +1199,7 @@ try {
 ```
 
 
-# Record External Payment for Invoices
+# Record Payment for Multiple Invoices
 
 This API call should be used when you want to record an external payment against multiple invoices.
 
@@ -1229,7 +1229,7 @@ In order apply a payment to multiple invoices, at minimum, specify the `amount` 
 Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal to invoices payment amount sum.
 
 ```ts
-async recordExternalPaymentForInvoices(
+async recordPaymentForMultipleInvoices(
   body?: CreateMultiInvoicePaymentRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<MultiInvoicePaymentResponse>>
@@ -1271,7 +1271,7 @@ const body: CreateMultiInvoicePaymentRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.recordExternalPaymentForInvoices(body);
+  const { result, ...httpResponse } = await invoicesController.recordPaymentForMultipleInvoices(body);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2202,12 +2202,12 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# List Invoice Segments
+# List Consolidated Invoice Segments
 
 Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
 
 ```ts
-async listInvoiceSegments(
+async listConsolidatedInvoiceSegments(
   invoiceUid: string,
   page?: number,
   perPage?: number,
@@ -2242,7 +2242,7 @@ const collect = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await invoicesController.listInvoiceSegments(collect);
+  const { result, ...httpResponse } = await invoicesController.listConsolidatedInvoiceSegments(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -3243,20 +3243,18 @@ try {
   ],
   "custom_fields": [
     {
-      "name": "non nul",
-      "value": "consectetur aliqua",
-      "owner_type": "ad",
-      "owner_id": 18482224
+      "name": "CustomerStatus",
+      "value": "Gold",
+      "owner_type": "Customer",
+      "owner_id": 18482224,
+      "metadatum_id": 13924
     },
     {
-      "value": "anim",
-      "owner_type": "in"
-    },
-    {
-      "owner_id": -13438519
-    },
-    {
-      "name": "ullamco non deserunt in"
+      "name": "SubscriptionTag",
+      "value": "Special Subscriber",
+      "owner_type": "Subscription",
+      "owner_id": 21344,
+      "metadatum_id": 139245
     }
   ],
   "public_url": "dolo",

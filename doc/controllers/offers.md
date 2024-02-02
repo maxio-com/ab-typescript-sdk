@@ -12,7 +12,7 @@ const offersController = new OffersController(client);
 
 * [Create Offer](../../doc/controllers/offers.md#create-offer)
 * [List Offers](../../doc/controllers/offers.md#list-offers)
-* [Read Offers](../../doc/controllers/offers.md#read-offers)
+* [Read Offer](../../doc/controllers/offers.md#read-offer)
 * [Archive Offer](../../doc/controllers/offers.md#archive-offer)
 * [Unarchive Offer](../../doc/controllers/offers.md#unarchive-offer)
 
@@ -245,12 +245,12 @@ try {
 ```
 
 
-# Read Offers
+# Read Offer
 
 This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
 
 ```ts
-async readOffers(
+async readOffer(
   offerId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OfferResponse>>
@@ -275,7 +275,7 @@ const offerId = 130;
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await offersController.readOffers(offerId);
+  const { result, ...httpResponse } = await offersController.readOffer(offerId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

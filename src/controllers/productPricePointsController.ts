@@ -327,7 +327,7 @@ export class ProductPricePointsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async createProductPricePoints(
+  async bulkCreateProductPricePoints(
     productId: number,
     body?: BulkCreateProductPricePointsRequest,
     requestOptions?: RequestOptions

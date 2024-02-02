@@ -20,16 +20,14 @@
       "before": {
         "first_name": "first_name0",
         "last_name": "last_name8",
-        "email": "email6",
-        "cc_emails": "cc_emails0",
-        "organization": "organization4"
+        "organization": "organization4",
+        "email": "email6"
       },
       "after": {
         "first_name": "first_name2",
         "last_name": "last_name0",
-        "email": "email4",
-        "cc_emails": "cc_emails8",
-        "organization": "organization4"
+        "organization": "organization4",
+        "email": "email4"
       }
     },
     "shipping_address": {
@@ -68,14 +66,7 @@
       "before": [
         {
           "owner_id": 26,
-          "owner_type": "owner_type2",
-          "name": "name0",
-          "value": "value2",
-          "metadatum_id": 26
-        },
-        {
-          "owner_id": 26,
-          "owner_type": "owner_type2",
+          "owner_type": "Customer",
           "name": "name0",
           "value": "value2",
           "metadatum_id": 26
@@ -84,21 +75,14 @@
       "after": [
         {
           "owner_id": 130,
-          "owner_type": "owner_type4",
+          "owner_type": "Customer",
           "name": "name2",
           "value": "value4",
           "metadatum_id": 130
         },
         {
           "owner_id": 130,
-          "owner_type": "owner_type4",
-          "name": "name2",
-          "value": "value4",
-          "metadatum_id": 130
-        },
-        {
-          "owner_id": 130,
-          "owner_type": "owner_type4",
+          "owner_type": "Customer",
           "name": "name2",
           "value": "value4",
           "metadatum_id": 130

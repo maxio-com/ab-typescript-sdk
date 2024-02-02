@@ -102,7 +102,7 @@ export class OffersController extends BaseController {
    * @param offerId  The Chargify id of the offer
    * @return Response from the API call
    */
-  async readOffers(
+  async readOffer(
     offerId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<OfferResponse>> {

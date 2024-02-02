@@ -214,7 +214,7 @@ export class CouponsController extends BaseController {
    * @param code              The code of the coupon
    * @return Response from the API call
    */
-  async readCouponByCode(
+  async findCoupon(
     productFamilyId?: number,
     code?: string,
     requestOptions?: RequestOptions
@@ -570,7 +570,7 @@ export class CouponsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async updateCouponCurrencyPrices(
+  async createOrUpdateCouponCurrencyPrices(
     couponId: number,
     body?: CouponCurrencyRequest,
     requestOptions?: RequestOptions
