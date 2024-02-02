@@ -1,21 +1,37 @@
-const stringToEval =
-  'abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca' +
-  'bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab' +
-  'cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc' +
-  'abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca' +
-  'bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab' +
-  'cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc' +
-  'abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca' +
-  'bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab' +
-  'cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab' +
-  'cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab' +
-  'cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab';
+const stringToEval = `abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca
+  bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca
+  bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca
+  bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca
+  bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabca
+  bcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab
+  cabcabcabccabcabcabcabcabcabcabcabcabcabcabcabcabc
+  abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcab`;
 
-const stringToByte = stringToEval.length * 2;
+function lengthInUtf8Kilobytes(str: string) {
+  const encodedLength: Uint8Array = new TextEncoder().encode(stringToEval);
+  return (str.length + (encodedLength ? encodedLength.length : 0)) / 1024;
+}
 
-export function getObjectOfTwoKBString() {
+export function get2KbObject() {
   return {
     value: stringToEval,
-    size: stringToByte / 1024,
+    size: lengthInUtf8Kilobytes(stringToEval),
   };
 }
