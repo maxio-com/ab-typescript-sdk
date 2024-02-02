@@ -177,7 +177,7 @@ describe('Coupons Controller', () => {
           productFamilyId: String(productFamily?.id),
         },
       });
-      const response = await couponsController.readCouponByCode(
+      const response = await couponsController.findCoupon(
         productFamily?.id || 0,
         'FIND01'
       );
@@ -188,7 +188,7 @@ describe('Coupons Controller', () => {
     });
 
     test('should throw and 404 error when user sends incorrect product code', async () => {
-      const promise = couponsController.readCouponByCode(
+      const promise = couponsController.findCoupon(
         productFamily?.id || 0,
         'invalid'
       );
@@ -201,7 +201,7 @@ describe('Coupons Controller', () => {
     });
 
     test('should throw and 404 error when user sends incorrect family id ', async () => {
-      const promise = couponsController.readCouponByCode(299, '15OFF');
+      const promise = couponsController.findCoupon(299, '15OFF');
 
       expect(promise).rejects.toThrow();
 
@@ -210,7 +210,7 @@ describe('Coupons Controller', () => {
       });
     });
     test('should throw and 401 error when user sends incorrect credentials to find a coupon by code', async () => {
-      const promise = invalidCouponsController.readCouponByCode(
+      const promise = invalidCouponsController.findCoupon(
         productFamily?.id || 0,
         '15OFF'
       );
@@ -460,7 +460,7 @@ describe('Coupons Controller', () => {
           },
         }
       );
-      await subscriptionsController.applyCouponToSubscription(
+      await subscriptionsController.applyCouponsToSubscription(
         subscriptionResponse?.subscription?.id || 0,
         'TEST1'
       );
@@ -572,30 +572,29 @@ describe('Coupons Controller', () => {
       );
       const couponId = createReponse.result.coupon?.id || 0;
 
-      const updateResponse = await couponsController.updateCouponCurrencyPrices(
-        couponId,
-        {
+      const updateResponse =
+        await couponsController.createOrUpdateCouponCurrencyPrices(couponId, {
           currencyPrices: [
             {
               currency: 'EUR',
               price: 10,
             },
           ],
-        }
-      );
+        });
 
       expect(updateResponse.statusCode).toBe(200);
     });
 
     test('should throw and 401 error when the user sends invalid credentials', async () => {
-      const promise = invalidCouponsController.updateCouponCurrencyPrices(200, {
-        currencyPrices: [
-          {
-            currency: 'BS',
-            price: 100,
-          },
-        ],
-      });
+      const promise =
+        invalidCouponsController.createOrUpdateCouponCurrencyPrices(200, {
+          currencyPrices: [
+            {
+              currency: 'BS',
+              price: 100,
+            },
+          ],
+        });
 
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {
@@ -615,14 +614,17 @@ describe('Coupons Controller', () => {
         }
       );
       const couponId = createReponse.result.coupon?.id || 0;
-      const promise = couponsController.updateCouponCurrencyPrices(couponId, {
-        currencyPrices: [
-          {
-            currency: 'test',
-            price: 0,
-          },
-        ],
-      });
+      const promise = couponsController.createOrUpdateCouponCurrencyPrices(
+        couponId,
+        {
+          currencyPrices: [
+            {
+              currency: 'test',
+              price: 0,
+            },
+          ],
+        }
+      );
 
       expect(promise).rejects.toThrow();
 
