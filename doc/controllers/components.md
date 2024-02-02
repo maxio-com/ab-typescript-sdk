@@ -15,17 +15,17 @@ const componentsController = new ComponentsController(client);
 * [Create on Off Component](../../doc/controllers/components.md#create-on-off-component)
 * [Create Prepaid Usage Component](../../doc/controllers/components.md#create-prepaid-usage-component)
 * [Create Event Based Component](../../doc/controllers/components.md#create-event-based-component)
-* [Read Component by Handle](../../doc/controllers/components.md#read-component-by-handle)
-* [Read Component by Id](../../doc/controllers/components.md#read-component-by-id)
+* [Find Component](../../doc/controllers/components.md#find-component)
+* [Read Component](../../doc/controllers/components.md#read-component)
 * [Update Product Family Component](../../doc/controllers/components.md#update-product-family-component)
 * [Archive Component](../../doc/controllers/components.md#archive-component)
 * [List Components](../../doc/controllers/components.md#list-components)
 * [Update Component](../../doc/controllers/components.md#update-component)
-* [Update Default Price Point for Component](../../doc/controllers/components.md#update-default-price-point-for-component)
+* [Promote Component Price Point to Default](../../doc/controllers/components.md#promote-component-price-point-to-default)
 * [List Components for Product Family](../../doc/controllers/components.md#list-components-for-product-family)
 * [Create Component Price Point](../../doc/controllers/components.md#create-component-price-point)
 * [List Component Price Points](../../doc/controllers/components.md#list-component-price-points)
-* [Create Component Price Points](../../doc/controllers/components.md#create-component-price-points)
+* [Bulk Create Component Price Points](../../doc/controllers/components.md#bulk-create-component-price-points)
 * [Update Component Price Point](../../doc/controllers/components.md#update-component-price-point)
 * [Archive Component Price Point](../../doc/controllers/components.md#archive-component-price-point)
 * [Unarchive Component Price Point](../../doc/controllers/components.md#unarchive-component-price-point)
@@ -682,12 +682,12 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Read Component by Handle
+# Find Component
 
 This request will return information regarding a component having the handle you provide. You can identify your components with a handle so you don't have to save or reference the IDs we generate.
 
 ```ts
-async readComponentByHandle(
+async findComponent(
   handle: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentResponse>>
@@ -712,7 +712,7 @@ const handle = 'handle6';
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await componentsController.readComponentByHandle(handle);
+  const { result, ...httpResponse } = await componentsController.findComponent(handle);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -756,14 +756,14 @@ try {
 ```
 
 
-# Read Component by Id
+# Read Component
 
 This request will return information regarding a component from a specific product family.
 
 You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
 
 ```ts
-async readComponentById(
+async readComponent(
   productFamilyId: number,
   componentId: string,
   requestOptions?: RequestOptions
@@ -792,7 +792,7 @@ const componentId = 'component_id8';
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await componentsController.readComponentById(
+  const { result, ...httpResponse } = await componentsController.readComponent(
   productFamilyId,
   componentId
 );
@@ -1274,7 +1274,7 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Update Default Price Point for Component
+# Promote Component Price Point to Default
 
 Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
 
@@ -1283,7 +1283,7 @@ See [Price Points Documentation](https://chargify.zendesk.com/hc/en-us/articles/
 Note: Custom price points are not able to be set as the default for a component.
 
 ```ts
-async updateDefaultPricePointForComponent(
+async promoteComponentPricePointToDefault(
   componentId: number,
   pricePointId: number,
   requestOptions?: RequestOptions
@@ -1312,7 +1312,7 @@ const pricePointId = 10;
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await componentsController.updateDefaultPricePointForComponent(
+  const { result, ...httpResponse } = await componentsController.promoteComponentPricePointToDefault(
   componentId,
   pricePointId
 );
@@ -1705,12 +1705,12 @@ try {
 ```
 
 
-# Create Component Price Points
+# Bulk Create Component Price Points
 
 Use this endpoint to create multiple component price points in one request.
 
 ```ts
-async createComponentPricePoints(
+async bulkCreateComponentPricePoints(
   componentId: string,
   body?: CreateComponentPricePointsRequest,
   requestOptions?: RequestOptions
@@ -1775,7 +1775,7 @@ const body: CreateComponentPricePointsRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await componentsController.createComponentPricePoints(
+  const { result, ...httpResponse } = await componentsController.bulkCreateComponentPricePoints(
   componentId,
   body
 );

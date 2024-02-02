@@ -16,8 +16,8 @@ const subscriptionGroupsController = new SubscriptionGroupsController(client);
 * [Read Subscription Group](../../doc/controllers/subscription-groups.md#read-subscription-group)
 * [Update Subscription Group Members](../../doc/controllers/subscription-groups.md#update-subscription-group-members)
 * [Delete Subscription Group](../../doc/controllers/subscription-groups.md#delete-subscription-group)
-* [Read Subscription Group by Subscription Id](../../doc/controllers/subscription-groups.md#read-subscription-group-by-subscription-id)
-* [Create Subscription Group Hierarchy](../../doc/controllers/subscription-groups.md#create-subscription-group-hierarchy)
+* [Find Subscription Group](../../doc/controllers/subscription-groups.md#find-subscription-group)
+* [Add Subscription to Group](../../doc/controllers/subscription-groups.md#add-subscription-to-group)
 * [Remove Subscription From Group](../../doc/controllers/subscription-groups.md#remove-subscription-from-group)
 
 
@@ -506,14 +506,14 @@ try {
 | 404 | Not Found | `ApiError` |
 
 
-# Read Subscription Group by Subscription Id
+# Find Subscription Group
 
 Use this endpoint to find subscription group associated with subscription.
 
 If the subscription is not in a group endpoint will return 404 code.
 
 ```ts
-async readSubscriptionGroupBySubscriptionId(
+async findSubscriptionGroup(
   subscriptionId: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<FullSubscriptionGroupResponse>>
@@ -538,7 +538,7 @@ const subscriptionId = 'subscription_id0';
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupsController.readSubscriptionGroupBySubscriptionId(subscriptionId);
+  const { result, ...httpResponse } = await subscriptionGroupsController.findSubscriptionGroup(subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -599,7 +599,7 @@ try {
 | 404 | Not Found | `ApiError` |
 
 
-# Create Subscription Group Hierarchy
+# Add Subscription to Group
 
 For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription groups.
 
@@ -617,7 +617,7 @@ To create a new subscription into a subscription group, please reference the fol
 [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
 
 ```ts
-async createSubscriptionGroupHierarchy(
+async addSubscriptionToGroup(
   subscriptionId: number,
   body?: AddSubscriptionToAGroup,
   requestOptions?: RequestOptions
@@ -658,7 +658,7 @@ const body: AddSubscriptionToAGroup = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupsController.createSubscriptionGroupHierarchy(
+  const { result, ...httpResponse } = await subscriptionGroupsController.addSubscriptionToGroup(
   subscriptionId,
   body
 );

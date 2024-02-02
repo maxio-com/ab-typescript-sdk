@@ -12,8 +12,8 @@ const subscriptionGroupInvoiceAccountController = new SubscriptionGroupInvoiceAc
 
 * [Create Subscription Group Prepayment](../../doc/controllers/subscription-group-invoice-account.md#create-subscription-group-prepayment)
 * [List Prepayments for Subscription Group](../../doc/controllers/subscription-group-invoice-account.md#list-prepayments-for-subscription-group)
-* [Issue Subscription Group Service Credits](../../doc/controllers/subscription-group-invoice-account.md#issue-subscription-group-service-credits)
-* [Deduct Subscription Group Service Credits](../../doc/controllers/subscription-group-invoice-account.md#deduct-subscription-group-service-credits)
+* [Issue Subscription Group Service Credit](../../doc/controllers/subscription-group-invoice-account.md#issue-subscription-group-service-credit)
+* [Deduct Subscription Group Service Credit](../../doc/controllers/subscription-group-invoice-account.md#deduct-subscription-group-service-credit)
 
 
 # Create Subscription Group Prepayment
@@ -165,12 +165,12 @@ try {
 | 404 | Not Found | `ApiError` |
 
 
-# Issue Subscription Group Service Credits
+# Issue Subscription Group Service Credit
 
 Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
 
 ```ts
-async issueSubscriptionGroupServiceCredits(
+async issueSubscriptionGroupServiceCredit(
   uid: string,
   body?: IssueServiceCreditRequest,
   requestOptions?: RequestOptions
@@ -204,7 +204,7 @@ const body: IssueServiceCreditRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.issueSubscriptionGroupServiceCredits(
+  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.issueSubscriptionGroupServiceCredit(
   uid,
   body
 );
@@ -241,12 +241,12 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Deduct Subscription Group Service Credits
+# Deduct Subscription Group Service Credit
 
 Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
 
 ```ts
-async deductSubscriptionGroupServiceCredits(
+async deductSubscriptionGroupServiceCredit(
   uid: string,
   body?: DeductServiceCreditRequest,
   requestOptions?: RequestOptions
@@ -280,7 +280,7 @@ const body: DeductServiceCreditRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.deductSubscriptionGroupServiceCredits(
+  const { result, ...httpResponse } = await subscriptionGroupInvoiceAccountController.deductSubscriptionGroupServiceCredit(
   uid,
   body
 );

@@ -14,8 +14,8 @@ const eventsBasedBillingSegmentsController = new EventsBasedBillingSegmentsContr
 * [List Segments for Price Point](../../doc/controllers/events-based-billing-segments.md#list-segments-for-price-point)
 * [Update Segment](../../doc/controllers/events-based-billing-segments.md#update-segment)
 * [Delete Segment](../../doc/controllers/events-based-billing-segments.md#delete-segment)
-* [Create Segments](../../doc/controllers/events-based-billing-segments.md#create-segments)
-* [Update Segments](../../doc/controllers/events-based-billing-segments.md#update-segments)
+* [Bulk Create Segments](../../doc/controllers/events-based-billing-segments.md#bulk-create-segments)
+* [Bulk Update Segments](../../doc/controllers/events-based-billing-segments.md#bulk-update-segments)
 
 
 # Create Segment
@@ -305,7 +305,7 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
-# Create Segments
+# Bulk Create Segments
 
 This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
 
@@ -314,7 +314,7 @@ If any of the records contain an error the whole request would fail and none of 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async createSegments(
+async bulkCreateSegments(
   componentId: string,
   pricePointId: string,
   body?: BulkCreateSegments,
@@ -345,7 +345,7 @@ const pricePointId = 'price_point_id8';
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.createSegments(
+  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.bulkCreateSegments(
   componentId,
   pricePointId
 );
@@ -369,7 +369,7 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
 
 
-# Update Segments
+# Bulk Update Segments
 
 This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `1000` records.
 
@@ -378,7 +378,7 @@ If any of the records contain an error the whole request would fail and none of 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async updateSegments(
+async bulkUpdateSegments(
   componentId: string,
   pricePointId: string,
   body?: BulkUpdateSegments,
@@ -409,7 +409,7 @@ const pricePointId = 'price_point_id8';
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.updateSegments(
+  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.bulkUpdateSegments(
   componentId,
   pricePointId
 );

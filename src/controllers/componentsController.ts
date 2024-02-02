@@ -287,7 +287,7 @@ export class ComponentsController extends BaseController {
    * @param handle The handle of the component to find
    * @return Response from the API call
    */
-  async readComponentByHandle(
+  async findComponent(
     handle: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
@@ -308,7 +308,7 @@ export class ComponentsController extends BaseController {
    *                                    prefixed with `handle:`
    * @return Response from the API call
    */
-  async readComponentById(
+  async readComponent(
     productFamilyId: number,
     componentId: string,
     requestOptions?: RequestOptions
@@ -517,7 +517,7 @@ export class ComponentsController extends BaseController {
    * @param pricePointId   The Chargify id of the price point
    * @return Response from the API call
    */
-  async updateDefaultPricePointForComponent(
+  async promoteComponentPricePointToDefault(
     componentId: number,
     pricePointId: number,
     requestOptions?: RequestOptions
@@ -726,7 +726,7 @@ export class ComponentsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async createComponentPricePoints(
+  async bulkCreateComponentPricePoints(
     componentId: string,
     body?: CreateComponentPricePointsRequest,
     requestOptions?: RequestOptions

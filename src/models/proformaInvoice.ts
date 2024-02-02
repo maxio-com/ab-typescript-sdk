@@ -15,12 +15,12 @@ import {
 } from '../schema';
 import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
 import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer';
+import {
+  InvoiceCustomField,
+  invoiceCustomFieldSchema,
+} from './invoiceCustomField';
 import { InvoiceLineItem, invoiceLineItemSchema } from './invoiceLineItem';
 import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
-import {
-  ProformaCustomField,
-  proformaCustomFieldSchema,
-} from './proformaCustomField';
 import {
   ProformaInvoiceCredit,
   proformaInvoiceCreditSchema,
@@ -75,7 +75,7 @@ export interface ProformaInvoice {
   taxes?: ProformaInvoiceTax[];
   credits?: ProformaInvoiceCredit[];
   payments?: ProformaInvoicePayment[];
-  customFields?: ProformaCustomField[];
+  customFields?: InvoiceCustomField[];
   publicUrl?: string;
 }
 
@@ -131,7 +131,7 @@ export const proformaInvoiceSchema: Schema<ProformaInvoice> = object({
   ],
   customFields: [
     'custom_fields',
-    optional(array(lazy(() => proformaCustomFieldSchema))),
+    optional(array(lazy(() => invoiceCustomFieldSchema))),
   ],
   publicUrl: ['public_url', optional(string())],
 });

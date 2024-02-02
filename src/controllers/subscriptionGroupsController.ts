@@ -234,7 +234,7 @@ export class SubscriptionGroupsController extends BaseController {
    * @param subscriptionId  The Chargify id of the subscription associated with the subscription group
    * @return Response from the API call
    */
-  async readSubscriptionGroupBySubscriptionId(
+  async findSubscriptionGroup(
     subscriptionId: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<FullSubscriptionGroupResponse>> {
@@ -280,7 +280,7 @@ export class SubscriptionGroupsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async createSubscriptionGroupHierarchy(
+  async addSubscriptionToGroup(
     subscriptionId: number,
     body?: AddSubscriptionToAGroup,
     requestOptions?: RequestOptions

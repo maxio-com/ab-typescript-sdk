@@ -420,7 +420,7 @@ export class SubscriptionStatusController extends BaseController {
    * @param subscriptionId  The Chargify id of the subscription
    * @return Response from the API call
    */
-  async stopDelayedCancellation(
+  async cancelDelayedCancellation(
     subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<DelayedCancellationResponse>> {

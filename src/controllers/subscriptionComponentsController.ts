@@ -265,7 +265,7 @@ export class SubscriptionComponentsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async updateSubscriptionComponentsPricePoints(
+  async bulkUpdateSubscriptionComponentsPricePoints(
     subscriptionId: number,
     body?: BulkComponentSPricePointAssignment,
     requestOptions?: RequestOptions
@@ -294,7 +294,7 @@ export class SubscriptionComponentsController extends BaseController {
    * @param subscriptionId  The Chargify id of the subscription
    * @return Response from the API call
    */
-  async resetSubscriptionComponentsPricePoints(
+  async bulkResetSubscriptionComponentsPricePoints(
     subscriptionId: number,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
@@ -543,7 +543,7 @@ export class SubscriptionComponentsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async updatePrepaidUsageAllocation(
+  async updatePrepaidUsageAllocationExpirationDate(
     subscriptionId: number,
     componentId: number,
     allocationId: number,
@@ -922,7 +922,7 @@ export class SubscriptionComponentsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async recordEvents(
+  async bulkRecordEvents(
     subdomain: string,
     apiHandle: string,
     storeUid?: string,

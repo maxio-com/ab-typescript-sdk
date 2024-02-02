@@ -513,7 +513,7 @@ export class InvoicesController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async recordExternalPaymentForInvoices(
+  async recordPaymentForMultipleInvoices(
     body?: CreateMultiInvoicePaymentRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<MultiInvoicePaymentResponse>> {
@@ -723,7 +723,7 @@ export class InvoicesController extends BaseController {
    * @param direction   Sort direction of the returned segments.
    * @return Response from the API call
    */
-  async listInvoiceSegments({
+  async listConsolidatedInvoiceSegments({
     invoiceUid,
     page,
     perPage,

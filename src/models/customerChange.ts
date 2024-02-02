@@ -4,36 +4,43 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema } from '../schema';
-import { AddressChange, addressChangeSchema } from './addressChange';
+import { lazy, nullable, object, optional, Schema } from '../schema';
 import {
-  CustomerCustomFieldsChange,
-  customerCustomFieldsChangeSchema,
-} from './customerCustomFieldsChange';
+  CustomerChangeBillingAddress,
+  customerChangeBillingAddressSchema,
+} from './containers/customerChangeBillingAddress';
 import {
-  CustomerPayerChange,
-  customerPayerChangeSchema,
-} from './customerPayerChange';
+  CustomerChangeCustomFields,
+  customerChangeCustomFieldsSchema,
+} from './containers/customerChangeCustomFields';
+import {
+  CustomerChangePayer,
+  customerChangePayerSchema,
+} from './containers/customerChangePayer';
+import {
+  CustomerChangeShippingAddress,
+  customerChangeShippingAddressSchema,
+} from './containers/customerChangeShippingAddress';
 
 export interface CustomerChange {
-  payer?: CustomerPayerChange;
-  shippingAddress?: AddressChange;
-  billingAddress?: AddressChange;
-  customFields?: CustomerCustomFieldsChange;
+  payer?: CustomerChangePayer | null;
+  shippingAddress?: CustomerChangeShippingAddress | null;
+  billingAddress?: CustomerChangeBillingAddress | null;
+  customFields?: CustomerChangeCustomFields | null;
 }
 
 export const customerChangeSchema: Schema<CustomerChange> = object({
-  payer: ['payer', optional(lazy(() => customerPayerChangeSchema))],
+  payer: ['payer', optional(nullable(lazy(() => customerChangePayerSchema)))],
   shippingAddress: [
     'shipping_address',
-    optional(lazy(() => addressChangeSchema)),
+    optional(nullable(lazy(() => customerChangeShippingAddressSchema))),
   ],
   billingAddress: [
     'billing_address',
-    optional(lazy(() => addressChangeSchema)),
+    optional(nullable(lazy(() => customerChangeBillingAddressSchema))),
   ],
   customFields: [
     'custom_fields',
-    optional(lazy(() => customerCustomFieldsChangeSchema)),
+    optional(nullable(lazy(() => customerChangeCustomFieldsSchema))),
   ],
 });

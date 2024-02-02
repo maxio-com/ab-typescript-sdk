@@ -18,8 +18,8 @@ const paymentProfilesController = new PaymentProfilesController(client);
 * [Delete Subscriptions Payment Profile](../../doc/controllers/payment-profiles.md#delete-subscriptions-payment-profile)
 * [Verify Bank Account](../../doc/controllers/payment-profiles.md#verify-bank-account)
 * [Delete Subscription Group Payment Profile](../../doc/controllers/payment-profiles.md#delete-subscription-group-payment-profile)
-* [Update Subscription Default Payment Profile](../../doc/controllers/payment-profiles.md#update-subscription-default-payment-profile)
-* [Update Subscription Group Default Payment Profile](../../doc/controllers/payment-profiles.md#update-subscription-group-default-payment-profile)
+* [Change Subscription Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-default-payment-profile)
+* [Change Subscription Group Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-group-default-payment-profile)
 * [Read One Time Token](../../doc/controllers/payment-profiles.md#read-one-time-token)
 * [Send Request Update Payment Email](../../doc/controllers/payment-profiles.md#send-request-update-payment-email)
 
@@ -967,14 +967,14 @@ try {
 ```
 
 
-# Update Subscription Default Payment Profile
+# Change Subscription Default Payment Profile
 
 This will change the default payment profile on the subscription to the existing payment profile with the id specified.
 
 You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
 ```ts
-async updateSubscriptionDefaultPaymentProfile(
+async changeSubscriptionDefaultPaymentProfile(
   subscriptionId: number,
   paymentProfileId: number,
   requestOptions?: RequestOptions
@@ -1003,7 +1003,7 @@ const paymentProfileId = 198;
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await paymentProfilesController.updateSubscriptionDefaultPaymentProfile(
+  const { result, ...httpResponse } = await paymentProfilesController.changeSubscriptionDefaultPaymentProfile(
   subscriptionId,
   paymentProfileId
 );
@@ -1056,7 +1056,7 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Update Subscription Group Default Payment Profile
+# Change Subscription Group Default Payment Profile
 
 This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
 
@@ -1065,7 +1065,7 @@ You must elect to change the existing payment profile to a new payment profile I
 The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
 
 ```ts
-async updateSubscriptionGroupDefaultPaymentProfile(
+async changeSubscriptionGroupDefaultPaymentProfile(
   uid: string,
   paymentProfileId: number,
   requestOptions?: RequestOptions
@@ -1094,7 +1094,7 @@ const paymentProfileId = 198;
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await paymentProfilesController.updateSubscriptionGroupDefaultPaymentProfile(
+  const { result, ...httpResponse } = await paymentProfilesController.changeSubscriptionGroupDefaultPaymentProfile(
   uid,
   paymentProfileId
 );

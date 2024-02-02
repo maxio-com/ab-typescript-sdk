@@ -250,7 +250,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async createSegments(
+  async bulkCreateSegments(
     componentId: string,
     pricePointId: string,
     body?: BulkCreateSegments,
@@ -286,7 +286,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async updateSegments(
+  async bulkUpdateSegments(
     componentId: string,
     pricePointId: string,
     body?: BulkUpdateSegments,

@@ -1225,7 +1225,7 @@ export class SubscriptionsController extends BaseController {
    * @param reference Subscription reference
    * @return Response from the API call
    */
-  async readSubscriptionByReference(
+  async findSubscription(
     reference?: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse>> {
@@ -1283,7 +1283,7 @@ export class SubscriptionsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async createPrepaidSubscription(
+  async updatePrepaidSubscriptionConfiguration(
     subscriptionId: number,
     body?: UpsertPrepaidConfigurationRequest,
     requestOptions?: RequestOptions
@@ -1377,7 +1377,7 @@ export class SubscriptionsController extends BaseController {
    * @param body
    * @return Response from the API call
    */
-  async applyCouponToSubscription(
+  async applyCouponsToSubscription(
     subscriptionId: number,
     code?: string,
     body?: AddCouponsRequest,
@@ -1408,7 +1408,7 @@ export class SubscriptionsController extends BaseController {
    * @param couponCode      The coupon code
    * @return Response from the API call
    */
-  async deleteCouponFromSubscription(
+  async removeCouponFromSubscription(
     subscriptionId: number,
     couponCode?: string,
     requestOptions?: RequestOptions
