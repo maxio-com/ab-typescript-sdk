@@ -17,7 +17,7 @@ const productPricePointsController = new ProductPricePointsController(client);
 * [Archive Product Price Point](../../doc/controllers/product-price-points.md#archive-product-price-point)
 * [Unarchive Product Price Point](../../doc/controllers/product-price-points.md#unarchive-product-price-point)
 * [Promote Product Price Point to Default](../../doc/controllers/product-price-points.md#promote-product-price-point-to-default)
-* [Create Product Price Points](../../doc/controllers/product-price-points.md#create-product-price-points)
+* [Bulk Create Product Price Points](../../doc/controllers/product-price-points.md#bulk-create-product-price-points)
 * [Create Product Currency Prices](../../doc/controllers/product-price-points.md#create-product-currency-prices)
 * [Update Product Currency Prices](../../doc/controllers/product-price-points.md#update-product-currency-prices)
 * [List All Product Price Points](../../doc/controllers/product-price-points.md#list-all-product-price-points)
@@ -646,12 +646,12 @@ try {
 ```
 
 
-# Create Product Price Points
+# Bulk Create Product Price Points
 
 Use this endpoint to create multiple product price points in one request.
 
 ```ts
-async createProductPricePoints(
+async bulkCreateProductPricePoints(
   productId: number,
   body?: BulkCreateProductPricePointsRequest,
   requestOptions?: RequestOptions
@@ -713,7 +713,7 @@ const body: BulkCreateProductPricePointsRequest = {
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await productPricePointsController.createProductPricePoints(
+  const { result, ...httpResponse } = await productPricePointsController.bulkCreateProductPricePoints(
   productId,
   body
 );

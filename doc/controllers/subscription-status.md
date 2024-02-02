@@ -17,7 +17,7 @@ const subscriptionStatusController = new SubscriptionStatusController(client);
 * [Update Automatic Subscription Resumption](../../doc/controllers/subscription-status.md#update-automatic-subscription-resumption)
 * [Reactivate Subscription](../../doc/controllers/subscription-status.md#reactivate-subscription)
 * [Initiate Delayed Cancellation](../../doc/controllers/subscription-status.md#initiate-delayed-cancellation)
-* [Stop Delayed Cancellation](../../doc/controllers/subscription-status.md#stop-delayed-cancellation)
+* [Cancel Delayed Cancellation](../../doc/controllers/subscription-status.md#cancel-delayed-cancellation)
 * [Cancel Dunning](../../doc/controllers/subscription-status.md#cancel-dunning)
 * [Preview Renewal](../../doc/controllers/subscription-status.md#preview-renewal)
 
@@ -1320,14 +1320,14 @@ try {
 | 404 | Not Found | `ApiError` |
 
 
-# Stop Delayed Cancellation
+# Cancel Delayed Cancellation
 
 Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
 
 This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
 
 ```ts
-async stopDelayedCancellation(
+async cancelDelayedCancellation(
   subscriptionId: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<DelayedCancellationResponse>>
@@ -1352,7 +1352,7 @@ const subscriptionId = 222;
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionStatusController.stopDelayedCancellation(subscriptionId);
+  const { result, ...httpResponse } = await subscriptionStatusController.cancelDelayedCancellation(subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

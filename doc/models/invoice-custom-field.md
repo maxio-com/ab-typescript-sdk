@@ -9,19 +9,21 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string \| undefined` | Optional | - |
-| `value` | `string \| undefined` | Optional | - |
 | `ownerId` | `number \| undefined` | Optional | - |
-| `ownerType` | `string \| undefined` | Optional | - |
+| `ownerType` | [`CustomFieldOwner \| undefined`](../../doc/models/custom-field-owner.md) | Optional | - |
+| `name` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
+| `value` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
+| `metadatumId` | `number \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
+  "owner_id": 142,
+  "owner_type": "Customer",
   "name": "name0",
   "value": "value2",
-  "owner_id": 142,
-  "owner_type": "owner_type2"
+  "metadatum_id": 142
 }
 ```
 

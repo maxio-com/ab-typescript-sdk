@@ -647,7 +647,7 @@ export class PaymentProfilesController extends BaseController {
    * @param paymentProfileId   The Chargify id of the payment profile
    * @return Response from the API call
    */
-  async updateSubscriptionDefaultPaymentProfile(
+  async changeSubscriptionDefaultPaymentProfile(
     subscriptionId: number,
     paymentProfileId: number,
     requestOptions?: RequestOptions
@@ -677,7 +677,7 @@ export class PaymentProfilesController extends BaseController {
    * @param paymentProfileId   The Chargify id of the payment profile
    * @return Response from the API call
    */
-  async updateSubscriptionGroupDefaultPaymentProfile(
+  async changeSubscriptionGroupDefaultPaymentProfile(
     uid: string,
     paymentProfileId: number,
     requestOptions?: RequestOptions

@@ -43,7 +43,7 @@
 | `taxes` | [`ProformaInvoiceTax[] \| undefined`](../../doc/models/proforma-invoice-tax.md) | Optional | - |
 | `credits` | [`ProformaInvoiceCredit[] \| undefined`](../../doc/models/proforma-invoice-credit.md) | Optional | - |
 | `payments` | [`ProformaInvoicePayment[] \| undefined`](../../doc/models/proforma-invoice-payment.md) | Optional | - |
-| `customFields` | [`ProformaCustomField[] \| undefined`](../../doc/models/proforma-custom-field.md) | Optional | - |
+| `customFields` | [`InvoiceCustomField[] \| undefined`](../../doc/models/invoice-custom-field.md) | Optional | - |
 | `publicUrl` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

@@ -223,7 +223,7 @@ describe('Offers Controller', () => {
       offerCreated = (await offersController.createOffer({ offer })).result;
     });
     test('should read a offer with a valid offer id', async () => {
-      const response = await offersController.readOffers(
+      const response = await offersController.readOffer(
         offerCreated.offer?.id || 0
       );
       expect(response.statusCode).toBe(200);
@@ -231,7 +231,7 @@ describe('Offers Controller', () => {
     });
 
     test('should throw 404 error sends an invalid offer id', async () => {
-      const promise = offersController.readOffers(123);
+      const promise = offersController.readOffer(123);
       expect(promise).rejects.toThrowError();
       await promise.catch((error) => {
         expect(error.statusCode).toBe(404);
@@ -239,7 +239,7 @@ describe('Offers Controller', () => {
     });
 
     test('should throw 401 error when user use invalid credentials', async () => {
-      const promise = invalidOffersController.readOffers(
+      const promise = invalidOffersController.readOffer(
         offerCreated.offer?.id || 0
       );
       expect(promise).rejects.toThrowError();
@@ -286,7 +286,7 @@ describe('Offers Controller', () => {
       const archiveResponse = await offersController.archiveOffer(
         archivedOffer.offer?.id || 0
       );
-      const readResponse = await offersController.readOffers(
+      const readResponse = await offersController.readOffer(
         archivedOffer.offer?.id || 0
       );
       expect(readResponse.statusCode).toBe(200);
@@ -316,7 +316,7 @@ describe('Offers Controller', () => {
       const archiveResponse = await offersController.unarchiveOffer(
         archivedOffer.offer?.id || 0
       );
-      const readResponse = await offersController.readOffers(
+      const readResponse = await offersController.readOffer(
         archivedOffer.offer?.id || 0
       );
       expect(readResponse.statusCode).toBe(200);
