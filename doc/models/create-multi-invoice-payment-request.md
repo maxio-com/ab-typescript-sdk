@@ -16,7 +16,6 @@
 ```json
 {
   "payment": {
-    "method": "other",
     "amount": "String9",
     "applications": [
       {
@@ -26,6 +25,7 @@
     ],
     "memo": "memo0",
     "details": "details6",
+    "method": "ach",
     "received_on": "received_on8"
   }
 }

@@ -16,7 +16,7 @@ import {
 
 export interface CreateInvoicePaymentRequest {
   payment: CreateInvoicePayment;
-  /** The type of payment to be applied to an Invoice. */
+  /** The type of payment to be applied to an Invoice. Defaults to external. */
   type?: InvoicePaymentType;
 }
 

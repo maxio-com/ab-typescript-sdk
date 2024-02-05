@@ -19,7 +19,7 @@ export interface CreateInvoicePayment {
   amount?: CreateInvoicePaymentAmount;
   /** A description to be attached to the payment. */
   memo?: string;
-  /** The type of payment method used. */
+  /** The type of payment method used. Defaults to other. */
   method?: InvoicePaymentMethodType;
   /** Additional information related to the payment method (eg. Check #) */
   details?: string;

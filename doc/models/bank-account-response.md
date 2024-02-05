@@ -18,7 +18,6 @@
   "payment_profile": {
     "masked_bank_routing_number": "masked_bank_routing_number0",
     "masked_bank_account_number": "masked_bank_account_number6",
-    "bank_account_type": "checking",
     "verified": false,
     "id": 44,
     "first_name": "first_name4",
