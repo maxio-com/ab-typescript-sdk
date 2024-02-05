@@ -14,7 +14,7 @@
 | `bankRoutingNumber` | `string \| undefined` | Optional | (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API |
 | `bankIban` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided |
 | `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided |
-| `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking<br>**Default**: `BankAccountType.Checking` |
+| `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bankAccountHolderType` | [`BankAccountHolderType \| undefined`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
 | `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | - |
 | `billingAddress` | `string \| undefined` | Optional | - |
@@ -30,7 +30,6 @@
 
 ```json
 {
-  "bank_account_type": "checking",
   "bank_name": "bank_name2",
   "bank_account_number": "bank_account_number4",
   "bank_routing_number": "bank_routing_number8",

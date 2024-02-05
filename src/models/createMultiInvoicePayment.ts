@@ -23,7 +23,7 @@ export interface CreateMultiInvoicePayment {
   memo?: string;
   /** Additional information related to the payment method (eg. Check #). */
   details?: string;
-  /** The type of payment method used. */
+  /** The type of payment method used. Defaults to other. */
   method?: InvoicePaymentMethodType;
   /** Dollar amount of the sum of the invoices payment (eg. "10.50" => $10.50). */
   amount: CreateMultiInvoicePaymentAmount;

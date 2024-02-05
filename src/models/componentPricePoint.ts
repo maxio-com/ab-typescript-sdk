@@ -47,7 +47,7 @@ export interface ComponentPricePoint {
   createdAt?: string;
   updatedAt?: string;
   prices?: ComponentPrice[];
-  /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
+  /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. Defaults to true during creation. */
   useSiteExchangeRate?: boolean;
   /** (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for. */
   subscriptionId?: number;

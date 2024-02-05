@@ -18,7 +18,6 @@
   "payment_profile": {
     "chargify_token": "tok_9g6hw85pnpt6knmskpwp4ttt",
     "full_number": "5424000000000015",
-    "bank_account_type": "checking",
     "id": 44,
     "payment_type": "bank_account",
     "first_name": "first_name4",
