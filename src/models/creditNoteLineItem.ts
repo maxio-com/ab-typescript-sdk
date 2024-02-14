@@ -68,6 +68,8 @@ export interface CreditNoteLineItem {
   componentId?: number | null;
   /** The price point ID of the component being credited. Will be `nil` for non-component credits. */
   pricePointId?: number | null;
+  billingScheduleItemId?: number | null;
+  customItem?: boolean;
 }
 
 export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = object({
@@ -87,4 +89,9 @@ export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = object({
   productVersion: ['product_version', optional(number())],
   componentId: ['component_id', optional(nullable(number()))],
   pricePointId: ['price_point_id', optional(nullable(number()))],
+  billingScheduleItemId: [
+    'billing_schedule_item_id',
+    optional(nullable(number())),
+  ],
+  customItem: ['custom_item', optional(boolean())],
 });

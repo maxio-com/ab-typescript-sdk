@@ -13,6 +13,7 @@
 | `memo` | `string \| undefined` | Optional | A description to be attached to the payment. |
 | `method` | [`InvoicePaymentMethodType \| undefined`](../../doc/models/invoice-payment-method-type.md) | Optional | The type of payment method used. Defaults to other. |
 | `details` | `string \| undefined` | Optional | Additional information related to the payment method (eg. Check #) |
+| `paymentProfileId` | `number \| undefined` | Optional | The ID of the payment profile to be used for the payment. |
 
 ## Example (as JSON)
 
@@ -21,7 +22,8 @@
   "amount": "String9",
   "memo": "memo0",
   "method": "cash",
-  "details": "details6"
+  "details": "details6",
+  "payment_profile_id": 122
 }
 ```
 
