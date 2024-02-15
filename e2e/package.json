@@ -3,7 +3,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "test": "jest --silent",
+    "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint --ignore-path .eslintignore --ext spec.js,spec.ts .",
     "format": "prettier --write \"src/e2e/**/*.{js,ts}\""
@@ -48,6 +48,6 @@
   "contributors": [],
   "dependencies": {
     "advanced-billing-sdk": "../",
-    "dotenv": "^16.4.4"
+    "uid": "^2.0.2"
   }
 }

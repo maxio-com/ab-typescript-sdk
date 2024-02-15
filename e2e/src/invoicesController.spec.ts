@@ -22,11 +22,7 @@ describe('Invoices Controller', () => {
 
   describe('Valid Advance Invoice Issuance', () => {
     test('should create a valid advance invoice issuance', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-01-invoice',
-        productHandle: 'scenario-01-invoice-handler',
-        customerReference: 'scenario-01-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -49,11 +45,7 @@ describe('Invoices Controller', () => {
     });
 
     test('should throw a 422 error when the user sends invalid or missing parameters in the request body', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-02-invoice',
-        productHandle: 'scenario-02-invoice-handler',
-        customerReference: 'scenario-02-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -67,11 +59,7 @@ describe('Invoices Controller', () => {
     });
 
     test('should throw a 401 error when the user sends incorrect credentials', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-03-invoice',
-        productHandle: 'scenario-03-invoice-handler',
-        customerReference: 'scenario-03-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -85,11 +73,7 @@ describe('Invoices Controller', () => {
 
   describe('Read Advance Invoice', () => {
     test('should read a valid advance invoice retrieval', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-01-read-invoice',
-        productHandle: 'scenario-01-read-invoice-handler',
-        customerReference: 'scenario-01-read-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -125,11 +109,7 @@ describe('Invoices Controller', () => {
     });
 
     test('should throw a 401 error when the user sends incorrect credentials', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-03-read-invoice',
-        productHandle: 'scenario-03-read-invoice-handler',
-        customerReference: 'scenario-03-read-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -159,11 +139,7 @@ describe('Invoices Controller', () => {
 
   describe('Void Advance Invoice', () => {
     test('should void a valid advance invoice issuance', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-01-void-invoice',
-        productHandle: 'scenario-01-void-invoice-handler',
-        customerReference: 'scenario-01-void-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -195,11 +171,7 @@ describe('Invoices Controller', () => {
     });
 
     test('should throw a 422 error when the user sends invalid or missing parameters', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-02-void-invoice',
-        productHandle: 'scenario-02-void-invoice-handler',
-        customerReference: 'scenario-02-void-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 
@@ -226,11 +198,7 @@ describe('Invoices Controller', () => {
     });
 
     test('should throw a 401 error when the user sends incorrect credentials', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-03-void-invoice',
-        productHandle: 'scenario-03-void-invoice-handler',
-        customerReference: 'scenario-03-void-invoice-reference',
-      });
+      const subsResponse = await createSubscription({});
 
       const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
 

@@ -1,3 +1,4 @@
+import { uid } from 'uid';
 import { CONFIG, createClient } from './config';
 import {
   Environment,
@@ -7,12 +8,18 @@ import {
   ProductsController,
   IntervalUnit,
 } from 'advanced-billing-sdk';
+const productId01 = `${uid()}-products-controller`;
+const productId02 = `${uid()}-products-controller`;
+const productId03 = `${uid()}-products-controller`;
+const productId04 = `${uid()}-products-controller`;
+const productFamilyName = `${uid()}-product-family`;
+let newProductId: string;
 
 const payloads = [
   {
     product: {
-      name: 'premium-0001',
-      handle: 'premium-0001',
+      name: productId01,
+      handle: productId01,
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
@@ -21,8 +28,8 @@ const payloads = [
   },
   {
     product: {
-      name: 'premium-0002',
-      handle: 'premium-0002',
+      name: productId02,
+      handle: productId02,
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
@@ -31,8 +38,8 @@ const payloads = [
   },
   {
     product: {
-      name: 'premium-0003',
-      handle: 'premium-0003',
+      name: productId03,
+      handle: productId03,
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
@@ -41,8 +48,8 @@ const payloads = [
   },
   {
     product: {
-      name: 'premium-0004',
-      handle: 'premium-0004',
+      name: productId04,
+      handle: productId04,
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
@@ -70,7 +77,7 @@ describe('Products Controller', () => {
     const productsController = new ProductsController(client);
     const payload = {
       productFamily: {
-        name: 'product name 005',
+        name: productFamilyName,
         description: 'product 0005 description',
       },
     };
@@ -86,14 +93,19 @@ describe('Products Controller', () => {
     const responseCollection = await Promise.all(promises);
     productsCreated = responseCollection.map((response) => response.result);
   });
+
+  beforeEach(() => {
+    newProductId = `${uid()}-product-create`;
+  });
   describe('Create Product', () => {
     test('should create a product when the user send the correct values', async () => {
       const client = createClient();
       const productsController = new ProductsController(client);
+
       const newProductPayload = {
         product: {
-          name: 'Platinum plan',
-          handle: 'platinum-2',
+          name: newProductId,
+          handle: newProductId,
           description: 'This is our gold plan.',
           accountingCode: '123',
           requireCredit_card: true,
@@ -109,8 +121,8 @@ describe('Products Controller', () => {
         newProductPayload
       );
       expect(productResponse.statusCode).toBe(201);
-      expect(productResponse.result.product.name).toBe('Platinum plan');
-      expect(productResponse.result.product.handle).toBe('platinum-2');
+      expect(productResponse.result.product.name).toBe(newProductId);
+      expect(productResponse.result.product.handle).toBe(newProductId);
     });
 
     test('should throw a error when the user send invalid payload values', async () => {
@@ -147,8 +159,8 @@ describe('Products Controller', () => {
 
       const newProductPayload = {
         product: {
-          name: 'Platinum plan-priv',
-          handle: 'platinum-2-priv',
+          name: newProductId,
+          handle: newProductId,
           description: 'This is our gold plan.',
           accountingCode: '123',
           requireCredit_card: true,
@@ -185,11 +197,10 @@ describe('Products Controller', () => {
         .sort();
       expect(response.result.length >= 5).toBeTruthy();
       const hasAllProducts = [
-        'Platinum plan',
-        'premium-0001',
-        'premium-0002',
-        'premium-0003',
-        'premium-0004',
+        productId01,
+        productId02,
+        productId03,
+        productId04,
       ].every((name) => productNames.includes(name));
       expect(hasAllProducts).toBeTruthy();
     });

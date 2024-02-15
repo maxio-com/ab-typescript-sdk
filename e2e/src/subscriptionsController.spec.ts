@@ -12,24 +12,29 @@ import {
   BankAccountHolderType,
 } from 'advanced-billing-sdk';
 import { createClient } from './config';
+import { uid } from 'uid';
 
 describe('Subscriptions Controller', () => {
   let subscriptionsController: SubscriptionsController;
   let productFamilyResponse: ProductFamilyResponse;
   let productResponse01: ProductResponse;
   let productResponse02: ProductResponse;
+  const productHandleId = `${uid()}-product-handle-basic`;
+  const productHandleEngageId = `${uid()}-product-handle-engage`;
+  const productFamilyName = `${uid()}-subscriptions-engage`;
+  let customerReference: string;
 
   const productFamilyBody = {
     productFamily: {
-      name: 'subscriptions-engage',
+      name: productFamilyName,
       description: 'Amazing subscriptions-engage',
     },
   };
 
   const productBody = {
     product: {
-      name: 'subscriptions-engage',
-      handle: 'basic-subscription',
+      name: productHandleId,
+      handle: productHandleId,
       description: 'Description print',
       priceInCents: BigInt(1000),
       interval: 1,
@@ -39,8 +44,8 @@ describe('Subscriptions Controller', () => {
 
   const productBody02 = {
     product: {
-      name: 'subscriptions-engage02',
-      handle: 'basic-subscription-02',
+      name: productHandleEngageId,
+      handle: productHandleEngageId,
       description: 'Description print',
       priceInCents: BigInt(100),
       interval: 1,
@@ -62,6 +67,10 @@ describe('Subscriptions Controller', () => {
     billingAddress2: null,
     billingAddress: '123 Mass Ave.',
   };
+
+  beforeEach(() => {
+    customerReference = uid();
+  });
 
   beforeAll(async () => {
     const client = createClient();
@@ -90,14 +99,14 @@ describe('Subscriptions Controller', () => {
     test('should create a subscription with valid credit card attributes', async () => {
       const body = {
         subscription: {
-          productHandle: 'basic-subscription',
+          productHandle: productHandleId,
           customerAttributes: {
             firstName: 'Joe',
             lastName: 'Blow',
             email: 'joe@example.com',
             zip: '02120',
             state: 'MA',
-            reference: 'XYZ1',
+            reference: customerReference,
             phone: '(617) 111 - 0000',
             organization: 'Acme',
             country: 'US',
@@ -120,14 +129,14 @@ describe('Subscriptions Controller', () => {
     test('should create a subscription with valid bank account attributes', async () => {
       const body = {
         subscription: {
-          productHandle: 'basic-subscription',
+          productHandle: productHandleId,
           customerAttributes: {
             firstName: 'Joe',
             lastName: 'Blow',
             email: 'joe@example.com',
             zip: '02120',
             state: 'MA',
-            reference: 'XYZ',
+            reference: customerReference,
             phone: '(617) 111 - 0000',
             organization: 'Acme',
             country: 'US',
@@ -158,14 +167,14 @@ describe('Subscriptions Controller', () => {
     test('should throw an 422 error when a subscription does not have a payment profile', async () => {
       const body = {
         subscription: {
-          productHandle: 'basic-subscription',
+          productHandle: productHandleId,
           customerAttributes: {
             firstName: 'Joe',
             lastName: 'Blow',
             email: 'joe@example.com',
             zip: '02120',
             state: 'MA',
-            reference: 'XYZ2',
+            reference: customerReference,
             phone: '(617) 111 - 0000',
             organization: 'Acme',
             country: 'US',
@@ -201,14 +210,14 @@ describe('Subscriptions Controller', () => {
       const subscriptionsByProduct = [
         {
           subscription: {
-            productHandle: 'basic-subscription-02',
+            productHandle: productHandleEngageId,
             customerAttributes: {
               firstName: 'Joe',
               lastName: 'Blow',
               email: 'joe@example.com',
               zip: '02120',
               state: 'MA',
-              reference: 'XYZ4',
+              reference: customerReference,
               phone: '(617) 111 - 0000',
               organization: 'Acme',
               country: 'US',
@@ -221,14 +230,14 @@ describe('Subscriptions Controller', () => {
         },
         {
           subscription: {
-            productHandle: 'basic-subscription-02',
+            productHandle: productHandleEngageId,
             customerAttributes: {
               firstName: 'Joe',
               lastName: 'Blow',
               email: 'joe@example.com',
               zip: '02120',
               state: 'MA',
-              reference: 'XYZ5',
+              reference: `${customerReference}second`,
               phone: '(617) 111 - 0000',
               organization: 'Acme',
               country: 'US',
