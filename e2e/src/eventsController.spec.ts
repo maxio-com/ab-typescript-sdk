@@ -22,11 +22,7 @@ describe('Events Controller', () => {
 
   describe('List Events for site', () => {
     test('should list events for site', async () => {
-      await createSubscription({
-        customerReference: 'listevents-product-refrence',
-        productFamilyName: 'listevents-product-familyname',
-        productHandle: 'listevents-product-handle',
-      });
+      await createSubscription({});
 
       const listResponse = await eventsController.listEvents({});
       expect(listResponse.statusCode).toBe(200);
@@ -44,11 +40,7 @@ describe('Events Controller', () => {
 
   describe('List Events for Subscription', () => {
     test('should list events for subscription when the user sends a valid subscription id', async () => {
-      const { subscriptionResponse } = await createSubscription({
-        customerReference: 'listeventsbysubscription-product-refrence',
-        productFamilyName: 'listeventsbysubscription-product-familyname',
-        productHandle: 'listeventsbysubscription-product-handle',
-      });
+      const { subscriptionResponse } = await createSubscription({});
       const subscriptId = subscriptionResponse?.subscription?.id;
       const listResponse = await eventsController.listSubscriptionEvents({
         subscriptionId: subscriptId || 0,
@@ -80,11 +72,7 @@ describe('Events Controller', () => {
 
   describe('Get total event count ', () => {
     test('should contain the total count of events', async () => {
-      await createSubscription({
-        customerReference: 'counteventsbysubscription-product-refrence',
-        productFamilyName: 'counteventsbysubscription-product-familyname',
-        productHandle: 'counteventsbysubscription-product-handle',
-      });
+      await createSubscription({});
       const listResponse = await eventsController.readEventsCount({});
       const count = listResponse.result?.count || 0;
       expect(listResponse.statusCode).toBe(200);

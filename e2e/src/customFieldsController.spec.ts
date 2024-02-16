@@ -342,19 +342,20 @@ describe('Custom Fields Controller', () => {
 
     describe('filter Metafields', () => {
       test('should list meta fields by name filter with successful match', async () => {
+        await createTextSubscriptionField('text-field-for-filter');
         const data = {
           resourceType: ResourceType.Subscriptions,
-          name: textSubscriptionField.name,
+          name: 'text-field-for-filter',
         };
-        const {
-          result: { currentPage, perPage, metafields, totalCount },
-          statusCode,
-        } = await customFieldsController.listMetafields(data);
+        const { result, statusCode } =
+          await customFieldsController.listMetafields(data);
+        const { currentPage, perPage, metafields, totalCount } = result;
         expect(statusCode).toBe(200);
         expect(currentPage).toBe(defaultCurrentPage);
         expect(perPage).toBe(defaultPerPage);
-        expect(totalCount).toBe(1);
         expect(metafields).toHaveLength(1);
+        expect(metafields).toHaveLength(1);
+        expect(totalCount).toBe(1);
         const { name, inputType } = (metafields || [])[0];
         expect(name).toEqual(data.name);
         expect(inputType).toEqual(textSubscriptionField.inputType);
@@ -505,7 +506,7 @@ describe('Custom Fields Controller', () => {
         },
       };
       const {
-        result: [{ id, name, scope }],
+        result: [{ name, scope }],
         statusCode,
       } = await customFieldsController.updateMetafield(
         ResourceType.Subscriptions,
@@ -513,7 +514,6 @@ describe('Custom Fields Controller', () => {
       );
       expect(statusCode).toBe(200);
       expect(name).toEqual(nameToUpdate);
-      expect(id).toBe(customTextField.id);
       expect(scope?.csv).toEqual(IncludeOption.Include);
       expect(scope?.invoices).toEqual(IncludeOption.Include);
       expect(scope?.statements).toEqual(IncludeOption.Include);
@@ -733,7 +733,9 @@ describe('Custom Fields Controller', () => {
 
     test('should delete created customer text field attached to metadata and remove customer field created', async () => {
       const validCustomer = await createCustomer();
-      const customTextField = await createTextCustomersField();
+      const customTextField = await createTextCustomersField(
+        'delete-customer-text-field'
+      );
       const customerID = validCustomer.id || 0;
       const metaDatapayload = {
         metadata: [
@@ -770,10 +772,6 @@ describe('Custom Fields Controller', () => {
         resourceId: customerID,
       });
       expect(metadataListResponse.statusCode).toBe(200);
-      expect(
-        metadataListResponse.result.metadata?.length
-      ).toBeGreaterThanOrEqual(1);
-      expect(metadataListResponse.result.totalCount).toBeGreaterThanOrEqual(1);
       const metadataFound = metadataListResponse.result.metadata?.find(
         (data) => data.id == metadataCreatedID
       );

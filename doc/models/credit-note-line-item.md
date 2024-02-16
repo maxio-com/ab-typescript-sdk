@@ -25,6 +25,8 @@
 | `productVersion` | `number \| undefined` | Optional | The version of the product being credited. |
 | `componentId` | `number \| null \| undefined` | Optional | The ID of the component being credited. Will be `nil` for non-component credits. |
 | `pricePointId` | `number \| null \| undefined` | Optional | The price point ID of the component being credited. Will be `nil` for non-component credits. |
+| `billingScheduleItemId` | `number \| null \| undefined` | Optional | - |
+| `customItem` | `boolean \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

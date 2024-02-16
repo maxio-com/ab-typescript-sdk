@@ -1,3 +1,4 @@
+import { uid } from 'uid';
 import { createClient } from './config';
 import {
   ProductFamilyResponse,
@@ -5,12 +6,16 @@ import {
 } from 'advanced-billing-sdk';
 
 describe('ProductsFamilies Controller', () => {
+  const productFamilyName = `${uid()}-product-family-controllers`;
+  const productFamilyName02 = `${uid()}-product-family-controllers-02`;
+  const productFamilyName03 = `${uid()}-product-family-controllers-03`;
+
   test('should create a product family with the correct params', async () => {
     const client = createClient();
     const productFamiliesController = new ProductFamiliesController(client);
     const payload = {
       productFamily: {
-        name: 'Acme Projects',
+        name: productFamilyName,
         description: 'Amazing project management tool',
       },
     };
@@ -48,7 +53,7 @@ describe('ProductsFamilies Controller', () => {
     const productFamiliesController = new ProductFamiliesController(client);
     const payload = {
       productFamily: {
-        name: 'productFamily',
+        name: productFamilyName02,
         description: 'product description',
       },
     };
@@ -76,20 +81,26 @@ describe('ProductsFamilies Controller', () => {
     const productNames = readResponse.result.map(
       (item: ProductFamilyResponse) => item.productFamily?.name
     );
-    expect(productNames.includes('Acme Projects')).toBeTruthy();
-    expect(productNames.includes('productFamily')).toBeTruthy();
+    expect(productNames.includes(productFamilyName)).toBeTruthy();
+    expect(productNames.includes(productFamilyName02)).toBeTruthy();
   });
 
   test('should list the products from already created product family without products', async () => {
     const client = createClient();
     const productFamiliesController = new ProductFamiliesController(client);
-    const productsFamiliesResponse =
-      await productFamiliesController.listProductFamilies({});
-    const [productFamilyResponse] = productsFamiliesResponse.result;
-    const productFamilyId = productFamilyResponse.productFamily?.id || 0;
+    const payload = {
+      productFamily: {
+        name: productFamilyName03,
+        description: 'Amazing project management tool',
+      },
+    };
+    const response =
+      await productFamiliesController.createProductFamily(payload);
+    const { productFamily } = response.result;
+
     const readResponse =
       await productFamiliesController.listProductsForProductFamily({
-        productFamilyId,
+        productFamilyId: productFamily?.id || 0,
       });
     expect(readResponse.statusCode).toBe(200);
     expect(readResponse.result.length).toBe(0);

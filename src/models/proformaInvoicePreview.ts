@@ -7,6 +7,7 @@
 import {
   array,
   lazy,
+  nullable,
   number,
   object,
   optional,
@@ -43,8 +44,8 @@ export interface ProformaInvoicePreview {
   siteId?: number;
   customerId?: number;
   subscriptionId?: number;
-  number?: string;
-  sequenceNumber?: number;
+  number?: string | null;
+  sequenceNumber?: number | null;
   createdAt?: string;
   deliveryDate?: string;
   status?: string;
@@ -76,7 +77,7 @@ export interface ProformaInvoicePreview {
   credits?: ProformaInvoiceCredit[];
   payments?: ProformaInvoicePayment[];
   customFields?: InvoiceCustomField[];
-  publicUrl?: string;
+  publicUrl?: string | null;
 }
 
 export const proformaInvoicePreviewSchema: Schema<ProformaInvoicePreview> = object(
@@ -85,8 +86,8 @@ export const proformaInvoicePreviewSchema: Schema<ProformaInvoicePreview> = obje
     siteId: ['site_id', optional(number())],
     customerId: ['customer_id', optional(number())],
     subscriptionId: ['subscription_id', optional(number())],
-    number: ['number', optional(string())],
-    sequenceNumber: ['sequence_number', optional(number())],
+    number: ['number', optional(nullable(string()))],
+    sequenceNumber: ['sequence_number', optional(nullable(number()))],
     createdAt: ['created_at', optional(string())],
     deliveryDate: ['delivery_date', optional(string())],
     status: ['status', optional(string())],
@@ -137,6 +138,6 @@ export const proformaInvoicePreviewSchema: Schema<ProformaInvoicePreview> = obje
       'custom_fields',
       optional(array(lazy(() => invoiceCustomFieldSchema))),
     ],
-    publicUrl: ['public_url', optional(string())],
+    publicUrl: ['public_url', optional(nullable(string()))],
   }
 );

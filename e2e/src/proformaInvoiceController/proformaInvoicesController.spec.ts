@@ -1,31 +1,31 @@
-import { ProformaInvoicesController } from 'advanced-billing-sdk';
+import {
+  ProformaInvoicesController,
+  SubscriptionResponse,
+} from 'advanced-billing-sdk';
 import { createClient } from '../config';
 import { createSubscription } from '../utils/subscription';
 
 describe('Proforma Invoices Controller', () => {
   let proformaInvoicesController: ProformaInvoicesController;
+  let subscriptionResponse: SubscriptionResponse | null;
 
   beforeAll(async () => {
     const client = createClient();
     proformaInvoicesController = new ProformaInvoicesController(client);
+    const subscriptionContext = await createSubscription({});
+    subscriptionResponse = subscriptionContext.subscriptionResponse;
   });
 
   describe('Create Proforma Invoices', () => {
     test('should create a valid proforma invoice', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-01-proforma',
-        productHandle: 'scenario-01-proforma-handler',
-        customerReference: 'scenario-01-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
+      const subscriptionId = subscriptionResponse?.subscription?.id;
 
       const createResponse =
         await proformaInvoicesController.createProformaInvoice(
-          subscriptId || 0
+          subscriptionId || 0
         );
       expect(createResponse.statusCode).toBe(201);
-      expect(createResponse.result.subscriptionId).toBe(subscriptId);
+      expect(createResponse.result.subscriptionId).toBe(subscriptionId);
     });
 
     test('should throw a 404 error when the user sends invalid subscription_id', async () => {
@@ -39,17 +39,11 @@ describe('Proforma Invoices Controller', () => {
 
   describe('Read Proforma Invoices', () => {
     test('should read a valid proforma invoice', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-02-read-proforma',
-        productHandle: 'scenario-02-read-proforma-handler',
-        customerReference: 'scenario-02-read-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
+      const subscriptionId = subscriptionResponse?.subscription?.id;
 
       const createResponse =
         await proformaInvoicesController.createProformaInvoice(
-          subscriptId || 0
+          subscriptionId || 0
         );
 
       const proformaUid = createResponse.result.uid;
@@ -71,17 +65,13 @@ describe('Proforma Invoices Controller', () => {
 
   describe('List Proforma invoices', () => {
     test('should list proforma invoices when user sends valid subscriptionId', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-04-list-proforma',
-        productHandle: 'scenario-04-list-proforma-handler',
-        customerReference: 'scenario-04-list-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
-      await proformaInvoicesController.createProformaInvoice(subscriptId || 0);
+      const subscriptionId = subscriptionResponse?.subscription?.id;
+      await proformaInvoicesController.createProformaInvoice(
+        subscriptionId || 0
+      );
       const listResponse =
         await proformaInvoicesController.listProformaInvoices({
-          subscriptionId: subscriptId || 0,
+          subscriptionId: subscriptionId || 0,
         });
       const proformaInvoicesLength =
         listResponse?.result?.proformaInvoices?.length || 0;
@@ -90,14 +80,10 @@ describe('Proforma Invoices Controller', () => {
     });
 
     test('should throw a 404 error when the request body is missing', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-05-list-proforma',
-        productHandle: 'scenario-05-list-proforma-handler',
-        customerReference: 'scenario-05-list-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
-      await proformaInvoicesController.createProformaInvoice(subscriptId || 0);
+      const subscriptionId = subscriptionResponse?.subscription?.id;
+      await proformaInvoicesController.createProformaInvoice(
+        subscriptionId || 0
+      );
       const promise = proformaInvoicesController.listProformaInvoices({
         subscriptionId: 0,
       });

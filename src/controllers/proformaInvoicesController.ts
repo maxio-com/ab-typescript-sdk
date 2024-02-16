@@ -20,6 +20,10 @@ import {
 import { Direction, directionSchema } from '../models/direction';
 import { InvoiceStatus, invoiceStatusSchema } from '../models/invoiceStatus';
 import {
+  ListProformaInvoicesResponse,
+  listProformaInvoicesResponseSchema,
+} from '../models/listProformaInvoicesResponse';
+import {
   ProformaInvoice,
   proformaInvoiceSchema,
 } from '../models/proformaInvoice';
@@ -35,7 +39,7 @@ import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
 } from '../models/voidInvoiceRequest';
-import { array, boolean, number, optional, string } from '../schema';
+import { boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class ProformaInvoicesController extends BaseController {
@@ -100,12 +104,12 @@ export class ProformaInvoicesController extends BaseController {
    * @return Response from the API call
    */
   async readProformaInvoice(
-    proformaInvoiceUid: number,
+    proformaInvoiceUid: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProformaInvoice>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      proformaInvoiceUid: [proformaInvoiceUid, number()],
+      proformaInvoiceUid: [proformaInvoiceUid, string()],
     });
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
@@ -200,7 +204,7 @@ export class ProformaInvoicesController extends BaseController {
     customFields?: boolean,
   },
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoice[]>> {
+  ): Promise<ApiResponse<ListProformaInvoicesResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
@@ -230,7 +234,7 @@ export class ProformaInvoicesController extends BaseController {
     req.query('payments', mapped.payments);
     req.query('custom_fields', mapped.customFields);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
-    return req.callAsJson(array(proformaInvoiceSchema), requestOptions);
+    return req.callAsJson(listProformaInvoicesResponseSchema, requestOptions);
   }
 
   /**

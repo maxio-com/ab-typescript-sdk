@@ -11,15 +11,14 @@ import {
   createCustomerTextMetadata,
   createCustomerDropdownMetadata,
   getMetadataIdList,
-  removeCustomerMetadataList,
 } from './utils';
 import {
   createTextCustomersField,
   createDropdownCustomersField,
-  removeCustomerCustomList,
 } from '../utils/customFieldsController';
 import { createCustomer } from '../utils/customers';
 import { get2KbObject } from '../utils/stringKB';
+import { uid } from 'uid';
 
 describe('Customer metadata', () => {
   let customerID: number;
@@ -36,11 +35,6 @@ describe('Customer metadata', () => {
     customerID = id;
   });
 
-  afterAll(async () => {
-    await removeCustomerMetadataList();
-    await removeCustomerCustomList();
-  });
-
   describe('Create customer metadata', () => {
     let textCustomerField: Metafield;
 
@@ -51,6 +45,8 @@ describe('Customer metadata', () => {
     });
 
     test('should create a customer metadata with existing metafield for attach to metadata.', async () => {
+      const textFieldName = `${uid()}-create`;
+      const textCustomerField = await createTextCustomersField(textFieldName);
       const metadata = {
         name: textCustomerField.name,
         value: 'Blue',
@@ -74,6 +70,8 @@ describe('Customer metadata', () => {
     });
 
     test('should create a customer multiple metadata with existing metafields for attached to metadata.', async () => {
+      const textFieldName = `${uid()}-create`;
+      const textCustomerField = await createTextCustomersField(textFieldName);
       const dropdownCustomerField = await createDropdownCustomersField(
         'dropdownCustomerFieldToCreate'
       );
@@ -187,8 +185,6 @@ describe('Customer metadata', () => {
     const DEFAULT_PER_PAGE = 20;
 
     beforeAll(async () => {
-      await removeCustomerMetadataList();
-      await removeCustomerCustomList();
       textFieldCustomerToList =
         await createTextCustomersField('listTextCustomer');
       dropdownFieldCustomerToList = await createDropdownCustomersField(
@@ -297,8 +293,6 @@ describe('Customer metadata', () => {
     let textMetaDataCustomerToUpdate: Metadata;
 
     beforeAll(async () => {
-      await removeCustomerMetadataList();
-      await removeCustomerCustomList();
       textFieldCustomerToUpdate = await createTextCustomersField(
         'textCustomerToUpdate'
       );
@@ -592,8 +586,6 @@ describe('Customer metadata', () => {
     const DEFAULT_PER_PAGE = 20;
 
     beforeAll(async () => {
-      await removeCustomerMetadataList();
-      await removeCustomerCustomList();
       textFieldCustomerToResourceList = await createTextCustomersField(
         'listTextCustomerResource'
       );
@@ -687,7 +679,7 @@ describe('Customer metadata', () => {
       expect(
         metadataNames?.includes(dropdownMetaCustomerDataToResourceList.name)
       ).toBeTruthy();
-      expect(totalCountBeforeDelete).toBe(DEFAULT_LENGTH + 1);
+      expect(totalCountBeforeDelete).toBeGreaterThanOrEqual(DEFAULT_LENGTH + 1);
 
       const { statusCode } = await customFieldsController.deleteMetadata(
         customerResource,

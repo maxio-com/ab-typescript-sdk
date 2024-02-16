@@ -1,28 +1,27 @@
-import { ProformaInvoicesController } from 'advanced-billing-sdk';
+import {
+  ProformaInvoicesController,
+  SubscriptionResponse,
+} from 'advanced-billing-sdk';
 import { createClient } from '../config';
 import { createSubscription } from '../utils/subscription';
 
 describe('Proforma Invoices Controller', () => {
   let proformaInvoicesController: ProformaInvoicesController;
-
+  let subscriptionResponse: SubscriptionResponse | null;
   beforeAll(async () => {
     const client = createClient();
     proformaInvoicesController = new ProformaInvoicesController(client);
+    const subscriptionContext = await createSubscription({});
+    subscriptionResponse = subscriptionContext.subscriptionResponse;
   });
 
   describe('Void Proforma Invoice', () => {
     test('should void a proforma invoice', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-01-void-proforma',
-        productHandle: 'scenario-01-void-proforma-handler',
-        customerReference: 'scenario-01-void-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
+      const subscriptionId = subscriptionResponse?.subscription?.id;
 
       const createResponse =
         await proformaInvoicesController.createProformaInvoice(
-          subscriptId || 0
+          subscriptionId || 0
         );
 
       const proformaUid = createResponse.result.uid;
@@ -47,17 +46,11 @@ describe('Proforma Invoices Controller', () => {
     });
 
     test('should throw a 422 error when the user does not provide reason in the request body.', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-03-void-proforma',
-        productHandle: 'scenario-03-void-proforma-handler',
-        customerReference: 'scenario-03-void-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
+      const subscriptionId = subscriptionResponse?.subscription?.id;
 
       const createResponse =
         await proformaInvoicesController.createProformaInvoice(
-          subscriptId || 0
+          subscriptionId || 0
         );
 
       const proformaUid = createResponse.result.uid;

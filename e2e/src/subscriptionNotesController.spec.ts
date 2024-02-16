@@ -25,11 +25,7 @@ describe('Subscription Notes Controller', () => {
     invalidSubscriptionNotesController = new SubscriptionNotesController(
       invalidClient
     );
-    subscriptionContext = await createSubscription({
-      productFamilyName: 'Notes family',
-      productHandle: 'subs-notes-001',
-      customerReference: 'notes-001',
-    });
+    subscriptionContext = await createSubscription({});
   });
   describe('Create subscription note', () => {
     test('should create a note on selected subscription', async () => {

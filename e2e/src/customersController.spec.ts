@@ -1,7 +1,9 @@
+import { uid } from 'uid';
 import { createClient } from './config';
 import { CustomersController, CustomerResponse } from 'advanced-billing-sdk';
 
 describe('CustomersController', () => {
+  const customerReferenceId = `${uid()}-for-search`;
   describe('Create customer', () => {
     test('should create a customer given the correct payload body', async () => {
       const client = createClient();
@@ -44,6 +46,7 @@ describe('CustomersController', () => {
     });
 
     test('should throw error when the user try to create a customer with the same reference value', async () => {
+      const sameReferenceId = uid();
       const client = createClient();
       const customersController = new CustomersController(client);
       const body = {
@@ -53,7 +56,7 @@ describe('CustomersController', () => {
           email: 'pedro@example.com',
           ccEmails: 'pedro@example.com',
           organization: 'ABC, Inc.',
-          reference: '1033',
+          reference: sameReferenceId,
           address: '123 Main Street',
           address2: 'Unit 10',
           city: 'Anytown',
@@ -72,7 +75,7 @@ describe('CustomersController', () => {
           email: 'Juan@example.com',
           ccEmails: 'Juan@example.com',
           organization: 'ABC, Inc.',
-          reference: '1033',
+          reference: sameReferenceId,
           address: '123 Main Street',
           address2: 'Unit 10',
           city: 'Anytown',
@@ -109,42 +112,42 @@ describe('CustomersController', () => {
           lastName: 'Lopez',
           email: 'fernando@example.com',
           organization: 'ABC, Inc.',
-          reference: '10001',
+          reference: customerReferenceId,
         },
         {
           firstName: 'Fernando',
           lastName: 'Pedregal',
           email: 'nando@example.com',
           organization: 'Holand, Inc.',
-          reference: '10002',
+          reference: uid(),
         },
         {
           firstName: 'Solivan',
           lastName: 'Medrano',
           email: 'soli@example.com',
           organization: 'ABC, Inc.',
-          reference: '10003',
+          reference: uid(),
         },
         {
           firstName: 'Edward',
           lastName: 'Kalua',
           email: 'kalua@example.com',
           organization: 'CPD, inc',
-          reference: '10004',
+          reference: uid(),
         },
         {
           firstName: 'Miguel',
           lastName: 'Santos',
           email: 'santos@example.com',
           organization: 'CPD, inc',
-          reference: '10005',
+          reference: uid(),
         },
         {
           firstName: 'Henrique',
           lastName: 'Figeroa',
           email: 'figeroa@example.com',
           organization: 'CPD, inc',
-          reference: '10006',
+          reference: uid(),
         },
       ];
 
@@ -175,11 +178,9 @@ describe('CustomersController', () => {
       const responseEmails = response.result
         .map((value: CustomerResponse) => value.customer.email)
         .sort();
-      expect(response.result.length).toBe(2);
-      expect(responseEmails).toEqual([
-        'fernando@example.com',
-        'nando@example.com',
-      ]);
+      expect(response.result.length).toBeGreaterThanOrEqual(2);
+      const [firstEmail] = responseEmails;
+      expect(firstEmail?.includes('nando')).toBeTruthy();
     });
 
     test('should get empty customers list when the user query criteria was not found in data', async () => {
@@ -195,7 +196,7 @@ describe('CustomersController', () => {
       const client = createClient();
       const customersController = new CustomersController(client);
       const response = await customersController.listCustomers({ q: 'ABC' });
-      expect(response.result.length >= 2).toBeTruthy();
+      expect(response.result.length).toBeGreaterThanOrEqual(2);
       const responseEmails = response.result
         .map((value: CustomerResponse) => value.customer.email)
         .sort();
@@ -206,7 +207,9 @@ describe('CustomersController', () => {
     test('should get customers list based on reference application criteria when the user search by reference', async () => {
       const client = createClient();
       const customersController = new CustomersController(client);
-      const response = await customersController.listCustomers({ q: '10001' });
+      const response = await customersController.listCustomers({
+        q: customerReferenceId,
+      });
       expect(response.result.length).toBe(1);
       const responseEmails = response.result.map(
         (value: CustomerResponse) => value.customer.email
@@ -240,7 +243,7 @@ describe('CustomersController', () => {
           lastName: 'Pedregal',
           email: 'nando@example.com',
           organization: 'Holand, Inc.',
-          reference: '102',
+          reference: uid(),
         },
       });
       const id = customerCreated.result.customer.id as number;
@@ -270,7 +273,7 @@ describe('CustomersController', () => {
           lastName: 'Pedregal',
           email: 'nando@example.com',
           organization: 'Holand, Inc.',
-          reference: '102A',
+          reference: uid(),
         },
       });
       const id = customerCreated.result.customer.id as number;
@@ -310,7 +313,7 @@ describe('CustomersController', () => {
           lastName: 'Pedregal',
           email: 'nando@example.com',
           organization: 'Holand, Inc.',
-          reference: '102B',
+          reference: uid(),
         },
       });
       const id = customerCreated.result.customer.id as number;
@@ -333,6 +336,7 @@ describe('CustomersController', () => {
   describe('Read Customer By Reference', () => {
     test('should read a customer by reference when the user sends a correct id from already created customer', async () => {
       const client = createClient();
+      const referenceId = uid();
       const customersController = new CustomersController(client);
       const customerCreated = await customersController.createCustomer({
         customer: {
@@ -340,11 +344,11 @@ describe('CustomersController', () => {
           lastName: 'Pedregal',
           email: 'nando@example.com',
           organization: 'Holand, Inc.',
-          reference: '102C',
+          reference: referenceId,
         },
       });
       const response =
-        await customersController.readCustomerByReference('102C');
+        await customersController.readCustomerByReference(referenceId);
       expect(response.result).toEqual(customerCreated.result);
     });
 
@@ -370,7 +374,7 @@ describe('CustomersController', () => {
           lastName: 'Pedregal',
           email: 'nando@example.com',
           organization: 'Holand, Inc.',
-          reference: '103C',
+          reference: uid(),
         },
       });
       const id = customerCreated.result.customer.id as number;

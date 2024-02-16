@@ -1,4 +1,5 @@
 import { createClient } from '../config';
+import { uid } from 'uid';
 
 import {
   ProductFamiliesController,
@@ -12,9 +13,9 @@ import { product } from '../mocks/products';
 import { createMockSubscription } from '../mocks/subscriptions';
 
 export interface SubscriptionConfig {
-  productFamilyName: string;
-  productHandle: string;
-  customerReference: string;
+  productFamilyName?: string;
+  productHandle?: string;
+  customerReference?: string;
 }
 
 export interface SubscriptionContext {
@@ -24,9 +25,9 @@ export interface SubscriptionContext {
 }
 
 export async function createSubscription({
-  productFamilyName,
-  productHandle,
-  customerReference,
+  productFamilyName = uid(),
+  productHandle = uid(),
+  customerReference = uid(),
 }: SubscriptionConfig): Promise<SubscriptionContext> {
   const client = createClient();
   const subscriptionsController = new SubscriptionsController(client);

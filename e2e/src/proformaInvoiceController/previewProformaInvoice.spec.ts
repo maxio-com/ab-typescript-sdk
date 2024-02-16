@@ -1,10 +1,15 @@
-import { Environment, ProformaInvoicesController } from 'advanced-billing-sdk';
+import {
+  Environment,
+  ProformaInvoicesController,
+  SubscriptionResponse,
+} from 'advanced-billing-sdk';
 import { createClient, CONFIG } from '../config';
 import { createSubscription } from '../utils/subscription';
 
 describe('Proforma Invoices Controller', () => {
   let proformaInvoicesController: ProformaInvoicesController;
   let invalidProformaInvoiceController: ProformaInvoicesController;
+  let subscriptionResponse: SubscriptionResponse | null;
 
   beforeAll(async () => {
     const client = createClient();
@@ -20,26 +25,23 @@ describe('Proforma Invoices Controller', () => {
     invalidProformaInvoiceController = new ProformaInvoicesController(
       invalidClient
     );
+    const subscriptionContext = await createSubscription({});
+    subscriptionResponse = subscriptionContext.subscriptionResponse;
   });
 
   describe('Preview Proforma Invoice', () => {
     test('should preview a proforma invoice', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-01-preview-proforma',
-        productHandle: 'scenario-01-preview-proforma-handler',
-        customerReference: 'scenario-01-preview-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
-
-      await proformaInvoicesController.createProformaInvoice(subscriptId || 0);
+      const subscriptionId = subscriptionResponse?.subscription?.id;
+      await proformaInvoicesController.createProformaInvoice(
+        subscriptionId || 0
+      );
 
       const previewResponse =
         await proformaInvoicesController.previewProformaInvoice(
-          subscriptId || 0
+          subscriptionId || 0
         );
       expect(previewResponse.statusCode).toBe(200);
-      expect(previewResponse.result.subscriptionId).toBe(subscriptId);
+      expect(previewResponse.result.subscriptionId).toBe(subscriptionId);
     });
 
     test('should throw a 404 error when the user sends invalid subscription_id', async () => {
@@ -51,16 +53,10 @@ describe('Proforma Invoices Controller', () => {
     });
 
     test('should throw a 401 error when the user sends incorrect credentials', async () => {
-      const subsResponse = await createSubscription({
-        productFamilyName: 'scenario-02-preview-proforma',
-        productHandle: 'scenario-02-preview-proforma-handler',
-        customerReference: 'scenario-02-preview-proforma-reference',
-      });
-
-      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
+      const subscriptionId = subscriptionResponse?.subscription?.id;
 
       const promise = invalidProformaInvoiceController.previewProformaInvoice(
-        subscriptId || 0
+        subscriptionId || 0
       );
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {

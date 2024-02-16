@@ -13,8 +13,8 @@
 | `siteId` | `number \| undefined` | Optional | - |
 | `customerId` | `number \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
-| `number` | `number \| undefined` | Optional | - |
-| `sequenceNumber` | `number \| undefined` | Optional | - |
+| `number` | `number \| null \| undefined` | Optional | - |
+| `sequenceNumber` | `number \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `deliveryDate` | `string \| undefined` | Optional | - |
 | `status` | `string \| undefined` | Optional | - |
@@ -44,7 +44,7 @@
 | `credits` | [`ProformaInvoiceCredit[] \| undefined`](../../doc/models/proforma-invoice-credit.md) | Optional | - |
 | `payments` | [`ProformaInvoicePayment[] \| undefined`](../../doc/models/proforma-invoice-payment.md) | Optional | - |
 | `customFields` | [`InvoiceCustomField[] \| undefined`](../../doc/models/invoice-custom-field.md) | Optional | - |
-| `publicUrl` | `string \| undefined` | Optional | - |
+| `publicUrl` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

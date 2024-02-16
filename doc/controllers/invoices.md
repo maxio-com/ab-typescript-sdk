@@ -1198,6 +1198,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Record Payment for Multiple Invoices
 
@@ -1779,7 +1785,9 @@ try {
       "product_id": 85,
       "product_version": 1,
       "component_id": 81,
-      "price_point_id": 165
+      "price_point_id": 165,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjcjx8b4",
@@ -1797,7 +1805,9 @@ try {
       "product_id": 85,
       "product_version": 1,
       "component_id": null,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjknzhx7",
@@ -1815,7 +1825,9 @@ try {
       "product_id": 85,
       "product_version": 1,
       "component_id": 78,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjnmh25w",
@@ -1833,7 +1845,9 @@ try {
       "product_id": 85,
       "product_version": 1,
       "component_id": 79,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjqn86kc",
@@ -1851,7 +1865,9 @@ try {
       "product_id": 85,
       "product_version": 1,
       "component_id": 80,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjtxxbdd",
@@ -1869,7 +1885,9 @@ try {
       "product_id": 85,
       "product_version": 1,
       "component_id": 81,
-      "price_point_id": 165
+      "price_point_id": 165,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     }
   ],
   "discounts": [
