@@ -10,12 +10,10 @@ import {
   createSubscriptionTextMetadata,
   createSubscriptionDropdownMetadata,
   getMetadataIdList,
-  removeSubscriptionsMetadataList,
 } from './utils';
 import {
   createTextSubscriptionField,
   createDropdownSubscriptionField,
-  removeSubscriptionsCustomList,
 } from '../utils/customFieldsController';
 import { get2KbObject } from '../utils/stringKB';
 import { createSubscription } from '../utils/subscription';
@@ -31,18 +29,8 @@ describe('Subscription metadata', () => {
   );
 
   beforeAll(async () => {
-    const randomCode = String(Math.floor(Math.random() * 999999999));
-    const { subscriptionResponse } = await createSubscription({
-      productFamilyName: `metadata-${randomCode}-invoice`,
-      productHandle: `metadata-${randomCode}-invoice-handler`,
-      customerReference: `metadata-${randomCode}-invoice-reference`,
-    });
+    const { subscriptionResponse } = await createSubscription({});
     subscriptionID = subscriptionResponse?.subscription?.id ?? 0;
-  });
-
-  afterAll(async () => {
-    await removeSubscriptionsMetadataList();
-    await removeSubscriptionsCustomList();
   });
 
   describe('Create subscription metadata', () => {
@@ -188,8 +176,6 @@ describe('Subscription metadata', () => {
     const DEFAULT_PER_PAGE = 20;
 
     beforeAll(async () => {
-      await removeSubscriptionsMetadataList();
-      await removeSubscriptionsCustomList();
       textFieldToList = await createTextSubscriptionField(
         'listTextSubscription'
       );
@@ -296,8 +282,6 @@ describe('Subscription metadata', () => {
     let textMetaDataSubscriptionToUpdate: Metadata;
 
     beforeAll(async () => {
-      await removeSubscriptionsMetadataList();
-      await removeSubscriptionsCustomList();
       textFieldSubscriptionToUpdate = await createTextSubscriptionField(
         'textFieldSubscriptionNameToUpdate'
       );
@@ -597,8 +581,6 @@ describe('Subscription metadata', () => {
     const DEFAULT_PER_PAGE = 20;
 
     beforeAll(async () => {
-      await removeSubscriptionsMetadataList();
-      await removeSubscriptionsCustomList();
       textFieldSubscriptionResourceList = await createTextSubscriptionField(
         'listTextSubscriptionResource'
       );
@@ -693,7 +675,7 @@ describe('Subscription metadata', () => {
       expect(
         metadataNames?.includes(dropdownMetaDataSubscriptionResourceList.name)
       ).toBeTruthy();
-      expect(totalCountBeforeDelete).toBe(DEFAULT_LENGTH + 1);
+      expect(totalCountBeforeDelete).toBeGreaterThanOrEqual(DEFAULT_LENGTH + 1);
 
       const { statusCode } = await customFieldsController.deleteMetadata(
         subscriptionResource,

@@ -14,6 +14,8 @@ export interface InvoiceRefund {
   appliedAmount?: string;
   /** The transaction ID for the refund as returned from the payment gateway */
   gatewayTransactionId?: string | null;
+  gatewayUsed?: string;
+  gatewayHandle?: string | null;
 }
 
 export const invoiceRefundSchema: Schema<InvoiceRefund> = object({
@@ -26,4 +28,6 @@ export const invoiceRefundSchema: Schema<InvoiceRefund> = object({
     'gateway_transaction_id',
     optional(nullable(string())),
   ],
+  gatewayUsed: ['gateway_used', optional(string())],
+  gatewayHandle: ['gateway_handle', optional(nullable(string()))],
 });

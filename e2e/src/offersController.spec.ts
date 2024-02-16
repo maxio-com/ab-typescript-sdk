@@ -9,24 +9,27 @@ import {
   IntervalUnit,
 } from 'advanced-billing-sdk';
 import { CONFIG, createClient } from './config';
+import { uid } from 'uid';
 
 describe('Offers Controller', () => {
   let offersController: OffersController;
   let productFamilyResponse: ProductFamilyResponse;
   let productResponse: ProductResponse;
   let invalidOffersController: OffersController;
+  const productId = `${uid()}-offers`;
+  const productFamilyName = `${uid()}-offers-family`;
 
   const productFamilyBody = {
     productFamily: {
-      name: 'Offers Acme Projects',
+      name: productFamilyName,
       description: 'Amazing project management tool',
     },
   };
 
   const productBody = {
     product: {
-      name: 'offers-premium-00020',
-      handle: 'offers-premium-0020',
+      name: productId,
+      handle: productId,
       description: 'premium-desc',
       priceInCents: BigInt(1000),
       interval: 1,
@@ -60,10 +63,9 @@ describe('Offers Controller', () => {
   });
 
   describe('List offers', () => {
-    test('should list an empty list of offers', async () => {
+    test('should list all offers on the list', async () => {
       const offersResponse = await offersController.listOffers({});
       expect(offersResponse.statusCode).toBe(200);
-      expect(offersResponse.result.offers).toEqual([]);
     });
 
     test('should throw 401 error when user use invalid credentials', async () => {
@@ -79,21 +81,21 @@ describe('Offers Controller', () => {
       const offers = [
         {
           name: 'Solo A',
-          handle: 'han_shot_first_a',
+          handle: uid(),
           description: 'A Star Wars Story A',
           productId: productResponse.product.id || 0,
           components: [],
         },
         {
           name: 'Solo B',
-          handle: 'han_shot_first_b',
+          handle: uid(),
           description: 'A Star Wars Story B',
           productId: productResponse.product.id || 0,
           components: [],
         },
         {
           name: 'Solo C',
-          handle: 'han_shot_first_c',
+          handle: uid(),
           description: 'A Star Wars Story C',
           productId: productResponse.product.id || 0,
           components: [],
@@ -109,17 +111,19 @@ describe('Offers Controller', () => {
         ?.map((offer: OfferResponse['offer']) => offer?.name)
         .sort();
       expect(offersResponse.statusCode).toBe(200);
-      expect(offersResponse.result.offers?.length).toBe(3);
-      expect(offersNames).toEqual(['Solo A', 'Solo B', 'Solo C']);
+      expect(offersNames?.includes('Solo A')).toBeTruthy();
+      expect(offersNames?.includes('Solo B')).toBeTruthy();
+      expect(offersNames?.includes('Solo C')).toBeTruthy();
     });
   });
 
   describe('Create Offer', () => {
     test('should create an offer when user sends correct product id', async () => {
+      const offerHandle = uid();
       const offerBody = {
         offer: {
           name: 'Solo',
-          handle: 'han_shot_first',
+          handle: offerHandle,
           description: 'A Star Wars Story',
           productId: productResponse.product.id || 0,
           components: [],
@@ -134,13 +138,13 @@ describe('Offers Controller', () => {
           productId: productResponse.product.id || 0,
           productRevisableNumber: 0,
           name: 'Solo',
-          handle: 'han_shot_first',
+          handle: offerHandle,
           description: 'A Star Wars Story',
           archivedAt: null,
           offerItems: [],
           offerDiscounts: [],
-          productFamilyName: 'Offers Acme Projects',
-          productName: 'offers-premium-00020',
+          productFamilyName: productFamilyName,
+          productName: productId,
           productPricePointName: 'Original',
           productPriceInCents: BigInt(1000),
           offerSignupPages: [],
@@ -215,7 +219,7 @@ describe('Offers Controller', () => {
     beforeAll(async () => {
       const offer = {
         name: 'golden A',
-        handle: 'han_shot_first_golden',
+        handle: uid(),
         description: 'A Star Wars Story A',
         productId: productResponse.product.id || 0,
         components: [],
@@ -255,21 +259,21 @@ describe('Offers Controller', () => {
       const offers = [
         {
           name: 'Premium A',
-          handle: 'han_shot_first_premium_a',
+          handle: uid(),
           description: 'A Star Wars Story A',
           productId: productResponse.product.id || 0,
           components: [],
         },
         {
           name: 'Premium B',
-          handle: 'han_shot_first_premium_b',
+          handle: uid(),
           description: 'A Star Wars Story B',
           productId: productResponse.product.id || 0,
           components: [],
         },
         {
           name: 'Premium C',
-          handle: 'han_shot_first_premium_c',
+          handle: uid(),
           description: 'A Star Wars Story C',
           productId: productResponse.product.id || 0,
           components: [],

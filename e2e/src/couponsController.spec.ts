@@ -10,6 +10,7 @@ import {
 import { createClient, CONFIG } from './config';
 import { product } from './mocks/products';
 import { createMockSubscription } from './mocks/subscriptions';
+import { uid } from 'uid';
 
 const couponBody = {
   coupon: {
@@ -61,7 +62,7 @@ describe('Coupons Controller', () => {
       (
         await productFamiliesController.createProductFamily({
           productFamily: {
-            name: 'coupons-product-family ab',
+            name: `coupons-product-family-${uid()}`,
             description: 'coupons product family a',
           },
         })
@@ -432,16 +433,17 @@ describe('Coupons Controller', () => {
 
   describe('List Coupon Usages', () => {
     test('should list the usages coupons ', async () => {
+      const handle = `${uid()}-coupon-handler`;
       const productResponse = await productsController.createProduct(
         productFamily?.id || 0,
         {
-          product: { ...product, handle: 'coupon-handler' },
+          product: { ...product, handle },
         }
       );
 
       const subscriptionBody = createMockSubscription({
-        productHandle: 'coupon-handler',
-        customerReference: 'coupon-reference',
+        productHandle: handle,
+        customerReference: uid(),
       });
 
       const subscriptionResponse = (

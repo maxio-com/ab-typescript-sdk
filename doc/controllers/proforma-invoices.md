@@ -139,7 +139,7 @@ Proforma invoices are only available on Relationship Invoicing sites.
 
 ```ts
 async readProformaInvoice(
-  proformaInvoiceUid: number,
+  proformaInvoiceUid: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
@@ -148,7 +148,7 @@ async readProformaInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `proformaInvoiceUid` | `number` | Template, Required | The uid of the proforma invoice |
+| `proformaInvoiceUid` | `string` | Template, Required | The uid of the proforma invoice |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -158,7 +158,7 @@ async readProformaInvoice(
 ## Example Usage
 
 ```ts
-const proformaInvoiceUid = 242;
+const proformaInvoiceUid = 'proforma_invoice_uid4';
 
 try {
   // @ts-expect-error: unused variables
@@ -259,7 +259,7 @@ async listProformaInvoices(
   payments?: boolean,
   customFields?: boolean,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ProformaInvoice[]>>
+): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
 
 ## Parameters
@@ -283,7 +283,7 @@ async listProformaInvoices(
 
 ## Response Type
 
-[`ProformaInvoice[]`](../../doc/models/proforma-invoice.md)
+[`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md)
 
 ## Example Usage
 

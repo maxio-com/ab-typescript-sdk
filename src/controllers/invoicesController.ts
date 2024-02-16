@@ -477,6 +477,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/payments.json`;
+    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 

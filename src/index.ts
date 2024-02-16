@@ -345,6 +345,8 @@ export type { ListOffersResponse } from './models/listOffersResponse';
 export type { ListProductPricePointsResponse } from './models/listProductPricePointsResponse';
 export { ListProductsInclude } from './models/listProductsInclude';
 export { ListProductsPricePointsInclude } from './models/listProductsPricePointsInclude';
+export type { ListProformaInvoicesMeta } from './models/listProformaInvoicesMeta';
+export type { ListProformaInvoicesResponse } from './models/listProformaInvoicesResponse';
 export type { ListPublicKeysMeta } from './models/listPublicKeysMeta';
 export type { ListPublicKeysResponse } from './models/listPublicKeysResponse';
 export type { ListSaleRepItem } from './models/listSaleRepItem';

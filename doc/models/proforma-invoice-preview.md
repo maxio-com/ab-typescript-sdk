@@ -13,8 +13,8 @@
 | `siteId` | `number \| undefined` | Optional | - |
 | `customerId` | `number \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
-| `number` | `string \| undefined` | Optional | - |
-| `sequenceNumber` | `number \| undefined` | Optional | - |
+| `number` | `string \| null \| undefined` | Optional | - |
+| `sequenceNumber` | `number \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `deliveryDate` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `status` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
@@ -44,7 +44,7 @@
 | `credits` | [`ProformaInvoiceCredit[] \| undefined`](../../doc/models/proforma-invoice-credit.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 | `payments` | [`ProformaInvoicePayment[] \| undefined`](../../doc/models/proforma-invoice-payment.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 | `customFields` | [`InvoiceCustomField[] \| undefined`](../../doc/models/invoice-custom-field.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
-| `publicUrl` | `string \| undefined` | Optional | - |
+| `publicUrl` | `string \| null \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

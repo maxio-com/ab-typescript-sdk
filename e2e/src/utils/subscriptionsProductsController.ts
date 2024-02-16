@@ -9,6 +9,7 @@ import {
 import { createClient } from '../config';
 import { product } from '../mocks/products';
 import { createMockSubscription } from '../mocks/subscriptions';
+import { uid } from 'uid';
 
 export interface MigrationContext {
   productFamilyResponse: ProductFamilyResponse | null;
@@ -19,6 +20,9 @@ export interface MigrationContext {
 
 export async function createContextForMigration(): Promise<MigrationContext> {
   const client = createClient();
+  const productHandleId = `${uid()}-subs01`;
+  const productHandleEngageId = `${uid()}-subs02`;
+  const productFamilyName = `${uid()} subscriptions migrations`;
   const subscriptionsController = new SubscriptionsController(client);
   const productFamiliesController = new ProductFamiliesController(client);
   const productsController = new ProductsController(client);
@@ -26,7 +30,7 @@ export async function createContextForMigration(): Promise<MigrationContext> {
   const productFamilyResponse = (
     await productFamiliesController.createProductFamily({
       productFamily: {
-        name: 'subscriptions migrations 01',
+        name: productFamilyName,
         description: 'Amazing subscriptions migration',
       },
     })
@@ -35,7 +39,7 @@ export async function createContextForMigration(): Promise<MigrationContext> {
     await productsController.createProduct(
       productFamilyResponse.productFamily?.id || 0,
       {
-        product: { ...product, handle: 'subs0001' },
+        product: { ...product, handle: productHandleId },
       }
     )
   ).result;
@@ -43,14 +47,14 @@ export async function createContextForMigration(): Promise<MigrationContext> {
     await productsController.createProduct(
       productFamilyResponse.productFamily?.id || 0,
       {
-        product: { ...product, handle: 'subs0002' },
+        product: { ...product, handle: productHandleEngageId },
       }
     )
   ).result;
 
   const subscriptionBody = createMockSubscription({
-    productHandle: 'subs0001',
-    customerReference: 'subsProduct001',
+    productHandle: productHandleId,
+    customerReference: productHandleEngageId,
   });
 
   const subscriptionResponse = (
