@@ -103,6 +103,7 @@ export class CustomFieldsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -154,6 +155,7 @@ export class CustomFieldsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listMetafieldsResponseSchema, requestOptions);
   }
 
@@ -179,6 +181,7 @@ export class CustomFieldsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
 
@@ -205,6 +208,7 @@ export class CustomFieldsController extends BaseController {
     req.query('name', mapped.name);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -264,6 +268,7 @@ export class CustomFieldsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
@@ -312,6 +317,7 @@ export class CustomFieldsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
   }
 
@@ -340,6 +346,7 @@ export class CustomFieldsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
 
@@ -395,6 +402,7 @@ export class CustomFieldsController extends BaseController {
     req.query('names[]', mapped.names, plainPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -501,6 +509,7 @@ export class CustomFieldsController extends BaseController {
     req.query('resource_ids[]', mapped.resourceIds, commaPrefix);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metadata.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
   }
 }

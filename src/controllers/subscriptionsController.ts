@@ -893,6 +893,7 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -1041,6 +1042,7 @@ export class SubscriptionsController extends BaseController {
     req.query('direction', mapped.direction);
     req.query('sort', mapped.sort);
     req.query('include[]', mapped.include, commaPrefix);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
   }
 
@@ -1133,6 +1135,7 @@ export class SubscriptionsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -1161,6 +1164,7 @@ export class SubscriptionsController extends BaseController {
     });
     req.query('include[]', mapped.include, plainPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -1216,6 +1220,7 @@ export class SubscriptionsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/override.json`;
     req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -1234,6 +1239,7 @@ export class SubscriptionsController extends BaseController {
       reference: [reference, optional(string())],
     });
     req.query('reference', mapped.reference);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -1273,6 +1279,7 @@ export class SubscriptionsController extends BaseController {
     req.query('ack', mapped.ack);
     req.query('cascade[]', mapped.cascade, plainPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -1296,6 +1303,7 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepaid_configurations.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(prepaidConfigurationResponseSchema, requestOptions);
   }
 
@@ -1354,6 +1362,7 @@ export class SubscriptionsController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionPreviewResponseSchema, requestOptions);
   }
 
@@ -1394,6 +1403,7 @@ export class SubscriptionsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/add_coupon.json`;
     req.throwOn(422, SubscriptionAddCouponError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
@@ -1421,6 +1431,7 @@ export class SubscriptionsController extends BaseController {
     req.query('coupon_code', mapped.couponCode);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/remove_coupon.json`;
     req.throwOn(422, SubscriptionRemoveCouponErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsText(requestOptions);
   }
 
@@ -1499,6 +1510,7 @@ export class SubscriptionsController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/activate.json`;
     req.throwOn(400, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 }

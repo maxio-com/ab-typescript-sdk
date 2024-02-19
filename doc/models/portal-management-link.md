@@ -22,9 +22,9 @@
 {
   "url": "url0",
   "fetch_count": 222,
-  "created_at": "created_at6",
-  "new_link_available_at": "new_link_available_at0",
-  "expires_at": "expires_at0"
+  "created_at": "2016-03-13T12:52:32.123Z",
+  "new_link_available_at": "2016-03-13T12:52:32.123Z",
+  "expires_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

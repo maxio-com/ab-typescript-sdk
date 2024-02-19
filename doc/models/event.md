@@ -14,7 +14,7 @@
 | `message` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `subscriptionId` | `number \| null` | Required | - |
 | `customerId` | `number` | Required | - |
-| `createdAt` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
+| `createdAt` | `string` | Required | - |
 | `eventSpecificData` | [`EventEventSpecificData \| null`](../../doc/models/containers/event-event-specific-data.md) | Required | This is a container for one-of cases. |
 
 ## Example (as JSON)
@@ -26,7 +26,7 @@
   "message": "message8",
   "subscription_id": 150,
   "customer_id": 78,
-  "created_at": "created_at0",
+  "created_at": "2016-03-13T12:52:32.123Z",
   "event_specific_data": {
     "previous_unit_balance": null,
     "previous_overage_unit_balance": null,

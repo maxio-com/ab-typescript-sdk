@@ -102,7 +102,7 @@ const body: CreatePrepaymentRequest = {
     amount: 100,
     details: 'John Doe signup for $100',
     memo: 'Signup for $100',
-    method: PrepaymentMethod.Check,
+    method: CreatePrepaymentMethod.Check,
   },
 };
 

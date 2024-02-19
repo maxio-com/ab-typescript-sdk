@@ -26,7 +26,7 @@
       75
     ],
     "primary_subscription_id": 148,
-    "next_assessment_at": "next_assessment_at8",
+    "next_assessment_at": "2016-03-13T12:52:32.123Z",
     "state": "state6",
     "cancel_at_end_of_period": false
   },

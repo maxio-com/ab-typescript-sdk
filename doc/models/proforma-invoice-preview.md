@@ -15,8 +15,8 @@
 | `subscriptionId` | `number \| undefined` | Optional | - |
 | `number` | `string \| null \| undefined` | Optional | - |
 | `sequenceNumber` | `number \| null \| undefined` | Optional | - |
-| `createdAt` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `deliveryDate` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
+| `createdAt` | `string \| undefined` | Optional | - |
+| `deliveryDate` | `string \| undefined` | Optional | - |
 | `status` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `collectionMethod` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `paymentInstructions` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |

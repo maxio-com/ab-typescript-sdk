@@ -63,6 +63,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       subscriptionGroupPrepaymentResponseSchema,
       requestOptions
@@ -142,6 +143,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listSubscriptionGroupPrepaymentResponseSchema,
       requestOptions
@@ -171,6 +173,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credits.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditResponseSchema, requestOptions);
   }
 
@@ -196,6 +199,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credit_deductions.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }
 }

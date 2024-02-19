@@ -290,8 +290,7 @@ The following parameters are configurable for the API Client:
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `30000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
-| `basicAuthUserName` | `string` | The username to use with basic authentication |
-| `basicAuthPassword` | `string` | The password to use with basic authentication |
+| `basicAuthCredentials` | [`BasicAuthCredentials`](https://www.github.com/maxio-com/ab-typescript-sdk/tree/1.0.1/doc/$a/https://www.github.com/maxio-com/ab-typescript-sdk/tree/1.0.1/basic-authentication.md) | The credential object for basicAuth |
 
 ### HttpClientOptions
 
@@ -318,10 +317,12 @@ The API client can be initialized as follows:
 
 ```ts
 const client = new Client({
+  basicAuthCredentials: {
+    username: 'BasicAuthUserName',
+    password: 'BasicAuthPassword'
+  },
   timeout: 30000,
   environment: Environment.Production,
-  basicAuthUserName: 'BasicAuthUserName',
-  basicAuthPassword: 'BasicAuthPassword',
 });
 ```
 
@@ -338,7 +339,9 @@ The SDK can be configured to use a different environment for making API calls. A
 
 ## Authorization
 
-This API uses `Basic Authentication`.
+This API uses the following authentication schemes.
+
+* [`BasicAuth (Basic Authentication)`](https://www.github.com/maxio-com/ab-typescript-sdk/tree/1.0.1/doc/$a/https://www.github.com/maxio-com/ab-typescript-sdk/tree/1.0.1/basic-authentication.md)
 
 ## List of APIs
 

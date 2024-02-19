@@ -20,9 +20,9 @@
 
 ```json
 {
-  "timestamp": "timestamp8",
+  "timestamp": "2016-03-13T12:52:32.123Z",
   "id": "id4",
-  "created_at": "created_at8",
+  "created_at": "2016-03-13T12:52:32.123Z",
   "uniqueness_token": "uniqueness_token0",
   "subscription_id": 200
 }

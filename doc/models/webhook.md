@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `event` | `string \| undefined` | Optional | A string describing which event type produced the given webhook |
-| `id` | `number \| undefined` | Optional | The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. |
+| `id` | `bigint \| undefined` | Optional | The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when the webhook was created |
 | `lastError` | `string \| undefined` | Optional | Text describing the status code and/or error from the last failed attempt to send the Webhook. When a webhook is retried and accepted, this field will be cleared. |
 | `lastErrorAt` | `string \| undefined` | Optional | Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared. |
@@ -28,9 +28,9 @@
 {
   "event": "event6",
   "id": 154,
-  "created_at": "created_at6",
+  "created_at": "2016-03-13T12:52:32.123Z",
   "last_error": "last_error8",
-  "last_error_at": "last_error_at6"
+  "last_error_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

@@ -76,6 +76,7 @@ export class BillingPortalController extends BaseController {
     req.query('auto_invite', mapped.autoInvite);
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/enable.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
 
@@ -106,6 +107,7 @@ export class BillingPortalController extends BaseController {
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/management_link.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.throwOn(429, TooManyManagementLinkRequestsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(portalManagementLinkSchema, requestOptions);
   }
 
@@ -140,6 +142,7 @@ export class BillingPortalController extends BaseController {
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/invitations/invite.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(resentInvitationSchema, requestOptions);
   }
 
@@ -163,6 +166,7 @@ export class BillingPortalController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ customerId: [customerId, number()] });
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/invitations/revoke.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(revokedInvitationSchema, requestOptions);
   }
 }
