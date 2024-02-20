@@ -1,6 +1,5 @@
-import { CONFIG, createClient } from './config';
+import { createClient, createInvalidClient } from './config';
 import {
-  Environment,
   BillingPortalController,
   CustomersController,
   Customer,
@@ -29,14 +28,7 @@ describe('Billing Portal Controller', () => {
       ccEmails: 'martha@example.com',
     },
   };
-  const invalidClient = createClient({
-    timeout: 0,
-    domain: CONFIG.DOMAIN,
-    environment: Environment.Production,
-    subdomain: CONFIG.SUBDOMAIN,
-    basicAuthUserName: 'invalidKey',
-    basicAuthPassword: CONFIG.PASSWORD,
-  });
+  const invalidClient = createInvalidClient();
   const invalidCustomerId = -1;
   const nonExistentCustomerId = 1;
 

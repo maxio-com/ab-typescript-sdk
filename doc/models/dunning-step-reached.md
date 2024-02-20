@@ -21,9 +21,9 @@
     "state": "state8",
     "subscription_id": 194,
     "revenue_at_risk_in_cents": 98,
-    "created_at": "created_at4",
+    "created_at": "2016-03-13T12:52:32.123Z",
     "attempts": 42,
-    "last_attempted_at": "last_attempted_at0"
+    "last_attempted_at": "2016-03-13T12:52:32.123Z"
   },
   "current_step": {
     "day_threshold": 198,

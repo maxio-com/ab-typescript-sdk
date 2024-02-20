@@ -1,5 +1,4 @@
 import {
-  Environment,
   OfferResponse,
   OffersController,
   ProductFamiliesController,
@@ -8,7 +7,7 @@ import {
   ProductResponse,
   IntervalUnit,
 } from 'advanced-billing-sdk';
-import { CONFIG, createClient } from './config';
+import { createClient, createInvalidClient } from './config';
 import { uid } from 'uid';
 
 describe('Offers Controller', () => {
@@ -39,14 +38,7 @@ describe('Offers Controller', () => {
 
   beforeAll(async () => {
     const client = createClient();
-    const invalidClient = createClient({
-      timeout: 0,
-      domain: CONFIG.DOMAIN,
-      environment: Environment.Production,
-      subdomain: CONFIG.SUBDOMAIN,
-      basicAuthUserName: 'invalidKey',
-      basicAuthPassword: CONFIG.PASSWORD,
-    });
+    const invalidClient = createInvalidClient();
     const productFamiliesController = new ProductFamiliesController(client);
     const productsController = new ProductsController(client);
     offersController = new OffersController(client);

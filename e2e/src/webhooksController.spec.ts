@@ -1,6 +1,5 @@
-import { CONFIG, createClient } from './config';
+import { createClient, createInvalidClient } from './config';
 import {
-  Environment,
   Endpoint,
   WebhooksController,
   WebhookSubscription,
@@ -8,14 +7,7 @@ import {
 
 describe('webhooks Controller', () => {
   const validClient = createClient();
-  const invalidClient = createClient({
-    timeout: 0,
-    domain: CONFIG.DOMAIN,
-    environment: Environment.Production,
-    subdomain: CONFIG.SUBDOMAIN,
-    basicAuthUserName: 'invalidKey',
-    basicAuthPassword: CONFIG.PASSWORD,
-  });
+  const invalidClient = createInvalidClient();
 
   describe('List Webhooks', () => {
     test('should get a webhooks associated to client site', async () => {
@@ -59,7 +51,7 @@ describe('webhooks Controller', () => {
       const webHooksController = new WebhooksController(validClient);
       const listEndpointsResponse = await webHooksController.listEndpoints();
       const idsResponse = listEndpointsResponse.result.map(
-        (endpoint: Endpoint) => Number(endpoint.id)
+        (endpoint: Endpoint) => BigInt(endpoint.id || 0)
       );
       const payload = { ids: idsResponse };
       const { statusCode, result } =
@@ -70,7 +62,7 @@ describe('webhooks Controller', () => {
     test('should thrown an error on replay webhooks when user is unauthorized', async () => {
       const webHooksController = new WebhooksController(invalidClient);
       const payload = {
-        ids: [123456789, 123456788],
+        ids: [BigInt(123456789), BigInt(123456788)],
       };
       const promise = webHooksController.replayWebhooks(payload);
       expect(promise).rejects.toThrow();

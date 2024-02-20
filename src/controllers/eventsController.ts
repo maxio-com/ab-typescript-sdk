@@ -173,6 +173,7 @@ export class EventsController extends BaseController {
     req.query('end_date', mapped.endDate);
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(eventResponseSchema), requestOptions);
   }
 
@@ -234,6 +235,7 @@ export class EventsController extends BaseController {
     req.query('direction', mapped.direction);
     req.query('filter', mapped.filter, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/events.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(eventResponseSchema), requestOptions);
   }
 
@@ -288,6 +290,7 @@ export class EventsController extends BaseController {
     req.query('max_id', mapped.maxId);
     req.query('direction', mapped.direction);
     req.query('filter', mapped.filter, commaPrefix);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(countResponseSchema, requestOptions);
   }
 }

@@ -53,6 +53,7 @@ export class AdvanceInvoiceController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice/issue.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -73,6 +74,7 @@ export class AdvanceInvoiceController extends BaseController {
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -101,6 +103,7 @@ export class AdvanceInvoiceController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/advance_invoice/void.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 }

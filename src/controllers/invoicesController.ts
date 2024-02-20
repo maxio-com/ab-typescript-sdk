@@ -71,13 +71,13 @@ import {
   multiInvoicePaymentResponseSchema,
 } from '../models/multiInvoicePaymentResponse';
 import {
-  PaymentResponse,
-  paymentResponseSchema,
-} from '../models/paymentResponse';
-import {
   RecordPaymentRequest,
   recordPaymentRequestSchema,
 } from '../models/recordPaymentRequest';
+import {
+  RecordPaymentResponse,
+  recordPaymentResponseSchema,
+} from '../models/recordPaymentResponse';
 import {
   RefundInvoiceRequest,
   refundInvoiceRequestSchema,
@@ -123,6 +123,7 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/refunds.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -286,6 +287,7 @@ export class InvoicesController extends BaseController {
     req.query('number', mapped.mNumber, commaPrefix);
     req.query('product_ids', mapped.productIds, commaPrefix);
     req.query('sort', mapped.sort);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listInvoicesResponseSchema, requestOptions);
   }
 
@@ -303,6 +305,7 @@ export class InvoicesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/invoices/${mapped.uid}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -400,6 +403,7 @@ export class InvoicesController extends BaseController {
     req.query('invoice_uid', mapped.invoiceUid);
     req.query('with_change_invoice_status', mapped.withChangeInvoiceStatus);
     req.query('event_types', mapped.eventTypes, commaPrefix);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listInvoiceEventsResponseSchema, requestOptions);
   }
 
@@ -478,6 +482,7 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/payments.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -525,6 +530,7 @@ export class InvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(multiInvoicePaymentResponseSchema, requestOptions);
   }
 
@@ -592,6 +598,7 @@ export class InvoicesController extends BaseController {
     req.query('taxes', mapped.taxes);
     req.query('refunds', mapped.refunds);
     req.query('applications', mapped.applications);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listCreditNotesResponseSchema, requestOptions);
   }
 
@@ -608,6 +615,7 @@ export class InvoicesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/credit_notes/${mapped.uid}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(creditNoteSchema, requestOptions);
   }
 
@@ -630,7 +638,7 @@ export class InvoicesController extends BaseController {
     subscriptionId: number,
     body?: RecordPaymentRequest,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<PaymentResponse>> {
+  ): Promise<ApiResponse<RecordPaymentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
@@ -640,7 +648,8 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payments.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    return req.callAsJson(paymentResponseSchema, requestOptions);
+    req.authenticate([{ basicAuth: true }]);
+    return req.callAsJson(recordPaymentResponseSchema, requestOptions);
   }
 
   /**
@@ -677,6 +686,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/reopen.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -704,6 +714,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/void.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -748,6 +759,7 @@ export class InvoicesController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/invoices/${mapped.invoiceUid}/segments.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(consolidatedInvoiceSchema, requestOptions);
   }
 
@@ -950,6 +962,7 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/invoices.json`;
     req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceResponseSchema, requestOptions);
   }
 
@@ -987,6 +1000,7 @@ export class InvoicesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/invoices/${mapped.uid}/deliveries.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -1011,6 +1025,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/customer_information/preview.json`;
     req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerChangesPreviewResponseSchema, requestOptions);
   }
 
@@ -1035,6 +1050,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/customer_information.json`;
     req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 
@@ -1084,6 +1100,7 @@ export class InvoicesController extends BaseController {
     req.appendTemplatePath`/invoices/${mapped.uid}/issue.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(invoiceSchema, requestOptions);
   }
 }

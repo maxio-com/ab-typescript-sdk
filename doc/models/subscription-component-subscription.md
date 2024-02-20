@@ -19,7 +19,7 @@ An optional object, will be returned if provided `include=subscription` query pa
 ```json
 {
   "state": "paused",
-  "updated_at": "updated_at0"
+  "updated_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

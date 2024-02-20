@@ -68,6 +68,7 @@ export class ProformaInvoicesController extends BaseController {
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -90,6 +91,7 @@ export class ProformaInvoicesController extends BaseController {
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -113,6 +115,7 @@ export class ProformaInvoicesController extends BaseController {
     });
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -141,6 +144,7 @@ export class ProformaInvoicesController extends BaseController {
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -234,6 +238,7 @@ export class ProformaInvoicesController extends BaseController {
     req.query('payments', mapped.payments);
     req.query('custom_fields', mapped.customFields);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProformaInvoicesResponseSchema, requestOptions);
   }
 
@@ -270,6 +275,7 @@ export class ProformaInvoicesController extends BaseController {
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}/void.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -304,6 +310,7 @@ export class ProformaInvoicesController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices/preview.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoicePreviewSchema, requestOptions);
   }
 
@@ -340,6 +347,7 @@ export class ProformaInvoicesController extends BaseController {
     req.json(mapped.body);
     req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
@@ -383,6 +391,7 @@ export class ProformaInvoicesController extends BaseController {
     req.json(mapped.body);
     req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(signupProformaPreviewResponseSchema, requestOptions);
   }
 }

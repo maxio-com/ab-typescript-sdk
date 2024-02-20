@@ -7,9 +7,9 @@
 import { object, optional, Schema, string } from '../schema';
 import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 
-export interface Payment {
+export interface PaidInvoice {
   /** The uid of the paid invoice */
-  invoiceUid?: string;
+  invoiceId?: string;
   /** The current status of the invoice. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
   status?: InvoiceStatus;
   /** The remaining due amount on the invoice */
@@ -18,8 +18,8 @@ export interface Payment {
   paidAmount?: string;
 }
 
-export const paymentSchema: Schema<Payment> = object({
-  invoiceUid: ['invoice_uid', optional(string())],
+export const paidInvoiceSchema: Schema<PaidInvoice> = object({
+  invoiceId: ['invoice_id', optional(string())],
   status: ['status', optional(invoiceStatusSchema)],
   dueAmount: ['due_amount', optional(string())],
   paidAmount: ['paid_amount', optional(string())],

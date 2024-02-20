@@ -211,8 +211,8 @@ async replayWebhooks(
 ```ts
 const body: ReplayWebhooksRequest = {
   ids: [
-    123456789,
-    123456788
+    BigInt(123456789),
+    BigInt(123456788)
   ],
 };
 
@@ -250,7 +250,7 @@ You can check available events here.
 
 ```ts
 async createEndpoint(
-  body?: UpdateEndpointRequest,
+  body?: CreateOrUpdateEndpointRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EndpointResponse>>
 ```
@@ -259,7 +259,7 @@ async createEndpoint(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`UpdateEndpointRequest \| undefined`](../../doc/models/update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
+| `body` | [`CreateOrUpdateEndpointRequest \| undefined`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -269,7 +269,7 @@ async createEndpoint(
 ## Example Usage
 
 ```ts
-const body: UpdateEndpointRequest = {
+const body: CreateOrUpdateEndpointRequest = {
   endpoint: {
     url: 'https://your.site/webhooks',
     webhookSubscriptions: [
@@ -402,7 +402,7 @@ If you want unsubscribe from specific event, just send a list of `webhook_subscr
 ```ts
 async updateEndpoint(
   endpointId: number,
-  body?: UpdateEndpointRequest,
+  body?: CreateOrUpdateEndpointRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EndpointResponse>>
 ```
@@ -412,7 +412,7 @@ async updateEndpoint(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `endpointId` | `number` | Template, Required | The Chargify id for the endpoint that should be updated |
-| `body` | [`UpdateEndpointRequest \| undefined`](../../doc/models/update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
+| `body` | [`CreateOrUpdateEndpointRequest \| undefined`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -424,7 +424,7 @@ async updateEndpoint(
 ```ts
 const endpointId = 42;
 
-const body: UpdateEndpointRequest = {
+const body: CreateOrUpdateEndpointRequest = {
   endpoint: {
     url: 'https://yout.site/webhooks/1/json.',
     webhookSubscriptions: [

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ids` | `number[]` | Required | - |
+| `ids` | `bigint[]` | Required | - |
 
 ## Example (as JSON)
 

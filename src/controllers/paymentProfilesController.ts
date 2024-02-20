@@ -368,6 +368,7 @@ export class PaymentProfilesController extends BaseController {
     req.json(mapped.body);
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -407,6 +408,7 @@ export class PaymentProfilesController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('customer_id', mapped.customerId);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(paymentProfileResponseSchema), requestOptions);
   }
 
@@ -461,6 +463,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
     req.throwOn(404, ApiError, 'Not Found');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -531,6 +534,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorStringMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -554,6 +558,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/payment_profiles/${mapped.paymentProfileId}.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -583,6 +588,7 @@ export class PaymentProfilesController extends BaseController {
       paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -609,6 +615,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/bank_accounts/${mapped.bankAccountId}/verification.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(bankAccountResponseSchema, requestOptions);
   }
 
@@ -633,6 +640,7 @@ export class PaymentProfilesController extends BaseController {
       paymentProfileId: [paymentProfileId, number()],
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -660,6 +668,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -689,6 +698,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/payment_profiles/${mapped.paymentProfileId}/change_payment_profile.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paymentProfileResponseSchema, requestOptions);
   }
 
@@ -715,6 +725,7 @@ export class PaymentProfilesController extends BaseController {
     });
     req.appendTemplatePath`/one_time_tokens/${mapped.chargifyToken}.json`;
     req.throwOn(404, ErrorListResponseError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(getOneTimeTokenRequestSchema, requestOptions);
   }
 
@@ -748,6 +759,7 @@ export class PaymentProfilesController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/request_payment_profiles_update.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 }

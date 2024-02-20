@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { basicAuthenticationProvider } from './authentication';
+import { createAuthProviderFromConfig } from './authProvider';
 import {
   AuthParams,
   ClientInterface,
@@ -55,7 +55,7 @@ export class Client implements ClientInterface {
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
       server => getBaseUri(server, this._config),
-      basicAuthenticationProvider(this._config.basicAuthUserName, this._config.basicAuthPassword),
+      createAuthProviderFromConfig(this._config),
       new HttpClient(AbortError, {
         timeout: this._timeout,
         clientConfigOverrides: this._config.unstable_httpClientOptions,
@@ -147,5 +147,5 @@ function withUserAgent(userAgent: string) {
 }
 
 function withAuthenticationByDefault(rb: SdkRequestBuilder) {
-  rb.authenticate(true);
+  rb.authenticate([{ basicAuth: true }]); 
 }
