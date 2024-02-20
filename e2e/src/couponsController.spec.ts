@@ -1,13 +1,12 @@
 import {
   CompoundingStrategy,
   CouponsController,
-  Environment,
   ProductFamiliesController,
   ProductFamily,
   SubscriptionsController,
   ProductsController,
 } from 'advanced-billing-sdk';
-import { createClient, CONFIG } from './config';
+import { createClient, createInvalidClient } from './config';
 import { product } from './mocks/products';
 import { createMockSubscription } from './mocks/subscriptions';
 import { uid } from 'uid';
@@ -45,14 +44,7 @@ describe('Coupons Controller', () => {
 
   beforeAll(async () => {
     const client = createClient();
-    const invalidClient = createClient({
-      timeout: 0,
-      domain: CONFIG.DOMAIN,
-      environment: Environment.Production,
-      subdomain: CONFIG.SUBDOMAIN,
-      basicAuthUserName: 'invalidKey',
-      basicAuthPassword: CONFIG.PASSWORD,
-    });
+    const invalidClient = createInvalidClient();
     couponsController = new CouponsController(client);
     subscriptionsController = new SubscriptionsController(client);
     productsController = new ProductsController(client);

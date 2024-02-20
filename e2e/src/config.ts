@@ -12,8 +12,10 @@ const defaultOptions = {
   domain: CONFIG.DOMAIN,
   environment: Environment.Production,
   subdomain: CONFIG.SUBDOMAIN,
-  basicAuthUserName: CONFIG.SDK_KEY,
-  basicAuthPassword: CONFIG.PASSWORD,
+  basicAuthCredentials: {
+    username: CONFIG.SDK_KEY || '',
+    password: CONFIG.PASSWORD || '',
+  },
 };
 
 export function createClient(options = defaultOptions) {
@@ -27,7 +29,9 @@ export function createInvalidClient() {
     domain: CONFIG.DOMAIN,
     environment: Environment.Production,
     subdomain: CONFIG.SUBDOMAIN,
-    basicAuthUserName: 'invalidKey',
-    basicAuthPassword: CONFIG.PASSWORD,
+    basicAuthCredentials: {
+      username: 'invalidKey' || '',
+      password: CONFIG.PASSWORD || '',
+    },
   });
 }

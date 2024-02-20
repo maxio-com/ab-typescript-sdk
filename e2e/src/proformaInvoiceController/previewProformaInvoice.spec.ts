@@ -1,9 +1,8 @@
 import {
-  Environment,
   ProformaInvoicesController,
   SubscriptionResponse,
 } from 'advanced-billing-sdk';
-import { createClient, CONFIG } from '../config';
+import { createClient, createInvalidClient } from '../config';
 import { createSubscription } from '../utils/subscription';
 
 describe('Proforma Invoices Controller', () => {
@@ -13,14 +12,7 @@ describe('Proforma Invoices Controller', () => {
 
   beforeAll(async () => {
     const client = createClient();
-    const invalidClient = createClient({
-      timeout: 0,
-      domain: CONFIG.DOMAIN,
-      environment: Environment.Production,
-      subdomain: CONFIG.SUBDOMAIN,
-      basicAuthUserName: 'invalidKey',
-      basicAuthPassword: CONFIG.PASSWORD,
-    });
+    const invalidClient = createInvalidClient();
     proformaInvoicesController = new ProformaInvoicesController(client);
     invalidProformaInvoiceController = new ProformaInvoicesController(
       invalidClient
