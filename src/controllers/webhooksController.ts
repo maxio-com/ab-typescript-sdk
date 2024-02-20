@@ -8,6 +8,10 @@ import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
+  CreateOrUpdateEndpointRequest,
+  createOrUpdateEndpointRequestSchema,
+} from '../models/createOrUpdateEndpointRequest';
+import {
   EnableWebhooksRequest,
   enableWebhooksRequestSchema,
 } from '../models/enableWebhooksRequest';
@@ -28,10 +32,6 @@ import {
   ReplayWebhooksResponse,
   replayWebhooksResponseSchema,
 } from '../models/replayWebhooksResponse';
-import {
-  UpdateEndpointRequest,
-  updateEndpointRequestSchema,
-} from '../models/updateEndpointRequest';
 import { WebhookOrder, webhookOrderSchema } from '../models/webhookOrder';
 import {
   WebhookResponse,
@@ -121,6 +121,7 @@ export class WebhooksController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('order', mapped.order);
     req.query('subscription', mapped.subscription);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(webhookResponseSchema), requestOptions);
   }
 
@@ -140,6 +141,7 @@ export class WebhooksController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(enableWebhooksResponseSchema, requestOptions);
   }
 
@@ -162,6 +164,7 @@ export class WebhooksController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(replayWebhooksResponseSchema, requestOptions);
   }
 
@@ -177,16 +180,17 @@ export class WebhooksController extends BaseController {
    * @return Response from the API call
    */
   async createEndpoint(
-    body?: UpdateEndpointRequest,
+    body?: CreateOrUpdateEndpointRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<EndpointResponse>> {
     const req = this.createRequest('POST', '/endpoints.json');
     const mapped = req.prepareArgs({
-      body: [body, optional(updateEndpointRequestSchema)],
+      body: [body, optional(createOrUpdateEndpointRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(endpointResponseSchema, requestOptions);
   }
 
@@ -199,6 +203,7 @@ export class WebhooksController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Endpoint[]>> {
     const req = this.createRequest('GET', '/endpoints.json');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(endpointSchema), requestOptions);
   }
 
@@ -216,25 +221,27 @@ export class WebhooksController extends BaseController {
    * If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the
    * specific event key.
    *
-   * @param endpointId   The Chargify id for the endpoint that should be updated
+   * @param endpointId   The Chargify id for the endpoint that should be
+   *                                                             updated
    * @param body
    * @return Response from the API call
    */
   async updateEndpoint(
     endpointId: number,
-    body?: UpdateEndpointRequest,
+    body?: CreateOrUpdateEndpointRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<EndpointResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       endpointId: [endpointId, number()],
-      body: [body, optional(updateEndpointRequestSchema)],
+      body: [body, optional(createOrUpdateEndpointRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/endpoints/${mapped.endpointId}.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(endpointResponseSchema, requestOptions);
   }
 }

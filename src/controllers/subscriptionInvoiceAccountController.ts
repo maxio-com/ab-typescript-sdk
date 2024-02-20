@@ -67,6 +67,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/account_balances.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(accountBalancesSchema, requestOptions);
   }
 
@@ -100,6 +101,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(createPrepaymentResponseSchema, requestOptions);
   }
 
@@ -164,6 +166,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.query('filter[end_date]', mapped.filterEndDate);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(prepaymentsResponseSchema, requestOptions);
   }
 
@@ -188,6 +191,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credits.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }
 
@@ -213,6 +217,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credit_deductions.json`;
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
 
@@ -247,6 +252,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(400, RefundPrepaymentBaseErrorsResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.throwOn(422, RefundPrepaymentAggregatedErrorsResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(prepaymentResponseSchema, requestOptions);
   }
 }

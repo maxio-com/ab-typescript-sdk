@@ -15,7 +15,7 @@ export enum PrepaymentMethod {
   MoneyOrder = 'money_order',
   Ach = 'ach',
   PaypalAccount = 'paypal_account',
-  CreditCardOnFile = 'credit_card_on_file',
+  CreditCard = 'credit_card',
   Other = 'other',
 }
 

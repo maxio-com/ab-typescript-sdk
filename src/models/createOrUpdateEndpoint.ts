@@ -11,15 +11,17 @@ import {
 } from './webhookSubscription';
 
 /** Used to Create or Update Endpoint */
-export interface UpdateEndpoint {
+export interface CreateOrUpdateEndpoint {
   url: string;
   webhookSubscriptions: WebhookSubscription[];
 }
 
-export const updateEndpointSchema: Schema<UpdateEndpoint> = object({
-  url: ['url', string()],
-  webhookSubscriptions: [
-    'webhook_subscriptions',
-    array(webhookSubscriptionSchema),
-  ],
-});
+export const createOrUpdateEndpointSchema: Schema<CreateOrUpdateEndpoint> = object(
+  {
+    url: ['url', string()],
+    webhookSubscriptions: [
+      'webhook_subscriptions',
+      array(webhookSubscriptionSchema),
+    ],
+  }
+);

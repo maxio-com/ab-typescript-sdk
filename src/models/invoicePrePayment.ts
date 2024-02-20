@@ -4,19 +4,19 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { bigint, number, object, optional, Schema } from '../schema';
 
 export interface InvoicePrePayment {
   /** The subscription id for the prepayment account */
-  subscriptionId?: string;
+  subscriptionId?: number;
   /** The amount in cents of the prepayment that was created as a result of this payment. */
-  amountInCents?: string;
+  amountInCents?: bigint;
   /** The total balance of the prepayment account for this subscription including any prior prepayments */
-  endingBalanceInCents?: string;
+  endingBalanceInCents?: bigint;
 }
 
 export const invoicePrePaymentSchema: Schema<InvoicePrePayment> = object({
-  subscriptionId: ['subscription_id', optional(string())],
-  amountInCents: ['amount_in_cents', optional(string())],
-  endingBalanceInCents: ['ending_balance_in_cents', optional(string())],
+  subscriptionId: ['subscription_id', optional(number())],
+  amountInCents: ['amount_in_cents', optional(bigint())],
+  endingBalanceInCents: ['ending_balance_in_cents', optional(bigint())],
 });

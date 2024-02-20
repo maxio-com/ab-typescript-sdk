@@ -15,7 +15,7 @@
 
 ```json
 {
-  "expires_at": "expires_at0"
+  "expires_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

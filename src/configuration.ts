@@ -12,8 +12,10 @@ export interface Configuration {
   environment: Environment;
   subdomain: string;
   domain: string;
-  basicAuthUserName: string;
-  basicAuthPassword: string;
+  basicAuthCredentials?: {
+    username: string;
+    password: string;
+  };
   httpClientOptions?: Partial<HttpClientOptions>;
   unstable_httpClientOptions?: any;
 }

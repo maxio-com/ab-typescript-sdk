@@ -21,7 +21,7 @@
     "message": "message0",
     "subscription_id": 96,
     "customer_id": 24,
-    "created_at": "created_at8",
+    "created_at": "2016-03-13T12:52:32.123Z",
     "event_specific_data": {
       "previous_unit_balance": null,
       "previous_overage_unit_balance": null,

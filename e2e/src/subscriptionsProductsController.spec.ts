@@ -1,8 +1,5 @@
-import {
-  Environment,
-  SubscriptionProductsController,
-} from 'advanced-billing-sdk';
-import { CONFIG, createClient } from './config';
+import { SubscriptionProductsController } from 'advanced-billing-sdk';
+import { createClient, createInvalidClient } from './config';
 import {
   createContextForMigration,
   MigrationContext,
@@ -19,14 +16,7 @@ describe('Subscriptions Products Controller', () => {
   let invalidSubscriptionProductsController: SubscriptionProductsController;
   beforeAll(async () => {
     const client = createClient();
-    const invalidClient = createClient({
-      timeout: 0,
-      domain: CONFIG.DOMAIN,
-      environment: Environment.Production,
-      subdomain: CONFIG.SUBDOMAIN,
-      basicAuthUserName: 'invalidKey',
-      basicAuthPassword: CONFIG.PASSWORD,
-    });
+    const invalidClient = createInvalidClient();
     subscriptionProductsController = new SubscriptionProductsController(client);
     invalidSubscriptionProductsController = new SubscriptionProductsController(
       invalidClient

@@ -1,7 +1,6 @@
 import { uid } from 'uid';
-import { CONFIG, createClient } from './config';
+import { createClient, createInvalidClient } from './config';
 import {
-  Environment,
   ProductFamiliesController,
   ProductResponse,
   IncludeNotNull,
@@ -59,14 +58,7 @@ const payloads = [
 ];
 
 describe('Products Controller', () => {
-  const invalidClient = createClient({
-    timeout: 0,
-    domain: CONFIG.DOMAIN,
-    environment: Environment.Production,
-    subdomain: CONFIG.SUBDOMAIN,
-    basicAuthUserName: 'invalidKey',
-    basicAuthPassword: CONFIG.PASSWORD,
-  });
+  const invalidClient = createInvalidClient();
 
   let productFamilyId = 0;
   let productsCreated: ProductResponse[] = [];

@@ -1,5 +1,5 @@
-import { Environment, SubscriptionNotesController } from 'advanced-billing-sdk';
-import { CONFIG, createClient } from './config';
+import { SubscriptionNotesController } from 'advanced-billing-sdk';
+import { createClient, createInvalidClient } from './config';
 import { createSubscription, SubscriptionContext } from './utils/subscription';
 
 describe('Subscription Notes Controller', () => {
@@ -13,14 +13,7 @@ describe('Subscription Notes Controller', () => {
   };
   beforeAll(async () => {
     const client = createClient();
-    const invalidClient = createClient({
-      timeout: 0,
-      domain: CONFIG.DOMAIN,
-      environment: Environment.Production,
-      subdomain: CONFIG.SUBDOMAIN,
-      basicAuthUserName: 'invalidKey',
-      basicAuthPassword: CONFIG.PASSWORD,
-    });
+    const invalidClient = createInvalidClient();
     subscriptionNotesController = new SubscriptionNotesController(client);
     invalidSubscriptionNotesController = new SubscriptionNotesController(
       invalidClient

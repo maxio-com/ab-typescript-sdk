@@ -1,5 +1,5 @@
-import { Environment, InvoicesController } from 'advanced-billing-sdk';
-import { createClient, CONFIG } from './config';
+import { InvoicesController } from 'advanced-billing-sdk';
+import { createClient, createInvalidClient } from './config';
 import { createSubscription } from './utils/subscription';
 
 describe('Invoices Controller', () => {
@@ -8,14 +8,7 @@ describe('Invoices Controller', () => {
 
   beforeAll(async () => {
     const client = createClient();
-    const invalidClient = createClient({
-      timeout: 0,
-      domain: CONFIG.DOMAIN,
-      environment: Environment.Production,
-      subdomain: CONFIG.SUBDOMAIN,
-      basicAuthUserName: 'invalidKey',
-      basicAuthPassword: CONFIG.PASSWORD,
-    });
+    const invalidClient = createInvalidClient();
     invoicesController = new InvoicesController(client);
     invalidInvoiceController = new InvoicesController(invalidClient);
   });

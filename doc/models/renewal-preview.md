@@ -23,7 +23,7 @@
 
 ```json
 {
-  "next_assessment_at": "next_assessment_at0",
+  "next_assessment_at": "2016-03-13T12:52:32.123Z",
   "subtotal_in_cents": 160,
   "total_tax_in_cents": 28,
   "total_discount_in_cents": 34,

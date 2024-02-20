@@ -42,7 +42,7 @@ export interface Product {
   requestCreditCard?: boolean;
   /** A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
   expirationInterval?: number | null;
-  /** A string representing the trial interval unit for this product, either month or day */
+  /** A string representing the expiration interval unit for this product, either month or day */
   expirationIntervalUnit?: ProductExpirationIntervalUnit | null;
   /** Timestamp indicating when this product was created */
   createdAt?: string;

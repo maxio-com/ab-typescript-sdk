@@ -42,7 +42,7 @@
       }
     ]
   },
-  "timestamp": "timestamp8",
+  "timestamp": "2016-03-13T12:52:32.123Z",
   "invoice": {
     "id": 166,
     "uid": "uid6",

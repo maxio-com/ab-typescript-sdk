@@ -209,7 +209,7 @@ try {
       "created_at": "2022-02-22T14:07:00-05:00",
       "updated_at": "2022-02-22T14:07:00-05:00",
       "component_handle": "string",
-      "archived_at": "string"
+      "archived_at": null
     }
   }
 ]
@@ -401,8 +401,8 @@ try {
       "last_name": "esse",
       "organization": null,
       "email": "ex eiusmod",
-      "created_at": "ad occaecat cillum",
-      "updated_at": "ut aute proident est",
+      "created_at": "2021-05-05T16:00:21-04:00",
+      "updated_at": "2021-05-05T16:00:21-04:00",
       "reference": "laboris ea cupidatat",
       "address": null,
       "address_2": null,
@@ -412,8 +412,8 @@ try {
       "country": null,
       "phone": null,
       "portal_invite_last_sent_at": null,
-      "portal_invite_last_accepted_at": "reprehenderit labore voluptate",
-      "portal_customer_created_at": "nisi aute reprehenderit Excepteur Duis",
+      "portal_invite_last_accepted_at": "2021-05-05T20:00:21-04:00",
+      "portal_customer_created_at": "2021-05-05T16:00:21-04:00",
       "cc_emails": "eiusmod sunt",
       "tax_exempt": true
     },
@@ -1061,7 +1061,7 @@ const allocationId = 24;
 
 const body: UpdateAllocationExpirationDate = {
   allocation: {
-    expiresAt: '05/07/2021',
+    expiresAt: '2021-05-05T16:00:00',
   },
 };
 

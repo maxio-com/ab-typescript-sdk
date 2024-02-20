@@ -80,6 +80,7 @@ export class SalesCommissionsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/sellers/${mapped.sellerId}/sales_commission_settings.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(saleRepSettingsSchema), requestOptions);
   }
 
@@ -145,6 +146,7 @@ export class SalesCommissionsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/sellers/${mapped.sellerId}/sales_reps.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(listSaleRepItemSchema), requestOptions);
   }
 
@@ -206,6 +208,7 @@ export class SalesCommissionsController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/sellers/${mapped.sellerId}/sales_reps/${mapped.salesRepId}.json`;
+    req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(saleRepSchema, requestOptions);
   }
 }

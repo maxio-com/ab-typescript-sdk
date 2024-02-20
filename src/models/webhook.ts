@@ -5,9 +5,9 @@
  */
 
 import {
+  bigint,
   boolean,
   nullable,
-  number,
   object,
   optional,
   Schema,
@@ -18,7 +18,7 @@ export interface Webhook {
   /** A string describing which event type produced the given webhook */
   event?: string;
   /** The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. */
-  id?: number;
+  id?: bigint;
   /** Timestamp indicating when the webhook was created */
   createdAt?: string;
   /** Text describing the status code and/or error from the last failed attempt to send the Webhook. When a webhook is retried and accepted, this field will be cleared. */
@@ -43,7 +43,7 @@ export interface Webhook {
 
 export const webhookSchema: Schema<Webhook> = object({
   event: ['event', optional(string())],
-  id: ['id', optional(number())],
+  id: ['id', optional(bigint())],
   createdAt: ['created_at', optional(string())],
   lastError: ['last_error', optional(string())],
   lastErrorAt: ['last_error_at', optional(string())],
