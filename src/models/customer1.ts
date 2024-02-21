@@ -7,7 +7,7 @@
 import { nullable, number, object, optional, Schema, string } from '../schema';
 
 export interface Customer1 {
-  chargifyId?: number;
+  chargifyId?: number | null;
   firstName?: string;
   lastName?: string;
   organization?: string | null;
@@ -17,7 +17,7 @@ export interface Customer1 {
 }
 
 export const customer1Schema: Schema<Customer1> = object({
-  chargifyId: ['chargify_id', optional(number())],
+  chargifyId: ['chargify_id', optional(nullable(number()))],
   firstName: ['first_name', optional(string())],
   lastName: ['last_name', optional(string())],
   organization: ['organization', optional(nullable(string()))],

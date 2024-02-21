@@ -42,8 +42,8 @@ import {
 export interface ProformaInvoice {
   uid?: string;
   siteId?: number;
-  customerId?: number;
-  subscriptionId?: number;
+  customerId?: number | null;
+  subscriptionId?: number | null;
   number?: number | null;
   sequenceNumber?: number | null;
   createdAt?: string;
@@ -83,8 +83,8 @@ export interface ProformaInvoice {
 export const proformaInvoiceSchema: Schema<ProformaInvoice> = object({
   uid: ['uid', optional(string())],
   siteId: ['site_id', optional(number())],
-  customerId: ['customer_id', optional(number())],
-  subscriptionId: ['subscription_id', optional(number())],
+  customerId: ['customer_id', optional(nullable(number()))],
+  subscriptionId: ['subscription_id', optional(nullable(number()))],
   number: ['number', optional(nullable(number()))],
   sequenceNumber: ['sequence_number', optional(nullable(number()))],
   createdAt: ['created_at', optional(string())],
