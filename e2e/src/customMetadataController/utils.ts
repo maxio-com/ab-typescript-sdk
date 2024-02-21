@@ -25,7 +25,7 @@ async function deleteAllCustomData(
 ) {
   const removeMetada = async (customData: Metadata = {}) =>
     await deleteCustomMetadata(customData, resourceType);
-  Promise.all(customMetadataList.map(removeMetada));
+  await Promise.all(customMetadataList.map(removeMetada));
 }
 
 async function createMetadata(
