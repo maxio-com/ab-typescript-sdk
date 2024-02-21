@@ -87,7 +87,7 @@ By default, proforma invoices returned on the index will only include totals, no
 async listSubscriptionGroupProformaInvoices(
   uid: string,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ProformaInvoice>>
+): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
 
 ## Parameters
@@ -99,7 +99,7 @@ async listSubscriptionGroupProformaInvoices(
 
 ## Response Type
 
-[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
+[`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md)
 
 ## Example Usage
 

@@ -18,7 +18,7 @@ async function deleteCustomFields(
   customFieldList: Metafield[] = [],
   resourceType: ResourceType
 ) {
-  Promise.all(
+  await Promise.all(
     customFieldList.map(
       async ({ name = '' }: Metafield = {}) =>
         await deleteCustomField(resourceType, name)
