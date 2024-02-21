@@ -61,7 +61,7 @@ export interface BankAccountPaymentProfile {
   paymentType?: PaymentType;
   /** denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account */
   verified?: boolean;
-  siteGatewaySettingId?: number;
+  siteGatewaySettingId?: number | null;
   gatewayHandle?: string | null;
 }
 
@@ -90,7 +90,10 @@ export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> 
     ],
     paymentType: ['payment_type', optional(paymentTypeSchema)],
     verified: ['verified', optional(boolean())],
-    siteGatewaySettingId: ['site_gateway_setting_id', optional(number())],
+    siteGatewaySettingId: [
+      'site_gateway_setting_id',
+      optional(nullable(number())),
+    ],
     gatewayHandle: ['gateway_handle', optional(nullable(string()))],
   }
 );

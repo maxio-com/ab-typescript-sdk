@@ -8,7 +8,7 @@ import { nullable, number, object, optional, Schema, string } from '../schema';
 
 /** Information about the customer who is owner or recipient the invoiced subscription. */
 export interface InvoiceCustomer {
-  chargifyId?: number;
+  chargifyId?: number | null;
   firstName?: string;
   lastName?: string;
   organization?: string | null;
@@ -18,7 +18,7 @@ export interface InvoiceCustomer {
 }
 
 export const invoiceCustomerSchema: Schema<InvoiceCustomer> = object({
-  chargifyId: ['chargify_id', optional(number())],
+  chargifyId: ['chargify_id', optional(nullable(number()))],
   firstName: ['first_name', optional(string())],
   lastName: ['last_name', optional(string())],
   organization: ['organization', optional(nullable(string()))],

@@ -11,8 +11,8 @@
 |  --- | --- | --- | --- |
 | `uid` | `string \| undefined` | Optional | - |
 | `siteId` | `number \| undefined` | Optional | - |
-| `customerId` | `number \| undefined` | Optional | - |
-| `subscriptionId` | `number \| undefined` | Optional | - |
+| `customerId` | `number \| null \| undefined` | Optional | - |
+| `subscriptionId` | `number \| null \| undefined` | Optional | - |
 | `number` | `number \| null \| undefined` | Optional | - |
 | `sequenceNumber` | `number \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |

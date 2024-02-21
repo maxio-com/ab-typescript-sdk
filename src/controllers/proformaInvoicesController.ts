@@ -86,13 +86,13 @@ export class ProformaInvoicesController extends BaseController {
   async listSubscriptionGroupProformaInvoices(
     uid: string,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoice>> {
+  ): Promise<ApiResponse<ListProformaInvoicesResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.authenticate([{ basicAuth: true }]);
-    return req.callAsJson(proformaInvoiceSchema, requestOptions);
+    return req.callAsJson(listProformaInvoicesResponseSchema, requestOptions);
   }
 
   /**

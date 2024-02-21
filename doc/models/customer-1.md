@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `chargifyId` | `number \| undefined` | Optional | - |
+| `chargifyId` | `number \| null \| undefined` | Optional | - |
 | `firstName` | `string \| undefined` | Optional | - |
 | `lastName` | `string \| undefined` | Optional | - |
 | `organization` | `string \| null \| undefined` | Optional | - |
