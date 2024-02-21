@@ -2,18 +2,25 @@ import {
   CustomersController,
   PaymentProfilesController,
   PaymentType,
+  SubscriptionComponentsController,
   SubscriptionGroupsController,
 } from 'advanced-billing-sdk';
 import { createClient } from '../config';
 
 import createProduct from './products';
+import { createComponent } from './components';
 
 export async function signUpSubscriptionGroup() {
   const client = createClient();
   const subscriptionGroupsController = new SubscriptionGroupsController(client);
+  const subscriptionsComponentsController =
+    new SubscriptionComponentsController(client);
 
-  const { productResponse } = await createProduct({});
+  const { productResponse, productFamilyResponse } = await createProduct({});
   const product = productResponse.product;
+  const componentResponse = await createComponent({
+    productFamilyId: productFamilyResponse?.productFamily?.id || 0,
+  });
 
   const customersController = new CustomersController(client);
   const paymentProfilesController = new PaymentProfilesController(client);
@@ -24,9 +31,10 @@ export async function signUpSubscriptionGroup() {
       email: 'martha@example.com',
     },
   };
-  const {
-    result: { customer },
-  } = await customersController.createCustomer(body);
+  const customerResponse = (await customersController.createCustomer(body))
+    .result;
+
+  const { customer } = customerResponse;
 
   const {
     result: { paymentProfile },
@@ -34,7 +42,7 @@ export async function signUpSubscriptionGroup() {
     paymentProfile: {
       customerId: customer.id,
       bankName: 'Royal Bank of France',
-      bankAccountNumber: '0000000',
+      bankAccountNumber: '0000001',
       bankRoutingNumber: '0003',
       bankBranchCode: '00006',
       paymentType: PaymentType.BankAccount,
@@ -54,6 +62,11 @@ export async function signUpSubscriptionGroup() {
 
         subscriptions: [
           {
+            components: [
+              {
+                componentId: componentResponse?.component.id,
+              },
+            ],
             primary: true,
             productHandle: product.handle || '',
             couponCodes: [],
@@ -63,8 +76,23 @@ export async function signUpSubscriptionGroup() {
     })
   ).result;
 
+  const subscriptionId = subscriptionGroupsSignedResponse.primarySubscriptionId;
+  const usageResponse = await subscriptionsComponentsController.createUsage(
+    subscriptionId || 0,
+    componentResponse?.component.id || 0,
+    {
+      usage: {
+        quantity: 1,
+        memo: 'memo test',
+      },
+    }
+  );
+
   return {
+    customerResponse,
     subscriptionGroupsSignedResponse,
-    product,
+    productResponse,
+    usageResponse,
+    componentResponse,
   };
 }
