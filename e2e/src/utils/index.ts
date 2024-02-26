@@ -7,3 +7,11 @@ export async function cleanSite() {
   const response = await sitesController.clearSite();
   return response;
 }
+
+export async function waitForSeconds(time: number) {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve('success');
+    }, time * 1000)
+  );
+}
