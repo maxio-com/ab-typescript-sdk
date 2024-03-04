@@ -14,6 +14,7 @@ import {
  */
 interface SubscriptionGroupUpdateErrorResponse {
   errors?: SubscriptionGroupUpdateError;
+  [key: string]: unknown;
 }
 
 export class SubscriptionGroupUpdateErrorResponseError extends ApiError<SubscriptionGroupUpdateErrorResponse> {}

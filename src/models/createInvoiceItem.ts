@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, object, optional, Schema, string } from '../schema';
+import { boolean, expandoObject, optional, Schema, string } from '../schema';
 import {
   CreateInvoiceItemComponentId,
   createInvoiceItemComponentIdSchema,
@@ -54,25 +54,28 @@ export interface CreateInvoiceItem {
   pricePointId?: CreateInvoiceItemPricePointId;
   productPricePointId?: CreateInvoiceItemProductPricePointId;
   description?: string;
+  [key: string]: unknown;
 }
 
-export const createInvoiceItemSchema: Schema<CreateInvoiceItem> = object({
-  title: ['title', optional(string())],
-  quantity: ['quantity', optional(createInvoiceItemQuantitySchema)],
-  unitPrice: ['unit_price', optional(createInvoiceItemUnitPriceSchema)],
-  taxable: ['taxable', optional(boolean())],
-  taxCode: ['tax_code', optional(string())],
-  periodRangeStart: ['period_range_start', optional(string())],
-  periodRangeEnd: ['period_range_end', optional(string())],
-  productId: ['product_id', optional(createInvoiceItemProductIdSchema)],
-  componentId: ['component_id', optional(createInvoiceItemComponentIdSchema)],
-  pricePointId: [
-    'price_point_id',
-    optional(createInvoiceItemPricePointIdSchema),
-  ],
-  productPricePointId: [
-    'product_price_point_id',
-    optional(createInvoiceItemProductPricePointIdSchema),
-  ],
-  description: ['description', optional(string())],
-});
+export const createInvoiceItemSchema: Schema<CreateInvoiceItem> = expandoObject(
+  {
+    title: ['title', optional(string())],
+    quantity: ['quantity', optional(createInvoiceItemQuantitySchema)],
+    unitPrice: ['unit_price', optional(createInvoiceItemUnitPriceSchema)],
+    taxable: ['taxable', optional(boolean())],
+    taxCode: ['tax_code', optional(string())],
+    periodRangeStart: ['period_range_start', optional(string())],
+    periodRangeEnd: ['period_range_end', optional(string())],
+    productId: ['product_id', optional(createInvoiceItemProductIdSchema)],
+    componentId: ['component_id', optional(createInvoiceItemComponentIdSchema)],
+    pricePointId: [
+      'price_point_id',
+      optional(createInvoiceItemPricePointIdSchema),
+    ],
+    productPricePointId: [
+      'product_price_point_id',
+      optional(createInvoiceItemProductPricePointIdSchema),
+    ],
+    description: ['description', optional(string())],
+  }
+);

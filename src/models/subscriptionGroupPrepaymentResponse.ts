@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { ServiceCreditType, serviceCreditTypeSchema } from './serviceCreditType';
 
 export interface SubscriptionGroupPrepaymentResponse {
@@ -17,9 +24,10 @@ export interface SubscriptionGroupPrepaymentResponse {
   entryType?: ServiceCreditType;
   /** A memo attached to the entry. */
   memo?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupPrepaymentResponseSchema: Schema<SubscriptionGroupPrepaymentResponse> = object(
+export const subscriptionGroupPrepaymentResponseSchema: Schema<SubscriptionGroupPrepaymentResponse> = expandoObject(
   {
     id: ['id', optional(number())],
     amountInCents: ['amount_in_cents', optional(bigint())],

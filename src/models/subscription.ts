@@ -8,10 +8,10 @@ import {
   array,
   bigint,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -188,9 +188,10 @@ export interface Subscription {
   prepaidConfiguration?: PrepaidConfiguration;
   /** Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided. */
   selfServicePageToken?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionSchema: Schema<Subscription> = object({
+export const subscriptionSchema: Schema<Subscription> = expandoObject({
   id: ['id', optional(number())],
   state: ['state', optional(subscriptionStateSchema)],
   balanceInCents: ['balance_in_cents', optional(bigint())],

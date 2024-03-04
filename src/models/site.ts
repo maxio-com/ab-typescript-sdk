@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -42,9 +42,10 @@ export interface Site {
   taxConfiguration?: TaxConfiguration;
   netTerms?: NetTerms;
   test?: boolean;
+  [key: string]: unknown;
 }
 
-export const siteSchema: Schema<Site> = object({
+export const siteSchema: Schema<Site> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   subdomain: ['subdomain', optional(string())],

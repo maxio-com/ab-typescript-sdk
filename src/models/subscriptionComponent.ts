@@ -6,10 +6,10 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -80,9 +80,10 @@ export interface SubscriptionComponent {
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit;
+  [key: string]: unknown;
 }
 
-export const subscriptionComponentSchema: Schema<SubscriptionComponent> = object(
+export const subscriptionComponentSchema: Schema<SubscriptionComponent> = expandoObject(
   {
     id: ['id', optional(number())],
     name: ['name', optional(string())],

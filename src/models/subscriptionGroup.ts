@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -24,15 +24,18 @@ export interface SubscriptionGroup {
   paymentCollectionMethod?: string;
   subscriptionIds?: number[];
   createdAt?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSchema: Schema<SubscriptionGroup> = object({
-  customerId: ['customer_id', optional(number())],
-  paymentProfile: [
-    'payment_profile',
-    optional(lazy(() => subscriptionGroupPaymentProfileSchema)),
-  ],
-  paymentCollectionMethod: ['payment_collection_method', optional(string())],
-  subscriptionIds: ['subscription_ids', optional(array(number()))],
-  createdAt: ['created_at', optional(string())],
-});
+export const subscriptionGroupSchema: Schema<SubscriptionGroup> = expandoObject(
+  {
+    customerId: ['customer_id', optional(number())],
+    paymentProfile: [
+      'payment_profile',
+      optional(lazy(() => subscriptionGroupPaymentProfileSchema)),
+    ],
+    paymentCollectionMethod: ['payment_collection_method', optional(string())],
+    subscriptionIds: ['subscription_ids', optional(array(number()))],
+    createdAt: ['created_at', optional(string())],
+  }
+);

@@ -11,6 +11,7 @@ import { ApiError } from '../core';
  */
 interface SingleErrorResponse {
   error: string;
+  [key: string]: unknown;
 }
 
 export class SingleErrorResponseError extends ApiError<SingleErrorResponse> {}

@@ -14,6 +14,7 @@ import {
  */
 interface SubscriptionGroupSignupErrorResponse {
   errors: SubscriptionGroupSignupError;
+  [key: string]: unknown;
 }
 
 export class SubscriptionGroupSignupErrorResponseError extends ApiError<SubscriptionGroupSignupErrorResponse> {}

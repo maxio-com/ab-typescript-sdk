@@ -5,11 +5,12 @@
  */
 
 import {
+  bigint,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -78,9 +79,13 @@ export interface Allocation {
    */
   downgradeCredit?: CreditType | null;
   payment?: AllocationPayment | null;
+  expiresAt?: string;
+  usedQuantity?: bigint;
+  chargeId?: bigint;
+  [key: string]: unknown;
 }
 
-export const allocationSchema: Schema<Allocation> = object({
+export const allocationSchema: Schema<Allocation> = expandoObject({
   allocationId: ['allocation_id', optional(number())],
   componentId: ['component_id', optional(number())],
   componentHandle: ['component_handle', optional(nullable(string()))],
@@ -106,4 +111,7 @@ export const allocationSchema: Schema<Allocation> = object({
   upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
   downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
   payment: ['payment', optional(nullable(lazy(() => allocationPaymentSchema)))],
+  expiresAt: ['expires_at', optional(string())],
+  usedQuantity: ['used_quantity', optional(bigint())],
+  chargeId: ['charge_id', optional(bigint())],
 });

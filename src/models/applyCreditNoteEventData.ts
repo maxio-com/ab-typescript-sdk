@@ -7,8 +7,8 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
-  object,
   optional,
   Schema,
   string,
@@ -40,9 +40,10 @@ export interface ApplyCreditNoteEventData {
   consolidatedInvoice?: boolean;
   /** List of credit notes applied to children invoices (if consolidated invoice) */
   appliedCreditNotes?: AppliedCreditNoteData[];
+  [key: string]: unknown;
 }
 
-export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = object(
+export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = expandoObject(
   {
     uid: ['uid', string()],
     creditNoteNumber: ['credit_note_number', string()],

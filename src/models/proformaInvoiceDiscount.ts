@@ -4,31 +4,47 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema, string } from '../schema';
+import { array, expandoObject, lazy, optional, Schema, string } from '../schema';
 import {
-  ProformaInvoiceDiscountBreakout,
-  proformaInvoiceDiscountBreakoutSchema,
-} from './proformaInvoiceDiscountBreakout';
+  InvoiceDiscountBreakout,
+  invoiceDiscountBreakoutSchema,
+} from './invoiceDiscountBreakout';
+import {
+  InvoiceDiscountType,
+  invoiceDiscountTypeSchema,
+} from './invoiceDiscountType';
+import {
+  ProformaInvoiceDiscountSourceType,
+  proformaInvoiceDiscountSourceTypeSchema,
+} from './proformaInvoiceDiscountSourceType';
 
 export interface ProformaInvoiceDiscount {
+  uid?: string;
   title?: string;
-  sourceType?: string;
-  discountType?: string;
+  code?: string;
+  sourceType?: ProformaInvoiceDiscountSourceType;
+  discountType?: InvoiceDiscountType;
   eligibleAmount?: string;
   discountAmount?: string;
-  lineItemBreakouts?: ProformaInvoiceDiscountBreakout[];
+  lineItemBreakouts?: InvoiceDiscountBreakout[];
+  [key: string]: unknown;
 }
 
-export const proformaInvoiceDiscountSchema: Schema<ProformaInvoiceDiscount> = object(
+export const proformaInvoiceDiscountSchema: Schema<ProformaInvoiceDiscount> = expandoObject(
   {
+    uid: ['uid', optional(string())],
     title: ['title', optional(string())],
-    sourceType: ['source_type', optional(string())],
-    discountType: ['discount_type', optional(string())],
+    code: ['code', optional(string())],
+    sourceType: [
+      'source_type',
+      optional(proformaInvoiceDiscountSourceTypeSchema),
+    ],
+    discountType: ['discount_type', optional(invoiceDiscountTypeSchema)],
     eligibleAmount: ['eligible_amount', optional(string())],
     discountAmount: ['discount_amount', optional(string())],
     lineItemBreakouts: [
       'line_item_breakouts',
-      optional(array(lazy(() => proformaInvoiceDiscountBreakoutSchema))),
+      optional(array(lazy(() => invoiceDiscountBreakoutSchema))),
     ],
   }
 );

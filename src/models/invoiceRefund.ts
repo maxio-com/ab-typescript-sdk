@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface InvoiceRefund {
   transactionId?: number;
@@ -16,9 +23,10 @@ export interface InvoiceRefund {
   gatewayTransactionId?: string | null;
   gatewayUsed?: string;
   gatewayHandle?: string | null;
+  [key: string]: unknown;
 }
 
-export const invoiceRefundSchema: Schema<InvoiceRefund> = object({
+export const invoiceRefundSchema: Schema<InvoiceRefund> = expandoObject({
   transactionId: ['transaction_id', optional(number())],
   paymentId: ['payment_id', optional(number())],
   memo: ['memo', optional(string())],

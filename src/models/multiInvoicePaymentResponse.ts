@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   MultiInvoicePayment,
   multiInvoicePaymentSchema,
@@ -12,8 +12,9 @@ import {
 
 export interface MultiInvoicePaymentResponse {
   payment: MultiInvoicePayment;
+  [key: string]: unknown;
 }
 
-export const multiInvoicePaymentResponseSchema: Schema<MultiInvoicePaymentResponse> = object(
+export const multiInvoicePaymentResponseSchema: Schema<MultiInvoicePaymentResponse> = expandoObject(
   { payment: ['payment', lazy(() => multiInvoicePaymentSchema)] }
 );

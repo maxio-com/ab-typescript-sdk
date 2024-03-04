@@ -8,9 +8,9 @@ import {
   array,
   boolean,
   dict,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -51,9 +51,10 @@ export interface SubscriptionGroupSignupItem {
   calendarBilling?: CalendarBilling;
   /** (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. */
   metafields?: Record<string, string>;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupItemSchema: Schema<SubscriptionGroupSignupItem> = object(
+export const subscriptionGroupSignupItemSchema: Schema<SubscriptionGroupSignupItem> = expandoObject(
   {
     productHandle: ['product_handle', optional(string())],
     productId: ['product_id', optional(number())],

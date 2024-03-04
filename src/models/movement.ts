@@ -7,9 +7,9 @@
 import {
   array,
   bigint,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -27,9 +27,10 @@ export interface Movement {
   lineItems?: MovementLineItem[];
   subscriptionId?: number;
   subscriberName?: string;
+  [key: string]: unknown;
 }
 
-export const movementSchema: Schema<Movement> = object({
+export const movementSchema: Schema<Movement> = expandoObject({
   timestamp: ['timestamp', optional(string())],
   amountInCents: ['amount_in_cents', optional(bigint())],
   amountFormatted: ['amount_formatted', optional(string())],

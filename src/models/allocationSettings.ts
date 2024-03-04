@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, object, optional, Schema, string } from '../schema';
+import { expandoObject, nullable, optional, Schema, string } from '../schema';
 import { CreditType, creditTypeSchema } from './creditType';
 
 export interface AllocationSettings {
@@ -20,10 +20,13 @@ export interface AllocationSettings {
   downgradeCredit?: CreditType | null;
   /** Either "true" or "false". */
   accrueCharge?: string;
+  [key: string]: unknown;
 }
 
-export const allocationSettingsSchema: Schema<AllocationSettings> = object({
-  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  accrueCharge: ['accrue_charge', optional(string())],
-});
+export const allocationSettingsSchema: Schema<AllocationSettings> = expandoObject(
+  {
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
+    accrueCharge: ['accrue_charge', optional(string())],
+  }
+);

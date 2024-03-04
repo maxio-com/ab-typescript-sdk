@@ -12,6 +12,7 @@ import { ProformaError } from '../models/proformaError';
  */
 interface ProformaBadRequestErrorResponse {
   errors?: ProformaError;
+  [key: string]: unknown;
 }
 
 export class ProformaBadRequestErrorResponseError extends ApiError<ProformaBadRequestErrorResponse> {}

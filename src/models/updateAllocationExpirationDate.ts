@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema } from '../schema';
+import { expandoObject, lazy, optional, Schema } from '../schema';
 import {
   AllocationExpirationDate,
   allocationExpirationDateSchema,
@@ -12,9 +12,10 @@ import {
 
 export interface UpdateAllocationExpirationDate {
   allocation?: AllocationExpirationDate;
+  [key: string]: unknown;
 }
 
-export const updateAllocationExpirationDateSchema: Schema<UpdateAllocationExpirationDate> = object(
+export const updateAllocationExpirationDateSchema: Schema<UpdateAllocationExpirationDate> = expandoObject(
   {
     allocation: [
       'allocation',

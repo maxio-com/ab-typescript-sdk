@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -45,9 +45,10 @@ export interface RefundInvoiceEventData {
   refundId: number;
   /** The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" */
   transactionTime: string;
+  [key: string]: unknown;
 }
 
-export const refundInvoiceEventDataSchema: Schema<RefundInvoiceEventData> = object(
+export const refundInvoiceEventDataSchema: Schema<RefundInvoiceEventData> = expandoObject(
   {
     applyCredit: ['apply_credit', boolean()],
     consolidationLevel: [

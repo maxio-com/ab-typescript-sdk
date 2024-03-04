@@ -9,22 +9,24 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `uid` | `string \| undefined` | Optional | - |
 | `title` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `sourceType` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `discountType` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
+| `code` | `string \| undefined` | Optional | - |
+| `sourceType` | [`ProformaInvoiceDiscountSourceType \| undefined`](../../doc/models/proforma-invoice-discount-source-type.md) | Optional | - |
+| `discountType` | [`InvoiceDiscountType \| undefined`](../../doc/models/invoice-discount-type.md) | Optional | - |
 | `eligibleAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `discountAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `lineItemBreakouts` | [`ProformaInvoiceDiscountBreakout[] \| undefined`](../../doc/models/proforma-invoice-discount-breakout.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
+| `lineItemBreakouts` | [`InvoiceDiscountBreakout[] \| undefined`](../../doc/models/invoice-discount-breakout.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 
 ## Example (as JSON)
 
 ```json
 {
+  "uid": "uid2",
   "title": "title8",
-  "source_type": "source_type2",
-  "discount_type": "discount_type0",
-  "eligible_amount": "eligible_amount4",
-  "discount_amount": "discount_amount6"
+  "code": "code0",
+  "source_type": "Coupon",
+  "discount_type": "percentage"
 }
 ```
 

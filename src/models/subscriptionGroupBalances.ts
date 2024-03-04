@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema } from '../schema';
+import { expandoObject, lazy, optional, Schema } from '../schema';
 import { AccountBalance, accountBalanceSchema } from './accountBalance';
 
 export interface SubscriptionGroupBalances {
@@ -12,9 +12,10 @@ export interface SubscriptionGroupBalances {
   serviceCredits?: AccountBalance;
   openInvoices?: AccountBalance;
   pendingDiscounts?: AccountBalance;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupBalancesSchema: Schema<SubscriptionGroupBalances> = object(
+export const subscriptionGroupBalancesSchema: Schema<SubscriptionGroupBalances> = expandoObject(
   {
     prepayments: ['prepayments', optional(lazy(() => accountBalanceSchema))],
     serviceCredits: [

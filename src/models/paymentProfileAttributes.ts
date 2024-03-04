@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { CardType, cardTypeSchema } from './cardType';
 import {
   PaymentProfileAttributesExpirationMonth,
@@ -63,9 +70,10 @@ export interface PaymentProfileAttributes {
   cvv?: string;
   /** (Optional, used only for Subscription Import) If you have the last 4 digits of the credit card number, you may supply them here so that we may create a masked card number (i.e. XXXX-XXXX-XXXX-1234) for display in the UI. Last 4 digits are required for refunds in Auth.Net. */
   lastFour?: string;
+  [key: string]: unknown;
 }
 
-export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = object(
+export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = expandoObject(
   {
     chargifyToken: ['chargify_token', optional(string())],
     id: ['id', optional(number())],

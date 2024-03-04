@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   RefundSegmentUids,
   refundSegmentUidsSchema,
@@ -25,9 +32,10 @@ export interface Refund {
   voidInvoice?: boolean;
   /** An array of segment uids to refund or the string 'all' to indicate that all segments should be refunded */
   segmentUids?: RefundSegmentUids;
+  [key: string]: unknown;
 }
 
-export const refundSchema: Schema<Refund> = object({
+export const refundSchema: Schema<Refund> = expandoObject({
   amount: ['amount', optional(string())],
   memo: ['memo', optional(string())],
   paymentId: ['payment_id', optional(number())],

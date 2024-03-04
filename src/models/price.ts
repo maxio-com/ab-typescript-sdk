@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, object, optional, Schema } from '../schema';
+import { expandoObject, nullable, optional, Schema } from '../schema';
 import {
   PriceEndingQuantity,
   priceEndingQuantitySchema,
@@ -23,9 +23,10 @@ export interface Price {
   endingQuantity?: PriceEndingQuantity | null;
   /** The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065 */
   unitPrice: PriceUnitPrice;
+  [key: string]: unknown;
 }
 
-export const priceSchema: Schema<Price> = object({
+export const priceSchema: Schema<Price> = expandoObject({
   startingQuantity: ['starting_quantity', priceStartingQuantitySchema],
   endingQuantity: [
     'ending_quantity',

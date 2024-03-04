@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -53,9 +53,10 @@ export interface Coupon {
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
   couponRestrictions?: CouponRestriction[];
+  [key: string]: unknown;
 }
 
-export const couponSchema: Schema<Coupon> = object({
+export const couponSchema: Schema<Coupon> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   code: ['code', optional(string())],

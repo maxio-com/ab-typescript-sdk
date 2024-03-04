@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -23,9 +23,10 @@ export interface DunningStepData {
   sendBccEmail: boolean;
   sendSms: boolean;
   smsBody?: string | null;
+  [key: string]: unknown;
 }
 
-export const dunningStepDataSchema: Schema<DunningStepData> = object({
+export const dunningStepDataSchema: Schema<DunningStepData> = expandoObject({
   dayThreshold: ['day_threshold', number()],
   action: ['action', string()],
   emailBody: ['email_body', optional(nullable(string()))],

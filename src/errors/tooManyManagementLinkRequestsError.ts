@@ -14,6 +14,7 @@ import {
  */
 interface TooManyManagementLinkRequests2 {
   errors: TooManyManagementLinkRequests;
+  [key: string]: unknown;
 }
 
 export class TooManyManagementLinkRequestsError extends ApiError<TooManyManagementLinkRequests2> {}

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   SignupProformaPreview,
   signupProformaPreviewSchema,
@@ -12,9 +12,10 @@ import {
 
 export interface SignupProformaPreviewResponse {
   proformaInvoicePreview: SignupProformaPreview;
+  [key: string]: unknown;
 }
 
-export const signupProformaPreviewResponseSchema: Schema<SignupProformaPreviewResponse> = object(
+export const signupProformaPreviewResponseSchema: Schema<SignupProformaPreviewResponse> = expandoObject(
   {
     proformaInvoicePreview: [
       'proforma_invoice_preview',

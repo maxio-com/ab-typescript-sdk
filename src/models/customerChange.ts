@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, nullable, object, optional, Schema } from '../schema';
+import { expandoObject, lazy, nullable, optional, Schema } from '../schema';
 import {
   CustomerChangeBillingAddress,
   customerChangeBillingAddressSchema,
@@ -27,9 +27,10 @@ export interface CustomerChange {
   shippingAddress?: CustomerChangeShippingAddress | null;
   billingAddress?: CustomerChangeBillingAddress | null;
   customFields?: CustomerChangeCustomFields | null;
+  [key: string]: unknown;
 }
 
-export const customerChangeSchema: Schema<CustomerChange> = object({
+export const customerChangeSchema: Schema<CustomerChange> = expandoObject({
   payer: ['payer', optional(nullable(lazy(() => customerChangePayerSchema)))],
   shippingAddress: [
     'shipping_address',

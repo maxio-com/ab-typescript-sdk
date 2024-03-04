@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, optional, Schema, string } from '../schema';
+import { expandoObject, number, optional, Schema, string } from '../schema';
 import {
   CreateInvoicePaymentAmount,
   createInvoicePaymentAmountSchema,
@@ -25,12 +25,15 @@ export interface CreateInvoicePayment {
   details?: string;
   /** The ID of the payment profile to be used for the payment. */
   paymentProfileId?: number;
+  [key: string]: unknown;
 }
 
-export const createInvoicePaymentSchema: Schema<CreateInvoicePayment> = object({
-  amount: ['amount', optional(createInvoicePaymentAmountSchema)],
-  memo: ['memo', optional(string())],
-  method: ['method', optional(invoicePaymentMethodTypeSchema)],
-  details: ['details', optional(string())],
-  paymentProfileId: ['payment_profile_id', optional(number())],
-});
+export const createInvoicePaymentSchema: Schema<CreateInvoicePayment> = expandoObject(
+  {
+    amount: ['amount', optional(createInvoicePaymentAmountSchema)],
+    memo: ['memo', optional(string())],
+    method: ['method', optional(invoicePaymentMethodTypeSchema)],
+    details: ['details', optional(string())],
+    paymentProfileId: ['payment_profile_id', optional(number())],
+  }
+);

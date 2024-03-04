@@ -8,9 +8,9 @@ import {
   array,
   bigint,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -37,9 +37,10 @@ export interface FullSubscriptionGroupResponse {
   currentBillingAmountInCents?: bigint;
   customer?: SubscriptionGroupCustomer;
   accountBalances?: SubscriptionGroupBalances;
+  [key: string]: unknown;
 }
 
-export const fullSubscriptionGroupResponseSchema: Schema<FullSubscriptionGroupResponse> = object(
+export const fullSubscriptionGroupResponseSchema: Schema<FullSubscriptionGroupResponse> = expandoObject(
   {
     uid: ['uid', optional(string())],
     scheme: ['scheme', optional(number())],

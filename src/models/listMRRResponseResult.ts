@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -23,9 +23,10 @@ export interface ListMRRResponseResult {
   currency?: string;
   currencySymbol?: string;
   movements?: Movement[];
+  [key: string]: unknown;
 }
 
-export const listMRRResponseResultSchema: Schema<ListMRRResponseResult> = object(
+export const listMRRResponseResultSchema: Schema<ListMRRResponseResult> = expandoObject(
   {
     page: ['page', optional(number())],
     perPage: ['per_page', optional(number())],

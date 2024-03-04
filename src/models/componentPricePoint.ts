@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -58,30 +58,33 @@ export interface ComponentPricePoint {
   intervalUnit?: ComponentPricePointIntervalUnit | null;
   /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
   currencyPrices?: ComponentCurrencyPrice[];
+  [key: string]: unknown;
 }
 
-export const componentPricePointSchema: Schema<ComponentPricePoint> = object({
-  id: ['id', optional(number())],
-  type: ['type', optional(pricePointTypeSchema)],
-  mDefault: ['default', optional(boolean())],
-  name: ['name', optional(string())],
-  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-  componentId: ['component_id', optional(number())],
-  handle: ['handle', optional(string())],
-  archivedAt: ['archived_at', optional(nullable(string()))],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  prices: ['prices', optional(array(lazy(() => componentPriceSchema)))],
-  useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-  subscriptionId: ['subscription_id', optional(number())],
-  taxIncluded: ['tax_included', optional(boolean())],
-  interval: ['interval', optional(nullable(number()))],
-  intervalUnit: [
-    'interval_unit',
-    optional(nullable(componentPricePointIntervalUnitSchema)),
-  ],
-  currencyPrices: [
-    'currency_prices',
-    optional(array(lazy(() => componentCurrencyPriceSchema))),
-  ],
-});
+export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObject(
+  {
+    id: ['id', optional(number())],
+    type: ['type', optional(pricePointTypeSchema)],
+    mDefault: ['default', optional(boolean())],
+    name: ['name', optional(string())],
+    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+    componentId: ['component_id', optional(number())],
+    handle: ['handle', optional(string())],
+    archivedAt: ['archived_at', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    prices: ['prices', optional(array(lazy(() => componentPriceSchema)))],
+    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+    subscriptionId: ['subscription_id', optional(number())],
+    taxIncluded: ['tax_included', optional(boolean())],
+    interval: ['interval', optional(nullable(number()))],
+    intervalUnit: [
+      'interval_unit',
+      optional(nullable(componentPricePointIntervalUnitSchema)),
+    ],
+    currencyPrices: [
+      'currency_prices',
+      optional(array(lazy(() => componentCurrencyPriceSchema))),
+    ],
+  }
+);

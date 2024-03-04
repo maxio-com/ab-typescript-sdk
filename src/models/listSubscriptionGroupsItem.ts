@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -30,9 +30,10 @@ export interface ListSubscriptionGroupsItem {
   state?: string;
   cancelAtEndOfPeriod?: boolean;
   accountBalances?: SubscriptionGroupBalances;
+  [key: string]: unknown;
 }
 
-export const listSubscriptionGroupsItemSchema: Schema<ListSubscriptionGroupsItem> = object(
+export const listSubscriptionGroupsItemSchema: Schema<ListSubscriptionGroupsItem> = expandoObject(
   {
     uid: ['uid', optional(string())],
     scheme: ['scheme', optional(number())],

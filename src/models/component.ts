@@ -8,10 +8,10 @@ import {
   array,
   bigint,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -95,9 +95,10 @@ export interface Component {
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit;
+  [key: string]: unknown;
 }
 
-export const componentSchema: Schema<Component> = object({
+export const componentSchema: Schema<Component> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(nullable(string()))],

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema } from '../schema';
+import { expandoObject, lazy, optional, Schema } from '../schema';
 import {
   SubscriptionGroupSignupComponentAllocatedQuantity,
   subscriptionGroupSignupComponentAllocatedQuantitySchema,
@@ -34,9 +34,10 @@ export interface SubscriptionGroupSignupComponent {
   pricePointId?: SubscriptionGroupSignupComponentPricePointId;
   /** Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`. */
   customPrice?: SubscriptionGroupComponentCustomPrice;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupComponentSchema: Schema<SubscriptionGroupSignupComponent> = object(
+export const subscriptionGroupSignupComponentSchema: Schema<SubscriptionGroupSignupComponent> = expandoObject(
   {
     componentId: [
       'component_id',

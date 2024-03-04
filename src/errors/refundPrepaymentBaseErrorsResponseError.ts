@@ -14,6 +14,7 @@ import {
  */
 interface RefundPrepaymentBaseErrorsResponse {
   errors?: RefundPrepaymentBaseRefundError;
+  [key: string]: unknown;
 }
 
 export class RefundPrepaymentBaseErrorsResponseError extends ApiError<RefundPrepaymentBaseErrorsResponse> {}

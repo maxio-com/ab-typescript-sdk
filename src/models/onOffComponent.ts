@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -64,9 +64,10 @@ export interface OnOffComponent {
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit;
+  [key: string]: unknown;
 }
 
-export const onOffComponentSchema: Schema<OnOffComponent> = object({
+export const onOffComponentSchema: Schema<OnOffComponent> = expandoObject({
   name: ['name', string()],
   description: ['description', optional(string())],
   handle: ['handle', optional(string())],

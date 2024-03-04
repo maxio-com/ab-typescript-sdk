@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -25,9 +25,10 @@ export interface SaleRep {
   subscriptionsCount?: number;
   testMode?: boolean;
   subscriptions?: SaleRepSubscription[];
+  [key: string]: unknown;
 }
 
-export const saleRepSchema: Schema<SaleRep> = object({
+export const saleRepSchema: Schema<SaleRep> = expandoObject({
   id: ['id', optional(number())],
   fullName: ['full_name', optional(string())],
   subscriptionsCount: ['subscriptions_count', optional(number())],

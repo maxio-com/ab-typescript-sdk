@@ -6,10 +6,10 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -29,17 +29,20 @@ export interface ComponentCostData {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme?: PricingScheme;
   tiers?: ComponentCostDataRateTier[];
+  [key: string]: unknown;
 }
 
-export const componentCostDataSchema: Schema<ComponentCostData> = object({
-  componentCodeId: ['component_code_id', optional(nullable(number()))],
-  pricePointId: ['price_point_id', optional(number())],
-  productId: ['product_id', optional(number())],
-  quantity: ['quantity', optional(string())],
-  amount: ['amount', optional(string())],
-  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-  tiers: [
-    'tiers',
-    optional(array(lazy(() => componentCostDataRateTierSchema))),
-  ],
-});
+export const componentCostDataSchema: Schema<ComponentCostData> = expandoObject(
+  {
+    componentCodeId: ['component_code_id', optional(nullable(number()))],
+    pricePointId: ['price_point_id', optional(number())],
+    productId: ['product_id', optional(number())],
+    quantity: ['quantity', optional(string())],
+    amount: ['amount', optional(string())],
+    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+    tiers: [
+      'tiers',
+      optional(array(lazy(() => componentCostDataRateTierSchema))),
+    ],
+  }
+);

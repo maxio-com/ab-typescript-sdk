@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 
 /** (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted. */
 export interface ACHAgreement {
@@ -16,9 +16,10 @@ export interface ACHAgreement {
   authorizerLastName?: string;
   /** (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement. */
   ipAddress?: string;
+  [key: string]: unknown;
 }
 
-export const aCHAgreementSchema: Schema<ACHAgreement> = object({
+export const aCHAgreementSchema: Schema<ACHAgreement> = expandoObject({
   agreementTerms: ['agreement_terms', optional(string())],
   authorizerFirstName: ['authorizer_first_name', optional(string())],
   authorizerLastName: ['authorizer_last_name', optional(string())],

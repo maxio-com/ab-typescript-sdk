@@ -11,6 +11,7 @@ import { ApiError } from '../core';
  */
 interface ErrorArrayMapResponse {
   errors?: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 export class ErrorArrayMapResponseError extends ApiError<ErrorArrayMapResponse> {}

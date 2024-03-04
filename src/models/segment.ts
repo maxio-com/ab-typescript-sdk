@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -46,9 +46,10 @@ export interface Segment {
   createdAt?: string;
   updatedAt?: string;
   prices?: SegmentPrice[];
+  [key: string]: unknown;
 }
 
-export const segmentSchema: Schema<Segment> = object({
+export const segmentSchema: Schema<Segment> = expandoObject({
   id: ['id', optional(number())],
   componentId: ['component_id', optional(number())],
   pricePointId: ['price_point_id', optional(number())],

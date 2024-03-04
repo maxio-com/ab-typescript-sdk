@@ -30,6 +30,7 @@
 | `componentCostData` | [`InvoiceLineItemComponentCostData2 \| null \| undefined`](../../doc/models/containers/invoice-line-item-component-cost-data-2.md) | Optional | This is a container for one-of cases. |
 | `productPricePointId` | `number \| null \| undefined` | Optional | The price point ID of the line item's product |
 | `customItem` | `boolean \| undefined` | Optional | - |
+| `kind` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

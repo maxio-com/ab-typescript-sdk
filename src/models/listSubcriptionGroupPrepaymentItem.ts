@@ -7,8 +7,8 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -25,9 +25,10 @@ export interface ListSubcriptionGroupPrepaymentItem {
   memo?: string;
   paymentType?: PrepaymentMethod;
   createdAt?: string;
+  [key: string]: unknown;
 }
 
-export const listSubcriptionGroupPrepaymentItemSchema: Schema<ListSubcriptionGroupPrepaymentItem> = object(
+export const listSubcriptionGroupPrepaymentItemSchema: Schema<ListSubcriptionGroupPrepaymentItem> = expandoObject(
   {
     id: ['id', optional(number())],
     subscriptionGroupUid: ['subscription_group_uid', optional(string())],

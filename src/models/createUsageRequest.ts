@@ -4,13 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import { CreateUsage, createUsageSchema } from './createUsage';
 
 export interface CreateUsageRequest {
   usage: CreateUsage;
+  [key: string]: unknown;
 }
 
-export const createUsageRequestSchema: Schema<CreateUsageRequest> = object({
-  usage: ['usage', lazy(() => createUsageSchema)],
-});
+export const createUsageRequestSchema: Schema<CreateUsageRequest> = expandoObject(
+  { usage: ['usage', lazy(() => createUsageSchema)] }
+);

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface SubscriptionNote {
   id?: number;
@@ -13,9 +20,10 @@ export interface SubscriptionNote {
   createdAt?: string;
   updatedAt?: string;
   sticky?: boolean;
+  [key: string]: unknown;
 }
 
-export const subscriptionNoteSchema: Schema<SubscriptionNote> = object({
+export const subscriptionNoteSchema: Schema<SubscriptionNote> = expandoObject({
   id: ['id', optional(number())],
   body: ['body', optional(string())],
   subscriptionId: ['subscription_id', optional(number())],

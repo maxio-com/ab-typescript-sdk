@@ -7,8 +7,8 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -42,9 +42,10 @@ export interface CreateProductPricePoint {
   expirationIntervalUnit?: IntervalUnit;
   /** Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined. */
   useSiteExchangeRate?: boolean;
+  [key: string]: unknown;
 }
 
-export const createProductPricePointSchema: Schema<CreateProductPricePoint> = object(
+export const createProductPricePointSchema: Schema<CreateProductPricePoint> = expandoObject(
   {
     name: ['name', string()],
     handle: ['handle', optional(string())],

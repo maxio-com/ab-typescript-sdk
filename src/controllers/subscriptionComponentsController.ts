@@ -25,9 +25,9 @@ import {
   allocationResponseSchema,
 } from '../models/allocationResponse';
 import {
-  BulkComponentSPricePointAssignment,
-  bulkComponentSPricePointAssignmentSchema,
-} from '../models/bulkComponentSPricePointAssignment';
+  BulkComponentsPricePointAssignment,
+  bulkComponentsPricePointAssignmentSchema,
+} from '../models/bulkComponentsPricePointAssignment';
 import {
   CreateUsageComponentId,
   createUsageComponentIdSchema,
@@ -269,13 +269,13 @@ export class SubscriptionComponentsController extends BaseController {
    */
   async bulkUpdateSubscriptionComponentsPricePoints(
     subscriptionId: number,
-    body?: BulkComponentSPricePointAssignment,
+    body?: BulkComponentsPricePointAssignment,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<BulkComponentSPricePointAssignment>> {
+  ): Promise<ApiResponse<BulkComponentsPricePointAssignment>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
-      body: [body, optional(bulkComponentSPricePointAssignmentSchema)],
+      body: [body, optional(bulkComponentsPricePointAssignmentSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -283,7 +283,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.throwOn(422, ComponentPricePointError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
-      bulkComponentSPricePointAssignmentSchema,
+      bulkComponentsPricePointAssignmentSchema,
       requestOptions
     );
   }
@@ -568,6 +568,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations/${mapped.allocationId}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, SubscriptionComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
@@ -614,6 +615,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations/${mapped.allocationId}.json`;
+    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, SubscriptionComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);

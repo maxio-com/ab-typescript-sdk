@@ -7,9 +7,9 @@
 import {
   boolean,
   dict,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -51,25 +51,28 @@ export interface CustomerAttributes {
   metafields?: Record<string, string>;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
   parentId?: number | null;
+  [key: string]: unknown;
 }
 
-export const customerAttributesSchema: Schema<CustomerAttributes> = object({
-  firstName: ['first_name', optional(string())],
-  lastName: ['last_name', optional(string())],
-  email: ['email', optional(string())],
-  ccEmails: ['cc_emails', optional(string())],
-  organization: ['organization', optional(string())],
-  reference: ['reference', optional(string())],
-  address: ['address', optional(string())],
-  address2: ['address_2', optional(nullable(string()))],
-  city: ['city', optional(string())],
-  state: ['state', optional(string())],
-  zip: ['zip', optional(string())],
-  country: ['country', optional(string())],
-  phone: ['phone', optional(string())],
-  verified: ['verified', optional(boolean())],
-  taxExempt: ['tax_exempt', optional(boolean())],
-  vatNumber: ['vat_number', optional(string())],
-  metafields: ['metafields', optional(dict(string()))],
-  parentId: ['parent_id', optional(nullable(number()))],
-});
+export const customerAttributesSchema: Schema<CustomerAttributes> = expandoObject(
+  {
+    firstName: ['first_name', optional(string())],
+    lastName: ['last_name', optional(string())],
+    email: ['email', optional(string())],
+    ccEmails: ['cc_emails', optional(string())],
+    organization: ['organization', optional(string())],
+    reference: ['reference', optional(string())],
+    address: ['address', optional(string())],
+    address2: ['address_2', optional(nullable(string()))],
+    city: ['city', optional(string())],
+    state: ['state', optional(string())],
+    zip: ['zip', optional(string())],
+    country: ['country', optional(string())],
+    phone: ['phone', optional(string())],
+    verified: ['verified', optional(boolean())],
+    taxExempt: ['tax_exempt', optional(boolean())],
+    vatNumber: ['vat_number', optional(string())],
+    metafields: ['metafields', optional(dict(string()))],
+    parentId: ['parent_id', optional(nullable(number()))],
+  }
+);

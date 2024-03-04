@@ -8,10 +8,10 @@ import {
   array,
   boolean,
   dict,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -145,104 +145,107 @@ export interface CreateSubscription {
   dunningCommunicationDelayTimeZone?: string | null;
   /** Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests. */
   skipBillingManifestTaxes?: boolean;
+  [key: string]: unknown;
 }
 
-export const createSubscriptionSchema: Schema<CreateSubscription> = object({
-  productHandle: ['product_handle', optional(string())],
-  productId: ['product_id', optional(number())],
-  productPricePointHandle: ['product_price_point_handle', optional(string())],
-  productPricePointId: ['product_price_point_id', optional(number())],
-  customPrice: [
-    'custom_price',
-    optional(lazy(() => subscriptionCustomPriceSchema)),
-  ],
-  couponCode: ['coupon_code', optional(string())],
-  couponCodes: ['coupon_codes', optional(array(string()))],
-  paymentCollectionMethod: [
-    'payment_collection_method',
-    optional(collectionMethodSchema),
-  ],
-  receivesInvoiceEmails: ['receives_invoice_emails', optional(string())],
-  netTerms: ['net_terms', optional(string())],
-  customerId: ['customer_id', optional(number())],
-  nextBillingAt: ['next_billing_at', optional(string())],
-  initialBillingAt: ['initial_billing_at', optional(string())],
-  storedCredentialTransactionId: [
-    'stored_credential_transaction_id',
-    optional(number()),
-  ],
-  salesRepId: ['sales_rep_id', optional(number())],
-  paymentProfileId: ['payment_profile_id', optional(number())],
-  reference: ['reference', optional(string())],
-  customerAttributes: [
-    'customer_attributes',
-    optional(lazy(() => customerAttributesSchema)),
-  ],
-  paymentProfileAttributes: [
-    'payment_profile_attributes',
-    optional(lazy(() => paymentProfileAttributesSchema)),
-  ],
-  creditCardAttributes: [
-    'credit_card_attributes',
-    optional(lazy(() => paymentProfileAttributesSchema)),
-  ],
-  bankAccountAttributes: [
-    'bank_account_attributes',
-    optional(lazy(() => bankAccountAttributesSchema)),
-  ],
-  components: [
-    'components',
-    optional(array(lazy(() => createSubscriptionComponentSchema))),
-  ],
-  calendarBilling: [
-    'calendar_billing',
-    optional(lazy(() => calendarBillingSchema)),
-  ],
-  metafields: ['metafields', optional(dict(string()))],
-  customerReference: ['customer_reference', optional(string())],
-  group: ['group', optional(lazy(() => groupSettingsSchema))],
-  ref: ['ref', optional(string())],
-  cancellationMessage: ['cancellation_message', optional(string())],
-  cancellationMethod: ['cancellation_method', optional(string())],
-  currency: ['currency', optional(string())],
-  expiresAt: ['expires_at', optional(string())],
-  expirationTracksNextBillingChange: [
-    'expiration_tracks_next_billing_change',
-    optional(string()),
-  ],
-  agreementTerms: ['agreement_terms', optional(string())],
-  authorizerFirstName: ['authorizer_first_name', optional(string())],
-  authorizerLastName: ['authorizer_last_name', optional(string())],
-  calendarBillingFirstCharge: [
-    'calendar_billing_first_charge',
-    optional(string()),
-  ],
-  reasonCode: ['reason_code', optional(string())],
-  productChangeDelayed: ['product_change_delayed', optional(boolean())],
-  offerId: ['offer_id', optional(createSubscriptionOfferIdSchema)],
-  prepaidConfiguration: [
-    'prepaid_configuration',
-    optional(lazy(() => upsertPrepaidConfigurationSchema)),
-  ],
-  previousBillingAt: ['previous_billing_at', optional(string())],
-  importMrr: ['import_mrr', optional(boolean())],
-  canceledAt: ['canceled_at', optional(string())],
-  activatedAt: ['activated_at', optional(string())],
-  agreementAcceptance: [
-    'agreement_acceptance',
-    optional(lazy(() => agreementAcceptanceSchema)),
-  ],
-  achAgreement: ['ach_agreement', optional(lazy(() => aCHAgreementSchema))],
-  dunningCommunicationDelayEnabled: [
-    'dunning_communication_delay_enabled',
-    optional(nullable(boolean())),
-  ],
-  dunningCommunicationDelayTimeZone: [
-    'dunning_communication_delay_time_zone',
-    optional(nullable(string())),
-  ],
-  skipBillingManifestTaxes: [
-    'skip_billing_manifest_taxes',
-    optional(boolean()),
-  ],
-});
+export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObject(
+  {
+    productHandle: ['product_handle', optional(string())],
+    productId: ['product_id', optional(number())],
+    productPricePointHandle: ['product_price_point_handle', optional(string())],
+    productPricePointId: ['product_price_point_id', optional(number())],
+    customPrice: [
+      'custom_price',
+      optional(lazy(() => subscriptionCustomPriceSchema)),
+    ],
+    couponCode: ['coupon_code', optional(string())],
+    couponCodes: ['coupon_codes', optional(array(string()))],
+    paymentCollectionMethod: [
+      'payment_collection_method',
+      optional(collectionMethodSchema),
+    ],
+    receivesInvoiceEmails: ['receives_invoice_emails', optional(string())],
+    netTerms: ['net_terms', optional(string())],
+    customerId: ['customer_id', optional(number())],
+    nextBillingAt: ['next_billing_at', optional(string())],
+    initialBillingAt: ['initial_billing_at', optional(string())],
+    storedCredentialTransactionId: [
+      'stored_credential_transaction_id',
+      optional(number()),
+    ],
+    salesRepId: ['sales_rep_id', optional(number())],
+    paymentProfileId: ['payment_profile_id', optional(number())],
+    reference: ['reference', optional(string())],
+    customerAttributes: [
+      'customer_attributes',
+      optional(lazy(() => customerAttributesSchema)),
+    ],
+    paymentProfileAttributes: [
+      'payment_profile_attributes',
+      optional(lazy(() => paymentProfileAttributesSchema)),
+    ],
+    creditCardAttributes: [
+      'credit_card_attributes',
+      optional(lazy(() => paymentProfileAttributesSchema)),
+    ],
+    bankAccountAttributes: [
+      'bank_account_attributes',
+      optional(lazy(() => bankAccountAttributesSchema)),
+    ],
+    components: [
+      'components',
+      optional(array(lazy(() => createSubscriptionComponentSchema))),
+    ],
+    calendarBilling: [
+      'calendar_billing',
+      optional(lazy(() => calendarBillingSchema)),
+    ],
+    metafields: ['metafields', optional(dict(string()))],
+    customerReference: ['customer_reference', optional(string())],
+    group: ['group', optional(lazy(() => groupSettingsSchema))],
+    ref: ['ref', optional(string())],
+    cancellationMessage: ['cancellation_message', optional(string())],
+    cancellationMethod: ['cancellation_method', optional(string())],
+    currency: ['currency', optional(string())],
+    expiresAt: ['expires_at', optional(string())],
+    expirationTracksNextBillingChange: [
+      'expiration_tracks_next_billing_change',
+      optional(string()),
+    ],
+    agreementTerms: ['agreement_terms', optional(string())],
+    authorizerFirstName: ['authorizer_first_name', optional(string())],
+    authorizerLastName: ['authorizer_last_name', optional(string())],
+    calendarBillingFirstCharge: [
+      'calendar_billing_first_charge',
+      optional(string()),
+    ],
+    reasonCode: ['reason_code', optional(string())],
+    productChangeDelayed: ['product_change_delayed', optional(boolean())],
+    offerId: ['offer_id', optional(createSubscriptionOfferIdSchema)],
+    prepaidConfiguration: [
+      'prepaid_configuration',
+      optional(lazy(() => upsertPrepaidConfigurationSchema)),
+    ],
+    previousBillingAt: ['previous_billing_at', optional(string())],
+    importMrr: ['import_mrr', optional(boolean())],
+    canceledAt: ['canceled_at', optional(string())],
+    activatedAt: ['activated_at', optional(string())],
+    agreementAcceptance: [
+      'agreement_acceptance',
+      optional(lazy(() => agreementAcceptanceSchema)),
+    ],
+    achAgreement: ['ach_agreement', optional(lazy(() => aCHAgreementSchema))],
+    dunningCommunicationDelayEnabled: [
+      'dunning_communication_delay_enabled',
+      optional(nullable(boolean())),
+    ],
+    dunningCommunicationDelayTimeZone: [
+      'dunning_communication_delay_time_zone',
+      optional(nullable(string())),
+    ],
+    skipBillingManifestTaxes: [
+      'skip_billing_manifest_taxes',
+      optional(boolean()),
+    ],
+  }
+);

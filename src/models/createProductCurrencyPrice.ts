@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, Schema, string } from '../schema';
+import { expandoObject, number, Schema, string } from '../schema';
 import { CurrencyPriceRole, currencyPriceRoleSchema } from './currencyPriceRole';
 
 export interface CreateProductCurrencyPrice {
@@ -14,9 +14,10 @@ export interface CreateProductCurrencyPrice {
   price: number;
   /** Role for the price. */
   role: CurrencyPriceRole;
+  [key: string]: unknown;
 }
 
-export const createProductCurrencyPriceSchema: Schema<CreateProductCurrencyPrice> = object(
+export const createProductCurrencyPriceSchema: Schema<CreateProductCurrencyPrice> = expandoObject(
   {
     currency: ['currency', string()],
     price: ['price', number()],

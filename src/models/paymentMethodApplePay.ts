@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, Schema } from '../schema';
+import { expandoObject, Schema } from '../schema';
 import {
   InvoiceEventPaymentMethod,
   invoiceEventPaymentMethodSchema,
@@ -12,8 +12,9 @@ import {
 
 export interface PaymentMethodApplePay {
   type: InvoiceEventPaymentMethod;
+  [key: string]: unknown;
 }
 
-export const paymentMethodApplePaySchema: Schema<PaymentMethodApplePay> = object(
+export const paymentMethodApplePaySchema: Schema<PaymentMethodApplePay> = expandoObject(
   { type: ['type', invoiceEventPaymentMethodSchema] }
 );

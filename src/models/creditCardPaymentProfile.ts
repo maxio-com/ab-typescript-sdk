@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -59,9 +59,10 @@ export interface CreditCardPaymentProfile {
   siteGatewaySettingId?: number | null;
   /** An identifier of connected gateway. */
   gatewayHandle?: string | null;
+  [key: string]: unknown;
 }
 
-export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = object(
+export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = expandoObject(
   {
     id: ['id', optional(number())],
     firstName: ['first_name', optional(string())],

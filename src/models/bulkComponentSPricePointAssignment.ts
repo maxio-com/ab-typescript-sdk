@@ -4,21 +4,22 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema';
 import {
-  ComponentSPricePointAssignment,
-  componentSPricePointAssignmentSchema,
-} from './componentSPricePointAssignment';
+  ComponentPricePointAssignment,
+  componentPricePointAssignmentSchema,
+} from './componentPricePointAssignment';
 
-export interface BulkComponentSPricePointAssignment {
-  components?: ComponentSPricePointAssignment[];
+export interface BulkComponentsPricePointAssignment {
+  components?: ComponentPricePointAssignment[];
+  [key: string]: unknown;
 }
 
-export const bulkComponentSPricePointAssignmentSchema: Schema<BulkComponentSPricePointAssignment> = object(
+export const bulkComponentsPricePointAssignmentSchema: Schema<BulkComponentsPricePointAssignment> = expandoObject(
   {
     components: [
       'components',
-      optional(array(lazy(() => componentSPricePointAssignmentSchema))),
+      optional(array(lazy(() => componentPricePointAssignmentSchema))),
     ],
   }
 );

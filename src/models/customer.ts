@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -68,9 +68,10 @@ export interface Customer {
   /** The locale for the customer to identify language-region */
   locale?: string | null;
   defaultSubscriptionGroupUid?: string | null;
+  [key: string]: unknown;
 }
 
-export const customerSchema: Schema<Customer> = object({
+export const customerSchema: Schema<Customer> = expandoObject({
   firstName: ['first_name', optional(string())],
   lastName: ['last_name', optional(string())],
   email: ['email', optional(string())],

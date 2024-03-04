@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface ComponentPrice {
   id?: number;
@@ -15,9 +22,10 @@ export interface ComponentPrice {
   pricePointId?: number;
   formattedUnitPrice?: string;
   segmentId?: number | null;
+  [key: string]: unknown;
 }
 
-export const componentPriceSchema: Schema<ComponentPrice> = object({
+export const componentPriceSchema: Schema<ComponentPrice> = expandoObject({
   id: ['id', optional(number())],
   componentId: ['component_id', optional(number())],
   startingQuantity: ['starting_quantity', optional(number())],

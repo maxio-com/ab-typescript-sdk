@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { UsageQuantity, usageQuantitySchema } from './containers/usageQuantity';
 
 export interface Usage {
@@ -17,9 +24,10 @@ export interface Usage {
   componentId?: number;
   componentHandle?: string;
   subscriptionId?: number;
+  [key: string]: unknown;
 }
 
-export const usageSchema: Schema<Usage> = object({
+export const usageSchema: Schema<Usage> = expandoObject({
   id: ['id', optional(bigint())],
   memo: ['memo', optional(string())],
   createdAt: ['created_at', optional(string())],

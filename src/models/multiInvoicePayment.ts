@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -26,14 +26,17 @@ export interface MultiInvoicePayment {
   /** The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. */
   currencyCode?: string;
   applications?: InvoicePaymentApplication[];
+  [key: string]: unknown;
 }
 
-export const multiInvoicePaymentSchema: Schema<MultiInvoicePayment> = object({
-  transactionId: ['transaction_id', optional(number())],
-  totalAmount: ['total_amount', optional(string())],
-  currencyCode: ['currency_code', optional(string())],
-  applications: [
-    'applications',
-    optional(array(lazy(() => invoicePaymentApplicationSchema))),
-  ],
-});
+export const multiInvoicePaymentSchema: Schema<MultiInvoicePayment> = expandoObject(
+  {
+    transactionId: ['transaction_id', optional(number())],
+    totalAmount: ['total_amount', optional(string())],
+    currencyCode: ['currency_code', optional(string())],
+    applications: [
+      'applications',
+      optional(array(lazy(() => invoicePaymentApplicationSchema))),
+    ],
+  }
+);

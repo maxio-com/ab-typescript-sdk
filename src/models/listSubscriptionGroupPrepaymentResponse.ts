@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, Schema } from '../schema';
+import { array, expandoObject, lazy, Schema } from '../schema';
 import {
   ListSubscriptionGroupPrepayment,
   listSubscriptionGroupPrepaymentSchema,
@@ -12,9 +12,10 @@ import {
 
 export interface ListSubscriptionGroupPrepaymentResponse {
   prepayments: ListSubscriptionGroupPrepayment[];
+  [key: string]: unknown;
 }
 
-export const listSubscriptionGroupPrepaymentResponseSchema: Schema<ListSubscriptionGroupPrepaymentResponse> = object(
+export const listSubscriptionGroupPrepaymentResponseSchema: Schema<ListSubscriptionGroupPrepaymentResponse> = expandoObject(
   {
     prepayments: [
       'prepayments',

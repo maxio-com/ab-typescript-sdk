@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, Schema } from '../schema';
+import { array, expandoObject, lazy, Schema } from '../schema';
 import {
   InvoiceCustomField,
   invoiceCustomFieldSchema,
@@ -13,9 +13,10 @@ import {
 export interface CustomerCustomFieldsChange {
   before: InvoiceCustomField[];
   after: InvoiceCustomField[];
+  [key: string]: unknown;
 }
 
-export const customerCustomFieldsChangeSchema: Schema<CustomerCustomFieldsChange> = object(
+export const customerCustomFieldsChangeSchema: Schema<CustomerCustomFieldsChange> = expandoObject(
   {
     before: ['before', array(lazy(() => invoiceCustomFieldSchema))],
     after: ['after', array(lazy(() => invoiceCustomFieldSchema))],

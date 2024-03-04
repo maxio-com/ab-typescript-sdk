@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, object, optional, Schema, string } from '../schema';
+import { expandoObject, nullable, optional, Schema, string } from '../schema';
 import { CardType, cardTypeSchema } from './cardType';
 import { CurrentVault, currentVaultSchema } from './currentVault';
 
@@ -35,20 +35,23 @@ export interface UpdatePaymentProfile {
   billingCountry?: string;
   /** Second line of the customer’s billing address i.e. Apt. 100 */
   billingAddress2?: string | null;
+  [key: string]: unknown;
 }
 
-export const updatePaymentProfileSchema: Schema<UpdatePaymentProfile> = object({
-  firstName: ['first_name', optional(string())],
-  lastName: ['last_name', optional(string())],
-  fullNumber: ['full_number', optional(string())],
-  cardType: ['card_type', optional(cardTypeSchema)],
-  expirationMonth: ['expiration_month', optional(string())],
-  expirationYear: ['expiration_year', optional(string())],
-  currentVault: ['current_vault', optional(currentVaultSchema)],
-  billingAddress: ['billing_address', optional(string())],
-  billingCity: ['billing_city', optional(string())],
-  billingState: ['billing_state', optional(string())],
-  billingZip: ['billing_zip', optional(string())],
-  billingCountry: ['billing_country', optional(string())],
-  billingAddress2: ['billing_address_2', optional(nullable(string()))],
-});
+export const updatePaymentProfileSchema: Schema<UpdatePaymentProfile> = expandoObject(
+  {
+    firstName: ['first_name', optional(string())],
+    lastName: ['last_name', optional(string())],
+    fullNumber: ['full_number', optional(string())],
+    cardType: ['card_type', optional(cardTypeSchema)],
+    expirationMonth: ['expiration_month', optional(string())],
+    expirationYear: ['expiration_year', optional(string())],
+    currentVault: ['current_vault', optional(currentVaultSchema)],
+    billingAddress: ['billing_address', optional(string())],
+    billingCity: ['billing_city', optional(string())],
+    billingState: ['billing_state', optional(string())],
+    billingZip: ['billing_zip', optional(string())],
+    billingCountry: ['billing_country', optional(string())],
+    billingAddress2: ['billing_address_2', optional(nullable(string()))],
+  }
+);

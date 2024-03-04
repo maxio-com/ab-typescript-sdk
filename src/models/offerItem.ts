@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -30,9 +30,10 @@ export interface OfferItem {
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit;
+  [key: string]: unknown;
 }
 
-export const offerItemSchema: Schema<OfferItem> = object({
+export const offerItemSchema: Schema<OfferItem> = expandoObject({
   componentId: ['component_id', optional(number())],
   pricePointId: ['price_point_id', optional(number())],
   startingQuantity: ['starting_quantity', optional(string())],

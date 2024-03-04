@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -53,9 +53,10 @@ export interface AllocationPreviewItem {
   pricePointHandle?: string;
   pricePointName?: string;
   componentHandle?: string | null;
+  [key: string]: unknown;
 }
 
-export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = object(
+export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = expandoObject(
   {
     componentId: ['component_id', optional(number())],
     subscriptionId: ['subscription_id', optional(number())],

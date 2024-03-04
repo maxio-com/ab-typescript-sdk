@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { BillingSchedule, billingScheduleSchema } from './billingSchedule';
 
 export interface CreateUsage {
@@ -14,9 +21,10 @@ export interface CreateUsage {
   memo?: string;
   /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. Please note this only works for site with Multifrequency enabled */
   billingSchedule?: BillingSchedule;
+  [key: string]: unknown;
 }
 
-export const createUsageSchema: Schema<CreateUsage> = object({
+export const createUsageSchema: Schema<CreateUsage> = expandoObject({
   quantity: ['quantity', optional(number())],
   pricePointId: ['price_point_id', optional(string())],
   memo: ['memo', optional(string())],

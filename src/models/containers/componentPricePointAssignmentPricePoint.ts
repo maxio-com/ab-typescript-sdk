@@ -7,13 +7,13 @@
 import { number, oneOf, Schema, string } from '../../schema';
 
 /** This is a container type for one-of types. */
-export type ComponentSPricePointAssignmentPricePoint = string | number;
+export type ComponentPricePointAssignmentPricePoint = string | number;
 
-export const componentSPricePointAssignmentPricePointSchema: Schema<ComponentSPricePointAssignmentPricePoint> = oneOf(
+export const componentPricePointAssignmentPricePointSchema: Schema<ComponentPricePointAssignmentPricePoint> = oneOf(
   [string(), number()]
 );
 
-export namespace ComponentSPricePointAssignmentPricePoint {
+export namespace ComponentPricePointAssignmentPricePoint {
   /**
   * Validation method to narrow down union type to string type case.
   *

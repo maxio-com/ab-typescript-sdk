@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { SiteStatistics, siteStatisticsSchema } from './siteStatistics';
 
 export interface SiteSummary {
@@ -13,9 +20,10 @@ export interface SiteSummary {
   siteId?: number;
   siteCurrency?: string;
   stats?: SiteStatistics;
+  [key: string]: unknown;
 }
 
-export const siteSummarySchema: Schema<SiteSummary> = object({
+export const siteSummarySchema: Schema<SiteSummary> = expandoObject({
   sellerName: ['seller_name', optional(string())],
   siteName: ['site_name', optional(string())],
   siteId: ['site_id', optional(number())],

@@ -6,10 +6,10 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -89,9 +89,11 @@ export interface InvoiceLineItem {
   /** The price point ID of the line item's product */
   productPricePointId?: number | null;
   customItem?: boolean;
+  kind?: string;
+  [key: string]: unknown;
 }
 
-export const invoiceLineItemSchema: Schema<InvoiceLineItem> = object({
+export const invoiceLineItemSchema: Schema<InvoiceLineItem> = expandoObject({
   uid: ['uid', optional(string())],
   title: ['title', optional(string())],
   description: ['description', optional(string())],
@@ -116,4 +118,5 @@ export const invoiceLineItemSchema: Schema<InvoiceLineItem> = object({
   ],
   productPricePointId: ['product_price_point_id', optional(nullable(number()))],
   customItem: ['custom_item', optional(boolean())],
+  kind: ['kind', optional(string())],
 });

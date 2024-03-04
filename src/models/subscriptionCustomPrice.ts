@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, object, optional, Schema, string } from '../schema';
+import { boolean, expandoObject, optional, Schema, string } from '../schema';
 import {
   SubscriptionCustomPriceExpirationInterval,
   subscriptionCustomPriceExpirationIntervalSchema,
@@ -59,9 +59,10 @@ export interface SubscriptionCustomPrice {
   expirationIntervalUnit?: IntervalUnit;
   /** (Optional) */
   taxIncluded?: boolean;
+  [key: string]: unknown;
 }
 
-export const subscriptionCustomPriceSchema: Schema<SubscriptionCustomPrice> = object(
+export const subscriptionCustomPriceSchema: Schema<SubscriptionCustomPrice> = expandoObject(
   {
     name: ['name', optional(string())],
     handle: ['handle', optional(string())],

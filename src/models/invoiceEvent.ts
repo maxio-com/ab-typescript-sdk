@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   InvoiceEventEventData,
   invoiceEventEventDataSchema,
@@ -20,9 +27,10 @@ export interface InvoiceEvent {
   eventData?: InvoiceEventEventData;
   timestamp?: string;
   invoice?: Invoice;
+  [key: string]: unknown;
 }
 
-export const invoiceEventSchema: Schema<any> = object({
+export const invoiceEventSchema: Schema<any> = expandoObject({
   id: ['id', optional(number())],
   eventType: ['event_type', optional(invoiceEventTypeSchema)],
   eventData: ['event_data', optional(lazy(() => invoiceEventEventDataSchema))],

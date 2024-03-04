@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -35,9 +35,10 @@ export interface CreateCustomer {
   taxExemptReason?: string;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
   parentId?: number | null;
+  [key: string]: unknown;
 }
 
-export const createCustomerSchema: Schema<CreateCustomer> = object({
+export const createCustomerSchema: Schema<CreateCustomer> = expandoObject({
   firstName: ['first_name', string()],
   lastName: ['last_name', string()],
   email: ['email', string()],

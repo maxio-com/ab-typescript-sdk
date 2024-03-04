@@ -6,10 +6,10 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -53,9 +53,10 @@ export interface CreateAllocation {
   pricePointId?: CreateAllocationPricePointId | null;
   /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. Please note this only works for site with Multifrequency enabled */
   billingSchedule?: BillingSchedule;
+  [key: string]: unknown;
 }
 
-export const createAllocationSchema: Schema<CreateAllocation> = object({
+export const createAllocationSchema: Schema<CreateAllocation> = expandoObject({
   quantity: ['quantity', number()],
   componentId: ['component_id', optional(number())],
   memo: ['memo', optional(string())],

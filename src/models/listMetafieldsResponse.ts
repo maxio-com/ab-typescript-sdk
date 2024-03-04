@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, number, object, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, number, optional, Schema } from '../schema';
 import { Metafield, metafieldSchema } from './metafield';
 
 export interface ListMetafieldsResponse {
@@ -13,9 +13,10 @@ export interface ListMetafieldsResponse {
   totalPages?: number;
   perPage?: number;
   metafields?: Metafield[];
+  [key: string]: unknown;
 }
 
-export const listMetafieldsResponseSchema: Schema<ListMetafieldsResponse> = object(
+export const listMetafieldsResponseSchema: Schema<ListMetafieldsResponse> = expandoObject(
   {
     totalCount: ['total_count', optional(number())],
     currentPage: ['current_page', optional(number())],

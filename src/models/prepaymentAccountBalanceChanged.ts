@@ -4,16 +4,17 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, object, Schema, string } from '../schema';
+import { bigint, expandoObject, Schema, string } from '../schema';
 
 export interface PrepaymentAccountBalanceChanged {
   reason: string;
   prepaymentAccountBalanceInCents: bigint;
   prepaymentBalanceChangeInCents: bigint;
   currencyCode: string;
+  [key: string]: unknown;
 }
 
-export const prepaymentAccountBalanceChangedSchema: Schema<PrepaymentAccountBalanceChanged> = object(
+export const prepaymentAccountBalanceChangedSchema: Schema<PrepaymentAccountBalanceChanged> = expandoObject(
   {
     reason: ['reason', string()],
     prepaymentAccountBalanceInCents: [

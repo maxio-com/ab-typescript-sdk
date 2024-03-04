@@ -7,8 +7,8 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -46,9 +46,10 @@ export interface CreateOrUpdateProduct {
   autoCreateSignupPage?: boolean;
   /** A string representing the tax code related to the product type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
   taxCode?: string;
+  [key: string]: unknown;
 }
 
-export const createOrUpdateProductSchema: Schema<CreateOrUpdateProduct> = object(
+export const createOrUpdateProductSchema: Schema<CreateOrUpdateProduct> = expandoObject(
   {
     name: ['name', string()],
     handle: ['handle', optional(string())],

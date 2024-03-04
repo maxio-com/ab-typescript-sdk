@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema } from '../schema';
+import { expandoObject, optional, Schema } from '../schema';
 import {
   FailedPaymentAction,
   failedPaymentActionSchema,
@@ -18,8 +18,11 @@ export interface IssueInvoiceRequest {
    * - `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
    */
   onFailedPayment?: FailedPaymentAction;
+  [key: string]: unknown;
 }
 
-export const issueInvoiceRequestSchema: Schema<IssueInvoiceRequest> = object({
-  onFailedPayment: ['on_failed_payment', optional(failedPaymentActionSchema)],
-});
+export const issueInvoiceRequestSchema: Schema<IssueInvoiceRequest> = expandoObject(
+  {
+    onFailedPayment: ['on_failed_payment', optional(failedPaymentActionSchema)],
+  }
+);

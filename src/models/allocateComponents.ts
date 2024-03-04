@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
@@ -40,21 +40,27 @@ export interface AllocateComponents {
    * Otherwise, leave the charges on the subscription to pay for at renewal.
    */
   initiateDunning?: boolean;
+  [key: string]: unknown;
 }
 
-export const allocateComponentsSchema: Schema<AllocateComponents> = object({
-  prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
-  prorationDowngradeScheme: ['proration_downgrade_scheme', optional(string())],
-  allocations: [
-    'allocations',
-    optional(array(lazy(() => createAllocationSchema))),
-  ],
-  accrueCharge: ['accrue_charge', optional(boolean())],
-  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  paymentCollectionMethod: [
-    'payment_collection_method',
-    optional(collectionMethodSchema),
-  ],
-  initiateDunning: ['initiate_dunning', optional(boolean())],
-});
+export const allocateComponentsSchema: Schema<AllocateComponents> = expandoObject(
+  {
+    prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
+    prorationDowngradeScheme: [
+      'proration_downgrade_scheme',
+      optional(string()),
+    ],
+    allocations: [
+      'allocations',
+      optional(array(lazy(() => createAllocationSchema))),
+    ],
+    accrueCharge: ['accrue_charge', optional(boolean())],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
+    paymentCollectionMethod: [
+      'payment_collection_method',
+      optional(collectionMethodSchema),
+    ],
+    initiateDunning: ['initiate_dunning', optional(boolean())],
+  }
+);

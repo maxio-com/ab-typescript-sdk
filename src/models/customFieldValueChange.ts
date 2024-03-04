@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, Schema, string } from '../schema';
+import { expandoObject, nullable, number, Schema, string } from '../schema';
 
 export interface CustomFieldValueChange {
   eventType: string;
@@ -14,9 +14,10 @@ export interface CustomFieldValueChange {
   newValue: string | null;
   resourceType: string;
   resourceId: number;
+  [key: string]: unknown;
 }
 
-export const customFieldValueChangeSchema: Schema<CustomFieldValueChange> = object(
+export const customFieldValueChangeSchema: Schema<CustomFieldValueChange> = expandoObject(
   {
     eventType: ['event_type', string()],
     metafieldName: ['metafield_name', string()],

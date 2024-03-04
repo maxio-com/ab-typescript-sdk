@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, object, Schema, string } from '../schema';
+import { array, expandoObject, Schema, string } from '../schema';
 import {
   WebhookSubscription,
   webhookSubscriptionSchema,
@@ -14,9 +14,10 @@ import {
 export interface CreateOrUpdateEndpoint {
   url: string;
   webhookSubscriptions: WebhookSubscription[];
+  [key: string]: unknown;
 }
 
-export const createOrUpdateEndpointSchema: Schema<CreateOrUpdateEndpoint> = object(
+export const createOrUpdateEndpointSchema: Schema<CreateOrUpdateEndpoint> = expandoObject(
   {
     url: ['url', string()],
     webhookSubscriptions: [
