@@ -65,7 +65,7 @@ describe('Create a Preview Sign Up Proforma Invoice', () => {
       );
 
     expect(response.request.url).toContain(
-      'next_proforma_invoice=nextProformaId'
+      'include=next_proforma_invoice'
     );
     const { currentProformaInvoice } = response.result.proformaInvoicePreview;
     expect(response.statusCode).toBe(201);
