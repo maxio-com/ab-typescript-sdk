@@ -52,6 +52,7 @@ export interface Coupon {
   discountType?: DiscountType;
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
+  applyOnSubscriptionExpiration?: boolean;
   couponRestrictions?: CouponRestriction[];
   [key: string]: unknown;
 }
@@ -98,6 +99,10 @@ export const couponSchema: Schema<Coupon> = expandoObject({
   ],
   applyOnCancelAtEndOfPeriod: [
     'apply_on_cancel_at_end_of_period',
+    optional(boolean()),
+  ],
+  applyOnSubscriptionExpiration: [
+    'apply_on_subscription_expiration',
     optional(boolean()),
   ],
   couponRestrictions: [

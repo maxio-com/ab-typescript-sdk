@@ -32,6 +32,7 @@ export interface CreateOrUpdateFlatAmountCoupon {
   compoundingStrategy?: CompoundingStrategy;
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
+  applyOnSubscriptionExpiration?: boolean;
   [key: string]: unknown;
 }
 
@@ -56,6 +57,10 @@ export const createOrUpdateFlatAmountCouponSchema: Schema<CreateOrUpdateFlatAmou
     ],
     applyOnCancelAtEndOfPeriod: [
       'apply_on_cancel_at_end_of_period',
+      optional(boolean()),
+    ],
+    applyOnSubscriptionExpiration: [
+      'apply_on_subscription_expiration',
       optional(boolean()),
     ],
   }
