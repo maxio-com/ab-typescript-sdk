@@ -1,4 +1,4 @@
-import { ProformaInvoicesController } from 'advanced-billing-sdk';
+import { ProformaInvoicesController, CreateSignupProformaPreviewInclude } from 'advanced-billing-sdk';
 import { createClient, createInvalidClient } from '../config';
 import { uid } from 'uid';
 import createProduct from '../utils/products';
@@ -54,7 +54,7 @@ describe('Create a Preview Sign Up Proforma Invoice', () => {
 
     const response =
       await proformaInvoicesController.previewSignupProformaInvoice(
-        'nextProformaId',
+        CreateSignupProformaPreviewInclude.NextProformaInvoice,
         {
           subscription: {
             productHandle,
@@ -65,7 +65,7 @@ describe('Create a Preview Sign Up Proforma Invoice', () => {
       );
 
     expect(response.request.url).toContain(
-      'next_proforma_invoice=nextProformaId'
+      'include=next_proforma_invoice'
     );
     const { currentProformaInvoice } = response.result.proformaInvoicePreview;
     expect(response.statusCode).toBe(201);
@@ -81,7 +81,7 @@ describe('Create a Preview Sign Up Proforma Invoice', () => {
 
   test('should throw an error when user sends an invalid payload with a missing product', async () => {
     const promise = proformaInvoicesController.previewSignupProformaInvoice(
-      '',
+      undefined,
       {
         subscription: {
           customerReference: uid(),
@@ -102,7 +102,7 @@ describe('Create a Preview Sign Up Proforma Invoice', () => {
       productHandle,
     });
     const promise = proformaInvoicesController.previewSignupProformaInvoice(
-      '',
+      undefined,
       {
         subscription: {
           productHandle,
@@ -122,7 +122,7 @@ describe('Create a Preview Sign Up Proforma Invoice', () => {
 
   test('should throw an 401 error with invalid credentials', async () => {
     const promise =
-      invalidProformaInvoicesController.previewSignupProformaInvoice('', {
+      invalidProformaInvoicesController.previewSignupProformaInvoice(undefined, {
         subscription: {},
       });
 

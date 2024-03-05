@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, optional, Schema } from '../schema';
+import { expandoObject, number, optional, Schema } from '../schema';
 import {
   RenewalPreviewComponentComponentId,
   renewalPreviewComponentComponentIdSchema,
@@ -28,9 +28,10 @@ export interface RenewalPreviewComponent {
   quantity?: number;
   /** Either the component price point's Chargify id or its handle prefixed with `handle:` */
   pricePointId?: RenewalPreviewComponentPricePointId;
+  [key: string]: unknown;
 }
 
-export const renewalPreviewComponentSchema: Schema<RenewalPreviewComponent> = object(
+export const renewalPreviewComponentSchema: Schema<RenewalPreviewComponent> = expandoObject(
   {
     componentId: [
       'component_id',

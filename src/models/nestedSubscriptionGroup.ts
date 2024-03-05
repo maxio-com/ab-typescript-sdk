@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface NestedSubscriptionGroup {
   /** The UID for the group */
@@ -15,9 +22,10 @@ export interface NestedSubscriptionGroup {
   primarySubscriptionId?: number;
   /** A boolean indicating whether the subscription is the primary in the group. Applicable to scheme 1. */
   primary?: boolean;
+  [key: string]: unknown;
 }
 
-export const nestedSubscriptionGroupSchema: Schema<NestedSubscriptionGroup> = object(
+export const nestedSubscriptionGroupSchema: Schema<NestedSubscriptionGroup> = expandoObject(
   {
     uid: ['uid', optional(string())],
     scheme: ['scheme', optional(number())],

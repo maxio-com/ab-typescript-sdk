@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -33,9 +33,10 @@ export interface SubscriptionProductMigration {
   /** The ID or handle of the specified product's price point. This can be passed to migrate to a non-default price point. */
   productPricePointHandle?: string;
   proration?: Proration;
+  [key: string]: unknown;
 }
 
-export const subscriptionProductMigrationSchema: Schema<SubscriptionProductMigration> = object(
+export const subscriptionProductMigrationSchema: Schema<SubscriptionProductMigration> = expandoObject(
   {
     productId: ['product_id', optional(number())],
     productPricePointId: ['product_price_point_id', optional(number())],

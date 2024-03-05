@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   CreateOrUpdateEndpoint,
   createOrUpdateEndpointSchema,
@@ -14,8 +14,9 @@ import {
 export interface CreateOrUpdateEndpointRequest {
   /** Used to Create or Update Endpoint */
   endpoint: CreateOrUpdateEndpoint;
+  [key: string]: unknown;
 }
 
-export const createOrUpdateEndpointRequestSchema: Schema<CreateOrUpdateEndpointRequest> = object(
+export const createOrUpdateEndpointRequestSchema: Schema<CreateOrUpdateEndpointRequest> = expandoObject(
   { endpoint: ['endpoint', lazy(() => createOrUpdateEndpointSchema)] }
 );

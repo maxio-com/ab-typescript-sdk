@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
@@ -35,9 +35,10 @@ export interface BankAccountAttributes {
   vaultToken?: string;
   /** (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token */
   customerVaultToken?: string;
+  [key: string]: unknown;
 }
 
-export const bankAccountAttributesSchema: Schema<BankAccountAttributes> = object(
+export const bankAccountAttributesSchema: Schema<BankAccountAttributes> = expandoObject(
   {
     chargifyToken: ['chargify_token', optional(string())],
     bankName: ['bank_name', optional(string())],

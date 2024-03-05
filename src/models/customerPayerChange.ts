@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   InvoicePayerChange,
   invoicePayerChangeSchema,
@@ -13,9 +13,12 @@ import {
 export interface CustomerPayerChange {
   before: InvoicePayerChange;
   after: InvoicePayerChange;
+  [key: string]: unknown;
 }
 
-export const customerPayerChangeSchema: Schema<CustomerPayerChange> = object({
-  before: ['before', lazy(() => invoicePayerChangeSchema)],
-  after: ['after', lazy(() => invoicePayerChangeSchema)],
-});
+export const customerPayerChangeSchema: Schema<CustomerPayerChange> = expandoObject(
+  {
+    before: ['before', lazy(() => invoicePayerChangeSchema)],
+    after: ['after', lazy(() => invoicePayerChangeSchema)],
+  }
+);

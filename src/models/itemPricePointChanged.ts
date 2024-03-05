@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, number, object, Schema, string } from '../schema';
+import { expandoObject, lazy, number, Schema, string } from '../schema';
 import {
   ItemPricePointData,
   itemPricePointDataSchema,
@@ -17,9 +17,10 @@ export interface ItemPricePointChanged {
   itemName: string;
   previousPricePoint: ItemPricePointData;
   currentPricePoint: ItemPricePointData;
+  [key: string]: unknown;
 }
 
-export const itemPricePointChangedSchema: Schema<ItemPricePointChanged> = object(
+export const itemPricePointChangedSchema: Schema<ItemPricePointChanged> = expandoObject(
   {
     itemId: ['item_id', number()],
     itemType: ['item_type', string()],

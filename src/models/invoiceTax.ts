@@ -6,10 +6,10 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -22,12 +22,16 @@ import {
   InvoiceTaxComponentBreakout,
   invoiceTaxComponentBreakoutSchema,
 } from './invoiceTaxComponentBreakout';
+import {
+  ProformaInvoiceTaxSourceType,
+  proformaInvoiceTaxSourceTypeSchema,
+} from './proformaInvoiceTaxSourceType';
 
 export interface InvoiceTax {
   uid?: string;
   title?: string;
   description?: string | null;
-  sourceType?: string;
+  sourceType?: ProformaInvoiceTaxSourceType;
   sourceId?: number;
   percentage?: string;
   taxableAmount?: string;
@@ -35,13 +39,14 @@ export interface InvoiceTax {
   transactionId?: number;
   lineItemBreakouts?: InvoiceTaxBreakout[];
   taxComponentBreakouts?: InvoiceTaxComponentBreakout[];
+  [key: string]: unknown;
 }
 
-export const invoiceTaxSchema: Schema<InvoiceTax> = object({
+export const invoiceTaxSchema: Schema<InvoiceTax> = expandoObject({
   uid: ['uid', optional(string())],
   title: ['title', optional(string())],
   description: ['description', optional(nullable(string()))],
-  sourceType: ['source_type', optional(string())],
+  sourceType: ['source_type', optional(proformaInvoiceTaxSourceTypeSchema)],
   sourceId: ['source_id', optional(number())],
   percentage: ['percentage', optional(string())],
   taxableAmount: ['taxable_amount', optional(string())],

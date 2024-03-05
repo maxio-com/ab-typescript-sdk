@@ -11,6 +11,7 @@ import { ApiError } from '../core';
  */
 interface SubscriptionRemoveCouponErrors {
   subscription: string[];
+  [key: string]: unknown;
 }
 
 export class SubscriptionRemoveCouponErrorsError extends ApiError<SubscriptionRemoveCouponErrors> {}

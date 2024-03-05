@@ -6,9 +6,9 @@
 
 import {
   bigint,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -25,9 +25,10 @@ export interface SubscriptionGroupItem {
   couponCode?: string | null;
   totalRevenueInCents?: bigint;
   balanceInCents?: bigint;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupItemSchema: Schema<SubscriptionGroupItem> = object(
+export const subscriptionGroupItemSchema: Schema<SubscriptionGroupItem> = expandoObject(
   {
     id: ['id', optional(number())],
     reference: ['reference', optional(nullable(string()))],

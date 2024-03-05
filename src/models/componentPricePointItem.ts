@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -27,9 +27,10 @@ export interface ComponentPricePointItem {
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit;
   prices?: Price[];
+  [key: string]: unknown;
 }
 
-export const componentPricePointItemSchema: Schema<ComponentPricePointItem> = object(
+export const componentPricePointItemSchema: Schema<ComponentPricePointItem> = expandoObject(
   {
     name: ['name', optional(string())],
     handle: ['handle', optional(string())],

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   RefundConsolidatedInvoiceSegmentUids,
   refundConsolidatedInvoiceSegmentUidsSchema,
@@ -24,9 +31,10 @@ export interface RefundConsolidatedInvoice {
   applyCredit?: boolean;
   /** The amount of payment to be refunded in decimal format. Example: "10.50". This will default to the full amount of the payment if not provided. */
   amount?: string;
+  [key: string]: unknown;
 }
 
-export const refundConsolidatedInvoiceSchema: Schema<RefundConsolidatedInvoice> = object(
+export const refundConsolidatedInvoiceSchema: Schema<RefundConsolidatedInvoice> = expandoObject(
   {
     memo: ['memo', string()],
     paymentId: ['payment_id', number()],

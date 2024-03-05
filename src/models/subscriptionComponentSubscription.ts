@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import { SubscriptionState, subscriptionStateSchema } from './subscriptionState';
 
 /** An optional object, will be returned if provided `include=subscription` query param. */
@@ -33,9 +33,10 @@ export interface SubscriptionComponentSubscription {
    */
   state?: SubscriptionState;
   updatedAt?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionComponentSubscriptionSchema: Schema<SubscriptionComponentSubscription> = object(
+export const subscriptionComponentSubscriptionSchema: Schema<SubscriptionComponentSubscription> = expandoObject(
   {
     state: ['state', optional(subscriptionStateSchema)],
     updatedAt: ['updated_at', optional(string())],

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   SubscriptionProductMigration,
   subscriptionProductMigrationSchema,
@@ -12,8 +12,9 @@ import {
 
 export interface SubscriptionProductMigrationRequest {
   migration: SubscriptionProductMigration;
+  [key: string]: unknown;
 }
 
-export const subscriptionProductMigrationRequestSchema: Schema<SubscriptionProductMigrationRequest> = object(
+export const subscriptionProductMigrationRequestSchema: Schema<SubscriptionProductMigrationRequest> = expandoObject(
   { migration: ['migration', lazy(() => subscriptionProductMigrationSchema)] }
 );

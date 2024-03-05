@@ -4,15 +4,16 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
 
 export interface AddressChange {
   before: InvoiceAddress;
   after: InvoiceAddress;
+  [key: string]: unknown;
 }
 
-export const addressChangeSchema: Schema<AddressChange> = object({
+export const addressChangeSchema: Schema<AddressChange> = expandoObject({
   before: ['before', lazy(() => invoiceAddressSchema)],
   after: ['after', lazy(() => invoiceAddressSchema)],
 });

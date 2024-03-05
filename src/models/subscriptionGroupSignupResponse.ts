@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -33,9 +33,10 @@ export interface SubscriptionGroupSignupResponse {
   subscriptions?: SubscriptionGroupItem[];
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
   paymentCollectionMethod?: CollectionMethod;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupResponseSchema: Schema<SubscriptionGroupSignupResponse> = object(
+export const subscriptionGroupSignupResponseSchema: Schema<SubscriptionGroupSignupResponse> = expandoObject(
   {
     uid: ['uid', optional(string())],
     scheme: ['scheme', optional(number())],

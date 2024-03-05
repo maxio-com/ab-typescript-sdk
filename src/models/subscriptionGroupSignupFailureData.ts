@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -36,9 +36,10 @@ export interface SubscriptionGroupSignupFailureData {
   creditCardAttributes?: SubscriptionGroupCreditCard;
   bankAccountAttributes?: SubscriptionGroupBankAccount;
   subscriptions?: SubscriptionGroupSignupItem[];
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupFailureDataSchema: Schema<SubscriptionGroupSignupFailureData> = object(
+export const subscriptionGroupSignupFailureDataSchema: Schema<SubscriptionGroupSignupFailureData> = expandoObject(
   {
     payerId: ['payer_id', optional(number())],
     payerReference: ['payer_reference', optional(string())],

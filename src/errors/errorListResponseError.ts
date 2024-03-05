@@ -11,6 +11,7 @@ import { ApiError } from '../core';
  */
 interface ErrorListResponse {
   errors: string[];
+  [key: string]: unknown;
 }
 
 export class ErrorListResponseError extends ApiError<ErrorListResponse> {}

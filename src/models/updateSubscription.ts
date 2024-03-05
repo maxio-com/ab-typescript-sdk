@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -62,42 +62,48 @@ export interface UpdateSubscription {
   dunningCommunicationDelayEnabled?: boolean | null;
   /** Time zone for the Dunning Communication Delay feature. */
   dunningCommunicationDelayTimeZone?: string | null;
+  [key: string]: unknown;
 }
 
-export const updateSubscriptionSchema: Schema<UpdateSubscription> = object({
-  creditCardAttributes: [
-    'credit_card_attributes',
-    optional(lazy(() => creditCardAttributesSchema)),
-  ],
-  productHandle: ['product_handle', optional(string())],
-  productId: ['product_id', optional(number())],
-  productChangeDelayed: ['product_change_delayed', optional(boolean())],
-  nextProductId: ['next_product_id', optional(string())],
-  nextProductPricePointId: ['next_product_price_point_id', optional(string())],
-  snapDay: ['snap_day', optional(updateSubscriptionSnapDaySchema)],
-  nextBillingAt: ['next_billing_at', optional(string())],
-  paymentCollectionMethod: ['payment_collection_method', optional(string())],
-  receivesInvoiceEmails: ['receives_invoice_emails', optional(boolean())],
-  netTerms: ['net_terms', optional(updateSubscriptionNetTermsSchema)],
-  storedCredentialTransactionId: [
-    'stored_credential_transaction_id',
-    optional(number()),
-  ],
-  reference: ['reference', optional(string())],
-  customPrice: [
-    'custom_price',
-    optional(lazy(() => subscriptionCustomPriceSchema)),
-  ],
-  components: [
-    'components',
-    optional(array(lazy(() => updateSubscriptionComponentSchema))),
-  ],
-  dunningCommunicationDelayEnabled: [
-    'dunning_communication_delay_enabled',
-    optional(nullable(boolean())),
-  ],
-  dunningCommunicationDelayTimeZone: [
-    'dunning_communication_delay_time_zone',
-    optional(nullable(string())),
-  ],
-});
+export const updateSubscriptionSchema: Schema<UpdateSubscription> = expandoObject(
+  {
+    creditCardAttributes: [
+      'credit_card_attributes',
+      optional(lazy(() => creditCardAttributesSchema)),
+    ],
+    productHandle: ['product_handle', optional(string())],
+    productId: ['product_id', optional(number())],
+    productChangeDelayed: ['product_change_delayed', optional(boolean())],
+    nextProductId: ['next_product_id', optional(string())],
+    nextProductPricePointId: [
+      'next_product_price_point_id',
+      optional(string()),
+    ],
+    snapDay: ['snap_day', optional(updateSubscriptionSnapDaySchema)],
+    nextBillingAt: ['next_billing_at', optional(string())],
+    paymentCollectionMethod: ['payment_collection_method', optional(string())],
+    receivesInvoiceEmails: ['receives_invoice_emails', optional(boolean())],
+    netTerms: ['net_terms', optional(updateSubscriptionNetTermsSchema)],
+    storedCredentialTransactionId: [
+      'stored_credential_transaction_id',
+      optional(number()),
+    ],
+    reference: ['reference', optional(string())],
+    customPrice: [
+      'custom_price',
+      optional(lazy(() => subscriptionCustomPriceSchema)),
+    ],
+    components: [
+      'components',
+      optional(array(lazy(() => updateSubscriptionComponentSchema))),
+    ],
+    dunningCommunicationDelayEnabled: [
+      'dunning_communication_delay_enabled',
+      optional(nullable(boolean())),
+    ],
+    dunningCommunicationDelayTimeZone: [
+      'dunning_communication_delay_time_zone',
+      optional(nullable(string())),
+    ],
+  }
+);

@@ -14,6 +14,7 @@ import {
  */
 interface CustomerErrorResponse {
   errors?: CustomerErrorResponseErrors;
+  [key: string]: unknown;
 }
 
 export class CustomerErrorResponseError extends ApiError<CustomerErrorResponse> {}

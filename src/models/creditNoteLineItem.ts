@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -70,28 +70,31 @@ export interface CreditNoteLineItem {
   pricePointId?: number | null;
   billingScheduleItemId?: number | null;
   customItem?: boolean;
+  [key: string]: unknown;
 }
 
-export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = object({
-  uid: ['uid', optional(string())],
-  title: ['title', optional(string())],
-  description: ['description', optional(string())],
-  quantity: ['quantity', optional(string())],
-  unitPrice: ['unit_price', optional(string())],
-  subtotalAmount: ['subtotal_amount', optional(string())],
-  discountAmount: ['discount_amount', optional(string())],
-  taxAmount: ['tax_amount', optional(string())],
-  totalAmount: ['total_amount', optional(string())],
-  tieredUnitPrice: ['tiered_unit_price', optional(boolean())],
-  periodRangeStart: ['period_range_start', optional(string())],
-  periodRangeEnd: ['period_range_end', optional(string())],
-  productId: ['product_id', optional(number())],
-  productVersion: ['product_version', optional(number())],
-  componentId: ['component_id', optional(nullable(number()))],
-  pricePointId: ['price_point_id', optional(nullable(number()))],
-  billingScheduleItemId: [
-    'billing_schedule_item_id',
-    optional(nullable(number())),
-  ],
-  customItem: ['custom_item', optional(boolean())],
-});
+export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = expandoObject(
+  {
+    uid: ['uid', optional(string())],
+    title: ['title', optional(string())],
+    description: ['description', optional(string())],
+    quantity: ['quantity', optional(string())],
+    unitPrice: ['unit_price', optional(string())],
+    subtotalAmount: ['subtotal_amount', optional(string())],
+    discountAmount: ['discount_amount', optional(string())],
+    taxAmount: ['tax_amount', optional(string())],
+    totalAmount: ['total_amount', optional(string())],
+    tieredUnitPrice: ['tiered_unit_price', optional(boolean())],
+    periodRangeStart: ['period_range_start', optional(string())],
+    periodRangeEnd: ['period_range_end', optional(string())],
+    productId: ['product_id', optional(number())],
+    productVersion: ['product_version', optional(number())],
+    componentId: ['component_id', optional(nullable(number()))],
+    pricePointId: ['price_point_id', optional(nullable(number()))],
+    billingScheduleItemId: [
+      'billing_schedule_item_id',
+      optional(nullable(number())),
+    ],
+    customItem: ['custom_item', optional(boolean())],
+  }
+);

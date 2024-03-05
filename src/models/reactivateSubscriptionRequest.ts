@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, lazy, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  lazy,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   ReactivateSubscriptionRequestResume,
   reactivateSubscriptionRequestResumeSchema,
@@ -27,9 +34,10 @@ export interface ReactivateSubscriptionRequest {
   useCreditsAndPrepayments?: boolean;
   /** If `true`, Chargify will attempt to resume the subscription's billing period. if not resumable, the subscription will be reactivated with a new billing period. If `false`: Chargify will only attempt to reactivate the subscription. */
   resume?: ReactivateSubscriptionRequestResume;
+  [key: string]: unknown;
 }
 
-export const reactivateSubscriptionRequestSchema: Schema<ReactivateSubscriptionRequest> = object(
+export const reactivateSubscriptionRequestSchema: Schema<ReactivateSubscriptionRequest> = expandoObject(
   {
     calendarBilling: [
       'calendar_billing',

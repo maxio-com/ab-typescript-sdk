@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema';
 import {
   ListProformaInvoicesMeta,
   listProformaInvoicesMetaSchema,
@@ -14,9 +14,10 @@ import { ProformaInvoice, proformaInvoiceSchema } from './proformaInvoice';
 export interface ListProformaInvoicesResponse {
   proformaInvoices?: ProformaInvoice[];
   meta?: ListProformaInvoicesMeta;
+  [key: string]: unknown;
 }
 
-export const listProformaInvoicesResponseSchema: Schema<ListProformaInvoicesResponse> = object(
+export const listProformaInvoicesResponseSchema: Schema<ListProformaInvoicesResponse> = expandoObject(
   {
     proformaInvoices: [
       'proforma_invoices',

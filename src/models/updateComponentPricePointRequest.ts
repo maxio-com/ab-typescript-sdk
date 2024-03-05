@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, optional, Schema } from '../schema';
+import { expandoObject, lazy, optional, Schema } from '../schema';
 import {
   UpdateComponentPricePoint,
   updateComponentPricePointSchema,
@@ -12,9 +12,10 @@ import {
 
 export interface UpdateComponentPricePointRequest {
   pricePoint?: UpdateComponentPricePoint;
+  [key: string]: unknown;
 }
 
-export const updateComponentPricePointRequestSchema: Schema<UpdateComponentPricePointRequest> = object(
+export const updateComponentPricePointRequestSchema: Schema<UpdateComponentPricePointRequest> = expandoObject(
   {
     pricePoint: [
       'price_point',

@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -74,9 +74,10 @@ export interface PrepaidUsageComponent {
   displayOnHostedPage?: boolean;
   allowFractionalQuantities?: boolean;
   publicSignupPageIds?: number[];
+  [key: string]: unknown;
 }
 
-export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = object(
+export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = expandoObject(
   {
     name: ['name', string()],
     unitName: ['unit_name', optional(string())],

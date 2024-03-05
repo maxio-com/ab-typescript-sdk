@@ -11,6 +11,7 @@ describe('SitesController', () => {
       name: 'Typescript SDK Env',
       subdomain: 'tp-sdk',
       currency: 'USD',
+      brighton_v1_enabled: false,
       sellerId: 722159,
       nonPrimaryCurrencies: ['EUR', 'GBP'],
       relationshipInvoicingEnabled: true,

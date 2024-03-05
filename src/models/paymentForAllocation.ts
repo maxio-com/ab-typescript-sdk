@@ -7,8 +7,8 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -20,11 +20,14 @@ export interface PaymentForAllocation {
   amountInCents?: bigint;
   success?: boolean;
   memo?: string;
+  [key: string]: unknown;
 }
 
-export const paymentForAllocationSchema: Schema<PaymentForAllocation> = object({
-  id: ['id', optional(number())],
-  amountInCents: ['amount_in_cents', optional(bigint())],
-  success: ['success', optional(boolean())],
-  memo: ['memo', optional(string())],
-});
+export const paymentForAllocationSchema: Schema<PaymentForAllocation> = expandoObject(
+  {
+    id: ['id', optional(number())],
+    amountInCents: ['amount_in_cents', optional(bigint())],
+    success: ['success', optional(boolean())],
+    memo: ['memo', optional(string())],
+  }
+);

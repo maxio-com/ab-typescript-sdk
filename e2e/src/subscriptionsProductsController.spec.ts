@@ -54,12 +54,18 @@ describe('Subscriptions Products Controller', () => {
         );
 
       expect(migrationResponse.statusCode).toBe(200);
-      expect(migrationResponse.result.migration).toEqual({
-        proratedAdjustmentInCents: BigInt(-1000),
-        chargeInCents: BigInt(1000),
-        paymentDueInCents: BigInt(0),
-        creditAppliedInCents: BigInt(0),
-      });
+      expect(migrationResponse.result.migration.proratedAdjustmentInCents).toBe(
+        BigInt(-1000)
+      );
+      expect(migrationResponse.result.migration.chargeInCents).toBe(
+        BigInt(1000)
+      );
+      expect(migrationResponse.result.migration.paymentDueInCents).toBe(
+        BigInt(0)
+      );
+      expect(migrationResponse.result.migration.creditAppliedInCents).toBe(
+        BigInt(0)
+      );
     });
 
     test('should throw an error when user sends invalid subscription id', async () => {

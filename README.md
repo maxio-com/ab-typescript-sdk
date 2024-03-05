@@ -286,7 +286,7 @@ The following parameters are configurable for the API Client:
 |  --- | --- | --- |
 | `subdomain` | `string` | The subdomain for your Chargify site.<br>*Default*: `'subdomain'` |
 | `domain` | `string` | The Chargify server domain.<br>*Default*: `'chargify.com'` |
-| `environment` | Environment | The API environment. <br> **Default: `Environment.Production`** |
+| `environment` | `Environment` | The API environment. <br> **Default: `Environment.Production`** |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `30000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |

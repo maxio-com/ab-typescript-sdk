@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
@@ -38,9 +38,10 @@ export interface SubscriptionGroupBankAccount {
   /** The vault that stores the payment profile with the provided vault_token. */
   currentVault?: BankAccountVault;
   gatewayHandle?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupBankAccountSchema: Schema<SubscriptionGroupBankAccount> = object(
+export const subscriptionGroupBankAccountSchema: Schema<SubscriptionGroupBankAccount> = expandoObject(
   {
     bankName: ['bank_name', optional(string())],
     bankAccountNumber: ['bank_account_number', optional(string())],

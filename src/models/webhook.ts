@@ -7,8 +7,8 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   nullable,
-  object,
   optional,
   Schema,
   string,
@@ -39,9 +39,10 @@ export interface Webhook {
   signature?: string;
   /** The calculated HMAC-SHA-256 webhook signature */
   signatureHmacSha256?: string;
+  [key: string]: unknown;
 }
 
-export const webhookSchema: Schema<Webhook> = object({
+export const webhookSchema: Schema<Webhook> = expandoObject({
   event: ['event', optional(string())],
   id: ['id', optional(bigint())],
   createdAt: ['created_at', optional(string())],

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 /** Refund an invoice or a segment of a consolidated invoice. */
 export interface RefundInvoice {
@@ -20,9 +27,10 @@ export interface RefundInvoice {
   applyCredit?: boolean;
   /** If `apply_credit` set to false and refunding full amount, if `void_invoice` set to true, invoice will be voided after refund. Defaults to `false`. */
   voidInvoice?: boolean;
+  [key: string]: unknown;
 }
 
-export const refundInvoiceSchema: Schema<RefundInvoice> = object({
+export const refundInvoiceSchema: Schema<RefundInvoice> = expandoObject({
   amount: ['amount', string()],
   memo: ['memo', string()],
   paymentId: ['payment_id', number()],

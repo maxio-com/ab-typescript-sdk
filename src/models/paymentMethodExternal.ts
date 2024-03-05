@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, object, Schema, string } from '../schema';
+import { expandoObject, nullable, Schema, string } from '../schema';
 import {
   InvoiceEventPaymentMethod,
   invoiceEventPaymentMethodSchema,
@@ -15,9 +15,10 @@ export interface PaymentMethodExternal {
   kind: string;
   memo: string | null;
   type: InvoiceEventPaymentMethod;
+  [key: string]: unknown;
 }
 
-export const paymentMethodExternalSchema: Schema<PaymentMethodExternal> = object(
+export const paymentMethodExternalSchema: Schema<PaymentMethodExternal> = expandoObject(
   {
     details: ['details', nullable(string())],
     kind: ['kind', string()],

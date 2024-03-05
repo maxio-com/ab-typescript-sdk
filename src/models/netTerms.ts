@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema } from '../schema';
+import { boolean, expandoObject, number, optional, Schema } from '../schema';
 
 export interface NetTerms {
   defaultNetTerms?: number;
@@ -12,9 +12,10 @@ export interface NetTerms {
   remittanceNetTerms?: number;
   netTermsOnRemittanceSignupsEnabled?: boolean;
   customNetTermsEnabled?: boolean;
+  [key: string]: unknown;
 }
 
-export const netTermsSchema: Schema<NetTerms> = object({
+export const netTermsSchema: Schema<NetTerms> = expandoObject({
   defaultNetTerms: ['default_net_terms', optional(number())],
   automaticNetTerms: ['automatic_net_terms', optional(number())],
   remittanceNetTerms: ['remittance_net_terms', optional(number())],

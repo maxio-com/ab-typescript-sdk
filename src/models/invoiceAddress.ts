@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, object, optional, Schema, string } from '../schema';
+import { expandoObject, nullable, optional, Schema, string } from '../schema';
 
 export interface InvoiceAddress {
   street?: string | null;
@@ -13,9 +13,10 @@ export interface InvoiceAddress {
   state?: string | null;
   zip?: string | null;
   country?: string | null;
+  [key: string]: unknown;
 }
 
-export const invoiceAddressSchema: Schema<InvoiceAddress> = object({
+export const invoiceAddressSchema: Schema<InvoiceAddress> = expandoObject({
   street: ['street', optional(nullable(string()))],
   line2: ['line2', optional(nullable(string()))],
   city: ['city', optional(nullable(string()))],

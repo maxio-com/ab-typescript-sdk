@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -99,9 +99,10 @@ export interface InvoiceEventData {
   isAdvanceInvoice?: boolean;
   /** The reason for the void. */
   reason?: string;
+  [key: string]: unknown;
 }
 
-export const invoiceEventDataSchema: Schema<any> = object({
+export const invoiceEventDataSchema: Schema<any> = expandoObject({
   uid: ['uid', optional(string())],
   creditNoteNumber: ['credit_note_number', optional(string())],
   creditNoteUid: ['credit_note_uid', optional(string())],

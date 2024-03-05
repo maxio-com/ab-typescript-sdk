@@ -14,6 +14,7 @@ import {
  */
 interface ComponentAllocation {
   errors?: ComponentAllocationErrorItem[];
+  [key: string]: unknown;
 }
 
 export class ComponentAllocationError extends ApiError<ComponentAllocation> {}

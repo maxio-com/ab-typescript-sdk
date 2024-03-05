@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -63,9 +63,10 @@ export interface BankAccountPaymentProfile {
   verified?: boolean;
   siteGatewaySettingId?: number | null;
   gatewayHandle?: string | null;
+  [key: string]: unknown;
 }
 
-export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> = object(
+export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> = expandoObject(
   {
     id: ['id', optional(number())],
     firstName: ['first_name', optional(string())],

@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -28,9 +28,10 @@ export interface MovementLineItem {
   prevQuantity?: number;
   /** When `true`, the line item's MRR value will contribute to the `plan` breakout. When `false`, the line item contributes to the `usage` breakout. */
   recurring?: boolean;
+  [key: string]: unknown;
 }
 
-export const movementLineItemSchema: Schema<MovementLineItem> = object({
+export const movementLineItemSchema: Schema<MovementLineItem> = expandoObject({
   productId: ['product_id', optional(number())],
   componentId: ['component_id', optional(number())],
   pricePointId: ['price_point_id', optional(number())],

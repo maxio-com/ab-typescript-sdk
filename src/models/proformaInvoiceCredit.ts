@@ -4,16 +4,17 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 
 export interface ProformaInvoiceCredit {
   uid?: string;
   memo?: string;
   originalAmount?: string;
   appliedAmount?: string;
+  [key: string]: unknown;
 }
 
-export const proformaInvoiceCreditSchema: Schema<ProformaInvoiceCredit> = object(
+export const proformaInvoiceCreditSchema: Schema<ProformaInvoiceCredit> = expandoObject(
   {
     uid: ['uid', optional(string())],
     memo: ['memo', optional(string())],

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, nullable, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  nullable,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { CreditType, creditTypeSchema } from './creditType';
 import { ItemCategory, itemCategorySchema } from './itemCategory';
 
@@ -27,9 +34,10 @@ export interface UpdateComponent {
    * Available values: `full`, `prorated`, `none`.
    */
   upgradeCharge?: CreditType | null;
+  [key: string]: unknown;
 }
 
-export const updateComponentSchema: Schema<UpdateComponent> = object({
+export const updateComponentSchema: Schema<UpdateComponent> = expandoObject({
   handle: ['handle', optional(string())],
   name: ['name', optional(string())],
   description: ['description', optional(nullable(string()))],

@@ -6,9 +6,9 @@
 
 import {
   bigint,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -29,9 +29,10 @@ export interface CouponUsage {
   revenue?: number | null;
   /** Total revenue of the all subscriptions that have received a discount from this coupon. */
   revenueInCents?: bigint;
+  [key: string]: unknown;
 }
 
-export const couponUsageSchema: Schema<CouponUsage> = object({
+export const couponUsageSchema: Schema<CouponUsage> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   signups: ['signups', optional(number())],

@@ -7,10 +7,10 @@
 import {
   array,
   bigint,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -39,9 +39,10 @@ export interface Offer {
   productPricePointName?: string;
   productPriceInCents?: bigint;
   offerSignupPages?: OfferSignupPage[];
+  [key: string]: unknown;
 }
 
-export const offerSchema: Schema<Offer> = object({
+export const offerSchema: Schema<Offer> = expandoObject({
   id: ['id', optional(number())],
   siteId: ['site_id', optional(number())],
   productFamilyId: ['product_family_id', optional(number())],

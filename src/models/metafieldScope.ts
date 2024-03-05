@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, object, optional, Schema, string } from '../schema';
+import { array, expandoObject, optional, Schema, string } from '../schema';
 import { IncludeOption, includeOptionSchema } from './includeOption';
 
 /** Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings. */
@@ -22,9 +22,10 @@ export interface MetafieldScope {
   /** Include (1) or exclude (0) metafields from being edited by your ecosystem. */
   publicEdit?: IncludeOption;
   hosted?: string[];
+  [key: string]: unknown;
 }
 
-export const metafieldScopeSchema: Schema<MetafieldScope> = object({
+export const metafieldScopeSchema: Schema<MetafieldScope> = expandoObject({
   csv: ['csv', optional(includeOptionSchema)],
   invoices: ['invoices', optional(includeOptionSchema)],
   statements: ['statements', optional(includeOptionSchema)],

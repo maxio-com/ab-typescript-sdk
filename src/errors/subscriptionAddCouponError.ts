@@ -14,6 +14,7 @@ interface SubscriptionAddCoupon {
   coupon_code?: string[];
   coupon_codes?: string[];
   subscription?: string[];
+  [key: string]: unknown;
 }
 
 export class SubscriptionAddCouponError extends ApiError<SubscriptionAddCoupon> {}

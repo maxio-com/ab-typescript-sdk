@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -34,9 +34,10 @@ export interface RemovePaymentEventData {
   paymentMethod: InvoiceEventPayment;
   /** The flag that shows whether the original payment was a prepayment or not */
   prepayment: boolean;
+  [key: string]: unknown;
 }
 
-export const removePaymentEventDataSchema: Schema<any> = object({
+export const removePaymentEventDataSchema: Schema<any> = expandoObject({
   transactionId: ['transaction_id', number()],
   memo: ['memo', string()],
   originalAmount: ['original_amount', optional(string())],

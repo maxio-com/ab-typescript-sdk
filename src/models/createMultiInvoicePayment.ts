@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema, string } from '../schema';
+import { array, expandoObject, lazy, optional, Schema, string } from '../schema';
 import {
   CreateMultiInvoicePaymentAmount,
   createMultiInvoicePaymentAmountSchema,
@@ -30,9 +30,10 @@ export interface CreateMultiInvoicePayment {
   /** Date reflecting when the payment was received from a customer. Must be in the past. */
   receivedOn?: string;
   applications: CreateInvoicePaymentApplication[];
+  [key: string]: unknown;
 }
 
-export const createMultiInvoicePaymentSchema: Schema<CreateMultiInvoicePayment> = object(
+export const createMultiInvoicePaymentSchema: Schema<CreateMultiInvoicePayment> = expandoObject(
   {
     memo: ['memo', optional(string())],
     details: ['details', optional(string())],

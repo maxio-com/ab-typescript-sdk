@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, lazy, number, object, optional, Schema } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+} from '../schema';
 import {
   ComponentCustomPrice,
   componentCustomPriceSchema,
@@ -35,9 +42,10 @@ export interface CreateSubscriptionComponent {
   pricePointId?: CreateSubscriptionComponentPricePointId;
   /** Create or update custom pricing unique to the subscription. Used in place of `price_point_id`. */
   customPrice?: ComponentCustomPrice;
+  [key: string]: unknown;
 }
 
-export const createSubscriptionComponentSchema: Schema<CreateSubscriptionComponent> = object(
+export const createSubscriptionComponentSchema: Schema<CreateSubscriptionComponent> = expandoObject(
   {
     componentId: [
       'component_id',

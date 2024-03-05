@@ -7,9 +7,9 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -35,9 +35,10 @@ export interface CreatePrepaidUsageComponentPricePoint {
   /** (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire */
   expirationInterval?: number;
   expirationIntervalUnit?: IntervalUnit;
+  [key: string]: unknown;
 }
 
-export const createPrepaidUsageComponentPricePointSchema: Schema<CreatePrepaidUsageComponentPricePoint> = object(
+export const createPrepaidUsageComponentPricePointSchema: Schema<CreatePrepaidUsageComponentPricePoint> = expandoObject(
   {
     name: ['name', string()],
     handle: ['handle', optional(string())],

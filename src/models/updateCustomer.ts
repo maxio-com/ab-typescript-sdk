@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -34,9 +34,10 @@ export interface UpdateCustomer {
   taxExempt?: boolean;
   taxExemptReason?: string;
   parentId?: number | null;
+  [key: string]: unknown;
 }
 
-export const updateCustomerSchema: Schema<UpdateCustomer> = object({
+export const updateCustomerSchema: Schema<UpdateCustomer> = expandoObject({
   firstName: ['first_name', optional(string())],
   lastName: ['last_name', optional(string())],
   email: ['email', optional(string())],

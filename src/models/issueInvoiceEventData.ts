@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, Schema, string } from '../schema';
+import { expandoObject, Schema, string } from '../schema';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
@@ -30,9 +30,10 @@ export interface IssueInvoiceEventData {
   dueAmount: string;
   /** The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.' */
   totalAmount: string;
+  [key: string]: unknown;
 }
 
-export const issueInvoiceEventDataSchema: Schema<IssueInvoiceEventData> = object(
+export const issueInvoiceEventDataSchema: Schema<IssueInvoiceEventData> = expandoObject(
   {
     consolidationLevel: [
       'consolidation_level',

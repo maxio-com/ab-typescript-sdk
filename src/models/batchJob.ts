@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface BatchJob {
   id?: number;
@@ -12,9 +19,10 @@ export interface BatchJob {
   rowCount?: number | null;
   createdAt?: string | null;
   completed?: string;
+  [key: string]: unknown;
 }
 
-export const batchJobSchema: Schema<BatchJob> = object({
+export const batchJobSchema: Schema<BatchJob> = expandoObject({
   id: ['id', optional(number())],
   finishedAt: ['finished_at', optional(nullable(string()))],
   rowCount: ['row_count', optional(nullable(number()))],

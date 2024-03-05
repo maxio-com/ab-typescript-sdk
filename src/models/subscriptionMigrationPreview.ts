@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, object, optional, Schema } from '../schema';
+import { bigint, expandoObject, optional, Schema } from '../schema';
 
 export interface SubscriptionMigrationPreview {
   /** The amount of the prorated adjustment that would be issued for the current subscription. */
@@ -15,9 +15,10 @@ export interface SubscriptionMigrationPreview {
   paymentDueInCents?: bigint;
   /** Represents a credit in cents that is applied to your subscription as part of a migration process for a specific product, which reduces the amount owed for the subscription. */
   creditAppliedInCents?: bigint;
+  [key: string]: unknown;
 }
 
-export const subscriptionMigrationPreviewSchema: Schema<SubscriptionMigrationPreview> = object(
+export const subscriptionMigrationPreviewSchema: Schema<SubscriptionMigrationPreview> = expandoObject(
   {
     proratedAdjustmentInCents: [
       'prorated_adjustment_in_cents',

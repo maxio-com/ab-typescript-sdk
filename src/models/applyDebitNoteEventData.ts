@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, Schema, string } from '../schema';
+import { expandoObject, Schema, string } from '../schema';
 
 /** Example schema for an `apply_debit_note` event */
 export interface ApplyDebitNoteEventData {
@@ -16,9 +16,10 @@ export interface ApplyDebitNoteEventData {
   originalAmount: string;
   /** The amount of the debit note applied to invoice. */
   appliedAmount: string;
+  [key: string]: unknown;
 }
 
-export const applyDebitNoteEventDataSchema: Schema<ApplyDebitNoteEventData> = object(
+export const applyDebitNoteEventDataSchema: Schema<ApplyDebitNoteEventData> = expandoObject(
   {
     debitNoteNumber: ['debit_note_number', string()],
     debitNoteUid: ['debit_note_uid', string()],

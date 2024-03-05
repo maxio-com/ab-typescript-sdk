@@ -8,10 +8,10 @@ import {
   array,
   bigint,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -92,9 +92,10 @@ export interface Product {
   itemCategory?: string | null;
   productPricePointId?: number;
   productPricePointHandle?: string | null;
+  [key: string]: unknown;
 }
 
-export const productSchema: Schema<Product> = object({
+export const productSchema: Schema<Product> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(nullable(string()))],

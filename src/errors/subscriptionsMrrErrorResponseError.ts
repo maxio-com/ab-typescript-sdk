@@ -12,6 +12,7 @@ import { AttributeError } from '../models/attributeError';
  */
 interface SubscriptionsMrrErrorResponse {
   errors: AttributeError;
+  [key: string]: unknown;
 }
 
 export class SubscriptionsMrrErrorResponseError extends ApiError<SubscriptionsMrrErrorResponse> {}

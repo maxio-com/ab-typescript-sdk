@@ -7,8 +7,8 @@
 import {
   array,
   bigint,
+  expandoObject,
   lazy,
-  object,
   optional,
   Schema,
   string,
@@ -28,9 +28,10 @@ export interface BillingManifest {
   endDate?: string;
   periodType?: string;
   existingBalanceInCents?: bigint;
+  [key: string]: unknown;
 }
 
-export const billingManifestSchema: Schema<BillingManifest> = object({
+export const billingManifestSchema: Schema<BillingManifest> = expandoObject({
   lineItems: [
     'line_items',
     optional(array(lazy(() => billingManifestItemSchema))),

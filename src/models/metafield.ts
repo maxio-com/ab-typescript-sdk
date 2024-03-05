@@ -5,10 +5,10 @@
  */
 
 import {
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -27,9 +27,10 @@ export interface Metafield {
   /** Indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page. Defaults to 'text' */
   inputType?: MetafieldInput;
   mEnum?: MetafieldEnum | null;
+  [key: string]: unknown;
 }
 
-export const metafieldSchema: Schema<Metafield> = object({
+export const metafieldSchema: Schema<Metafield> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   scope: ['scope', optional(lazy(() => metafieldScopeSchema))],

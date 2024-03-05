@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, number, object, optional, Schema, string } from '../schema';
+import {
+  array,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface Endpoint {
   id?: number;
@@ -12,9 +19,10 @@ export interface Endpoint {
   siteId?: number;
   status?: string;
   webhookSubscriptions?: string[];
+  [key: string]: unknown;
 }
 
-export const endpointSchema: Schema<Endpoint> = object({
+export const endpointSchema: Schema<Endpoint> = expandoObject({
   id: ['id', optional(number())],
   url: ['url', optional(string())],
   siteId: ['site_id', optional(number())],

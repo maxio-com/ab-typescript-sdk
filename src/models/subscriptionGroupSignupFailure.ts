@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, nullable, object, Schema, string } from '../schema';
+import { expandoObject, lazy, nullable, Schema, string } from '../schema';
 import {
   SubscriptionGroupSignupFailureData,
   subscriptionGroupSignupFailureDataSchema,
@@ -13,9 +13,10 @@ import {
 export interface SubscriptionGroupSignupFailure {
   subscriptionGroup: SubscriptionGroupSignupFailureData;
   customer: string | null;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupFailureSchema: Schema<SubscriptionGroupSignupFailure> = object(
+export const subscriptionGroupSignupFailureSchema: Schema<SubscriptionGroupSignupFailure> = expandoObject(
   {
     subscriptionGroup: [
       'subscription_group',

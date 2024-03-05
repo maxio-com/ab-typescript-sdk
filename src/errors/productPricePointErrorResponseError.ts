@@ -12,6 +12,7 @@ import { ProductPricePointErrors } from '../models/productPricePointErrors';
  */
 interface ProductPricePointErrorResponse {
   errors: ProductPricePointErrors;
+  [key: string]: unknown;
 }
 
 export class ProductPricePointErrorResponseError extends ApiError<ProductPricePointErrorResponse> {}

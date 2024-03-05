@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import { CardType, cardTypeSchema } from './cardType';
 import {
   SubscriptionGroupCreditCardExpirationMonth,
@@ -43,9 +43,10 @@ export interface SubscriptionGroupCreditCard {
   customerVaultToken?: string;
   cvv?: string;
   paymentType?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCard> = object(
+export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCard> = expandoObject(
   {
     fullNumber: [
       'full_number',

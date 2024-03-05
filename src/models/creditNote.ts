@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -91,9 +91,10 @@ export interface CreditNote {
   refunds?: InvoiceRefund[];
   /** An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://chargify.zendesk.com/hc/en-us/articles/4407753036699#origin-invoices) */
   originInvoices?: OriginInvoice[];
+  [key: string]: unknown;
 }
 
-export const creditNoteSchema: Schema<CreditNote> = object({
+export const creditNoteSchema: Schema<CreditNote> = expandoObject({
   uid: ['uid', optional(string())],
   siteId: ['site_id', optional(number())],
   customerId: ['customer_id', optional(number())],

@@ -4,7 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, dict, lazy, object, optional, Schema, string } from '../schema';
+import {
+  array,
+  dict,
+  expandoObject,
+  lazy,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { PayerError, payerErrorSchema } from './payerError';
 import {
   SubscriptionGroupSubscriptionError,
@@ -19,9 +27,10 @@ export interface SubscriptionGroupSignupError {
   subscriptionGroup?: string[];
   paymentProfileId?: string;
   payerId?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupErrorSchema: Schema<SubscriptionGroupSignupError> = object(
+export const subscriptionGroupSignupErrorSchema: Schema<SubscriptionGroupSignupError> = expandoObject(
   {
     subscriptions: [
       'subscriptions',

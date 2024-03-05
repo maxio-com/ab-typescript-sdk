@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, lazy, nullable, object, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  lazy,
+  nullable,
+  Schema,
+  string,
+} from '../schema';
 import {
   VoidInvoiceEventDataCreditNoteAttributes,
   voidInvoiceEventDataCreditNoteAttributesSchema,
@@ -23,16 +30,19 @@ export interface VoidInvoiceEventData {
   isAdvanceInvoice: boolean;
   /** The reason for the void. */
   reason: string;
+  [key: string]: unknown;
 }
 
-export const voidInvoiceEventDataSchema: Schema<VoidInvoiceEventData> = object({
-  creditNoteAttributes: [
-    'credit_note_attributes',
-    nullable(lazy(() => voidInvoiceEventDataCreditNoteAttributesSchema)),
-  ],
-  memo: ['memo', nullable(string())],
-  appliedAmount: ['applied_amount', nullable(string())],
-  transactionTime: ['transaction_time', nullable(string())],
-  isAdvanceInvoice: ['is_advance_invoice', boolean()],
-  reason: ['reason', string()],
-});
+export const voidInvoiceEventDataSchema: Schema<VoidInvoiceEventData> = expandoObject(
+  {
+    creditNoteAttributes: [
+      'credit_note_attributes',
+      nullable(lazy(() => voidInvoiceEventDataCreditNoteAttributesSchema)),
+    ],
+    memo: ['memo', nullable(string())],
+    appliedAmount: ['applied_amount', nullable(string())],
+    transactionTime: ['transaction_time', nullable(string())],
+    isAdvanceInvoice: ['is_advance_invoice', boolean()],
+    reason: ['reason', string()],
+  }
+);

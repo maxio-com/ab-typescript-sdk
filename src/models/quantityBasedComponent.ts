@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -70,9 +70,10 @@ export interface QuantityBasedComponent {
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit;
+  [key: string]: unknown;
 }
 
-export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = object(
+export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = expandoObject(
   {
     name: ['name', string()],
     unitName: ['unit_name', string()],

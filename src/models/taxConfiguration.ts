@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, object, optional, Schema } from '../schema';
+import { boolean, expandoObject, optional, Schema } from '../schema';
 import {
   TaxConfigurationKind,
   taxConfigurationKindSchema,
@@ -19,9 +19,10 @@ export interface TaxConfiguration {
   destinationAddress?: TaxDestinationAddress;
   /** Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction */
   fullyConfigured?: boolean;
+  [key: string]: unknown;
 }
 
-export const taxConfigurationSchema: Schema<TaxConfiguration> = object({
+export const taxConfigurationSchema: Schema<TaxConfiguration> = expandoObject({
   kind: ['kind', optional(taxConfigurationKindSchema)],
   destinationAddress: [
     'destination_address',

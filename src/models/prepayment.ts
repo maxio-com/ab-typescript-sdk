@@ -7,8 +7,8 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -27,9 +27,10 @@ export interface Prepayment {
   /** The payment type of the prepayment. */
   paymentType?: PrepaymentMethod;
   createdAt: string;
+  [key: string]: unknown;
 }
 
-export const prepaymentSchema: Schema<Prepayment> = object({
+export const prepaymentSchema: Schema<Prepayment> = expandoObject({
   id: ['id', number()],
   subscriptionId: ['subscription_id', number()],
   amountInCents: ['amount_in_cents', bigint()],

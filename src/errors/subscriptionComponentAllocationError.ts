@@ -14,6 +14,7 @@ import {
  */
 interface SubscriptionComponentAllocation {
   errors?: SubscriptionComponentAllocationErrorItem[];
+  [key: string]: unknown;
 }
 
 export class SubscriptionComponentAllocationError extends ApiError<SubscriptionComponentAllocation> {}

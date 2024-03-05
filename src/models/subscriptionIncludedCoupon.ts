@@ -7,9 +7,9 @@
 import {
   bigint,
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -23,9 +23,10 @@ export interface SubscriptionIncludedCoupon {
   recurring?: boolean;
   amountInCents?: bigint | null;
   percentage?: string | null;
+  [key: string]: unknown;
 }
 
-export const subscriptionIncludedCouponSchema: Schema<SubscriptionIncludedCoupon> = object(
+export const subscriptionIncludedCouponSchema: Schema<SubscriptionIncludedCoupon> = expandoObject(
   {
     code: ['code', optional(string())],
     useCount: ['use_count', optional(number())],

@@ -12,6 +12,7 @@ import { Errors } from '../models/errors';
  */
 interface EventBasedBillingListSegmentsErrors {
   errors?: Errors;
+  [key: string]: unknown;
 }
 
 export class EventBasedBillingListSegmentsErrorsError extends ApiError<EventBasedBillingListSegmentsErrors> {}

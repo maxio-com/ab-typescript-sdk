@@ -4,13 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import { CreatedPrepayment, createdPrepaymentSchema } from './createdPrepayment';
 
 export interface CreatePrepaymentResponse {
   prepayment: CreatedPrepayment;
+  [key: string]: unknown;
 }
 
-export const createPrepaymentResponseSchema: Schema<CreatePrepaymentResponse> = object(
+export const createPrepaymentResponseSchema: Schema<CreatePrepaymentResponse> = expandoObject(
   { prepayment: ['prepayment', lazy(() => createdPrepaymentSchema)] }
 );

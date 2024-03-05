@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface Customer1 {
   chargifyId?: number | null;
@@ -14,9 +21,10 @@ export interface Customer1 {
   email?: string;
   vatNumber?: string | null;
   reference?: string | null;
+  [key: string]: unknown;
 }
 
-export const customer1Schema: Schema<Customer1> = object({
+export const customer1Schema: Schema<Customer1> = expandoObject({
   chargifyId: ['chargify_id', optional(nullable(number()))],
   firstName: ['first_name', optional(string())],
   lastName: ['last_name', optional(string())],

@@ -11,6 +11,7 @@ import { ApiError } from '../core';
  */
 interface EventBasedBillingSegment {
   errors: EventBasedBillingSegmentError;
+  [key: string]: unknown;
 }
 
 export class EventBasedBillingSegmentError extends ApiError<EventBasedBillingSegment> {}

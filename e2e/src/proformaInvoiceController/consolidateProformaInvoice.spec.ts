@@ -59,7 +59,7 @@ describe('Proforma Invoices Controller', () => {
 
       const listResponse =
         await proformaInvoicesController.listSubscriptionGroupProformaInvoices(
-          uid
+          {uid: uid}
         );
 
       const [proformaInvoice] = listResponse.result.proformaInvoices || [];
@@ -72,7 +72,7 @@ describe('Proforma Invoices Controller', () => {
     test('should throw 404 when listSubscriptionGroupProformaInvoices with an invalid uid', async () => {
       const promise =
         proformaInvoicesController.listSubscriptionGroupProformaInvoices(
-          'invalid'
+          {uid: 'invalid'}
         );
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {
@@ -83,7 +83,7 @@ describe('Proforma Invoices Controller', () => {
     test('should throw 404 when listSubscriptionGroupProformaInvoices with an invalid client', async () => {
       const promise =
         invalidProformaInvoicesController.listSubscriptionGroupProformaInvoices(
-          'invalid'
+          {uid: 'invalid'}
         );
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {

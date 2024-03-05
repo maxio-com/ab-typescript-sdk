@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -40,9 +40,10 @@ export interface GetOneTimeTokenPaymentProfile {
   siteGatewaySettingId: number;
   customerVaultToken?: string | null;
   gatewayHandle?: string | null;
+  [key: string]: unknown;
 }
 
-export const getOneTimeTokenPaymentProfileSchema: Schema<GetOneTimeTokenPaymentProfile> = object(
+export const getOneTimeTokenPaymentProfileSchema: Schema<GetOneTimeTokenPaymentProfile> = expandoObject(
   {
     id: ['id', optional(nullable(string()))],
     firstName: ['first_name', string()],

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, boolean, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  boolean,
+  expandoObject,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   CompoundingStrategy,
   compoundingStrategySchema,
@@ -25,9 +32,11 @@ export interface CreateOrUpdateFlatAmountCoupon {
   compoundingStrategy?: CompoundingStrategy;
   excludeMidPeriodAllocations?: boolean;
   applyOnCancelAtEndOfPeriod?: boolean;
+  applyOnSubscriptionExpiration?: boolean;
+  [key: string]: unknown;
 }
 
-export const createOrUpdateFlatAmountCouponSchema: Schema<CreateOrUpdateFlatAmountCoupon> = object(
+export const createOrUpdateFlatAmountCouponSchema: Schema<CreateOrUpdateFlatAmountCoupon> = expandoObject(
   {
     name: ['name', string()],
     code: ['code', string()],
@@ -48,6 +57,10 @@ export const createOrUpdateFlatAmountCouponSchema: Schema<CreateOrUpdateFlatAmou
     ],
     applyOnCancelAtEndOfPeriod: [
       'apply_on_cancel_at_end_of_period',
+      optional(boolean()),
+    ],
+    applyOnSubscriptionExpiration: [
+      'apply_on_subscription_expiration',
       optional(boolean()),
     ],
   }

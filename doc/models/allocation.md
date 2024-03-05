@@ -31,6 +31,9 @@
 | `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `payment` | [`AllocationPayment \| null \| undefined`](../../doc/models/containers/allocation-payment.md) | Optional | This is a container for one-of cases. |
+| `expiresAt` | `string \| undefined` | Optional | - |
+| `usedQuantity` | `bigint \| undefined` | Optional | - |
+| `chargeId` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

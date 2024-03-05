@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, optional, Schema, string } from '../schema';
+import { expandoObject, number, optional, Schema, string } from '../schema';
 
 export interface SiteStatistics {
   totalSubscriptions?: number;
@@ -18,9 +18,10 @@ export interface SiteStatistics {
   totalPastDueSubscriptions?: number;
   totalUnpaidSubscriptions?: number;
   totalDunningSubscriptions?: number;
+  [key: string]: unknown;
 }
 
-export const siteStatisticsSchema: Schema<SiteStatistics> = object({
+export const siteStatisticsSchema: Schema<SiteStatistics> = expandoObject({
   totalSubscriptions: ['total_subscriptions', optional(number())],
   subscriptionsToday: ['subscriptions_today', optional(number())],
   totalRevenue: ['total_revenue', optional(string())],

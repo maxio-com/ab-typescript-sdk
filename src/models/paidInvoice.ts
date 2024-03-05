@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 
 export interface PaidInvoice {
@@ -16,9 +16,10 @@ export interface PaidInvoice {
   dueAmount?: string;
   /** The total amount paid on this invoice (including any prior payments) */
   paidAmount?: string;
+  [key: string]: unknown;
 }
 
-export const paidInvoiceSchema: Schema<PaidInvoice> = object({
+export const paidInvoiceSchema: Schema<PaidInvoice> = expandoObject({
   invoiceId: ['invoice_id', optional(string())],
   status: ['status', optional(invoiceStatusSchema)],
   dueAmount: ['due_amount', optional(string())],

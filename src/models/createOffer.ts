@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -26,9 +26,10 @@ export interface CreateOffer {
   productPricePointId?: number;
   components?: CreateOfferComponent[];
   coupons?: string[];
+  [key: string]: unknown;
 }
 
-export const createOfferSchema: Schema<CreateOffer> = object({
+export const createOfferSchema: Schema<CreateOffer> = expandoObject({
   name: ['name', string()],
   handle: ['handle', string()],
   description: ['description', optional(string())],

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   BillingManifestLineItemKind,
   billingManifestLineItemKindSchema,
@@ -31,24 +38,27 @@ export interface BillingManifestItem {
   productName?: string;
   periodRangeStart?: string;
   periodRangeEnd?: string;
+  [key: string]: unknown;
 }
 
-export const billingManifestItemSchema: Schema<BillingManifestItem> = object({
-  transactionType: [
-    'transaction_type',
-    optional(lineItemTransactionTypeSchema),
-  ],
-  kind: ['kind', optional(billingManifestLineItemKindSchema)],
-  amountInCents: ['amount_in_cents', optional(bigint())],
-  memo: ['memo', optional(string())],
-  discountAmountInCents: ['discount_amount_in_cents', optional(bigint())],
-  taxableAmountInCents: ['taxable_amount_in_cents', optional(bigint())],
-  componentId: ['component_id', optional(number())],
-  componentHandle: ['component_handle', optional(string())],
-  componentName: ['component_name', optional(string())],
-  productId: ['product_id', optional(number())],
-  productHandle: ['product_handle', optional(string())],
-  productName: ['product_name', optional(string())],
-  periodRangeStart: ['period_range_start', optional(string())],
-  periodRangeEnd: ['period_range_end', optional(string())],
-});
+export const billingManifestItemSchema: Schema<BillingManifestItem> = expandoObject(
+  {
+    transactionType: [
+      'transaction_type',
+      optional(lineItemTransactionTypeSchema),
+    ],
+    kind: ['kind', optional(billingManifestLineItemKindSchema)],
+    amountInCents: ['amount_in_cents', optional(bigint())],
+    memo: ['memo', optional(string())],
+    discountAmountInCents: ['discount_amount_in_cents', optional(bigint())],
+    taxableAmountInCents: ['taxable_amount_in_cents', optional(bigint())],
+    componentId: ['component_id', optional(number())],
+    componentHandle: ['component_handle', optional(string())],
+    componentName: ['component_name', optional(string())],
+    productId: ['product_id', optional(number())],
+    productHandle: ['product_handle', optional(string())],
+    productName: ['product_name', optional(string())],
+    periodRangeStart: ['period_range_start', optional(string())],
+    periodRangeEnd: ['period_range_end', optional(string())],
+  }
+);

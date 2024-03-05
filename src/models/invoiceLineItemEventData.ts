@@ -7,10 +7,10 @@
 import {
   array,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -41,9 +41,10 @@ export interface InvoiceLineItemEventData {
   componentId?: number | null;
   billingScheduleItemId?: number | null;
   customItem?: boolean | null;
+  [key: string]: unknown;
 }
 
-export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = object(
+export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = expandoObject(
   {
     uid: ['uid', optional(string())],
     title: ['title', optional(string())],

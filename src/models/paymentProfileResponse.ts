@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, Schema } from '../schema';
+import { expandoObject, Schema } from '../schema';
 import {
   PaymentProfileResponsePaymentProfile,
   paymentProfileResponsePaymentProfileSchema,
@@ -12,9 +12,10 @@ import {
 
 export interface PaymentProfileResponse {
   paymentProfile: PaymentProfileResponsePaymentProfile;
+  [key: string]: unknown;
 }
 
-export const paymentProfileResponseSchema: Schema<PaymentProfileResponse> = object(
+export const paymentProfileResponseSchema: Schema<PaymentProfileResponse> = expandoObject(
   {
     paymentProfile: [
       'payment_profile',

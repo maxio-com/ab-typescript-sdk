@@ -6,9 +6,9 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -35,9 +35,10 @@ export interface SubscriptionMigrationPreviewOptions {
   proration?: Proration;
   /** The date that the proration is calculated from for the preview */
   prorationDate?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionMigrationPreviewOptionsSchema: Schema<SubscriptionMigrationPreviewOptions> = object(
+export const subscriptionMigrationPreviewOptionsSchema: Schema<SubscriptionMigrationPreviewOptions> = expandoObject(
   {
     productId: ['product_id', optional(number())],
     productPricePointId: ['product_price_point_id', optional(number())],

@@ -6,10 +6,10 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -31,9 +31,10 @@ export interface InvoicePayment {
   gatewayUsed?: string;
   /** The transaction ID for the payment as returned from the payment gateway */
   gatewayTransactionId?: string | null;
+  [key: string]: unknown;
 }
 
-export const invoicePaymentSchema: Schema<InvoicePayment> = object({
+export const invoicePaymentSchema: Schema<InvoicePayment> = expandoObject({
   transactionTime: ['transaction_time', optional(string())],
   memo: ['memo', optional(string())],
   originalAmount: ['original_amount', optional(string())],

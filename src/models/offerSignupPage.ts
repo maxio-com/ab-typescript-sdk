@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, number, object, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface OfferSignupPage {
   id?: number;
@@ -13,9 +20,10 @@ export interface OfferSignupPage {
   returnUrl?: string;
   returnParams?: string;
   url?: string;
+  [key: string]: unknown;
 }
 
-export const offerSignupPageSchema: Schema<OfferSignupPage> = object({
+export const offerSignupPageSchema: Schema<OfferSignupPage> = expandoObject({
   id: ['id', optional(number())],
   nickname: ['nickname', optional(string())],
   enabled: ['enabled', optional(boolean())],

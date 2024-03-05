@@ -14,11 +14,14 @@ import {
   ProformaBadRequestErrorResponseError,
 } from '../errors/proformaBadRequestErrorResponseError';
 import {
+  CreateSignupProformaPreviewInclude,
+  createSignupProformaPreviewIncludeSchema,
+} from '../models/createSignupProformaPreviewInclude';
+import {
   CreateSubscriptionRequest,
   createSubscriptionRequestSchema,
 } from '../models/createSubscriptionRequest';
 import { Direction, directionSchema } from '../models/direction';
-import { InvoiceStatus, invoiceStatusSchema } from '../models/invoiceStatus';
 import {
   ListProformaInvoicesResponse,
   listProformaInvoicesResponseSchema,
@@ -28,9 +31,9 @@ import {
   proformaInvoiceSchema,
 } from '../models/proformaInvoice';
 import {
-  ProformaInvoicePreview,
-  proformaInvoicePreviewSchema,
-} from '../models/proformaInvoicePreview';
+  ProformaInvoiceStatus,
+  proformaInvoiceStatusSchema,
+} from '../models/proformaInvoiceStatus';
 import {
   SignupProformaPreviewResponse,
   signupProformaPreviewResponseSchema,
@@ -80,15 +83,50 @@ export class ProformaInvoicesController extends BaseController {
    * include breakdowns, pass the specific field as a key in the query with a value set to true.
    *
    *
-   * @param uid The uid of the subscription group
+   * @param uid           The uid of the subscription group
+   * @param lineItems     Include line items data
+   * @param discounts     Include discounts data
+   * @param taxes         Include taxes data
+   * @param credits       Include credits data
+   * @param payments      Include payments data
+   * @param customFields  Include custom fields data
    * @return Response from the API call
    */
-  async listSubscriptionGroupProformaInvoices(
+  async listSubscriptionGroupProformaInvoices({
+    uid,
+    lineItems,
+    discounts,
+    taxes,
+    credits,
+    payments,
+    customFields,
+  }: {
     uid: string,
+    lineItems?: boolean,
+    discounts?: boolean,
+    taxes?: boolean,
+    credits?: boolean,
+    payments?: boolean,
+    customFields?: boolean,
+  },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProformaInvoicesResponse>> {
     const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ uid: [uid, string()] });
+    const mapped = req.prepareArgs({
+      uid: [uid, string()],
+      lineItems: [lineItems, optional(boolean())],
+      discounts: [discounts, optional(boolean())],
+      taxes: [taxes, optional(boolean())],
+      credits: [credits, optional(boolean())],
+      payments: [payments, optional(boolean())],
+      customFields: [customFields, optional(boolean())],
+    });
+    req.query('line_items', mapped.lineItems);
+    req.query('discounts', mapped.discounts);
+    req.query('taxes', mapped.taxes);
+    req.query('credits', mapped.credits);
+    req.query('payments', mapped.payments);
+    req.query('custom_fields', mapped.customFields);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.authenticate([{ basicAuth: true }]);
@@ -154,21 +192,23 @@ export class ProformaInvoicesController extends BaseController {
    * include breakdowns, pass the specific field as a key in the query with a value set to `true`.
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param startDate       The beginning date range for the invoice's Due Date, in the YYYY-MM-DD
-   *                                         format.
-   * @param endDate         The ending date range for the invoice's Due Date, in the YYYY-MM-DD
-   *                                         format.
-   * @param status          The current status of the invoice.  Allowed Values: draft, open, paid,
-   *                                         pending, voided
-   * @param page            Result records are organized in pages. By default, the first page of
-   *                                         results is displayed. The page parameter specifies a page number of
-   *                                         results to fetch. You can start navigating through the pages to consume
-   *                                         the results. You do this by passing in a page parameter. Retrieve the next
-   *                                         page by adding ?page=2 to the query string. If there are no results to
-   *                                         return, then an empty result set will be returned. Use in query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each request.
-   *                                         Default value is 20. The maximum allowed values is 200; any per_page value
-   *                                         over 200 will be changed to 200. Use in query `per_page=200`.
+   * @param startDate       The beginning date range for the invoice's Due Date, in the YYYY-
+   *                                                 MM-DD format.
+   * @param endDate         The ending date range for the invoice's Due Date, in the YYYY-MM-
+   *                                                 DD format.
+   * @param status          The current status of the invoice.  Allowed Values: draft, open,
+   *                                                 paid, pending, voided
+   * @param page            Result records are organized in pages. By default, the first page
+   *                                                 of results is displayed. The page parameter specifies a page
+   *                                                 number of results to fetch. You can start navigating through the
+   *                                                 pages to consume the results. You do this by passing in a page
+   *                                                 parameter. Retrieve the next page by adding ?page=2 to the query
+   *                                                 string. If there are no results to return, then an empty result
+   *                                                 set will be returned. Use in query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each
+   *                                                 request. Default value is 20. The maximum allowed values is 200;
+   *                                                 any per_page value over 200 will be changed to 200. Use in query
+   *                                                 `per_page=200`.
    * @param direction       The sort direction of the returned invoices.
    * @param lineItems       Include line items data
    * @param discounts       Include discounts data
@@ -196,7 +236,7 @@ export class ProformaInvoicesController extends BaseController {
     subscriptionId: number,
     startDate?: string,
     endDate?: string,
-    status?: InvoiceStatus,
+    status?: ProformaInvoiceStatus,
     page?: number,
     perPage?: number,
     direction?: Direction,
@@ -214,7 +254,7 @@ export class ProformaInvoicesController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
-      status: [status, optional(invoiceStatusSchema)],
+      status: [status, optional(proformaInvoiceStatusSchema)],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       direction: [direction, optional(directionSchema)],
@@ -302,7 +342,7 @@ export class ProformaInvoicesController extends BaseController {
   async previewProformaInvoice(
     subscriptionId: number,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoicePreview>> {
+  ): Promise<ApiResponse<ProformaInvoice>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
@@ -311,7 +351,7 @@ export class ProformaInvoicesController extends BaseController {
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
-    return req.callAsJson(proformaInvoicePreviewSchema, requestOptions);
+    return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
   /**
@@ -365,13 +405,14 @@ export class ProformaInvoicesController extends BaseController {
    *
    * A product and customer first name, last name, and email are the minimum requirements.
    *
-   * @param includeNextProformaInvoice    Choose to include a proforma invoice
-   *                                                                          preview for the first renewal
+   * @param include      Choose to include a proforma invoice preview for the
+   *                                                           first renewal. Use in query
+   *                                                           `include=next_proforma_invoice`.
    * @param body
    * @return Response from the API call
    */
   async previewSignupProformaInvoice(
-    includeNextProformaInvoice?: string,
+    include?: CreateSignupProformaPreviewInclude,
     body?: CreateSubscriptionRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SignupProformaPreviewResponse>> {
@@ -380,14 +421,11 @@ export class ProformaInvoicesController extends BaseController {
       '/subscriptions/proforma_invoices/preview.json'
     );
     const mapped = req.prepareArgs({
-      includeNextProformaInvoice: [
-        includeNextProformaInvoice,
-        optional(string()),
-      ],
+      include: [include, optional(createSignupProformaPreviewIncludeSchema)],
       body: [body, optional(createSubscriptionRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('include=next_proforma_invoice', mapped.includeNextProformaInvoice);
+    req.query('include', mapped.include);
     req.json(mapped.body);
     req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');

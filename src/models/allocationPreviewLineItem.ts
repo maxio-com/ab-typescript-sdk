@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, number, object, optional, Schema, string } from '../schema';
+import {
+  bigint,
+  expandoObject,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   AllocationPreviewDirection,
   allocationPreviewDirectionSchema,
@@ -31,9 +38,10 @@ export interface AllocationPreviewLineItem {
   componentHandle?: string;
   /** Visible when using Fine-grained Component Control */
   direction?: AllocationPreviewDirection;
+  [key: string]: unknown;
 }
 
-export const allocationPreviewLineItemSchema: Schema<AllocationPreviewLineItem> = object(
+export const allocationPreviewLineItemSchema: Schema<AllocationPreviewLineItem> = expandoObject(
   {
     transactionType: [
       'transaction_type',

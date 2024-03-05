@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
@@ -30,9 +30,10 @@ export interface PreviewAllocationsRequest {
    * Available values: `full`, `prorated`, `none`.
    */
   downgradeCredit?: CreditType | null;
+  [key: string]: unknown;
 }
 
-export const previewAllocationsRequestSchema: Schema<PreviewAllocationsRequest> = object(
+export const previewAllocationsRequestSchema: Schema<PreviewAllocationsRequest> = expandoObject(
   {
     allocations: ['allocations', array(lazy(() => createAllocationSchema))],
     effectiveProrationDate: ['effective_proration_date', optional(string())],

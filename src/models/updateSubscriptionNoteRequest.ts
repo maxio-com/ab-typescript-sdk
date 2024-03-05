@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   UpdateSubscriptionNote,
   updateSubscriptionNoteSchema,
@@ -14,8 +14,9 @@ import {
 export interface UpdateSubscriptionNoteRequest {
   /** Updatable fields for Subscription Note */
   note: UpdateSubscriptionNote;
+  [key: string]: unknown;
 }
 
-export const updateSubscriptionNoteRequestSchema: Schema<UpdateSubscriptionNoteRequest> = object(
+export const updateSubscriptionNoteRequestSchema: Schema<UpdateSubscriptionNoteRequest> = expandoObject(
   { note: ['note', lazy(() => updateSubscriptionNoteSchema)] }
 );

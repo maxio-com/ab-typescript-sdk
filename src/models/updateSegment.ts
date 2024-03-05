@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema';
 import {
   CreateOrUpdateSegmentPrice,
   createOrUpdateSegmentPriceSchema,
@@ -15,9 +15,10 @@ export interface UpdateSegment {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme: PricingScheme;
   prices?: CreateOrUpdateSegmentPrice[];
+  [key: string]: unknown;
 }
 
-export const updateSegmentSchema: Schema<UpdateSegment> = object({
+export const updateSegmentSchema: Schema<UpdateSegment> = expandoObject({
   pricingScheme: ['pricing_scheme', pricingSchemeSchema],
   prices: [
     'prices',

@@ -14,6 +14,7 @@ import {
  */
 interface ComponentPricePoint {
   errors?: ComponentPricePointErrorItem[];
+  [key: string]: unknown;
 }
 
 export class ComponentPricePointError extends ApiError<ComponentPricePoint> {}

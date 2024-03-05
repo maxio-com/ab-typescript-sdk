@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 
 export interface InvoiceCredit {
   uid?: string;
@@ -14,9 +14,10 @@ export interface InvoiceCredit {
   memo?: string;
   originalAmount?: string;
   appliedAmount?: string;
+  [key: string]: unknown;
 }
 
-export const invoiceCreditSchema: Schema<InvoiceCredit> = object({
+export const invoiceCreditSchema: Schema<InvoiceCredit> = expandoObject({
   uid: ['uid', optional(string())],
   creditNoteNumber: ['credit_note_number', optional(string())],
   creditNoteUid: ['credit_note_uid', optional(string())],

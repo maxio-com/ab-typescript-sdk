@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, optional, Schema, string } from '../schema';
+import { expandoObject, number, optional, Schema, string } from '../schema';
 
 export interface SaleRepSettings {
   customerName?: string;
@@ -14,9 +14,10 @@ export interface SaleRepSettings {
   subscriptionMrr?: string;
   salesRepId?: number;
   salesRepName?: string;
+  [key: string]: unknown;
 }
 
-export const saleRepSettingsSchema: Schema<SaleRepSettings> = object({
+export const saleRepSettingsSchema: Schema<SaleRepSettings> = expandoObject({
   customerName: ['customer_name', optional(string())],
   subscriptionId: ['subscription_id', optional(number())],
   siteLink: ['site_link', optional(string())],

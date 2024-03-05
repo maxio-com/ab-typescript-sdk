@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema, string } from '../schema';
+import { array, expandoObject, lazy, optional, Schema, string } from '../schema';
 import { MetafieldInput, metafieldInputSchema } from './metafieldInput';
 import { MetafieldScope, metafieldScopeSchema } from './metafieldScope';
 
@@ -16,9 +16,10 @@ export interface CreateMetafield {
   inputType?: MetafieldInput;
   /** Only applicable when input_type is radio or dropdown */
   mEnum?: string[];
+  [key: string]: unknown;
 }
 
-export const createMetafieldSchema: Schema<CreateMetafield> = object({
+export const createMetafieldSchema: Schema<CreateMetafield> = expandoObject({
   name: ['name', optional(string())],
   scope: ['scope', optional(lazy(() => metafieldScopeSchema))],
   inputType: ['input_type', optional(metafieldInputSchema)],

@@ -6,9 +6,9 @@
 
 import {
   array,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -43,9 +43,10 @@ export interface CreateInvoice {
   shippingAddress?: CreateInvoiceAddress;
   coupons?: CreateInvoiceCoupon[];
   status?: CreateInvoiceStatus;
+  [key: string]: unknown;
 }
 
-export const createInvoiceSchema: Schema<CreateInvoice> = object({
+export const createInvoiceSchema: Schema<CreateInvoice> = expandoObject({
   lineItems: [
     'line_items',
     optional(array(lazy(() => createInvoiceItemSchema))),

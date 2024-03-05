@@ -4,16 +4,17 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, optional, Schema, string } from '../schema';
+import { expandoObject, number, optional, Schema, string } from '../schema';
 
 export interface SubscriptionGroupPaymentProfile {
   id?: number;
   firstName?: string;
   lastName?: string;
   maskedCardNumber?: string;
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupPaymentProfileSchema: Schema<SubscriptionGroupPaymentProfile> = object(
+export const subscriptionGroupPaymentProfileSchema: Schema<SubscriptionGroupPaymentProfile> = expandoObject(
   {
     id: ['id', optional(number())],
     firstName: ['first_name', optional(string())],

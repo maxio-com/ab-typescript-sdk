@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, object, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema';
 import {
   CancellationOptions,
   cancellationOptionsSchema,
@@ -12,8 +12,9 @@ import {
 
 export interface CancellationRequest {
   subscription: CancellationOptions;
+  [key: string]: unknown;
 }
 
-export const cancellationRequestSchema: Schema<CancellationRequest> = object({
-  subscription: ['subscription', lazy(() => cancellationOptionsSchema)],
-});
+export const cancellationRequestSchema: Schema<CancellationRequest> = expandoObject(
+  { subscription: ['subscription', lazy(() => cancellationOptionsSchema)] }
+);

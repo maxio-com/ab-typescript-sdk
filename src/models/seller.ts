@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { lazy, nullable, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  lazy,
+  nullable,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
 
 export interface Seller {
@@ -12,9 +19,10 @@ export interface Seller {
   address?: InvoiceAddress;
   phone?: string;
   logoUrl?: string | null;
+  [key: string]: unknown;
 }
 
-export const sellerSchema: Schema<Seller> = object({
+export const sellerSchema: Schema<Seller> = expandoObject({
   name: ['name', optional(string())],
   address: ['address', optional(lazy(() => invoiceAddressSchema))],
   phone: ['phone', optional(string())],

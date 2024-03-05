@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema, string } from '../schema';
+import { array, expandoObject, lazy, optional, Schema, string } from '../schema';
 import {
   InvoiceBalanceItem,
   invoiceBalanceItemSchema,
@@ -13,9 +13,10 @@ import {
 export interface InvoicePreviousBalance {
   capturedAt?: string;
   invoices?: InvoiceBalanceItem[];
+  [key: string]: unknown;
 }
 
-export const invoicePreviousBalanceSchema: Schema<InvoicePreviousBalance> = object(
+export const invoicePreviousBalanceSchema: Schema<InvoicePreviousBalance> = expandoObject(
   {
     capturedAt: ['captured_at', optional(string())],
     invoices: [

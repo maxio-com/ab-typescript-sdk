@@ -7,8 +7,8 @@
 import {
   array,
   boolean,
+  expandoObject,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -24,9 +24,10 @@ export interface ReactivateSubscriptionGroupResponse {
   nextAssessmentAt?: string;
   state?: string;
   cancelAtEndOfPeriod?: boolean;
+  [key: string]: unknown;
 }
 
-export const reactivateSubscriptionGroupResponseSchema: Schema<ReactivateSubscriptionGroupResponse> = object(
+export const reactivateSubscriptionGroupResponseSchema: Schema<ReactivateSubscriptionGroupResponse> = expandoObject(
   {
     uid: ['uid', optional(string())],
     scheme: ['scheme', optional(number())],

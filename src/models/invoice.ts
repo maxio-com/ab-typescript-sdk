@@ -7,10 +7,10 @@
 import {
   array,
   bigint,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -154,9 +154,10 @@ export interface Invoice {
   /** The public URL of the invoice */
   publicUrl?: string;
   previousBalanceData?: InvoicePreviousBalance;
+  [key: string]: unknown;
 }
 
-export const invoiceSchema: Schema<Invoice> = object({
+export const invoiceSchema: Schema<Invoice> = expandoObject({
   id: ['id', optional(bigint())],
   uid: ['uid', optional(string())],
   siteId: ['site_id', optional(number())],

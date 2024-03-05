@@ -86,6 +86,12 @@ By default, proforma invoices returned on the index will only include totals, no
 ```ts
 async listSubscriptionGroupProformaInvoices(
   uid: string,
+  lineItems?: boolean,
+  discounts?: boolean,
+  taxes?: boolean,
+  credits?: boolean,
+  payments?: boolean,
+  customFields?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
@@ -95,6 +101,12 @@ async listSubscriptionGroupProformaInvoices(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The uid of the subscription group |
+| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data |
+| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data |
+| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data |
+| `credits` | `boolean \| undefined` | Query, Optional | Include credits data |
+| `payments` | `boolean \| undefined` | Query, Optional | Include payments data |
+| `customFields` | `boolean \| undefined` | Query, Optional | Include custom fields data |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -104,12 +116,19 @@ async listSubscriptionGroupProformaInvoices(
 ## Example Usage
 
 ```ts
-const uid = 'uid0';
-
+const collect = {
+  uid: 'uid0',
+  lineItems: false,
+  discounts: false,
+  taxes: false,
+  credits: false,
+  payments: false,
+  customFields: false
+}
 try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await proformaInvoicesController.listSubscriptionGroupProformaInvoices(uid);
+  const { result, ...httpResponse } = await proformaInvoicesController.listSubscriptionGroupProformaInvoices(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -248,7 +267,7 @@ async listProformaInvoices(
   subscriptionId: number,
   startDate?: string,
   endDate?: string,
-  status?: InvoiceStatus,
+  status?: ProformaInvoiceStatus,
   page?: number,
   perPage?: number,
   direction?: Direction,
@@ -269,7 +288,7 @@ async listProformaInvoices(
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `startDate` | `string \| undefined` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `endDate` | `string \| undefined` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
-| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`ProformaInvoiceStatus \| undefined`](../../doc/models/proforma-invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices. |
@@ -392,7 +411,7 @@ Alternatively, if you have some proforma invoices already, you may make a previe
 async previewProformaInvoice(
   subscriptionId: number,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ProformaInvoicePreview>>
+): Promise<ApiResponse<ProformaInvoice>>
 ```
 
 ## Parameters
@@ -404,7 +423,7 @@ async previewProformaInvoice(
 
 ## Response Type
 
-[`ProformaInvoicePreview`](../../doc/models/proforma-invoice-preview.md)
+[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
 ## Example Usage
 
@@ -513,7 +532,7 @@ A product and customer first name, last name, and email are the minimum requirem
 
 ```ts
 async previewSignupProformaInvoice(
-  includeNextProformaInvoice?: string,
+  include?: CreateSignupProformaPreviewInclude,
   body?: CreateSubscriptionRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SignupProformaPreviewResponse>>
@@ -523,7 +542,7 @@ async previewSignupProformaInvoice(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `includeNextProformaInvoice` | `string \| undefined` | Query, Optional | Choose to include a proforma invoice preview for the first renewal |
+| `include` | [`CreateSignupProformaPreviewInclude \| undefined`](../../doc/models/create-signup-proforma-preview-include.md) | Query, Optional | Choose to include a proforma invoice preview for the first renewal. Use in query `include=next_proforma_invoice`. |
 | `body` | [`CreateSubscriptionRequest \| undefined`](../../doc/models/create-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 

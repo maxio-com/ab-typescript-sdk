@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import {
   CompoundingStrategy,
   compoundingStrategySchema,
@@ -29,19 +29,22 @@ export interface CreateInvoiceCoupon {
   description?: string;
   productFamilyId?: CreateInvoiceCouponProductFamilyId;
   compoundingStrategy?: CompoundingStrategy;
+  [key: string]: unknown;
 }
 
-export const createInvoiceCouponSchema: Schema<CreateInvoiceCoupon> = object({
-  code: ['code', optional(string())],
-  percentage: ['percentage', optional(createInvoiceCouponPercentageSchema)],
-  amount: ['amount', optional(createInvoiceCouponAmountSchema)],
-  description: ['description', optional(string())],
-  productFamilyId: [
-    'product_family_id',
-    optional(createInvoiceCouponProductFamilyIdSchema),
-  ],
-  compoundingStrategy: [
-    'compounding_strategy',
-    optional(compoundingStrategySchema),
-  ],
-});
+export const createInvoiceCouponSchema: Schema<CreateInvoiceCoupon> = expandoObject(
+  {
+    code: ['code', optional(string())],
+    percentage: ['percentage', optional(createInvoiceCouponPercentageSchema)],
+    amount: ['amount', optional(createInvoiceCouponAmountSchema)],
+    description: ['description', optional(string())],
+    productFamilyId: [
+      'product_family_id',
+      optional(createInvoiceCouponProductFamilyIdSchema),
+    ],
+    compoundingStrategy: [
+      'compounding_strategy',
+      optional(compoundingStrategySchema),
+    ],
+  }
+);

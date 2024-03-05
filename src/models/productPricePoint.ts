@@ -8,10 +8,10 @@ import {
   array,
   bigint,
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -66,37 +66,43 @@ export interface ProductPricePoint {
   subscriptionId?: number | null;
   /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
   currencyPrices?: CurrencyPrice[];
+  [key: string]: unknown;
 }
 
-export const productPricePointSchema: Schema<ProductPricePoint> = object({
-  id: ['id', optional(number())],
-  name: ['name', optional(string())],
-  handle: ['handle', optional(string())],
-  priceInCents: ['price_in_cents', optional(bigint())],
-  interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
-  trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
-  trialInterval: ['trial_interval', optional(number())],
-  trialIntervalUnit: ['trial_interval_unit', optional(intervalUnitSchema)],
-  trialType: ['trial_type', optional(string())],
-  introductoryOffer: ['introductory_offer', optional(boolean())],
-  initialChargeInCents: ['initial_charge_in_cents', optional(bigint())],
-  initialChargeAfterTrial: ['initial_charge_after_trial', optional(boolean())],
-  expirationInterval: ['expiration_interval', optional(number())],
-  expirationIntervalUnit: [
-    'expiration_interval_unit',
-    optional(intervalUnitSchema),
-  ],
-  productId: ['product_id', optional(number())],
-  archivedAt: ['archived_at', optional(nullable(string()))],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-  type: ['type', optional(pricePointTypeSchema)],
-  taxIncluded: ['tax_included', optional(boolean())],
-  subscriptionId: ['subscription_id', optional(nullable(number()))],
-  currencyPrices: [
-    'currency_prices',
-    optional(array(lazy(() => currencyPriceSchema))),
-  ],
-});
+export const productPricePointSchema: Schema<ProductPricePoint> = expandoObject(
+  {
+    id: ['id', optional(number())],
+    name: ['name', optional(string())],
+    handle: ['handle', optional(string())],
+    priceInCents: ['price_in_cents', optional(bigint())],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
+    trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
+    trialInterval: ['trial_interval', optional(number())],
+    trialIntervalUnit: ['trial_interval_unit', optional(intervalUnitSchema)],
+    trialType: ['trial_type', optional(string())],
+    introductoryOffer: ['introductory_offer', optional(boolean())],
+    initialChargeInCents: ['initial_charge_in_cents', optional(bigint())],
+    initialChargeAfterTrial: [
+      'initial_charge_after_trial',
+      optional(boolean()),
+    ],
+    expirationInterval: ['expiration_interval', optional(number())],
+    expirationIntervalUnit: [
+      'expiration_interval_unit',
+      optional(intervalUnitSchema),
+    ],
+    productId: ['product_id', optional(number())],
+    archivedAt: ['archived_at', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+    type: ['type', optional(pricePointTypeSchema)],
+    taxIncluded: ['tax_included', optional(boolean())],
+    subscriptionId: ['subscription_id', optional(nullable(number()))],
+    currencyPrices: [
+      'currency_prices',
+      optional(array(lazy(() => currencyPriceSchema))),
+    ],
+  }
+);

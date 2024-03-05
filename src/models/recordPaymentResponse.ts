@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, nullable, object, optional, Schema } from '../schema';
+import {
+  array,
+  expandoObject,
+  lazy,
+  nullable,
+  optional,
+  Schema,
+} from '../schema';
 import {
   RecordPaymentResponsePrepayment,
   recordPaymentResponsePrepaymentSchema,
@@ -14,9 +21,10 @@ import { PaidInvoice, paidInvoiceSchema } from './paidInvoice';
 export interface RecordPaymentResponse {
   paidInvoices?: PaidInvoice[];
   prepayment?: RecordPaymentResponsePrepayment | null;
+  [key: string]: unknown;
 }
 
-export const recordPaymentResponseSchema: Schema<RecordPaymentResponse> = object(
+export const recordPaymentResponseSchema: Schema<RecordPaymentResponse> = expandoObject(
   {
     paidInvoices: [
       'paid_invoices',

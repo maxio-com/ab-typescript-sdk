@@ -8,8 +8,8 @@ import {
   array,
   bigint,
   boolean,
+  expandoObject,
   lazy,
-  object,
   optional,
   Schema,
   string,
@@ -38,9 +38,10 @@ export interface RenewalPreview {
   uncalculatedTaxes?: boolean;
   /** An array of objects representing the individual transactions that will be created at the next renewal */
   lineItems?: RenewalPreviewLineItem[];
+  [key: string]: unknown;
 }
 
-export const renewalPreviewSchema: Schema<RenewalPreview> = object({
+export const renewalPreviewSchema: Schema<RenewalPreview> = expandoObject({
   nextAssessmentAt: ['next_assessment_at', optional(string())],
   subtotalInCents: ['subtotal_in_cents', optional(bigint())],
   totalTaxInCents: ['total_tax_in_cents', optional(bigint())],

@@ -6,10 +6,10 @@
 
 import {
   boolean,
+  expandoObject,
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -37,9 +37,10 @@ export interface ApplyPaymentEventData {
   remainingPrepaymentAmount?: string | null;
   prepayment?: boolean;
   external?: boolean;
+  [key: string]: unknown;
 }
 
-export const applyPaymentEventDataSchema: Schema<any> = object({
+export const applyPaymentEventDataSchema: Schema<any> = expandoObject({
   memo: ['memo', string()],
   originalAmount: ['original_amount', string()],
   appliedAmount: ['applied_amount', string()],

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, object, optional, Schema } from '../schema';
+import { boolean, expandoObject, optional, Schema } from '../schema';
 
 /** Optional attributes related to billing date and accrual. Note: Only applicable for new subscriptions. */
 export interface GroupBilling {
@@ -14,9 +14,10 @@ export interface GroupBilling {
   alignDate?: boolean;
   /** A flag indicating whether or not to prorate billing of the new subscription for the current period. A value of true is ignored unless align_date is also true. */
   prorate?: boolean;
+  [key: string]: unknown;
 }
 
-export const groupBillingSchema: Schema<GroupBilling> = object({
+export const groupBillingSchema: Schema<GroupBilling> = expandoObject({
   accrue: ['accrue', optional(boolean())],
   alignDate: ['align_date', optional(boolean())],
   prorate: ['prorate', optional(boolean())],

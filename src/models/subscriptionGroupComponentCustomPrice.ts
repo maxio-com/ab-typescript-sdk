@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, lazy, object, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema';
 import {
   ComponentCustomPrice,
   componentCustomPriceSchema,
@@ -18,9 +18,10 @@ export interface SubscriptionGroupComponentCustomPrice {
   pricingScheme?: PricingScheme;
   prices?: Price[];
   overagePricing?: ComponentCustomPrice[];
+  [key: string]: unknown;
 }
 
-export const subscriptionGroupComponentCustomPriceSchema: Schema<SubscriptionGroupComponentCustomPrice> = object(
+export const subscriptionGroupComponentCustomPriceSchema: Schema<SubscriptionGroupComponentCustomPrice> = expandoObject(
   {
     pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],

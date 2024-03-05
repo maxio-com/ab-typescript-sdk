@@ -7,9 +7,9 @@
 import {
   boolean,
   dict,
+  expandoObject,
   lazy,
   number,
-  object,
   optional,
   Schema,
   string,
@@ -22,9 +22,10 @@ export interface ListSaleRepItem {
   subscriptionsCount?: number;
   mrrData?: Record<string, SaleRepItemMrr>;
   testMode?: boolean;
+  [key: string]: unknown;
 }
 
-export const listSaleRepItemSchema: Schema<ListSaleRepItem> = object({
+export const listSaleRepItemSchema: Schema<ListSaleRepItem> = expandoObject({
   id: ['id', optional(number())],
   fullName: ['full_name', optional(string())],
   subscriptionsCount: ['subscriptions_count', optional(number())],

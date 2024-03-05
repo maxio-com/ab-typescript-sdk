@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { object, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 
 export interface InvoicePaymentApplication {
   /** Unique identifier for the paid invoice. It has the prefix "inv_" followed by alphanumeric characters. */
@@ -13,9 +13,10 @@ export interface InvoicePaymentApplication {
   applicationUid?: string;
   /** Dollar amount of the paid invoice. */
   appliedAmount?: string;
+  [key: string]: unknown;
 }
 
-export const invoicePaymentApplicationSchema: Schema<InvoicePaymentApplication> = object(
+export const invoicePaymentApplicationSchema: Schema<InvoicePaymentApplication> = expandoObject(
   {
     invoiceUid: ['invoice_uid', optional(string())],
     applicationUid: ['application_uid', optional(string())],

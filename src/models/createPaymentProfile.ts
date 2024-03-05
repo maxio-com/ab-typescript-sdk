@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { nullable, number, object, optional, Schema, string } from '../schema';
+import {
+  expandoObject,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
@@ -84,48 +91,51 @@ export interface CreatePaymentProfile {
   bankAccountHolderType?: BankAccountHolderType;
   /** (Optional) Used for creating subscription with payment profile imported using vault_token, for proper display in Advanced Billing UI */
   lastFour?: string;
+  [key: string]: unknown;
 }
 
-export const createPaymentProfileSchema: Schema<CreatePaymentProfile> = object({
-  chargifyToken: ['chargify_token', optional(string())],
-  id: ['id', optional(number())],
-  paymentType: ['payment_type', optional(paymentTypeSchema)],
-  firstName: ['first_name', optional(string())],
-  lastName: ['last_name', optional(string())],
-  maskedCardNumber: ['masked_card_number', optional(string())],
-  fullNumber: ['full_number', optional(string())],
-  cardType: ['card_type', optional(cardTypeSchema)],
-  expirationMonth: [
-    'expiration_month',
-    optional(createPaymentProfileExpirationMonthSchema),
-  ],
-  expirationYear: [
-    'expiration_year',
-    optional(createPaymentProfileExpirationYearSchema),
-  ],
-  billingAddress: ['billing_address', optional(string())],
-  billingAddress2: ['billing_address_2', optional(nullable(string()))],
-  billingCity: ['billing_city', optional(string())],
-  billingState: ['billing_state', optional(string())],
-  billingCountry: ['billing_country', optional(string())],
-  billingZip: ['billing_zip', optional(string())],
-  currentVault: ['current_vault', optional(currentVaultSchema)],
-  vaultToken: ['vault_token', optional(string())],
-  customerVaultToken: ['customer_vault_token', optional(string())],
-  customerId: ['customer_id', optional(number())],
-  paypalEmail: ['paypal_email', optional(string())],
-  paymentMethodNonce: ['payment_method_nonce', optional(string())],
-  gatewayHandle: ['gateway_handle', optional(string())],
-  cvv: ['cvv', optional(string())],
-  bankName: ['bank_name', optional(string())],
-  bankIban: ['bank_iban', optional(string())],
-  bankRoutingNumber: ['bank_routing_number', optional(string())],
-  bankAccountNumber: ['bank_account_number', optional(string())],
-  bankBranchCode: ['bank_branch_code', optional(string())],
-  bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
-  bankAccountHolderType: [
-    'bank_account_holder_type',
-    optional(bankAccountHolderTypeSchema),
-  ],
-  lastFour: ['last_four', optional(string())],
-});
+export const createPaymentProfileSchema: Schema<CreatePaymentProfile> = expandoObject(
+  {
+    chargifyToken: ['chargify_token', optional(string())],
+    id: ['id', optional(number())],
+    paymentType: ['payment_type', optional(paymentTypeSchema)],
+    firstName: ['first_name', optional(string())],
+    lastName: ['last_name', optional(string())],
+    maskedCardNumber: ['masked_card_number', optional(string())],
+    fullNumber: ['full_number', optional(string())],
+    cardType: ['card_type', optional(cardTypeSchema)],
+    expirationMonth: [
+      'expiration_month',
+      optional(createPaymentProfileExpirationMonthSchema),
+    ],
+    expirationYear: [
+      'expiration_year',
+      optional(createPaymentProfileExpirationYearSchema),
+    ],
+    billingAddress: ['billing_address', optional(string())],
+    billingAddress2: ['billing_address_2', optional(nullable(string()))],
+    billingCity: ['billing_city', optional(string())],
+    billingState: ['billing_state', optional(string())],
+    billingCountry: ['billing_country', optional(string())],
+    billingZip: ['billing_zip', optional(string())],
+    currentVault: ['current_vault', optional(currentVaultSchema)],
+    vaultToken: ['vault_token', optional(string())],
+    customerVaultToken: ['customer_vault_token', optional(string())],
+    customerId: ['customer_id', optional(number())],
+    paypalEmail: ['paypal_email', optional(string())],
+    paymentMethodNonce: ['payment_method_nonce', optional(string())],
+    gatewayHandle: ['gateway_handle', optional(string())],
+    cvv: ['cvv', optional(string())],
+    bankName: ['bank_name', optional(string())],
+    bankIban: ['bank_iban', optional(string())],
+    bankRoutingNumber: ['bank_routing_number', optional(string())],
+    bankAccountNumber: ['bank_account_number', optional(string())],
+    bankBranchCode: ['bank_branch_code', optional(string())],
+    bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
+    bankAccountHolderType: [
+      'bank_account_holder_type',
+      optional(bankAccountHolderTypeSchema),
+    ],
+    lastFour: ['last_four', optional(string())],
+  }
+);

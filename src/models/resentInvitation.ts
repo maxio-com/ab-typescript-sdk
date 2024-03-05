@@ -4,16 +4,17 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, object, optional, Schema, string } from '../schema';
+import { expandoObject, number, optional, Schema, string } from '../schema';
 
 export interface ResentInvitation {
   lastSentAt?: string;
   lastAcceptedAt?: string;
   sendInviteLinkText?: string;
   uninvitedCount?: number;
+  [key: string]: unknown;
 }
 
-export const resentInvitationSchema: Schema<ResentInvitation> = object({
+export const resentInvitationSchema: Schema<ResentInvitation> = expandoObject({
   lastSentAt: ['last_sent_at', optional(string())],
   lastAcceptedAt: ['last_accepted_at', optional(string())],
   sendInviteLinkText: ['send_invite_link_text', optional(string())],

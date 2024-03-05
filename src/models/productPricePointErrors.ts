@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, object, optional, Schema, string } from '../schema';
+import { array, expandoObject, optional, Schema, string } from '../schema';
 
 export interface ProductPricePointErrors {
   pricePoint?: string;
@@ -13,9 +13,10 @@ export interface ProductPricePointErrors {
   name?: string[];
   price?: string[];
   priceInCents?: string[];
+  [key: string]: unknown;
 }
 
-export const productPricePointErrorsSchema: Schema<ProductPricePointErrors> = object(
+export const productPricePointErrorsSchema: Schema<ProductPricePointErrors> = expandoObject(
   {
     pricePoint: ['price_point', optional(string())],
     interval: ['interval', optional(array(string()))],
