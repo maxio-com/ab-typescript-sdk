@@ -4,14 +4,21 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, nullable, number, Schema, string } from '../schema';
+import {
+  bigint,
+  expandoObject,
+  nullable,
+  number,
+  Schema,
+  string,
+} from '../schema';
 import {
   EventEventSpecificData,
   eventEventSpecificDataSchema,
 } from './containers/eventEventSpecificData';
 
 export interface Event {
-  id: number;
+  id: bigint;
   key: string;
   message: string;
   subscriptionId: number | null;
@@ -22,7 +29,7 @@ export interface Event {
 }
 
 export const eventSchema: Schema<Event> = expandoObject({
-  id: ['id', number()],
+  id: ['id', bigint()],
   key: ['key', string()],
   message: ['message', string()],
   subscriptionId: ['subscription_id', nullable(number())],

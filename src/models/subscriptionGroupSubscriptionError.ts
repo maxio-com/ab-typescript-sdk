@@ -12,6 +12,10 @@ export interface SubscriptionGroupSubscriptionError {
   productPricePointId?: string[];
   paymentProfile?: string[];
   paymentProfileChargifyToken?: string[];
+  base?: string[];
+  paymentProfileExpirationMonth?: string[];
+  paymentProfileExpirationYear?: string[];
+  paymentProfileFullNumber?: string[];
   [key: string]: unknown;
 }
 
@@ -22,6 +26,19 @@ export const subscriptionGroupSubscriptionErrorSchema: Schema<SubscriptionGroupS
     paymentProfile: ['payment_profile', optional(array(string()))],
     paymentProfileChargifyToken: [
       'payment_profile.chargify_token',
+      optional(array(string())),
+    ],
+    base: ['base', optional(array(string()))],
+    paymentProfileExpirationMonth: [
+      'payment_profile.expiration_month',
+      optional(array(string())),
+    ],
+    paymentProfileExpirationYear: [
+      'payment_profile.expiration_year',
+      optional(array(string())),
+    ],
+    paymentProfileFullNumber: [
+      'payment_profile.full_number',
       optional(array(string())),
     ],
   }

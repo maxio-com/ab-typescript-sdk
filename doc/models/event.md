@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number` | Required | - |
+| `id` | `bigint` | Required | - |
 | `key` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `message` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `subscriptionId` | `number \| null` | Required | - |

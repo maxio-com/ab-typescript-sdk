@@ -5,23 +5,16 @@
  */
 
 import { array, expandoObject, number, optional, Schema } from '../schema';
-import {
-  CreateSubscriptionGroupSubscriptionId,
-  createSubscriptionGroupSubscriptionIdSchema,
-} from './containers/createSubscriptionGroupSubscriptionId';
 
 export interface CreateSubscriptionGroup {
-  subscriptionId: CreateSubscriptionGroupSubscriptionId;
+  subscriptionId: number;
   memberIds?: number[];
   [key: string]: unknown;
 }
 
 export const createSubscriptionGroupSchema: Schema<CreateSubscriptionGroup> = expandoObject(
   {
-    subscriptionId: [
-      'subscription_id',
-      createSubscriptionGroupSubscriptionIdSchema,
-    ],
+    subscriptionId: ['subscription_id', number()],
     memberIds: ['member_ids', optional(array(number()))],
   }
 );

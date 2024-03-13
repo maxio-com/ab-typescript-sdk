@@ -101,6 +101,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(createPrepaymentResponseSchema, requestOptions);
   }
