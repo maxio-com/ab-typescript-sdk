@@ -9,12 +9,12 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number \| undefined` | Optional | - |
-| `subscriptionId` | `number \| undefined` | Optional | - |
-| `amountInCents` | `bigint \| undefined` | Optional | - |
+| `id` | `bigint \| undefined` | Optional | **Constraints**: `>= 1` |
+| `subscriptionId` | `number \| undefined` | Optional | **Constraints**: `>= 1` |
+| `amountInCents` | `bigint \| undefined` | Optional | **Constraints**: `>= 0.01` |
 | `memo` | `string \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
-| `startingBalanceInCents` | `bigint \| undefined` | Optional | - |
+| `startingBalanceInCents` | `bigint \| undefined` | Optional | **Constraints**: `>= 0` |
 | `endingBalanceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)

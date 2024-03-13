@@ -14,6 +14,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { GroupType, groupTypeSchema } from './groupType';
 import {
   SubscriptionGroupBalances,
   subscriptionGroupBalancesSchema,
@@ -30,6 +31,7 @@ export interface ListSubscriptionGroupsItem {
   state?: string;
   cancelAtEndOfPeriod?: boolean;
   accountBalances?: SubscriptionGroupBalances;
+  groupType?: GroupType;
   [key: string]: unknown;
 }
 
@@ -48,5 +50,6 @@ export const listSubscriptionGroupsItemSchema: Schema<ListSubscriptionGroupsItem
       'account_balances',
       optional(lazy(() => subscriptionGroupBalancesSchema)),
     ],
+    groupType: ['group_type', optional(groupTypeSchema)],
   }
 );

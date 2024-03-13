@@ -15,6 +15,10 @@ Object which contains subscription errors.
 | `productPricePointId` | `string[] \| undefined` | Optional | - |
 | `paymentProfile` | `string[] \| undefined` | Optional | - |
 | `paymentProfileChargifyToken` | `string[] \| undefined` | Optional | - |
+| `base` | `string[] \| undefined` | Optional | - |
+| `paymentProfileExpirationMonth` | `string[] \| undefined` | Optional | - |
+| `paymentProfileExpirationYear` | `string[] \| undefined` | Optional | - |
+| `paymentProfileFullNumber` | `string[] \| undefined` | Optional | - |
 
 ## Example (as JSON)
 
@@ -35,6 +39,11 @@ Object which contains subscription errors.
   "payment_profile.chargify_token": [
     "payment_profile.chargify_token8",
     "payment_profile.chargify_token9"
+  ],
+  "base": [
+    "base7",
+    "base8",
+    "base9"
   ]
 }
 ```

@@ -19,6 +19,7 @@
 | `state` | `string \| undefined` | Optional | - |
 | `cancelAtEndOfPeriod` | `boolean \| undefined` | Optional | - |
 | `accountBalances` | [`SubscriptionGroupBalances \| undefined`](../../doc/models/subscription-group-balances.md) | Optional | - |
+| `groupType` | [`GroupType \| undefined`](../../doc/models/group-type.md) | Optional | - |
 
 ## Example (as JSON)
 

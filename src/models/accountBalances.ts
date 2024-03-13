@@ -10,6 +10,8 @@ import { AccountBalance, accountBalanceSchema } from './accountBalance';
 export interface AccountBalances {
   /** The balance, in cents, of the sum of the subscription's  open, payable invoices. */
   openInvoices?: AccountBalance;
+  /** The balance, in cents, of the sum of the subscription's  pending, payable invoices. */
+  pendingInvoices?: AccountBalance;
   /** The balance, in cents, of the subscription's Pending Discount account. */
   pendingDiscounts?: AccountBalance;
   /** The balance, in cents, of the subscription's Service Credit account. */
@@ -21,6 +23,10 @@ export interface AccountBalances {
 
 export const accountBalancesSchema: Schema<AccountBalances> = expandoObject({
   openInvoices: ['open_invoices', optional(lazy(() => accountBalanceSchema))],
+  pendingInvoices: [
+    'pending_invoices',
+    optional(lazy(() => accountBalanceSchema)),
+  ],
   pendingDiscounts: [
     'pending_discounts',
     optional(lazy(() => accountBalanceSchema)),

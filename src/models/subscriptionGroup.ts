@@ -13,6 +13,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import {
   SubscriptionGroupPaymentProfile,
   subscriptionGroupPaymentProfileSchema,
@@ -21,7 +22,8 @@ import {
 export interface SubscriptionGroup {
   customerId?: number;
   paymentProfile?: SubscriptionGroupPaymentProfile;
-  paymentCollectionMethod?: string;
+  /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
+  paymentCollectionMethod?: CollectionMethod;
   subscriptionIds?: number[];
   createdAt?: string;
   [key: string]: unknown;
@@ -34,7 +36,10 @@ export const subscriptionGroupSchema: Schema<SubscriptionGroup> = expandoObject(
       'payment_profile',
       optional(lazy(() => subscriptionGroupPaymentProfileSchema)),
     ],
-    paymentCollectionMethod: ['payment_collection_method', optional(string())],
+    paymentCollectionMethod: [
+      'payment_collection_method',
+      optional(collectionMethodSchema),
+    ],
     subscriptionIds: ['subscription_ids', optional(array(number()))],
     createdAt: ['created_at', optional(string())],
   }

@@ -24,7 +24,7 @@
 | `phone` | `string \| undefined` | Optional | - |
 | `locale` | `string \| undefined` | Optional | - |
 | `vatNumber` | `string \| undefined` | Optional | - |
-| `taxExempt` | `string \| undefined` | Optional | - |
+| `taxExempt` | `boolean \| undefined` | Optional | - |
 | `taxExemptReason` | `string \| undefined` | Optional | - |
 | `metafields` | `Record<string, string> \| undefined` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 

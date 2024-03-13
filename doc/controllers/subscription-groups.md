@@ -174,7 +174,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SingleStringErrorResponseError`](../../doc/models/single-string-error-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionGroupCreateErrorResponseError`](../../doc/models/subscription-group-create-error-response-error.md) |
 
 
 # List Subscription Groups
@@ -189,7 +189,7 @@ Account balance information for the subscription groups is not returned by defau
 async listSubscriptionGroups(
   page?: number,
   perPage?: number,
-  include?: string,
+  include?: SubscriptionGroupsListInclude[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSubscriptionGroupsResponse>>
 ```
@@ -200,7 +200,7 @@ async listSubscriptionGroups(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `include` | `string \| undefined` | Query, Optional | A list of additional information to include in the response. The following values are supported:<br><br>- `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances` |
+| `include` | [`SubscriptionGroupsListInclude[] \| undefined`](../../doc/models/subscription-groups-list-include.md) | Query, Optional | A list of additional information to include in the response. The following values are supported:<br><br>- `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -210,7 +210,7 @@ async listSubscriptionGroups(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
   perPage: 50
 }
@@ -280,6 +280,7 @@ Current billing amount for the subscription group is not returned by default. If
 ```ts
 async readSubscriptionGroup(
   uid: string,
+  include?: SubscriptionGroupInclude[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<FullSubscriptionGroupResponse>>
 ```
@@ -289,6 +290,7 @@ async readSubscriptionGroup(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The uid of the subscription group |
+| `include` | [`SubscriptionGroupInclude[] \| undefined`](../../doc/models/subscription-group-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=current_billing_amount_in_cents`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -300,10 +302,10 @@ async readSubscriptionGroup(
 ```ts
 const uid = 'uid0';
 
-try {
+Liquid error: Value cannot be null. (Parameter 'key')try {
   // @ts-expect-error: unused variables
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = await subscriptionGroupsController.readSubscriptionGroup(uid);
+  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await subscriptionGroupsController.readSubscriptionGroup(uid);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

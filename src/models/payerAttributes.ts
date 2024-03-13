@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { dict, expandoObject, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  dict,
+  expandoObject,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 
 export interface PayerAttributes {
   firstName?: string;
@@ -22,7 +29,7 @@ export interface PayerAttributes {
   phone?: string;
   locale?: string;
   vatNumber?: string;
-  taxExempt?: string;
+  taxExempt?: boolean;
   taxExemptReason?: string;
   /** (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. */
   metafields?: Record<string, string>;
@@ -45,7 +52,7 @@ export const payerAttributesSchema: Schema<PayerAttributes> = expandoObject({
   phone: ['phone', optional(string())],
   locale: ['locale', optional(string())],
   vatNumber: ['vat_number', optional(string())],
-  taxExempt: ['tax_exempt', optional(string())],
+  taxExempt: ['tax_exempt', optional(boolean())],
   taxExemptReason: ['tax_exempt_reason', optional(string())],
   metafields: ['metafields', optional(dict(string()))],
 });

@@ -14,7 +14,7 @@ import {
 } from '../schema';
 
 export interface CreatedPrepayment {
-  id?: number;
+  id?: bigint;
   subscriptionId?: number;
   amountInCents?: bigint;
   memo?: string;
@@ -26,7 +26,7 @@ export interface CreatedPrepayment {
 
 export const createdPrepaymentSchema: Schema<CreatedPrepayment> = expandoObject(
   {
-    id: ['id', optional(number())],
+    id: ['id', optional(bigint())],
     subscriptionId: ['subscription_id', optional(number())],
     amountInCents: ['amount_in_cents', optional(bigint())],
     memo: ['memo', optional(string())],
