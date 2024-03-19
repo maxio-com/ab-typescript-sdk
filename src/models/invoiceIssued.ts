@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, Schema, string } from '../schema';
+import { array, expandoObject, lazy, nullable, Schema, string } from '../schema';
 import {
   InvoiceLineItemEventData,
   invoiceLineItemEventDataSchema,
@@ -14,8 +14,10 @@ export interface InvoiceIssued {
   uid: string;
   number: string;
   role: string;
-  dueDate: string;
+  dueDate: string | null;
+  /** Invoice issue date. Can be an empty string if value is missing. */
   issueDate: string;
+  /** Paid date. Can be an empty string if value is missing. */
   paidDate: string;
   dueAmount: string;
   paidAmount: string;
@@ -33,7 +35,7 @@ export const invoiceIssuedSchema: Schema<InvoiceIssued> = expandoObject({
   uid: ['uid', string()],
   number: ['number', string()],
   role: ['role', string()],
-  dueDate: ['due_date', string()],
+  dueDate: ['due_date', nullable(string())],
   issueDate: ['issue_date', string()],
   paidDate: ['paid_date', string()],
   dueAmount: ['due_amount', string()],
