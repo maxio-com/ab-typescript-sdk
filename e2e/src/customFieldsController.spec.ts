@@ -14,7 +14,6 @@ import {
   createTextCustomersField,
   createTextSubscriptionField,
   defaultEnum,
-  defaultHost,
   dropdownData,
   excludeScope,
   includeScope,
@@ -243,41 +242,6 @@ describe('Custom Fields Controller', () => {
         expect(scope?.statements).toBe(payload.metafields.scope.statements);
         expect(scope?.portal).toBe(payload.metafields.scope.portal);
         expect(scope?.hosted).toHaveLength(0);
-      });
-
-      //TODO: should wait nestor's feedback
-      test.skip('should create a meta fields with hosted scope and input_type=text', async () => {
-        const payload = {
-          metafields: {
-            scope: {
-              hosted: [...defaultHost],
-              ...switchedScope,
-            },
-            ...textData,
-          },
-        };
-        const {
-          result: [{ name, inputType, scope }],
-          statusCode,
-        } = await customFieldsController.createMetafields(
-          ResourceType.Subscriptions,
-          payload
-        );
-        expect(statusCode).toBe(200);
-        expect(name).toEqual(payload.metafields.name);
-        expect(inputType).toBe(payload.metafields.inputType);
-        expect(scope?.publicEdit).toBe(payload.metafields.scope.publicEdit);
-        expect(scope?.publicShow).toBe(payload.metafields.scope.publicShow);
-        expect(scope?.csv).toBe(payload.metafields.scope.csv);
-        expect(scope?.invoices).toBe(payload.metafields.scope.invoices);
-        expect(scope?.statements).toBe(payload.metafields.scope.statements);
-        expect(scope?.portal).toBe(payload.metafields.scope.portal);
-        expect(scope?.hosted).toHaveLength(
-          payload.metafields.scope.hosted.length
-        );
-        payload.metafields.scope.hosted.map((value) =>
-          expect(scope?.hosted?.includes(value)).toBeTruthy()
-        );
       });
     });
 
