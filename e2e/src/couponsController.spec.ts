@@ -10,6 +10,7 @@ import { createClient, createInvalidClient } from './config';
 import { product } from './mocks/products';
 import { createMockSubscription } from './mocks/subscriptions';
 import { uid } from 'uid';
+import createProduct from './utils/products';
 
 const couponBody = {
   coupon: {
@@ -280,7 +281,7 @@ describe('Coupons Controller', () => {
         allowNegativeBalance: false,
         recurring: false,
         endDate: '2024-08-29T12:00:00-04:00',
-        productFamilyId: '0',
+        productFamilyId: String(productFamily?.id),
         stackable: true,
         compoundingStrategy: CompoundingStrategy.Compound,
         excludeMidPeriodAllocations: true,
@@ -545,6 +546,7 @@ describe('Coupons Controller', () => {
 
   describe('Create/Update Currency Prices', () => {
     test('should create a valid currency price', async () => {
+      const { productFamilyResponse } = await createProduct({});
       const createReponse = await couponsController.createCoupon(
         productFamily?.id || 0,
         {
@@ -555,7 +557,8 @@ describe('Coupons Controller', () => {
             allowNegativeBalance: false,
             recurring: false,
             endDate: '2024-08-29T12:00:00-04:00',
-            productFamilyId: '0',
+            productFamilyId:
+              String(productFamilyResponse.productFamily?.id) || '',
             stackable: true,
             compoundingStrategy: CompoundingStrategy.Compound,
             excludeMidPeriodAllocations: true,
