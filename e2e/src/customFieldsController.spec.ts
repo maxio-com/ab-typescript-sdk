@@ -14,7 +14,6 @@ import {
   createTextCustomersField,
   createTextSubscriptionField,
   defaultEnum,
-  defaultHost,
   dropdownData,
   excludeScope,
   includeScope,
