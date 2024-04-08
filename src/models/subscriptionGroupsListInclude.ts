@@ -16,4 +16,4 @@ export enum SubscriptionGroupsListInclude {
 /**
  * Schema for SubscriptionGroupsListInclude
  */
-export const subscriptionGroupsListIncludeSchema: Schema<SubscriptionGroupsListInclude> = stringEnum(SubscriptionGroupsListInclude);
+export const  subscriptionGroupsListIncludeSchema: Schema<SubscriptionGroupsListInclude> = stringEnum(SubscriptionGroupsListInclude);

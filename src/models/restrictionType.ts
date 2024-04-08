@@ -17,4 +17,4 @@ export enum RestrictionType {
 /**
  * Schema for RestrictionType
  */
-export const restrictionTypeSchema: Schema<RestrictionType> = stringEnum(RestrictionType);
+export const  restrictionTypeSchema: Schema<RestrictionType> = stringEnum(RestrictionType);

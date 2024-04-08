@@ -20,4 +20,4 @@ export enum ComponentKind {
 /**
  * Schema for ComponentKind
  */
-export const componentKindSchema: Schema<ComponentKind> = stringEnum(ComponentKind);
+export const  componentKindSchema: Schema<ComponentKind> = stringEnum(ComponentKind);

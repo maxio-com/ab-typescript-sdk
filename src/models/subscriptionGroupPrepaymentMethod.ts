@@ -21,4 +21,4 @@ export enum SubscriptionGroupPrepaymentMethod {
 /**
  * Schema for SubscriptionGroupPrepaymentMethod
  */
-export const subscriptionGroupPrepaymentMethodSchema: Schema<SubscriptionGroupPrepaymentMethod> = stringEnum(SubscriptionGroupPrepaymentMethod);
+export const  subscriptionGroupPrepaymentMethodSchema: Schema<SubscriptionGroupPrepaymentMethod> = stringEnum(SubscriptionGroupPrepaymentMethod);

@@ -18,4 +18,4 @@ export enum InvoiceConsolidationLevel {
 /**
  * Schema for InvoiceConsolidationLevel
  */
-export const invoiceConsolidationLevelSchema: Schema<InvoiceConsolidationLevel> = stringEnum(InvoiceConsolidationLevel);
+export const  invoiceConsolidationLevelSchema: Schema<InvoiceConsolidationLevel> = stringEnum(InvoiceConsolidationLevel);

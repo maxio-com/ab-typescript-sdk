@@ -20,4 +20,4 @@ export enum GroupTargetType {
 /**
  * Schema for GroupTargetType
  */
-export const groupTargetTypeSchema: Schema<GroupTargetType> = stringEnum(GroupTargetType);
+export const  groupTargetTypeSchema: Schema<GroupTargetType> = stringEnum(GroupTargetType);

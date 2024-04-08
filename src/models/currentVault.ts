@@ -42,4 +42,4 @@ export enum CurrentVault {
 /**
  * Schema for CurrentVault
  */
-export const currentVaultSchema: Schema<CurrentVault> = stringEnum(CurrentVault);
+export const  currentVaultSchema: Schema<CurrentVault> = stringEnum(CurrentVault);

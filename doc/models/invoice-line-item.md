@@ -27,7 +27,7 @@
 | `componentId` | `number \| null \| undefined` | Optional | The ID of the component being billed. Will be `nil` for non-component charges. |
 | `pricePointId` | `number \| null \| undefined` | Optional | The price point ID of the component being billed. Will be `nil` for non-component charges. |
 | `hide` | `boolean \| undefined` | Optional | - |
-| `componentCostData` | [`InvoiceLineItemComponentCostData2 \| null \| undefined`](../../doc/models/containers/invoice-line-item-component-cost-data-2.md) | Optional | This is a container for one-of cases. |
+| `componentCostData` | [`InvoiceLineItemComponentCostData \| null \| undefined`](../../doc/models/invoice-line-item-component-cost-data.md) | Optional | - |
 | `productPricePointId` | `number \| null \| undefined` | Optional | The price point ID of the line item's product |
 | `customItem` | `boolean \| undefined` | Optional | - |
 | `kind` | `string \| undefined` | Optional | - |

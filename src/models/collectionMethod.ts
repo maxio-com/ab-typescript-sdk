@@ -19,4 +19,4 @@ export enum CollectionMethod {
 /**
  * Schema for CollectionMethod
  */
-export const collectionMethodSchema: Schema<CollectionMethod> = stringEnum(CollectionMethod);
+export const  collectionMethodSchema: Schema<CollectionMethod> = stringEnum(CollectionMethod);

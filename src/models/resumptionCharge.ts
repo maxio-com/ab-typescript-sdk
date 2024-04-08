@@ -18,4 +18,4 @@ export enum ResumptionCharge {
 /**
  * Schema for ResumptionCharge
  */
-export const resumptionChargeSchema: Schema<ResumptionCharge> = stringEnum(ResumptionCharge);
+export const  resumptionChargeSchema: Schema<ResumptionCharge> = stringEnum(ResumptionCharge);

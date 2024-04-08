@@ -16,4 +16,4 @@ export enum ListEventsDateField {
 /**
  * Schema for ListEventsDateField
  */
-export const listEventsDateFieldSchema: Schema<ListEventsDateField> = stringEnum(ListEventsDateField);
+export const  listEventsDateFieldSchema: Schema<ListEventsDateField> = stringEnum(ListEventsDateField);

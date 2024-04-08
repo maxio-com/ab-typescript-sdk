@@ -17,4 +17,4 @@ export enum IntervalUnit {
 /**
  * Schema for IntervalUnit
  */
-export const intervalUnitSchema: Schema<IntervalUnit> = stringEnum(IntervalUnit);
+export const  intervalUnitSchema: Schema<IntervalUnit> = stringEnum(IntervalUnit);

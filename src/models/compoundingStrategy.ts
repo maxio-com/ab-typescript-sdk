@@ -17,4 +17,4 @@ export enum CompoundingStrategy {
 /**
  * Schema for CompoundingStrategy
  */
-export const compoundingStrategySchema: Schema<CompoundingStrategy> = stringEnum(CompoundingStrategy);
+export const  compoundingStrategySchema: Schema<CompoundingStrategy> = stringEnum(CompoundingStrategy);

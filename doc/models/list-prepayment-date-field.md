@@ -1,9 +1,9 @@
 
-# List Subscription Group Prepayment Date Field
+# List Prepayment Date Field
 
 ## Enumeration
 
-`ListSubscriptionGroupPrepaymentDateField`
+`ListPrepaymentDateField`
 
 ## Fields
 

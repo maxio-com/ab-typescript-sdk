@@ -17,4 +17,4 @@ export enum CreateInvoiceStatus {
 /**
  * Schema for CreateInvoiceStatus
  */
-export const createInvoiceStatusSchema: Schema<CreateInvoiceStatus> = stringEnum(CreateInvoiceStatus);
+export const  createInvoiceStatusSchema: Schema<CreateInvoiceStatus> = stringEnum(CreateInvoiceStatus);

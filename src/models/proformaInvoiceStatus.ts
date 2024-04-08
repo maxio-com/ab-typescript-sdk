@@ -18,4 +18,4 @@ export enum ProformaInvoiceStatus {
 /**
  * Schema for ProformaInvoiceStatus
  */
-export const proformaInvoiceStatusSchema: Schema<ProformaInvoiceStatus> = stringEnum(ProformaInvoiceStatus);
+export const  proformaInvoiceStatusSchema: Schema<ProformaInvoiceStatus> = stringEnum(ProformaInvoiceStatus);

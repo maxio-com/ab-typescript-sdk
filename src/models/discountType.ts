@@ -17,4 +17,4 @@ export enum DiscountType {
 /**
  * Schema for DiscountType
  */
-export const discountTypeSchema: Schema<DiscountType> = stringEnum(DiscountType);
+export const  discountTypeSchema: Schema<DiscountType> = stringEnum(DiscountType);

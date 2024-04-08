@@ -19,4 +19,4 @@ export enum TaxDestinationAddress {
 /**
  * Schema for TaxDestinationAddress
  */
-export const taxDestinationAddressSchema: Schema<TaxDestinationAddress> = stringEnum(TaxDestinationAddress);
+export const  taxDestinationAddressSchema: Schema<TaxDestinationAddress> = stringEnum(TaxDestinationAddress);

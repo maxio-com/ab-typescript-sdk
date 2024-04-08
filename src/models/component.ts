@@ -18,13 +18,10 @@ import {
 } from '../schema';
 import { ComponentKind, componentKindSchema } from './componentKind';
 import { ComponentPrice, componentPriceSchema } from './componentPrice';
-import {
-  ComponentPricingScheme,
-  componentPricingSchemeSchema,
-} from './containers/componentPricingScheme';
 import { CreditType, creditTypeSchema } from './creditType';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { ItemCategory, itemCategorySchema } from './itemCategory';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
 export interface Component {
   /** The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. */
@@ -33,7 +30,7 @@ export interface Component {
   name?: string;
   /** The component API handle */
   handle?: string | null;
-  pricingScheme?: ComponentPricingScheme | null;
+  pricingScheme?: PricingScheme | null;
   /** The name of the unit that the component’s usage is measured in. i.e. message */
   unitName?: string;
   /** The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. */
@@ -102,10 +99,7 @@ export const componentSchema: Schema<Component> = expandoObject({
   id: ['id', optional(number())],
   name: ['name', optional(string())],
   handle: ['handle', optional(nullable(string()))],
-  pricingScheme: [
-    'pricing_scheme',
-    optional(nullable(componentPricingSchemeSchema)),
-  ],
+  pricingScheme: ['pricing_scheme', optional(nullable(pricingSchemeSchema))],
   unitName: ['unit_name', optional(string())],
   unitPrice: ['unit_price', optional(nullable(string()))],
   productFamilyId: ['product_family_id', optional(number())],
