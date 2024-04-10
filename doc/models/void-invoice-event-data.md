@@ -11,7 +11,7 @@ Example schema for an `void_invoice` event
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `creditNoteAttributes` | [`VoidInvoiceEventDataCreditNoteAttributes \| null`](../../doc/models/containers/void-invoice-event-data-credit-note-attributes.md) | Required | This is a container for one-of cases. |
+| `creditNoteAttributes` | [`CreditNote \| null`](../../doc/models/credit-note.md) | Required | - |
 | `memo` | `string \| null` | Required | The memo provided during invoice voiding. |
 | `appliedAmount` | `string \| null` | Required | The amount of the void. |
 | `transactionTime` | `string \| null` | Required | The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" |
@@ -24,9 +24,9 @@ Example schema for an `void_invoice` event
 {
   "credit_note_attributes": {
     "uid": "uid2",
-    "site_id": 218,
-    "customer_id": 74,
-    "subscription_id": 146,
+    "site_id": 72,
+    "customer_id": 184,
+    "subscription_id": 0,
     "number": "number0"
   },
   "memo": "memo6",

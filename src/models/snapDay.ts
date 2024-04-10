@@ -16,4 +16,4 @@ export enum SnapDay {
 /**
  * Schema for SnapDay
  */
-export const snapDaySchema: Schema<SnapDay> = stringEnum(SnapDay);
+export const  snapDaySchema: Schema<SnapDay> = stringEnum(SnapDay);

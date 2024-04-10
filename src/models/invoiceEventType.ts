@@ -29,4 +29,4 @@ export enum InvoiceEventType {
 /**
  * Schema for InvoiceEventType
  */
-export const invoiceEventTypeSchema: Schema<InvoiceEventType> = stringEnum(InvoiceEventType);
+export const  invoiceEventTypeSchema: Schema<InvoiceEventType> = stringEnum(InvoiceEventType);

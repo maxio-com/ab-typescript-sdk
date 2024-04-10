@@ -20,4 +20,4 @@ export enum BankAccountVault {
 /**
  * Schema for BankAccountVault
  */
-export const bankAccountVaultSchema: Schema<BankAccountVault> = stringEnum(BankAccountVault);
+export const  bankAccountVaultSchema: Schema<BankAccountVault> = stringEnum(BankAccountVault);

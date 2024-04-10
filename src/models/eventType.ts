@@ -49,4 +49,4 @@ export enum EventType {
 /**
  * Schema for EventType
  */
-export const eventTypeSchema: Schema<EventType> = stringEnum(EventType);
+export const  eventTypeSchema: Schema<EventType> = stringEnum(EventType);

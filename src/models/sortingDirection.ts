@@ -17,4 +17,4 @@ export enum SortingDirection {
 /**
  * Schema for SortingDirection
  */
-export const sortingDirectionSchema: Schema<SortingDirection> = stringEnum(SortingDirection);
+export const  sortingDirectionSchema: Schema<SortingDirection> = stringEnum(SortingDirection);

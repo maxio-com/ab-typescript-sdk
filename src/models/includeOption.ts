@@ -17,4 +17,4 @@ export enum IncludeOption {
 /**
  * Schema for IncludeOption
  */
-export const includeOptionSchema: Schema<IncludeOption> = stringEnum(IncludeOption);
+export const  includeOptionSchema: Schema<IncludeOption> = stringEnum(IncludeOption);

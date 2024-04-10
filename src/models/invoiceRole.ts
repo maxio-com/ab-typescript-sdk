@@ -25,4 +25,4 @@ export enum InvoiceRole {
 /**
  * Schema for InvoiceRole
  */
-export const invoiceRoleSchema: Schema<InvoiceRole> = stringEnum(InvoiceRole);
+export const  invoiceRoleSchema: Schema<InvoiceRole> = stringEnum(InvoiceRole);

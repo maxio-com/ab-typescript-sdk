@@ -19,4 +19,4 @@ export enum WebhookStatus {
 /**
  * Schema for WebhookStatus
  */
-export const webhookStatusSchema: Schema<WebhookStatus> = stringEnum(WebhookStatus);
+export const  webhookStatusSchema: Schema<WebhookStatus> = stringEnum(WebhookStatus);

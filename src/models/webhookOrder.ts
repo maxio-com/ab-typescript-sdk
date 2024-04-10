@@ -17,4 +17,4 @@ export enum WebhookOrder {
 /**
  * Schema for WebhookOrder
  */
-export const webhookOrderSchema: Schema<WebhookOrder> = stringEnum(WebhookOrder);
+export const  webhookOrderSchema: Schema<WebhookOrder> = stringEnum(WebhookOrder);

@@ -20,4 +20,4 @@ export enum ItemCategory {
 /**
  * Schema for ItemCategory
  */
-export const itemCategorySchema: Schema<ItemCategory> = stringEnum(ItemCategory);
+export const  itemCategorySchema: Schema<ItemCategory> = stringEnum(ItemCategory);

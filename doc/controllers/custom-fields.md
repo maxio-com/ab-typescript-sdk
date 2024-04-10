@@ -89,8 +89,6 @@ const body: CreateMetafieldsRequest = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.createMetafields(
   resourceType,
   body
@@ -99,8 +97,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -114,7 +110,6 @@ try {
   {
     "name": "Color",
     "scope": {
-      "hosted": [],
       "csv": "0",
       "statements": "0",
       "invoices": "0",
@@ -127,7 +122,6 @@ try {
   {
     "name": "Brand",
     "scope": {
-      "hosted": [],
       "csv": "0",
       "statements": "0",
       "invoices": "0",
@@ -186,15 +180,11 @@ const collect = {
   perPage: 50
 }
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.listMetafields(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -260,15 +250,11 @@ async updateMetafield(
 const resourceType = ResourceType.Subscriptions;
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.updateMetafield(resourceType);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -314,15 +300,11 @@ async deleteMetafield(
 const resourceType = ResourceType.Subscriptions;
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.deleteMetafield(resourceType);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -404,8 +386,6 @@ const body: CreateMetadataRequest = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.createMetadata(
   resourceType,
   resourceId,
@@ -415,8 +395,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -472,15 +450,11 @@ const collect = {
   perPage: 50
 }
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.listMetadata(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -522,8 +496,6 @@ const resourceType = ResourceType.Subscriptions;
 const resourceId = 60;
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.updateMetadata(
   resourceType,
   resourceId
@@ -532,8 +504,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -604,10 +574,8 @@ const resourceType = ResourceType.Subscriptions;
 
 const resourceId = 60;
 
-Liquid error: Value cannot be null. (Parameter 'key')try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await customFieldsController.deleteMetadata(
+try {
+  const { result, ...httpResponse } = await customFieldsController.deleteMetadata(
   resourceType,
   resourceId
 );
@@ -615,8 +583,6 @@ Liquid error: Value cannot be null. (Parameter 'key')try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -687,22 +653,18 @@ async listMetadataForResourceType(
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
   resourceType: ResourceType.Subscriptions,
   page: 2,
   perPage: 50,
   dateField: BasicDateField.UpdatedAt
 }
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await customFieldsController.listMetadataForResourceType(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }

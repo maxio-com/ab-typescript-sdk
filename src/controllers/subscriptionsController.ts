@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
+import {
+  ApiResponse,
+  commaPrefix,
+  RequestOptions,
+  unindexedPrefix,
+} from '../core';
 import {
   ErrorArrayMapResponseError,
 } from '../errors/errorArrayMapResponseError';
@@ -1041,7 +1046,7 @@ export class SubscriptionsController extends BaseController {
     req.query(mapped.metadata);
     req.query('direction', mapped.direction);
     req.query('sort', mapped.sort);
-    req.query('include[]', mapped.include, commaPrefix);
+    req.query('include', mapped.include, unindexedPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
   }
@@ -1162,7 +1167,7 @@ export class SubscriptionsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       include: [include, optional(array(subscriptionIncludeSchema))],
     });
-    req.query('include[]', mapped.include, plainPrefix);
+    req.query('include', mapped.include, unindexedPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
@@ -1277,7 +1282,7 @@ export class SubscriptionsController extends BaseController {
       cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
     });
     req.query('ack', mapped.ack);
-    req.query('cascade[]', mapped.cascade, plainPrefix);
+    req.query('cascade', mapped.cascade, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);

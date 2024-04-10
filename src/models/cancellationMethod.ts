@@ -20,4 +20,4 @@ export enum CancellationMethod {
 /**
  * Schema for CancellationMethod
  */
-export const cancellationMethodSchema: Schema<CancellationMethod> = stringEnum(CancellationMethod);
+export const  cancellationMethodSchema: Schema<CancellationMethod> = stringEnum(CancellationMethod);

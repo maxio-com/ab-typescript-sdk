@@ -27,4 +27,4 @@ export enum SubscriptionStateFilter {
 /**
  * Schema for SubscriptionStateFilter
  */
-export const subscriptionStateFilterSchema: Schema<SubscriptionStateFilter> = stringEnum(SubscriptionStateFilter);
+export const  subscriptionStateFilterSchema: Schema<SubscriptionStateFilter> = stringEnum(SubscriptionStateFilter);

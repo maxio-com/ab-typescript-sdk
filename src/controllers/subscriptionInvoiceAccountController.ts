@@ -17,7 +17,6 @@ import {
   AccountBalances,
   accountBalancesSchema,
 } from '../models/accountBalances';
-import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreatePrepaymentRequest,
   createPrepaymentRequestSchema,
@@ -34,6 +33,10 @@ import {
   IssueServiceCreditRequest,
   issueServiceCreditRequestSchema,
 } from '../models/issueServiceCreditRequest';
+import {
+  ListPrepaymentsFilter,
+  listPrepaymentsFilterSchema,
+} from '../models/listPrepaymentsFilter';
 import {
   PrepaymentResponse,
   prepaymentResponseSchema,
@@ -109,45 +112,32 @@ export class SubscriptionInvoiceAccountController extends BaseController {
   /**
    * This request will list a subscription's prepayments.
    *
-   * @param subscriptionId     The Chargify id of the subscription
-   * @param page               Result records are organized in pages. By default, the first page of
-   *                                             results is displayed. The page parameter specifies a page number of
-   *                                             results to fetch. You can start navigating through the pages to
-   *                                             consume the results. You do this by passing in a page parameter.
-   *                                             Retrieve the next page by adding ?page=2 to the query string. If there
-   *                                             are no results to return, then an empty result set will be returned.
-   *                                             Use in query `page=1`.
-   * @param perPage            This parameter indicates how many records to fetch in each request.
-   *                                             Default value is 20. The maximum allowed values is 200; any per_page
-   *                                             value over 200 will be changed to 200. Use in query `per_page=200`.
-   * @param filterDateField    The type of filter you would like to apply to your search. created_at
-   *                                             - Time when prepayment was created. application_at - Time when
-   *                                             prepayment was applied to invoice. Use in query
-   *                                             `filter[date_field]=created_at`.
-   * @param filterStartDate    The start date (format YYYY-MM-DD) with which to filter the
-   *                                             date_field. Returns prepayments with a timestamp at or after midnight
-   *                                             (12:00:00 AM) in your site’s time zone on the date specified. Use in
-   *                                             query `filter[start_date]=2011-12-15`.
-   * @param filterEndDate      The end date (format YYYY-MM-DD) with which to filter the date_field.
-   *                                             Returns prepayments with a timestamp up to and including 11:59:59PM in
-   *                                             your site’s time zone on the date specified. Use in query
-   *                                             `filter[end_date]=2011-12-15`.
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param page            Result records are organized in pages. By default, the
+   *                                                        first page of results is displayed. The page parameter
+   *                                                        specifies a page number of results to fetch. You can start
+   *                                                        navigating through the pages to consume the results. You do
+   *                                                        this by passing in a page parameter. Retrieve the next page
+   *                                                        by adding ?page=2 to the query string. If there are no
+   *                                                        results to return, then an empty result set will be
+   *                                                        returned. Use in query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each
+   *                                                        request. Default value is 20. The maximum allowed values is
+   *                                                        200; any per_page value over 200 will be changed to 200.
+   *                                                        Use in query `per_page=200`.
+   * @param filter          Filter to use for List Prepayments operations
    * @return Response from the API call
    */
   async listPrepayments({
     subscriptionId,
     page,
     perPage,
-    filterDateField,
-    filterStartDate,
-    filterEndDate,
+    filter,
   }: {
     subscriptionId: number,
     page?: number,
     perPage?: number,
-    filterDateField?: BasicDateField,
-    filterStartDate?: string,
-    filterEndDate?: string,
+    filter?: ListPrepaymentsFilter,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PrepaymentsResponse>> {
@@ -156,15 +146,11 @@ export class SubscriptionInvoiceAccountController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
-      filterStartDate: [filterStartDate, optional(string())],
-      filterEndDate: [filterEndDate, optional(string())],
+      filter: [filter, optional(listPrepaymentsFilterSchema)],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter[date_field]', mapped.filterDateField);
-    req.query('filter[start_date]', mapped.filterStartDate);
-    req.query('filter[end_date]', mapped.filterEndDate);
+    req.query('filter', mapped.filter);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.authenticate([{ basicAuth: true }]);

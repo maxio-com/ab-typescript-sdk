@@ -93,8 +93,6 @@ const body: CreateOrUpdateCoupon = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.createCoupon(
   productFamilyId,
   body
@@ -103,8 +101,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -129,15 +125,8 @@ async listCouponsForProductFamily(
   productFamilyId: number,
   page?: number,
   perPage?: number,
-  filterDateField?: BasicDateField,
-  filterEndDate?: string,
-  filterEndDatetime?: string,
-  filterStartDate?: string,
-  filterStartDatetime?: string,
-  filterIds?: number[],
-  filterCodes?: string[],
+  filter?: ListCouponsFilter,
   currencyPrices?: boolean,
-  filterUseSiteExchangeRate?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse[]>>
 ```
@@ -149,15 +138,8 @@ async listCouponsForProductFamily(
 | `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the coupon belongs |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. |
-| `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[date_field]=2011-12-15`. |
-| `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `?filter[end_datetime]=2011-12-1T10:15:30+01:00`. |
-| `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-17`. |
-| `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching coupons with matching id based on provided values. Use in query `filter[ids]=1,2,3`. |
-| `filterCodes` | `string[] \| undefined` | Query, Optional | Allows fetching coupons with matching codes based on provided values. Use in query `filter[codes]=free,free_trial`. |
+| `filter` | [`ListCouponsFilter \| undefined`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
-| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -167,22 +149,33 @@ async listCouponsForProductFamily(
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
   productFamilyId: 140,
   page: 2,
   perPage: 50,
+  filter: {
+    startDate: '2011-12-17',
+    endDate: '2011-12-15',
+    startDatetime: '12/19/2011 09:15:30',
+    endDatetime: '06/07/2019 17:20:06',
+    ids: [
+      1,
+      2,
+      3
+    ],
+    codes: [
+      'free',
+      'free_trial'
+    ],
+  },
   currencyPrices: true
 }
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.listCouponsForProductFamily(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -215,7 +208,6 @@ try {
       "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
-      "coupon_restrictions": [],
       "use_site_exchange_rate": true
     }
   },
@@ -241,7 +233,6 @@ try {
       "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
-      "coupon_restrictions": [],
       "use_site_exchange_rate": true
     }
   },
@@ -313,15 +304,11 @@ async findCoupon(
 
 ```ts
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.findCoupon();
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -366,8 +353,6 @@ const productFamilyId = 140;
 const couponId = 162;
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.readCoupon(
   productFamilyId,
   couponId
@@ -376,8 +361,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -408,8 +391,7 @@ try {
     "archived_at": null,
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
+    "compounding_strategy": "compound"
   }
 }
 ```
@@ -476,8 +458,6 @@ const body: CreateOrUpdateCoupon = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.updateCoupon(
   productFamilyId,
   couponId,
@@ -487,8 +467,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -519,8 +497,7 @@ try {
     "archived_at": null,
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
+    "compounding_strategy": "compound"
   }
 }
 ```
@@ -560,8 +537,6 @@ const productFamilyId = 140;
 const couponId = 162;
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.archiveCoupon(
   productFamilyId,
   couponId
@@ -570,8 +545,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -602,8 +575,7 @@ try {
     "archived_at": "2016-12-02T13:09:33-05:00",
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
+    "compounding_strategy": "compound"
   }
 }
 ```
@@ -619,20 +591,8 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 async listCoupons(
   page?: number,
   perPage?: number,
-  dateField?: BasicDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  filterIds?: number[],
-  filterCodes?: string[],
+  filter?: ListCouponsFilter,
   currencyPrices?: boolean,
-  filterEndDate?: string,
-  filterEndDatetime?: string,
-  filterStartDate?: string,
-  filterStartDatetime?: string,
-  filterDateField?: BasicDateField,
-  filterUseSiteExchangeRate?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse[]>>
 ```
@@ -643,20 +603,8 @@ async listCoupons(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `dateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search. |
-| `startDate` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
-| `endDate` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `startDatetime` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[start_datetime] instead to achieve the same result. The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `endDatetime` | `string \| undefined` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[end_datetime] instead to achieve the same result. The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching coupons with matching id based on provided values. Use in query `filter[ids]=1,2,3`. |
-| `filterCodes` | `string[] \| undefined` | Query, Optional | Allows fetching coupons with matching code based on provided values. Use in query `filter[ids]=1,2,3`. |
+| `filter` | [`ListCouponsFilter \| undefined`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
-| `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[end_date]=2011-12-17`. |
-| `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `filter[end_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-19`. |
-| `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=updated_at`. |
-| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -666,25 +614,32 @@ async listCoupons(
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
   page: 2,
   perPage: 50,
-  dateField: BasicDateField.UpdatedAt,
-  startDate: '2011-12-17',
-  startDatetime: '06/07/2019 17:20:06',
-  endDatetime: '06/07/2019 17:20:06',
+  filter: {
+    startDate: '2011-12-17',
+    endDate: '2011-12-15',
+    startDatetime: '12/19/2011 09:15:30',
+    endDatetime: '06/07/2019 17:20:06',
+    ids: [
+      1,
+      2,
+      3
+    ],
+    codes: [
+      'free',
+      'free_trial'
+    ],
+  },
   currencyPrices: true
 }
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.listCoupons(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -772,8 +727,6 @@ const productFamilyId = 140;
 const couponId = 162;
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.readCouponUsage(
   productFamilyId,
   couponId
@@ -782,8 +735,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -875,15 +826,11 @@ async validateCoupon(
 const code = 'code8';
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.validateCoupon(code);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -914,8 +861,7 @@ try {
     "archived_at": null,
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "full-price",
-    "coupon_restrictions": []
+    "compounding_strategy": "full-price"
   }
 }
 ```
@@ -972,8 +918,6 @@ const body: CouponCurrencyRequest = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.createOrUpdateCouponCurrencyPrices(
   couponId,
   body
@@ -982,8 +926,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -1068,8 +1010,6 @@ const body: CouponSubcodes = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.createCouponSubcodes(
   couponId,
   body
@@ -1078,8 +1018,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -1094,9 +1032,7 @@ try {
     "BALTIMOREFALL",
     "ORLANDOFALL",
     "DETROITFALL"
-  ],
-  "duplicate_codes": [],
-  "invalid_codes": []
+  ]
 }
 ```
 
@@ -1136,15 +1072,11 @@ const collect = {
   perPage: 50
 }
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.listCouponSubcodes(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -1229,8 +1161,6 @@ const body: CouponSubcodes = {
 };
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.updateCouponSubcodes(
   couponId,
   body
@@ -1239,8 +1169,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }
@@ -1301,8 +1229,6 @@ const couponId = 162;
 const subcode = 'subcode4';
 
 try {
-  // @ts-expect-error: unused variables
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { result, ...httpResponse } = await couponsController.deleteCouponSubcode(
   couponId,
   subcode
@@ -1311,8 +1237,6 @@ try {
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
   if (error instanceof ApiError) {
-    // @ts-expect-error: unused variables
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const errors = error.result;
     // const { statusCode, headers } = error;
   }

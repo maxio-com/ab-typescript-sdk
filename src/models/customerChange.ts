@@ -5,43 +5,36 @@
  */
 
 import { expandoObject, lazy, nullable, optional, Schema } from '../schema';
+import { AddressChange, addressChangeSchema } from './addressChange';
 import {
-  CustomerChangeBillingAddress,
-  customerChangeBillingAddressSchema,
-} from './containers/customerChangeBillingAddress';
+  CustomerCustomFieldsChange,
+  customerCustomFieldsChangeSchema,
+} from './customerCustomFieldsChange';
 import {
-  CustomerChangeCustomFields,
-  customerChangeCustomFieldsSchema,
-} from './containers/customerChangeCustomFields';
-import {
-  CustomerChangePayer,
-  customerChangePayerSchema,
-} from './containers/customerChangePayer';
-import {
-  CustomerChangeShippingAddress,
-  customerChangeShippingAddressSchema,
-} from './containers/customerChangeShippingAddress';
+  CustomerPayerChange,
+  customerPayerChangeSchema,
+} from './customerPayerChange';
 
 export interface CustomerChange {
-  payer?: CustomerChangePayer | null;
-  shippingAddress?: CustomerChangeShippingAddress | null;
-  billingAddress?: CustomerChangeBillingAddress | null;
-  customFields?: CustomerChangeCustomFields | null;
+  payer?: CustomerPayerChange | null;
+  shippingAddress?: AddressChange | null;
+  billingAddress?: AddressChange | null;
+  customFields?: CustomerCustomFieldsChange | null;
   [key: string]: unknown;
 }
 
 export const customerChangeSchema: Schema<CustomerChange> = expandoObject({
-  payer: ['payer', optional(nullable(lazy(() => customerChangePayerSchema)))],
+  payer: ['payer', optional(nullable(lazy(() => customerPayerChangeSchema)))],
   shippingAddress: [
     'shipping_address',
-    optional(nullable(lazy(() => customerChangeShippingAddressSchema))),
+    optional(nullable(lazy(() => addressChangeSchema))),
   ],
   billingAddress: [
     'billing_address',
-    optional(nullable(lazy(() => customerChangeBillingAddressSchema))),
+    optional(nullable(lazy(() => addressChangeSchema))),
   ],
   customFields: [
     'custom_fields',
-    optional(nullable(lazy(() => customerChangeCustomFieldsSchema))),
+    optional(nullable(lazy(() => customerCustomFieldsChangeSchema))),
   ],
 });

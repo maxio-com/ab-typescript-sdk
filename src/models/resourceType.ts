@@ -17,4 +17,4 @@ export enum ResourceType {
 /**
  * Schema for ResourceType
  */
-export const resourceTypeSchema: Schema<ResourceType> = stringEnum(ResourceType);
+export const  resourceTypeSchema: Schema<ResourceType> = stringEnum(ResourceType);

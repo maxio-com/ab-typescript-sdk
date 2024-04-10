@@ -17,4 +17,4 @@ export enum CreditNoteStatus {
 /**
  * Schema for CreditNoteStatus
  */
-export const creditNoteStatusSchema: Schema<CreditNoteStatus> = stringEnum(CreditNoteStatus);
+export const  creditNoteStatusSchema: Schema<CreditNoteStatus> = stringEnum(CreditNoteStatus);

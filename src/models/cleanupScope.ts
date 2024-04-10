@@ -17,4 +17,4 @@ export enum CleanupScope {
 /**
  * Schema for CleanupScope
  */
-export const cleanupScopeSchema: Schema<CleanupScope> = stringEnum(CleanupScope);
+export const  cleanupScopeSchema: Schema<CleanupScope> = stringEnum(CleanupScope);

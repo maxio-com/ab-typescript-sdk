@@ -18,4 +18,4 @@ export enum FirstChargeType {
 /**
  * Schema for FirstChargeType
  */
-export const firstChargeTypeSchema: Schema<FirstChargeType> = stringEnum(FirstChargeType);
+export const  firstChargeTypeSchema: Schema<FirstChargeType> = stringEnum(FirstChargeType);

@@ -18,4 +18,4 @@ export enum CreditType {
 /**
  * Schema for CreditType
  */
-export const creditTypeSchema: Schema<CreditType> = stringEnum(CreditType);
+export const  creditTypeSchema: Schema<CreditType> = stringEnum(CreditType);

@@ -17,4 +17,4 @@ export enum BankAccountHolderType {
 /**
  * Schema for BankAccountHolderType
  */
-export const bankAccountHolderTypeSchema: Schema<BankAccountHolderType> = stringEnum(BankAccountHolderType);
+export const  bankAccountHolderTypeSchema: Schema<BankAccountHolderType> = stringEnum(BankAccountHolderType);

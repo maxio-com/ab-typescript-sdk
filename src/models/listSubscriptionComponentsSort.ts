@@ -17,4 +17,4 @@ export enum ListSubscriptionComponentsSort {
 /**
  * Schema for ListSubscriptionComponentsSort
  */
-export const listSubscriptionComponentsSortSchema: Schema<ListSubscriptionComponentsSort> = stringEnum(ListSubscriptionComponentsSort);
+export const  listSubscriptionComponentsSortSchema: Schema<ListSubscriptionComponentsSort> = stringEnum(ListSubscriptionComponentsSort);

@@ -5,7 +5,7 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, commaPrefix, plainPrefix, RequestOptions } from '../core';
+import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
 import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
@@ -399,7 +399,7 @@ export class CustomFieldsController extends BaseController {
       names: [names, optional(array(string()))],
     });
     req.query('name', mapped.name);
-    req.query('names[]', mapped.names, plainPrefix);
+    req.query('names', mapped.names, unindexedPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.authenticate([{ basicAuth: true }]);
@@ -506,7 +506,7 @@ export class CustomFieldsController extends BaseController {
     req.query('start_datetime', mapped.startDatetime);
     req.query('end_datetime', mapped.endDatetime);
     req.query('with_deleted', mapped.withDeleted);
-    req.query('resource_ids[]', mapped.resourceIds, commaPrefix);
+    req.query('resource_ids', mapped.resourceIds, unindexedPrefix);
     req.query('direction', mapped.direction);
     req.appendTemplatePath`/${mapped.resourceType}/metadata.json`;
     req.authenticate([{ basicAuth: true }]);

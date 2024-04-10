@@ -19,4 +19,4 @@ export enum ProformaInvoiceRole {
 /**
  * Schema for ProformaInvoiceRole
  */
-export const proformaInvoiceRoleSchema: Schema<ProformaInvoiceRole> = stringEnum(ProformaInvoiceRole);
+export const  proformaInvoiceRoleSchema: Schema<ProformaInvoiceRole> = stringEnum(ProformaInvoiceRole);

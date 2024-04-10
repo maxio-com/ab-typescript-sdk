@@ -18,4 +18,4 @@ export enum ReactivationCharge {
 /**
  * Schema for ReactivationCharge
  */
-export const reactivationChargeSchema: Schema<ReactivationCharge> = stringEnum(ReactivationCharge);
+export const  reactivationChargeSchema: Schema<ReactivationCharge> = stringEnum(ReactivationCharge);

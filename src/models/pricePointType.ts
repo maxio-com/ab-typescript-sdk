@@ -18,4 +18,4 @@ export enum PricePointType {
 /**
  * Schema for PricePointType
  */
-export const pricePointTypeSchema: Schema<PricePointType> = stringEnum(PricePointType);
+export const  pricePointTypeSchema: Schema<PricePointType> = stringEnum(PricePointType);

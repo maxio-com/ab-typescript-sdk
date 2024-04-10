@@ -19,4 +19,4 @@ export enum TaxConfigurationKind {
 /**
  * Schema for TaxConfigurationKind
  */
-export const taxConfigurationKindSchema: Schema<TaxConfigurationKind> = stringEnum(TaxConfigurationKind);
+export const  taxConfigurationKindSchema: Schema<TaxConfigurationKind> = stringEnum(TaxConfigurationKind);

@@ -17,4 +17,4 @@ export enum CustomFieldOwner {
 /**
  * Schema for CustomFieldOwner
  */
-export const customFieldOwnerSchema: Schema<CustomFieldOwner> = stringEnum(CustomFieldOwner);
+export const  customFieldOwnerSchema: Schema<CustomFieldOwner> = stringEnum(CustomFieldOwner);

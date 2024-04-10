@@ -20,4 +20,4 @@ export enum InvoiceEventPaymentMethod {
 /**
  * Schema for InvoiceEventPaymentMethod
  */
-export const invoiceEventPaymentMethodSchema: Schema<InvoiceEventPaymentMethod> = stringEnum(InvoiceEventPaymentMethod);
+export const  invoiceEventPaymentMethodSchema: Schema<InvoiceEventPaymentMethod> = stringEnum(InvoiceEventPaymentMethod);
