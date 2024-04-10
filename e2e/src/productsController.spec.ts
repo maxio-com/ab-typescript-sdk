@@ -3,7 +3,6 @@ import { createClient, createInvalidClient } from './config';
 import {
   ProductFamiliesController,
   ProductResponse,
-  IncludeNotNull,
   ProductsController,
   IntervalUnit,
 } from 'advanced-billing-sdk';
@@ -181,8 +180,6 @@ describe('Products Controller', () => {
       const client = createClient();
       const productsController = new ProductsController(client);
       const response = await productsController.listProducts({
-        filterPrepaidProductPricePointProductPricePointId:
-          IncludeNotNull.NotNull,
       });
       const productNames = response.result
         .map((result: ProductResponse) => result.product.name)
