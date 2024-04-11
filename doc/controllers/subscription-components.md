@@ -114,7 +114,6 @@ async listSubscriptionComponents(
   subscriptionId: number,
   dateField?: SubscriptionListDateField,
   direction?: SortingDirection,
-  filter?: ListSubscriptionComponentsFilter,
   endDate?: string,
   endDatetime?: string,
   pricePointIds?: IncludeNotNull,
@@ -123,6 +122,8 @@ async listSubscriptionComponents(
   startDate?: string,
   startDatetime?: string,
   include?: ListSubscriptionComponentsInclude,
+  filterUseSiteExchangeRate?: boolean,
+  filterCurrencies?: string[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionComponentResponse[]>>
 ```
@@ -134,7 +135,6 @@ async listSubscriptionComponents(
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
-| `filter` | [`ListSubscriptionComponentsFilter \| undefined`](../../doc/models/list-subscription-components-filter.md) | Query, Optional | Filter to use for List Subscription Components operation |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `endDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
@@ -143,6 +143,8 @@ async listSubscriptionComponents(
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
+| `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=EUR,USD`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -152,15 +154,9 @@ async listSubscriptionComponents(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
   subscriptionId: 222,
   dateField: SubscriptionListDateField.UpdatedAt,
-  filter: {
-    currencies: [
-      'EUR',
-      'USD'
-    ],
-  },
   pricePointIds: IncludeNotNull.NotNull,
   productFamilyIds: [
     1,
@@ -438,7 +434,8 @@ try {
         "description": "Duis",
         "handle": "ea dolore dolore sunt",
         "accounting_code": null
-      }
+      },
+      "public_signup_pages": []
     }
   }
 }
@@ -1642,7 +1639,6 @@ async listSubscriptionComponentsForSite(
   perPage?: number,
   sort?: ListSubscriptionComponentsSort,
   direction?: SortingDirection,
-  filter?: ListSubscriptionComponentsForSiteFilter,
   dateField?: SubscriptionListDateField,
   startDate?: string,
   startDatetime?: string,
@@ -1652,6 +1648,14 @@ async listSubscriptionComponentsForSite(
   pricePointIds?: IncludeNotNull,
   productFamilyIds?: number[],
   include?: ListSubscriptionComponentsInclude,
+  filterUseSiteExchangeRate?: boolean,
+  filterCurrencies?: string[],
+  filterSubscriptionStates?: SubscriptionStateFilter[],
+  filterSubscriptionDateField?: SubscriptionListDateField,
+  filterSubscriptionStartDate?: string,
+  filterSubscriptionStartDatetime?: string,
+  filterSubscriptionEndDate?: string,
+  filterSubscriptionEndDatetime?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSubscriptionComponentsResponse>>
 ```
@@ -1664,7 +1668,6 @@ async listSubscriptionComponentsForSite(
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
-| `filter` | [`ListSubscriptionComponentsForSiteFilter \| undefined`](../../doc/models/list-subscription-components-for-site-filter.md) | Query, Optional | Filter to use for List Subscription Components For Site operation |
 | `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2011-12-15`. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
@@ -1674,6 +1677,14 @@ async listSubscriptionComponentsForSite(
 | `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
 | `productFamilyIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
 | `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `filterUseSiteExchangeRate` | `boolean \| undefined` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
+| `filterCurrencies` | `string[] \| undefined` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=USD,EUR`. |
+| `filterSubscriptionStates` | [`SubscriptionStateFilter[] \| undefined`](../../doc/models/subscription-state-filter.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
+| `filterSubscriptionDateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filterSubscriptionEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1683,16 +1694,10 @@ async listSubscriptionComponentsForSite(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
   perPage: 50,
   sort: ListSubscriptionComponentsSort.UpdatedAt,
-  filter: {
-    currencies: [
-      'EUR',
-      'USD'
-    ],
-  },
   dateField: SubscriptionListDateField.UpdatedAt,
   subscriptionIds: [
     1,

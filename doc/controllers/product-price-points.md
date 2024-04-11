@@ -611,7 +611,8 @@ try {
       "accounting_code": null,
       "created_at": "2023-12-01T06:56:12-05:00",
       "updated_at": "2023-12-01T06:56:12-05:00"
-    }
+    },
+    "public_signup_pages": []
   }
 }
 ```
@@ -916,7 +917,14 @@ This method allows retrieval of a list of Products Price Points belonging to a S
 ```ts
 async listAllProductPricePoints(
   direction?: SortingDirection,
-  filter?: ListPricePointsFilter,
+  filterArchivedAt?: IncludeNotNull,
+  filterDateField?: BasicDateField,
+  filterEndDate?: string,
+  filterEndDatetime?: string,
+  filterIds?: number[],
+  filterStartDate?: string,
+  filterStartDatetime?: string,
+  filterType?: PricePointType[],
   include?: ListProductsPricePointsInclude,
   page?: number,
   perPage?: number,
@@ -929,7 +937,14 @@ async listAllProductPricePoints(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
-| `filter` | [`ListPricePointsFilter \| undefined`](../../doc/models/list-price-points-filter.md) | Query, Optional | Filter to use for List PricePoints operations |
+| `filterArchivedAt` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
+| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
+| `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
+| `filterEndDatetime` | `string \| undefined` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
+| `filterIds` | `number[] \| undefined` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
+| `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
+| `filterStartDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
+| `filterType` | [`PricePointType[] \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`. |
 | `include` | [`ListProductsPricePointsInclude \| undefined`](../../doc/models/list-products-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
@@ -942,23 +957,7 @@ async listAllProductPricePoints(
 ## Example Usage
 
 ```ts
-const collect = {
-  filter: {
-    startDate: '2011-12-17',
-    endDate: '2011-12-15',
-    startDatetime: '12/19/2011 09:15:30',
-    endDatetime: '06/07/2019 17:20:06',
-    type: [
-      PricePointType.Catalog,
-      PricePointType.Default,
-      PricePointType.Custom
-    ],
-    ids: [
-      1,
-      2,
-      3
-    ],
-  },
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
   include: ListProductsPricePointsInclude.CurrencyPrices,
   page: 2,
   perPage: 50

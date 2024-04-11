@@ -26,14 +26,14 @@ import {
 } from './cancellationMethod';
 import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import {
+  SubscriptionGroup2,
+  subscriptionGroup2Schema,
+} from './containers/subscriptionGroup2';
+import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
 } from './creditCardPaymentProfile';
 import { Customer, customerSchema } from './customer';
-import {
-  NestedSubscriptionGroup,
-  nestedSubscriptionGroupSchema,
-} from './nestedSubscriptionGroup';
 import {
   PrepaidConfiguration,
   prepaidConfigurationSchema,
@@ -123,7 +123,7 @@ export interface Subscription {
   customer?: Customer;
   product?: Product;
   creditCard?: CreditCardPaymentProfile;
-  group?: NestedSubscriptionGroup | null;
+  group?: SubscriptionGroup2 | null;
   bankAccount?: BankAccountPaymentProfile;
   /** The payment profile type for the active profile on file. */
   paymentType?: string | null;
@@ -147,7 +147,7 @@ export interface Subscription {
   offerId?: number | null;
   /** On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. */
   payerId?: number | null;
-  /** The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation. */
+  /** The balance in cents plus the estimated renewal amount in cents. */
   currentBillingAmountInCents?: bigint;
   /** The product price point currently subscribed to. */
   productPricePointId?: number;
@@ -233,10 +233,7 @@ export const subscriptionSchema: Schema<Subscription> = expandoObject({
     'credit_card',
     optional(lazy(() => creditCardPaymentProfileSchema)),
   ],
-  group: [
-    'group',
-    optional(nullable(lazy(() => nestedSubscriptionGroupSchema))),
-  ],
+  group: ['group', optional(nullable(lazy(() => subscriptionGroup2Schema)))],
   bankAccount: [
     'bank_account',
     optional(lazy(() => bankAccountPaymentProfileSchema)),

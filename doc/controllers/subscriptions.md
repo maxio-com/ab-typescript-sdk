@@ -911,17 +911,14 @@ async listSubscriptions(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
   perPage: 50,
   startDate: '2022-07-01',
   endDate: '2022-08-01',
   startDatetime: '2022-07-01 09:00:05',
   endDatetime: '2022-08-01 10:00:05',
-  sort: SubscriptionSort.SignupDate,
-  include: [
-    SubscriptionListInclude.SelfServicePageToken
-  ]
+  sort: SubscriptionSort.SignupDate
 }
 try {
   const { result, ...httpResponse } = await subscriptionsController.listSubscriptions(collect);
@@ -1181,16 +1178,8 @@ async readSubscription(
 ```ts
 const subscriptionId = 222;
 
-const include: SubscriptionInclude[] = [
-  SubscriptionInclude.Coupons,
-  SubscriptionInclude.SelfServicePageToken
-];
-
-try {
-  const { result, ...httpResponse } = await subscriptionsController.readSubscription(
-  subscriptionId,
-  include
-);
+Liquid error: Value cannot be null. (Parameter 'key')try {
+  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await subscriptionsController.readSubscription(subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1498,16 +1487,10 @@ const subscriptionId = 222;
 
 const ack = 252;
 
-const cascade: SubscriptionPurgeType[] = [
-  SubscriptionPurgeType.Customer,
-  SubscriptionPurgeType.PaymentProfile
-];
-
-try {
-  const { result, ...httpResponse } = await subscriptionsController.purgeSubscription(
+Liquid error: Value cannot be null. (Parameter 'key')try {
+  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await subscriptionsController.purgeSubscription(
   subscriptionId,
-  ack,
-  cascade
+  ack
 );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;

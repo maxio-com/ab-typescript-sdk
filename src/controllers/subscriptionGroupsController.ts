@@ -131,22 +131,22 @@ export class SubscriptionGroupsController extends BaseController {
    * Account balance information for the subscription groups is not returned by default. If this
    * information is desired, the `include[]=account_balances` parameter must be provided with the request.
    *
-   * @param page     Result records are organized in pages. By default, the first
-   *                                                    page of results is displayed. The page parameter specifies a
-   *                                                    page number of results to fetch. You can start navigating
-   *                                                    through the pages to consume the results. You do this by
-   *                                                    passing in a page parameter. Retrieve the next page by adding ?
-   *                                                    page=2 to the query string. If there are no results to return,
-   *                                                    then an empty result set will be returned. Use in query
-   *                                                    `page=1`.
-   * @param perPage  This parameter indicates how many records to fetch in each
-   *                                                    request. Default value is 20. The maximum allowed values is 200;
-   *                                                    any per_page value over 200 will be changed to 200. Use in
-   *                                                    query `per_page=200`.
-   * @param include  A list of additional information to include in the response.
-   *                                                    The following values are supported:  - `account_balances`:
-   *                                                    Account balance information for the subscription groups. Use in
-   *                                                    query: `include[]=account_balances`
+   * @param page      Result records are organized in pages. By default, the first
+   *                                                     page of results is displayed. The page parameter specifies a
+   *                                                     page number of results to fetch. You can start navigating
+   *                                                     through the pages to consume the results. You do this by
+   *                                                     passing in a page parameter. Retrieve the next page by adding ?
+   *                                                     page=2 to the query string. If there are no results to return,
+   *                                                     then an empty result set will be returned. Use in query
+   *                                                     `page=1`.
+   * @param perPage   This parameter indicates how many records to fetch in each
+   *                                                     request. Default value is 20. The maximum allowed values is
+   *                                                     200; any per_page value over 200 will be changed to 200. Use
+   *                                                     in query `per_page=200`.
+   * @param include   A list of additional information to include in the response.
+   *                                                     The following values are supported:  - `account_balances`:
+   *                                                     Account balance information for the subscription groups. Use
+   *                                                     in query: `include[]=account_balances`
    * @return Response from the API call
    */
   async listSubscriptionGroups({
@@ -168,7 +168,7 @@ export class SubscriptionGroupsController extends BaseController {
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('include', mapped.include, unindexedPrefix);
+    req.query('include[]', mapped.include, unindexedPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSubscriptionGroupsResponseSchema, requestOptions);
   }
@@ -181,9 +181,9 @@ export class SubscriptionGroupsController extends BaseController {
    * Current billing amount for the subscription group is not returned by default. If this information is
    * desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
    *
-   * @param uid     The uid of the subscription group
-   * @param include Allows including additional data in the response. Use in query:
-   *                                              `include[]=current_billing_amount_in_cents`.
+   * @param uid       The uid of the subscription group
+   * @param include   Allows including additional data in the response. Use in query:
+   *                                                `include[]=current_billing_amount_in_cents`.
    * @return Response from the API call
    */
   async readSubscriptionGroup(
@@ -196,7 +196,7 @@ export class SubscriptionGroupsController extends BaseController {
       uid: [uid, string()],
       include: [include, optional(array(subscriptionGroupIncludeSchema))],
     });
-    req.query('include', mapped.include, unindexedPrefix);
+    req.query('include[]', mapped.include, unindexedPrefix);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
@@ -204,7 +204,7 @@ export class SubscriptionGroupsController extends BaseController {
 
   /**
    * Use this endpoint to update subscription group members.
-   * `"member_ids"` should contain an array of both subscription IDs to set as group members and
+   * `"member_ids": []` should contain an array of both subscription IDs to set as group members and
    * subscription IDs already present in the groups. Not including them will result in removing them from
    * subscription group. To clean up members, just leave the array empty.
    *

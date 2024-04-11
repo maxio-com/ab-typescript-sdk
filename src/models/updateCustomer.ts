@@ -34,8 +34,6 @@ export interface UpdateCustomer {
   taxExempt?: boolean;
   taxExemptReason?: string;
   parentId?: number | null;
-  /** Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway */
-  verified?: boolean | null;
   [key: string]: unknown;
 }
 
@@ -58,5 +56,4 @@ export const updateCustomerSchema: Schema<UpdateCustomer> = expandoObject({
   taxExempt: ['tax_exempt', optional(boolean())],
   taxExemptReason: ['tax_exempt_reason', optional(string())],
   parentId: ['parent_id', optional(nullable(number()))],
-  verified: ['verified', optional(nullable(boolean()))],
 });

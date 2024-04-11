@@ -12,12 +12,15 @@ import {
   optional,
   Schema,
 } from '../schema';
-import { InvoicePrePayment, invoicePrePaymentSchema } from './invoicePrePayment';
+import {
+  RecordPaymentResponsePrepayment,
+  recordPaymentResponsePrepaymentSchema,
+} from './containers/recordPaymentResponsePrepayment';
 import { PaidInvoice, paidInvoiceSchema } from './paidInvoice';
 
 export interface RecordPaymentResponse {
   paidInvoices?: PaidInvoice[];
-  prepayment?: InvoicePrePayment | null;
+  prepayment?: RecordPaymentResponsePrepayment | null;
   [key: string]: unknown;
 }
 
@@ -29,7 +32,7 @@ export const recordPaymentResponseSchema: Schema<RecordPaymentResponse> = expand
     ],
     prepayment: [
       'prepayment',
-      optional(nullable(lazy(() => invoicePrePaymentSchema))),
+      optional(nullable(lazy(() => recordPaymentResponsePrepaymentSchema))),
     ],
   }
 );

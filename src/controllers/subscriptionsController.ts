@@ -1046,7 +1046,7 @@ export class SubscriptionsController extends BaseController {
     req.query(mapped.metadata);
     req.query('direction', mapped.direction);
     req.query('sort', mapped.sort);
-    req.query('include', mapped.include, unindexedPrefix);
+    req.query('include[]', mapped.include, unindexedPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
   }
@@ -1167,7 +1167,7 @@ export class SubscriptionsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       include: [include, optional(array(subscriptionIncludeSchema))],
     });
-    req.query('include', mapped.include, unindexedPrefix);
+    req.query('include[]', mapped.include, unindexedPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
@@ -1282,7 +1282,7 @@ export class SubscriptionsController extends BaseController {
       cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
     });
     req.query('ack', mapped.ack);
-    req.query('cascade', mapped.cascade, commaPrefix);
+    req.query('cascade[]', mapped.cascade, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);

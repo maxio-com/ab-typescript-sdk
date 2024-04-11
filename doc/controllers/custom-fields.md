@@ -110,6 +110,7 @@ try {
   {
     "name": "Color",
     "scope": {
+      "hosted": [],
       "csv": "0",
       "statements": "0",
       "invoices": "0",
@@ -122,6 +123,7 @@ try {
   {
     "name": "Brand",
     "scope": {
+      "hosted": [],
       "csv": "0",
       "statements": "0",
       "invoices": "0",
@@ -574,8 +576,8 @@ const resourceType = ResourceType.Subscriptions;
 
 const resourceId = 60;
 
-try {
-  const { result, ...httpResponse } = await customFieldsController.deleteMetadata(
+Liquid error: Value cannot be null. (Parameter 'key')try {
+  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await customFieldsController.deleteMetadata(
   resourceType,
   resourceId
 );
@@ -653,7 +655,7 @@ async listMetadataForResourceType(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   resourceType: ResourceType.Subscriptions,
   page: 2,
   perPage: 50,

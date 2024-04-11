@@ -15,9 +15,9 @@ import {
   string,
 } from '../schema';
 import {
-  InvoiceLineItemComponentCostData,
-  invoiceLineItemComponentCostDataSchema,
-} from './invoiceLineItemComponentCostData';
+  InvoiceLineItemComponentCostData2,
+  invoiceLineItemComponentCostData2Schema,
+} from './containers/invoiceLineItemComponentCostData2';
 
 export interface InvoiceLineItem {
   /** Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists. */
@@ -85,7 +85,7 @@ export interface InvoiceLineItem {
   /** The price point ID of the component being billed. Will be `nil` for non-component charges. */
   pricePointId?: number | null;
   hide?: boolean;
-  componentCostData?: InvoiceLineItemComponentCostData | null;
+  componentCostData?: InvoiceLineItemComponentCostData2 | null;
   /** The price point ID of the line item's product */
   productPricePointId?: number | null;
   customItem?: boolean;
@@ -114,7 +114,7 @@ export const invoiceLineItemSchema: Schema<InvoiceLineItem> = expandoObject({
   hide: ['hide', optional(boolean())],
   componentCostData: [
     'component_cost_data',
-    optional(nullable(lazy(() => invoiceLineItemComponentCostDataSchema))),
+    optional(nullable(lazy(() => invoiceLineItemComponentCostData2Schema))),
   ],
   productPricePointId: ['product_price_point_id', optional(nullable(number()))],
   customItem: ['custom_item', optional(boolean())],

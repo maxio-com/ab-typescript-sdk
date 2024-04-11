@@ -60,10 +60,7 @@ import {
   CreateQuantityBasedComponent,
   createQuantityBasedComponentSchema,
 } from '../models/createQuantityBasedComponent';
-import {
-  ListComponentsFilter,
-  listComponentsFilterSchema,
-} from '../models/listComponentsFilter';
+import { IncludeNotNull, includeNotNullSchema } from '../models/includeNotNull';
 import {
   ListComponentsPricePointsInclude,
   listComponentsPricePointsIncludeSchema,
@@ -72,10 +69,6 @@ import {
   ListComponentsPricePointsResponse,
   listComponentsPricePointsResponseSchema,
 } from '../models/listComponentsPricePointsResponse';
-import {
-  ListPricePointsFilter,
-  listPricePointsFilterSchema,
-} from '../models/listPricePointsFilter';
 import { PricePointType, pricePointTypeSchema } from '../models/pricePointType';
 import {
   SortingDirection,
@@ -397,41 +390,46 @@ export class ComponentsController extends BaseController {
   /**
    * This request will return a list of components for a site.
    *
-   * @param dateField        The type of filter you would like to apply to your search.
-   * @param startDate        The start date (format YYYY-MM-DD) with which to filter
-   *                                                        the date_field. Returns components with a timestamp at or
-   *                                                        after midnight (12:00:00 AM) in your site’s time zone on
-   *                                                        the date specified.
-   * @param endDate          The end date (format YYYY-MM-DD) with which to filter the
-   *                                                        date_field. Returns components with a timestamp up to and
-   *                                                        including 11:59:59PM in your site’s time zone on the date
-   *                                                        specified.
-   * @param startDatetime    The start date and time (format YYYY-MM-DD HH:MM:SS) with
-   *                                                        which to filter the date_field. Returns components with a
-   *                                                        timestamp at or after exact time provided in query. You can
-   *                                                        specify timezone in query - otherwise your site's time zone
-   *                                                        will be used. If provided, this parameter will be used
-   *                                                        instead of start_date.
-   * @param endDatetime      The end date and time (format YYYY-MM-DD HH:MM:SS) with
-   *                                                        which to filter the date_field. Returns components with a
-   *                                                        timestamp at or before exact time provided in query. You
-   *                                                        can specify timezone in query - otherwise your site's time
-   *                                                        zone will be used. If provided, this parameter will be used
-   *                                                        instead of end_date.  optional
-   * @param includeArchived  Include archived items
-   * @param page             Result records are organized in pages. By default, the
-   *                                                        first page of results is displayed. The page parameter
-   *                                                        specifies a page number of results to fetch. You can start
-   *                                                        navigating through the pages to consume the results. You do
-   *                                                        this by passing in a page parameter. Retrieve the next page
-   *                                                        by adding ?page=2 to the query string. If there are no
-   *                                                        results to return, then an empty result set will be
-   *                                                        returned. Use in query `page=1`.
-   * @param perPage          This parameter indicates how many records to fetch in each
-   *                                                        request. Default value is 20. The maximum allowed values is
-   *                                                        200; any per_page value over 200 will be changed to 200.
-   *                                                        Use in query `per_page=200`.
-   * @param filter           Filter to use for List Components operations
+   * @param dateField                      The type of filter you would like to apply to your search.
+   * @param startDate                      The start date (format YYYY-MM-DD) with which to filter
+   *                                                         the date_field. Returns components with a timestamp at or
+   *                                                         after midnight (12:00:00 AM) in your site’s time zone on
+   *                                                         the date specified.
+   * @param endDate                        The end date (format YYYY-MM-DD) with which to filter the
+   *                                                         date_field. Returns components with a timestamp up to and
+   *                                                         including 11:59:59PM in your site’s time zone on the date
+   *                                                         specified.
+   * @param startDatetime                  The start date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns components with a
+   *                                                         timestamp at or after exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of start_date.
+   * @param endDatetime                    The end date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns components with a
+   *                                                         timestamp at or before exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of end_date.  optional
+   * @param includeArchived                Include archived items
+   * @param page                           Result records are organized in pages. By default, the
+   *                                                         first page of results is displayed. The page parameter
+   *                                                         specifies a page number of results to fetch. You can start
+   *                                                         navigating through the pages to consume the results. You
+   *                                                         do this by passing in a page parameter. Retrieve the next
+   *                                                         page by adding ?page=2 to the query string. If there are
+   *                                                         no results to return, then an empty result set will be
+   *                                                         returned. Use in query `page=1`.
+   * @param perPage                        This parameter indicates how many records to fetch in
+   *                                                         each request. Default value is 20. The maximum allowed
+   *                                                         values is 200; any per_page value over 200 will be changed
+   *                                                         to 200. Use in query `per_page=200`.
+   * @param filterIds                      Allows fetching components with matching id based on
+   *                                                         provided value. Use in query `filter[ids]=1,2,3`.
+   * @param filterUseSiteExchangeRate      Allows fetching components with matching
+   *                                                         use_site_exchange_rate based on provided value (refers to
+   *                                                         default price point). Use in query
+   *                                                         `filter[use_site_exchange_rate]=true`.
    * @return Response from the API call
    */
   async listComponents({
@@ -443,7 +441,8 @@ export class ComponentsController extends BaseController {
     includeArchived,
     page,
     perPage,
-    filter,
+    filterIds,
+    filterUseSiteExchangeRate,
   }: {
     dateField?: BasicDateField,
     startDate?: string,
@@ -453,7 +452,8 @@ export class ComponentsController extends BaseController {
     includeArchived?: boolean,
     page?: number,
     perPage?: number,
-    filter?: ListComponentsFilter,
+    filterIds?: string[],
+    filterUseSiteExchangeRate?: boolean,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse[]>> {
@@ -467,7 +467,11 @@ export class ComponentsController extends BaseController {
       includeArchived: [includeArchived, optional(boolean())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      filter: [filter, optional(listComponentsFilterSchema)],
+      filterIds: [filterIds, optional(array(string()))],
+      filterUseSiteExchangeRate: [
+        filterUseSiteExchangeRate,
+        optional(boolean()),
+      ],
     });
     req.query('date_field', mapped.dateField);
     req.query('start_date', mapped.startDate);
@@ -477,7 +481,8 @@ export class ComponentsController extends BaseController {
     req.query('include_archived', mapped.includeArchived);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(componentResponseSchema), requestOptions);
   }
@@ -541,9 +546,11 @@ export class ComponentsController extends BaseController {
   /**
    * This request will return a list of components for a particular product family.
    *
-   * @param productFamilyId   The Chargify id of the product family
-   * @param includeArchived   Include archived items.
-   * @param page              Result records are organized in pages. By default, the
+   * @param productFamilyId                The Chargify id of the product family
+   * @param includeArchived                Include archived items.
+   * @param filterIds                      Allows fetching components with matching id based on
+   *                                                         provided value. Use in query `filter[ids]=1,2`.
+   * @param page                           Result records are organized in pages. By default, the
    *                                                         first page of results is displayed. The page parameter
    *                                                         specifies a page number of results to fetch. You can start
    *                                                         navigating through the pages to consume the results. You
@@ -551,57 +558,62 @@ export class ComponentsController extends BaseController {
    *                                                         page by adding ?page=2 to the query string. If there are
    *                                                         no results to return, then an empty result set will be
    *                                                         returned. Use in query `page=1`.
-   * @param perPage           This parameter indicates how many records to fetch in
+   * @param perPage                        This parameter indicates how many records to fetch in
    *                                                         each request. Default value is 20. The maximum allowed
    *                                                         values is 200; any per_page value over 200 will be changed
    *                                                         to 200. Use in query `per_page=200`.
-   * @param filter            Filter to use for List Components operations
-   * @param dateField         The type of filter you would like to apply to your search.
+   * @param dateField                      The type of filter you would like to apply to your search.
    *                                                         Use in query `date_field=created_at`.
-   * @param endDate           The end date (format YYYY-MM-DD) with which to filter the
+   * @param endDate                        The end date (format YYYY-MM-DD) with which to filter the
    *                                                         date_field. Returns components with a timestamp up to and
    *                                                         including 11:59:59PM in your site’s time zone on the date
    *                                                         specified.
-   * @param endDatetime       The end date and time (format YYYY-MM-DD HH:MM:SS) with
+   * @param endDatetime                    The end date and time (format YYYY-MM-DD HH:MM:SS) with
    *                                                         which to filter the date_field. Returns components with a
    *                                                         timestamp at or before exact time provided in query. You
    *                                                         can specify timezone in query - otherwise your site's time
    *                                                         zone will be used. If provided, this parameter will be
    *                                                         used instead of end_date. optional.
-   * @param startDate         The start date (format YYYY-MM-DD) with which to filter
+   * @param startDate                      The start date (format YYYY-MM-DD) with which to filter
    *                                                         the date_field. Returns components with a timestamp at or
    *                                                         after midnight (12:00:00 AM) in your site’s time zone on
    *                                                         the date specified.
-   * @param startDatetime     The start date and time (format YYYY-MM-DD HH:MM:SS) with
+   * @param startDatetime                  The start date and time (format YYYY-MM-DD HH:MM:SS) with
    *                                                         which to filter the date_field. Returns components with a
    *                                                         timestamp at or after exact time provided in query. You
    *                                                         can specify timezone in query - otherwise your site's time
    *                                                         zone will be used. If provided, this parameter will be
    *                                                         used instead of start_date.
+   * @param filterUseSiteExchangeRate      Allows fetching components with matching
+   *                                                         use_site_exchange_rate based on provided value (refers to
+   *                                                         default price point). Use in query
+   *                                                         `filter[use_site_exchange_rate]=true`.
    * @return Response from the API call
    */
   async listComponentsForProductFamily({
     productFamilyId,
     includeArchived,
+    filterIds,
     page,
     perPage,
-    filter,
     dateField,
     endDate,
     endDatetime,
     startDate,
     startDatetime,
+    filterUseSiteExchangeRate,
   }: {
     productFamilyId: number,
     includeArchived?: boolean,
+    filterIds?: number[],
     page?: number,
     perPage?: number,
-    filter?: ListComponentsFilter,
     dateField?: BasicDateField,
     endDate?: string,
     endDatetime?: string,
     startDate?: string,
     startDatetime?: string,
+    filterUseSiteExchangeRate?: boolean,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse[]>> {
@@ -609,24 +621,29 @@ export class ComponentsController extends BaseController {
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
       includeArchived: [includeArchived, optional(boolean())],
+      filterIds: [filterIds, optional(array(number()))],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      filter: [filter, optional(listComponentsFilterSchema)],
       dateField: [dateField, optional(basicDateFieldSchema)],
       endDate: [endDate, optional(string())],
       endDatetime: [endDatetime, optional(string())],
       startDate: [startDate, optional(string())],
       startDatetime: [startDatetime, optional(string())],
+      filterUseSiteExchangeRate: [
+        filterUseSiteExchangeRate,
+        optional(boolean()),
+      ],
     });
     req.query('include_archived', mapped.includeArchived);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
     req.query('date_field', mapped.dateField);
     req.query('end_date', mapped.endDate);
     req.query('end_datetime', mapped.endDatetime);
     req.query('start_date', mapped.startDate);
     req.query('start_datetime', mapped.startDatetime);
+    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(componentResponseSchema), requestOptions);
@@ -893,53 +910,118 @@ export class ComponentsController extends BaseController {
   /**
    * This method allows to retrieve a list of Components Price Points belonging to a Site.
    *
-   * @param include   Allows including additional data in the response. Use in
-   *                                                      query: `include=currency_prices`.
-   * @param page      Result records are organized in pages. By default, the first
-   *                                                      page of results is displayed. The page parameter specifies a
-   *                                                      page number of results to fetch. You can start navigating
-   *                                                      through the pages to consume the results. You do this by
-   *                                                      passing in a page parameter. Retrieve the next page by adding
-   *                                                      ?page=2 to the query string. If there are no results to
-   *                                                      return, then an empty result set will be returned. Use in
-   *                                                      query `page=1`.
-   * @param perPage   This parameter indicates how many records to fetch in each
-   *                                                      request. Default value is 20. The maximum allowed values is
-   *                                                      200; any per_page value over 200 will be changed to 200. Use
-   *                                                      in query `per_page=200`.
-   * @param direction Controls the order in which results are returned. Use in
-   *                                                      query `direction=asc`.
-   * @param filter    Filter to use for List PricePoints operations
+   * @param filterDateField        The type of filter you would like to apply to
+   *                                                                   your search. Use in query:
+   *                                                                   `filter[date_field]=created_at`.
+   * @param filterEndDate          The end date (format YYYY-MM-DD) with which to
+   *                                                                   filter the date_field. Returns price points with
+   *                                                                   a timestamp up to and including 11:59:59PM in
+   *                                                                   your site’s time zone on the date specified.
+   * @param filterEndDatetime      The end date and time (format YYYY-MM-DD HH:MM:
+   *                                                                   SS) with which to filter the date_field. Returns
+   *                                                                   price points with a timestamp at or before exact
+   *                                                                   time provided in query. You can specify timezone
+   *                                                                   in query - otherwise your site's time zone will
+   *                                                                   be used. If provided, this parameter will be
+   *                                                                   used instead of end_date.
+   * @param include                Allows including additional data in the
+   *                                                                   response. Use in query:
+   *                                                                   `include=currency_prices`.
+   * @param page                   Result records are organized in pages. By
+   *                                                                   default, the first page of results is displayed.
+   *                                                                   The page parameter specifies a page number of
+   *                                                                   results to fetch. You can start navigating
+   *                                                                   through the pages to consume the results. You do
+   *                                                                   this by passing in a page parameter. Retrieve
+   *                                                                   the next page by adding ?page=2 to the query
+   *                                                                   string. If there are no results to return, then
+   *                                                                   an empty result set will be returned. Use in
+   *                                                                   query `page=1`.
+   * @param perPage                This parameter indicates how many records to
+   *                                                                   fetch in each request. Default value is 20. The
+   *                                                                   maximum allowed values is 200; any per_page
+   *                                                                   value over 200 will be changed to 200. Use in
+   *                                                                   query `per_page=200`.
+   * @param filterStartDate        The start date (format YYYY-MM-DD) with which
+   *                                                                   to filter the date_field. Returns price points
+   *                                                                   with a timestamp at or after midnight (12:00:00
+   *                                                                   AM) in your site’s time zone on the date
+   *                                                                   specified.
+   * @param filterStartDatetime    The start date and time (format YYYY-MM-DD HH:
+   *                                                                   MM:SS) with which to filter the date_field.
+   *                                                                   Returns price points with a timestamp at or
+   *                                                                   after exact time provided in query. You can
+   *                                                                   specify timezone in query - otherwise your
+   *                                                                   site's time zone will be used. If provided, this
+   *                                                                   parameter will be used instead of start_date.
+   * @param filterType             Allows fetching price points with matching type.
+   *                                                                   Use in query: `filter[type]=custom,catalog`.
+   * @param direction              Controls the order in which results are
+   *                                                                   returned. Use in query `direction=asc`.
+   * @param filterIds              Allows fetching price points with matching id
+   *                                                                   based on provided values. Use in query:
+   *                                                                   `filter[ids]=1,2,3`.
+   * @param filterArchivedAt       Allows fetching price points only if
+   *                                                                   archived_at is present or not. Use in query:
+   *                                                                   `filter[archived_at]=not_null`.
    * @return Response from the API call
    */
   async listAllComponentPricePoints({
+    filterDateField,
+    filterEndDate,
+    filterEndDatetime,
     include,
     page,
     perPage,
+    filterStartDate,
+    filterStartDatetime,
+    filterType,
     direction,
-    filter,
+    filterIds,
+    filterArchivedAt,
   }: {
+    filterDateField?: BasicDateField,
+    filterEndDate?: string,
+    filterEndDatetime?: string,
     include?: ListComponentsPricePointsInclude,
     page?: number,
     perPage?: number,
+    filterStartDate?: string,
+    filterStartDatetime?: string,
+    filterType?: PricePointType[],
     direction?: SortingDirection,
-    filter?: ListPricePointsFilter,
+    filterIds?: number[],
+    filterArchivedAt?: IncludeNotNull,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListComponentsPricePointsResponse>> {
     const req = this.createRequest('GET', '/components_price_points.json');
     const mapped = req.prepareArgs({
+      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
+      filterEndDate: [filterEndDate, optional(string())],
+      filterEndDatetime: [filterEndDatetime, optional(string())],
       include: [include, optional(listComponentsPricePointsIncludeSchema)],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
+      filterStartDate: [filterStartDate, optional(string())],
+      filterStartDatetime: [filterStartDatetime, optional(string())],
+      filterType: [filterType, optional(array(pricePointTypeSchema))],
       direction: [direction, optional(sortingDirectionSchema)],
-      filter: [filter, optional(listPricePointsFilterSchema)],
+      filterIds: [filterIds, optional(array(number()))],
+      filterArchivedAt: [filterArchivedAt, optional(includeNotNullSchema)],
     });
+    req.query('filter[date_field]', mapped.filterDateField);
+    req.query('filter[end_date]', mapped.filterEndDate);
+    req.query('filter[end_datetime]', mapped.filterEndDatetime);
     req.query('include', mapped.include);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
+    req.query('filter[start_date]', mapped.filterStartDate);
+    req.query('filter[start_datetime]', mapped.filterStartDatetime);
+    req.query('filter[type]', mapped.filterType, commaPrefix);
     req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[archived_at]', mapped.filterArchivedAt);
     req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(

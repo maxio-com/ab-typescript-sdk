@@ -38,7 +38,7 @@
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`CreditCardPaymentProfile \| undefined`](../../doc/models/credit-card-payment-profile.md) | Optional | - |
-| `group` | [`NestedSubscriptionGroup \| null \| undefined`](../../doc/models/nested-subscription-group.md) | Optional | - |
+| `group` | [`SubscriptionGroup2 \| null \| undefined`](../../doc/models/containers/subscription-group-2.md) | Optional | This is a container for one-of cases. |
 | `bankAccount` | [`BankAccountPaymentProfile \| undefined`](../../doc/models/bank-account-payment-profile.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |
@@ -51,7 +51,7 @@
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
 | `offerId` | `number \| null \| undefined` | Optional | The ID of the offer associated with the subscription. |
 | `payerId` | `number \| null \| undefined` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
-| `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation. |
+| `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. |
 | `productPricePointId` | `number \| undefined` | Optional | The product price point currently subscribed to. |
 | `productPricePointType` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `nextProductPricePointId` | `number \| null \| undefined` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |

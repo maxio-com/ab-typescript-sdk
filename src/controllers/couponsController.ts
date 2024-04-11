@@ -5,11 +5,12 @@
  */
 
 import { ApiError } from '@apimatic/core';
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
   SingleStringErrorResponseError,
 } from '../errors/singleStringErrorResponseError';
+import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CouponCurrencyRequest,
   couponCurrencyRequestSchema,
@@ -29,10 +30,6 @@ import {
   CreateOrUpdateCoupon,
   createOrUpdateCouponSchema,
 } from '../models/createOrUpdateCoupon';
-import {
-  ListCouponsFilter,
-  listCouponsFilterSchema,
-} from '../models/listCouponsFilter';
 import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
@@ -90,40 +87,86 @@ export class CouponsController extends BaseController {
    * exchange rate. If the flag is set to false, it will return all of the defined prices for each
    * currency.
    *
-   * @param productFamilyId   The Chargify id of the product family to which the coupon
-   *                                                      belongs
-   * @param page              Result records are organized in pages. By default, the first
-   *                                                      page of results is displayed. The page parameter specifies a
-   *                                                      page number of results to fetch. You can start navigating
-   *                                                      through the pages to consume the results. You do this by
-   *                                                      passing in a page parameter. Retrieve the next page by adding
-   *                                                      ?page=2 to the query string. If there are no results to
-   *                                                      return, then an empty result set will be returned. Use in
-   *                                                      query `page=1`.
-   * @param perPage           This parameter indicates how many records to fetch in each
-   *                                                      request. Default value is 30. The maximum allowed values is
-   *                                                      200; any per_page value over 200 will be changed to 200. Use
-   *                                                      in query `per_page=200`.
-   * @param filter            Filter to use for List Coupons operations
-   * @param currencyPrices    When fetching coupons, if you have defined multiple
-   *                                                      currencies at the site level, you can optionally pass the `?
-   *                                                      currency_prices=true` query param to include an array of
-   *                                                      currency price data in the response. Use in query
-   *                                                      `currency_prices=true`.
+   * @param productFamilyId                The Chargify id of the product family to which the coupon
+   *                                                         belongs
+   * @param page                           Result records are organized in pages. By default, the
+   *                                                         first page of results is displayed. The page parameter
+   *                                                         specifies a page number of results to fetch. You can start
+   *                                                         navigating through the pages to consume the results. You
+   *                                                         do this by passing in a page parameter. Retrieve the next
+   *                                                         page by adding ?page=2 to the query string. If there are
+   *                                                         no results to return, then an empty result set will be
+   *                                                         returned. Use in query `page=1`.
+   * @param perPage                        This parameter indicates how many records to fetch in
+   *                                                         each request. Default value is 30. The maximum allowed
+   *                                                         values is 200; any per_page value over 200 will be changed
+   *                                                         to 200. Use in query `per_page=200`.
+   * @param filterDateField                The type of filter you would like to apply to your search.
+   *                                                         Use in query `filter[date_field]=created_at`.
+   * @param filterEndDate                  The end date (format YYYY-MM-DD) with which to filter the
+   *                                                         date_field. Returns coupons with a timestamp up to and
+   *                                                         including 11:59:59PM in your site’s time zone on the date
+   *                                                         specified. Use in query `filter[date_field]=2011-12-15`.
+   * @param filterEndDatetime              The end date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns coupons with a
+   *                                                         timestamp at or before exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of end_date. Use in query `?
+   *                                                         filter[end_datetime]=2011-12-1T10:15:30+01:00`.
+   * @param filterStartDate                The start date (format YYYY-MM-DD) with which to filter
+   *                                                         the date_field. Returns coupons with a timestamp at or
+   *                                                         after midnight (12:00:00 AM) in your site’s time zone on
+   *                                                         the date specified. Use in query `filter[start_date]=2011-
+   *                                                         12-17`.
+   * @param filterStartDatetime            The start date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns coupons with a
+   *                                                         timestamp at or after exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of start_date. Use in query
+   *                                                         `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
+   * @param filterIds                      Allows fetching coupons with matching id based on
+   *                                                         provided values. Use in query `filter[ids]=1,2,3`.
+   * @param filterCodes                    Allows fetching coupons with matching codes based on
+   *                                                         provided values. Use in query `filter[codes]=free,
+   *                                                         free_trial`.
+   * @param currencyPrices                 When fetching coupons, if you have defined multiple
+   *                                                         currencies at the site level, you can optionally pass the
+   *                                                         `?currency_prices=true` query param to include an array of
+   *                                                         currency price data in the response. Use in query
+   *                                                         `currency_prices=true`.
+   * @param filterUseSiteExchangeRate      Allows fetching coupons with matching
+   *                                                         use_site_exchange_rate based on provided value. Use in
+   *                                                         query `filter[use_site_exchange_rate]=true`.
    * @return Response from the API call
    */
   async listCouponsForProductFamily({
     productFamilyId,
     page,
     perPage,
-    filter,
+    filterDateField,
+    filterEndDate,
+    filterEndDatetime,
+    filterStartDate,
+    filterStartDatetime,
+    filterIds,
+    filterCodes,
     currencyPrices,
+    filterUseSiteExchangeRate,
   }: {
     productFamilyId: number,
     page?: number,
     perPage?: number,
-    filter?: ListCouponsFilter,
+    filterDateField?: BasicDateField,
+    filterEndDate?: string,
+    filterEndDatetime?: string,
+    filterStartDate?: string,
+    filterStartDatetime?: string,
+    filterIds?: number[],
+    filterCodes?: string[],
     currencyPrices?: boolean,
+    filterUseSiteExchangeRate?: boolean,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse[]>> {
@@ -132,13 +175,30 @@ export class CouponsController extends BaseController {
       productFamilyId: [productFamilyId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      filter: [filter, optional(listCouponsFilterSchema)],
+      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
+      filterEndDate: [filterEndDate, optional(string())],
+      filterEndDatetime: [filterEndDatetime, optional(string())],
+      filterStartDate: [filterStartDate, optional(string())],
+      filterStartDatetime: [filterStartDatetime, optional(string())],
+      filterIds: [filterIds, optional(array(number()))],
+      filterCodes: [filterCodes, optional(array(string()))],
       currencyPrices: [currencyPrices, optional(boolean())],
+      filterUseSiteExchangeRate: [
+        filterUseSiteExchangeRate,
+        optional(boolean()),
+      ],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
+    req.query('filter[date_field]', mapped.filterDateField);
+    req.query('filter[end_date]', mapped.filterEndDate);
+    req.query('filter[end_datetime]', mapped.filterEndDatetime);
+    req.query('filter[start_date]', mapped.filterStartDate);
+    req.query('filter[start_datetime]', mapped.filterStartDatetime);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[codes]', mapped.filterCodes, commaPrefix);
     req.query('currency_prices', mapped.currencyPrices);
+    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponResponseSchema), requestOptions);
@@ -270,36 +330,123 @@ export class CouponsController extends BaseController {
    * exchange rate. If the flag is set to false, it will return all of the defined prices for each
    * currency.
    *
-   * @param page            Result records are organized in pages. By default, the first
-   *                                                    page of results is displayed. The page parameter specifies a
-   *                                                    page number of results to fetch. You can start navigating
-   *                                                    through the pages to consume the results. You do this by
-   *                                                    passing in a page parameter. Retrieve the next page by adding ?
-   *                                                    page=2 to the query string. If there are no results to return,
-   *                                                    then an empty result set will be returned. Use in query
-   *                                                    `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each
-   *                                                    request. Default value is 30. The maximum allowed values is 200;
-   *                                                    any per_page value over 200 will be changed to 200. Use in
-   *                                                    query `per_page=200`.
-   * @param filter          Filter to use for List Coupons operations
-   * @param currencyPrices  When fetching coupons, if you have defined multiple currencies
-   *                                                    at the site level, you can optionally pass the `?
-   *                                                    currency_prices=true` query param to include an array of
-   *                                                    currency price data in the response. Use in query
-   *                                                    `currency_prices=true`.
+   * @param page                           Result records are organized in pages. By default, the
+   *                                                         first page of results is displayed. The page parameter
+   *                                                         specifies a page number of results to fetch. You can start
+   *                                                         navigating through the pages to consume the results. You
+   *                                                         do this by passing in a page parameter. Retrieve the next
+   *                                                         page by adding ?page=2 to the query string. If there are
+   *                                                         no results to return, then an empty result set will be
+   *                                                         returned. Use in query `page=1`.
+   * @param perPage                        This parameter indicates how many records to fetch in
+   *                                                         each request. Default value is 30. The maximum allowed
+   *                                                         values is 200; any per_page value over 200 will be changed
+   *                                                         to 200. Use in query `per_page=200`.
+   * @param dateField                      The field was deprecated: on January 20, 2022. We
+   *                                                         recommend using filter[date_field] instead to achieve the
+   *                                                         same result. The type of filter you would like to apply to
+   *                                                         your search.
+   * @param startDate                      The field was deprecated: on January 20, 2022. We
+   *                                                         recommend using filter[start_date] instead to achieve the
+   *                                                         same result. The start date (format YYYY-MM-DD) with which
+   *                                                         to filter the date_field. Returns coupons with a timestamp
+   *                                                         at or after midnight (12:00:00 AM) in your site’s time
+   *                                                         zone on the date specified.
+   * @param endDate                        The field was deprecated: on January 20, 2022. We
+   *                                                         recommend using filter[end_date] instead to achieve the
+   *                                                         same result. The end date (format YYYY-MM-DD) with which
+   *                                                         to filter the date_field. Returns coupons with a timestamp
+   *                                                         up to and including 11:59:59PM in your site’s time zone on
+   *                                                         the date specified.
+   * @param startDatetime                  The field was deprecated: on January 20, 2022. We
+   *                                                         recommend using filter[start_datetime] instead to achieve
+   *                                                         the same result. The start date and time (format YYYY-MM-
+   *                                                         DD HH:MM:SS) with which to filter the date_field. Returns
+   *                                                         coupons with a timestamp at or after exact time provided
+   *                                                         in query. You can specify timezone in query - otherwise
+   *                                                         your site's time zone will be used. If provided, this
+   *                                                         parameter will be used instead of start_date.
+   * @param endDatetime                    The field was deprecated: on January 20, 2022. We
+   *                                                         recommend using filter[end_datetime] instead to achieve
+   *                                                         the same result. The end date and time (format YYYY-MM-DD
+   *                                                         HH:MM:SS) with which to filter the date_field. Returns
+   *                                                         coupons with a timestamp at or before exact time provided
+   *                                                         in query. You can specify timezone in query - otherwise
+   *                                                         your site's time zone will be used. If provided, this
+   *                                                         parameter will be used instead of end_date.
+   * @param filterIds                      Allows fetching coupons with matching id based on
+   *                                                         provided values. Use in query `filter[ids]=1,2,3`.
+   * @param filterCodes                    Allows fetching coupons with matching code based on
+   *                                                         provided values. Use in query `filter[ids]=1,2,3`.
+   * @param currencyPrices                 When fetching coupons, if you have defined multiple
+   *                                                         currencies at the site level, you can optionally pass the
+   *                                                         `?currency_prices=true` query param to include an array of
+   *                                                         currency price data in the response. Use in query
+   *                                                         `currency_prices=true`.
+   * @param filterEndDate                  The end date (format YYYY-MM-DD) with which to filter the
+   *                                                         date_field. Returns coupons with a timestamp up to and
+   *                                                         including 11:59:59PM in your site’s time zone on the date
+   *                                                         specified. Use in query `filter[end_date]=2011-12-17`.
+   * @param filterEndDatetime              The end date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns coupons with a
+   *                                                         timestamp at or before exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of end_date. Use in query
+   *                                                         `filter[end_datetime]=2011-12-19T10:15:30+01:00`.
+   * @param filterStartDate                The start date (format YYYY-MM-DD) with which to filter
+   *                                                         the date_field. Returns coupons with a timestamp at or
+   *                                                         after midnight (12:00:00 AM) in your site’s time zone on
+   *                                                         the date specified. Use in query `filter[start_date]=2011-
+   *                                                         12-19`.
+   * @param filterStartDatetime            The start date and time (format YYYY-MM-DD HH:MM:SS) with
+   *                                                         which to filter the date_field. Returns coupons with a
+   *                                                         timestamp at or after exact time provided in query. You
+   *                                                         can specify timezone in query - otherwise your site's time
+   *                                                         zone will be used. If provided, this parameter will be
+   *                                                         used instead of start_date. Use in query
+   *                                                         `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
+   * @param filterDateField                The type of filter you would like to apply to your search.
+   *                                                         Use in query `filter[date_field]=updated_at`.
+   * @param filterUseSiteExchangeRate      Allows fetching coupons with matching
+   *                                                         use_site_exchange_rate based on provided value. Use in
+   *                                                         query `filter[use_site_exchange_rate]=true`.
    * @return Response from the API call
    */
   async listCoupons({
     page,
     perPage,
-    filter,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    filterIds,
+    filterCodes,
     currencyPrices,
+    filterEndDate,
+    filterEndDatetime,
+    filterStartDate,
+    filterStartDatetime,
+    filterDateField,
+    filterUseSiteExchangeRate,
   }: {
     page?: number,
     perPage?: number,
-    filter?: ListCouponsFilter,
+    dateField?: BasicDateField,
+    startDate?: string,
+    endDate?: string,
+    startDatetime?: string,
+    endDatetime?: string,
+    filterIds?: number[],
+    filterCodes?: string[],
     currencyPrices?: boolean,
+    filterEndDate?: string,
+    filterEndDatetime?: string,
+    filterStartDate?: string,
+    filterStartDatetime?: string,
+    filterDateField?: BasicDateField,
+    filterUseSiteExchangeRate?: boolean,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse[]>> {
@@ -307,13 +454,40 @@ export class CouponsController extends BaseController {
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      filter: [filter, optional(listCouponsFilterSchema)],
+      dateField: [dateField, optional(basicDateFieldSchema)],
+      startDate: [startDate, optional(string())],
+      endDate: [endDate, optional(string())],
+      startDatetime: [startDatetime, optional(string())],
+      endDatetime: [endDatetime, optional(string())],
+      filterIds: [filterIds, optional(array(number()))],
+      filterCodes: [filterCodes, optional(array(string()))],
       currencyPrices: [currencyPrices, optional(boolean())],
+      filterEndDate: [filterEndDate, optional(string())],
+      filterEndDatetime: [filterEndDatetime, optional(string())],
+      filterStartDate: [filterStartDate, optional(string())],
+      filterStartDatetime: [filterStartDatetime, optional(string())],
+      filterDateField: [filterDateField, optional(basicDateFieldSchema)],
+      filterUseSiteExchangeRate: [
+        filterUseSiteExchangeRate,
+        optional(boolean()),
+      ],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
+    req.query('date_field', mapped.dateField);
+    req.query('start_date', mapped.startDate);
+    req.query('end_date', mapped.endDate);
+    req.query('start_datetime', mapped.startDatetime);
+    req.query('end_datetime', mapped.endDatetime);
+    req.query('filter[ids]', mapped.filterIds, commaPrefix);
+    req.query('filter[codes]', mapped.filterCodes, commaPrefix);
     req.query('currency_prices', mapped.currencyPrices);
+    req.query('filter[end_date]', mapped.filterEndDate);
+    req.query('filter[end_datetime]', mapped.filterEndDatetime);
+    req.query('filter[start_date]', mapped.filterStartDate);
+    req.query('filter[start_datetime]', mapped.filterStartDatetime);
+    req.query('filter[date_field]', mapped.filterDateField);
+    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponResponseSchema), requestOptions);
   }

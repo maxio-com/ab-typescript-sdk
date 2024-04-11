@@ -23,9 +23,12 @@ import {
   SubscriptionComponentPricePointType,
   subscriptionComponentPricePointTypeSchema,
 } from './containers/subscriptionComponentPricePointType';
+import {
+  SubscriptionComponentPricingScheme,
+  subscriptionComponentPricingSchemeSchema,
+} from './containers/subscriptionComponentPricingScheme';
 import { CreditType, creditTypeSchema } from './creditType';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 import {
   SubscriptionComponentSubscription,
   subscriptionComponentSubscriptionSchema,
@@ -43,7 +46,7 @@ export interface SubscriptionComponent {
   currency?: string;
   /** For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off. */
   allocatedQuantity?: SubscriptionComponentAllocatedQuantity;
-  pricingScheme?: PricingScheme | null;
+  pricingScheme?: SubscriptionComponentPricingScheme | null;
   componentId?: number;
   componentHandle?: string | null;
   subscriptionId?: number;
@@ -93,7 +96,10 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = expand
       'allocated_quantity',
       optional(subscriptionComponentAllocatedQuantitySchema),
     ],
-    pricingScheme: ['pricing_scheme', optional(nullable(pricingSchemeSchema))],
+    pricingScheme: [
+      'pricing_scheme',
+      optional(nullable(subscriptionComponentPricingSchemeSchema)),
+    ],
     componentId: ['component_id', optional(number())],
     componentHandle: ['component_handle', optional(nullable(string()))],
     subscriptionId: ['subscription_id', optional(number())],

@@ -17,7 +17,7 @@
 | `unitBalance` | `number \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
 | `allocatedQuantity` | [`SubscriptionComponentAllocatedQuantity \| undefined`](../../doc/models/containers/subscription-component-allocated-quantity.md) | Optional | This is a container for one-of cases. |
-| `pricingScheme` | [`PricingScheme \| null \| undefined`](../../doc/models/pricing-scheme.md) | Optional | - |
+| `pricingScheme` | [`SubscriptionComponentPricingScheme \| null \| undefined`](../../doc/models/containers/subscription-component-pricing-scheme.md) | Optional | This is a container for one-of cases. |
 | `componentId` | `number \| undefined` | Optional | - |
 | `componentHandle` | `string \| null \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |

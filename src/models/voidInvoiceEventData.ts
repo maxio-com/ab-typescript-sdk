@@ -12,11 +12,14 @@ import {
   Schema,
   string,
 } from '../schema';
-import { CreditNote, creditNoteSchema } from './creditNote';
+import {
+  VoidInvoiceEventDataCreditNoteAttributes,
+  voidInvoiceEventDataCreditNoteAttributesSchema,
+} from './containers/voidInvoiceEventDataCreditNoteAttributes';
 
 /** Example schema for an `void_invoice` event */
 export interface VoidInvoiceEventData {
-  creditNoteAttributes: CreditNote | null;
+  creditNoteAttributes: VoidInvoiceEventDataCreditNoteAttributes | null;
   /** The memo provided during invoice voiding. */
   memo: string | null;
   /** The amount of the void. */
@@ -34,7 +37,7 @@ export const voidInvoiceEventDataSchema: Schema<VoidInvoiceEventData> = expandoO
   {
     creditNoteAttributes: [
       'credit_note_attributes',
-      nullable(lazy(() => creditNoteSchema)),
+      nullable(lazy(() => voidInvoiceEventDataCreditNoteAttributesSchema)),
     ],
     memo: ['memo', nullable(string())],
     appliedAmount: ['applied_amount', nullable(string())],

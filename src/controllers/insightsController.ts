@@ -4,12 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   SubscriptionsMrrErrorResponseError,
 } from '../errors/subscriptionsMrrErrorResponseError';
 import { Direction, directionSchema } from '../models/direction';
-import { ListMrrFilter, listMrrFilterSchema } from '../models/listMrrFilter';
 import {
   ListMRRResponse,
   listMRRResponseSchema,
@@ -24,7 +23,7 @@ import {
   SubscriptionMRRResponse,
   subscriptionMRRResponseSchema,
 } from '../models/subscriptionMRRResponse';
-import { number, optional, string } from '../schema';
+import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class InsightsController extends BaseController {
@@ -155,33 +154,34 @@ export class InsightsController extends BaseController {
    * This endpoint returns your site's current MRR, including plan and usage breakouts split per
    * subscription.
    *
-   * @param filter    Filter to use for List MRR per subscription operation
-   * @param atTime    Submit a timestamp in ISO8601 format to request MRR for a historic time.
-   *                                          Use in query: `at_time=2022-01-10T10:00:00-05:00`.
-   * @param page      Result records are organized in pages. By default, the first page of
-   *                                          results is displayed. The page parameter specifies a page number of
-   *                                          results to fetch. You can start navigating through the pages to consume
-   *                                          the results. You do this by passing in a page parameter. Retrieve the
-   *                                          next page by adding ?page=2 to the query string. If there are no results
-   *                                          to return, then an empty result set will be returned. Use in query
-   *                                          `page=1`.
-   * @param perPage   This parameter indicates how many records to fetch in each request.
-   *                                          Default value is 20. The maximum allowed values is 200; any per_page
-   *                                          value over 200 will be changed to 200. Use in query `per_page=200`.
-   * @param direction Controls the order in which results are returned. Records are ordered by
-   *                                          subscription_id in ascending order by default. Use in query
-   *                                          `direction=desc`.
+   * @param filterSubscriptionIds    Submit ids in order to limit results. Use in query:
+   *                                              `filter[subscription_ids]=1,2,3`.
+   * @param atTime                   Submit a timestamp in ISO8601 format to request MRR for a historic
+   *                                              time. Use in query: `at_time=2022-01-10T10:00:00-05:00`.
+   * @param page                     Result records are organized in pages. By default, the first page of
+   *                                              results is displayed. The page parameter specifies a page number of
+   *                                              results to fetch. You can start navigating through the pages to
+   *                                              consume the results. You do this by passing in a page parameter.
+   *                                              Retrieve the next page by adding ?page=2 to the query string. If
+   *                                              there are no results to return, then an empty result set will be
+   *                                              returned. Use in query `page=1`.
+   * @param perPage                  This parameter indicates how many records to fetch in each request.
+   *                                              Default value is 20. The maximum allowed values is 200; any per_page
+   *                                              value over 200 will be changed to 200. Use in query `per_page=200`.
+   * @param direction                Controls the order in which results are returned. Records are
+   *                                              ordered by subscription_id in ascending order by default. Use in
+   *                                              query `direction=desc`.
    * @return Response from the API call
    * @deprecated
    */
   async listMrrPerSubscription({
-    filter,
+    filterSubscriptionIds,
     atTime,
     page,
     perPage,
     direction,
   }: {
-    filter?: ListMrrFilter,
+    filterSubscriptionIds?: number[],
     atTime?: string,
     page?: number,
     perPage?: number,
@@ -191,13 +191,13 @@ export class InsightsController extends BaseController {
   ): Promise<ApiResponse<SubscriptionMRRResponse>> {
     const req = this.createRequest('GET', '/subscriptions_mrr.json');
     const mapped = req.prepareArgs({
-      filter: [filter, optional(listMrrFilterSchema)],
+      filterSubscriptionIds: [filterSubscriptionIds, optional(array(number()))],
       atTime: [atTime, optional(string())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       direction: [direction, optional(directionSchema)],
     });
-    req.query('filter', mapped.filter);
+    req.query('filter[subscription_ids]', mapped.filterSubscriptionIds, commaPrefix);
     req.query('at_time', mapped.atTime);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);

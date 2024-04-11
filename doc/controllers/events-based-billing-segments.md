@@ -110,7 +110,10 @@ async listSegmentsForPricePoint(
   pricePointId: string,
   page?: number,
   perPage?: number,
-  filter?: ListSegmentsFilter,
+  filterSegmentProperty1Value?: string,
+  filterSegmentProperty2Value?: string,
+  filterSegmentProperty3Value?: string,
+  filterSegmentProperty4Value?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSegmentsResponse>>
 ```
@@ -123,7 +126,10 @@ async listSegmentsForPricePoint(
 | `pricePointId` | `string` | Template, Required | ID or Handle for the Price Point belonging to the Component |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `filter` | [`ListSegmentsFilter \| undefined`](../../doc/models/list-segments-filter.md) | Query, Optional | Filter to use for List Segments for a Price Point operation |
+| `filterSegmentProperty1Value` | `string \| undefined` | Query, Optional | The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected. Use in query `filter[segment_property_1_value]=EU`. |
+| `filterSegmentProperty2Value` | `string \| undefined` | Query, Optional | The value passed here would be used to filter segments. Pass a value related to `segment_property_2` on attached Metric. If empty string is passed, this filter would be rejected. |
+| `filterSegmentProperty3Value` | `string \| undefined` | Query, Optional | The value passed here would be used to filter segments. Pass a value related to `segment_property_3` on attached Metric. If empty string is passed, this filter would be rejected. |
+| `filterSegmentProperty4Value` | `string \| undefined` | Query, Optional | The value passed here would be used to filter segments. Pass a value related to `segment_property_4` on attached Metric. If empty string is passed, this filter would be rejected. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -133,14 +139,11 @@ async listSegmentsForPricePoint(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
   componentId: 'component_id8',
   pricePointId: 'price_point_id8',
   page: 2,
-  perPage: 50,
-  filter: {
-    segmentProperty1Value: 'EU',
-  }
+  perPage: 50
 }
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.listSegmentsForPricePoint(collect);

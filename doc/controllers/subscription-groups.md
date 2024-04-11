@@ -202,12 +202,9 @@ async listSubscriptionGroups(
 ## Example Usage
 
 ```ts
-const collect = {
+const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
-  perPage: 50,
-  include: [
-    SubscriptionGroupsListInclude.AccountBalances
-  ]
+  perPage: 50
 }
 try {
   const { result, ...httpResponse } = await subscriptionGroupsController.listSubscriptionGroups(collect);
@@ -293,15 +290,8 @@ async readSubscriptionGroup(
 ```ts
 const uid = 'uid0';
 
-const include: SubscriptionGroupInclude[] = [
-  SubscriptionGroupInclude.CurrentBillingAmountInCents
-];
-
-try {
-  const { result, ...httpResponse } = await subscriptionGroupsController.readSubscriptionGroup(
-  uid,
-  include
-);
+Liquid error: Value cannot be null. (Parameter 'key')try {
+  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await subscriptionGroupsController.readSubscriptionGroup(uid);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -358,7 +348,7 @@ try {
 # Update Subscription Group Members
 
 Use this endpoint to update subscription group members.
-`"member_ids"` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
+`"member_ids": []` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
 
 ```ts
 async updateSubscriptionGroupMembers(
