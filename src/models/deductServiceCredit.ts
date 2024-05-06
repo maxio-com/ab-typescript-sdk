@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema';
 import {
   DeductServiceCreditAmount,
   deductServiceCreditAmountSchema,
@@ -12,13 +12,13 @@ import {
 
 export interface DeductServiceCredit {
   amount: DeductServiceCreditAmount;
-  memo: string;
+  memo?: string;
   [key: string]: unknown;
 }
 
 export const deductServiceCreditSchema: Schema<DeductServiceCredit> = expandoObject(
   {
     amount: ['amount', deductServiceCreditAmountSchema],
-    memo: ['memo', string()],
+    memo: ['memo', optional(string())],
   }
 );

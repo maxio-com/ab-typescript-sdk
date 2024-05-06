@@ -51,6 +51,14 @@ import {
 import { EBBEvent, eBBEventSchema } from '../models/eBBEvent';
 import { IncludeNotNull, includeNotNullSchema } from '../models/includeNotNull';
 import {
+  ListSubscriptionComponentsFilter,
+  listSubscriptionComponentsFilterSchema,
+} from '../models/listSubscriptionComponentsFilter';
+import {
+  ListSubscriptionComponentsForSiteFilter,
+  listSubscriptionComponentsForSiteFilterSchema,
+} from '../models/listSubscriptionComponentsForSiteFilter';
+import {
   ListSubscriptionComponentsInclude,
   listSubscriptionComponentsIncludeSchema,
 } from '../models/listSubscriptionComponentsInclude';
@@ -83,15 +91,11 @@ import {
   subscriptionResponseSchema,
 } from '../models/subscriptionResponse';
 import {
-  SubscriptionStateFilter,
-  subscriptionStateFilterSchema,
-} from '../models/subscriptionStateFilter';
-import {
   UpdateAllocationExpirationDate,
   updateAllocationExpirationDateSchema,
 } from '../models/updateAllocationExpirationDate';
 import { UsageResponse, usageResponseSchema } from '../models/usageResponse';
-import { array, boolean, number, optional, string } from '../schema';
+import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionComponentsController extends BaseController {
@@ -127,67 +131,58 @@ export class SubscriptionComponentsController extends BaseController {
    * When requesting to list components for a given subscription, if the subscription contains
    * **archived** components they will be listed in the server response.
    *
-   * @param subscriptionId                 The Chargify id of the subscription
-   * @param dateField                      The type of filter you'd like to apply
-   *                                                                            to your search. Use in query
-   *                                                                            `date_field=updated_at`.
-   * @param direction                      Controls the order in which results
-   *                                                                            are returned. Use in query
-   *                                                                            `direction=asc`.
-   * @param endDate                        The end date (format YYYY-MM-DD) with
-   *                                                                            which to filter the date_field. Returns
-   *                                                                            components with a timestamp up to and
-   *                                                                            including 11:59:59PM in your site’s
-   *                                                                            time zone on the date specified.
-   * @param endDatetime                    The end date and time (format YYYY-MM-
-   *                                                                            DD HH:MM:SS) with which to filter the
-   *                                                                            date_field. Returns components with a
-   *                                                                            timestamp at or before exact time
-   *                                                                            provided in query. You can specify
-   *                                                                            timezone in query - otherwise your
-   *                                                                            site''s time zone will be used. If
-   *                                                                            provided, this parameter will be used
-   *                                                                            instead of end_date.
-   * @param pricePointIds                  Allows fetching components allocation
-   *                                                                            only if price point id is present. Use
-   *                                                                            in query `price_point_ids=not_null`.
-   * @param productFamilyIds               Allows fetching components allocation
-   *                                                                            with matching product family id based
-   *                                                                            on provided ids. Use in query
-   *                                                                            `product_family_ids=1,2,3`.
-   * @param sort                           The attribute by which to sort. Use in
-   *                                                                            query `sort=updated_at`.
-   * @param startDate                      The start date (format YYYY-MM-DD)
-   *                                                                            with which to filter the date_field.
-   *                                                                            Returns components with a timestamp at
-   *                                                                            or after midnight (12:00:00 AM) in your
-   *                                                                            site’s time zone on the date specified.
-   * @param startDatetime                  The start date and time (format YYYY-
-   *                                                                            MM-DD HH:MM:SS) with which to filter
-   *                                                                            the date_field. Returns components with
-   *                                                                            a timestamp at or after exact time
-   *                                                                            provided in query. You can specify
-   *                                                                            timezone in query - otherwise your
-   *                                                                            site''s time zone will be used. If
-   *                                                                            provided, this parameter will be used
-   *                                                                            instead of start_date.
-   * @param include                        Allows including additional data in
-   *                                                                            the response. Use in query
-   *                                                                            `include=subscription`.
-   * @param filterUseSiteExchangeRate      Allows fetching components allocation
-   *                                                                            with matching use_site_exchange_rate
-   *                                                                            based on provided value. Use in query
-   *                                                                            `filter[use_site_exchange_rate]=true`.
-   * @param filterCurrencies               Allows fetching components allocation
-   *                                                                            with matching currency based on
-   *                                                                            provided values. Use in query
-   *                                                                            `filter[currencies]=EUR,USD`.
+   * @param subscriptionId     The Chargify id of the subscription
+   * @param dateField          The type of filter you'd like to apply to
+   *                                                                      your search. Use in query
+   *                                                                      `date_field=updated_at`.
+   * @param direction          Controls the order in which results are
+   *                                                                      returned. Use in query `direction=asc`.
+   * @param filter             Filter to use for List Subscription
+   *                                                                      Components operation
+   * @param endDate            The end date (format YYYY-MM-DD) with which
+   *                                                                      to filter the date_field. Returns components
+   *                                                                      with a timestamp up to and including 11:59:
+   *                                                                      59PM in your site’s time zone on the date
+   *                                                                      specified.
+   * @param endDatetime        The end date and time (format YYYY-MM-DD HH:
+   *                                                                      MM:SS) with which to filter the date_field.
+   *                                                                      Returns components with a timestamp at or
+   *                                                                      before exact time provided in query. You can
+   *                                                                      specify timezone in query - otherwise your
+   *                                                                      site''s time zone will be used. If provided,
+   *                                                                      this parameter will be used instead of
+   *                                                                      end_date.
+   * @param pricePointIds      Allows fetching components allocation only
+   *                                                                      if price point id is present. Use in query
+   *                                                                      `price_point_ids=not_null`.
+   * @param productFamilyIds   Allows fetching components allocation with
+   *                                                                      matching product family id based on provided
+   *                                                                      ids. Use in query `product_family_ids=1,2,3`.
+   * @param sort               The attribute by which to sort. Use in query
+   *                                                                      `sort=updated_at`.
+   * @param startDate          The start date (format YYYY-MM-DD) with
+   *                                                                      which to filter the date_field. Returns
+   *                                                                      components with a timestamp at or after
+   *                                                                      midnight (12:00:00 AM) in your site’s time
+   *                                                                      zone on the date specified.
+   * @param startDatetime      The start date and time (format YYYY-MM-DD
+   *                                                                      HH:MM:SS) with which to filter the date_field.
+   *                                                                      Returns components with a timestamp at or
+   *                                                                      after exact time provided in query. You can
+   *                                                                      specify timezone in query - otherwise your
+   *                                                                      site''s time zone will be used. If provided,
+   *                                                                      this parameter will be used instead of
+   *                                                                      start_date.
+   * @param include            Allows including additional data in the
+   *                                                                      response. Use in query `include=subscription,
+   *                                                                      historic_usages`.
    * @return Response from the API call
    */
   async listSubscriptionComponents({
     subscriptionId,
     dateField,
     direction,
+    filter,
     endDate,
     endDatetime,
     pricePointIds,
@@ -196,12 +191,11 @@ export class SubscriptionComponentsController extends BaseController {
     startDate,
     startDatetime,
     include,
-    filterUseSiteExchangeRate,
-    filterCurrencies,
   }: {
     subscriptionId: number,
     dateField?: SubscriptionListDateField,
     direction?: SortingDirection,
+    filter?: ListSubscriptionComponentsFilter,
     endDate?: string,
     endDatetime?: string,
     pricePointIds?: IncludeNotNull,
@@ -209,9 +203,7 @@ export class SubscriptionComponentsController extends BaseController {
     sort?: ListSubscriptionComponentsSort,
     startDate?: string,
     startDatetime?: string,
-    include?: ListSubscriptionComponentsInclude,
-    filterUseSiteExchangeRate?: boolean,
-    filterCurrencies?: string[],
+    include?: ListSubscriptionComponentsInclude[],
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionComponentResponse[]>> {
@@ -220,6 +212,7 @@ export class SubscriptionComponentsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       dateField: [dateField, optional(subscriptionListDateFieldSchema)],
       direction: [direction, optional(sortingDirectionSchema)],
+      filter: [filter, optional(listSubscriptionComponentsFilterSchema)],
       endDate: [endDate, optional(string())],
       endDatetime: [endDatetime, optional(string())],
       pricePointIds: [pricePointIds, optional(includeNotNullSchema)],
@@ -227,15 +220,14 @@ export class SubscriptionComponentsController extends BaseController {
       sort: [sort, optional(listSubscriptionComponentsSortSchema)],
       startDate: [startDate, optional(string())],
       startDatetime: [startDatetime, optional(string())],
-      include: [include, optional(listSubscriptionComponentsIncludeSchema)],
-      filterUseSiteExchangeRate: [
-        filterUseSiteExchangeRate,
-        optional(boolean()),
+      include: [
+        include,
+        optional(array(listSubscriptionComponentsIncludeSchema)),
       ],
-      filterCurrencies: [filterCurrencies, optional(array(string()))],
     });
     req.query('date_field', mapped.dateField);
     req.query('direction', mapped.direction);
+    req.query('filter', mapped.filter);
     req.query('end_date', mapped.endDate);
     req.query('end_datetime', mapped.endDatetime);
     req.query('price_point_ids', mapped.pricePointIds);
@@ -243,9 +235,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('sort', mapped.sort);
     req.query('start_date', mapped.startDate);
     req.query('start_datetime', mapped.startDatetime);
-    req.query('include', mapped.include);
-    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
-    req.query('filter[currencies]', mapped.filterCurrencies, commaPrefix);
+    req.query('include', mapped.include, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
@@ -964,172 +954,82 @@ export class SubscriptionComponentsController extends BaseController {
   /**
    * This request will list components applied to each subscription.
    *
-   * @param page                                 Result records are organized in
-   *                                                                                  pages. By default, the first page
-   *                                                                                  of results is displayed. The page
-   *                                                                                  parameter specifies a page number
-   *                                                                                  of results to fetch. You can
-   *                                                                                  start navigating through the
-   *                                                                                  pages to consume the results. You
-   *                                                                                  do this by passing in a page
-   *                                                                                  parameter. Retrieve the next page
-   *                                                                                  by adding ?page=2 to the query
-   *                                                                                  string. If there are no results
-   *                                                                                  to return, then an empty result
-   *                                                                                  set will be returned. Use in
-   *                                                                                  query `page=1`.
-   * @param perPage                              This parameter indicates how
-   *                                                                                  many records to fetch in each
-   *                                                                                  request. Default value is 20. The
-   *                                                                                  maximum allowed values is 200;
-   *                                                                                  any per_page value over 200 will
-   *                                                                                  be changed to 200. Use in query
-   *                                                                                  `per_page=200`.
-   * @param sort                                 The attribute by which to sort.
-   *                                                                                  Use in query: `sort=updated_at`.
-   * @param direction                            Controls the order in which
-   *                                                                                  results are returned. Use in
-   *                                                                                  query `direction=asc`.
-   * @param dateField                            The type of filter you'd like to
-   *                                                                                  apply to your search. Use in
-   *                                                                                  query: `date_field=updated_at`.
-   * @param startDate                            The start date (format YYYY-MM-
-   *                                                                                  DD) with which to filter the
-   *                                                                                  date_field. Returns components
-   *                                                                                  with a timestamp at or after
-   *                                                                                  midnight (12:00:00 AM) in your
-   *                                                                                  site’s time zone on the date
-   *                                                                                  specified. Use in query
-   *                                                                                  `start_date=2011-12-15`.
-   * @param startDatetime                        The start date and time (format
-   *                                                                                  YYYY-MM-DD HH:MM:SS) with which
-   *                                                                                  to filter the date_field. Returns
-   *                                                                                  components with a timestamp at or
-   *                                                                                  after exact time provided in
-   *                                                                                  query. You can specify timezone
-   *                                                                                  in query - otherwise your site''s
-   *                                                                                  time zone will be used. If
-   *                                                                                  provided, this parameter will be
-   *                                                                                  used instead of start_date. Use
-   *                                                                                  in query `start_datetime=2022-07-
-   *                                                                                  01 09:00:05`.
-   * @param endDate                              The end date (format YYYY-MM-DD)
-   *                                                                                  with which to filter the
-   *                                                                                  date_field. Returns components
-   *                                                                                  with a timestamp up to and
-   *                                                                                  including 11:59:59PM in your
-   *                                                                                  site’s time zone on the date
-   *                                                                                  specified. Use in query
-   *                                                                                  `end_date=2011-12-16`.
-   * @param endDatetime                          The end date and time (format
-   *                                                                                  YYYY-MM-DD HH:MM:SS) with which
-   *                                                                                  to filter the date_field. Returns
-   *                                                                                  components with a timestamp at or
-   *                                                                                  before exact time provided in
-   *                                                                                  query. You can specify timezone
-   *                                                                                  in query - otherwise your site''s
-   *                                                                                  time zone will be used. If
-   *                                                                                  provided, this parameter will be
-   *                                                                                  used instead of end_date. Use in
-   *                                                                                  query `end_datetime=2022-07-01 09:
-   *                                                                                  00:05`.
-   * @param subscriptionIds                      Allows fetching components
-   *                                                                                  allocation with matching
-   *                                                                                  subscription id based on provided
-   *                                                                                  ids. Use in query
-   *                                                                                  `subscription_ids=1,2,3`.
-   * @param pricePointIds                        Allows fetching components
-   *                                                                                  allocation only if price point id
-   *                                                                                  is present. Use in query
-   *                                                                                  `price_point_ids=not_null`.
-   * @param productFamilyIds                     Allows fetching components
-   *                                                                                  allocation with matching product
-   *                                                                                  family id based on provided ids.
-   *                                                                                  Use in query
-   *                                                                                  `product_family_ids=1,2,3`.
-   * @param include                              Allows including additional data
-   *                                                                                  in the response. Use in query
-   *                                                                                  `include=subscription`.
-   * @param filterUseSiteExchangeRate            Allows fetching components
-   *                                                                                  allocation with matching
-   *                                                                                  use_site_exchange_rate based on
-   *                                                                                  provided value. Use in query
-   *                                                                                  `filter[use_site_exchange_rate]=t
-   *                                                                                  rue`.
-   * @param filterCurrencies                     Allows fetching components
-   *                                                                                  allocation with matching currency
-   *                                                                                  based on provided values. Use in
-   *                                                                                  query `filter[currencies]=USD,
-   *                                                                                  EUR`.
-   * @param filterSubscriptionStates             Allows fetching components
-   *                                                                                  allocations that belong to the
-   *                                                                                  subscription with matching states
-   *                                                                                  based on provided values. To use
-   *                                                                                  this filter you also have to
-   *                                                                                  include the following param in
-   *                                                                                  the request
-   *                                                                                  `include=subscription`. Use in
-   *                                                                                  query
-   *                                                                                  `filter[subscription][states]=act
-   *                                                                                  ive,
-   *                                                                                  canceled&include=subscription`.
-   * @param filterSubscriptionDateField          The type of filter you'd like to
-   *                                                                                  apply to your search. To use this
-   *                                                                                  filter you also have to include
-   *                                                                                  the following param in the
-   *                                                                                  request `include=subscription`.
-   * @param filterSubscriptionStartDate          The start date (format YYYY-MM-
-   *                                                                                  DD) with which to filter the
-   *                                                                                  date_field. Returns components
-   *                                                                                  that belong to the subscription
-   *                                                                                  with a timestamp at or after
-   *                                                                                  midnight (12:00:00 AM) in your
-   *                                                                                  site’s time zone on the date
-   *                                                                                  specified. To use this filter you
-   *                                                                                  also have to include the
-   *                                                                                  following param in the request
-   *                                                                                  `include=subscription`.
-   * @param filterSubscriptionStartDatetime      The start date and time (format
-   *                                                                                  YYYY-MM-DD HH:MM:SS) with which
-   *                                                                                  to filter the date_field. Returns
-   *                                                                                  components that belong to the
-   *                                                                                  subscription with a timestamp at
-   *                                                                                  or after exact time provided in
-   *                                                                                  query. You can specify timezone
-   *                                                                                  in query - otherwise your site''s
-   *                                                                                  time zone will be used. If
-   *                                                                                  provided, this parameter will be
-   *                                                                                  used instead of start_date. To
-   *                                                                                  use this filter you also have to
-   *                                                                                  include the following param in
-   *                                                                                  the request
-   *                                                                                  `include=subscription`.
-   * @param filterSubscriptionEndDate            The end date (format YYYY-MM-DD)
-   *                                                                                  with which to filter the
-   *                                                                                  date_field. Returns components
-   *                                                                                  that belong to the subscription
-   *                                                                                  with a timestamp up to and
-   *                                                                                  including 11:59:59PM in your
-   *                                                                                  site’s time zone on the date
-   *                                                                                  specified. To use this filter you
-   *                                                                                  also have to include the
-   *                                                                                  following param in the request
-   *                                                                                  `include=subscription`.
-   * @param filterSubscriptionEndDatetime        The end date and time (format
-   *                                                                                  YYYY-MM-DD HH:MM:SS) with which
-   *                                                                                  to filter the date_field. Returns
-   *                                                                                  components that belong to the
-   *                                                                                  subscription with a timestamp at
-   *                                                                                  or before exact time provided in
-   *                                                                                  query. You can specify timezone
-   *                                                                                  in query - otherwise your site''s
-   *                                                                                  time zone will be used. If
-   *                                                                                  provided, this parameter will be
-   *                                                                                  used instead of end_date. To use
-   *                                                                                  this filter you also have to
-   *                                                                                  include the following param in
-   *                                                                                  the request
-   *                                                                                  `include=subscription`.
+   * @param page               Result records are organized in pages.
+   *                                                                             By default, the first page of results
+   *                                                                             is displayed. The page parameter
+   *                                                                             specifies a page number of results to
+   *                                                                             fetch. You can start navigating
+   *                                                                             through the pages to consume the
+   *                                                                             results. You do this by passing in a
+   *                                                                             page parameter. Retrieve the next page
+   *                                                                             by adding ?page=2 to the query string.
+   *                                                                             If there are no results to return,
+   *                                                                             then an empty result set will be
+   *                                                                             returned. Use in query `page=1`.
+   * @param perPage            This parameter indicates how many
+   *                                                                             records to fetch in each request.
+   *                                                                             Default value is 20. The maximum
+   *                                                                             allowed values is 200; any per_page
+   *                                                                             value over 200 will be changed to 200.
+   *                                                                             Use in query `per_page=200`.
+   * @param sort               The attribute by which to sort. Use
+   *                                                                             in query: `sort=updated_at`.
+   * @param direction          Controls the order in which results
+   *                                                                             are returned. Use in query
+   *                                                                             `direction=asc`.
+   * @param filter             Filter to use for List Subscription
+   *                                                                             Components For Site operation
+   * @param dateField          The type of filter you'd like to
+   *                                                                             apply to your search. Use in query:
+   *                                                                             `date_field=updated_at`.
+   * @param startDate          The start date (format YYYY-MM-DD)
+   *                                                                             with which to filter the date_field.
+   *                                                                             Returns components with a timestamp at
+   *                                                                             or after midnight (12:00:00 AM) in
+   *                                                                             your site’s time zone on the date
+   *                                                                             specified. Use in query
+   *                                                                             `start_date=2011-12-15`.
+   * @param startDatetime      The start date and time (format YYYY-
+   *                                                                             MM-DD HH:MM:SS) with which to filter
+   *                                                                             the date_field. Returns components
+   *                                                                             with a timestamp at or after exact
+   *                                                                             time provided in query. You can
+   *                                                                             specify timezone in query - otherwise
+   *                                                                             your site''s time zone will be used.
+   *                                                                             If provided, this parameter will be
+   *                                                                             used instead of start_date. Use in
+   *                                                                             query `start_datetime=2022-07-01 09:00:
+   *                                                                             05`.
+   * @param endDate            The end date (format YYYY-MM-DD) with
+   *                                                                             which to filter the date_field.
+   *                                                                             Returns components with a timestamp up
+   *                                                                             to and including 11:59:59PM in your
+   *                                                                             site’s time zone on the date specified.
+   *                                                                             Use in query `end_date=2011-12-16`.
+   * @param endDatetime        The end date and time (format YYYY-MM-
+   *                                                                             DD HH:MM:SS) with which to filter the
+   *                                                                             date_field. Returns components with a
+   *                                                                             timestamp at or before exact time
+   *                                                                             provided in query. You can specify
+   *                                                                             timezone in query - otherwise your
+   *                                                                             site''s time zone will be used. If
+   *                                                                             provided, this parameter will be used
+   *                                                                             instead of end_date. Use in query
+   *                                                                             `end_datetime=2022-07-01 09:00:05`.
+   * @param subscriptionIds    Allows fetching components allocation
+   *                                                                             with matching subscription id based on
+   *                                                                             provided ids. Use in query
+   *                                                                             `subscription_ids=1,2,3`.
+   * @param pricePointIds      Allows fetching components allocation
+   *                                                                             only if price point id is present. Use
+   *                                                                             in query `price_point_ids=not_null`.
+   * @param productFamilyIds   Allows fetching components allocation
+   *                                                                             with matching product family id based
+   *                                                                             on provided ids. Use in query
+   *                                                                             `product_family_ids=1,2,3`.
+   * @param include            Allows including additional data in
+   *                                                                             the response. Use in query
+   *                                                                             `include=subscription,historic_usages`.
    * @return Response from the API call
    */
   async listSubscriptionComponentsForSite({
@@ -1137,6 +1037,7 @@ export class SubscriptionComponentsController extends BaseController {
     perPage,
     sort,
     direction,
+    filter,
     dateField,
     startDate,
     startDatetime,
@@ -1146,19 +1047,12 @@ export class SubscriptionComponentsController extends BaseController {
     pricePointIds,
     productFamilyIds,
     include,
-    filterUseSiteExchangeRate,
-    filterCurrencies,
-    filterSubscriptionStates,
-    filterSubscriptionDateField,
-    filterSubscriptionStartDate,
-    filterSubscriptionStartDatetime,
-    filterSubscriptionEndDate,
-    filterSubscriptionEndDatetime,
   }: {
     page?: number,
     perPage?: number,
     sort?: ListSubscriptionComponentsSort,
     direction?: SortingDirection,
+    filter?: ListSubscriptionComponentsForSiteFilter,
     dateField?: SubscriptionListDateField,
     startDate?: string,
     startDatetime?: string,
@@ -1168,14 +1062,6 @@ export class SubscriptionComponentsController extends BaseController {
     pricePointIds?: IncludeNotNull,
     productFamilyIds?: number[],
     include?: ListSubscriptionComponentsInclude,
-    filterUseSiteExchangeRate?: boolean,
-    filterCurrencies?: string[],
-    filterSubscriptionStates?: SubscriptionStateFilter[],
-    filterSubscriptionDateField?: SubscriptionListDateField,
-    filterSubscriptionStartDate?: string,
-    filterSubscriptionStartDatetime?: string,
-    filterSubscriptionEndDate?: string,
-    filterSubscriptionEndDatetime?: string,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSubscriptionComponentsResponse>> {
@@ -1185,6 +1071,7 @@ export class SubscriptionComponentsController extends BaseController {
       perPage: [perPage, optional(number())],
       sort: [sort, optional(listSubscriptionComponentsSortSchema)],
       direction: [direction, optional(sortingDirectionSchema)],
+      filter: [filter, optional(listSubscriptionComponentsForSiteFilterSchema)],
       dateField: [dateField, optional(subscriptionListDateFieldSchema)],
       startDate: [startDate, optional(string())],
       startDatetime: [startDatetime, optional(string())],
@@ -1194,40 +1081,12 @@ export class SubscriptionComponentsController extends BaseController {
       pricePointIds: [pricePointIds, optional(includeNotNullSchema)],
       productFamilyIds: [productFamilyIds, optional(array(number()))],
       include: [include, optional(listSubscriptionComponentsIncludeSchema)],
-      filterUseSiteExchangeRate: [
-        filterUseSiteExchangeRate,
-        optional(boolean()),
-      ],
-      filterCurrencies: [filterCurrencies, optional(array(string()))],
-      filterSubscriptionStates: [
-        filterSubscriptionStates,
-        optional(array(subscriptionStateFilterSchema)),
-      ],
-      filterSubscriptionDateField: [
-        filterSubscriptionDateField,
-        optional(subscriptionListDateFieldSchema),
-      ],
-      filterSubscriptionStartDate: [
-        filterSubscriptionStartDate,
-        optional(string()),
-      ],
-      filterSubscriptionStartDatetime: [
-        filterSubscriptionStartDatetime,
-        optional(string()),
-      ],
-      filterSubscriptionEndDate: [
-        filterSubscriptionEndDate,
-        optional(string()),
-      ],
-      filterSubscriptionEndDatetime: [
-        filterSubscriptionEndDatetime,
-        optional(string()),
-      ],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('sort', mapped.sort);
     req.query('direction', mapped.direction);
+    req.query('filter', mapped.filter);
     req.query('date_field', mapped.dateField);
     req.query('start_date', mapped.startDate);
     req.query('start_datetime', mapped.startDatetime);
@@ -1237,14 +1096,6 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('price_point_ids', mapped.pricePointIds);
     req.query('product_family_ids', mapped.productFamilyIds, commaPrefix);
     req.query('include', mapped.include);
-    req.query('filter[use_site_exchange_rate]', mapped.filterUseSiteExchangeRate);
-    req.query('filter[currencies]', mapped.filterCurrencies, commaPrefix);
-    req.query('filter[subscription][states]', mapped.filterSubscriptionStates, commaPrefix);
-    req.query('filter[subscription][date_field]', mapped.filterSubscriptionDateField);
-    req.query('filter[subscription][start_date]', mapped.filterSubscriptionStartDate);
-    req.query('filter[subscription][start_datetime]', mapped.filterSubscriptionStartDatetime);
-    req.query('filter[subscription][end_date]', mapped.filterSubscriptionEndDate);
-    req.query('filter[subscription][end_datetime]', mapped.filterSubscriptionEndDatetime);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listSubscriptionComponentsResponseSchema,

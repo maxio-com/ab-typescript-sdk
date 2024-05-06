@@ -25,7 +25,7 @@ export interface ProductPricePoint {
   /** The product price point name */
   name?: string;
   /** The product price point API handle */
-  handle?: string;
+  handle?: string | null;
   /** The product price point price, in integer cents */
   priceInCents?: bigint;
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days */
@@ -33,21 +33,21 @@ export interface ProductPricePoint {
   /** A string representing the interval unit for this product price point, either month or day */
   intervalUnit?: IntervalUnit;
   /** The product price point trial price, in integer cents */
-  trialPriceInCents?: bigint;
+  trialPriceInCents?: bigint | null;
   /** The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days */
-  trialInterval?: number;
+  trialInterval?: number | null;
   /** A string representing the trial interval unit for this product price point, either month or day */
-  trialIntervalUnit?: IntervalUnit;
+  trialIntervalUnit?: IntervalUnit | null;
   trialType?: string;
   /** reserved for future use */
-  introductoryOffer?: boolean;
+  introductoryOffer?: boolean | null;
   /** The product price point initial charge, in integer cents */
-  initialChargeInCents?: bigint;
-  initialChargeAfterTrial?: boolean;
+  initialChargeInCents?: bigint | null;
+  initialChargeAfterTrial?: boolean | null;
   /** The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days */
-  expirationInterval?: number;
+  expirationInterval?: number | null;
   /** A string representing the expiration interval unit for this product price point, either month or day */
-  expirationIntervalUnit?: IntervalUnit;
+  expirationIntervalUnit?: IntervalUnit | null;
   /** The product id this price point belongs to */
   productId?: number;
   /** Timestamp indicating when this price point was archived */
@@ -73,24 +73,30 @@ export const productPricePointSchema: Schema<ProductPricePoint> = expandoObject(
   {
     id: ['id', optional(number())],
     name: ['name', optional(string())],
-    handle: ['handle', optional(string())],
+    handle: ['handle', optional(nullable(string()))],
     priceInCents: ['price_in_cents', optional(bigint())],
     interval: ['interval', optional(number())],
     intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
-    trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
-    trialInterval: ['trial_interval', optional(number())],
-    trialIntervalUnit: ['trial_interval_unit', optional(intervalUnitSchema)],
+    trialPriceInCents: ['trial_price_in_cents', optional(nullable(bigint()))],
+    trialInterval: ['trial_interval', optional(nullable(number()))],
+    trialIntervalUnit: [
+      'trial_interval_unit',
+      optional(nullable(intervalUnitSchema)),
+    ],
     trialType: ['trial_type', optional(string())],
-    introductoryOffer: ['introductory_offer', optional(boolean())],
-    initialChargeInCents: ['initial_charge_in_cents', optional(bigint())],
+    introductoryOffer: ['introductory_offer', optional(nullable(boolean()))],
+    initialChargeInCents: [
+      'initial_charge_in_cents',
+      optional(nullable(bigint())),
+    ],
     initialChargeAfterTrial: [
       'initial_charge_after_trial',
-      optional(boolean()),
+      optional(nullable(boolean())),
     ],
-    expirationInterval: ['expiration_interval', optional(number())],
+    expirationInterval: ['expiration_interval', optional(nullable(number()))],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(intervalUnitSchema),
+      optional(nullable(intervalUnitSchema)),
     ],
     productId: ['product_id', optional(number())],
     archivedAt: ['archived_at', optional(nullable(string()))],

@@ -16,10 +16,6 @@ import {
   string,
 } from '../schema';
 import {
-  AllocationPayment,
-  allocationPaymentSchema,
-} from './containers/allocationPayment';
-import {
   AllocationPreviousQuantity,
   allocationPreviousQuantitySchema,
 } from './containers/allocationPreviousQuantity';
@@ -29,6 +25,10 @@ import {
 } from './containers/allocationQuantity';
 import { CreditType, creditTypeSchema } from './creditType';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+import {
+  PaymentForAllocation,
+  paymentForAllocationSchema,
+} from './paymentForAllocation';
 
 export interface Allocation {
   /** The allocation unique id */
@@ -78,7 +78,7 @@ export interface Allocation {
    * Available values: `full`, `prorated`, `none`.
    */
   downgradeCredit?: CreditType | null;
-  payment?: AllocationPayment | null;
+  payment?: PaymentForAllocation | null;
   expiresAt?: string;
   usedQuantity?: bigint;
   chargeId?: bigint;
@@ -110,7 +110,10 @@ export const allocationSchema: Schema<Allocation> = expandoObject({
   initiateDunning: ['initiate_dunning', optional(boolean())],
   upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
   downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  payment: ['payment', optional(nullable(lazy(() => allocationPaymentSchema)))],
+  payment: [
+    'payment',
+    optional(nullable(lazy(() => paymentForAllocationSchema))),
+  ],
   expiresAt: ['expires_at', optional(string())],
   usedQuantity: ['used_quantity', optional(bigint())],
   chargeId: ['charge_id', optional(bigint())],

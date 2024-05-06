@@ -26,14 +26,14 @@ import {
 } from './cancellationMethod';
 import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import {
-  SubscriptionGroup2,
-  subscriptionGroup2Schema,
-} from './containers/subscriptionGroup2';
-import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
 } from './creditCardPaymentProfile';
 import { Customer, customerSchema } from './customer';
+import {
+  NestedSubscriptionGroup,
+  nestedSubscriptionGroupSchema,
+} from './nestedSubscriptionGroup';
 import {
   PrepaidConfiguration,
   prepaidConfigurationSchema,
@@ -81,15 +81,15 @@ export interface Subscription {
   /** The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility. */
   productVersionNumber?: number;
   /** Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) */
-  currentPeriodEndsAt?: string;
+  currentPeriodEndsAt?: string | null;
   /** Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases) */
-  nextAssessmentAt?: string;
+  nextAssessmentAt?: string | null;
   /** Timestamp for when the trial period (if any) began */
   trialStartedAt?: string | null;
   /** Timestamp for when the trial period (if any) ended */
   trialEndedAt?: string | null;
   /** Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial) */
-  activatedAt?: string;
+  activatedAt?: string | null;
   /** Timestamp giving the expiration date of this subscription (if any) */
   expiresAt?: string | null;
   /** The creation date for this subscription */
@@ -105,7 +105,7 @@ export interface Subscription {
   /** The timestamp of the most recent cancellation */
   canceledAt?: string | null;
   /** Timestamp relating to the start of the current (recurring) period */
-  currentPeriodStartedAt?: string;
+  currentPeriodStartedAt?: string | null;
   /** Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) */
   previousState?: SubscriptionState;
   /** The ID of the transaction that generated the revenue */
@@ -123,7 +123,7 @@ export interface Subscription {
   customer?: Customer;
   product?: Product;
   creditCard?: CreditCardPaymentProfile;
-  group?: SubscriptionGroup2 | null;
+  group?: NestedSubscriptionGroup | null;
   bankAccount?: BankAccountPaymentProfile;
   /** The payment profile type for the active profile on file. */
   paymentType?: string | null;
@@ -147,7 +147,7 @@ export interface Subscription {
   offerId?: number | null;
   /** On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. */
   payerId?: number | null;
-  /** The balance in cents plus the estimated renewal amount in cents. */
+  /** The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation. */
   currentBillingAmountInCents?: bigint;
   /** The product price point currently subscribed to. */
   productPricePointId?: number;
@@ -185,7 +185,7 @@ export interface Subscription {
   scheduledCancellationAt?: string | null;
   creditBalanceInCents?: bigint;
   prepaymentBalanceInCents?: bigint;
-  prepaidConfiguration?: PrepaidConfiguration;
+  prepaidConfiguration?: PrepaidConfiguration | null;
   /** Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided. */
   selfServicePageToken?: string;
   [key: string]: unknown;
@@ -198,11 +198,11 @@ export const subscriptionSchema: Schema<Subscription> = expandoObject({
   totalRevenueInCents: ['total_revenue_in_cents', optional(bigint())],
   productPriceInCents: ['product_price_in_cents', optional(bigint())],
   productVersionNumber: ['product_version_number', optional(number())],
-  currentPeriodEndsAt: ['current_period_ends_at', optional(string())],
-  nextAssessmentAt: ['next_assessment_at', optional(string())],
+  currentPeriodEndsAt: ['current_period_ends_at', optional(nullable(string()))],
+  nextAssessmentAt: ['next_assessment_at', optional(nullable(string()))],
   trialStartedAt: ['trial_started_at', optional(nullable(string()))],
   trialEndedAt: ['trial_ended_at', optional(nullable(string()))],
-  activatedAt: ['activated_at', optional(string())],
+  activatedAt: ['activated_at', optional(nullable(string()))],
   expiresAt: ['expires_at', optional(nullable(string()))],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
@@ -216,7 +216,10 @@ export const subscriptionSchema: Schema<Subscription> = expandoObject({
     optional(nullable(boolean())),
   ],
   canceledAt: ['canceled_at', optional(nullable(string()))],
-  currentPeriodStartedAt: ['current_period_started_at', optional(string())],
+  currentPeriodStartedAt: [
+    'current_period_started_at',
+    optional(nullable(string())),
+  ],
   previousState: ['previous_state', optional(subscriptionStateSchema)],
   signupPaymentId: ['signup_payment_id', optional(number())],
   signupRevenue: ['signup_revenue', optional(string())],
@@ -233,7 +236,10 @@ export const subscriptionSchema: Schema<Subscription> = expandoObject({
     'credit_card',
     optional(lazy(() => creditCardPaymentProfileSchema)),
   ],
-  group: ['group', optional(nullable(lazy(() => subscriptionGroup2Schema)))],
+  group: [
+    'group',
+    optional(nullable(lazy(() => nestedSubscriptionGroupSchema))),
+  ],
   bankAccount: [
     'bank_account',
     optional(lazy(() => bankAccountPaymentProfileSchema)),
@@ -299,7 +305,7 @@ export const subscriptionSchema: Schema<Subscription> = expandoObject({
   prepaymentBalanceInCents: ['prepayment_balance_in_cents', optional(bigint())],
   prepaidConfiguration: [
     'prepaid_configuration',
-    optional(lazy(() => prepaidConfigurationSchema)),
+    optional(nullable(lazy(() => prepaidConfigurationSchema))),
   ],
   selfServicePageToken: ['self_service_page_token', optional(string())],
 });

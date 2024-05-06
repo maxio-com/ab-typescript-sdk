@@ -20,10 +20,7 @@ import {
   componentCurrencyPriceSchema,
 } from './componentCurrencyPrice';
 import { ComponentPrice, componentPriceSchema } from './componentPrice';
-import {
-  ComponentPricePointIntervalUnit,
-  componentPricePointIntervalUnitSchema,
-} from './containers/componentPricePointIntervalUnit';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 
@@ -42,7 +39,7 @@ export interface ComponentPricePoint {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme?: PricingScheme;
   componentId?: number;
-  handle?: string;
+  handle?: string | null;
   archivedAt?: string | null;
   createdAt?: string;
   updatedAt?: string;
@@ -55,7 +52,7 @@ export interface ComponentPricePoint {
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number | null;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
-  intervalUnit?: ComponentPricePointIntervalUnit | null;
+  intervalUnit?: IntervalUnit | null;
   /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
   currencyPrices?: ComponentCurrencyPrice[];
   [key: string]: unknown;
@@ -69,7 +66,7 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
     name: ['name', optional(string())],
     pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     componentId: ['component_id', optional(number())],
-    handle: ['handle', optional(string())],
+    handle: ['handle', optional(nullable(string()))],
     archivedAt: ['archived_at', optional(nullable(string()))],
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],
@@ -78,10 +75,7 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
     subscriptionId: ['subscription_id', optional(number())],
     taxIncluded: ['tax_included', optional(boolean())],
     interval: ['interval', optional(nullable(number()))],
-    intervalUnit: [
-      'interval_unit',
-      optional(nullable(componentPricePointIntervalUnitSchema)),
-    ],
+    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     currencyPrices: [
       'currency_prices',
       optional(array(lazy(() => componentCurrencyPriceSchema))),

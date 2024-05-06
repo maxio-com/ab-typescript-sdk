@@ -11,19 +11,19 @@
 |  --- | --- | --- | --- |
 | `id` | `number \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | The product price point name |
-| `handle` | `string \| undefined` | Optional | The product price point API handle |
+| `handle` | `string \| null \| undefined` | Optional | The product price point API handle |
 | `priceInCents` | `bigint \| undefined` | Optional | The product price point price, in integer cents |
 | `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days |
 | `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this product price point, either month or day |
-| `trialPriceInCents` | `bigint \| undefined` | Optional | The product price point trial price, in integer cents |
-| `trialInterval` | `number \| undefined` | Optional | The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days |
-| `trialIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product price point, either month or day |
+| `trialPriceInCents` | `bigint \| null \| undefined` | Optional | The product price point trial price, in integer cents |
+| `trialInterval` | `number \| null \| undefined` | Optional | The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days |
+| `trialIntervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product price point, either month or day |
 | `trialType` | `string \| undefined` | Optional | - |
-| `introductoryOffer` | `boolean \| undefined` | Optional | reserved for future use |
-| `initialChargeInCents` | `bigint \| undefined` | Optional | The product price point initial charge, in integer cents |
-| `initialChargeAfterTrial` | `boolean \| undefined` | Optional | - |
-| `expirationInterval` | `number \| undefined` | Optional | The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days |
-| `expirationIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month or day |
+| `introductoryOffer` | `boolean \| null \| undefined` | Optional | reserved for future use |
+| `initialChargeInCents` | `bigint \| null \| undefined` | Optional | The product price point initial charge, in integer cents |
+| `initialChargeAfterTrial` | `boolean \| null \| undefined` | Optional | - |
+| `expirationInterval` | `number \| null \| undefined` | Optional | The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days |
+| `expirationIntervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month or day |
 | `productId` | `number \| undefined` | Optional | The product id this price point belongs to |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this price point was archived |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this price point was created |

@@ -12,7 +12,7 @@
 | `id` | `number \| undefined` | Optional | The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. |
 | `name` | `string \| undefined` | Optional | The name of the Component, suitable for display on statements. i.e. Text Messages. |
 | `handle` | `string \| null \| undefined` | Optional | The component API handle |
-| `pricingScheme` | [`ComponentPricingScheme \| null \| undefined`](../../doc/models/containers/component-pricing-scheme.md) | Optional | This is a container for one-of cases. |
+| `pricingScheme` | [`PricingScheme \| null \| undefined`](../../doc/models/pricing-scheme.md) | Optional | - |
 | `unitName` | `string \| undefined` | Optional | The name of the unit that the component’s usage is measured in. i.e. message |
 | `unitPrice` | `string \| null \| undefined` | Optional | The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. |
 | `productFamilyId` | `number \| undefined` | Optional | The id of the Product Family to which the Component belongs |
@@ -26,7 +26,7 @@
 | `overagePrices` | [`ComponentPrice[] \| null \| undefined`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `prices` | [`ComponentPrice[] \| null \| undefined`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `pricePointCount` | `number \| undefined` | Optional | Count for the number of price points associated with the component |
-| `pricePointsUrl` | `string \| undefined` | Optional | URL that points to the location to read the existing price points via GET request |
+| `pricePointsUrl` | `string \| null \| undefined` | Optional | URL that points to the location to read the existing price points via GET request |
 | `defaultPricePointName` | `string \| undefined` | Optional | - |
 | `taxCode` | `string \| null \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
 | `recurring` | `boolean \| undefined` | Optional | - |
@@ -52,7 +52,7 @@
   "id": 24,
   "name": "name2",
   "handle": "handle8",
-  "pricing_scheme": "tiered",
+  "pricing_scheme": "per_unit",
   "unit_name": "unit_name4"
 }
 ```

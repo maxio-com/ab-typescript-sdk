@@ -481,6 +481,19 @@ try {
 
 Use this endpoint to retrieve the details for an invoice.
 
+## PDF Invoice retrieval
+
+Individual PDF Invoices can be retrieved by using the "Accept" header application/pdf or appending .pdf as the format portion of the URL:
+
+```curl -u <api_key>:x -H
+Accept:application/pdf -H
+https://acme.chargify.com/invoices/inv_8gd8tdhtd3hgr.pdf > output_file.pdf
+URL: `https://<subdomain>.chargify.com/invoices/<uid>.<format>`
+Method: GET
+Required parameters: `uid`
+Response: A single Invoice.
+```
+
 ```ts
 async readInvoice(
   uid: string,
@@ -603,9 +616,6 @@ try {
       "price_point_id": null
     }
   ],
-  "discounts": [],
-  "taxes": [],
-  "credits": [],
   "payments": [
     {
       "transaction_time": "2018-07-26T15:22:02Z",
@@ -623,8 +633,6 @@ try {
       "prepayment": false
     }
   ],
-  "refunds": [],
-  "custom_fields": [],
   "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
 }
 ```
@@ -781,7 +789,6 @@ try {
           "organization": null,
           "email": "evan4@example.com"
         },
-        "recipient_emails": [],
         "net_terms": 0,
         "memo": "Thanks for your business! If you have any questions, please contact your account manager.",
         "billing_address": {
@@ -1047,8 +1054,6 @@ try {
         "total_amount": "168.61",
         "paid_amount": "168.61",
         "due_amount": "0.0",
-        "credits": [],
-        "refunds": [],
         "payments": [
           {
             "memo": "Non-Resumable Canceled On Purpose - Standard Plan: Renewal payment",
@@ -1066,7 +1071,6 @@ try {
             "prepayment": false
           }
         ],
-        "custom_fields": [],
         "display_settings": {
           "hide_zero_subtotal_lines": false,
           "include_discounts_on_lines": false
@@ -2809,12 +2813,6 @@ try {
         "price_point_id": null
       }
     ],
-    "discounts": [],
-    "taxes": [],
-    "credits": [],
-    "payments": [],
-    "refunds": [],
-    "custom_fields": [],
     "public_url": "https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x"
   }
 }

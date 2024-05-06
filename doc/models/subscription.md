@@ -15,11 +15,11 @@
 | `totalRevenueInCents` | `bigint \| undefined` | Optional | Gives the total revenue from the subscription in the number of cents. |
 | `productPriceInCents` | `bigint \| undefined` | Optional | (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. |
 | `productVersionNumber` | `number \| undefined` | Optional | The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility. |
-| `currentPeriodEndsAt` | `string \| undefined` | Optional | Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) |
-| `nextAssessmentAt` | `string \| undefined` | Optional | Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases) |
+| `currentPeriodEndsAt` | `string \| null \| undefined` | Optional | Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) |
+| `nextAssessmentAt` | `string \| null \| undefined` | Optional | Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases) |
 | `trialStartedAt` | `string \| null \| undefined` | Optional | Timestamp for when the trial period (if any) began |
 | `trialEndedAt` | `string \| null \| undefined` | Optional | Timestamp for when the trial period (if any) ended |
-| `activatedAt` | `string \| undefined` | Optional | Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial) |
+| `activatedAt` | `string \| null \| undefined` | Optional | Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial) |
 | `expiresAt` | `string \| null \| undefined` | Optional | Timestamp giving the expiration date of this subscription (if any) |
 | `createdAt` | `string \| undefined` | Optional | The creation date for this subscription |
 | `updatedAt` | `string \| undefined` | Optional | The date of last update for this subscription |
@@ -27,7 +27,7 @@
 | `cancellationMethod` | [`CancellationMethod \| null \| undefined`](../../doc/models/cancellation-method.md) | Optional | The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription's state is not canceled. |
 | `cancelAtEndOfPeriod` | `boolean \| null \| undefined` | Optional | Whether or not the subscription will (or has) canceled at the end of the period. |
 | `canceledAt` | `string \| null \| undefined` | Optional | The timestamp of the most recent cancellation |
-| `currentPeriodStartedAt` | `string \| undefined` | Optional | Timestamp relating to the start of the current (recurring) period |
+| `currentPeriodStartedAt` | `string \| null \| undefined` | Optional | Timestamp relating to the start of the current (recurring) period |
 | `previousState` | [`SubscriptionState \| undefined`](../../doc/models/subscription-state.md) | Optional | Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) |
 | `signupPaymentId` | `number \| undefined` | Optional | The ID of the transaction that generated the revenue |
 | `signupRevenue` | `string \| undefined` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
@@ -38,7 +38,7 @@
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`CreditCardPaymentProfile \| undefined`](../../doc/models/credit-card-payment-profile.md) | Optional | - |
-| `group` | [`SubscriptionGroup2 \| null \| undefined`](../../doc/models/containers/subscription-group-2.md) | Optional | This is a container for one-of cases. |
+| `group` | [`NestedSubscriptionGroup \| null \| undefined`](../../doc/models/nested-subscription-group.md) | Optional | - |
 | `bankAccount` | [`BankAccountPaymentProfile \| undefined`](../../doc/models/bank-account-payment-profile.md) | Optional | - |
 | `paymentType` | `string \| null \| undefined` | Optional | The payment profile type for the active profile on file. |
 | `referralCode` | `string \| null \| undefined` | Optional | The subscription's unique code that can be given to referrals. |
@@ -51,7 +51,7 @@
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
 | `offerId` | `number \| null \| undefined` | Optional | The ID of the offer associated with the subscription. |
 | `payerId` | `number \| null \| undefined` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
-| `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. |
+| `currentBillingAmountInCents` | `bigint \| undefined` | Optional | The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation. |
 | `productPricePointId` | `number \| undefined` | Optional | The product price point currently subscribed to. |
 | `productPricePointType` | [`PricePointType \| undefined`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `nextProductPricePointId` | `number \| null \| undefined` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
@@ -69,7 +69,7 @@
 | `scheduledCancellationAt` | `string \| null \| undefined` | Optional | - |
 | `creditBalanceInCents` | `bigint \| undefined` | Optional | - |
 | `prepaymentBalanceInCents` | `bigint \| undefined` | Optional | - |
-| `prepaidConfiguration` | [`PrepaidConfiguration \| undefined`](../../doc/models/prepaid-configuration.md) | Optional | - |
+| `prepaidConfiguration` | [`PrepaidConfiguration \| null \| undefined`](../../doc/models/prepaid-configuration.md) | Optional | - |
 | `selfServicePageToken` | `string \| undefined` | Optional | Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided. |
 
 ## Example (as JSON)

@@ -8,6 +8,7 @@ import { expandoObject, number, optional, Schema } from '../schema';
 
 export interface CreateOfferComponent {
   componentId?: number;
+  pricePointId?: number;
   startingQuantity?: number;
   [key: string]: unknown;
 }
@@ -15,6 +16,7 @@ export interface CreateOfferComponent {
 export const createOfferComponentSchema: Schema<CreateOfferComponent> = expandoObject(
   {
     componentId: ['component_id', optional(number())],
+    pricePointId: ['price_point_id', optional(number())],
     startingQuantity: ['starting_quantity', optional(number())],
   }
 );

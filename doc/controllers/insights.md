@@ -274,7 +274,7 @@ This endpoint returns your site's current MRR, including plan and usage breakout
 
 ```ts
 async listMrrPerSubscription(
-  filterSubscriptionIds?: number[],
+  filter?: ListMrrFilter,
   atTime?: string,
   page?: number,
   perPage?: number,
@@ -287,7 +287,7 @@ async listMrrPerSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `filterSubscriptionIds` | `number[] \| undefined` | Query, Optional | Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`. |
+| `filter` | [`ListMrrFilter \| undefined`](../../doc/models/list-mrr-filter.md) | Query, Optional | Filter to use for List MRR per subscription operation |
 | `atTime` | `string \| undefined` | Query, Optional | Submit a timestamp in ISO8601 format to request MRR for a historic time. Use in query: `at_time=2022-01-10T10:00:00-05:00`. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
@@ -301,7 +301,14 @@ async listMrrPerSubscription(
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
+  filter: {
+    subscriptionIds: [
+      1,
+      2,
+      3
+    ],
+  },
   atTime: 'at_time=2022-01-10T10:00:00-05:00',
   page: 2,
   perPage: 50,

@@ -8,6 +8,7 @@ import {
   bigint,
   boolean,
   expandoObject,
+  nullable,
   optional,
   Schema,
   string,
@@ -19,7 +20,7 @@ import {
 
 export interface RefundPrepayment {
   /** `amount` is not required if you pass `amount_in_cents`. */
-  amountInCents: bigint;
+  amountInCents: bigint | null;
   /** `amount_in_cents` is not required if you pass `amount`. */
   amount: RefundPrepaymentAmount;
   memo: string;
@@ -29,7 +30,7 @@ export interface RefundPrepayment {
 }
 
 export const refundPrepaymentSchema: Schema<RefundPrepayment> = expandoObject({
-  amountInCents: ['amount_in_cents', bigint()],
+  amountInCents: ['amount_in_cents', nullable(bigint())],
   amount: ['amount', refundPrepaymentAmountSchema],
   memo: ['memo', string()],
   external: ['external', optional(boolean())],

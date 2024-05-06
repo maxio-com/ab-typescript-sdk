@@ -17,13 +17,9 @@ import {
   string,
 } from '../schema';
 import {
-  ProductExpirationIntervalUnit,
-  productExpirationIntervalUnitSchema,
-} from './containers/productExpirationIntervalUnit';
-import {
-  ProductTrialIntervalUnit,
-  productTrialIntervalUnitSchema,
-} from './containers/productTrialIntervalUnit';
+  ExtendedIntervalUnit,
+  extendedIntervalUnitSchema,
+} from './extendedIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { ProductFamily, productFamilySchema } from './productFamily';
 import { PublicSignupPage, publicSignupPageSchema } from './publicSignupPage';
@@ -43,7 +39,7 @@ export interface Product {
   /** A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
   expirationInterval?: number | null;
   /** A string representing the expiration interval unit for this product, either month or day */
-  expirationIntervalUnit?: ProductExpirationIntervalUnit | null;
+  expirationIntervalUnit?: ExtendedIntervalUnit | null;
   /** Timestamp indicating when this product was created */
   createdAt?: string;
   /** Timestamp indicating when this product was last updated */
@@ -61,7 +57,7 @@ export interface Product {
   /** A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
   trialInterval?: number | null;
   /** A string representing the trial interval unit for this product, either month or day */
-  trialIntervalUnit?: ProductTrialIntervalUnit | null;
+  trialIntervalUnit?: IntervalUnit | null;
   /** Timestamp indicating when this product was archived */
   archivedAt?: string | null;
   /** Boolean that controls whether a payment profile is required to be entered for customers wishing to sign up on this product. */
@@ -70,7 +66,7 @@ export interface Product {
   taxable?: boolean;
   /** The url to which a customer will be returned after a successful account update */
   updateReturnUrl?: string | null;
-  initialChargeAfterTrial?: boolean;
+  initialChargeAfterTrial?: boolean | null;
   /** The version of the product */
   versionNumber?: number;
   /** The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update) */
@@ -105,7 +101,7 @@ export const productSchema: Schema<Product> = expandoObject({
   expirationInterval: ['expiration_interval', optional(nullable(number()))],
   expirationIntervalUnit: [
     'expiration_interval_unit',
-    optional(nullable(productExpirationIntervalUnitSchema)),
+    optional(nullable(extendedIntervalUnitSchema)),
   ],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
@@ -120,14 +116,17 @@ export const productSchema: Schema<Product> = expandoObject({
   trialInterval: ['trial_interval', optional(nullable(number()))],
   trialIntervalUnit: [
     'trial_interval_unit',
-    optional(nullable(productTrialIntervalUnitSchema)),
+    optional(nullable(intervalUnitSchema)),
   ],
   archivedAt: ['archived_at', optional(nullable(string()))],
   requireCreditCard: ['require_credit_card', optional(boolean())],
   returnParams: ['return_params', optional(nullable(string()))],
   taxable: ['taxable', optional(boolean())],
   updateReturnUrl: ['update_return_url', optional(nullable(string()))],
-  initialChargeAfterTrial: ['initial_charge_after_trial', optional(boolean())],
+  initialChargeAfterTrial: [
+    'initial_charge_after_trial',
+    optional(nullable(boolean())),
+  ],
   versionNumber: ['version_number', optional(number())],
   updateReturnParams: ['update_return_params', optional(nullable(string()))],
   productFamily: ['product_family', optional(lazy(() => productFamilySchema))],

@@ -149,9 +149,7 @@ async listPrepayments(
   subscriptionId: number,
   page?: number,
   perPage?: number,
-  filterDateField?: BasicDateField,
-  filterStartDate?: string,
-  filterEndDate?: string,
+  filter?: ListPrepaymentsFilter,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PrepaymentsResponse>>
 ```
@@ -163,9 +161,7 @@ async listPrepayments(
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `filterDateField` | [`BasicDateField \| undefined`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. |
-| `filterStartDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-15`. |
-| `filterEndDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[end_date]=2011-12-15`. |
+| `filter` | [`ListPrepaymentsFilter \| undefined`](../../doc/models/list-prepayments-filter.md) | Query, Optional | Filter to use for List Prepayments operations |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -175,10 +171,15 @@ async listPrepayments(
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
   subscriptionId: 222,
   page: 2,
-  perPage: 50
+  perPage: 50,
+  filter: {
+    dateField: ListPrepaymentDateField.CreatedAt,
+    startDate: '2024-01-01',
+    endDate: '2024-01-31',
+  }
 }
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.listPrepayments(collect);
@@ -252,7 +253,6 @@ const subscriptionId = 222;
 const body: IssueServiceCreditRequest = {
   serviceCredit: {
     amount: '1',
-    memo: 'Courtesy credit',
   },
 };
 
@@ -282,6 +282,12 @@ try {
   "memo": "Credit to group account"
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
 # Deduct Service Credit
@@ -339,7 +345,7 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
 # Refund Prepayment
@@ -351,7 +357,7 @@ The amount may be passed either as a decimal, with `amount`, or an integer in ce
 ```ts
 async refundPrepayment(
   subscriptionId: number,
-  prepaymentId: string,
+  prepaymentId: bigint,
   body?: RefundPrepaymentRequest,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PrepaymentResponse>>
@@ -362,7 +368,7 @@ async refundPrepayment(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `prepaymentId` | `string` | Template, Required | id of prepayment |
+| `prepaymentId` | `bigint` | Template, Required | id of prepayment |
 | `body` | [`RefundPrepaymentRequest \| undefined`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -375,7 +381,7 @@ async refundPrepayment(
 ```ts
 const subscriptionId = 222;
 
-const prepaymentId = 'prepayment_id8';
+const prepaymentId = BigInt(228);
 
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.refundPrepayment(
@@ -398,5 +404,5 @@ try {
 |  --- | --- | --- |
 | 400 | Bad Request | [`RefundPrepaymentBaseErrorsResponseError`](../../doc/models/refund-prepayment-base-errors-response-error.md) |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity | [`RefundPrepaymentAggregatedErrorsResponseError`](../../doc/models/refund-prepayment-aggregated-errors-response-error.md) |
+| 422 | Unprocessable Entity | `ApiError` |
 
