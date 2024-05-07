@@ -6,10 +6,6 @@
 
 import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  RefundPrepaymentAggregatedErrorsResponseError,
-} from '../errors/refundPrepaymentAggregatedErrorsResponseError';
 import {
   RefundPrepaymentBaseErrorsResponseError,
 } from '../errors/refundPrepaymentBaseErrorsResponseError';
@@ -50,7 +46,7 @@ import {
   refundPrepaymentRequestSchema,
 } from '../models/refundPrepaymentRequest';
 import { ServiceCredit, serviceCreditSchema } from '../models/serviceCredit';
-import { number, optional, string } from '../schema';
+import { bigint, number, optional } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionInvoiceAccountController extends BaseController {
@@ -178,6 +174,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credits.json`;
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }
@@ -203,7 +200,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credit_deductions.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -223,14 +220,14 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    */
   async refundPrepayment(
     subscriptionId: number,
-    prepaymentId: string,
+    prepaymentId: bigint,
     body?: RefundPrepaymentRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PrepaymentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
-      prepaymentId: [prepaymentId, string()],
+      prepaymentId: [prepaymentId, bigint()],
       body: [body, optional(refundPrepaymentRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -238,7 +235,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments/${mapped.prepaymentId}/refunds.json`;
     req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
     req.throwOn(400, RefundPrepaymentBaseErrorsResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, RefundPrepaymentAggregatedErrorsResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(prepaymentResponseSchema, requestOptions);
   }

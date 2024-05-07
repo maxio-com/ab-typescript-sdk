@@ -122,7 +122,7 @@ async listSubscriptionComponents(
   sort?: ListSubscriptionComponentsSort,
   startDate?: string,
   startDatetime?: string,
-  include?: ListSubscriptionComponentsInclude,
+  include?: ListSubscriptionComponentsInclude[],
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionComponentResponse[]>>
 ```
@@ -142,7 +142,7 @@ async listSubscriptionComponents(
 | `sort` | [`ListSubscriptionComponentsSort \| undefined`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query `sort=updated_at`. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `startDatetime` | `string \| undefined` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `include` | [`ListSubscriptionComponentsInclude[] \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription,historic_usages`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -168,7 +168,10 @@ const collect = {
     3
   ],
   sort: ListSubscriptionComponentsSort.UpdatedAt,
-  include: ListSubscriptionComponentsInclude.Subscription
+  include: [
+    ListSubscriptionComponentsInclude.Subscription,
+    ListSubscriptionComponentsInclude.HistoricUsages
+  ]
 }
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.listSubscriptionComponents(collect);
@@ -1673,7 +1676,7 @@ async listSubscriptionComponentsForSite(
 | `subscriptionIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching subscription id based on provided ids. Use in query `subscription_ids=1,2,3`. |
 | `pricePointIds` | [`IncludeNotNull \| undefined`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
 | `productFamilyIds` | `number[] \| undefined` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
-| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `include` | [`ListSubscriptionComponentsInclude \| undefined`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription,historic_usages`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

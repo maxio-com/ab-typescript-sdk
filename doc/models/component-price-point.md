@@ -15,7 +15,7 @@
 | `name` | `string \| undefined` | Optional | - |
 | `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `componentId` | `number \| undefined` | Optional | - |
-| `handle` | `string \| undefined` | Optional | - |
+| `handle` | `string \| null \| undefined` | Optional | - |
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |

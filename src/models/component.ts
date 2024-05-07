@@ -57,7 +57,7 @@ export interface Component {
   /** Count for the number of price points associated with the component */
   pricePointCount?: number;
   /** URL that points to the location to read the existing price points via GET request */
-  pricePointsUrl?: string;
+  pricePointsUrl?: string | null;
   defaultPricePointName?: string;
   /** A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
   taxCode?: string | null;
@@ -122,7 +122,7 @@ export const componentSchema: Schema<Component> = expandoObject({
     optional(nullable(array(lazy(() => componentPriceSchema)))),
   ],
   pricePointCount: ['price_point_count', optional(number())],
-  pricePointsUrl: ['price_points_url', optional(string())],
+  pricePointsUrl: ['price_points_url', optional(nullable(string()))],
   defaultPricePointName: ['default_price_point_name', optional(string())],
   taxCode: ['tax_code', optional(nullable(string()))],
   recurring: ['recurring', optional(boolean())],

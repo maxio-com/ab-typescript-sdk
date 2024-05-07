@@ -31,7 +31,7 @@
 | `returnParams` | `string \| null \| undefined` | Optional | - |
 | `taxable` | `boolean \| undefined` | Optional | - |
 | `updateReturnUrl` | `string \| null \| undefined` | Optional | The url to which a customer will be returned after a successful account update |
-| `initialChargeAfterTrial` | `boolean \| undefined` | Optional | - |
+| `initialChargeAfterTrial` | `boolean \| null \| undefined` | Optional | - |
 | `versionNumber` | `number \| undefined` | Optional | The version of the product |
 | `updateReturnParams` | `string \| null \| undefined` | Optional | The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update) |
 | `productFamily` | [`ProductFamily \| undefined`](../../doc/models/product-family.md) | Optional | - |

@@ -81,9 +81,9 @@ export interface CreatePaymentProfile {
   bankIban?: string;
   /** (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API */
   bankRoutingNumber?: string;
-  /** (Required when creating with ACH, GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The customerʼs bank account number */
+  /** (Required when creating with ACH, GoCardless, Stripe BECS or BACS Direct Debit, and bank_iban is blank) The customerʼs bank account number */
   bankAccountNumber?: string;
-  /** (Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided */
+  /** (Optional when creating with GoCardless, required with Stripe BECS or BACS Direct Debit) Branch/Sort code. Alternatively, an IBAN can be provided */
   bankBranchCode?: string;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;

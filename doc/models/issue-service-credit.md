@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `amount` | [`IssueServiceCreditAmount`](../../doc/models/containers/issue-service-credit-amount.md) | Required | This is a container for one-of cases. |
-| `memo` | `string` | Required | - |
+| `memo` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

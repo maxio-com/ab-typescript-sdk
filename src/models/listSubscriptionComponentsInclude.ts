@@ -11,6 +11,7 @@ import { Schema, stringEnum } from '../schema';
  */
 export enum ListSubscriptionComponentsInclude {
   Subscription = 'subscription',
+  HistoricUsages = 'historic_usages',
 }
 
 /**

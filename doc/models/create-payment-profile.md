@@ -36,8 +36,8 @@
 | `bankName` | `string \| undefined` | Optional | (Required when creating with ACH or GoCardless, optional with Stripe Direct Debit). The name of the bank where the customerʼs account resides |
 | `bankIban` | `string \| undefined` | Optional | (Optional when creating with GoCardless, required with Stripe Direct Debit). International Bank Account Number. Alternatively, local bank details can be provided |
 | `bankRoutingNumber` | `string \| undefined` | Optional | (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API |
-| `bankAccountNumber` | `string \| undefined` | Optional | (Required when creating with ACH, GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The customerʼs bank account number |
-| `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided |
+| `bankAccountNumber` | `string \| undefined` | Optional | (Required when creating with ACH, GoCardless, Stripe BECS or BACS Direct Debit, and bank_iban is blank) The customerʼs bank account number |
+| `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating with GoCardless, required with Stripe BECS or BACS Direct Debit) Branch/Sort code. Alternatively, an IBAN can be provided |
 | `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bankAccountHolderType` | [`BankAccountHolderType \| undefined`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
 | `lastFour` | `string \| undefined` | Optional | (Optional) Used for creating subscription with payment profile imported using vault_token, for proper display in Advanced Billing UI |

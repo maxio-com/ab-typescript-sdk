@@ -26,7 +26,7 @@
 | `overagePrices` | [`ComponentPrice[] \| null \| undefined`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `prices` | [`ComponentPrice[] \| null \| undefined`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `pricePointCount` | `number \| undefined` | Optional | Count for the number of price points associated with the component |
-| `pricePointsUrl` | `string \| undefined` | Optional | URL that points to the location to read the existing price points via GET request |
+| `pricePointsUrl` | `string \| null \| undefined` | Optional | URL that points to the location to read the existing price points via GET request |
 | `defaultPricePointName` | `string \| undefined` | Optional | - |
 | `taxCode` | `string \| null \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
 | `recurring` | `boolean \| undefined` | Optional | - |

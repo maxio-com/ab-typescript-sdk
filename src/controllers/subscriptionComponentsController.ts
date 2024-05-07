@@ -174,7 +174,8 @@ export class SubscriptionComponentsController extends BaseController {
    *                                                                      this parameter will be used instead of
    *                                                                      start_date.
    * @param include            Allows including additional data in the
-   *                                                                      response. Use in query `include=subscription`.
+   *                                                                      response. Use in query `include=subscription,
+   *                                                                      historic_usages`.
    * @return Response from the API call
    */
   async listSubscriptionComponents({
@@ -202,7 +203,7 @@ export class SubscriptionComponentsController extends BaseController {
     sort?: ListSubscriptionComponentsSort,
     startDate?: string,
     startDatetime?: string,
-    include?: ListSubscriptionComponentsInclude,
+    include?: ListSubscriptionComponentsInclude[],
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionComponentResponse[]>> {
@@ -219,7 +220,10 @@ export class SubscriptionComponentsController extends BaseController {
       sort: [sort, optional(listSubscriptionComponentsSortSchema)],
       startDate: [startDate, optional(string())],
       startDatetime: [startDatetime, optional(string())],
-      include: [include, optional(listSubscriptionComponentsIncludeSchema)],
+      include: [
+        include,
+        optional(array(listSubscriptionComponentsIncludeSchema)),
+      ],
     });
     req.query('date_field', mapped.dateField);
     req.query('direction', mapped.direction);
@@ -231,7 +235,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('sort', mapped.sort);
     req.query('start_date', mapped.startDate);
     req.query('start_datetime', mapped.startDatetime);
-    req.query('include', mapped.include);
+    req.query('include', mapped.include, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
@@ -1025,7 +1029,7 @@ export class SubscriptionComponentsController extends BaseController {
    *                                                                             `product_family_ids=1,2,3`.
    * @param include            Allows including additional data in
    *                                                                             the response. Use in query
-   *                                                                             `include=subscription`.
+   *                                                                             `include=subscription,historic_usages`.
    * @return Response from the API call
    */
   async listSubscriptionComponentsForSite({
