@@ -14,9 +14,9 @@
 | `totalDiscountInCents` | `bigint \| undefined` | Optional | - |
 | `totalTaxInCents` | `bigint \| undefined` | Optional | - |
 | `subtotalInCents` | `bigint \| undefined` | Optional | - |
-| `startDate` | `string \| undefined` | Optional | - |
-| `endDate` | `string \| undefined` | Optional | - |
-| `periodType` | `string \| undefined` | Optional | - |
+| `startDate` | `string \| null \| undefined` | Optional | - |
+| `endDate` | `string \| null \| undefined` | Optional | - |
+| `periodType` | `string \| null \| undefined` | Optional | - |
 | `existingBalanceInCents` | `bigint \| undefined` | Optional | - |
 
 ## Example (as JSON)

@@ -16,9 +16,9 @@ import {
   string,
 } from '../schema';
 import {
-  CouponCompoundingStrategy,
-  couponCompoundingStrategySchema,
-} from './containers/couponCompoundingStrategy';
+  CompoundingStrategy,
+  compoundingStrategySchema,
+} from './compoundingStrategy';
 import { CouponRestriction, couponRestrictionSchema } from './couponRestriction';
 import { DiscountType, discountTypeSchema } from './discountType';
 import { RecurringScheme, recurringSchemeSchema } from './recurringScheme';
@@ -45,7 +45,7 @@ export interface Coupon {
   archivedAt?: string | null;
   conversionLimit?: string | null;
   stackable?: boolean;
-  compoundingStrategy?: CouponCompoundingStrategy;
+  compoundingStrategy?: CompoundingStrategy | null;
   useSiteExchangeRate?: boolean;
   createdAt?: string;
   updatedAt?: string;
@@ -87,7 +87,7 @@ export const couponSchema: Schema<Coupon> = expandoObject({
   stackable: ['stackable', optional(boolean())],
   compoundingStrategy: [
     'compounding_strategy',
-    optional(couponCompoundingStrategySchema),
+    optional(nullable(compoundingStrategySchema)),
   ],
   useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
   createdAt: ['created_at', optional(string())],

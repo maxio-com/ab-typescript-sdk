@@ -7,6 +7,7 @@
 import {
   bigint,
   expandoObject,
+  nullable,
   number,
   optional,
   Schema,
@@ -16,7 +17,7 @@ import { UsageQuantity, usageQuantitySchema } from './containers/usageQuantity';
 
 export interface Usage {
   id?: bigint;
-  memo?: string;
+  memo?: string | null;
   createdAt?: string;
   pricePointId?: number;
   quantity?: UsageQuantity;
@@ -29,7 +30,7 @@ export interface Usage {
 
 export const usageSchema: Schema<Usage> = expandoObject({
   id: ['id', optional(bigint())],
-  memo: ['memo', optional(string())],
+  memo: ['memo', optional(nullable(string()))],
   createdAt: ['created_at', optional(string())],
   pricePointId: ['price_point_id', optional(number())],
   quantity: ['quantity', optional(usageQuantitySchema)],

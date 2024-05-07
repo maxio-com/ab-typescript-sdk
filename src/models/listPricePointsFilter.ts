@@ -13,7 +13,10 @@ import {
   string,
 } from '../schema';
 import { BasicDateField, basicDateFieldSchema } from './basicDateField';
-import { IncludeNotNull, includeNotNullSchema } from './includeNotNull';
+import {
+  IncludeNullOrNotNull,
+  includeNullOrNotNullSchema,
+} from './includeNullOrNotNull';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 
 export interface ListPricePointsFilter {
@@ -32,7 +35,7 @@ export interface ListPricePointsFilter {
   /** Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. */
   ids?: number[];
   /** Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. */
-  archivedAt?: IncludeNotNull;
+  archivedAt?: IncludeNullOrNotNull;
   [key: string]: unknown;
 }
 
@@ -45,6 +48,6 @@ export const listPricePointsFilterSchema: Schema<ListPricePointsFilter> = expand
     endDatetime: ['end_datetime', optional(string())],
     type: ['type', optional(array(pricePointTypeSchema))],
     ids: ['ids', optional(array(number()))],
-    archivedAt: ['archived_at', optional(includeNotNullSchema)],
+    archivedAt: ['archived_at', optional(includeNullOrNotNullSchema)],
   }
 );

@@ -5,6 +5,7 @@
  */
 
 import {
+  array,
   boolean,
   expandoObject,
   lazy,
@@ -19,12 +20,10 @@ import {
   SubscriptionComponentAllocatedQuantity,
   subscriptionComponentAllocatedQuantitySchema,
 } from './containers/subscriptionComponentAllocatedQuantity';
-import {
-  SubscriptionComponentPricePointType,
-  subscriptionComponentPricePointTypeSchema,
-} from './containers/subscriptionComponentPricePointType';
 import { CreditType, creditTypeSchema } from './creditType';
+import { HistoricUsage, historicUsageSchema } from './historicUsage';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
 import {
   SubscriptionComponentSubscription,
@@ -61,7 +60,7 @@ export interface SubscriptionComponent {
   archivedAt?: string | null;
   pricePointId?: number | null;
   pricePointHandle?: string | null;
-  pricePointType?: SubscriptionComponentPricePointType;
+  pricePointType?: PricePointType | null;
   pricePointName?: string | null;
   productFamilyId?: number;
   productFamilyHandle?: string;
@@ -72,6 +71,7 @@ export interface SubscriptionComponent {
   allowFractionalQuantities?: boolean;
   /** An optional object, will be returned if provided `include=subscription` query param. */
   subscription?: SubscriptionComponentSubscription;
+  historicUsages?: HistoricUsage[];
   displayOnHostedPage?: boolean;
   /** The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
@@ -105,7 +105,7 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = expand
     pricePointHandle: ['price_point_handle', optional(nullable(string()))],
     pricePointType: [
       'price_point_type',
-      optional(subscriptionComponentPricePointTypeSchema),
+      optional(nullable(pricePointTypeSchema)),
     ],
     pricePointName: ['price_point_name', optional(nullable(string()))],
     productFamilyId: ['product_family_id', optional(number())],
@@ -124,6 +124,10 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = expand
     subscription: [
       'subscription',
       optional(lazy(() => subscriptionComponentSubscriptionSchema)),
+    ],
+    historicUsages: [
+      'historic_usages',
+      optional(array(lazy(() => historicUsageSchema))),
     ],
     displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
     interval: ['interval', optional(number())],

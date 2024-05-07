@@ -39,7 +39,7 @@ export interface ComponentPricePoint {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme?: PricingScheme;
   componentId?: number;
-  handle?: string;
+  handle?: string | null;
   archivedAt?: string | null;
   createdAt?: string;
   updatedAt?: string;
@@ -66,7 +66,7 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
     name: ['name', optional(string())],
     pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     componentId: ['component_id', optional(number())],
-    handle: ['handle', optional(string())],
+    handle: ['handle', optional(nullable(string()))],
     archivedAt: ['archived_at', optional(nullable(string()))],
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],

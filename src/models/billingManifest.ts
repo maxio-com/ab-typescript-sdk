@@ -9,6 +9,7 @@ import {
   bigint,
   expandoObject,
   lazy,
+  nullable,
   optional,
   Schema,
   string,
@@ -24,9 +25,9 @@ export interface BillingManifest {
   totalDiscountInCents?: bigint;
   totalTaxInCents?: bigint;
   subtotalInCents?: bigint;
-  startDate?: string;
-  endDate?: string;
-  periodType?: string;
+  startDate?: string | null;
+  endDate?: string | null;
+  periodType?: string | null;
   existingBalanceInCents?: bigint;
   [key: string]: unknown;
 }
@@ -40,8 +41,8 @@ export const billingManifestSchema: Schema<BillingManifest> = expandoObject({
   totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
   totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
   subtotalInCents: ['subtotal_in_cents', optional(bigint())],
-  startDate: ['start_date', optional(string())],
-  endDate: ['end_date', optional(string())],
-  periodType: ['period_type', optional(string())],
+  startDate: ['start_date', optional(nullable(string()))],
+  endDate: ['end_date', optional(nullable(string()))],
+  periodType: ['period_type', optional(nullable(string()))],
   existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
 });

@@ -7,6 +7,7 @@
 import {
   bigint,
   expandoObject,
+  nullable,
   number,
   optional,
   Schema,
@@ -23,7 +24,7 @@ export interface SubscriptionGroupPrepaymentResponse {
   /** The type of entry */
   entryType?: ServiceCreditType;
   /** A memo attached to the entry. */
-  memo?: string;
+  memo?: string | null;
   [key: string]: unknown;
 }
 
@@ -33,6 +34,6 @@ export const subscriptionGroupPrepaymentResponseSchema: Schema<SubscriptionGroup
     amountInCents: ['amount_in_cents', optional(bigint())],
     endingBalanceInCents: ['ending_balance_in_cents', optional(bigint())],
     entryType: ['entry_type', optional(serviceCreditTypeSchema)],
-    memo: ['memo', optional(string())],
+    memo: ['memo', optional(nullable(string()))],
   }
 );

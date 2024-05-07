@@ -30,7 +30,7 @@
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
 | `conversionLimit` | `string \| null \| undefined` | Optional | - |
 | `stackable` | `boolean \| undefined` | Optional | - |
-| `compoundingStrategy` | [`CouponCompoundingStrategy \| undefined`](../../doc/models/containers/coupon-compounding-strategy.md) | Optional | This is a container for any-of cases. |
+| `compoundingStrategy` | [`CompoundingStrategy \| null \| undefined`](../../doc/models/compounding-strategy.md) | Optional | - |
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |

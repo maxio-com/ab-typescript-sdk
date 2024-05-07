@@ -66,7 +66,7 @@ export interface Product {
   taxable?: boolean;
   /** The url to which a customer will be returned after a successful account update */
   updateReturnUrl?: string | null;
-  initialChargeAfterTrial?: boolean;
+  initialChargeAfterTrial?: boolean | null;
   /** The version of the product */
   versionNumber?: number;
   /** The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update) */
@@ -123,7 +123,10 @@ export const productSchema: Schema<Product> = expandoObject({
   returnParams: ['return_params', optional(nullable(string()))],
   taxable: ['taxable', optional(boolean())],
   updateReturnUrl: ['update_return_url', optional(nullable(string()))],
-  initialChargeAfterTrial: ['initial_charge_after_trial', optional(boolean())],
+  initialChargeAfterTrial: [
+    'initial_charge_after_trial',
+    optional(nullable(boolean())),
+  ],
   versionNumber: ['version_number', optional(number())],
   updateReturnParams: ['update_return_params', optional(nullable(string()))],
   productFamily: ['product_family', optional(lazy(() => productFamilySchema))],

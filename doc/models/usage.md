@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `bigint \| undefined` | Optional | **Constraints**: `>= 0` |
-| `memo` | `string \| undefined` | Optional | - |
+| `memo` | `string \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `quantity` | [`UsageQuantity \| undefined`](../../doc/models/containers/usage-quantity.md) | Optional | This is a container for one-of cases. |
