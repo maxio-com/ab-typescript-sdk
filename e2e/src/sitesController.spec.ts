@@ -31,7 +31,7 @@ describe('SitesController', () => {
         state: 'TX',
         zip: '78015',
         country: 'US',
-        name: 'Root Testing RUIC',
+        name: 'Maxio Developer Experience',
         phone: '555 111 222',
       },
       taxConfiguration: {
