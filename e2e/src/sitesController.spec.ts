@@ -7,12 +7,12 @@ describe('SitesController', () => {
     const sitesController = new SitesController(client);
     const response = await sitesController.readSite();
     const expectedSite = {
-      id: 4511,
-      name: 'Typescript SDK Env',
-      subdomain: 'tp-sdk',
+      id: 86562,
+      name: 'Typescript SDK',
+      subdomain: 'ts-sdk',
       currency: 'USD',
       brighton_v1_enabled: false,
-      sellerId: 722159,
+      sellerId: 56887,
       nonPrimaryCurrencies: ['EUR', 'GBP'],
       relationshipInvoicingEnabled: true,
       customerHierarchyEnabled: false,
@@ -31,7 +31,7 @@ describe('SitesController', () => {
         state: 'TX',
         zip: '78015',
         country: 'US',
-        name: 'Developer Experience',
+        name: 'Maxio Developer Experience',
         phone: '555 111 222',
       },
       taxConfiguration: {

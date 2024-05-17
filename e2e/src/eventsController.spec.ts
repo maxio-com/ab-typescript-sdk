@@ -1,6 +1,7 @@
 import { EventsController } from 'advanced-billing-sdk';
 import { createClient, createInvalidClient } from './config';
 import { createSubscription } from './utils/subscription';
+import { waitForSeconds } from './utils';
 
 describe('Events Controller', () => {
   let eventsController: EventsController;
@@ -35,6 +36,7 @@ describe('Events Controller', () => {
     test('should list events for subscription when the user sends a valid subscription id', async () => {
       const { subscriptionResponse } = await createSubscription({});
       const subscriptId = subscriptionResponse?.subscription?.id;
+      await waitForSeconds(1);
       const listResponse = await eventsController.listSubscriptionEvents({
         subscriptionId: subscriptId || 0,
       });
