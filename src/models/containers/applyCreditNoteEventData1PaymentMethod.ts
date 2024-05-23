@@ -27,9 +27,9 @@ import {
 } from '../paymentMethodPaypal';
 
 /** This is a container type for any-of types. */
-export type InvoiceEventDataPaymentMethod = PaymentMethodApplePay | PaymentMethodBankAccount | PaymentMethodCreditCard | PaymentMethodExternal | PaymentMethodPaypal;
+export type ApplyCreditNoteEventData1PaymentMethod = PaymentMethodApplePay | PaymentMethodBankAccount | PaymentMethodCreditCard | PaymentMethodExternal | PaymentMethodPaypal;
 
-export const invoiceEventDataPaymentMethodSchema: Schema<InvoiceEventDataPaymentMethod> = anyOf(
+export const applyCreditNoteEventData1PaymentMethodSchema: Schema<ApplyCreditNoteEventData1PaymentMethod> = anyOf(
   [
     paymentMethodApplePaySchema,
     paymentMethodBankAccountSchema,
@@ -39,7 +39,7 @@ export const invoiceEventDataPaymentMethodSchema: Schema<InvoiceEventDataPayment
   ]
 );
 
-export namespace InvoiceEventDataPaymentMethod {
+export namespace ApplyCreditNoteEventData1PaymentMethod {
   /**
   * Validation method to narrow down union type to PaymentMethodApplePay type case.
   *

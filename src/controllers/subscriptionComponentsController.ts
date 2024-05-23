@@ -95,7 +95,7 @@ import {
   updateAllocationExpirationDateSchema,
 } from '../models/updateAllocationExpirationDate';
 import { UsageResponse, usageResponseSchema } from '../models/usageResponse';
-import { array, number, optional, string } from '../schema';
+import { array, bigint, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class SubscriptionComponentsController extends BaseController {
@@ -176,6 +176,11 @@ export class SubscriptionComponentsController extends BaseController {
    * @param include            Allows including additional data in the
    *                                                                      response. Use in query `include=subscription,
    *                                                                      historic_usages`.
+   * @param inUse              If in_use is set to true, it returns only
+   *                                                                      components that are currently in use. However,
+   *                                                                      if it's set to false or not provided, it
+   *                                                                      returns all components connected with the
+   *                                                                      subscription.
    * @return Response from the API call
    */
   async listSubscriptionComponents({
@@ -191,6 +196,7 @@ export class SubscriptionComponentsController extends BaseController {
     startDate,
     startDatetime,
     include,
+    inUse,
   }: {
     subscriptionId: number,
     dateField?: SubscriptionListDateField,
@@ -204,6 +210,7 @@ export class SubscriptionComponentsController extends BaseController {
     startDate?: string,
     startDatetime?: string,
     include?: ListSubscriptionComponentsInclude[],
+    inUse?: boolean,
   },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionComponentResponse[]>> {
@@ -224,6 +231,7 @@ export class SubscriptionComponentsController extends BaseController {
         include,
         optional(array(listSubscriptionComponentsIncludeSchema)),
       ],
+      inUse: [inUse, optional(boolean())],
     });
     req.query('date_field', mapped.dateField);
     req.query('direction', mapped.direction);
@@ -236,6 +244,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('start_date', mapped.startDate);
     req.query('start_datetime', mapped.startDatetime);
     req.query('include', mapped.include, commaPrefix);
+    req.query('in_use', mapped.inUse);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
@@ -772,8 +781,8 @@ export class SubscriptionComponentsController extends BaseController {
   }: {
     subscriptionId: number,
     componentId: ListUsagesInputComponentId,
-    sinceId?: number,
-    maxId?: number,
+    sinceId?: bigint,
+    maxId?: bigint,
     sinceDate?: string,
     untilDate?: string,
     page?: number,
@@ -785,8 +794,8 @@ export class SubscriptionComponentsController extends BaseController {
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
       componentId: [componentId, listUsagesInputComponentIdSchema],
-      sinceId: [sinceId, optional(number())],
-      maxId: [maxId, optional(number())],
+      sinceId: [sinceId, optional(bigint())],
+      maxId: [maxId, optional(bigint())],
       sinceDate: [sinceDate, optional(string())],
       untilDate: [untilDate, optional(string())],
       page: [page, optional(number())],

@@ -13,7 +13,7 @@ import {
   ListEventsDateField,
   listEventsDateFieldSchema,
 } from '../models/listEventsDateField';
-import { array, number, optional, string } from '../schema';
+import { array, bigint, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class EventsController extends BaseController {
@@ -136,8 +136,8 @@ export class EventsController extends BaseController {
   }: {
     page?: number,
     perPage?: number,
-    sinceId?: number,
-    maxId?: number,
+    sinceId?: bigint,
+    maxId?: bigint,
     direction?: Direction,
     filter?: EventType[],
     dateField?: ListEventsDateField,
@@ -152,8 +152,8 @@ export class EventsController extends BaseController {
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      sinceId: [sinceId, optional(number())],
-      maxId: [maxId, optional(number())],
+      sinceId: [sinceId, optional(bigint())],
+      maxId: [maxId, optional(bigint())],
       direction: [direction, optional(directionSchema)],
       filter: [filter, optional(array(eventTypeSchema))],
       dateField: [dateField, optional(listEventsDateFieldSchema)],
@@ -211,8 +211,8 @@ export class EventsController extends BaseController {
     subscriptionId: number,
     page?: number,
     perPage?: number,
-    sinceId?: number,
-    maxId?: number,
+    sinceId?: bigint,
+    maxId?: bigint,
     direction?: Direction,
     filter?: EventType[],
   },
@@ -223,8 +223,8 @@ export class EventsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      sinceId: [sinceId, optional(number())],
-      maxId: [maxId, optional(number())],
+      sinceId: [sinceId, optional(bigint())],
+      maxId: [maxId, optional(bigint())],
       direction: [direction, optional(directionSchema)],
       filter: [filter, optional(array(eventTypeSchema))],
     });
@@ -268,8 +268,8 @@ export class EventsController extends BaseController {
   }: {
     page?: number,
     perPage?: number,
-    sinceId?: number,
-    maxId?: number,
+    sinceId?: bigint,
+    maxId?: bigint,
     direction?: Direction,
     filter?: EventType[],
   },
@@ -279,8 +279,8 @@ export class EventsController extends BaseController {
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
-      sinceId: [sinceId, optional(number())],
-      maxId: [maxId, optional(number())],
+      sinceId: [sinceId, optional(bigint())],
+      maxId: [maxId, optional(bigint())],
       direction: [direction, optional(directionSchema)],
       filter: [filter, optional(array(eventTypeSchema))],
     });

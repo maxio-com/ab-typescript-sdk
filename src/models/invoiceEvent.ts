@@ -5,35 +5,36 @@
  */
 
 import {
+  bigint,
   expandoObject,
   lazy,
-  number,
   optional,
   Schema,
   string,
 } from '../schema';
 import {
-  InvoiceEventEventData,
-  invoiceEventEventDataSchema,
-} from './containers/invoiceEventEventData';
-import { Invoice, invoiceSchema } from './invoice';
-import { InvoiceEventType, invoiceEventTypeSchema } from './invoiceEventType';
+  ApplyCreditNoteEventData1,
+  applyCreditNoteEventData1Schema,
+} from './applyCreditNoteEventData1';
+import { Invoice1, invoice1Schema } from './invoice1';
 
 export interface InvoiceEvent {
-  id?: number;
-  /** Invoice Event Type */
-  eventType?: InvoiceEventType;
-  /** The event data is the data that, when combined with the command, results in the output invoice found in the invoice field. */
-  eventData?: InvoiceEventEventData;
+  id?: bigint;
   timestamp?: string;
-  invoice?: Invoice;
+  invoice?: Invoice1;
+  eventType?: string;
+  /** Example schema for an `apply_credit_note` event */
+  eventData?: ApplyCreditNoteEventData1;
   [key: string]: unknown;
 }
 
 export const invoiceEventSchema: Schema<any> = expandoObject({
-  id: ['id', optional(number())],
-  eventType: ['event_type', optional(invoiceEventTypeSchema)],
-  eventData: ['event_data', optional(lazy(() => invoiceEventEventDataSchema))],
+  id: ['id', optional(bigint())],
   timestamp: ['timestamp', optional(string())],
-  invoice: ['invoice', optional(lazy(() => invoiceSchema))],
+  invoice: ['invoice', optional(lazy(() => invoice1Schema))],
+  eventType: ['event_type', optional(string())],
+  eventData: [
+    'event_data',
+    optional(lazy(() => applyCreditNoteEventData1Schema)),
+  ],
 });

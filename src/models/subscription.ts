@@ -29,7 +29,7 @@ import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
 } from './creditCardPaymentProfile';
-import { Customer, customerSchema } from './customer';
+import { Customer1, customer1Schema } from './customer1';
 import {
   NestedSubscriptionGroup,
   nestedSubscriptionGroupSchema,
@@ -120,7 +120,7 @@ export interface Subscription {
   snapDay?: string | null;
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
   paymentCollectionMethod?: CollectionMethod;
-  customer?: Customer;
+  customer?: Customer1;
   product?: Product;
   creditCard?: CreditCardPaymentProfile;
   group?: NestedSubscriptionGroup | null;
@@ -230,7 +230,7 @@ export const subscriptionSchema: Schema<Subscription> = expandoObject({
     'payment_collection_method',
     optional(collectionMethodSchema),
   ],
-  customer: ['customer', optional(lazy(() => customerSchema))],
+  customer: ['customer', optional(lazy(() => customer1Schema))],
   product: ['product', optional(lazy(() => productSchema))],
   creditCard: [
     'credit_card',

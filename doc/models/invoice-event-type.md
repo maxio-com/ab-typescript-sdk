@@ -16,6 +16,7 @@ Invoice Event Type
 | `createCreditNote` |
 | `applyPayment` |
 | `applyDebitNote` |
+| `createDebitNote` |
 | `refundInvoice` |
 | `voidInvoice` |
 | `voidRemainder` |

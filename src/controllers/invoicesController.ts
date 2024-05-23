@@ -90,7 +90,7 @@ import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
 } from '../models/voidInvoiceRequest';
-import { array, boolean, number, optional, string } from '../schema';
+import { array, bigint, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 
 export class InvoicesController extends BaseController {
@@ -390,7 +390,7 @@ export class InvoicesController extends BaseController {
     eventTypes,
   }: {
     sinceDate?: string,
-    sinceId?: number,
+    sinceId?: bigint,
     page?: number,
     perPage?: number,
     invoiceUid?: string,
@@ -402,7 +402,7 @@ export class InvoicesController extends BaseController {
     const req = this.createRequest('GET', '/invoices/events.json');
     const mapped = req.prepareArgs({
       sinceDate: [sinceDate, optional(string())],
-      sinceId: [sinceId, optional(number())],
+      sinceId: [sinceId, optional(bigint())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       invoiceUid: [invoiceUid, optional(string())],

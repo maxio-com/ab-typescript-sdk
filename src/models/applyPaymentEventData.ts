@@ -18,9 +18,14 @@ import {
   InvoiceEventPayment,
   invoiceEventPaymentSchema,
 } from './containers/invoiceEventPayment';
+import {
+  InvoiceConsolidationLevel,
+  invoiceConsolidationLevelSchema,
+} from './invoiceConsolidationLevel';
 
 /** Example schema for an `apply_payment` event */
 export interface ApplyPaymentEventData {
+  consolidationLevel: InvoiceConsolidationLevel;
   /** The payment memo */
   memo: string;
   /** The full, original amount of the payment transaction as a string in full units. Incoming payments can be split amongst several invoices, which will result in a `applied_amount` less than the `original_amount`. Example: A $100.99 payment, of which $40.11 is applied to this invoice, will have an `original_amount` of `"100.99"`. */
@@ -41,6 +46,7 @@ export interface ApplyPaymentEventData {
 }
 
 export const applyPaymentEventDataSchema: Schema<any> = expandoObject({
+  consolidationLevel: ['consolidation_level', invoiceConsolidationLevelSchema],
   memo: ['memo', string()],
   originalAmount: ['original_amount', string()],
   appliedAmount: ['applied_amount', string()],

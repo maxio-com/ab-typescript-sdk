@@ -21,7 +21,7 @@
 | `currency` | `string \| undefined` | Optional | The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields. |
 | `memo` | `string \| undefined` | Optional | The memo printed on credit note, which is a description of the reason for the credit. |
 | `seller` | [`Seller \| undefined`](../../doc/models/seller.md) | Optional | - |
-| `customer` | [`Customer1 \| undefined`](../../doc/models/customer-1.md) | Optional | - |
+| `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `billingAddress` | [`BillingAddress \| undefined`](../../doc/models/billing-address.md) | Optional | - |
 | `shippingAddress` | [`ShippingAddress \| undefined`](../../doc/models/shipping-address.md) | Optional | - |
 | `subtotalAmount` | `string \| undefined` | Optional | Subtotal of the credit note, which is the sum of all line items before discounts or taxes. Note that this is a positive amount representing the credit back to the customer. |

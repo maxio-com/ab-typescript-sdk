@@ -7,14 +7,16 @@
 import { expandoObject, nullable, optional, Schema, string } from '../schema';
 
 export interface CreateProductFamily {
-  name?: string;
+  name: string;
+  handle?: string | null;
   description?: string | null;
   [key: string]: unknown;
 }
 
 export const createProductFamilySchema: Schema<CreateProductFamily> = expandoObject(
   {
-    name: ['name', optional(string())],
+    name: ['name', string()],
+    handle: ['handle', optional(nullable(string()))],
     description: ['description', optional(nullable(string()))],
   }
 );

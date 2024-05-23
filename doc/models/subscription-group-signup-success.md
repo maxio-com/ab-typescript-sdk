@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionGroup` | [`SubscriptionGroupSignupSuccessData`](../../doc/models/subscription-group-signup-success-data.md) | Required | - |
-| `customer` | [`Customer`](../../doc/models/customer.md) | Required | - |
+| `customer` | [`Customer1`](../../doc/models/customer-1.md) | Required | - |
 
 ## Example (as JSON)
 

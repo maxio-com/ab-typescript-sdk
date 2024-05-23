@@ -5,7 +5,7 @@
  */
 
 import { array, expandoObject, lazy, number, optional, Schema } from '../schema';
-import { InvoiceEvent, invoiceEventSchema } from './invoiceEvent';
+import { InvoiceEvent, invoiceEventSchema } from './containers/invoiceEvent';
 
 export interface ListInvoiceEventsResponse {
   events?: InvoiceEvent[];

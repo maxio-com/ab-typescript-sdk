@@ -15,6 +15,7 @@ export enum InvoiceEventType {
   CreateCreditNote = 'create_credit_note',
   ApplyPayment = 'apply_payment',
   ApplyDebitNote = 'apply_debit_note',
+  CreateDebitNote = 'create_debit_note',
   RefundInvoice = 'refund_invoice',
   VoidInvoice = 'void_invoice',
   VoidRemainder = 'void_remainder',

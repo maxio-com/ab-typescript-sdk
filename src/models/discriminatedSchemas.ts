@@ -5,6 +5,7 @@
  */
 
 import { discriminatedObject, Schema } from '../schema';
+import { invoiceEventSchema } from './invoiceEvent';
 import { invoiceEventPaymentSchema } from './invoiceEventPayment';
 import { invoiceEventPayment1Schema } from './invoiceEventPayment1';
 
@@ -15,6 +16,15 @@ export const discriminatedInvoiceEventPaymentSchema: Schema<any> = discriminated
     'Invoice Event Payment': invoiceEventPaymentSchema,
  },
   'Invoice Event Payment'
+);
+
+export const discriminatedInvoiceEventSchema: Schema<any> = discriminatedObject(
+  'eventType',
+  'event_type',
+  {
+    'Invoice Event': invoiceEventSchema,
+ },
+  'Invoice Event'
 );
 
 export const discriminatedInvoiceEventPayment1Schema: Schema<any> = discriminatedObject(

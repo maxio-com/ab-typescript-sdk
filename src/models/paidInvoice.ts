@@ -10,7 +10,7 @@ import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 export interface PaidInvoice {
   /** The uid of the paid invoice */
   invoiceId?: string;
-  /** The current status of the invoice. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
+  /** The current status of the invoice. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statuses) for more. */
   status?: InvoiceStatus;
   /** The remaining due amount on the invoice */
   dueAmount?: string;

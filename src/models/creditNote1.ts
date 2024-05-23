@@ -23,7 +23,7 @@ import {
   creditNoteLineItemSchema,
 } from './creditNoteLineItem';
 import { CreditNoteStatus, creditNoteStatusSchema } from './creditNoteStatus';
-import { Customer1, customer1Schema } from './customer1';
+import { Customer, customerSchema } from './customer';
 import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
 import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
 import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
@@ -65,7 +65,7 @@ export interface CreditNote1 {
   /** The memo printed on credit note, which is a description of the reason for the credit. */
   memo?: string;
   seller?: Seller;
-  customer?: Customer1;
+  customer?: Customer;
   billingAddress?: BillingAddress;
   shippingAddress?: ShippingAddress;
   /** Subtotal of the credit note, which is the sum of all line items before discounts or taxes. Note that this is a positive amount representing the credit back to the customer. */
@@ -104,7 +104,7 @@ export const creditNote1Schema: Schema<CreditNote1> = expandoObject({
   currency: ['currency', optional(string())],
   memo: ['memo', optional(string())],
   seller: ['seller', optional(lazy(() => sellerSchema))],
-  customer: ['customer', optional(lazy(() => customer1Schema))],
+  customer: ['customer', optional(lazy(() => customerSchema))],
   billingAddress: [
     'billing_address',
     optional(lazy(() => billingAddressSchema)),

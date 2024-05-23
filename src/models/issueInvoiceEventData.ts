@@ -22,9 +22,9 @@ export interface IssueInvoiceEventData {
    * See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).
    */
   consolidationLevel: InvoiceConsolidationLevel;
-  /** The status of the invoice before event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
+  /** The status of the invoice before event occurrence. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statusess) for more. */
   fromStatus: InvoiceStatus;
-  /** The status of the invoice after event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. */
+  /** The status of the invoice after event occurrence. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statusess) for more. */
   toStatus: InvoiceStatus;
   /** Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`. */
   dueAmount: string;

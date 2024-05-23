@@ -34,8 +34,8 @@
 | `delayedCancelAt` | `string \| null \| undefined` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `couponCode` | `string \| null \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `snapDay` | `string \| null \| undefined` | Optional | The day of the month that the subscription will charge according to calendar billing rules, if used. |
-| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `CollectionMethod.Automatic` |
-| `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
+| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
+| `customer` | [`Customer1 \| undefined`](../../doc/models/customer-1.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
 | `creditCard` | [`CreditCardPaymentProfile \| undefined`](../../doc/models/credit-card-payment-profile.md) | Optional | - |
 | `group` | [`NestedSubscriptionGroup \| null \| undefined`](../../doc/models/nested-subscription-group.md) | Optional | - |
@@ -76,7 +76,6 @@
 
 ```json
 {
-  "payment_collection_method": "automatic",
   "credit_card": {
     "id": 10088716,
     "first_name": "Test",

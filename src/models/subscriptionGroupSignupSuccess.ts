@@ -5,7 +5,7 @@
  */
 
 import { expandoObject, lazy, Schema } from '../schema';
-import { Customer, customerSchema } from './customer';
+import { Customer1, customer1Schema } from './customer1';
 import {
   SubscriptionGroupSignupSuccessData,
   subscriptionGroupSignupSuccessDataSchema,
@@ -13,7 +13,7 @@ import {
 
 export interface SubscriptionGroupSignupSuccess {
   subscriptionGroup: SubscriptionGroupSignupSuccessData;
-  customer: Customer;
+  customer: Customer1;
   [key: string]: unknown;
 }
 
@@ -23,6 +23,6 @@ export const subscriptionGroupSignupSuccessSchema: Schema<SubscriptionGroupSignu
       'subscription_group',
       lazy(() => subscriptionGroupSignupSuccessDataSchema),
     ],
-    customer: ['customer', lazy(() => customerSchema)],
+    customer: ['customer', lazy(() => customer1Schema)],
   }
 );
