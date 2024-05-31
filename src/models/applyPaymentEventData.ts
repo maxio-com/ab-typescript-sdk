@@ -7,7 +7,6 @@
 import {
   boolean,
   expandoObject,
-  lazy,
   nullable,
   number,
   optional,
@@ -18,9 +17,14 @@ import {
   InvoiceEventPayment,
   invoiceEventPaymentSchema,
 } from './containers/invoiceEventPayment';
+import {
+  InvoiceConsolidationLevel,
+  invoiceConsolidationLevelSchema,
+} from './invoiceConsolidationLevel';
 
 /** Example schema for an `apply_payment` event */
 export interface ApplyPaymentEventData {
+  consolidationLevel: InvoiceConsolidationLevel;
   /** The payment memo */
   memo: string;
   /** The full, original amount of the payment transaction as a string in full units. Incoming payments can be split amongst several invoices, which will result in a `applied_amount` less than the `original_amount`. Example: A $100.99 payment, of which $40.11 is applied to this invoice, will have an `original_amount` of `"100.99"`. */
@@ -40,18 +44,27 @@ export interface ApplyPaymentEventData {
   [key: string]: unknown;
 }
 
-export const applyPaymentEventDataSchema: Schema<any> = expandoObject({
-  memo: ['memo', string()],
-  originalAmount: ['original_amount', string()],
-  appliedAmount: ['applied_amount', string()],
-  transactionTime: ['transaction_time', string()],
-  paymentMethod: ['payment_method', lazy(() => invoiceEventPaymentSchema)],
-  transactionId: ['transaction_id', optional(number())],
-  parentInvoiceNumber: ['parent_invoice_number', optional(nullable(number()))],
-  remainingPrepaymentAmount: [
-    'remaining_prepayment_amount',
-    optional(nullable(string())),
-  ],
-  prepayment: ['prepayment', optional(boolean())],
-  external: ['external', optional(boolean())],
-});
+export const applyPaymentEventDataSchema: Schema<ApplyPaymentEventData> = expandoObject(
+  {
+    consolidationLevel: [
+      'consolidation_level',
+      invoiceConsolidationLevelSchema,
+    ],
+    memo: ['memo', string()],
+    originalAmount: ['original_amount', string()],
+    appliedAmount: ['applied_amount', string()],
+    transactionTime: ['transaction_time', string()],
+    paymentMethod: ['payment_method', invoiceEventPaymentSchema],
+    transactionId: ['transaction_id', optional(number())],
+    parentInvoiceNumber: [
+      'parent_invoice_number',
+      optional(nullable(number())),
+    ],
+    remainingPrepaymentAmount: [
+      'remaining_prepayment_amount',
+      optional(nullable(string())),
+    ],
+    prepayment: ['prepayment', optional(boolean())],
+    external: ['external', optional(boolean())],
+  }
+);

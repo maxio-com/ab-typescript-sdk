@@ -9,6 +9,7 @@ import {
   boolean,
   expandoObject,
   lazy,
+  nullable,
   optional,
   Schema,
   string,
@@ -33,7 +34,7 @@ export interface ApplyCreditNoteEventData {
   /** The time the credit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" */
   transactionTime?: string;
   /** The credit note memo. */
-  memo?: string;
+  memo?: string | null;
   /** The role of the credit note (e.g. 'general') */
   role?: string;
   /** Shows whether it was applied to consolidated invoice or not */
@@ -51,7 +52,7 @@ export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = 
     originalAmount: ['original_amount', string()],
     appliedAmount: ['applied_amount', string()],
     transactionTime: ['transaction_time', optional(string())],
-    memo: ['memo', optional(string())],
+    memo: ['memo', optional(nullable(string()))],
     role: ['role', optional(string())],
     consolidatedInvoice: ['consolidated_invoice', optional(boolean())],
     appliedCreditNotes: [

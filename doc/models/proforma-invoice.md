@@ -18,7 +18,7 @@
 | `createdAt` | `string \| undefined` | Optional | - |
 | `deliveryDate` | `string \| undefined` | Optional | - |
 | `status` | [`ProformaInvoiceStatus \| undefined`](../../doc/models/proforma-invoice-status.md) | Optional | - |
-| `collectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `CollectionMethod.Automatic` |
+| `collectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `paymentInstructions` | `string \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
 | `consolidationLevel` | [`InvoiceConsolidationLevel \| undefined`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835). |
@@ -50,7 +50,6 @@
 
 ```json
 {
-  "collection_method": "automatic",
   "uid": "uid6",
   "site_id": 196,
   "customer_id": 52,

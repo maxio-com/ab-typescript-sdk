@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
+import { expandoObject, Schema } from '../schema';
 import {
   CreateComponentPricePointRequestPricePoint,
   createComponentPricePointRequestPricePointSchema,
@@ -19,7 +19,7 @@ export const createComponentPricePointRequestSchema: Schema<CreateComponentPrice
   {
     pricePoint: [
       'price_point',
-      lazy(() => createComponentPricePointRequestPricePointSchema),
+      createComponentPricePointRequestPricePointSchema,
     ],
   }
 );

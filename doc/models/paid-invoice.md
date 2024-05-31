@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoiceId` | `string \| undefined` | Optional | The uid of the paid invoice |
-| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Optional | The current status of the invoice. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more. |
+| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Optional | The current status of the invoice. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statuses) for more. |
 | `dueAmount` | `string \| undefined` | Optional | The remaining due amount on the invoice |
 | `paidAmount` | `string \| undefined` | Optional | The total amount paid on this invoice (including any prior payments) |
 
