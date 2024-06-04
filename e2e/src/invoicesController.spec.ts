@@ -1,6 +1,7 @@
-import { InvoicesController } from 'advanced-billing-sdk';
+import { InvoicesController, InvoiceEventType } from 'advanced-billing-sdk';
 import { createClient, createInvalidClient } from './config';
 import { createSubscription } from './utils/subscription';
+import { waitForSeconds } from './utils';
 
 describe('Invoices Controller', () => {
   let invoicesController: InvoicesController;
@@ -227,6 +228,47 @@ describe('Invoices Controller', () => {
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(404);
       });
+    });
+  });
+
+  describe('List Invoice Events', () => {
+    test('should list invoice events', async () => {
+      const subsResponse = await createSubscription({});
+      const subscriptId = subsResponse.subscriptionResponse?.subscription?.id;
+      const createResponse = await invoicesController.createInvoice(
+        subscriptId || 0,
+        {
+          invoice: {
+            lineItems: [
+              {
+                title: 'A Product',
+                quantity: 12,
+                unitPrice: '150.00',
+              },
+            ],
+          },
+        }
+      );
+      const invoiceUid = createResponse.result.invoice.uid;
+      await invoicesController.voidInvoice(
+        invoiceUid || '',
+        {
+          mVoid: {
+            reason: 'Duplicate invoice',
+          },
+        }
+      );
+
+      await waitForSeconds(3);
+      const invoiceEventsResponse = await invoicesController.listInvoiceEvents(
+        {
+          invoiceUid: invoiceUid
+        }
+      );
+      expect(invoiceEventsResponse.statusCode).toBe(200);
+      expect(invoiceEventsResponse.result.events?.length).toBe(2);
+      expect(invoiceEventsResponse.result.events?.[0].eventType).toBe(InvoiceEventType.IssueInvoice);
+      expect(invoiceEventsResponse.result.events?.[1].eventType).toBe(InvoiceEventType.VoidInvoice);
     });
   });
 });
