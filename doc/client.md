@@ -44,6 +44,8 @@ const client = new Client({
   },
   timeout: 30000,
   environment: Environment.Production,
+  subdomain: 'subdomain',
+  domain: 'chargify.com',
 });
 ```
 
