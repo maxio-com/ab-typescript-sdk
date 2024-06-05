@@ -23,7 +23,7 @@ export interface Customer {
   email?: string;
   /** A comma-separated list of emails that should be cc’d on all customer communications (i.e. “joe@example.com, sue@example.com”) */
   ccEmails?: string | null;
-  /** The organization of the customer */
+  /** The organization of the customer. If no value, `null` or empty string is provided, `organization` will be populated with the customer's first and last name, separated with a space. */
   organization?: string | null;
   /** The unique identifier used within your own application for this customer */
   reference?: string | null;
