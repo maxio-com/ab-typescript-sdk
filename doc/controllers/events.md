@@ -84,8 +84,8 @@ Here’s an example event for the `subscription_state_change` event:
 async listEvents(
   page?: number,
   perPage?: number,
-  sinceId?: number,
-  maxId?: number,
+  sinceId?: bigint,
+  maxId?: bigint,
   direction?: Direction,
   filter?: EventType[],
   dateField?: ListEventsDateField,
@@ -103,8 +103,8 @@ async listEvents(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `sinceId` | `number \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `maxId` | `number \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events. |
 | `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `dateField` | [`ListEventsDateField \| undefined`](../../doc/models/list-events-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
@@ -217,8 +217,8 @@ async listSubscriptionEvents(
   subscriptionId: number,
   page?: number,
   perPage?: number,
-  sinceId?: number,
-  maxId?: number,
+  sinceId?: bigint,
+  maxId?: bigint,
   direction?: Direction,
   filter?: EventType[],
   requestOptions?: RequestOptions
@@ -232,8 +232,8 @@ async listSubscriptionEvents(
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `sinceId` | `number \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `maxId` | `number \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events. |
 | `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -319,8 +319,8 @@ Get a count of all the events for a given site by using this method.
 async readEventsCount(
   page?: number,
   perPage?: number,
-  sinceId?: number,
-  maxId?: number,
+  sinceId?: bigint,
+  maxId?: bigint,
   direction?: Direction,
   filter?: EventType[],
   requestOptions?: RequestOptions
@@ -333,8 +333,8 @@ async readEventsCount(
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `sinceId` | `number \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `maxId` | `number \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events. |
 | `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |

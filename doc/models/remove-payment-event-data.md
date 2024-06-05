@@ -25,13 +25,13 @@ Example schema for an `remove_payment` event
 {
   "transaction_id": 180,
   "memo": "memo0",
-  "original_amount": "original_amount0",
   "applied_amount": "applied_amount2",
   "transaction_time": "2016-03-13T12:52:32.123Z",
   "payment_method": {
     "type": "apple_pay"
   },
-  "prepayment": false
+  "prepayment": false,
+  "original_amount": "original_amount0"
 }
 ```
 

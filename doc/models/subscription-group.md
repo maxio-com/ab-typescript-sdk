@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `customerId` | `number \| undefined` | Optional | - |
 | `paymentProfile` | [`SubscriptionGroupPaymentProfile \| undefined`](../../doc/models/subscription-group-payment-profile.md) | Optional | - |
-| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `CollectionMethod.Automatic` |
+| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `subscriptionIds` | `number[] \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 
@@ -19,7 +19,6 @@
 
 ```json
 {
-  "payment_collection_method": "automatic",
   "customer_id": 36,
   "payment_profile": {
     "id": 44,
@@ -27,6 +26,7 @@
     "last_name": "last_name2",
     "masked_card_number": "masked_card_number2"
   },
+  "payment_collection_method": "prepaid",
   "subscription_ids": [
     146,
     147,

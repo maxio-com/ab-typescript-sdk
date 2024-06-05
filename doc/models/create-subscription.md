@@ -16,7 +16,7 @@
 | `customPrice` | [`SubscriptionCustomPrice \| undefined`](../../doc/models/subscription-custom-price.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `couponCode` | `string \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
-| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `CollectionMethod.Automatic` |
+| `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `receivesInvoiceEmails` | `string \| undefined` | Optional | (Optional) Default: True - Whether or not this subscription is set to receive emails related to this subscription. |
 | `netTerms` | `string \| undefined` | Optional | (Optional) Default: null The number of days after renewal (on invoice billing) that a subscription is due. A value between 0 (due immediately) and 180. |
 | `customerId` | `number \| undefined` | Optional | The ID of an existing customer within Chargify. Required, unless a `customer_reference` or a set of `customer_attributes` is given. |
@@ -63,7 +63,6 @@
 
 ```json
 {
-  "payment_collection_method": "automatic",
   "metafields": {
     "custom_field_name_1": "custom_field_value_1",
     "custom_field_name_2": "custom_field_value_2"
