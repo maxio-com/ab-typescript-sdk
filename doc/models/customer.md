@@ -13,7 +13,7 @@
 | `lastName` | `string \| undefined` | Optional | The last name of the customer |
 | `email` | `string \| undefined` | Optional | The email address of the customer |
 | `ccEmails` | `string \| null \| undefined` | Optional | A comma-separated list of emails that should be cc’d on all customer communications (i.e. “joe@example.com, sue@example.com”) |
-| `organization` | `string \| null \| undefined` | Optional | The organization of the customer |
+| `organization` | `string \| null \| undefined` | Optional | The organization of the customer. If no value, `null` or empty string is provided, `organization` will be populated with the customer's first and last name, separated with a space. |
 | `reference` | `string \| null \| undefined` | Optional | The unique identifier used within your own application for this customer |
 | `id` | `number \| undefined` | Optional | The customer ID in Chargify |
 | `createdAt` | `string \| undefined` | Optional | The timestamp in which the customer object was created in Chargify |
