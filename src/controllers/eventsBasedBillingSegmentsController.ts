@@ -4,17 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import {
-  EventBasedBillingListSegmentsErrorsError,
-} from '../errors/eventBasedBillingListSegmentsErrorsError';
-import {
-  EventBasedBillingSegmentError,
-} from '../errors/eventBasedBillingSegmentError';
-import {
-  EventBasedBillingSegmentErrorsError,
-} from '../errors/eventBasedBillingSegmentErrorsError';
 import {
   BulkCreateSegments,
   bulkCreateSegmentsSchema,
@@ -45,6 +35,10 @@ import {
 } from '../models/updateSegmentRequest';
 import { number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { EventBasedBillingListSegmentsErrorsError } from '../errors/eventBasedBillingListSegmentsErrorsError';
+import { EventBasedBillingSegmentError } from '../errors/eventBasedBillingSegmentError';
+import { EventBasedBillingSegmentErrorsError } from '../errors/eventBasedBillingSegmentErrorsError';
 
 export class EventsBasedBillingSegmentsController extends BaseController {
   /**
@@ -75,8 +69,13 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingSegmentErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      EventBasedBillingSegmentErrorsError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(segmentResponseSchema, requestOptions);
   }
@@ -108,19 +107,20 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    * @param filter         Filter to use for List Segments for a Price Point operation
    * @return Response from the API call
    */
-  async listSegmentsForPricePoint({
-    componentId,
-    pricePointId,
-    page,
-    perPage,
-    filter,
-  }: {
-    componentId: string,
-    pricePointId: string,
-    page?: number,
-    perPage?: number,
-    filter?: ListSegmentsFilter,
-  },
+  async listSegmentsForPricePoint(
+    {
+      componentId,
+      pricePointId,
+      page,
+      perPage,
+      filter,
+    }: {
+      componentId: string;
+      pricePointId: string;
+      page?: number;
+      perPage?: number;
+      filter?: ListSegmentsFilter;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSegmentsResponse>> {
     const req = this.createRequest('GET');
@@ -135,8 +135,13 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('filter', mapped.filter);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingListSegmentsErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      EventBasedBillingListSegmentsErrorsError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
@@ -171,8 +176,13 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/${mapped.id}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingSegmentErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      EventBasedBillingSegmentErrorsError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(segmentResponseSchema, requestOptions);
   }
@@ -201,8 +211,13 @@ export class EventsBasedBillingSegmentsController extends BaseController {
       id: [id, number()],
     });
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/${mapped.id}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ApiError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -238,8 +253,13 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/bulk.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingSegmentError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      EventBasedBillingSegmentError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }
@@ -275,8 +295,13 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments/bulk.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, EventBasedBillingSegmentError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      EventBasedBillingSegmentError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSegmentsResponseSchema, requestOptions);
   }

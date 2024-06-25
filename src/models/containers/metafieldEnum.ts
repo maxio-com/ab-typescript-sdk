@@ -16,20 +16,22 @@ export const metafieldEnumSchema: Schema<MetafieldEnum> = oneOf([
 
 export namespace MetafieldEnum {
   /**
-  * Validation method to narrow down union type to string type case.
-  *
-  * This is String case.
-  */
+   * Validation method to narrow down union type to string type case.
+   *
+   * This is String case.
+   */
   export function isString(value: unknown): value is string {
     return typeof value === 'string';
   }
 
   /**
-  * Validation method to narrow down union type to string[] type case.
-  *
-  * This is Array of String case.
-  */
+   * Validation method to narrow down union type to string[] type case.
+   *
+   * This is Array of String case.
+   */
   export function isArrayOfString(value: unknown): value is string[] {
-    return Array.isArray(value) && value.every((item) => typeof item === 'string');
+    return (
+      Array.isArray(value) && value.every((item) => typeof item === 'string')
+    );
   }
 }

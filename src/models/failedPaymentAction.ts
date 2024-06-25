@@ -18,4 +18,6 @@ export enum FailedPaymentAction {
 /**
  * Schema for FailedPaymentAction
  */
-export const  failedPaymentActionSchema: Schema<FailedPaymentAction> = stringEnum(FailedPaymentAction);
+export const failedPaymentActionSchema: Schema<FailedPaymentAction> = stringEnum(
+  FailedPaymentAction
+);

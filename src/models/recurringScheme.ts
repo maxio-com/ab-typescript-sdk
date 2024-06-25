@@ -18,4 +18,6 @@ export enum RecurringScheme {
 /**
  * Schema for RecurringScheme
  */
-export const  recurringSchemeSchema: Schema<RecurringScheme> = stringEnum(RecurringScheme);
+export const recurringSchemeSchema: Schema<RecurringScheme> = stringEnum(
+  RecurringScheme
+);

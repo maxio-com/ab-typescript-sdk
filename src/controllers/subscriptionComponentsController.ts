@@ -4,14 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { ComponentAllocationError } from '../errors/componentAllocationError';
-import { ComponentPricePointError } from '../errors/componentPricePointError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  SubscriptionComponentAllocationError,
-} from '../errors/subscriptionComponentAllocationError';
 import {
   AllocateComponents,
   allocateComponentsSchema,
@@ -97,6 +90,11 @@ import {
 import { UsageResponse, usageResponseSchema } from '../models/usageResponse';
 import { array, bigint, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ComponentAllocationError } from '../errors/componentAllocationError';
+import { ComponentPricePointError } from '../errors/componentPricePointError';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { SubscriptionComponentAllocationError } from '../errors/subscriptionComponentAllocationError';
 
 export class SubscriptionComponentsController extends BaseController {
   /**
@@ -118,7 +116,7 @@ export class SubscriptionComponentsController extends BaseController {
       componentId: [componentId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionComponentResponseSchema, requestOptions);
   }
@@ -183,35 +181,36 @@ export class SubscriptionComponentsController extends BaseController {
    *                                                                      subscription.
    * @return Response from the API call
    */
-  async listSubscriptionComponents({
-    subscriptionId,
-    dateField,
-    direction,
-    filter,
-    endDate,
-    endDatetime,
-    pricePointIds,
-    productFamilyIds,
-    sort,
-    startDate,
-    startDatetime,
-    include,
-    inUse,
-  }: {
-    subscriptionId: number,
-    dateField?: SubscriptionListDateField,
-    direction?: SortingDirection,
-    filter?: ListSubscriptionComponentsFilter,
-    endDate?: string,
-    endDatetime?: string,
-    pricePointIds?: IncludeNotNull,
-    productFamilyIds?: number[],
-    sort?: ListSubscriptionComponentsSort,
-    startDate?: string,
-    startDatetime?: string,
-    include?: ListSubscriptionComponentsInclude[],
-    inUse?: boolean,
-  },
+  async listSubscriptionComponents(
+    {
+      subscriptionId,
+      dateField,
+      direction,
+      filter,
+      endDate,
+      endDatetime,
+      pricePointIds,
+      productFamilyIds,
+      sort,
+      startDate,
+      startDatetime,
+      include,
+      inUse,
+    }: {
+      subscriptionId: number;
+      dateField?: SubscriptionListDateField;
+      direction?: SortingDirection;
+      filter?: ListSubscriptionComponentsFilter;
+      endDate?: string;
+      endDatetime?: string;
+      pricePointIds?: IncludeNotNull;
+      productFamilyIds?: number[];
+      sort?: ListSubscriptionComponentsSort;
+      startDate?: string;
+      startDatetime?: string;
+      include?: ListSubscriptionComponentsInclude[];
+      inUse?: boolean;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionComponentResponse[]>> {
     const req = this.createRequest('GET');
@@ -279,7 +278,12 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/price_points.json`;
-    req.throwOn(422, ComponentPricePointError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ComponentPricePointError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       bulkComponentsPricePointAssignmentSchema,
@@ -398,7 +402,12 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(allocationResponseSchema, requestOptions);
   }
@@ -451,8 +460,13 @@ export class SubscriptionComponentsController extends BaseController {
     });
     req.query('page', mapped.page);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(allocationResponseSchema), requestOptions);
   }
@@ -484,8 +498,13 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/allocations.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(allocationResponseSchema), requestOptions);
   }
@@ -521,7 +540,12 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/allocations/preview.json`;
-    req.throwOn(422, ComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ComponentAllocationError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(allocationPreviewResponseSchema, requestOptions);
   }
@@ -567,8 +591,13 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations/${mapped.allocationId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, SubscriptionComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      SubscriptionComponentAllocationError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -614,8 +643,13 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations/${mapped.allocationId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, SubscriptionComponentAllocationError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      SubscriptionComponentAllocationError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -717,7 +751,12 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/usages.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(usageResponseSchema, requestOptions);
   }
@@ -769,25 +808,26 @@ export class SubscriptionComponentsController extends BaseController {
    *                                                      in query `per_page=200`.
    * @return Response from the API call
    */
-  async listUsages({
-    subscriptionId,
-    componentId,
-    sinceId,
-    maxId,
-    sinceDate,
-    untilDate,
-    page,
-    perPage,
-  }: {
-    subscriptionId: number,
-    componentId: ListUsagesInputComponentId,
-    sinceId?: bigint,
-    maxId?: bigint,
-    sinceDate?: string,
-    untilDate?: string,
-    page?: number,
-    perPage?: number,
-  },
+  async listUsages(
+    {
+      subscriptionId,
+      componentId,
+      sinceId,
+      maxId,
+      sinceDate,
+      untilDate,
+      page,
+      perPage,
+    }: {
+      subscriptionId: number;
+      componentId: ListUsagesInputComponentId;
+      sinceId?: bigint;
+      maxId?: bigint;
+      sinceDate?: string;
+      untilDate?: string;
+      page?: number;
+      perPage?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<UsageResponse[]>> {
     const req = this.createRequest('GET');
@@ -1041,37 +1081,38 @@ export class SubscriptionComponentsController extends BaseController {
    *                                                                             `include=subscription,historic_usages`.
    * @return Response from the API call
    */
-  async listSubscriptionComponentsForSite({
-    page,
-    perPage,
-    sort,
-    direction,
-    filter,
-    dateField,
-    startDate,
-    startDatetime,
-    endDate,
-    endDatetime,
-    subscriptionIds,
-    pricePointIds,
-    productFamilyIds,
-    include,
-  }: {
-    page?: number,
-    perPage?: number,
-    sort?: ListSubscriptionComponentsSort,
-    direction?: SortingDirection,
-    filter?: ListSubscriptionComponentsForSiteFilter,
-    dateField?: SubscriptionListDateField,
-    startDate?: string,
-    startDatetime?: string,
-    endDate?: string,
-    endDatetime?: string,
-    subscriptionIds?: number[],
-    pricePointIds?: IncludeNotNull,
-    productFamilyIds?: number[],
-    include?: ListSubscriptionComponentsInclude,
-  },
+  async listSubscriptionComponentsForSite(
+    {
+      page,
+      perPage,
+      sort,
+      direction,
+      filter,
+      dateField,
+      startDate,
+      startDatetime,
+      endDate,
+      endDatetime,
+      subscriptionIds,
+      pricePointIds,
+      productFamilyIds,
+      include,
+    }: {
+      page?: number;
+      perPage?: number;
+      sort?: ListSubscriptionComponentsSort;
+      direction?: SortingDirection;
+      filter?: ListSubscriptionComponentsForSiteFilter;
+      dateField?: SubscriptionListDateField;
+      startDate?: string;
+      startDatetime?: string;
+      endDate?: string;
+      endDatetime?: string;
+      subscriptionIds?: number[];
+      pricePointIds?: IncludeNotNull;
+      productFamilyIds?: number[];
+      include?: ListSubscriptionComponentsInclude;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSubscriptionComponentsResponse>> {
     const req = this.createRequest('GET', '/subscriptions_components.json');

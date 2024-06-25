@@ -4,11 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import {
-  CustomerErrorResponseError,
-} from '../errors/customerErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateCustomerRequest,
@@ -32,6 +28,8 @@ import {
 } from '../models/updateCustomerRequest';
 import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { CustomerErrorResponseError } from '../errors/customerErrorResponseError';
 
 export class CustomersController extends BaseController {
   /**
@@ -86,7 +84,12 @@ export class CustomersController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, CustomerErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      CustomerErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
@@ -143,27 +146,28 @@ export class CustomersController extends BaseController {
    *                                           reference, organization)
    * @return Response from the API call
    */
-  async listCustomers({
-    direction,
-    page,
-    perPage,
-    dateField,
-    startDate,
-    endDate,
-    startDatetime,
-    endDatetime,
-    q,
-  }: {
-    direction?: SortingDirection,
-    page?: number,
-    perPage?: number,
-    dateField?: BasicDateField,
-    startDate?: string,
-    endDate?: string,
-    startDatetime?: string,
-    endDatetime?: string,
-    q?: string,
-  },
+  async listCustomers(
+    {
+      direction,
+      page,
+      perPage,
+      dateField,
+      startDate,
+      endDate,
+      startDatetime,
+      endDatetime,
+      q,
+    }: {
+      direction?: SortingDirection;
+      page?: number;
+      perPage?: number;
+      dateField?: BasicDateField;
+      startDate?: string;
+      endDate?: string;
+      startDatetime?: string;
+      endDatetime?: string;
+      q?: string;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CustomerResponse[]>> {
     const req = this.createRequest('GET', '/customers.json');
@@ -228,8 +232,13 @@ export class CustomersController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/customers/${mapped.id}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, CustomerErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      CustomerErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }

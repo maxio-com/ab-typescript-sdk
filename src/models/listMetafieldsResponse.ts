@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, number, optional, Schema } from '../schema';
+import {
+  array,
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+} from '../schema';
 import { Metafield, metafieldSchema } from './metafield';
 
 export interface ListMetafieldsResponse {

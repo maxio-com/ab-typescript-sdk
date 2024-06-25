@@ -16,20 +16,20 @@ export const updateSubscriptionSnapDaySchema: Schema<UpdateSubscriptionSnapDay> 
 
 export namespace UpdateSubscriptionSnapDay {
   /**
-  * Validation method to narrow down union type to SnapDay type case.
-  *
-  * This is SnapDay case.
-  */
+   * Validation method to narrow down union type to SnapDay type case.
+   *
+   * This is SnapDay case.
+   */
   export function isSnapDay(value: unknown): value is SnapDay {
     const validationResult = validateAndMap(value, snapDaySchema);
     return validationResult.errors === false;
   }
 
   /**
-  * Validation method to narrow down union type to number type case.
-  *
-  * This is Number case.
-  */
+   * Validation method to narrow down union type to number type case.
+   *
+   * This is Number case.
+   */
   export function isNumber(value: unknown): value is number {
     return typeof value === 'number';
   }

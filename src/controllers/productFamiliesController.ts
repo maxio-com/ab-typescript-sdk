@@ -4,9 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateProductFamilyRequest,
@@ -30,13 +28,15 @@ import {
 } from '../models/productResponse';
 import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class ProductFamiliesController extends BaseController {
   /**
    * This method allows to retrieve a list of Products belonging to a Product Family.
    *
-   * @param productFamilyId   The Chargify id of the product family to which the product
-   *                                                       belongs
+   * @param productFamilyId   Either the product family's id or its handle prefixed with
+   *                                                       `handle:`
    * @param page              Result records are organized in pages. By default, the
    *                                                       first page of results is displayed. The page parameter
    *                                                       specifies a page number of results to fetch. You can start
@@ -77,36 +77,37 @@ export class ProductFamiliesController extends BaseController {
    *                                                       query `include=prepaid_product_price_point`.
    * @return Response from the API call
    */
-  async listProductsForProductFamily({
-    productFamilyId,
-    page,
-    perPage,
-    dateField,
-    filter,
-    startDate,
-    endDate,
-    startDatetime,
-    endDatetime,
-    includeArchived,
-    include,
-  }: {
-    productFamilyId: number,
-    page?: number,
-    perPage?: number,
-    dateField?: BasicDateField,
-    filter?: ListProductsFilter,
-    startDate?: string,
-    endDate?: string,
-    startDatetime?: string,
-    endDatetime?: string,
-    includeArchived?: boolean,
-    include?: ListProductsInclude,
-  },
+  async listProductsForProductFamily(
+    {
+      productFamilyId,
+      page,
+      perPage,
+      dateField,
+      filter,
+      startDate,
+      endDate,
+      startDatetime,
+      endDatetime,
+      includeArchived,
+      include,
+    }: {
+      productFamilyId: string;
+      page?: number;
+      perPage?: number;
+      dateField?: BasicDateField;
+      filter?: ListProductsFilter;
+      startDate?: string;
+      endDate?: string;
+      startDatetime?: string;
+      endDatetime?: string;
+      includeArchived?: boolean;
+      include?: ListProductsInclude;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       dateField: [dateField, optional(basicDateFieldSchema)],
@@ -154,7 +155,12 @@ export class ProductFamiliesController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productFamilyResponseSchema, requestOptions);
   }
@@ -182,19 +188,20 @@ export class ProductFamiliesController extends BaseController {
    *                                         instead of end_date.
    * @return Response from the API call
    */
-  async listProductFamilies({
-    dateField,
-    startDate,
-    endDate,
-    startDatetime,
-    endDatetime,
-  }: {
-    dateField?: BasicDateField,
-    startDate?: string,
-    endDate?: string,
-    startDatetime?: string,
-    endDatetime?: string,
-  },
+  async listProductFamilies(
+    {
+      dateField,
+      startDate,
+      endDate,
+      startDatetime,
+      endDatetime,
+    }: {
+      dateField?: BasicDateField;
+      startDate?: string;
+      endDate?: string;
+      startDatetime?: string;
+      endDatetime?: string;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductFamilyResponse[]>> {
     const req = this.createRequest('GET', '/product_families.json');

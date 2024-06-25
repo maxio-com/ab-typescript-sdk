@@ -4,15 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import {
-  ErrorArrayMapResponseError,
-} from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  ProductPricePointErrorResponseError,
-} from '../errors/productPricePointErrorResponseError';
 import {
   BulkCreateProductPricePointsRequest,
   bulkCreateProductPricePointsRequestSchema,
@@ -100,6 +92,10 @@ import {
 } from '../models/updateProductPricePointRequest';
 import { array, boolean, number, optional } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ProductPricePointErrorResponseError } from '../errors/productPricePointErrorResponseError';
 
 export class ProductPricePointsController extends BaseController {
   /**
@@ -123,7 +119,12 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
-    req.throwOn(422, ProductPricePointErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ProductPricePointErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
@@ -158,19 +159,20 @@ export class ProductPricePointsController extends BaseController {
    * @param filterType      Use in query: `filter[type]=catalog,default`.
    * @return Response from the API call
    */
-  async listProductPricePoints({
-    productId,
-    page,
-    perPage,
-    currencyPrices,
-    filterType,
-  }: {
-    productId: ListProductPricePointsInputProductId,
-    page?: number,
-    perPage?: number,
-    currencyPrices?: boolean,
-    filterType?: PricePointType[],
-  },
+  async listProductPricePoints(
+    {
+      productId,
+      page,
+      perPage,
+      currencyPrices,
+      filterType,
+    }: {
+      productId: ListProductPricePointsInputProductId;
+      page?: number;
+      perPage?: number;
+      currencyPrices?: boolean;
+      filterType?: PricePointType[];
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET');
@@ -196,9 +198,14 @@ export class ProductPricePointsController extends BaseController {
    * Note: Custom product price points are not able to be updated.
    *
    * @param productId      The id or handle of the product. When using the
-   *                                                                handle, it must be prefixed with `handle:`
+   *                                                                handle, it must be prefixed with `handle:`. Example:
+   *                                                                `123` for an integer ID, or `handle:example-
+   *                                                                product-handle` for a string handle.
    * @param pricePointId   The id or handle of the price point. When using
-   *                                                                the handle, it must be prefixed with `handle:`
+   *                                                                the handle, it must be prefixed with `handle:`.
+   *                                                                Example: `123` for an integer ID, or `handle:
+   *                                                                example-product-price-point-handle` for a string
+   *                                                                handle.
    * @param body
    * @return Response from the API call
    */
@@ -222,12 +229,17 @@ export class ProductPricePointsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to retrieve details for a specific product price point.
+   * Use this endpoint to retrieve details for a specific product price point. You can achieve this by
+   * using either the product price point ID or handle.
    *
    * @param productId       The id or handle of the product. When using the
-   *                                                             handle, it must be prefixed with `handle:`
+   *                                                             handle, it must be prefixed with `handle:`. Example:
+   *                                                             `123` for an integer ID, or `handle:example-product-
+   *                                                             handle` for a string handle.
    * @param pricePointId    The id or handle of the price point. When using the
-   *                                                             handle, it must be prefixed with `handle:`
+   *                                                             handle, it must be prefixed with `handle:`. Example:
+   *                                                             `123` for an integer ID, or `handle:example-product-
+   *                                                             price-point-handle` for a string handle.
    * @param currencyPrices  When fetching a product's price points, if you have
    *                                                             defined multiple currencies at the site level, you can
    *                                                             optionally pass the ?currency_prices=true query param
@@ -261,9 +273,13 @@ export class ProductPricePointsController extends BaseController {
    * Use this endpoint to archive a product price point.
    *
    * @param productId      The id or handle of the product. When using the
-   *                                                               handle, it must be prefixed with `handle:`
+   *                                                               handle, it must be prefixed with `handle:`. Example:
+   *                                                               `123` for an integer ID, or `handle:example-product-
+   *                                                               handle` for a string handle.
    * @param pricePointId   The id or handle of the price point. When using the
-   *                                                               handle, it must be prefixed with `handle:`
+   *                                                               handle, it must be prefixed with `handle:`. Example:
+   *                                                               `123` for an integer ID, or `handle:example-product-
+   *                                                               price-point-handle` for a string handle.
    * @return Response from the API call
    */
   async archiveProductPricePoint(
@@ -277,7 +293,12 @@ export class ProductPricePointsController extends BaseController {
       pricePointId: [pricePointId, archiveProductPricePointPricePointIdSchema],
     });
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
   }
@@ -349,7 +370,12 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/bulk.json`;
-    req.throwOn(422, ApiError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ApiError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       bulkCreateProductPricePointsResponseSchema,
@@ -385,7 +411,12 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(currencyPricesResponseSchema, requestOptions);
   }
@@ -417,7 +448,12 @@ export class ProductPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_price_points/${mapped.productPricePointId}/currency_prices.json`;
-    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(currencyPricesResponseSchema, requestOptions);
   }
@@ -444,19 +480,20 @@ export class ProductPricePointsController extends BaseController {
    *                                                    query `per_page=200`.
    * @return Response from the API call
    */
-  async listAllProductPricePoints({
-    direction,
-    filter,
-    include,
-    page,
-    perPage,
-  }: {
-    direction?: SortingDirection,
-    filter?: ListPricePointsFilter,
-    include?: ListProductsPricePointsInclude,
-    page?: number,
-    perPage?: number,
-  },
+  async listAllProductPricePoints(
+    {
+      direction,
+      filter,
+      include,
+      page,
+      perPage,
+    }: {
+      direction?: SortingDirection;
+      filter?: ListPricePointsFilter;
+      include?: ListProductsPricePointsInclude;
+      page?: number;
+      perPage?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
     const req = this.createRequest('GET', '/products_price_points.json');
@@ -472,7 +509,12 @@ export class ProductPricePointsController extends BaseController {
     req.query('include', mapped.include);
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
   }

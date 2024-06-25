@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  SubscriptionGroupUpdateError,
-} from '../models/subscriptionGroupUpdateError';
+import { SubscriptionGroupUpdateError } from '../models/subscriptionGroupUpdateError';
 
 /**
  * Creates an instance of SubscriptionGroupUpdateErrorResponse
@@ -17,4 +15,6 @@ interface SubscriptionGroupUpdateErrorResponse {
   [key: string]: unknown;
 }
 
-export class SubscriptionGroupUpdateErrorResponseError extends ApiError<SubscriptionGroupUpdateErrorResponse> {}
+export class SubscriptionGroupUpdateErrorResponseError extends ApiError<
+  SubscriptionGroupUpdateErrorResponse
+> {}

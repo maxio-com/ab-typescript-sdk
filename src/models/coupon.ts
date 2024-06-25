@@ -19,7 +19,10 @@ import {
   CompoundingStrategy,
   compoundingStrategySchema,
 } from './compoundingStrategy';
-import { CouponRestriction, couponRestrictionSchema } from './couponRestriction';
+import {
+  CouponRestriction,
+  couponRestrictionSchema,
+} from './couponRestriction';
 import { DiscountType, discountTypeSchema } from './discountType';
 import { RecurringScheme, recurringSchemeSchema } from './recurringScheme';
 

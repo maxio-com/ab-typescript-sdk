@@ -17,4 +17,4 @@ export enum GroupType {
 /**
  * Schema for GroupType
  */
-export const  groupTypeSchema: Schema<GroupType> = stringEnum(GroupType);
+export const groupTypeSchema: Schema<GroupType> = stringEnum(GroupType);

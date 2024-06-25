@@ -674,10 +674,8 @@ Each of them is required.
 ```
 
 ```ts
-async createSubscription(
-  body?: CreateSubscriptionRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+async createSubscription(  body?: CreateSubscriptionRequest,
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -899,8 +897,7 @@ Use the query strings below to search for a subscription using the criteria avai
 Self-Service Page token for the subscriptions is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
 
 ```ts
-async listSubscriptions(
-  page?: number,
+async listSubscriptions(  page?: number,
   perPage?: number,
   state?: SubscriptionStateFilter,
   product?: number,
@@ -915,8 +912,7 @@ async listSubscriptions(
   direction?: SortingDirection,
   sort?: SubscriptionSort,
   include?: SubscriptionListInclude[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse[]>>
 ```
 
 ## Parameters
@@ -1017,11 +1013,9 @@ For a subscription using Calendar Billing, setting the next billing date is a bi
 Note: If you change the product associated with a subscription that contains a `snap_date` and immediately `READ/GET` the subscription data, it will still contain evidence of the existing `snap_date`. This is due to the fact that a product change is instantanous and only affects the product associated with a subscription. After the `next_billing` date arrives, the `snap_day` associated with the subscription will return to `null.` Another way of looking at this is that you willl have to wait for the next billing cycle to arrive before the `snap_date` will reset to `null`.
 
 ```ts
-async updateSubscription(
-  subscriptionId: number,
+async updateSubscription(  subscriptionId: number,
   body?: UpdateSubscriptionRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -1193,11 +1187,9 @@ Use this endpoint to find subscription details.
 Self-Service Page token for the subscription is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
 
 ```ts
-async readSubscription(
-  subscriptionId: number,
+async readSubscription(  subscriptionId: number,
   include?: SubscriptionInclude[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -1400,11 +1392,9 @@ When passing `current_period_starts_at` some validations are made:
 If unpermitted parameters are sent, a 400 HTTP response is sent along with a string giving the reason for the problem.
 
 ```ts
-async overrideSubscription(
-  subscriptionId: number,
+async overrideSubscription(  subscriptionId: number,
   body?: OverrideSubscriptionRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1460,10 +1450,8 @@ try {
 Use this endpoint to find a subscription by its reference.
 
 ```ts
-async findSubscription(
-  reference?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+async findSubscription(  reference?: string,
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -1506,12 +1494,10 @@ If you need to remove subscriptions from a live site, please contact support to 
 The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
 
 ```ts
-async purgeSubscription(
-  subscriptionId: number,
+async purgeSubscription(  subscriptionId: number,
   ack: number,
   cascade?: SubscriptionPurgeType[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1561,11 +1547,9 @@ try {
 Use this endpoint to update a subscription's prepaid configuration.
 
 ```ts
-async updatePrepaidSubscriptionConfiguration(
-  subscriptionId: number,
+async updatePrepaidSubscriptionConfiguration(  subscriptionId: number,
   body?: UpsertPrepaidConfigurationRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PrepaidConfigurationResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<PrepaidConfigurationResponse>>
 ```
 
 ## Parameters
@@ -1653,10 +1637,8 @@ You can pass shipping and billing addresses and still decide not to calculate ta
 If you'd like to calculate subscriptions that do not include tax, please feel free to leave off the billing information.
 
 ```ts
-async previewSubscription(
-  body?: CreateSubscriptionRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionPreviewResponse>>
+async previewSubscription(  body?: CreateSubscriptionRequest,
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionPreviewResponse>>
 ```
 
 ## Parameters
@@ -1823,12 +1805,10 @@ Passing in a coupon code as a query parameter will add the code to the subscript
 For this reason, using this query parameter on this endpoint has been deprecated in favor of using the request body parameters as described below. When passing in request body parameters, the list of coupon codes will simply be added to any existing list of codes on the subscription.
 
 ```ts
-async applyCouponsToSubscription(
-  subscriptionId: number,
+async applyCouponsToSubscription(  subscriptionId: number,
   code?: string,
   body?: AddCouponsRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -2036,11 +2016,9 @@ Use this endpoint to remove a coupon from an existing subscription.
 For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407896488987#removing-a-coupon)
 
 ```ts
-async removeCouponFromSubscription(
-  subscriptionId: number,
+async removeCouponFromSubscription(  subscriptionId: number,
   couponCode?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<string>>
+requestOptions?: RequestOptions): Promise<ApiResponse<string>>
 ```
 
 ## Parameters
@@ -2132,11 +2110,9 @@ You can read more about the behavior of trialing subscriptions [here](https://ma
 When the `revert_on_failure` parameter is set to `true`, the subscription's state will remain as Trialing, we will void the invoice from activation and return any prepayments and credits applied to the invoice back to the subscription.
 
 ```ts
-async activateSubscription(
-  subscriptionId: number,
+async activateSubscription(  subscriptionId: number,
   body?: ActivateSubscriptionRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters

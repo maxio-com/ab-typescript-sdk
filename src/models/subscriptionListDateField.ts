@@ -16,4 +16,6 @@ export enum SubscriptionListDateField {
 /**
  * Schema for SubscriptionListDateField
  */
-export const  subscriptionListDateFieldSchema: Schema<SubscriptionListDateField> = stringEnum(SubscriptionListDateField);
+export const subscriptionListDateFieldSchema: Schema<SubscriptionListDateField> = stringEnum(
+  SubscriptionListDateField
+);

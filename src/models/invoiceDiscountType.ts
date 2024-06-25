@@ -18,4 +18,6 @@ export enum InvoiceDiscountType {
 /**
  * Schema for InvoiceDiscountType
  */
-export const  invoiceDiscountTypeSchema: Schema<InvoiceDiscountType> = stringEnum(InvoiceDiscountType);
+export const invoiceDiscountTypeSchema: Schema<InvoiceDiscountType> = stringEnum(
+  InvoiceDiscountType
+);

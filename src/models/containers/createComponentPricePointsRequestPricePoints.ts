@@ -15,7 +15,9 @@ import {
 } from '../createPrepaidUsageComponentPricePoint';
 
 /** This is a container type for any-of types. */
-export type CreateComponentPricePointsRequestPricePoints = CreateComponentPricePoint | CreatePrepaidUsageComponentPricePoint;
+export type CreateComponentPricePointsRequestPricePoints =
+  | CreateComponentPricePoint
+  | CreatePrepaidUsageComponentPricePoint;
 
 export const createComponentPricePointsRequestPricePointsSchema: Schema<CreateComponentPricePointsRequestPricePoints> = anyOf(
   [createComponentPricePointSchema, createPrepaidUsageComponentPricePointSchema]
@@ -23,22 +25,32 @@ export const createComponentPricePointsRequestPricePointsSchema: Schema<CreateCo
 
 export namespace CreateComponentPricePointsRequestPricePoints {
   /**
-  * Validation method to narrow down union type to CreateComponentPricePoint type case.
-  *
-  * This is Create Component Price Point case.
-  */
-  export function isCreateComponentPricePoint(value: unknown): value is CreateComponentPricePoint {
-    const validationResult = validateAndMap(value, createComponentPricePointSchema);
+   * Validation method to narrow down union type to CreateComponentPricePoint type case.
+   *
+   * This is Create Component Price Point case.
+   */
+  export function isCreateComponentPricePoint(
+    value: unknown
+  ): value is CreateComponentPricePoint {
+    const validationResult = validateAndMap(
+      value,
+      createComponentPricePointSchema
+    );
     return validationResult.errors === false;
   }
 
   /**
-  * Validation method to narrow down union type to CreatePrepaidUsageComponentPricePoint type case.
-  *
-  * This is Create Prepaid Usage Component Price Point case.
-  */
-  export function isCreatePrepaidUsageComponentPricePoint(value: unknown): value is CreatePrepaidUsageComponentPricePoint {
-    const validationResult = validateAndMap(value, createPrepaidUsageComponentPricePointSchema);
+   * Validation method to narrow down union type to CreatePrepaidUsageComponentPricePoint type case.
+   *
+   * This is Create Prepaid Usage Component Price Point case.
+   */
+  export function isCreatePrepaidUsageComponentPricePoint(
+    value: unknown
+  ): value is CreatePrepaidUsageComponentPricePoint {
+    const validationResult = validateAndMap(
+      value,
+      createPrepaidUsageComponentPricePointSchema
+    );
     return validationResult.errors === false;
   }
 }

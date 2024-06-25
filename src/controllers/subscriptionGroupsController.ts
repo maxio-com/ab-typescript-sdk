@@ -4,18 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  SubscriptionGroupCreateErrorResponseError,
-} from '../errors/subscriptionGroupCreateErrorResponseError';
-import {
-  SubscriptionGroupSignupErrorResponseError,
-} from '../errors/subscriptionGroupSignupErrorResponseError';
-import {
-  SubscriptionGroupUpdateErrorResponseError,
-} from '../errors/subscriptionGroupUpdateErrorResponseError';
 import {
   AddSubscriptionToAGroup,
   addSubscriptionToAGroupSchema,
@@ -62,6 +51,11 @@ import {
 } from '../models/updateSubscriptionGroupRequest';
 import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { SubscriptionGroupCreateErrorResponseError } from '../errors/subscriptionGroupCreateErrorResponseError';
+import { SubscriptionGroupSignupErrorResponseError } from '../errors/subscriptionGroupSignupErrorResponseError';
+import { SubscriptionGroupUpdateErrorResponseError } from '../errors/subscriptionGroupUpdateErrorResponseError';
 
 export class SubscriptionGroupsController extends BaseController {
   /**
@@ -93,7 +87,12 @@ export class SubscriptionGroupsController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, SubscriptionGroupSignupErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SubscriptionGroupSignupErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       subscriptionGroupSignupResponseSchema,
@@ -117,7 +116,12 @@ export class SubscriptionGroupsController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, SubscriptionGroupCreateErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SubscriptionGroupCreateErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
   }
@@ -149,15 +153,16 @@ export class SubscriptionGroupsController extends BaseController {
    *                                                    query: `include[]=account_balances`
    * @return Response from the API call
    */
-  async listSubscriptionGroups({
-    page,
-    perPage,
-    include,
-  }: {
-    page?: number,
-    perPage?: number,
-    include?: SubscriptionGroupsListInclude[],
-  },
+  async listSubscriptionGroups(
+    {
+      page,
+      perPage,
+      include,
+    }: {
+      page?: number;
+      perPage?: number;
+      include?: SubscriptionGroupsListInclude[];
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSubscriptionGroupsResponse>> {
     const req = this.createRequest('GET', '/subscription_groups.json');
@@ -225,7 +230,12 @@ export class SubscriptionGroupsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
-    req.throwOn(422, SubscriptionGroupUpdateErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SubscriptionGroupUpdateErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionGroupResponseSchema, requestOptions);
   }
@@ -244,7 +254,7 @@ export class SubscriptionGroupsController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       deleteSubscriptionGroupResponseSchema,
@@ -269,7 +279,7 @@ export class SubscriptionGroupsController extends BaseController {
       subscriptionId: [subscriptionId, string()],
     });
     req.query('subscription_id', mapped.subscriptionId);
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);
   }
@@ -342,8 +352,13 @@ export class SubscriptionGroupsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/group.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }

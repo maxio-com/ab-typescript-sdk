@@ -16,20 +16,20 @@ export const addSubscriptionToAGroupGroupSchema: Schema<AddSubscriptionToAGroupG
 
 export namespace AddSubscriptionToAGroupGroup {
   /**
-  * Validation method to narrow down union type to GroupSettings type case.
-  *
-  * This is Group Settings case.
-  */
+   * Validation method to narrow down union type to GroupSettings type case.
+   *
+   * This is Group Settings case.
+   */
   export function isGroupSettings(value: unknown): value is GroupSettings {
     const validationResult = validateAndMap(value, groupSettingsSchema);
     return validationResult.errors === false;
   }
 
   /**
-  * Validation method to narrow down union type to boolean type case.
-  *
-  * This is Boolean case.
-  */
+   * Validation method to narrow down union type to boolean type case.
+   *
+   * This is Boolean case.
+   */
   export function isBoolean(value: unknown): value is boolean {
     return typeof value === 'boolean';
   }

@@ -11,17 +11,6 @@ import {
   unindexedPrefix,
 } from '../core';
 import {
-  ErrorArrayMapResponseError,
-} from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
-import {
-  SubscriptionAddCouponError,
-} from '../errors/subscriptionAddCouponError';
-import {
-  SubscriptionRemoveCouponErrorsError,
-} from '../errors/subscriptionRemoveCouponErrorsError';
-import {
   ActivateSubscriptionRequest,
   activateSubscriptionRequestSchema,
 } from '../models/activateSubscriptionRequest';
@@ -87,6 +76,11 @@ import {
 } from '../models/upsertPrepaidConfigurationRequest';
 import { array, dict, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
+import { SubscriptionAddCouponError } from '../errors/subscriptionAddCouponError';
+import { SubscriptionRemoveCouponErrorsError } from '../errors/subscriptionRemoveCouponErrorsError';
 
 export class SubscriptionsController extends BaseController {
   /**
@@ -934,7 +928,12 @@ export class SubscriptionsController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
@@ -1016,39 +1015,40 @@ export class SubscriptionsController extends BaseController {
    *                                                            in query: `include[]=self_service_page_token`.
    * @return Response from the API call
    */
-  async listSubscriptions({
-    page,
-    perPage,
-    state,
-    product,
-    productPricePointId,
-    coupon,
-    dateField,
-    startDate,
-    endDate,
-    startDatetime,
-    endDatetime,
-    metadata,
-    direction,
-    sort,
-    include,
-  }: {
-    page?: number,
-    perPage?: number,
-    state?: SubscriptionStateFilter,
-    product?: number,
-    productPricePointId?: number,
-    coupon?: number,
-    dateField?: SubscriptionDateField,
-    startDate?: string,
-    endDate?: string,
-    startDatetime?: string,
-    endDatetime?: string,
-    metadata?: Record<string, string>,
-    direction?: SortingDirection,
-    sort?: SubscriptionSort,
-    include?: SubscriptionListInclude[],
-  },
+  async listSubscriptions(
+    {
+      page,
+      perPage,
+      state,
+      product,
+      productPricePointId,
+      coupon,
+      dateField,
+      startDate,
+      endDate,
+      startDatetime,
+      endDatetime,
+      metadata,
+      direction,
+      sort,
+      include,
+    }: {
+      page?: number;
+      perPage?: number;
+      state?: SubscriptionStateFilter;
+      product?: number;
+      productPricePointId?: number;
+      coupon?: number;
+      dateField?: SubscriptionDateField;
+      startDate?: string;
+      endDate?: string;
+      startDatetime?: string;
+      endDatetime?: string;
+      metadata?: Record<string, string>;
+      direction?: SortingDirection;
+      sort?: SubscriptionSort;
+      include?: SubscriptionListInclude[];
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionResponse[]>> {
     const req = this.createRequest('GET', '/subscriptions.json');
@@ -1176,7 +1176,12 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
@@ -1261,7 +1266,12 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/override.json`;
-    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -1444,7 +1454,12 @@ export class SubscriptionsController extends BaseController {
     req.query('code', mapped.code);
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/add_coupon.json`;
-    req.throwOn(422, SubscriptionAddCouponError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SubscriptionAddCouponError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
@@ -1472,7 +1487,12 @@ export class SubscriptionsController extends BaseController {
     });
     req.query('coupon_code', mapped.couponCode);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/remove_coupon.json`;
-    req.throwOn(422, SubscriptionRemoveCouponErrorsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SubscriptionRemoveCouponErrorsError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsText(requestOptions);
   }
@@ -1551,7 +1571,12 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/activate.json`;
-    req.throwOn(400, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      400,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }

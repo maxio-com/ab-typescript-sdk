@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  RefundPrepaymentBaseRefundError,
-} from '../models/refundPrepaymentBaseRefundError';
+import { RefundPrepaymentBaseRefundError } from '../models/refundPrepaymentBaseRefundError';
 
 /**
  * Creates an instance of RefundPrepaymentBaseErrorsResponse
@@ -17,4 +15,6 @@ interface RefundPrepaymentBaseErrorsResponse {
   [key: string]: unknown;
 }
 
-export class RefundPrepaymentBaseErrorsResponseError extends ApiError<RefundPrepaymentBaseErrorsResponse> {}
+export class RefundPrepaymentBaseErrorsResponseError extends ApiError<
+  RefundPrepaymentBaseErrorsResponse
+> {}

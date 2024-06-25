@@ -28,11 +28,9 @@ const productPricePointsController = new ProductPricePointsController(client);
 [Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)
 
 ```ts
-async createProductPricePoint(
-  productId: CreateProductPricePointProductId,
+async createProductPricePoint(  productId: CreateProductPricePointProductId,
   body?: CreateProductPricePointRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
 ## Parameters
@@ -124,14 +122,12 @@ try {
 Use this endpoint to retrieve a list of product price points.
 
 ```ts
-async listProductPricePoints(
-  productId: ListProductPricePointsInputProductId,
+async listProductPricePoints(  productId: ListProductPricePointsInputProductId,
   page?: number,
   perPage?: number,
   currencyPrices?: boolean,
   filterType?: PricePointType[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListProductPricePointsResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
 
 ## Parameters
@@ -206,12 +202,10 @@ Use this endpoint to update a product price point.
 Note: Custom product price points are not able to be updated.
 
 ```ts
-async updateProductPricePoint(
-  productId: UpdateProductPricePointProductId,
+async updateProductPricePoint(  productId: UpdateProductPricePointProductId,
   pricePointId: UpdateProductPricePointPricePointId,
   body?: UpdateProductPricePointRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
 ## Parameters
@@ -287,15 +281,13 @@ try {
 
 # Read Product Price Point
 
-Use this endpoint to retrieve details for a specific product price point.
+Use this endpoint to retrieve details for a specific product price point. You can achieve this by using either the product price point ID or handle.
 
 ```ts
-async readProductPricePoint(
-  productId: ReadProductPricePointProductId,
+async readProductPricePoint(  productId: ReadProductPricePointProductId,
   pricePointId: ReadProductPricePointPricePointId,
   currencyPrices?: boolean,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
 ## Parameters
@@ -366,11 +358,9 @@ try {
 Use this endpoint to archive a product price point.
 
 ```ts
-async archiveProductPricePoint(
-  productId: ArchiveProductPricePointProductId,
+async archiveProductPricePoint(  productId: ArchiveProductPricePointProductId,
   pricePointId: ArchiveProductPricePointPricePointId,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
 ## Parameters
@@ -446,11 +436,9 @@ try {
 Use this endpoint to unarchive an archived product price point.
 
 ```ts
-async unarchiveProductPricePoint(
-  productId: number,
+async unarchiveProductPricePoint(  productId: number,
   pricePointId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductPricePointResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
 ## Parameters
@@ -522,11 +510,9 @@ Use this endpoint to make a product price point the default for the product.
 Note: Custom product price points are not able to be set as the default for a product.
 
 ```ts
-async promoteProductPricePointToDefault(
-  productId: number,
+async promoteProductPricePointToDefault(  productId: number,
   pricePointId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -622,11 +608,9 @@ try {
 Use this endpoint to create multiple product price points in one request.
 
 ```ts
-async bulkCreateProductPricePoints(
-  productId: number,
+async bulkCreateProductPricePoints(  productId: number,
   body?: BulkCreateProductPricePointsRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<BulkCreateProductPricePointsResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<BulkCreateProductPricePointsResponse>>
 ```
 
 ## Parameters
@@ -741,11 +725,9 @@ When creating currency prices, they need to mirror the structure of your primary
 Note: Currency Prices are not able to be created for custom product price points.
 
 ```ts
-async createProductCurrencyPrices(
-  productPricePointId: number,
+async createProductCurrencyPrices(  productPricePointId: number,
   body?: CreateProductCurrencyPricesRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CurrencyPricesResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<CurrencyPricesResponse>>
 ```
 
 ## Parameters
@@ -833,11 +815,9 @@ When updating the pricing, it needs to mirror the structure of your primary pric
 Note: Currency Prices are not able to be updated for custom product price points.
 
 ```ts
-async updateProductCurrencyPrices(
-  productPricePointId: number,
+async updateProductCurrencyPrices(  productPricePointId: number,
   body?: UpdateCurrencyPricesRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CurrencyPricesResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<CurrencyPricesResponse>>
 ```
 
 ## Parameters
@@ -914,14 +894,12 @@ try {
 This method allows retrieval of a list of Products Price Points belonging to a Site.
 
 ```ts
-async listAllProductPricePoints(
-  direction?: SortingDirection,
+async listAllProductPricePoints(  direction?: SortingDirection,
   filter?: ListPricePointsFilter,
   include?: ListProductsPricePointsInclude,
   page?: number,
   perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListProductPricePointsResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
 
 ## Parameters

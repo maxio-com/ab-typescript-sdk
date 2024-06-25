@@ -9,7 +9,7 @@ import { RetryConfiguration } from './core';
 
 /** Default values for the configuration parameters of the client. */
 export const DEFAULT_CONFIGURATION: Configuration = {
-  timeout: 30000,
+  timeout: 120000,
   environment: Environment.Production,
   subdomain: 'subdomain',
   domain: 'chargify.com',

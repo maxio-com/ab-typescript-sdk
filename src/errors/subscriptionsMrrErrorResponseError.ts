@@ -15,4 +15,6 @@ interface SubscriptionsMrrErrorResponse {
   [key: string]: unknown;
 }
 
-export class SubscriptionsMrrErrorResponseError extends ApiError<SubscriptionsMrrErrorResponse> {}
+export class SubscriptionsMrrErrorResponseError extends ApiError<
+  SubscriptionsMrrErrorResponse
+> {}

@@ -20,4 +20,6 @@ export enum InvoiceDateField {
 /**
  * Schema for InvoiceDateField
  */
-export const  invoiceDateFieldSchema: Schema<InvoiceDateField> = stringEnum(InvoiceDateField);
+export const invoiceDateFieldSchema: Schema<InvoiceDateField> = stringEnum(
+  InvoiceDateField
+);

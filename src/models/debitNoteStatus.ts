@@ -19,4 +19,6 @@ export enum DebitNoteStatus {
 /**
  * Schema for DebitNoteStatus
  */
-export const  debitNoteStatusSchema: Schema<DebitNoteStatus> = stringEnum(DebitNoteStatus);
+export const debitNoteStatusSchema: Schema<DebitNoteStatus> = stringEnum(
+  DebitNoteStatus
+);

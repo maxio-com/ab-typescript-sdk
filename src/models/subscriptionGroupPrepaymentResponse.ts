@@ -13,7 +13,10 @@ import {
   Schema,
   string,
 } from '../schema';
-import { ServiceCreditType, serviceCreditTypeSchema } from './serviceCreditType';
+import {
+  ServiceCreditType,
+  serviceCreditTypeSchema,
+} from './serviceCreditType';
 
 export interface SubscriptionGroupPrepaymentResponse {
   id?: number;

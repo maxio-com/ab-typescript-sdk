@@ -23,4 +23,6 @@ export enum InvoiceSortField {
 /**
  * Schema for InvoiceSortField
  */
-export const  invoiceSortFieldSchema: Schema<InvoiceSortField> = stringEnum(InvoiceSortField);
+export const invoiceSortFieldSchema: Schema<InvoiceSortField> = stringEnum(
+  InvoiceSortField
+);

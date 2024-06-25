@@ -15,19 +15,19 @@ export const readProductPricePointProductIdSchema: Schema<ReadProductPricePointP
 
 export namespace ReadProductPricePointProductId {
   /**
-  * Validation method to narrow down union type to number type case.
-  *
-  * This is Number case.
-  */
+   * Validation method to narrow down union type to number type case.
+   *
+   * This is Number case.
+   */
   export function isNumber(value: unknown): value is number {
     return typeof value === 'number';
   }
 
   /**
-  * Validation method to narrow down union type to string type case.
-  *
-  * This is String case.
-  */
+   * Validation method to narrow down union type to string type case.
+   *
+   * This is String case.
+   */
   export function isString(value: unknown): value is string {
     return typeof value === 'string';
   }

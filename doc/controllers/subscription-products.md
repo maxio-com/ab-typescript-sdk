@@ -74,11 +74,9 @@ You may wish to redirect customers to different pages depending on whether their
 8. Optionally, you can use the applied "msg" param in the `redirect_url` to determine whether it was successful or not.
 
 ```ts
-async migrateSubscriptionProduct(
-  subscriptionId: number,
+async migrateSubscriptionProduct(  subscriptionId: number,
   body?: SubscriptionProductMigrationRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -263,11 +261,9 @@ It is also possible to preview the migration for a date in the future, as long a
 This will calculate the prorated adjustment, charge, payment and credit applied values assuming the migration is done at that date in the future as opposed to right now.
 
 ```ts
-async previewSubscriptionProductMigration(
-  subscriptionId: number,
+async previewSubscriptionProductMigration(  subscriptionId: number,
   body?: SubscriptionMigrationPreviewRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionMigrationPreviewResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionMigrationPreviewResponse>>
 ```
 
 ## Parameters

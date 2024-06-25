@@ -44,7 +44,10 @@ import {
   SubscriptionIncludedCoupon,
   subscriptionIncludedCouponSchema,
 } from './subscriptionIncludedCoupon';
-import { SubscriptionState, subscriptionStateSchema } from './subscriptionState';
+import {
+  SubscriptionState,
+  subscriptionStateSchema,
+} from './subscriptionState';
 
 export interface Subscription {
   /** The subscription unique id within Chargify. */

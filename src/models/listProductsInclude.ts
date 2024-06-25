@@ -16,4 +16,6 @@ export enum ListProductsInclude {
 /**
  * Schema for ListProductsInclude
  */
-export const  listProductsIncludeSchema: Schema<ListProductsInclude> = stringEnum(ListProductsInclude);
+export const listProductsIncludeSchema: Schema<ListProductsInclude> = stringEnum(
+  ListProductsInclude
+);

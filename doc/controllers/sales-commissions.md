@@ -28,14 +28,12 @@ Access to the Sales Commission API endpoints is available to users with financia
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
 ```ts
-async listSalesCommissionSettings(
-  sellerId: string,
+async listSalesCommissionSettings(  sellerId: string,
   authorization?: string,
   liveMode?: boolean,
   page?: number,
   perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SaleRepSettings[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SaleRepSettings[]>>
 ```
 
 ## Parameters
@@ -122,14 +120,12 @@ Access to the Sales Commission API endpoints is available to users with financia
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
 ```ts
-async listSalesReps(
-  sellerId: string,
+async listSalesReps(  sellerId: string,
   authorization?: string,
   liveMode?: boolean,
   page?: number,
   perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListSaleRepItem[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ListSaleRepItem[]>>
 ```
 
 ## Parameters
@@ -265,15 +261,13 @@ Access to the Sales Commission API endpoints is available to users with financia
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
 ```ts
-async readSalesRep(
-  sellerId: string,
+async readSalesRep(  sellerId: string,
   salesRepId: string,
   authorization?: string,
   liveMode?: boolean,
   page?: number,
   perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SaleRep>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SaleRep>>
 ```
 
 ## Parameters

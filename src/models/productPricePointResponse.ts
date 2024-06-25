@@ -5,7 +5,10 @@
  */
 
 import { expandoObject, lazy, Schema } from '../schema';
-import { ProductPricePoint, productPricePointSchema } from './productPricePoint';
+import {
+  ProductPricePoint,
+  productPricePointSchema,
+} from './productPricePoint';
 
 export interface ProductPricePointResponse {
   pricePoint: ProductPricePoint;

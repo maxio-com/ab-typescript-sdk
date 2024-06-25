@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  CustomerErrorResponseErrors,
-} from '../models/containers/customerErrorResponseErrors';
+import { CustomerErrorResponseErrors } from '../models/containers/customerErrorResponseErrors';
 
 /**
  * Creates an instance of CustomerErrorResponse
@@ -17,4 +15,6 @@ interface CustomerErrorResponse {
   [key: string]: unknown;
 }
 
-export class CustomerErrorResponseError extends ApiError<CustomerErrorResponse> {}
+export class CustomerErrorResponseError extends ApiError<
+  CustomerErrorResponse
+> {}

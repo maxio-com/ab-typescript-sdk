@@ -14,4 +14,6 @@ interface ErrorArrayMapResponse {
   [key: string]: unknown;
 }
 
-export class ErrorArrayMapResponseError extends ApiError<ErrorArrayMapResponse> {}
+export class ErrorArrayMapResponseError extends ApiError<
+  ErrorArrayMapResponse
+> {}

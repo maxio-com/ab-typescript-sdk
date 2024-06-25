@@ -35,11 +35,9 @@ If you need to provide your customer their Management URL through other means, y
 In order to prevent abuse & overuse, we ask that you request a new URL only when absolutely necessary. Management URLs are good for 65 days, so you should re-use a previously generated one as much as possible. If you use the URL frequently (such as to display on your website), please **do not** make an API request to Chargify every time.
 
 ```ts
-async enableBillingPortalForCustomer(
-  customerId: number,
+async enableBillingPortalForCustomer(  customerId: number,
   autoInvite?: AutoInvite,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CustomerResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
 ```
 
 ## Parameters
@@ -91,10 +89,8 @@ This method will provide to the API user the exact URL required for a subscriber
 + You are limited to 15 requests for the same URL. If you make more than 15 requests before `new_link_available_at`, you will be blocked from further Management URL requests (with a response code `429`)
 
 ```ts
-async readBillingPortalLink(
-  customerId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PortalManagementLink>>
+async readBillingPortalLink(  customerId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<PortalManagementLink>>
 ```
 
 ## Parameters
@@ -163,10 +159,8 @@ If you attempt to resend an invitation when the Customer does not exist a Custom
 This endpoint will only return a JSON response.
 
 ```ts
-async resendBillingPortalInvitation(
-  customerId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ResentInvitation>>
+async resendBillingPortalInvitation(  customerId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<ResentInvitation>>
 ```
 
 ## Parameters
@@ -227,10 +221,8 @@ If you attempt to revoke an invitation when the Billing Portal is already disabl
 This endpoint will only return a JSON response.
 
 ```ts
-async revokeBillingPortalAccess(
-  customerId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<RevokedInvitation>>
+async revokeBillingPortalAccess(  customerId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<RevokedInvitation>>
 ```
 
 ## Parameters

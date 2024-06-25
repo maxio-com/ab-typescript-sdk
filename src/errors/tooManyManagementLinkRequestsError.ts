@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  TooManyManagementLinkRequests,
-} from '../models/tooManyManagementLinkRequests';
+import { TooManyManagementLinkRequests } from '../models/tooManyManagementLinkRequests';
 
 /**
  * Creates an instance of TooManyManagementLinkRequests2
@@ -17,4 +15,6 @@ interface TooManyManagementLinkRequests2 {
   [key: string]: unknown;
 }
 
-export class TooManyManagementLinkRequestsError extends ApiError<TooManyManagementLinkRequests2> {}
+export class TooManyManagementLinkRequestsError extends ApiError<
+  TooManyManagementLinkRequests2
+> {}

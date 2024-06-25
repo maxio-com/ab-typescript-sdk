@@ -21,7 +21,10 @@ import {
   CreateInvoiceCoupon,
   createInvoiceCouponSchema,
 } from './createInvoiceCoupon';
-import { CreateInvoiceItem, createInvoiceItemSchema } from './createInvoiceItem';
+import {
+  CreateInvoiceItem,
+  createInvoiceItemSchema,
+} from './createInvoiceItem';
 import {
   CreateInvoiceStatus,
   createInvoiceStatusSchema,

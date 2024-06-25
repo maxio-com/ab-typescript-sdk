@@ -8,7 +8,7 @@ The following parameters are configurable for the API Client:
 | `subdomain` | `string` | The subdomain for your Chargify site.<br>*Default*: `'subdomain'` |
 | `domain` | `string` | The Chargify server domain.<br>*Default*: `'chargify.com'` |
 | `environment` | `Environment` | The API environment. <br> **Default: `Environment.Production`** |
-| `timeout` | `number` | Timeout for API calls.<br>*Default*: `30000` |
+| `timeout` | `number` | Timeout for API calls.<br>*Default*: `120000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
 | `basicAuthCredentials` | [`BasicAuthCredentials`]($a/basic-authentication.md) | The credential object for basicAuth |
@@ -42,7 +42,7 @@ const client = new Client({
     username: 'BasicAuthUserName',
     password: 'BasicAuthPassword'
   },
-  timeout: 30000,
+  timeout: 120000,
   environment: Environment.Production,
   subdomain: 'subdomain',
   domain: 'chargify.com',
@@ -62,6 +62,7 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | billingPortal | Gets BillingPortalController |
 | coupons | Gets CouponsController |
 | components | Gets ComponentsController |
+| componentPricePoints | Gets ComponentPricePointsController |
 | customers | Gets CustomersController |
 | customFields | Gets CustomFieldsController |
 | events | Gets EventsController |

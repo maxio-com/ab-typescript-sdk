@@ -19,4 +19,6 @@ export enum AllocationPreviewLineItemKind {
 /**
  * Schema for AllocationPreviewLineItemKind
  */
-export const  allocationPreviewLineItemKindSchema: Schema<AllocationPreviewLineItemKind> = stringEnum(AllocationPreviewLineItemKind);
+export const allocationPreviewLineItemKindSchema: Schema<AllocationPreviewLineItemKind> = stringEnum(
+  AllocationPreviewLineItemKind
+);

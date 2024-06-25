@@ -5,7 +5,10 @@
  */
 
 import { expandoObject, lazy, Schema } from '../schema';
-import { AllocationPreview, allocationPreviewSchema } from './allocationPreview';
+import {
+  AllocationPreview,
+  allocationPreviewSchema,
+} from './allocationPreview';
 
 export interface AllocationPreviewResponse {
   allocationPreview: AllocationPreview;

@@ -17,4 +17,4 @@ export enum AutoInvite {
 /**
  * Schema for AutoInvite
  */
-export const  autoInviteSchema: Schema<AutoInvite> = numberEnum(AutoInvite);
+export const autoInviteSchema: Schema<AutoInvite> = numberEnum(AutoInvite);

@@ -4,9 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import {
   BatchJobResponse,
   batchJobResponseSchema,
@@ -19,6 +17,8 @@ import {
 import { Subscription, subscriptionSchema } from '../models/subscription';
 import { array, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 
 export class APIExportsController extends BaseController {
   /**
@@ -39,15 +39,16 @@ export class APIExportsController extends BaseController {
    *                           results to return, then an empty result set will be returned. Use in query `page=1`.
    * @return Response from the API call
    */
-  async listExportedProformaInvoices({
-    batchId,
-    perPage,
-    page,
-  }: {
-    batchId: string,
-    perPage?: number,
-    page?: number,
-  },
+  async listExportedProformaInvoices(
+    {
+      batchId,
+      perPage,
+      page,
+    }: {
+      batchId: string;
+      perPage?: number;
+      page?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProformaInvoice[]>> {
     const req = this.createRequest('GET');
@@ -59,7 +60,7 @@ export class APIExportsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('page', mapped.page);
     req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(proformaInvoiceSchema), requestOptions);
   }
@@ -81,15 +82,16 @@ export class APIExportsController extends BaseController {
    *                           results to return, then an empty result set will be returned. Use in query `page=1`.
    * @return Response from the API call
    */
-  async listExportedInvoices({
-    batchId,
-    perPage,
-    page,
-  }: {
-    batchId: string,
-    perPage?: number,
-    page?: number,
-  },
+  async listExportedInvoices(
+    {
+      batchId,
+      perPage,
+      page,
+    }: {
+      batchId: string;
+      perPage?: number;
+      page?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Invoice[]>> {
     const req = this.createRequest('GET');
@@ -101,7 +103,7 @@ export class APIExportsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('page', mapped.page);
     req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(invoiceSchema), requestOptions);
   }
@@ -124,15 +126,16 @@ export class APIExportsController extends BaseController {
    *                           results to return, then an empty result set will be returned. Use in query `page=1`.
    * @return Response from the API call
    */
-  async listExportedSubscriptions({
-    batchId,
-    perPage,
-    page,
-  }: {
-    batchId: string,
-    perPage?: number,
-    page?: number,
-  },
+  async listExportedSubscriptions(
+    {
+      batchId,
+      perPage,
+      page,
+    }: {
+      batchId: string;
+      perPage?: number;
+      page?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Subscription[]>> {
     const req = this.createRequest('GET');
@@ -144,7 +147,7 @@ export class APIExportsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('page', mapped.page);
     req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}/rows.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionSchema), requestOptions);
   }
@@ -163,8 +166,13 @@ export class APIExportsController extends BaseController {
       'POST',
       '/api_exports/proforma_invoices.json'
     );
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      409,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
@@ -178,8 +186,13 @@ export class APIExportsController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<BatchJobResponse>> {
     const req = this.createRequest('POST', '/api_exports/invoices.json');
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      409,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
@@ -193,7 +206,12 @@ export class APIExportsController extends BaseController {
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<BatchJobResponse>> {
     const req = this.createRequest('POST', '/api_exports/subscriptions.json');
-    req.throwOn(409, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      409,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
@@ -211,7 +229,7 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
@@ -229,7 +247,7 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }
@@ -247,7 +265,7 @@ export class APIExportsController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ batchId: [batchId, string()] });
     req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(batchJobResponseSchema, requestOptions);
   }

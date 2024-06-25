@@ -5,7 +5,10 @@
  */
 
 import { expandoObject, number, optional, Schema, string } from '../schema';
-import { CurrencyPriceRole, currencyPriceRoleSchema } from './currencyPriceRole';
+import {
+  CurrencyPriceRole,
+  currencyPriceRoleSchema,
+} from './currencyPriceRole';
 
 export interface CurrencyPrice {
   id?: number;

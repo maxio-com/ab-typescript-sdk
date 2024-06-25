@@ -15,7 +15,9 @@ import {
 } from '../createOrUpdatePercentageCoupon';
 
 /** This is a container type for one-of types. */
-export type CreateOrUpdateCouponCoupon = CreateOrUpdatePercentageCoupon | CreateOrUpdateFlatAmountCoupon;
+export type CreateOrUpdateCouponCoupon =
+  | CreateOrUpdatePercentageCoupon
+  | CreateOrUpdateFlatAmountCoupon;
 
 export const createOrUpdateCouponCouponSchema: Schema<CreateOrUpdateCouponCoupon> = oneOf(
   [createOrUpdatePercentageCouponSchema, createOrUpdateFlatAmountCouponSchema]
@@ -23,22 +25,32 @@ export const createOrUpdateCouponCouponSchema: Schema<CreateOrUpdateCouponCoupon
 
 export namespace CreateOrUpdateCouponCoupon {
   /**
-  * Validation method to narrow down union type to CreateOrUpdatePercentageCoupon type case.
-  *
-  * This is Create or Update Percentage Coupon case.
-  */
-  export function isCreateOrUpdatePercentageCoupon(value: unknown): value is CreateOrUpdatePercentageCoupon {
-    const validationResult = validateAndMap(value, createOrUpdatePercentageCouponSchema);
+   * Validation method to narrow down union type to CreateOrUpdatePercentageCoupon type case.
+   *
+   * This is Create or Update Percentage Coupon case.
+   */
+  export function isCreateOrUpdatePercentageCoupon(
+    value: unknown
+  ): value is CreateOrUpdatePercentageCoupon {
+    const validationResult = validateAndMap(
+      value,
+      createOrUpdatePercentageCouponSchema
+    );
     return validationResult.errors === false;
   }
 
   /**
-  * Validation method to narrow down union type to CreateOrUpdateFlatAmountCoupon type case.
-  *
-  * This is Create or Update Flat Amount Coupon case.
-  */
-  export function isCreateOrUpdateFlatAmountCoupon(value: unknown): value is CreateOrUpdateFlatAmountCoupon {
-    const validationResult = validateAndMap(value, createOrUpdateFlatAmountCouponSchema);
+   * Validation method to narrow down union type to CreateOrUpdateFlatAmountCoupon type case.
+   *
+   * This is Create or Update Flat Amount Coupon case.
+   */
+  export function isCreateOrUpdateFlatAmountCoupon(
+    value: unknown
+  ): value is CreateOrUpdateFlatAmountCoupon {
+    const validationResult = validateAndMap(
+      value,
+      createOrUpdateFlatAmountCouponSchema
+    );
     return validationResult.errors === false;
   }
 }

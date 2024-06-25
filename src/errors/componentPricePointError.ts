@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  ComponentPricePointErrorItem,
-} from '../models/componentPricePointErrorItem';
+import { ComponentPricePointErrorItem } from '../models/componentPricePointErrorItem';
 
 /**
  * Creates an instance of ComponentPricePoint

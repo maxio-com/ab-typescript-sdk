@@ -15,19 +15,19 @@ export const quantityBasedComponentUnitPriceSchema: Schema<QuantityBasedComponen
 
 export namespace QuantityBasedComponentUnitPrice {
   /**
-  * Validation method to narrow down union type to string type case.
-  *
-  * This is String case.
-  */
+   * Validation method to narrow down union type to string type case.
+   *
+   * This is String case.
+   */
   export function isString(value: unknown): value is string {
     return typeof value === 'string';
   }
 
   /**
-  * Validation method to narrow down union type to number type case.
-  *
-  * This is Precision case.
-  */
+   * Validation method to narrow down union type to number type case.
+   *
+   * This is Precision case.
+   */
   export function isNumber(value: unknown): value is number {
     return typeof value === 'number';
   }

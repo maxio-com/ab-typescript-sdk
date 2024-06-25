@@ -15,4 +15,6 @@ interface EventBasedBillingListSegmentsErrors {
   [key: string]: unknown;
 }
 
-export class EventBasedBillingListSegmentsErrorsError extends ApiError<EventBasedBillingListSegmentsErrors> {}
+export class EventBasedBillingListSegmentsErrorsError extends ApiError<
+  EventBasedBillingListSegmentsErrors
+> {}

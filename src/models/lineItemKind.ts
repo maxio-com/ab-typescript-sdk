@@ -25,4 +25,6 @@ export enum LineItemKind {
 /**
  * Schema for LineItemKind
  */
-export const  lineItemKindSchema: Schema<LineItemKind> = stringEnum(LineItemKind);
+export const lineItemKindSchema: Schema<LineItemKind> = stringEnum(
+  LineItemKind
+);

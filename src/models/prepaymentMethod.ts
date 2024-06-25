@@ -22,4 +22,6 @@ export enum PrepaymentMethod {
 /**
  * Schema for PrepaymentMethod
  */
-export const  prepaymentMethodSchema: Schema<PrepaymentMethod> = stringEnum(PrepaymentMethod);
+export const prepaymentMethodSchema: Schema<PrepaymentMethod> = stringEnum(
+  PrepaymentMethod
+);

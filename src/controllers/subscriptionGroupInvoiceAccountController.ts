@@ -4,9 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
   DeductServiceCreditRequest,
   deductServiceCreditRequestSchema,
@@ -38,6 +36,8 @@ import {
 } from '../models/subscriptionGroupPrepaymentResponse';
 import { number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class SubscriptionGroupInvoiceAccountController extends BaseController {
   /**
@@ -62,7 +62,12 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       subscriptionGroupPrepaymentResponseSchema,
@@ -88,17 +93,18 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
    * @param filter   Filter to use for List Prepayments operations
    * @return Response from the API call
    */
-  async listPrepaymentsForSubscriptionGroup({
-    uid,
-    page,
-    perPage,
-    filter,
-  }: {
-    uid: string,
-    page?: number,
-    perPage?: number,
-    filter?: ListPrepaymentsFilter,
-  },
+  async listPrepaymentsForSubscriptionGroup(
+    {
+      uid,
+      page,
+      perPage,
+      filter,
+    }: {
+      uid: string;
+      page?: number;
+      perPage?: number;
+      filter?: ListPrepaymentsFilter;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSubscriptionGroupPrepaymentResponse>> {
     const req = this.createRequest('GET');
@@ -112,7 +118,7 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('filter', mapped.filter);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/prepayments.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listSubscriptionGroupPrepaymentResponseSchema,
@@ -142,7 +148,12 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credits.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditResponseSchema, requestOptions);
   }
@@ -168,7 +179,12 @@ export class SubscriptionGroupInvoiceAccountController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/service_credit_deductions.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(serviceCreditSchema, requestOptions);
   }

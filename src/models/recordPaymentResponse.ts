@@ -12,7 +12,10 @@ import {
   optional,
   Schema,
 } from '../schema';
-import { InvoicePrePayment, invoicePrePaymentSchema } from './invoicePrePayment';
+import {
+  InvoicePrePayment,
+  invoicePrePaymentSchema,
+} from './invoicePrePayment';
 import { PaidInvoice, paidInvoiceSchema } from './paidInvoice';
 
 export interface RecordPaymentResponse {

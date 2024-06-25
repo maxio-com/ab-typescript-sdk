@@ -5,7 +5,10 @@
  */
 
 import { array, expandoObject, lazy, optional, Schema } from '../schema';
-import { ProductPricePoint, productPricePointSchema } from './productPricePoint';
+import {
+  ProductPricePoint,
+  productPricePointSchema,
+} from './productPricePoint';
 
 export interface BulkCreateProductPricePointsResponse {
   pricePoints?: ProductPricePoint[];

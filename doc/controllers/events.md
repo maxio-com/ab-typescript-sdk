@@ -81,8 +81,7 @@ Here’s an example event for the `subscription_state_change` event:
 ```
 
 ```ts
-async listEvents(
-  page?: number,
+async listEvents(  page?: number,
   perPage?: number,
   sinceId?: bigint,
   maxId?: bigint,
@@ -93,8 +92,7 @@ async listEvents(
   endDate?: string,
   startDatetime?: string,
   endDatetime?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<EventResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<EventResponse[]>>
 ```
 
 ## Parameters
@@ -213,16 +211,14 @@ The following request will return a list of events for a subscription.
 Each event type has its own `event_specific_data` specified.
 
 ```ts
-async listSubscriptionEvents(
-  subscriptionId: number,
+async listSubscriptionEvents(  subscriptionId: number,
   page?: number,
   perPage?: number,
   sinceId?: bigint,
   maxId?: bigint,
   direction?: Direction,
   filter?: EventType[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<EventResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<EventResponse[]>>
 ```
 
 ## Parameters
@@ -316,15 +312,13 @@ try {
 Get a count of all the events for a given site by using this method.
 
 ```ts
-async readEventsCount(
-  page?: number,
+async readEventsCount(  page?: number,
   perPage?: number,
   sinceId?: bigint,
   maxId?: bigint,
   direction?: Direction,
   filter?: EventType[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<CountResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<CountResponse>>
 ```
 
 ## Parameters
