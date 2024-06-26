@@ -79,7 +79,7 @@ describe('Products Controller', () => {
     const { productFamily } = response.result;
     productFamilyId = productFamily?.id || 0;
     const promises = payloads.map((payload) =>
-      productsController.createProduct(productFamilyId, payload)
+      productsController.createProduct(String(productFamilyId), payload)
     );
     const responseCollection = await Promise.all(promises);
     productsCreated = responseCollection.map((response) => response.result);
@@ -108,7 +108,7 @@ describe('Products Controller', () => {
         },
       };
       const productResponse = await productsController.createProduct(
-        productFamilyId,
+        String(productFamilyId),
         newProductPayload
       );
       expect(productResponse.statusCode).toBe(201);
@@ -133,7 +133,7 @@ describe('Products Controller', () => {
         },
       };
       const promise = productsController.createProduct(
-        productFamilyId,
+        String(productFamilyId),
         newProductPayload
       );
 
@@ -164,7 +164,7 @@ describe('Products Controller', () => {
       };
 
       const promise = productsController.createProduct(
-        productFamilyId,
+        String(productFamilyId),
         newProductPayload
       );
 

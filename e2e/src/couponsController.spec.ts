@@ -428,7 +428,7 @@ describe('Coupons Controller', () => {
     test('should list the usages coupons ', async () => {
       const handle = `${uid()}-coupon-handler`;
       const productResponse = await productsController.createProduct(
-        productFamily?.id || 0,
+        String(productFamily?.id || 0),
         {
           product: { ...product, handle },
         }

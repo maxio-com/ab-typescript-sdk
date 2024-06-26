@@ -37,7 +37,7 @@ export async function createContextForMigration(): Promise<MigrationContext> {
   ).result;
   const productResponse01 = (
     await productsController.createProduct(
-      productFamilyResponse.productFamily?.id || 0,
+      String(productFamilyResponse.productFamily?.id || 0),
       {
         product: { ...product, handle: productHandleId },
       }
@@ -45,7 +45,7 @@ export async function createContextForMigration(): Promise<MigrationContext> {
   ).result;
   const productResponse02 = (
     await productsController.createProduct(
-      productFamilyResponse.productFamily?.id || 0,
+      String(productFamilyResponse.productFamily?.id || 0),
       {
         product: { ...product, handle: productHandleEngageId },
       }

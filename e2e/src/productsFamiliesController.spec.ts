@@ -100,7 +100,7 @@ describe('ProductsFamilies Controller', () => {
 
     const readResponse =
       await productFamiliesController.listProductsForProductFamily({
-        productFamilyId: productFamily?.id || 0,
+        productFamilyId: String(productFamily?.id || 0),
       });
     expect(readResponse.statusCode).toBe(200);
     expect(readResponse.result.length).toBe(0);

@@ -48,7 +48,7 @@ describe('Offers Controller', () => {
     ).result;
     productResponse = await (
       await productsController.createProduct(
-        productFamilyResponse.productFamily?.id || 0,
+        String(productFamilyResponse.productFamily?.id || 0),
         productBody
       )
     ).result;

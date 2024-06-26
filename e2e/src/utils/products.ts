@@ -30,7 +30,7 @@ export default async function createProduct({
 
   const productResponse = (
     await productsController.createProduct(
-      productFamilyResponse.productFamily?.id || 0,
+      String(productFamilyResponse.productFamily?.id || 0),
       {
         product: { ...product, handle: productHandle },
       }
