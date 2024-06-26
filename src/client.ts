@@ -92,8 +92,9 @@ function createHttpClientAdapter(client: HttpClient): HttpClientInterface {
 function getBaseUri(server: Server = 'default', config: Configuration): string {
   if (config.environment === Environment.Production) {
     if (server === 'default') {
-      return pathTemplate`https://${new SkipEncode(config.subdomain)}.
-      ${new SkipEncode(config.domain)}`;
+      return pathTemplate`https://${new SkipEncode(config.subdomain)}.${
+        new SkipEncode(config.domain)
+      }`;
     }
   }
   if (config.environment === Environment.Environment2) {
