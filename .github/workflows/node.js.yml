@@ -29,6 +29,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+      - name: Print dependencies
+        run: pnpm ls
       - name: Build process verification
         run: pnpm run build
       - name: e2e tests verification
