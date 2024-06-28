@@ -17,4 +17,6 @@ export enum BasicDateField {
 /**
  * Schema for BasicDateField
  */
-export const  basicDateFieldSchema: Schema<BasicDateField> = stringEnum(BasicDateField);
+export const basicDateFieldSchema: Schema<BasicDateField> = stringEnum(
+  BasicDateField
+);

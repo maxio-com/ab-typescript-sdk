@@ -17,4 +17,6 @@ export enum DebitNoteRole {
 /**
  * Schema for DebitNoteRole
  */
-export const  debitNoteRoleSchema: Schema<DebitNoteRole> = stringEnum(DebitNoteRole);
+export const debitNoteRoleSchema: Schema<DebitNoteRole> = stringEnum(
+  DebitNoteRole
+);

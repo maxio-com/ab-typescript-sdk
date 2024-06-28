@@ -18,4 +18,6 @@ export enum CurrencyPriceRole {
 /**
  * Schema for CurrencyPriceRole
  */
-export const  currencyPriceRoleSchema: Schema<CurrencyPriceRole> = stringEnum(CurrencyPriceRole);
+export const currencyPriceRoleSchema: Schema<CurrencyPriceRole> = stringEnum(
+  CurrencyPriceRole
+);

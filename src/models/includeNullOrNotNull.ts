@@ -17,4 +17,6 @@ export enum IncludeNullOrNotNull {
 /**
  * Schema for IncludeNullOrNotNull
  */
-export const  includeNullOrNotNullSchema: Schema<IncludeNullOrNotNull> = stringEnum(IncludeNullOrNotNull);
+export const includeNullOrNotNullSchema: Schema<IncludeNullOrNotNull> = stringEnum(
+  IncludeNullOrNotNull
+);

@@ -5,7 +5,10 @@
  */
 
 import { array, expandoObject, lazy, optional, Schema } from '../schema';
-import { ComponentCostData, componentCostDataSchema } from './componentCostData';
+import {
+  ComponentCostData,
+  componentCostDataSchema,
+} from './componentCostData';
 
 export interface InvoiceLineItemComponentCostData {
   rates?: ComponentCostData[];

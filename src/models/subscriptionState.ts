@@ -30,4 +30,6 @@ export enum SubscriptionState {
 /**
  * Schema for SubscriptionState
  */
-export const  subscriptionStateSchema: Schema<SubscriptionState> = stringEnum(SubscriptionState);
+export const subscriptionStateSchema: Schema<SubscriptionState> = stringEnum(
+  SubscriptionState
+);

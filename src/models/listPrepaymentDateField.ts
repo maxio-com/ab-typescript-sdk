@@ -17,4 +17,6 @@ export enum ListPrepaymentDateField {
 /**
  * Schema for ListPrepaymentDateField
  */
-export const  listPrepaymentDateFieldSchema: Schema<ListPrepaymentDateField> = stringEnum(ListPrepaymentDateField);
+export const listPrepaymentDateFieldSchema: Schema<ListPrepaymentDateField> = stringEnum(
+  ListPrepaymentDateField
+);

@@ -18,4 +18,6 @@ export enum ExtendedIntervalUnit {
 /**
  * Schema for ExtendedIntervalUnit
  */
-export const  extendedIntervalUnitSchema: Schema<ExtendedIntervalUnit> = stringEnum(ExtendedIntervalUnit);
+export const extendedIntervalUnitSchema: Schema<ExtendedIntervalUnit> = stringEnum(
+  ExtendedIntervalUnit
+);

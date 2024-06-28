@@ -19,4 +19,6 @@ export enum PricingScheme {
 /**
  * Schema for PricingScheme
  */
-export const  pricingSchemeSchema: Schema<PricingScheme> = stringEnum(PricingScheme);
+export const pricingSchemeSchema: Schema<PricingScheme> = stringEnum(
+  PricingScheme
+);

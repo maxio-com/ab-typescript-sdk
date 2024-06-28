@@ -16,21 +16,23 @@ export const customerErrorResponseErrorsSchema: Schema<CustomerErrorResponseErro
 
 export namespace CustomerErrorResponseErrors {
   /**
-  * Validation method to narrow down union type to CustomerError type case.
-  *
-  * This is Customer Error case.
-  */
+   * Validation method to narrow down union type to CustomerError type case.
+   *
+   * This is Customer Error case.
+   */
   export function isCustomerError(value: unknown): value is CustomerError {
     const validationResult = validateAndMap(value, customerErrorSchema);
     return validationResult.errors === false;
   }
 
   /**
-  * Validation method to narrow down union type to string[] type case.
-  *
-  * This is Array of String case.
-  */
+   * Validation method to narrow down union type to string[] type case.
+   *
+   * This is Array of String case.
+   */
   export function isArrayOfString(value: unknown): value is string[] {
-    return Array.isArray(value) && value.every((item) => typeof item === 'string');
+    return (
+      Array.isArray(value) && value.every((item) => typeof item === 'string')
+    );
   }
 }

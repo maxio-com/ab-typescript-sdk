@@ -26,18 +26,16 @@ Use this method to create a product within your Chargify site.
 + [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
 
 ```ts
-async createProduct(
-  productFamilyId: number,
+async createProduct(  productFamilyId: string,
   body?: CreateOrUpdateProductRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productFamilyId` | `number` | Template, Required | The Chargify id of the product family to which the product belongs |
+| `productFamilyId` | `string` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreateOrUpdateProductRequest \| undefined`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -48,7 +46,7 @@ async createProduct(
 ## Example Usage
 
 ```ts
-const productFamilyId = 140;
+const productFamilyId = 'product_family_id4';
 
 const body: CreateOrUpdateProductRequest = {
   product: {
@@ -141,10 +139,8 @@ try {
 This endpoint allows you to read the current details of a product that you've created in Chargify.
 
 ```ts
-async readProduct(
-  productId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
+async readProduct(  productId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -232,11 +228,9 @@ Use this method to change aspects of an existing product.
 Updating a product using this endpoint will create a new price point and set it as the default price point for this product. If you should like to update an existing product price point, that must be done separately.
 
 ```ts
-async updateProduct(
-  productId: number,
+async updateProduct(  productId: number,
   body?: CreateOrUpdateProductRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -330,10 +324,8 @@ Sending a DELETE request to this endpoint will archive the product. All current 
 This will restrict the option to chose the product for purchase via the Billing Portal, as well as disable Public Signup Pages for the product.
 
 ```ts
-async archiveProduct(
-  productId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
+async archiveProduct(  productId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -419,10 +411,8 @@ try {
 This method allows to retrieve a Product object by its `api_handle`.
 
 ```ts
-async readProductByHandle(
-  apiHandle: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse>>
+async readProductByHandle(  apiHandle: string,
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -527,8 +517,7 @@ try {
 This method allows to retrieve a list of Products belonging to a Site.
 
 ```ts
-async listProducts(
-  dateField?: BasicDateField,
+async listProducts(  dateField?: BasicDateField,
   filter?: ListProductsFilter,
   endDate?: string,
   endDatetime?: string,
@@ -538,8 +527,7 @@ async listProducts(
   perPage?: number,
   includeArchived?: boolean,
   include?: ListProductsInclude,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProductResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse[]>>
 ```
 
 ## Parameters

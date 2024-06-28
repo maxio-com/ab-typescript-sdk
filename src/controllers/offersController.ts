@@ -6,9 +6,6 @@
 
 import { ApiResponse, RequestOptions } from '../core';
 import {
-  ErrorArrayMapResponseError,
-} from '../errors/errorArrayMapResponseError';
-import {
   CreateOfferRequest,
   createOfferRequestSchema,
 } from '../models/createOfferRequest';
@@ -19,6 +16,7 @@ import {
 import { OfferResponse, offerResponseSchema } from '../models/offerResponse';
 import { boolean, number, optional } from '../schema';
 import { BaseController } from './baseController';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
 
 export class OffersController extends BaseController {
   /**
@@ -53,7 +51,12 @@ export class OffersController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(offerResponseSchema, requestOptions);
   }
@@ -73,15 +76,16 @@ export class OffersController extends BaseController {
    * @param includeArchived  Include archived products. Use in query: `include_archived=true`.
    * @return Response from the API call
    */
-  async listOffers({
-    page,
-    perPage,
-    includeArchived,
-  }: {
-    page?: number,
-    perPage?: number,
-    includeArchived?: boolean,
-  },
+  async listOffers(
+    {
+      page,
+      perPage,
+      includeArchived,
+    }: {
+      page?: number;
+      perPage?: number;
+      includeArchived?: boolean;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListOffersResponse>> {
     const req = this.createRequest('GET', '/offers.json');

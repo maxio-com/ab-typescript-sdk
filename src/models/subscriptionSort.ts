@@ -21,4 +21,6 @@ export enum SubscriptionSort {
 /**
  * Schema for SubscriptionSort
  */
-export const  subscriptionSortSchema: Schema<SubscriptionSort> = stringEnum(SubscriptionSort);
+export const subscriptionSortSchema: Schema<SubscriptionSort> = stringEnum(
+  SubscriptionSort
+);

@@ -4,15 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import {
-  ErrorArrayMapResponseError,
-} from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  ProformaBadRequestErrorResponseError,
-} from '../errors/proformaBadRequestErrorResponseError';
 import {
   CreateSignupProformaPreviewInclude,
   createSignupProformaPreviewIncludeSchema,
@@ -44,6 +36,10 @@ import {
 } from '../models/voidInvoiceRequest';
 import { boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ProformaBadRequestErrorResponseError } from '../errors/proformaBadRequestErrorResponseError';
 
 export class ProformaInvoicesController extends BaseController {
   /**
@@ -70,7 +66,12 @@ export class ProformaInvoicesController extends BaseController {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -92,23 +93,24 @@ export class ProformaInvoicesController extends BaseController {
    * @param customFields  Include custom fields data
    * @return Response from the API call
    */
-  async listSubscriptionGroupProformaInvoices({
-    uid,
-    lineItems,
-    discounts,
-    taxes,
-    credits,
-    payments,
-    customFields,
-  }: {
-    uid: string,
-    lineItems?: boolean,
-    discounts?: boolean,
-    taxes?: boolean,
-    credits?: boolean,
-    payments?: boolean,
-    customFields?: boolean,
-  },
+  async listSubscriptionGroupProformaInvoices(
+    {
+      uid,
+      lineItems,
+      discounts,
+      taxes,
+      credits,
+      payments,
+      customFields,
+    }: {
+      uid: string;
+      lineItems?: boolean;
+      discounts?: boolean;
+      taxes?: boolean;
+      credits?: boolean;
+      payments?: boolean;
+      customFields?: boolean;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProformaInvoicesResponse>> {
     const req = this.createRequest('GET');
@@ -128,7 +130,7 @@ export class ProformaInvoicesController extends BaseController {
     req.query('payments', mapped.payments);
     req.query('custom_fields', mapped.customFields);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProformaInvoicesResponseSchema, requestOptions);
   }
@@ -152,7 +154,7 @@ export class ProformaInvoicesController extends BaseController {
       proformaInvoiceUid: [proformaInvoiceUid, string()],
     });
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
@@ -181,7 +183,12 @@ export class ProformaInvoicesController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
@@ -218,35 +225,36 @@ export class ProformaInvoicesController extends BaseController {
    * @param customFields    Include custom fields data
    * @return Response from the API call
    */
-  async listProformaInvoices({
-    subscriptionId,
-    startDate,
-    endDate,
-    status,
-    page,
-    perPage,
-    direction,
-    lineItems,
-    discounts,
-    taxes,
-    credits,
-    payments,
-    customFields,
-  }: {
-    subscriptionId: number,
-    startDate?: string,
-    endDate?: string,
-    status?: ProformaInvoiceStatus,
-    page?: number,
-    perPage?: number,
-    direction?: Direction,
-    lineItems?: boolean,
-    discounts?: boolean,
-    taxes?: boolean,
-    credits?: boolean,
-    payments?: boolean,
-    customFields?: boolean,
-  },
+  async listProformaInvoices(
+    {
+      subscriptionId,
+      startDate,
+      endDate,
+      status,
+      page,
+      perPage,
+      direction,
+      lineItems,
+      discounts,
+      taxes,
+      credits,
+      payments,
+      customFields,
+    }: {
+      subscriptionId: number;
+      startDate?: string;
+      endDate?: string;
+      status?: ProformaInvoiceStatus;
+      page?: number;
+      perPage?: number;
+      direction?: Direction;
+      lineItems?: boolean;
+      discounts?: boolean;
+      taxes?: boolean;
+      credits?: boolean;
+      payments?: boolean;
+      customFields?: boolean;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProformaInvoicesResponse>> {
     const req = this.createRequest('GET');
@@ -313,8 +321,13 @@ export class ProformaInvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}/void.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
@@ -348,8 +361,13 @@ export class ProformaInvoicesController extends BaseController {
       subscriptionId: [subscriptionId, number()],
     });
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices/preview.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
@@ -385,8 +403,18 @@ export class ProformaInvoicesController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      400,
+      ProformaBadRequestErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
+    req.throwOn(
+      422,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
@@ -427,8 +455,18 @@ export class ProformaInvoicesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.query('include', mapped.include);
     req.json(mapped.body);
-    req.throwOn(400, ProformaBadRequestErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(422, ErrorArrayMapResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      400,
+      ProformaBadRequestErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
+    req.throwOn(
+      422,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(signupProformaPreviewResponseSchema, requestOptions);
   }

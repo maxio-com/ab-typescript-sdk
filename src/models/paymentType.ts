@@ -18,4 +18,4 @@ export enum PaymentType {
 /**
  * Schema for PaymentType
  */
-export const  paymentTypeSchema: Schema<PaymentType> = stringEnum(PaymentType);
+export const paymentTypeSchema: Schema<PaymentType> = stringEnum(PaymentType);

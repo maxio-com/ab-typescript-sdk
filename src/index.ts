@@ -6,7 +6,7 @@
 
 export * from './client';
 export * from './configuration';
-export type { ApiResponse } from './core'
+export type { ApiResponse } from './core';
 export {
   AbortError,
   ArgumentsValidationError,
@@ -19,6 +19,7 @@ export * from './defaultConfiguration';
 export * from './controllers/advanceInvoiceController';
 export * from './controllers/aPIExportsController';
 export * from './controllers/billingPortalController';
+export * from './controllers/componentPricePointsController';
 export * from './controllers/componentsController';
 export * from './controllers/couponsController';
 export * from './controllers/customFieldsController';
@@ -645,6 +646,8 @@ export * from './models/containers/allocationPreviewItemPreviousQuantity';
 export * from './models/containers/allocationPreviewItemQuantity';
 export * from './models/containers/allocationPreviousQuantity';
 export * from './models/containers/allocationQuantity';
+export * from './models/containers/archiveComponentPricePointComponentId';
+export * from './models/containers/archiveComponentPricePointPricePointId';
 export * from './models/containers/archiveProductPricePointPricePointId';
 export * from './models/containers/archiveProductPricePointProductId';
 export * from './models/containers/calendarBillingSnapDay';
@@ -701,6 +704,8 @@ export * from './models/containers/priceStartingQuantity';
 export * from './models/containers/priceUnitPrice';
 export * from './models/containers/quantityBasedComponentUnitPrice';
 export * from './models/containers/reactivateSubscriptionRequestResume';
+export * from './models/containers/readComponentPricePointComponentId';
+export * from './models/containers/readComponentPricePointPricePointId';
 export * from './models/containers/readProductPricePointPricePointId';
 export * from './models/containers/readProductPricePointProductId';
 export * from './models/containers/refundConsolidatedInvoiceSegmentUids';
@@ -727,6 +732,8 @@ export * from './models/containers/subscriptionGroupSignupComponentAllocatedQuan
 export * from './models/containers/subscriptionGroupSignupComponentComponentId';
 export * from './models/containers/subscriptionGroupSignupComponentPricePointId';
 export * from './models/containers/subscriptionGroupSignupComponentUnitBalance';
+export * from './models/containers/updateComponentPricePointComponentId';
+export * from './models/containers/updateComponentPricePointPricePointId';
 export * from './models/containers/updateMetafieldsRequestMetafields';
 export * from './models/containers/updatePriceEndingQuantity';
 export * from './models/containers/updatePriceStartingQuantity';

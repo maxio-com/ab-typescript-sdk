@@ -23,7 +23,10 @@ import {
   SubscriptionGroupCustomer,
   subscriptionGroupCustomerSchema,
 } from './subscriptionGroupCustomer';
-import { SubscriptionState, subscriptionStateSchema } from './subscriptionState';
+import {
+  SubscriptionState,
+  subscriptionStateSchema,
+} from './subscriptionState';
 
 export interface FullSubscriptionGroupResponse {
   uid?: string;

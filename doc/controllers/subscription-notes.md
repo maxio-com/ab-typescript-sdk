@@ -30,11 +30,9 @@ If you have structured data such as birth date, color, etc., consider using Meta
 Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
 
 ```ts
-async createSubscriptionNote(
-  subscriptionId: number,
+async createSubscriptionNote(  subscriptionId: number,
   body?: UpdateSubscriptionNoteRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionNoteResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
 ## Parameters
@@ -82,12 +80,10 @@ try {
 Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
 
 ```ts
-async listSubscriptionNotes(
-  subscriptionId: number,
+async listSubscriptionNotes(  subscriptionId: number,
   page?: number,
   perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionNoteResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse[]>>
 ```
 
 ## Parameters
@@ -156,11 +152,9 @@ try {
 Once you have obtained the ID of the note you wish to read, use this method to show a particular note attached to a subscription.
 
 ```ts
-async readSubscriptionNote(
-  subscriptionId: number,
+async readSubscriptionNote(  subscriptionId: number,
   noteId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionNoteResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
 ## Parameters
@@ -218,12 +212,10 @@ try {
 Use the following method to update a note for a Subscription.
 
 ```ts
-async updateSubscriptionNote(
-  subscriptionId: number,
+async updateSubscriptionNote(  subscriptionId: number,
   noteId: number,
   body?: UpdateSubscriptionNoteRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionNoteResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
 ## Parameters
@@ -275,11 +267,9 @@ try {
 Use the following method to delete a note for a Subscription.
 
 ```ts
-async deleteSubscriptionNote(
-  subscriptionId: number,
+async deleteSubscriptionNote(  subscriptionId: number,
   noteId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters

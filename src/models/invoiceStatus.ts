@@ -21,4 +21,6 @@ export enum InvoiceStatus {
 /**
  * Schema for InvoiceStatus
  */
-export const  invoiceStatusSchema: Schema<InvoiceStatus> = stringEnum(InvoiceStatus);
+export const invoiceStatusSchema: Schema<InvoiceStatus> = stringEnum(
+  InvoiceStatus
+);

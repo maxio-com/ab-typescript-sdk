@@ -34,11 +34,9 @@ const subscriptionComponentsController = new SubscriptionComponentsController(cl
 This request will list information regarding a specific component owned by a subscription.
 
 ```ts
-async readSubscriptionComponent(
-  subscriptionId: number,
+async readSubscriptionComponent(  subscriptionId: number,
   componentId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionComponentResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionComponentResponse>>
 ```
 
 ## Parameters
@@ -110,8 +108,7 @@ This request will list a subscription's applied components.
 When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
 
 ```ts
-async listSubscriptionComponents(
-  subscriptionId: number,
+async listSubscriptionComponents(  subscriptionId: number,
   dateField?: SubscriptionListDateField,
   direction?: SortingDirection,
   filter?: ListSubscriptionComponentsFilter,
@@ -124,8 +121,7 @@ async listSubscriptionComponents(
   startDatetime?: string,
   include?: ListSubscriptionComponentsInclude[],
   inUse?: boolean,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionComponentResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionComponentResponse[]>>
 ```
 
 ## Parameters
@@ -229,11 +225,9 @@ The `price_point` key can take either a:
 3. `"_default"` string, which will reset the price point to the component's current default price point.
 
 ```ts
-async bulkUpdateSubscriptionComponentsPricePoints(
-  subscriptionId: number,
+async bulkUpdateSubscriptionComponentsPricePoints(  subscriptionId: number,
   body?: BulkComponentsPricePointAssignment,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<BulkComponentsPricePointAssignment>>
+requestOptions?: RequestOptions): Promise<ApiResponse<BulkComponentsPricePointAssignment>>
 ```
 
 ## Parameters
@@ -316,10 +310,8 @@ Resets all of a subscription's components to use the current default.
 **Note**: this will update the price point for all of the subscription's components, even ones that have not been allocated yet.
 
 ```ts
-async bulkResetSubscriptionComponentsPricePoints(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionResponse>>
+async bulkResetSubscriptionComponentsPricePoints(  subscriptionId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -504,12 +496,10 @@ See the tables below for valid values.
 **NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**
 
 ```ts
-async allocateComponent(
-  subscriptionId: number,
+async allocateComponent(  subscriptionId: number,
   componentId: number,
   body?: CreateAllocationRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<AllocationResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<AllocationResponse>>
 ```
 
 ## Parameters
@@ -614,12 +604,10 @@ puts component.allocated_quantity
 ```
 
 ```ts
-async listAllocations(
-  subscriptionId: number,
+async listAllocations(  subscriptionId: number,
   componentId: number,
   page?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<AllocationResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<AllocationResponse[]>>
 ```
 
 ## Parameters
@@ -722,11 +710,9 @@ A `component_id` is required for each allocation.
 This endpoint only responds to JSON. It is not available for XML.
 
 ```ts
-async allocateComponents(
-  subscriptionId: number,
+async allocateComponents(  subscriptionId: number,
   body?: AllocateComponents,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<AllocationResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<AllocationResponse[]>>
 ```
 
 ## Parameters
@@ -840,11 +826,9 @@ When the allocation uses multiple different types of `upgrade_charge`s or `downg
 See example below for Fine-Grained Component Control response.
 
 ```ts
-async previewAllocations(
-  subscriptionId: number,
+async previewAllocations(  subscriptionId: number,
   body?: PreviewAllocationsRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<AllocationPreviewResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<AllocationPreviewResponse>>
 ```
 
 ## Parameters
@@ -1018,13 +1002,11 @@ A few limitations exist when changing an allocation's expiration date:
 - An expiration date can be changed towards the past (essentially expiring it) up to the subscription's current period beginning date.
 
 ```ts
-async updatePrepaidUsageAllocationExpirationDate(
-  subscriptionId: number,
+async updatePrepaidUsageAllocationExpirationDate(  subscriptionId: number,
   componentId: number,
   allocationId: number,
   body?: UpdateAllocationExpirationDate,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1094,13 +1076,11 @@ By default, destroying an allocation will generate a service credit on the subsc
 3. `refund`: The allocation will be destroyed and the balances will be updated and a refund will be issued along with a Credit Note.
 
 ```ts
-async deletePrepaidUsageAllocation(
-  subscriptionId: number,
+async deletePrepaidUsageAllocation(  subscriptionId: number,
   componentId: number,
   allocationId: number,
   body?: CreditSchemeRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1215,12 +1195,10 @@ Q. Is it possible to record metered usage for more than one component at a time?
 A. No. Usage should be reported as one API call per component on a single subscription. For example, to record that a subscriber has sent both an SMS Message and an Email, send an API call for each.
 
 ```ts
-async createUsage(
-  subscriptionId: number,
+async createUsage(  subscriptionId: number,
   componentId: CreateUsageComponentId,
   body?: CreateUsageRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<UsageResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<UsageResponse>>
 ```
 
 ## Parameters
@@ -1310,8 +1288,7 @@ Note: The `since_date` and `until_date` attributes each default to midnight on t
 Use this endpoint to read the previously recorded components for a subscription.  You can now specify either the component id (integer) or the component handle prefixed by "handle:" to specify the unique identifier for the component you are working with.
 
 ```ts
-async listUsages(
-  subscriptionId: number,
+async listUsages(  subscriptionId: number,
   componentId: ListUsagesInputComponentId,
   sinceId?: bigint,
   maxId?: bigint,
@@ -1319,8 +1296,7 @@ async listUsages(
   untilDate?: string,
   page?: number,
   perPage?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<UsageResponse[]>>
+requestOptions?: RequestOptions): Promise<ApiResponse<UsageResponse[]>>
 ```
 
 ## Parameters
@@ -1405,11 +1381,9 @@ Use this endpoint to activate an event-based component for a single subscription
 *Note: it is possible to stream events for a subscription at any time, regardless of component activation status. The activation status only determines if the subscription should be billed for event-based component usage at renewal.*
 
 ```ts
-async activateEventBasedComponent(
-  subscriptionId: number,
+async activateEventBasedComponent(  subscriptionId: number,
   componentId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1452,11 +1426,9 @@ try {
 Use this endpoint to deactivate an event-based component for a single subscription. Deactivating the event-based component causes Chargify to ignore related events at subscription renewal.
 
 ```ts
-async deactivateEventBasedComponent(
-  subscriptionId: number,
+async deactivateEventBasedComponent(  subscriptionId: number,
   componentId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1517,13 +1489,11 @@ https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
 ```
 
 ```ts
-async recordEvent(
-  subdomain: string,
+async recordEvent(  subdomain: string,
   apiHandle: string,
   storeUid?: string,
   body?: EBBEvent,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1581,13 +1551,11 @@ Use this endpoint to record a collection of events.
 A maximum of 1000 events can be published in a single request. A 422 will be returned if this limit is exceeded.
 
 ```ts
-async bulkRecordEvents(
-  subdomain: string,
+async bulkRecordEvents(  subdomain: string,
   apiHandle: string,
   storeUid?: string,
   body?: EBBEvent[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -1643,8 +1611,7 @@ try {
 This request will list components applied to each subscription.
 
 ```ts
-async listSubscriptionComponentsForSite(
-  page?: number,
+async listSubscriptionComponentsForSite(  page?: number,
   perPage?: number,
   sort?: ListSubscriptionComponentsSort,
   direction?: SortingDirection,
@@ -1658,8 +1625,7 @@ async listSubscriptionComponentsForSite(
   pricePointIds?: IncludeNotNull,
   productFamilyIds?: number[],
   include?: ListSubscriptionComponentsInclude,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListSubscriptionComponentsResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ListSubscriptionComponentsResponse>>
 ```
 
 ## Parameters

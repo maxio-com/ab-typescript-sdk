@@ -15,28 +15,28 @@ export const createSegmentSegmentProperty2ValueSchema: Schema<CreateSegmentSegme
 
 export namespace CreateSegmentSegmentProperty2Value {
   /**
-  * Validation method to narrow down union type to string type case.
-  *
-  * This is String case.
-  */
+   * Validation method to narrow down union type to string type case.
+   *
+   * This is String case.
+   */
   export function isString(value: unknown): value is string {
     return typeof value === 'string';
   }
 
   /**
-  * Validation method to narrow down union type to number type case.
-  *
-  * This is Precision case.
-  */
+   * Validation method to narrow down union type to number type case.
+   *
+   * This is Precision case.
+   */
   export function isNumber(value: unknown): value is number {
     return typeof value === 'number';
   }
 
   /**
-  * Validation method to narrow down union type to boolean type case.
-  *
-  * This is Boolean case.
-  */
+   * Validation method to narrow down union type to boolean type case.
+   *
+   * This is Boolean case.
+   */
   export function isBoolean(value: unknown): value is boolean {
     return typeof value === 'boolean';
   }

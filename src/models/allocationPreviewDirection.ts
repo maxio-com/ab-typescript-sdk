@@ -17,4 +17,6 @@ export enum AllocationPreviewDirection {
 /**
  * Schema for AllocationPreviewDirection
  */
-export const  allocationPreviewDirectionSchema: Schema<AllocationPreviewDirection> = stringEnum(AllocationPreviewDirection);
+export const allocationPreviewDirectionSchema: Schema<AllocationPreviewDirection> = stringEnum(
+  AllocationPreviewDirection
+);

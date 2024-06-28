@@ -21,4 +21,6 @@ export enum BillingManifestLineItemKind {
 /**
  * Schema for BillingManifestLineItemKind
  */
-export const  billingManifestLineItemKindSchema: Schema<BillingManifestLineItemKind> = stringEnum(BillingManifestLineItemKind);
+export const billingManifestLineItemKindSchema: Schema<BillingManifestLineItemKind> = stringEnum(
+  BillingManifestLineItemKind
+);

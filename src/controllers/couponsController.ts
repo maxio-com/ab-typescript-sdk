@@ -4,12 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  SingleStringErrorResponseError,
-} from '../errors/singleStringErrorResponseError';
 import {
   CouponCurrencyRequest,
   couponCurrencyRequestSchema,
@@ -35,6 +30,9 @@ import {
 } from '../models/listCouponsFilter';
 import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError';
 
 export class CouponsController extends BaseController {
   /**
@@ -78,7 +76,12 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
@@ -112,19 +115,20 @@ export class CouponsController extends BaseController {
    *                                                      `currency_prices=true`.
    * @return Response from the API call
    */
-  async listCouponsForProductFamily({
-    productFamilyId,
-    page,
-    perPage,
-    filter,
-    currencyPrices,
-  }: {
-    productFamilyId: number,
-    page?: number,
-    perPage?: number,
-    filter?: ListCouponsFilter,
-    currencyPrices?: boolean,
-  },
+  async listCouponsForProductFamily(
+    {
+      productFamilyId,
+      page,
+      perPage,
+      filter,
+      currencyPrices,
+    }: {
+      productFamilyId: number;
+      page?: number;
+      perPage?: number;
+      filter?: ListCouponsFilter;
+      currencyPrices?: boolean;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse[]>> {
     const req = this.createRequest('GET');
@@ -290,17 +294,18 @@ export class CouponsController extends BaseController {
    *                                                    `currency_prices=true`.
    * @return Response from the API call
    */
-  async listCoupons({
-    page,
-    perPage,
-    filter,
-    currencyPrices,
-  }: {
-    page?: number,
-    perPage?: number,
-    filter?: ListCouponsFilter,
-    currencyPrices?: boolean,
-  },
+  async listCoupons(
+    {
+      page,
+      perPage,
+      filter,
+      currencyPrices,
+    }: {
+      page?: number;
+      perPage?: number;
+      filter?: ListCouponsFilter;
+      currencyPrices?: boolean;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse[]>> {
     const req = this.createRequest('GET', '/coupons.json');
@@ -508,15 +513,16 @@ export class CouponsController extends BaseController {
    *                            200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listCouponSubcodes({
-    couponId,
-    page,
-    perPage,
-  }: {
-    couponId: number,
-    page?: number,
-    perPage?: number,
-  },
+  async listCouponSubcodes(
+    {
+      couponId,
+      page,
+      perPage,
+    }: {
+      couponId: number;
+      page?: number;
+      perPage?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponSubcodes>> {
     const req = this.createRequest('GET');
@@ -610,7 +616,7 @@ export class CouponsController extends BaseController {
       subcode: [subcode, string()],
     });
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes/${mapped.subcode}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }

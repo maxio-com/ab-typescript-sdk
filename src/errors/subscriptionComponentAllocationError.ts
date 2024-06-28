@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  SubscriptionComponentAllocationErrorItem,
-} from '../models/subscriptionComponentAllocationErrorItem';
+import { SubscriptionComponentAllocationErrorItem } from '../models/subscriptionComponentAllocationErrorItem';
 
 /**
  * Creates an instance of SubscriptionComponentAllocation
@@ -17,4 +15,6 @@ interface SubscriptionComponentAllocation {
   [key: string]: unknown;
 }
 
-export class SubscriptionComponentAllocationError extends ApiError<SubscriptionComponentAllocation> {}
+export class SubscriptionComponentAllocationError extends ApiError<
+  SubscriptionComponentAllocation
+> {}

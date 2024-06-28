@@ -5,9 +5,6 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import {
-  SubscriptionsMrrErrorResponseError,
-} from '../errors/subscriptionsMrrErrorResponseError';
 import { Direction, directionSchema } from '../models/direction';
 import { ListMrrFilter, listMrrFilterSchema } from '../models/listMrrFilter';
 import {
@@ -26,6 +23,7 @@ import {
 } from '../models/subscriptionMRRResponse';
 import { number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { SubscriptionsMrrErrorResponseError } from '../errors/subscriptionsMrrErrorResponseError';
 
 export class InsightsController extends BaseController {
   /**
@@ -122,17 +120,18 @@ export class InsightsController extends BaseController {
    * @return Response from the API call
    * @deprecated
    */
-  async listMrrMovements({
-    subscriptionId,
-    page,
-    perPage,
-    direction,
-  }: {
-    subscriptionId?: number,
-    page?: number,
-    perPage?: number,
-    direction?: SortingDirection,
-  },
+  async listMrrMovements(
+    {
+      subscriptionId,
+      page,
+      perPage,
+      direction,
+    }: {
+      subscriptionId?: number;
+      page?: number;
+      perPage?: number;
+      direction?: SortingDirection;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListMRRResponse>> {
     const req = this.createRequest('GET', '/mrr_movements.json');
@@ -174,19 +173,20 @@ export class InsightsController extends BaseController {
    * @return Response from the API call
    * @deprecated
    */
-  async listMrrPerSubscription({
-    filter,
-    atTime,
-    page,
-    perPage,
-    direction,
-  }: {
-    filter?: ListMrrFilter,
-    atTime?: string,
-    page?: number,
-    perPage?: number,
-    direction?: Direction,
-  },
+  async listMrrPerSubscription(
+    {
+      filter,
+      atTime,
+      page,
+      perPage,
+      direction,
+    }: {
+      filter?: ListMrrFilter;
+      atTime?: string;
+      page?: number;
+      perPage?: number;
+      direction?: Direction;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SubscriptionMRRResponse>> {
     const req = this.createRequest('GET', '/subscriptions_mrr.json');
@@ -203,7 +203,12 @@ export class InsightsController extends BaseController {
     req.query('per_page', mapped.perPage);
     req.query('direction', mapped.direction);
     req.deprecated('InsightsController.listMrrPerSubscription');
-    req.throwOn(400, SubscriptionsMrrErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      400,
+      SubscriptionsMrrErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionMRRResponseSchema, requestOptions);
   }

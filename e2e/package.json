@@ -3,7 +3,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "test": "jest",
+    "test": "jest --maxWorkers=1",
     "coverage": "jest --coverage",
     "lint": "eslint --ignore-path .eslintignore --ext spec.js,spec.ts .",
     "format": "prettier --write \"src/e2e/**/*.{js,ts}\""

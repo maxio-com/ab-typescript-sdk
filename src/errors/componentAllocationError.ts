@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  ComponentAllocationErrorItem,
-} from '../models/componentAllocationErrorItem';
+import { ComponentAllocationErrorItem } from '../models/componentAllocationErrorItem';
 
 /**
  * Creates an instance of ComponentAllocation

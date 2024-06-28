@@ -34,10 +34,8 @@ Only one of the `subscriptions` can have `"primary": true` attribute set.
 When passing product to a subscription you can use either `product_id` or `product_handle` or `offer_id`. You can also use `custom_price` instead.
 
 ```ts
-async signupWithSubscriptionGroup(
-  body?: SubscriptionGroupSignupRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionGroupSignupResponse>>
+async signupWithSubscriptionGroup(  body?: SubscriptionGroupSignupRequest,
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionGroupSignupResponse>>
 ```
 
 ## Parameters
@@ -97,10 +95,8 @@ try {
 Creates a subscription group with given members.
 
 ```ts
-async createSubscriptionGroup(
-  body?: CreateSubscriptionGroupRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionGroupResponse>>
+async createSubscriptionGroup(  body?: CreateSubscriptionGroupRequest,
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionGroupResponse>>
 ```
 
 ## Parameters
@@ -178,12 +174,10 @@ Returns an array of subscription groups for the site. The response is paginated 
 Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
 
 ```ts
-async listSubscriptionGroups(
-  page?: number,
+async listSubscriptionGroups(  page?: number,
   perPage?: number,
   include?: SubscriptionGroupsListInclude[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListSubscriptionGroupsResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ListSubscriptionGroupsResponse>>
 ```
 
 ## Parameters
@@ -269,11 +263,9 @@ Use this endpoint to find subscription group details.
 Current billing amount for the subscription group is not returned by default. If this information is desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
 
 ```ts
-async readSubscriptionGroup(
-  uid: string,
+async readSubscriptionGroup(  uid: string,
   include?: SubscriptionGroupInclude[],
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<FullSubscriptionGroupResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<FullSubscriptionGroupResponse>>
 ```
 
 ## Parameters
@@ -361,11 +353,9 @@ Use this endpoint to update subscription group members.
 `"member_ids"` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
 
 ```ts
-async updateSubscriptionGroupMembers(
-  uid: string,
+async updateSubscriptionGroupMembers(  uid: string,
   body?: UpdateSubscriptionGroupRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionGroupResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionGroupResponse>>
 ```
 
 ## Parameters
@@ -444,10 +434,8 @@ Use this endpoint to delete subscription group.
 Only groups without members can be deleted
 
 ```ts
-async deleteSubscriptionGroup(
-  uid: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<DeleteSubscriptionGroupResponse>>
+async deleteSubscriptionGroup(  uid: string,
+requestOptions?: RequestOptions): Promise<ApiResponse<DeleteSubscriptionGroupResponse>>
 ```
 
 ## Parameters
@@ -501,10 +489,8 @@ Use this endpoint to find subscription group associated with subscription.
 If the subscription is not in a group endpoint will return 404 code.
 
 ```ts
-async findSubscriptionGroup(
-  subscriptionId: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<FullSubscriptionGroupResponse>>
+async findSubscriptionGroup(  subscriptionId: string,
+requestOptions?: RequestOptions): Promise<ApiResponse<FullSubscriptionGroupResponse>>
 ```
 
 ## Parameters
@@ -601,11 +587,9 @@ To create a new subscription into a subscription group, please reference the fol
 [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
 
 ```ts
-async addSubscriptionToGroup(
-  subscriptionId: number,
+async addSubscriptionToGroup(  subscriptionId: number,
   body?: AddSubscriptionToAGroup,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionGroupResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionGroupResponse>>
 ```
 
 ## Parameters
@@ -682,10 +666,8 @@ try {
 For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to remove existing subscription from subscription group.
 
 ```ts
-async removeSubscriptionFromGroup(
-  subscriptionId: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
+async removeSubscriptionFromGroup(  subscriptionId: number,
+requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 ```
 
 ## Parameters

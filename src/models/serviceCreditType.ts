@@ -17,4 +17,6 @@ export enum ServiceCreditType {
 /**
  * Schema for ServiceCreditType
  */
-export const  serviceCreditTypeSchema: Schema<ServiceCreditType> = stringEnum(ServiceCreditType);
+export const serviceCreditTypeSchema: Schema<ServiceCreditType> = stringEnum(
+  ServiceCreditType
+);

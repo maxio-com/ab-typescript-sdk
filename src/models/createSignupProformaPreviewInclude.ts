@@ -16,4 +16,6 @@ export enum CreateSignupProformaPreviewInclude {
 /**
  * Schema for CreateSignupProformaPreviewInclude
  */
-export const  createSignupProformaPreviewIncludeSchema: Schema<CreateSignupProformaPreviewInclude> = stringEnum(CreateSignupProformaPreviewInclude);
+export const createSignupProformaPreviewIncludeSchema: Schema<CreateSignupProformaPreviewInclude> = stringEnum(
+  CreateSignupProformaPreviewInclude
+);

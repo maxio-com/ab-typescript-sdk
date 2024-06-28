@@ -17,4 +17,6 @@ export enum ProformaInvoiceDiscountSourceType {
 /**
  * Schema for ProformaInvoiceDiscountSourceType
  */
-export const  proformaInvoiceDiscountSourceTypeSchema: Schema<ProformaInvoiceDiscountSourceType> = stringEnum(ProformaInvoiceDiscountSourceType);
+export const proformaInvoiceDiscountSourceTypeSchema: Schema<ProformaInvoiceDiscountSourceType> = stringEnum(
+  ProformaInvoiceDiscountSourceType
+);

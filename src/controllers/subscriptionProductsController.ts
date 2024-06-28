@@ -5,7 +5,6 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
   SubscriptionMigrationPreviewRequest,
   subscriptionMigrationPreviewRequestSchema,
@@ -24,6 +23,7 @@ import {
 } from '../models/subscriptionResponse';
 import { number, optional } from '../schema';
 import { BaseController } from './baseController';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class SubscriptionProductsController extends BaseController {
   /**
@@ -137,7 +137,12 @@ export class SubscriptionProductsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/migrations.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
@@ -168,7 +173,12 @@ export class SubscriptionProductsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/migrations/preview.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       subscriptionMigrationPreviewResponseSchema,

@@ -19,4 +19,6 @@ export enum ChargebackStatus {
 /**
  * Schema for ChargebackStatus
  */
-export const  chargebackStatusSchema: Schema<ChargebackStatus> = stringEnum(ChargebackStatus);
+export const chargebackStatusSchema: Schema<ChargebackStatus> = stringEnum(
+  ChargebackStatus
+);

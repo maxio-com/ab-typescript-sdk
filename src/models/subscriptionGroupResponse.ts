@@ -5,7 +5,10 @@
  */
 
 import { expandoObject, lazy, Schema } from '../schema';
-import { SubscriptionGroup, subscriptionGroupSchema } from './subscriptionGroup';
+import {
+  SubscriptionGroup,
+  subscriptionGroupSchema,
+} from './subscriptionGroup';
 
 export interface SubscriptionGroupResponse {
   subscriptionGroup: SubscriptionGroup;

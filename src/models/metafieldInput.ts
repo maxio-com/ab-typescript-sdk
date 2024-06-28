@@ -19,4 +19,6 @@ export enum MetafieldInput {
 /**
  * Schema for MetafieldInput
  */
-export const  metafieldInputSchema: Schema<MetafieldInput> = stringEnum(MetafieldInput);
+export const metafieldInputSchema: Schema<MetafieldInput> = stringEnum(
+  MetafieldInput
+);

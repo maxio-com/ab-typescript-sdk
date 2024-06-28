@@ -5,7 +5,10 @@
  */
 
 import { expandoObject, optional, Schema, string } from '../schema';
-import { SubscriptionState, subscriptionStateSchema } from './subscriptionState';
+import {
+  SubscriptionState,
+  subscriptionStateSchema,
+} from './subscriptionState';
 
 /** An optional object, will be returned if provided `include=subscription` query param. */
 export interface SubscriptionComponentSubscription {

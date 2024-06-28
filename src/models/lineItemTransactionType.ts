@@ -22,4 +22,6 @@ export enum LineItemTransactionType {
 /**
  * Schema for LineItemTransactionType
  */
-export const  lineItemTransactionTypeSchema: Schema<LineItemTransactionType> = stringEnum(LineItemTransactionType);
+export const lineItemTransactionTypeSchema: Schema<LineItemTransactionType> = stringEnum(
+  LineItemTransactionType
+);

@@ -83,13 +83,13 @@ describe('Subscriptions Controller', () => {
     ).result;
     productResponse01 = (
       await productsController.createProduct(
-        productFamilyResponse.productFamily?.id || 0,
+        String(productFamilyResponse.productFamily?.id || 0),
         productBody
       )
     ).result;
     productResponse02 = (
       await productsController.createProduct(
-        productFamilyResponse.productFamily?.id || 0,
+        String(productFamilyResponse.productFamily?.id || 0),
         productBody02
       )
     ).result;

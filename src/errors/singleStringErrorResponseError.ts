@@ -14,4 +14,6 @@ interface SingleStringErrorResponse {
   [key: string]: unknown;
 }
 
-export class SingleStringErrorResponseError extends ApiError<SingleStringErrorResponse> {}
+export class SingleStringErrorResponseError extends ApiError<
+  SingleStringErrorResponse
+> {}

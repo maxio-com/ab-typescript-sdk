@@ -5,7 +5,10 @@
  */
 
 import { expandoObject, lazy, Schema } from '../schema';
-import { CreatedPrepayment, createdPrepaymentSchema } from './createdPrepayment';
+import {
+  CreatedPrepayment,
+  createdPrepaymentSchema,
+} from './createdPrepayment';
 
 export interface CreatePrepaymentResponse {
   prepayment: CreatedPrepayment;

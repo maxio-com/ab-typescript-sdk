@@ -4,9 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
-import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateMetadataRequest,
@@ -41,6 +39,8 @@ import {
 } from '../models/updateMetafieldsRequest';
 import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 
 export class CustomFieldsController extends BaseController {
   /**
@@ -102,7 +102,12 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
@@ -127,19 +132,20 @@ export class CustomFieldsController extends BaseController {
    *                                          `direction=asc`.
    * @return Response from the API call
    */
-  async listMetafields({
-    resourceType,
-    name,
-    page,
-    perPage,
-    direction,
-  }: {
-    resourceType: ResourceType,
-    name?: string,
-    page?: number,
-    perPage?: number,
-    direction?: SortingDirection,
-  },
+  async listMetafields(
+    {
+      resourceType,
+      name,
+      page,
+      perPage,
+      direction,
+    }: {
+      resourceType: ResourceType;
+      name?: string;
+      page?: number;
+      perPage?: number;
+      direction?: SortingDirection;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListMetafieldsResponse>> {
     const req = this.createRequest('GET');
@@ -180,7 +186,12 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metafieldSchema), requestOptions);
   }
@@ -207,7 +218,7 @@ export class CustomFieldsController extends BaseController {
     });
     req.query('name', mapped.name);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -267,7 +278,12 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
@@ -294,17 +310,18 @@ export class CustomFieldsController extends BaseController {
    *                                      will be changed to 200. Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listMetadata({
-    resourceType,
-    resourceId,
-    page,
-    perPage,
-  }: {
-    resourceType: ResourceType,
-    resourceId: number,
-    page?: number,
-    perPage?: number,
-  },
+  async listMetadata(
+    {
+      resourceType,
+      resourceId,
+      page,
+      perPage,
+    }: {
+      resourceType: ResourceType;
+      resourceId: number;
+      page?: number;
+      perPage?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaginatedMetadata>> {
     const req = this.createRequest('GET');
@@ -345,7 +362,12 @@ export class CustomFieldsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.throwOn(422, SingleErrorResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      SingleErrorResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(metadataSchema), requestOptions);
   }
@@ -401,7 +423,7 @@ export class CustomFieldsController extends BaseController {
     req.query('name', mapped.name);
     req.query('names', mapped.names, unindexedPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -457,31 +479,32 @@ export class CustomFieldsController extends BaseController {
    *                                           `direction=asc`.
    * @return Response from the API call
    */
-  async listMetadataForResourceType({
-    resourceType,
-    page,
-    perPage,
-    dateField,
-    startDate,
-    endDate,
-    startDatetime,
-    endDatetime,
-    withDeleted,
-    resourceIds,
-    direction,
-  }: {
-    resourceType: ResourceType,
-    page?: number,
-    perPage?: number,
-    dateField?: BasicDateField,
-    startDate?: string,
-    endDate?: string,
-    startDatetime?: string,
-    endDatetime?: string,
-    withDeleted?: boolean,
-    resourceIds?: number[],
-    direction?: SortingDirection,
-  },
+  async listMetadataForResourceType(
+    {
+      resourceType,
+      page,
+      perPage,
+      dateField,
+      startDate,
+      endDate,
+      startDatetime,
+      endDatetime,
+      withDeleted,
+      resourceIds,
+      direction,
+    }: {
+      resourceType: ResourceType;
+      page?: number;
+      perPage?: number;
+      dateField?: BasicDateField;
+      startDate?: string;
+      endDate?: string;
+      startDatetime?: string;
+      endDatetime?: string;
+      withDeleted?: boolean;
+      resourceIds?: number[];
+      direction?: SortingDirection;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaginatedMetadata>> {
     const req = this.createRequest('GET');

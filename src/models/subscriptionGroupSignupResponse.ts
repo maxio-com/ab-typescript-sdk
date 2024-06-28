@@ -19,7 +19,10 @@ import {
   SubscriptionGroupItem,
   subscriptionGroupItemSchema,
 } from './subscriptionGroupItem';
-import { SubscriptionState, subscriptionStateSchema } from './subscriptionState';
+import {
+  SubscriptionState,
+  subscriptionStateSchema,
+} from './subscriptionState';
 
 export interface SubscriptionGroupSignupResponse {
   uid?: string;

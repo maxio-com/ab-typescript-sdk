@@ -5,9 +5,7 @@
  */
 
 import { ApiError } from '../core';
-import {
-  SubscriptionGroupCreateErrorResponseErrors,
-} from '../models/containers/subscriptionGroupCreateErrorResponseErrors';
+import { SubscriptionGroupCreateErrorResponseErrors } from '../models/containers/subscriptionGroupCreateErrorResponseErrors';
 
 /**
  * Creates an instance of SubscriptionGroupCreateErrorResponse
@@ -17,4 +15,6 @@ interface SubscriptionGroupCreateErrorResponse {
   [key: string]: unknown;
 }
 
-export class SubscriptionGroupCreateErrorResponseError extends ApiError<SubscriptionGroupCreateErrorResponse> {}
+export class SubscriptionGroupCreateErrorResponseError extends ApiError<
+  SubscriptionGroupCreateErrorResponse
+> {}

@@ -17,4 +17,6 @@ export enum SubscriptionPurgeType {
 /**
  * Schema for SubscriptionPurgeType
  */
-export const  subscriptionPurgeTypeSchema: Schema<SubscriptionPurgeType> = stringEnum(SubscriptionPurgeType);
+export const subscriptionPurgeTypeSchema: Schema<SubscriptionPurgeType> = stringEnum(
+  SubscriptionPurgeType
+);

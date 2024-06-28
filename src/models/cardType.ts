@@ -51,4 +51,4 @@ export enum CardType {
 /**
  * Schema for CardType
  */
-export const  cardTypeSchema: Schema<CardType> = stringEnum(CardType);
+export const cardTypeSchema: Schema<CardType> = stringEnum(CardType);

@@ -50,4 +50,6 @@ export enum WebhookSubscription {
 /**
  * Schema for WebhookSubscription
  */
-export const  webhookSubscriptionSchema: Schema<WebhookSubscription> = stringEnum(WebhookSubscription);
+export const webhookSubscriptionSchema: Schema<WebhookSubscription> = stringEnum(
+  WebhookSubscription
+);

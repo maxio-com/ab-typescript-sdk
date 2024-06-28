@@ -4,9 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
   CreateReasonCodeRequest,
   createReasonCodeRequestSchema,
@@ -25,6 +23,8 @@ import {
 } from '../models/updateReasonCodeRequest';
 import { array, number, optional } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class ReasonCodesController extends BaseController {
   /**
@@ -61,7 +61,12 @@ export class ReasonCodesController extends BaseController {
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
@@ -80,13 +85,14 @@ export class ReasonCodesController extends BaseController {
    *                           Use in query `per_page=200`.
    * @return Response from the API call
    */
-  async listReasonCodes({
-    page,
-    perPage,
-  }: {
-    page?: number,
-    perPage?: number,
-  },
+  async listReasonCodes(
+    {
+      page,
+      perPage,
+    }: {
+      page?: number;
+      perPage?: number;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ReasonCodeResponse[]>> {
     const req = this.createRequest('GET', '/reason_codes.json');
@@ -114,7 +120,7 @@ export class ReasonCodesController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ reasonCodeId: [reasonCodeId, number()] });
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
@@ -139,7 +145,7 @@ export class ReasonCodesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
@@ -158,7 +164,7 @@ export class ReasonCodesController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ reasonCodeId: [reasonCodeId, number()] });
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(reasonCodesJsonResponseSchema, requestOptions);
   }

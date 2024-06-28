@@ -17,4 +17,4 @@ export enum Direction {
 /**
  * Schema for Direction
  */
-export const  directionSchema: Schema<Direction> = stringEnum(Direction);
+export const directionSchema: Schema<Direction> = stringEnum(Direction);

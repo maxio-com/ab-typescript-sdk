@@ -6,14 +6,12 @@
 
 import { ApiResponse, RequestOptions } from '../core';
 import {
-  SingleStringErrorResponseError,
-} from '../errors/singleStringErrorResponseError';
-import {
   ReferralValidationResponse,
   referralValidationResponseSchema,
 } from '../models/referralValidationResponse';
 import { string } from '../schema';
 import { BaseController } from './baseController';
+import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError';
 
 export class ReferralCodesController extends BaseController {
   /**
@@ -40,7 +38,12 @@ export class ReferralCodesController extends BaseController {
     const req = this.createRequest('GET', '/referral_codes/validate.json');
     const mapped = req.prepareArgs({ code: [code, string()] });
     req.query('code', mapped.code);
-    req.throwOn(404, SingleStringErrorResponseError, true, 'Invalid referral code.');
+    req.throwOn(
+      404,
+      SingleStringErrorResponseError,
+      true,
+      'Invalid referral code.'
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(referralValidationResponseSchema, requestOptions);
   }

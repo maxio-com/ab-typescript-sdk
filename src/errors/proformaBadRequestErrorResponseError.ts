@@ -15,4 +15,6 @@ interface ProformaBadRequestErrorResponse {
   [key: string]: unknown;
 }
 
-export class ProformaBadRequestErrorResponseError extends ApiError<ProformaBadRequestErrorResponse> {}
+export class ProformaBadRequestErrorResponseError extends ApiError<
+  ProformaBadRequestErrorResponse
+> {}

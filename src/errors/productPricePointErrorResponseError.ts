@@ -15,4 +15,6 @@ interface ProductPricePointErrorResponse {
   [key: string]: unknown;
 }
 
-export class ProductPricePointErrorResponseError extends ApiError<ProductPricePointErrorResponse> {}
+export class ProductPricePointErrorResponseError extends ApiError<
+  ProductPricePointErrorResponse
+> {}

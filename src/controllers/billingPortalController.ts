@@ -4,12 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '@apimatic/core';
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import {
-  TooManyManagementLinkRequestsError,
-} from '../errors/tooManyManagementLinkRequestsError';
 import { AutoInvite, autoInviteSchema } from '../models/autoInvite';
 import {
   CustomerResponse,
@@ -29,6 +24,9 @@ import {
 } from '../models/revokedInvitation';
 import { number, optional } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { TooManyManagementLinkRequestsError } from '../errors/tooManyManagementLinkRequestsError';
 
 export class BillingPortalController extends BaseController {
   /**
@@ -75,7 +73,12 @@ export class BillingPortalController extends BaseController {
     });
     req.query('auto_invite', mapped.autoInvite);
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/enable.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
@@ -105,8 +108,18 @@ export class BillingPortalController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({ customerId: [customerId, number()] });
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/management_link.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
-    req.throwOn(429, TooManyManagementLinkRequestsError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
+    req.throwOn(
+      429,
+      TooManyManagementLinkRequestsError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(portalManagementLinkSchema, requestOptions);
   }
@@ -140,8 +153,13 @@ export class BillingPortalController extends BaseController {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({ customerId: [customerId, number()] });
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/invitations/invite.json`;
-    req.throwOn(404, ApiError, true, 'Not Found:\'{$response.body}\'');
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(resentInvitationSchema, requestOptions);
   }

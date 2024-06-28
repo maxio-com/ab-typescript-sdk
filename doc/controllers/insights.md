@@ -29,9 +29,7 @@ https://subdomain.chargify.com/dashboard
 ```
 
 ```ts
-async readSiteStats(
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SiteSummary>>
+async readSiteStats(requestOptions?: RequestOptions): Promise<ApiResponse<SiteSummary>>
 ```
 
 ## Parameters
@@ -86,11 +84,9 @@ try {
 This endpoint returns your site's current MRR, including plan and usage breakouts.
 
 ```ts
-async readMrr(
-  atTime?: string,
+async readMrr(  atTime?: string,
   subscriptionId?: number,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<MRRResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<MRRResponse>>
 ```
 
 ## Parameters
@@ -171,13 +167,11 @@ Usage includes revenue from:
 * Prepaid Usage Components
 
 ```ts
-async listMrrMovements(
-  subscriptionId?: number,
+async listMrrMovements(  subscriptionId?: number,
   page?: number,
   perPage?: number,
   direction?: SortingDirection,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ListMRRResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<ListMRRResponse>>
 ```
 
 ## Parameters
@@ -273,14 +267,12 @@ try {
 This endpoint returns your site's current MRR, including plan and usage breakouts split per subscription.
 
 ```ts
-async listMrrPerSubscription(
-  filter?: ListMrrFilter,
+async listMrrPerSubscription(  filter?: ListMrrFilter,
   atTime?: string,
   page?: number,
   perPage?: number,
   direction?: Direction,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<SubscriptionMRRResponse>>
+requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionMRRResponse>>
 ```
 
 ## Parameters

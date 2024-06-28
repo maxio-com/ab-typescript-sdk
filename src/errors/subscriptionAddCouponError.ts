@@ -17,4 +17,6 @@ interface SubscriptionAddCoupon {
   [key: string]: unknown;
 }
 
-export class SubscriptionAddCouponError extends ApiError<SubscriptionAddCoupon> {}
+export class SubscriptionAddCouponError extends ApiError<
+  SubscriptionAddCoupon
+> {}

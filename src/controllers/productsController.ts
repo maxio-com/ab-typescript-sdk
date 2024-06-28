@@ -5,7 +5,6 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateOrUpdateProductRequest,
@@ -25,6 +24,7 @@ import {
 } from '../models/productResponse';
 import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class ProductsController extends BaseController {
   /**
@@ -34,25 +34,30 @@ export class ProductsController extends BaseController {
    * + [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-
    * us/articles/5404225334669-Product-Changes-Migrations)
    *
-   * @param productFamilyId   The Chargify id of the product family to which
-   *                                                                 the product belongs
+   * @param productFamilyId   Either the product family's id or its handle
+   *                                                                 prefixed with `handle:`
    * @param body
    * @return Response from the API call
    */
   async createProduct(
-    productFamilyId: number,
+    productFamilyId: string,
     body?: CreateOrUpdateProductRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       body: [body, optional(createOrUpdateProductRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
@@ -105,7 +110,12 @@ export class ProductsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/products/${mapped.productId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
@@ -127,7 +137,12 @@ export class ProductsController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ productId: [productId, number()] });
     req.appendTemplatePath`/products/${mapped.productId}.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
   }
@@ -193,29 +208,30 @@ export class ProductsController extends BaseController {
    *                                                      query `include=prepaid_product_price_point`.
    * @return Response from the API call
    */
-  async listProducts({
-    dateField,
-    filter,
-    endDate,
-    endDatetime,
-    startDate,
-    startDatetime,
-    page,
-    perPage,
-    includeArchived,
-    include,
-  }: {
-    dateField?: BasicDateField,
-    filter?: ListProductsFilter,
-    endDate?: string,
-    endDatetime?: string,
-    startDate?: string,
-    startDatetime?: string,
-    page?: number,
-    perPage?: number,
-    includeArchived?: boolean,
-    include?: ListProductsInclude,
-  },
+  async listProducts(
+    {
+      dateField,
+      filter,
+      endDate,
+      endDatetime,
+      startDate,
+      startDatetime,
+      page,
+      perPage,
+      includeArchived,
+      include,
+    }: {
+      dateField?: BasicDateField;
+      filter?: ListProductsFilter;
+      endDate?: string;
+      endDatetime?: string;
+      startDate?: string;
+      startDatetime?: string;
+      page?: number;
+      perPage?: number;
+      includeArchived?: boolean;
+      include?: ListProductsInclude;
+    },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse[]>> {
     const req = this.createRequest('GET', '/products.json');

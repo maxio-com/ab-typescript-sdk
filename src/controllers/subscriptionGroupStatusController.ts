@@ -5,7 +5,6 @@
  */
 
 import { ApiResponse, RequestOptions } from '../core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
 import {
   CancelGroupedSubscriptionsRequest,
   cancelGroupedSubscriptionsRequestSchema,
@@ -20,6 +19,7 @@ import {
 } from '../models/reactivateSubscriptionGroupResponse';
 import { optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class SubscriptionGroupStatusController extends BaseController {
   /**
@@ -48,7 +48,12 @@ export class SubscriptionGroupStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/cancel.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -70,7 +75,12 @@ export class SubscriptionGroupStatusController extends BaseController {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -90,7 +100,12 @@ export class SubscriptionGroupStatusController extends BaseController {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ uid: [uid, string()] });
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/delayed_cancel.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -151,7 +166,12 @@ export class SubscriptionGroupStatusController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/reactivate.json`;
-    req.throwOn(422, ErrorListResponseError, true, 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.');
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       reactivateSubscriptionGroupResponseSchema,

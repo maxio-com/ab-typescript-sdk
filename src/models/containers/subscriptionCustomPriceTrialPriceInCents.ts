@@ -15,19 +15,19 @@ export const subscriptionCustomPriceTrialPriceInCentsSchema: Schema<Subscription
 
 export namespace SubscriptionCustomPriceTrialPriceInCents {
   /**
-  * Validation method to narrow down union type to string type case.
-  *
-  * This is String case.
-  */
+   * Validation method to narrow down union type to string type case.
+   *
+   * This is String case.
+   */
   export function isString(value: unknown): value is string {
     return typeof value === 'string';
   }
 
   /**
-  * Validation method to narrow down union type to bigint type case.
-  *
-  * This is Long case.
-  */
+   * Validation method to narrow down union type to bigint type case.
+   *
+   * This is Long case.
+   */
   export function isBigint(value: unknown): value is bigint {
     return typeof value === 'bigint';
   }
