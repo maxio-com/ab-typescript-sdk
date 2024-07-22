@@ -36,6 +36,42 @@ const couponBody = {
   },
 };
 
+const subcodes = [
+  'SUBCODE1',
+  'SUBCODE2',
+  'SUBCODE3',
+  'SUBCODE4',
+  'SUBCODE5',
+  'SUBCODE6',
+];
+
+const createSubdodes = async (
+  code: string,
+  subcodes: string[],
+  couponsController: CouponsController,
+  productFamilyId: number
+) => {
+  const createReponse = await couponsController.createCoupon(productFamilyId, {
+    coupon: {
+      ...couponBody.coupon,
+      code,
+      productFamilyId: String(productFamilyId),
+    },
+  });
+
+  const couponId = createReponse.result.coupon?.id || 0;
+
+  return {
+    createSubcodeResponse: await couponsController.createCouponSubcodes(
+      couponId,
+      {
+        codes: subcodes,
+      }
+    ),
+    couponId,
+  };
+};
+
 describe('Coupons Controller', () => {
   let productFamily: ProductFamily | null;
   let couponsController: CouponsController;
@@ -627,6 +663,186 @@ describe('Coupons Controller', () => {
 
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(422);
+      });
+    });
+  });
+
+  describe('Create Coupon Subcodes', () => {
+    test('should create a coupon subcodes correctly when there is an existing coupon in the system.', async () => {
+      const { createSubcodeResponse } = await createSubdodes(
+        'CREATE001',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      expect(createSubcodeResponse.result.statusCode).toBe(200);
+      expect(createSubcodeResponse.result.createdCodes).toEqual(subcodes);
+    });
+
+    test('should return invalid_codes from response when subcodes are incorrect.', async () => {
+      const invalidSubCode = ['^'];
+
+      const { createSubcodeResponse } = await createSubdodes(
+        'CREATE002',
+        invalidSubCode,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      expect(createSubcodeResponse.result.invalidCodes).toEqual(invalidSubCode);
+    });
+  });
+
+  describe('List Coupon Subcodes', () => {
+    test('should list all the subcodes from a coupon', async () => {
+      const { couponId } = await createSubdodes(
+        'LIST001',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const listCouponSubcodesResponse =
+        await couponsController.listCouponSubcodes({ couponId });
+
+      expect(listCouponSubcodesResponse.statusCode).toBe(200);
+      expect(listCouponSubcodesResponse.result.codes).toEqual(subcodes);
+    });
+    test('should return error when couponId is not in the sytstem.', async () => {
+      await createSubdodes(
+        'LIST002',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const promise = couponsController.listCouponSubcodes({ couponId: 101 });
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+  });
+
+  describe('Update Coupon Subcodes', () => {
+    test('should update a coupon subcodes correctly when there is an existing coupon in the system.', async () => {
+      const { couponId } = await createSubdodes(
+        'UPDATE001',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const updateSubcodeResponse =
+        await couponsController.updateCouponSubcodes(couponId, {
+          codes: ['NEWCODE1', 'NEWCODE2'],
+        });
+
+      expect(updateSubcodeResponse.statusCode).toBe(200);
+      expect(updateSubcodeResponse.result.createdCodes).toEqual([
+        'NEWCODE1',
+        'NEWCODE2',
+      ]);
+    });
+
+    test('should return invalid_codes from response when subcodes are incorrect.', async () => {
+      const { couponId } = await createSubdodes(
+        'UPDATE002',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const updateSubcodeWithInvalidCharacterResponse =
+        await couponsController.updateCouponSubcodes(couponId, {
+          codes: [')'],
+        });
+
+      expect(
+        updateSubcodeWithInvalidCharacterResponse.result.invalidCodes
+      ).toEqual([')']);
+    });
+
+    test('should not update subcodes with the same content.', async () => {
+      const { couponId } = await createSubdodes(
+        'UPDATE003',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const updateSubcodeWithTheSameContent =
+        await couponsController.updateCouponSubcodes(couponId, {
+          codes: subcodes,
+        });
+
+      expect(updateSubcodeWithTheSameContent.result.createdCodes).toEqual(
+        subcodes
+      );
+    });
+  });
+
+  describe('Delete Coupon Subcodes', () => {
+    test('should delete a coupon subcode correctly when there is an existing coupon in the system.', async () => {
+      const subcode = 'SUBCODE1';
+
+      const { couponId } = await createSubdodes(
+        'DELETE001',
+        [subcode],
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const deleteSubcodeResponse = await couponsController.deleteCouponSubcode(
+        couponId,
+        subcode
+      );
+
+      expect(deleteSubcodeResponse.statusCode).toBe(200);
+      expect(deleteSubcodeResponse.result).toEqual(undefined);
+    });
+
+    test('should not delete a coupon subcode that does not exist or has already been deleted.', async () => {
+      const { couponId } = await createSubdodes(
+        'DELETE002',
+        subcodes,
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const promise = couponsController.deleteCouponSubcode(
+        couponId,
+        'SUBCODE'
+      );
+
+      expect(promise).rejects.toThrow();
+
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
+    test('should not allow to delete coupon when credentials are inavlid', async () => {
+      const subcode = 'SUBCODE1';
+
+      const { couponId } = await createSubdodes(
+        'DELETE003',
+        [subcode],
+        couponsController,
+        productFamily?.id || 0
+      );
+
+      const promise = invalidCouponsController.deleteCouponSubcode(
+        couponId,
+        subcode
+      );
+
+      expect(promise).rejects.toThrow();
+      await promise.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
       });
     });
   });
