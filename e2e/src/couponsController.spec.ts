@@ -36,15 +36,6 @@ const couponBody = {
   },
 };
 
-const subcodes = [
-  'SUBCODE1',
-  'SUBCODE2',
-  'SUBCODE3',
-  'SUBCODE4',
-  'SUBCODE5',
-  'SUBCODE6',
-];
-
 const createSubdodes = async (
   code: string,
   subcodes: string[],
@@ -669,13 +660,17 @@ describe('Coupons Controller', () => {
 
   describe('Create Coupon Subcodes', () => {
     test('should create a coupon subcodes correctly when there is an existing coupon in the system.', async () => {
+      const subcodes = [
+        `CREATE_SUBCDOES-${uid().toUpperCase()}`,
+        `CREATE_SUBCDOES-${uid().toUpperCase()}`,
+      ];
       const { createSubcodeResponse } = await createSubdodes(
         'CREATE_SUBCODES001',
         subcodes,
         couponsController,
         productFamily?.id || 0
       );
-      expect(createSubcodeResponse.result.statusCode).toBe(200);
+      expect(createSubcodeResponse.statusCode).toBe(200);
       expect(createSubcodeResponse.result.createdCodes).toEqual(subcodes);
     });
 
@@ -695,6 +690,11 @@ describe('Coupons Controller', () => {
 
   describe('List Coupon Subcodes', () => {
     test('should list all the subcodes from a coupon', async () => {
+      const subcodes = [
+        `LIST_SUBCDOES-${uid().toUpperCase()}`,
+        `LIST_SUBCDOES-${uid().toUpperCase()}`,
+      ];
+
       const { couponId } = await createSubdodes(
         'LIST_SUBCODES001',
         subcodes,
@@ -708,7 +708,12 @@ describe('Coupons Controller', () => {
       expect(listCouponSubcodesResponse.statusCode).toBe(200);
       expect(listCouponSubcodesResponse.result.codes).toEqual(subcodes);
     });
+
     test('should return error when couponId is not in the sytstem.', async () => {
+      const subcodes = [
+        `LIST_SUBCODES2-${uid().toUpperCase()}`,
+        `LIST_SUBCODES2-${uid().toUpperCase()}`,
+      ];
       await createSubdodes(
         'LIST_SUBCODES002',
         subcodes,
@@ -728,6 +733,10 @@ describe('Coupons Controller', () => {
 
   describe('Update Coupon Subcodes', () => {
     test('should update a coupon subcodes correctly when there is an existing coupon in the system.', async () => {
+      const subcodes = [
+        `UPDATE_SUBCODES1-${uid().toUpperCase()}`,
+        `UPDATE_SUBCODES1-${uid().toUpperCase()}`,
+      ];
       const { couponId } = await createSubdodes(
         'UPDATE_SUBCODES001',
         subcodes,
@@ -748,6 +757,10 @@ describe('Coupons Controller', () => {
     });
 
     test('should return invalid_codes from response when subcodes are incorrect.', async () => {
+      const subcodes = [
+        `UPDATE_SUBCODES2-${uid().toUpperCase()}`,
+        `UPDATE_SUBCODES2-${uid().toUpperCase()}`,
+      ];
       const { couponId } = await createSubdodes(
         'UPDATE_SUBCODES002',
         subcodes,
@@ -766,6 +779,10 @@ describe('Coupons Controller', () => {
     });
 
     test('should not update subcodes with the same content.', async () => {
+      const subcodes = [
+        `UPDATE_SUBCODES3-${uid().toUpperCase()}`,
+        `UPDATE_SUBCODES3-${uid().toUpperCase()}`,
+      ];
       const { couponId } = await createSubdodes(
         'UPDATE_SUBCODES003',
         subcodes,
@@ -786,11 +803,11 @@ describe('Coupons Controller', () => {
 
   describe('Delete Coupon Subcodes', () => {
     test('should delete a coupon subcode correctly when there is an existing coupon in the system.', async () => {
-      const subcode = 'SUBCODE1';
+      const subcode = `DELETE_SUBCODES1-${uid()}`;
 
       const { couponId } = await createSubdodes(
         'DELETE_SUBCODES001',
-        [subcode],
+        [subcode, 'DELETE_SUBCODES002'],
         couponsController,
         productFamily?.id || 0
       );
@@ -805,6 +822,10 @@ describe('Coupons Controller', () => {
     });
 
     test('should not delete a coupon subcode that does not exist or has already been deleted.', async () => {
+      const subcodes = [
+        `DELETE_SUBCODES2-${uid()}`,
+        `DELETE_SUBCODES2-${uid()}`,
+      ];
       const { couponId } = await createSubdodes(
         'DELETE_SUBCODES002',
         subcodes,
@@ -814,7 +835,7 @@ describe('Coupons Controller', () => {
 
       const promise = couponsController.deleteCouponSubcode(
         couponId,
-        'SUBCODE'
+        `DELETE_SUBCODES2-${uid()}`
       );
 
       expect(promise).rejects.toThrow();
@@ -825,7 +846,7 @@ describe('Coupons Controller', () => {
     });
 
     test('should not allow to delete coupon when credentials are inavlid', async () => {
-      const subcode = 'SUBCODE1';
+      const subcode = `DELETE_SUBCODES3-${uid()}`;
 
       const { couponId } = await createSubdodes(
         'DELETE_SUBCODES003',
