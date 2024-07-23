@@ -46,7 +46,7 @@ const createSubcodes = async (
     coupon: {
       ...couponBody.coupon,
       code,
-      productFamilyId: String(productFamilyId),
+      productFamilyId: productFamilyId.toString(),
     },
   });
 
