@@ -36,7 +36,7 @@ const couponBody = {
   },
 };
 
-const createSubdodes = async (
+const createSubcodes = async (
   code: string,
   subcodes: string[],
   couponsController: CouponsController,
@@ -664,7 +664,7 @@ describe('Coupons Controller', () => {
         `CREATE_SUBCDOES-${uid().toUpperCase()}`,
         `CREATE_SUBCDOES-${uid().toUpperCase()}`,
       ];
-      const { createSubcodeResponse } = await createSubdodes(
+      const { createSubcodeResponse } = await createSubcodes(
         'CREATE_SUBCODES001',
         subcodes,
         couponsController,
@@ -677,7 +677,7 @@ describe('Coupons Controller', () => {
     test('should return invalid_codes from response when subcodes are incorrect.', async () => {
       const invalidSubCode = ['^'];
 
-      const { createSubcodeResponse } = await createSubdodes(
+      const { createSubcodeResponse } = await createSubcodes(
         'CREATE_SUBCODES002',
         invalidSubCode,
         couponsController,
@@ -695,7 +695,7 @@ describe('Coupons Controller', () => {
         `LIST_SUBCDOES-${uid().toUpperCase()}`,
       ];
 
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'LIST_SUBCODES001',
         subcodes,
         couponsController,
@@ -714,7 +714,7 @@ describe('Coupons Controller', () => {
         `LIST_SUBCODES2-${uid().toUpperCase()}`,
         `LIST_SUBCODES2-${uid().toUpperCase()}`,
       ];
-      await createSubdodes(
+      await createSubcodes(
         'LIST_SUBCODES002',
         subcodes,
         couponsController,
@@ -737,7 +737,7 @@ describe('Coupons Controller', () => {
         `UPDATE_SUBCODES1-${uid().toUpperCase()}`,
         `UPDATE_SUBCODES1-${uid().toUpperCase()}`,
       ];
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'UPDATE_SUBCODES001',
         subcodes,
         couponsController,
@@ -761,7 +761,7 @@ describe('Coupons Controller', () => {
         `UPDATE_SUBCODES2-${uid().toUpperCase()}`,
         `UPDATE_SUBCODES2-${uid().toUpperCase()}`,
       ];
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'UPDATE_SUBCODES002',
         subcodes,
         couponsController,
@@ -783,7 +783,7 @@ describe('Coupons Controller', () => {
         `UPDATE_SUBCODES3-${uid().toUpperCase()}`,
         `UPDATE_SUBCODES3-${uid().toUpperCase()}`,
       ];
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'UPDATE_SUBCODES003',
         subcodes,
         couponsController,
@@ -805,7 +805,7 @@ describe('Coupons Controller', () => {
     test('should delete a coupon subcode correctly when there is an existing coupon in the system.', async () => {
       const subcode = `DELETE_SUBCODES1-${uid()}`;
 
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'DELETE_SUBCODES001',
         [subcode, 'DELETE_SUBCODES002'],
         couponsController,
@@ -826,7 +826,7 @@ describe('Coupons Controller', () => {
         `DELETE_SUBCODES2-${uid()}`,
         `DELETE_SUBCODES2-${uid()}`,
       ];
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'DELETE_SUBCODES002',
         subcodes,
         couponsController,
@@ -848,7 +848,7 @@ describe('Coupons Controller', () => {
     test('should not allow to delete coupon when credentials are inavlid', async () => {
       const subcode = `DELETE_SUBCODES3-${uid()}`;
 
-      const { couponId } = await createSubdodes(
+      const { couponId } = await createSubcodes(
         'DELETE_SUBCODES003',
         [subcode],
         couponsController,
