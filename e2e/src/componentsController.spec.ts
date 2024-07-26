@@ -82,6 +82,39 @@ describe('Components Controller', () => {
       );
     });
 
+    test('should not find component with invllid id', async () => {
+      const productFamilyId = productFamily?.id || 0;
+      const meteredComponent = {
+        productFamilyId,
+        name: 'test',
+        description: 'test',
+        quantity: 1,
+        unitName: 'test',
+        price: 1,
+        handle: uid(),
+        pricingScheme: PricingScheme.PerUnit,
+        unitPrice: 1,
+      };
+
+      await productsController.createProduct(
+        productFamilyId.toString(),
+        newProductPayload
+      );
+
+      await componentsController.createMeteredComponent(productFamilyId, {
+        meteredComponent,
+      });
+
+      const componentsControllerInavlidResponse =
+        invalidComponentsController.findComponent('invalid-id');
+
+      expect(componentsControllerInavlidResponse).rejects.toThrow();
+
+      await componentsControllerInavlidResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+
     test('should not find component with invalid credentials', async () => {
       const productFamilyId = productFamily?.id || 0;
       const meteredComponent = {
