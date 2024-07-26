@@ -34,23 +34,23 @@ describe('Components Controller', () => {
   });
 
   describe('Find Component', () => {
-    const newProductPayload = {
-      product: {
-        name: 'product-find-component-name',
-        handle: `product-find-component-${uid()}`,
-        description: '',
-        requireCredit_card: true,
-        priceInCents: BigInt(1000),
-        interval: 1,
-        intervalUnit: IntervalUnit.Month,
-      },
-    };
-
     test('should find component with valid id', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-find-component-name-${uid()}`,
+          handle: `product-find-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
       const productFamilyId = productFamily?.id || 0;
       const meteredComponent = {
         productFamilyId,
-        name: 'test',
+        name: `component-name-valid${uid()}`,
         description: 'test',
         quantity: 1,
         unitName: 'test',
@@ -83,10 +83,21 @@ describe('Components Controller', () => {
     });
 
     test('should not find component with invllid id', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-find-component-name-invalid-id-${uid()}`,
+          handle: `product-find-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
       const productFamilyId = productFamily?.id || 0;
       const meteredComponent = {
         productFamilyId,
-        name: 'test',
+        name: `component-name-invalid-${uid()}`,
         description: 'test',
         quantity: 1,
         unitName: 'test',
@@ -106,7 +117,7 @@ describe('Components Controller', () => {
       });
 
       const componentsControllerInavlidResponse =
-        invalidComponentsController.findComponent('invalid-id');
+        componentsController.findComponent('invalid-id');
 
       expect(componentsControllerInavlidResponse).rejects.toThrow();
 
@@ -116,10 +127,21 @@ describe('Components Controller', () => {
     });
 
     test('should not find component with invalid credentials', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-find-component-name-${uid()}`,
+          handle: `product-find-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
       const productFamilyId = productFamily?.id || 0;
       const meteredComponent = {
         productFamilyId,
-        name: 'test',
+        name: `component-name-invalid-credentials${uid()}`,
         description: 'test',
         quantity: 1,
         unitName: 'test',
