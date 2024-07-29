@@ -36,6 +36,8 @@ describe('Components Controller', () => {
       ).result.productFamily || null;
   });
 
+  const invalidComponentId = 'invalid-id';
+
   const prepareDataForComponentResponse = async (
     productPaload: CreateOrUpdateProductRequest,
     productFamilyId: number,
@@ -136,7 +138,7 @@ describe('Components Controller', () => {
       );
 
       const componentsControllerInavlidResponse =
-        componentsController.findComponent('invalid-id');
+        componentsController.findComponent(invalidComponentId);
 
       expect(componentsControllerInavlidResponse).rejects.toThrow();
 
@@ -277,8 +279,6 @@ describe('Components Controller', () => {
         productFamilyId,
         meteredComponent
       );
-
-      const invalidComponentId = 'invalid-id';
 
       const readComponentResponse = componentsController.readComponent(
         productFamilyId,
@@ -429,8 +429,6 @@ describe('Components Controller', () => {
         meteredComponent
       );
 
-      const invalidComponentId = 'invalid-id';
-
       const updateComponentResponse = componentsController.updateComponent(
         invalidComponentId,
         {
@@ -577,8 +575,6 @@ describe('Components Controller', () => {
         productFamilyId,
         meteredComponent
       );
-
-      const invalidComponentId = 'invalid-id';
 
       const archiveComponentResponse = componentsController.archiveComponent(
         productFamilyId,
