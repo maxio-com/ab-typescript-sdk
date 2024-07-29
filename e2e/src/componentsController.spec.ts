@@ -498,4 +498,146 @@ describe('Components Controller', () => {
       });
     });
   });
+  describe('Archive Component', () => {
+    it('should archive component with valid id', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `product-archive-component-name-${uid()}`,
+          handle: `product-archive-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `archive-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const componentId = component.id?.toString() || '';
+
+      const archiveComponentResponse =
+        await componentsController.archiveComponent(
+          productFamilyId,
+          componentId
+        );
+
+      expect(archiveComponentResponse.statusCode).toBe(200);
+    });
+    it('should not archive component with invalid id', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-archive-component-name-invalid-id-${uid()}`,
+          handle: `product-archive-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `archive-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const invalidComponentId = 'invalid-id';
+
+      const archiveComponentResponse = componentsController.archiveComponent(
+        productFamilyId,
+        invalidComponentId
+      );
+
+      expect(archiveComponentResponse).rejects.toThrow();
+
+      await archiveComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+    it('should not archive component with invalid credentials', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-archive-component-name-${uid()}`,
+          handle: `product-archive-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `archive-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const componentId = component.id?.toString() || '';
+
+      const archiveComponentResponse =
+        invalidComponentsController.archiveComponent(
+          productFamilyId,
+          componentId
+        );
+
+      expect(archiveComponentResponse).rejects.toThrow();
+
+      await archiveComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
 });
