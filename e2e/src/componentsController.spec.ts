@@ -35,18 +35,6 @@ describe('Components Controller', () => {
       ).result.productFamily || null;
   });
 
-  const newProductPayload: CreateOrUpdateProductRequest = {
-    product: {
-      name: `product-find-component-name-${uid()}`,
-      handle: `product-find-component-${uid()}`,
-      description: '',
-      requireCredit_card: true,
-      priceInCents: BigInt(1000),
-      interval: 1,
-      intervalUnit: IntervalUnit.Month,
-    },
-  };
-
   const prepareDataForComponentResponse = async (
     productPaload: CreateOrUpdateProductRequest,
     productFamilyId: number,
@@ -67,6 +55,18 @@ describe('Components Controller', () => {
 
   describe('Find Component', () => {
     test('should find component with valid id', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `product-read-component-name-${uid()}`,
+          handle: `product-read-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
       const productFamilyId = productFamily?.id || 0;
 
       const meteredComponent: CreateMeteredComponent = {
@@ -161,7 +161,7 @@ describe('Components Controller', () => {
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
           productFamilyId,
-          name: `component-name-valid${uid()}`,
+          name: `component-name-valid-${uid()}`,
           description: 'test',
           quantity: 1,
           unitName: 'test',
@@ -185,6 +185,154 @@ describe('Components Controller', () => {
 
       expect(componentsControllerInavlidResponse).rejects.toThrow();
       await componentsControllerInavlidResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+
+  describe('Read Component', () => {
+    it('should read component with valid id', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `product-read-component-name-${uid()}`,
+          handle: `product-read-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `read-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+      const componentId = component.id?.toString() || '';
+
+      const readComponentResponse = await componentsController.readComponent(
+        productFamilyId,
+        componentId
+      );
+
+      expect(readComponentResponse.statusCode).toBe(200);
+      expect(readComponentResponse.result.component.name).toBe(
+        meteredComponent.meteredComponent.name
+      );
+      expect(readComponentResponse.result.component.productFamilyId).toBe(
+        meteredComponent.meteredComponent.productFamilyId
+      );
+      expect(readComponentResponse.result.component.handle).toBe(
+        meteredComponent.meteredComponent.handle
+      );
+    });
+    it('should not read component with invalid id', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-read-component-name-invalid-id-${uid()}`,
+          handle: `product-read-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `read-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const invalidComponentId = 'invalid-id';
+
+      const readComponentResponse = componentsController.readComponent(
+        productFamilyId,
+        invalidComponentId
+      );
+
+      expect(readComponentResponse).rejects.toThrow();
+
+      await readComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+    it('should not read component with invalid credentials', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-read-component-name-${uid()}`,
+          handle: `product-read-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `read-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+      const componentId = component.id?.toString() || '';
+
+      const readComponentResponse = invalidComponentsController.readComponent(
+        productFamilyId,
+        componentId
+      );
+
+      expect(readComponentResponse).rejects.toThrow();
+
+      await readComponentResponse.catch((reason) => {
         expect(reason.statusCode).toBe(401);
       });
     });
