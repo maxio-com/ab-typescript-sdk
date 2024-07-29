@@ -7,6 +7,7 @@ import {
   ProductFamiliesController,
   ProductFamily,
   ProductsController,
+  UpdateComponentRequest,
 } from 'advanced-billing-sdk';
 import { createClient, createInvalidClient } from './config';
 import { uid } from 'uid';
@@ -333,6 +334,166 @@ describe('Components Controller', () => {
       expect(readComponentResponse).rejects.toThrow();
 
       await readComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+
+  describe('Update Product Family Component', () => {
+    it('should update component with valid id', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `product-update-component-name-${uid()}`,
+          handle: `product-update-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `update-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const updatedMeteredComponent: UpdateComponentRequest = {
+        component: {
+          name: 'updated name',
+          description: 'updated description',
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const componentId = component.id?.toString() || '';
+
+      const updateComponentResponse =
+        await componentsController.updateComponent(
+          componentId,
+          updatedMeteredComponent
+        );
+
+      expect(updateComponentResponse.statusCode).toBe(200);
+      expect(updateComponentResponse.result.component.description).toBe(
+        updatedMeteredComponent.component.description
+      );
+    });
+    it('should not update component with invalid id', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-update-component-name-invalid-id-${uid()}`,
+          handle: `product-update-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `update-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const invalidComponentId = 'invalid-id';
+
+      const updateComponentResponse = componentsController.updateComponent(
+        invalidComponentId,
+        {
+          component: {
+            name: 'updated name',
+            description: 'updated description',
+          },
+        }
+      );
+
+      expect(updateComponentResponse).rejects.toThrow();
+
+      await updateComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+    it('should not update component with invalid credentials', async () => {
+      const newProductPayload = {
+        product: {
+          name: `product-update-component-name-${uid()}`,
+          handle: `product-update-component-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `update-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const componentId = component.id?.toString() || '';
+
+      const updateComponentResponse =
+        invalidComponentsController.updateComponent(componentId, {
+          component: {
+            name: 'updated name',
+            description: 'updated description',
+          },
+        });
+
+      expect(updateComponentResponse).rejects.toThrow();
+
+      await updateComponentResponse.catch((reason) => {
         expect(reason.statusCode).toBe(401);
       });
     });
