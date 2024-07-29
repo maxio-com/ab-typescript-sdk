@@ -1,5 +1,7 @@
 import {
   ComponentsController,
+  CreateMeteredComponent,
+  CreateOrUpdateProductRequest,
   IntervalUnit,
   PricingScheme,
   ProductFamiliesController,
@@ -33,45 +35,61 @@ describe('Components Controller', () => {
       ).result.productFamily || null;
   });
 
+  const newProductPayload: CreateOrUpdateProductRequest = {
+    product: {
+      name: `product-find-component-name-${uid()}`,
+      handle: `product-find-component-${uid()}`,
+      description: '',
+      requireCredit_card: true,
+      priceInCents: BigInt(1000),
+      interval: 1,
+      intervalUnit: IntervalUnit.Month,
+    },
+  };
+
+  const prepareDataForComponentResponse = async (
+    productPaload: CreateOrUpdateProductRequest,
+    productFamilyId: number,
+    componentPayload: CreateMeteredComponent
+  ) => {
+    await productsController.createProduct(
+      productFamilyId.toString(),
+      productPaload
+    );
+
+    const createComponentReponse =
+      await componentsController.createMeteredComponent(productFamilyId, {
+        ...componentPayload,
+      });
+
+    return createComponentReponse.result;
+  };
+
   describe('Find Component', () => {
     test('should find component with valid id', async () => {
-      const newProductPayload = {
-        product: {
-          name: `product-find-component-name-${uid()}`,
-          handle: `product-find-component-${uid()}`,
-          description: '',
-          requireCredit_card: true,
-          priceInCents: BigInt(1000),
-          interval: 1,
-          intervalUnit: IntervalUnit.Month,
+      const productFamilyId = productFamily?.id || 0;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `component-name-valid${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
-      const meteredComponent = {
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
         productFamilyId,
-        name: `component-name-valid${uid()}`,
-        description: 'test',
-        quantity: 1,
-        unitName: 'test',
-        price: 1,
-        handle: uid(),
-        pricingScheme: PricingScheme.PerUnit,
-        unitPrice: 1,
-      };
-
-      await productsController.createProduct(
-        productFamilyId.toString(),
-        newProductPayload
+        meteredComponent
       );
 
-      const createComponentReponse =
-        await componentsController.createMeteredComponent(productFamilyId, {
-          meteredComponent,
-        });
-
-      const componentHandle =
-        createComponentReponse.result.component?.handle || '';
+      const componentHandle = component.handle || '';
 
       const componentsControllerResponse =
         await componentsController.findComponent(componentHandle);
@@ -95,26 +113,26 @@ describe('Components Controller', () => {
         },
       };
       const productFamilyId = productFamily?.id || 0;
-      const meteredComponent = {
-        productFamilyId,
-        name: `component-name-invalid-${uid()}`,
-        description: 'test',
-        quantity: 1,
-        unitName: 'test',
-        price: 1,
-        handle: uid(),
-        pricingScheme: PricingScheme.PerUnit,
-        unitPrice: 1,
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `component-name-valid${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
       };
 
-      await productsController.createProduct(
-        productFamilyId.toString(),
-        newProductPayload
+      await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
       );
-
-      await componentsController.createMeteredComponent(productFamilyId, {
-        meteredComponent,
-      });
 
       const componentsControllerInavlidResponse =
         componentsController.findComponent('invalid-id');
@@ -139,30 +157,28 @@ describe('Components Controller', () => {
         },
       };
       const productFamilyId = productFamily?.id || 0;
-      const meteredComponent = {
-        productFamilyId,
-        name: `component-name-invalid-credentials${uid()}`,
-        description: 'test',
-        quantity: 1,
-        unitName: 'test',
-        price: 1,
-        handle: uid(),
-        pricingScheme: PricingScheme.PerUnit,
-        unitPrice: 1,
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `component-name-valid${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
       };
 
-      await productsController.createProduct(
-        productFamilyId.toString(),
-        newProductPayload
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
       );
 
-      const componentsControllerResponse =
-        await componentsController.createMeteredComponent(productFamilyId, {
-          meteredComponent,
-        });
-
-      const componentHandle =
-        componentsControllerResponse.result.component?.handle || '';
+      const componentHandle = component.handle || '';
 
       const componentsControllerInavlidResponse =
         invalidComponentsController.findComponent(componentHandle);
