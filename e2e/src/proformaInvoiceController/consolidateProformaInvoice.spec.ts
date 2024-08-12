@@ -65,7 +65,7 @@ describe('Proforma Invoices Controller', () => {
       const [proformaInvoice] = listResponse.result.proformaInvoices || [];
       expect(listResponse.statusCode).toBe(200);
       expect(listResponse.result.proformaInvoices?.length).toBeGreaterThan(0);
-      expect(proformaInvoice.siteId).toBe(86562);
+      expect(proformaInvoice.siteId).toBe(87351);
       expect(proformaInvoice.customerId).toBe(customerResponse.customer.id);
     });
 

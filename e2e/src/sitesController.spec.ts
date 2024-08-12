@@ -7,7 +7,7 @@ describe('SitesController', () => {
     const sitesController = new SitesController(client);
     const response = await sitesController.readSite();
     const expectedSite = {
-      id: 87346,
+      id: 87351,
       name: 'Typescript SDK',
       subdomain: 'ts-sdk',
       currency: 'USD',
