@@ -7,12 +7,12 @@ describe('SitesController', () => {
     const sitesController = new SitesController(client);
     const response = await sitesController.readSite();
     const expectedSite = {
-      id: 86562,
+      id: 87346,
       name: 'Typescript SDK',
       subdomain: 'ts-sdk',
       currency: 'USD',
       brighton_v1_enabled: false,
-      sellerId: 56887,
+      sellerId: 58665,
       nonPrimaryCurrencies: ['EUR', 'GBP'],
       relationshipInvoicingEnabled: true,
       customerHierarchyEnabled: false,
