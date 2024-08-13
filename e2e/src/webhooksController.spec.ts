@@ -98,7 +98,7 @@ describe('webhooks Controller', () => {
       const { statusCode, result } = await webHooksController.listEndpoints();
       const urlsResponse = result.map((endpoint: Endpoint) => endpoint.url);
       expect(statusCode).toBe(200);
-      expect(result).toHaveLength(5);
+      expect(result).toHaveLength(3);
       expect(
         urlsResponse.includes(
           'https://play.svix.com/in/e_Z1G9YLgAbB9Ze6wMTL4qEAE7j22/'
