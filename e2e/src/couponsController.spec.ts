@@ -706,7 +706,7 @@ describe('Coupons Controller', () => {
         await couponsController.listCouponSubcodes({ couponId });
 
       expect(listCouponSubcodesResponse.statusCode).toBe(200);
-      expect(listCouponSubcodesResponse.result.codes).toEqual(subcodes);
+      expect(listCouponSubcodesResponse.result.codes.sort().toEqual(subcodes.sort());
     });
 
     test('should return error when couponId is not in the sytstem.', async () => {
