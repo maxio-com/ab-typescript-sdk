@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@apimatic/authentication-adapters':
-        specifier: ^0.5.0
-        version: 0.5.3
+        specifier: ^0.5.4
+        version: 0.5.4
       '@apimatic/axios-client-adapter':
-        specifier: ^0.3.0
-        version: 0.3.3
+        specifier: ^0.3.4
+        version: 0.3.4
       '@apimatic/core':
-        specifier: ^0.10.0
-        version: 0.10.10
+        specifier: ^0.10.12
+        version: 0.10.12
       '@apimatic/schema':
-        specifier: ^0.7.0
-        version: 0.7.11
+        specifier: ^0.7.12
+        version: 0.7.12
     devDependencies:
       '@types/jest':
         specifier: ^29.4.0
@@ -102,27 +102,27 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
-  /@apimatic/authentication-adapters@0.5.3:
-    resolution: {integrity: sha512-Ld2cHQuwdAMzE0jNzOsUin9kU6QFyXMZcPw4ZoCPi29Vp4I1qWtSbs602p1P4cSv8Yxf47JinaiT6OSMgCrO5g==}
+  /@apimatic/authentication-adapters@0.5.4:
+    resolution: {integrity: sha512-UP4+LfvLQJjgtKaGr+hgQogM3JJGb9llEX8v9OVUp0xmiIVI8zt0m69nz/vk4GaNe4U6AvS3D4x0YiE5JtLVkg==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
-      '@apimatic/core-interfaces': 0.2.5
+      '@apimatic/core-interfaces': 0.2.6
       '@apimatic/http-headers': 0.3.2
       '@apimatic/http-query': 0.3.2
       tslib: 2.6.3
     dev: false
 
-  /@apimatic/axios-client-adapter@0.3.3:
-    resolution: {integrity: sha512-sQmT2Kbs8Lq4Bz/TLOBjH+CNd1QfjTDMbmwyxFpRSzusta6cAl7EcaR2JcCiOeuu2J1fr61tTRUFMwqlDliJqg==}
+  /@apimatic/axios-client-adapter@0.3.4:
+    resolution: {integrity: sha512-vRluB6E7AHnGRZp/ntPcvdj01RrxUj2ylzDR6ejsT/xbXf0SOw2awSDOEq1ZsglzakNvzbuGaWIBY+e2yq8e/Q==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       '@apimatic/convert-to-stream': 0.1.2
-      '@apimatic/core-interfaces': 0.2.5
+      '@apimatic/core-interfaces': 0.2.6
       '@apimatic/file-wrapper': 0.3.2
       '@apimatic/http-headers': 0.3.2
       '@apimatic/http-query': 0.3.2
       '@apimatic/json-bigint': 1.2.0
-      '@apimatic/schema': 0.7.11
+      '@apimatic/schema': 0.7.12
       axios: 1.7.2
       detect-browser: 5.3.0
       detect-node: 2.1.0
@@ -144,25 +144,25 @@ packages:
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dev: false
 
-  /@apimatic/core-interfaces@0.2.5:
-    resolution: {integrity: sha512-73NLoa1OG5RHP+9f76/bhOAYmkhay0lGDlsffmwU2W1zQ16JB5U6y5lpjnHCWku7VN5MfXYK2UXaPJWO8+xG5g==}
+  /@apimatic/core-interfaces@0.2.6:
+    resolution: {integrity: sha512-XbqyftDB4GO3rVOablFt7RnF03gLdctUgLT0flDP5JI3E4r+Cn2O66nFufWfSFhI/Vr0vJbVjjDG2xzZ2bHBjQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       '@apimatic/file-wrapper': 0.3.2
       tslib: 2.6.3
     dev: false
 
-  /@apimatic/core@0.10.10:
-    resolution: {integrity: sha512-z6BGkUDasJtO1eQJPyl0Bv1rnF+8kXtxYO38voWKh2eBbU73kGLffTSbL4cqf1HTB9HSan1XyRxFowLpUYSGiA==}
+  /@apimatic/core@0.10.12:
+    resolution: {integrity: sha512-PcOkX5SykmhORfHVQsWvGE8rFgCYA7gRoTaTX5kYXDHQLXOZoo/lIoo5Hc4FLqQkgMma9/bsqvvG8ls1d/suhA==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       '@apimatic/convert-to-stream': 0.0.2
-      '@apimatic/core-interfaces': 0.2.5
+      '@apimatic/core-interfaces': 0.2.6
       '@apimatic/file-wrapper': 0.3.2
       '@apimatic/http-headers': 0.3.2
       '@apimatic/http-query': 0.3.2
       '@apimatic/json-bigint': 1.2.0
-      '@apimatic/schema': 0.7.11
+      '@apimatic/schema': 0.7.12
       detect-browser: 5.3.0
       detect-node: 2.1.0
       form-data: 3.0.1
@@ -199,8 +199,8 @@ packages:
     resolution: {integrity: sha512-+bmVzYMdZu0Ya5L+my4FXFUih54OvQA/qlZsFOYdOoostyUuB27UDrVWQs/WVCmS0ADdo5vTU0eeTrrBkHoySw==}
     dev: false
 
-  /@apimatic/schema@0.7.11:
-    resolution: {integrity: sha512-lsCngEepI7We27bVcRNU1rWvq2300iVeZ2go5WCLbnGlIy6xmmx4Nw4TACWMe9ZRFyvlIMMFvBSxzV61orYwjA==}
+  /@apimatic/schema@0.7.12:
+    resolution: {integrity: sha512-JiIabKJuEKAF5QGFPwx2kG9vfTbQW7OLKxhRXbcIv8VvaH1DX/AdAfsDq3/+qCTmu6LpeNJmLWs8fwh8YRcsaQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       tslib: 2.6.3
