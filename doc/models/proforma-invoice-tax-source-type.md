@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `tax` |
-| `avalara` |
+| `Tax` |
+| `Avalara` |
 

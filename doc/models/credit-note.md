@@ -35,7 +35,7 @@
 | `taxes` | [`InvoiceTax[] \| undefined`](../../doc/models/invoice-tax.md) | Optional | - |
 | `applications` | [`CreditNoteApplication[] \| undefined`](../../doc/models/credit-note-application.md) | Optional | - |
 | `refunds` | [`InvoiceRefund[] \| undefined`](../../doc/models/invoice-refund.md) | Optional | - |
-| `originInvoices` | [`OriginInvoice[] \| undefined`](../../doc/models/origin-invoice.md) | Optional | An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://chargify.zendesk.com/hc/en-us/articles/4407753036699#origin-invoices) |
+| `originInvoices` | [`OriginInvoice[] \| undefined`](../../doc/models/origin-invoice.md) | Optional | An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-Notes-Proration#origin-invoices) |
 
 ## Example (as JSON)
 

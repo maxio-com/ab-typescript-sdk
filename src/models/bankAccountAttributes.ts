@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -30,7 +30,7 @@ export interface BankAccountAttributes {
   /** Defaults to personal */
   bankAccountHolderType?: BankAccountHolderType;
   paymentType?: PaymentType;
-  /** The vault that stores the payment profile with the provided vault_token. */
+  /** The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. */
   currentVault?: BankAccountVault;
   vaultToken?: string;
   /** (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token */

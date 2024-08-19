@@ -175,6 +175,7 @@ const collect = {
     endDate: '2024-01-31',
   }
 }
+
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.listPrepayments(collect);
   // Get more response info...

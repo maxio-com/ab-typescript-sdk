@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -12,6 +12,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { AllVaults, allVaultsSchema } from './allVaults';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
@@ -26,7 +27,6 @@ import {
   CreatePaymentProfileExpirationYear,
   createPaymentProfileExpirationYearSchema,
 } from './containers/createPaymentProfileExpirationYear';
-import { CurrentVault, currentVaultSchema } from './currentVault';
 import { PaymentType, paymentTypeSchema } from './paymentType';
 
 export interface CreatePaymentProfile {
@@ -60,7 +60,7 @@ export interface CreatePaymentProfile {
   /** The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway. */
   billingZip?: string;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
-  currentVault?: CurrentVault;
+  currentVault?: AllVaults;
   /** The “token” provided by your vault storage for an already stored payment profile */
   vaultToken?: string;
   /** (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token */
@@ -118,7 +118,7 @@ export const createPaymentProfileSchema: Schema<CreatePaymentProfile> = expandoO
     billingState: ['billing_state', optional(string())],
     billingCountry: ['billing_country', optional(string())],
     billingZip: ['billing_zip', optional(string())],
-    currentVault: ['current_vault', optional(currentVaultSchema)],
+    currentVault: ['current_vault', optional(allVaultsSchema)],
     vaultToken: ['vault_token', optional(string())],
     customerVaultToken: ['customer_vault_token', optional(string())],
     customerId: ['customer_id', optional(number())],

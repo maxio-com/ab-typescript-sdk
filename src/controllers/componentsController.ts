@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -57,22 +57,22 @@ export class ComponentsController extends BaseController {
    * the start of every billing period. If you want to bill for a quantity of something that does not
    * change unless you change it, then you want quantity components, instead.
    *
-   * For more information on components, please see our documentation [here](https://maxio-chargify.
-   * zendesk.com/hc/en-us/articles/5405020625677).
+   * For more information on components, please see our documentation [here](https://maxio.zendesk.
+   * com/hc/en-us/articles/24261141522189-Components-Overview).
    *
-   * @param productFamilyId   The Chargify id of the product family to which the
-   *                                                           component belongs
+   * @param productFamilyId   Either the product family's id or its handle prefixed
+   *                                                           with `handle:`
    * @param body
    * @return Response from the API call
    */
   async createMeteredComponent(
-    productFamilyId: number,
+    productFamilyId: string,
     body?: CreateMeteredComponent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       body: [body, optional(createMeteredComponentSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -108,22 +108,22 @@ export class ComponentsController extends BaseController {
    * The allocated quantity for one-time quantity-based components immediately gets reset back to zero
    * after the allocation is made.
    *
-   * For more information on components, please see our documentation [here](https://maxio-chargify.
-   * zendesk.com/hc/en-us/articles/5405020625677).
+   * For more information on components, please see our documentation [here](https://maxio.zendesk.
+   * com/hc/en-us/articles/24261141522189-Components-Overview).
    *
-   * @param productFamilyId   The Chargify id of the product family to which
-   *                                                                 the component belongs
+   * @param productFamilyId   Either the product family's id or its handle
+   *                                                                 prefixed with `handle:`
    * @param body
    * @return Response from the API call
    */
   async createQuantityBasedComponent(
-    productFamilyId: number,
+    productFamilyId: string,
     body?: CreateQuantityBasedComponent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       body: [body, optional(createQuantityBasedComponentSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -147,22 +147,22 @@ export class ComponentsController extends BaseController {
    * On/off components are used for any flat fee, recurring add on (think $99/month for tech support or a
    * flat add on shipping fee).
    *
-   * For more information on components, please see our documentation [here](https://maxio-chargify.
-   * zendesk.com/hc/en-us/articles/5405020625677).
+   * For more information on components, please see our documentation [here](https://maxio.zendesk.
+   * com/hc/en-us/articles/24261141522189-Components-Overview).
    *
-   * @param productFamilyId   The Chargify id of the product family to which the
-   *                                                         component belongs
+   * @param productFamilyId   Either the product family's id or its handle prefixed
+   *                                                         with `handle:`
    * @param body
    * @return Response from the API call
    */
   async createOnOffComponent(
-    productFamilyId: number,
+    productFamilyId: string,
     body?: CreateOnOffComponent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       body: [body, optional(createOnOffComponentSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -188,22 +188,22 @@ export class ComponentsController extends BaseController {
    * charge at the end of the period for the amount of units used, prepaid components are charged for at
    * the time of purchase, and we subsequently keep track of the usage against the amount purchased.
    *
-   * For more information on components, please see our documentation [here](https://maxio-chargify.
-   * zendesk.com/hc/en-us/articles/5405020625677).
+   * For more information on components, please see our documentation [here](https://maxio.zendesk.
+   * com/hc/en-us/articles/24261141522189-Components-Overview).
    *
-   * @param productFamilyId   The Chargify id of the product family to which the
-   *                                                           component belongs
+   * @param productFamilyId   Either the product family's id or its handle prefixed
+   *                                                           with `handle:`
    * @param body
    * @return Response from the API call
    */
   async createPrepaidUsageComponent(
-    productFamilyId: number,
+    productFamilyId: string,
     body?: CreatePrepaidComponent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       body: [body, optional(createPrepaidComponentSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -233,22 +233,22 @@ export class ComponentsController extends BaseController {
    * So, instead of reporting usage directly for each component (as you would with metered components),
    * the usage is derived from analysis of your events.
    *
-   * For more information on components, please see our documentation [here](https://maxio-chargify.
-   * zendesk.com/hc/en-us/articles/5405020625677).
+   * For more information on components, please see our documentation [here](https://maxio.zendesk.
+   * com/hc/en-us/articles/24261141522189-Components-Overview).
    *
-   * @param productFamilyId   The Chargify id of the product family to which the
-   *                                                       component belongs
+   * @param productFamilyId   Either the product family's id or its handle prefixed with
+   *                                                       `handle:`
    * @param body
    * @return Response from the API call
    */
   async createEventBasedComponent(
-    productFamilyId: number,
+    productFamilyId: string,
     body?: CreateEBBComponent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      productFamilyId: [productFamilyId, number()],
+      productFamilyId: [productFamilyId, string()],
       body: [body, optional(createEBBComponentSchema)],
     });
     req.header('Content-Type', 'application/json');
@@ -289,9 +289,9 @@ export class ComponentsController extends BaseController {
    * You may read the component by either the component's id or handle. When using the handle, it must be
    * prefixed with `handle:`.
    *
-   * @param productFamilyId   The Chargify id of the product family to which the component belongs
-   * @param componentId       Either the Chargify id of the component or the handle for the component
-   *                                    prefixed with `handle:`
+   * @param productFamilyId   The Advanced Billing id of the product family to which the component belongs
+   * @param componentId       Either the Advanced Billing id of the component or the handle for the
+   *                                    component prefixed with `handle:`
    * @return Response from the API call
    */
   async readComponent(
@@ -315,10 +315,10 @@ export class ComponentsController extends BaseController {
    * You may read the component by either the component's id or handle. When using the handle, it must be
    * prefixed with `handle:`.
    *
-   * @param productFamilyId   The Chargify id of the product family to which the
-   *                                                           component belongs
-   * @param componentId       Either the Chargify id of the component or the handle
-   *                                                           for the component prefixed with `handle:`
+   * @param productFamilyId   The Advanced Billing id of the product family to which
+   *                                                           the component belongs
+   * @param componentId       Either the Advanced Billing id of the component or the
+   *                                                           handle for the component prefixed with `handle:`
    * @param body
    * @return Response from the API call
    */
@@ -351,9 +351,9 @@ export class ComponentsController extends BaseController {
    * Sending a DELETE request to this endpoint will archive the component. All current subscribers will
    * be unffected; their subscription/purchase will continue to be charged as usual.
    *
-   * @param productFamilyId   The Chargify id of the product family to which the component belongs
-   * @param componentId       Either the Chargify id of the component or the handle for the component
-   *                                    prefixed with `handle:`
+   * @param productFamilyId   The Advanced Billing id of the product family to which the component belongs
+   * @param componentId       Either the Advanced Billing id of the component or the handle for the
+   *                                    component prefixed with `handle:`
    * @return Response from the API call
    */
   async archiveComponent(
@@ -502,7 +502,7 @@ export class ComponentsController extends BaseController {
   /**
    * This request will return a list of components for a particular product family.
    *
-   * @param productFamilyId   The Chargify id of the product family
+   * @param productFamilyId   The Advanced Billing id of the product family
    * @param includeArchived   Include archived items.
    * @param page              Result records are organized in pages. By default, the
    *                                                         first page of results is displayed. The page parameter

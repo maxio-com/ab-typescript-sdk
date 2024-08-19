@@ -9,7 +9,7 @@
 
 | Name |
 |  --- |
-| `updatedAt` |
+| `UpdatedAt` |
 
 ## Example
 

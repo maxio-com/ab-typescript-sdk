@@ -11,19 +11,19 @@ Invoice Event Type
 
 | Name |
 |  --- |
-| `issueInvoice` |
-| `applyCreditNote` |
-| `createCreditNote` |
-| `applyPayment` |
-| `applyDebitNote` |
-| `createDebitNote` |
-| `refundInvoice` |
-| `voidInvoice` |
-| `voidRemainder` |
-| `backportInvoice` |
-| `changeInvoiceStatus` |
-| `changeInvoiceCollectionMethod` |
-| `removePayment` |
-| `failedPayment` |
-| `changeChargebackStatus` |
+| `IssueInvoice` |
+| `ApplyCreditNote` |
+| `CreateCreditNote` |
+| `ApplyPayment` |
+| `ApplyDebitNote` |
+| `CreateDebitNote` |
+| `RefundInvoice` |
+| `VoidInvoice` |
+| `VoidRemainder` |
+| `BackportInvoice` |
+| `ChangeInvoiceStatus` |
+| `ChangeInvoiceCollectionMethod` |
+| `RemovePayment` |
+| `FailedPayment` |
+| `ChangeChargebackStatus` |
 

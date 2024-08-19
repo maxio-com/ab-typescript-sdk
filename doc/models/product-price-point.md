@@ -23,7 +23,7 @@
 | `initialChargeInCents` | `bigint \| null \| undefined` | Optional | The product price point initial charge, in integer cents |
 | `initialChargeAfterTrial` | `boolean \| null \| undefined` | Optional | - |
 | `expirationInterval` | `number \| null \| undefined` | Optional | The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days |
-| `expirationIntervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month or day |
+| `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month, day or never |
 | `productId` | `number \| undefined` | Optional | The product id this price point belongs to |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this price point was archived |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this price point was created |

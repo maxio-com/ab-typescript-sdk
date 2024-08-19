@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `singleCustomer` |
-| `multipleCustomers` |
+| `SingleCustomer` |
+| `MultipleCustomers` |
 

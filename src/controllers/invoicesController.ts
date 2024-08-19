@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -476,10 +476,10 @@ export class InvoicesController extends BaseController {
    * }
    * ```
    *
-   * Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's
-   * Service Credit account. At this time, partial payments from a Service Credit Account are only
-   * allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service
-   * Credit account balance must be greater than or equal to the invoice's `due_amount`.
+   * Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the
+   * Subscription's Service Credit account. At this time, partial payments from a Service Credit Account
+   * are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the
+   * Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
    *
    * @param uid          The unique identifier for the invoice, this does not
    *                                                           refer to the public facing invoice number.
@@ -569,7 +569,7 @@ export class InvoicesController extends BaseController {
    * `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field
    * as a key in the query with a value set to `true`.
    *
-   * @param subscriptionId  The subscription's Chargify id
+   * @param subscriptionId  The subscription's Advanced Billing id
    * @param page            Result records are organized in pages. By default, the first page of results is
    *                                   displayed. The page parameter specifies a page number of results to fetch. You
    *                                   can start navigating through the pages to consume the results. You do this by

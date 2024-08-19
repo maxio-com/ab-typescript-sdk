@@ -11,6 +11,6 @@ Defaults to checking
 
 | Name |
 |  --- |
-| `checking` |
-| `savings` |
+| `Checking` |
+| `Savings` |
 

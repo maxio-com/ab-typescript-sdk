@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -267,7 +267,8 @@ export class SubscriptionGroupsController extends BaseController {
    *
    * If the subscription is not in a group endpoint will return 404 code.
    *
-   * @param subscriptionId  The Chargify id of the subscription associated with the subscription group
+   * @param subscriptionId  The Advanced Billing id of the subscription associated with the subscription
+   *                                  group
    * @return Response from the API call
    */
   async findSubscriptionGroup(
@@ -285,10 +286,10 @@ export class SubscriptionGroupsController extends BaseController {
   }
 
   /**
-   * For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-
-   * us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-
-   * us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription
-   * groups.
+   * For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-
+   * us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https:
+   * //maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-
+   * hierarchies) features, it is possible to add existing subscriptions to subscription groups.
    *
    * Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's
    * needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already
@@ -335,10 +336,10 @@ export class SubscriptionGroupsController extends BaseController {
   }
 
   /**
-   * For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-
-   * us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-
-   * us/articles/4407746683291) features, it is possible to remove existing subscription from
-   * subscription group.
+   * For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-
+   * us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https:
+   * //maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-
+   * hierarchies) features, it is possible to remove existing subscription from subscription group.
    *
    * @param subscriptionId  The Chargify id of the subscription
    * @return Response from the API call

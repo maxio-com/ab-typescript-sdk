@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -20,7 +20,7 @@ import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError
 
 export class OffersController extends BaseController {
   /**
-   * Create an offer within your Chargify site by sending a POST request.
+   * Create an offer within your Advanced Billing site by sending a POST request.
    *
    * ## Documentation
    *
@@ -29,8 +29,8 @@ export class OffersController extends BaseController {
    *
    * Once an offer is defined it can be used as an alternative to the product when creating subscriptions.
    *
-   * Full documentation on how to use offers in the Chargify UI can be located [here](https://chargify.
-   * zendesk.com/hc/en-us/articles/4407753852059).
+   * Full documentation on how to use offers in the Advanced Billing UI can be located [here](https:
+   * //maxio.zendesk.com/hc/en-us/articles/24261295098637-Offers-Overview).
    *
    * ## Using a Product Price Point
    *

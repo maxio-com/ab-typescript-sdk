@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -26,8 +26,8 @@ export class SubscriptionNotesController extends BaseController {
    *
    * If you have structured data such as birth date, color, etc., consider using Metadata instead.
    *
-   * Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-
-   * chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
+   * Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https:
+   * //maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
    *
    * @param subscriptionId  The Chargify id of the subscription
    * @param body
@@ -99,7 +99,7 @@ export class SubscriptionNotesController extends BaseController {
    * note attached to a subscription.
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param noteId          The Chargify id of the note
+   * @param noteId          The Advanced Billing id of the note
    * @return Response from the API call
    */
   async readSubscriptionNote(
@@ -121,7 +121,7 @@ export class SubscriptionNotesController extends BaseController {
    * Use the following method to update a note for a Subscription.
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param noteId          The Chargify id of the note
+   * @param noteId          The Advanced Billing id of the note
    * @param body
    * @return Response from the API call
    */
@@ -148,7 +148,7 @@ export class SubscriptionNotesController extends BaseController {
    * Use the following method to delete a note for a Subscription.
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param noteId          The Chargify id of the note
+   * @param noteId          The Advanced Billing id of the note
    * @return Response from the API call
    */
   async deleteSubscriptionNote(

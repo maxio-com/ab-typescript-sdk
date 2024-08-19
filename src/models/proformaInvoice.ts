@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -72,7 +72,7 @@ export interface ProformaInvoice {
    * * "child": An invoice segment which has been combined into a consolidated invoice.
    * * "parent": A consolidated invoice, whose contents are composed of invoice segments.
    * "Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.
-   * See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).
+   * See also the [invoice consolidation documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-Invoice-Consolidation).
    */
   consolidationLevel?: InvoiceConsolidationLevel;
   productName?: string;

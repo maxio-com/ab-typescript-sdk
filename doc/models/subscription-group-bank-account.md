@@ -23,7 +23,7 @@
 | `billingZip` | `string \| undefined` | Optional | - |
 | `billingCountry` | `string \| undefined` | Optional | - |
 | `chargifyToken` | `string \| undefined` | Optional | - |
-| `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
+| `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. |
 | `gatewayHandle` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)

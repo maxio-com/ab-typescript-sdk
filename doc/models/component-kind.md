@@ -11,9 +11,9 @@ A handle for the component type
 
 | Name |
 |  --- |
-| `meteredComponent` |
-| `quantityBasedComponent` |
-| `onOffComponent` |
-| `prepaidUsageComponent` |
-| `eventBasedComponent` |
+| `MeteredComponent` |
+| `QuantityBasedComponent` |
+| `OnOffComponent` |
+| `PrepaidUsageComponent` |
+| `EventBasedComponent` |
 

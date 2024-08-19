@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -41,7 +41,7 @@ export interface MeteredComponent {
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme: PricingScheme;
-  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
+  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   /**
    * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
@@ -68,7 +68,7 @@ export interface MeteredComponent {
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
-  intervalUnit?: IntervalUnit;
+  intervalUnit?: IntervalUnit | null;
   [key: string]: unknown;
 }
 
@@ -97,5 +97,5 @@ export const meteredComponentSchema: Schema<MeteredComponent> = expandoObject({
   ],
   publicSignupPageIds: ['public_signup_page_ids', optional(array(number()))],
   interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
+  intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
 });

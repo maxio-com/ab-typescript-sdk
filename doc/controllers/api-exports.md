@@ -55,6 +55,7 @@ const collect = {
   perPage: 100,
   page: 2
 }
+
 try {
   const { result, ...httpResponse } = await aPIExportsController.listExportedProformaInvoices(collect);
   // Get more response info...
@@ -108,6 +109,7 @@ const collect = {
   perPage: 100,
   page: 2
 }
+
 try {
   const { result, ...httpResponse } = await aPIExportsController.listExportedInvoices(collect);
   // Get more response info...
@@ -161,6 +163,7 @@ const collect = {
   perPage: 100,
   page: 2
 }
+
 try {
   const { result, ...httpResponse } = await aPIExportsController.listExportedSubscriptions(collect);
   // Get more response info...

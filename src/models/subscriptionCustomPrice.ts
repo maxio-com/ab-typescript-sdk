@@ -1,10 +1,17 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, optional, Schema, string } from '../schema';
+import {
+  boolean,
+  expandoObject,
+  nullable,
+  optional,
+  Schema,
+  string,
+} from '../schema';
 import {
   SubscriptionCustomPriceExpirationInterval,
   subscriptionCustomPriceExpirationIntervalSchema,
@@ -29,6 +36,10 @@ import {
   SubscriptionCustomPriceTrialPriceInCents,
   subscriptionCustomPriceTrialPriceInCentsSchema,
 } from './containers/subscriptionCustomPriceTrialPriceInCents';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
@@ -42,7 +53,7 @@ export interface SubscriptionCustomPrice {
   /** Required if using `custom_price` attribute. */
   interval: SubscriptionCustomPriceInterval;
   /** Required if using `custom_price` attribute. */
-  intervalUnit: IntervalUnit;
+  intervalUnit: IntervalUnit | null;
   /** (Optional) */
   trialPriceInCents?: SubscriptionCustomPriceTrialPriceInCents;
   /** (Optional) */
@@ -56,7 +67,7 @@ export interface SubscriptionCustomPrice {
   /** (Optional) */
   expirationInterval?: SubscriptionCustomPriceExpirationInterval;
   /** (Optional) */
-  expirationIntervalUnit?: IntervalUnit;
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   /** (Optional) */
   taxIncluded?: boolean;
   [key: string]: unknown;
@@ -68,7 +79,7 @@ export const subscriptionCustomPriceSchema: Schema<SubscriptionCustomPrice> = ex
     handle: ['handle', optional(string())],
     priceInCents: ['price_in_cents', subscriptionCustomPricePriceInCentsSchema],
     interval: ['interval', subscriptionCustomPriceIntervalSchema],
-    intervalUnit: ['interval_unit', intervalUnitSchema],
+    intervalUnit: ['interval_unit', nullable(intervalUnitSchema)],
     trialPriceInCents: [
       'trial_price_in_cents',
       optional(subscriptionCustomPriceTrialPriceInCentsSchema),
@@ -92,7 +103,7 @@ export const subscriptionCustomPriceSchema: Schema<SubscriptionCustomPrice> = ex
     ],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(intervalUnitSchema),
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
     taxIncluded: ['tax_included', optional(boolean())],
   }

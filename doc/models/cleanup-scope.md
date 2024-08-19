@@ -11,6 +11,6 @@ all: Will clear all products, customers, and related subscriptions from the site
 
 | Name |
 |  --- |
-| `all` |
-| `customers` |
+| `All` |
+| `Customers` |
 

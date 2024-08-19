@@ -11,7 +11,7 @@ Passed as a parameter to list methods to return only non null values.
 
 | Name |
 |  --- |
-| `notNull` |
+| `NotNull` |
 
 ## Example
 

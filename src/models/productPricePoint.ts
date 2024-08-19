@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -17,6 +17,10 @@ import {
   string,
 } from '../schema';
 import { CurrencyPrice, currencyPriceSchema } from './currencyPrice';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 
@@ -46,8 +50,8 @@ export interface ProductPricePoint {
   initialChargeAfterTrial?: boolean | null;
   /** The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days */
   expirationInterval?: number | null;
-  /** A string representing the expiration interval unit for this product price point, either month or day */
-  expirationIntervalUnit?: IntervalUnit | null;
+  /** A string representing the expiration interval unit for this product price point, either month, day or never */
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   /** The product id this price point belongs to */
   productId?: number;
   /** Timestamp indicating when this price point was archived */
@@ -96,7 +100,7 @@ export const productPricePointSchema: Schema<ProductPricePoint> = expandoObject(
     expirationInterval: ['expiration_interval', optional(nullable(number()))],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(nullable(intervalUnitSchema)),
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
     productId: ['product_id', optional(number())],
     archivedAt: ['archived_at', optional(nullable(string()))],

@@ -9,7 +9,7 @@
 
 | Name |
 |  --- |
-| `doNotRecur` |
-| `recurIndefinitely` |
-| `recurWithDuration` |
+| `DoNotRecur` |
+| `RecurIndefinitely` |
+| `RecurWithDuration` |
 

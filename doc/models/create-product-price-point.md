@@ -21,7 +21,7 @@
 | `initialChargeInCents` | `bigint \| undefined` | Optional | The product price point initial charge, in integer cents |
 | `initialChargeAfterTrial` | `boolean \| undefined` | Optional | - |
 | `expirationInterval` | `number \| undefined` | Optional | The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. |
-| `expirationIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month or day |
+| `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month, day or never |
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.<br>**Default**: `true` |
 
 ## Example (as JSON)

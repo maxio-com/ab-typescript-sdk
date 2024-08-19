@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -10,7 +10,7 @@ import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
 export interface PaidInvoice {
   /** The uid of the paid invoice */
   invoiceId?: string;
-  /** The current status of the invoice. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statuses) for more. */
+  /** The current status of the invoice. See [Invoice Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview#invoice-statuses) for more. */
   status?: InvoiceStatus;
   /** The remaining due amount on the invoice */
   dueAmount?: string;

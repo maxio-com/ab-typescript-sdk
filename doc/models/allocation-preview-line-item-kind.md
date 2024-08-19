@@ -11,8 +11,8 @@ A handle for the line item kind for allocation preview
 
 | Name |
 |  --- |
-| `quantityBasedComponent` |
-| `onOffComponent` |
-| `coupon` |
-| `tax` |
+| `QuantityBasedComponent` |
+| `OnOffComponent` |
+| `Coupon` |
+| `Tax` |
 

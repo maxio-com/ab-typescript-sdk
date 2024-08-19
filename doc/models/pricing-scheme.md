@@ -11,8 +11,8 @@ The identifier for the pricing scheme. See [Product Components](https://help.cha
 
 | Name |
 |  --- |
-| `stairstep` |
-| `volume` |
-| `perUnit` |
-| `tiered` |
+| `Stairstep` |
+| `Volume` |
+| `PerUnit` |
+| `Tiered` |
 

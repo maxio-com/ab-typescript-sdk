@@ -11,6 +11,6 @@ The role of the debit note.
 
 | Name |
 |  --- |
-| `chargeback` |
-| `refund` |
+| `Chargeback` |
+| `Refund` |
 

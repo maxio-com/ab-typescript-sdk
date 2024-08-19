@@ -9,5 +9,5 @@
 
 | Name |
 |  --- |
-| `currentBillingAmountInCents` |
+| `CurrentBillingAmountInCents` |
 

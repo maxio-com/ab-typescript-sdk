@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -99,7 +99,8 @@ import { ProductPricePointErrorResponseError } from '../errors/productPricePoint
 
 export class ProductPricePointsController extends BaseController {
   /**
-   * [Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)
+   * [Product Price Point Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-
+   * Product-Price-Points)
    *
    * @param productId    The id or handle of the product. When using the
    *                                                              handle, it must be prefixed with `handle:`
@@ -306,8 +307,8 @@ export class ProductPricePointsController extends BaseController {
   /**
    * Use this endpoint to unarchive an archived product price point.
    *
-   * @param productId      The Chargify id of the product to which the price point belongs
-   * @param pricePointId   The Chargify id of the product price point
+   * @param productId      The Advanced Billing id of the product to which the price point belongs
+   * @param pricePointId   The Advanced Billing id of the product price point
    * @return Response from the API call
    */
   async unarchiveProductPricePoint(
@@ -330,8 +331,8 @@ export class ProductPricePointsController extends BaseController {
    *
    * Note: Custom product price points are not able to be set as the default for a product.
    *
-   * @param productId      The Chargify id of the product to which the price point belongs
-   * @param pricePointId   The Chargify id of the product price point
+   * @param productId      The Advanced Billing id of the product to which the price point belongs
+   * @param pricePointId   The Advanced Billing id of the product price point
    * @return Response from the API call
    */
   async promoteProductPricePointToDefault(
@@ -352,8 +353,8 @@ export class ProductPricePointsController extends BaseController {
   /**
    * Use this endpoint to create multiple product price points in one request.
    *
-   * @param productId    The Chargify id of the product to which the
-   *                                                                   price points belong
+   * @param productId    The Advanced Billing id of the product to which
+   *                                                                   the price points belong
    * @param body
    * @return Response from the API call
    */
@@ -393,8 +394,8 @@ export class ProductPricePointsController extends BaseController {
    *
    * Note: Currency Prices are not able to be created for custom product price points.
    *
-   * @param productPricePointId    The Chargify id of the product price
-   *                                                                            point
+   * @param productPricePointId    The Advanced Billing id of the product
+   *                                                                            price point
    * @param body
    * @return Response from the API call
    */
@@ -431,7 +432,8 @@ export class ProductPricePointsController extends BaseController {
    *
    * Note: Currency Prices are not able to be updated for custom product price points.
    *
-   * @param productPricePointId    The Chargify id of the product price point
+   * @param productPricePointId    The Advanced Billing id of the product price
+   *                                                                     point
    * @param body
    * @return Response from the API call
    */

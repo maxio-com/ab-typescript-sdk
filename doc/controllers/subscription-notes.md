@@ -27,7 +27,7 @@ Notes allow you to record information about a particular Subscription in a free 
 
 If you have structured data such as birth date, color, etc., consider using Metadata instead.
 
-Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
+Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
 
 ```ts
 async createSubscriptionNote(  subscriptionId: number,
@@ -107,6 +107,7 @@ const collect = {
   page: 2,
   perPage: 50
 }
+
 try {
   const { result, ...httpResponse } = await subscriptionNotesController.listSubscriptionNotes(collect);
   // Get more response info...
@@ -162,7 +163,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `noteId` | `number` | Template, Required | The Chargify id of the note |
+| `noteId` | `number` | Template, Required | The Advanced Billing id of the note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -223,7 +224,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `noteId` | `number` | Template, Required | The Chargify id of the note |
+| `noteId` | `number` | Template, Required | The Advanced Billing id of the note |
 | `body` | [`UpdateSubscriptionNoteRequest \| undefined`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -277,7 +278,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `noteId` | `number` | Template, Required | The Chargify id of the note |
+| `noteId` | `number` | Template, Required | The Advanced Billing id of the note |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

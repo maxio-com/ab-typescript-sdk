@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -17,7 +17,7 @@ import {
 export interface TaxConfiguration {
   kind?: TaxConfigurationKind;
   destinationAddress?: TaxDestinationAddress;
-  /** Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction */
+  /** Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio.zendesk.com/hc/en-us/articles/24287012608909-Taxes-Overview */
   fullyConfigured?: boolean;
   [key: string]: unknown;
 }

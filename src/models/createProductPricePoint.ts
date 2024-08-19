@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -8,11 +8,16 @@ import {
   bigint,
   boolean,
   expandoObject,
+  nullable,
   number,
   optional,
   Schema,
   string,
 } from '../schema';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 export interface CreateProductPricePoint {
@@ -38,8 +43,8 @@ export interface CreateProductPricePoint {
   initialChargeAfterTrial?: boolean;
   /** The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. */
   expirationInterval?: number;
-  /** A string representing the expiration interval unit for this product price point, either month or day */
-  expirationIntervalUnit?: IntervalUnit;
+  /** A string representing the expiration interval unit for this product price point, either month, day or never */
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   /** Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined. */
   useSiteExchangeRate?: boolean;
   [key: string]: unknown;
@@ -64,7 +69,7 @@ export const createProductPricePointSchema: Schema<CreateProductPricePoint> = ex
     expirationInterval: ['expiration_interval', optional(number())],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(intervalUnitSchema),
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
     useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
   }

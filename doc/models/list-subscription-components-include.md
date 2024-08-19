@@ -9,8 +9,8 @@
 
 | Name |
 |  --- |
-| `subscription` |
-| `historicUsages` |
+| `Subscription` |
+| `HistoricUsages` |
 
 ## Example
 

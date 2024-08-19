@@ -5,13 +5,13 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `subdomain` | `string` | The subdomain for your Chargify site.<br>*Default*: `'subdomain'` |
-| `domain` | `string` | The Chargify server domain.<br>*Default*: `'chargify.com'` |
+| `subdomain` | `string` | The subdomain for your Advanced Billing site.<br>*Default*: `'subdomain'` |
+| `domain` | `string` | The Advanced Billing server domain.<br>*Default*: `'chargify.com'` |
 | `environment` | `Environment` | The API environment. <br> **Default: `Environment.Production`** |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `120000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
-| `basicAuthCredentials` | [`BasicAuthCredentials`]($a/basic-authentication.md) | The credential object for basicAuth |
+| `basicAuthCredentials` | [`BasicAuthCredentials`](auth/basic-authentication.md) | The credential object for basicAuth |
 
 ## HttpClientOptions
 

@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -20,8 +20,8 @@ export class ReferralCodesController extends BaseController {
    *
    * ## Referrals Documentation
    *
-   * Full documentation on how to use the referrals feature in the Chargify UI can be located
-   * [here](https://chargify.zendesk.com/hc/en-us/articles/4407802831643).
+   * Full documentation on how to use the referrals feature in the Advanced Billing UI can be located
+   * [here](https://maxio.zendesk.com/hc/en-us/sections/24286965611405-Referrals).
    *
    * ## Server Response
    *

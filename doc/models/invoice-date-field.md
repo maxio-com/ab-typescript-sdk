@@ -9,11 +9,11 @@
 
 | Name |
 |  --- |
-| `createdAt` |
-| `dueDate` |
-| `issueDate` |
-| `updatedAt` |
-| `paidDate` |
+| `CreatedAt` |
+| `DueDate` |
+| `IssueDate` |
+| `UpdatedAt` |
+| `PaidDate` |
 
 ## Example
 

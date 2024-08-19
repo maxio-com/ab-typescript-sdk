@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -30,7 +30,7 @@ export interface BankAccountPaymentProfile {
   lastName?: string;
   /** The Chargify-assigned id for the customer record to which the bank account belongs */
   customerId?: number;
-  /** The vault that stores the payment profile with the provided vault_token. */
+  /** The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. */
   currentVault?: BankAccountVault;
   /** The “token” provided by your vault storage for an already stored payment profile */
   vaultToken?: string;
@@ -51,14 +51,14 @@ export interface BankAccountPaymentProfile {
   /** The bank where the account resides */
   bankName?: string;
   /** A string representation of the stored bank routing number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’). payment_type will be bank_account */
-  maskedBankRoutingNumber: string;
+  maskedBankRoutingNumber?: string;
   /** A string representation of the stored bank account number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’) */
   maskedBankAccountNumber: string;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;
   /** Defaults to personal */
   bankAccountHolderType?: BankAccountHolderType;
-  paymentType?: PaymentType;
+  paymentType: PaymentType;
   /** denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account */
   verified?: boolean;
   siteGatewaySettingId?: number | null;
@@ -82,14 +82,14 @@ export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> 
     customerVaultToken: ['customer_vault_token', optional(nullable(string()))],
     billingAddress2: ['billing_address_2', optional(nullable(string()))],
     bankName: ['bank_name', optional(string())],
-    maskedBankRoutingNumber: ['masked_bank_routing_number', string()],
+    maskedBankRoutingNumber: ['masked_bank_routing_number', optional(string())],
     maskedBankAccountNumber: ['masked_bank_account_number', string()],
     bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
     bankAccountHolderType: [
       'bank_account_holder_type',
       optional(bankAccountHolderTypeSchema),
     ],
-    paymentType: ['payment_type', optional(paymentTypeSchema)],
+    paymentType: ['payment_type', paymentTypeSchema],
     verified: ['verified', optional(boolean())],
     siteGatewaySettingId: [
       'site_gateway_setting_id',

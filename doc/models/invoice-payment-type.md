@@ -11,8 +11,8 @@ The type of payment to be applied to an Invoice. Defaults to external.
 
 | Name |
 |  --- |
-| `external` |
-| `prepayment` |
-| `serviceCredit` |
-| `payment` |
+| `External` |
+| `Prepayment` |
+| `ServiceCredit` |
+| `Payment` |
 

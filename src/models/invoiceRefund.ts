@@ -1,10 +1,11 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
 import {
+  boolean,
   expandoObject,
   nullable,
   number,
@@ -23,6 +24,7 @@ export interface InvoiceRefund {
   gatewayTransactionId?: string | null;
   gatewayUsed?: string;
   gatewayHandle?: string | null;
+  achLateReject?: boolean | null;
   [key: string]: unknown;
 }
 
@@ -38,4 +40,5 @@ export const invoiceRefundSchema: Schema<InvoiceRefund> = expandoObject({
   ],
   gatewayUsed: ['gateway_used', optional(string())],
   gatewayHandle: ['gateway_handle', optional(nullable(string()))],
+  achLateReject: ['ach_late_reject', optional(nullable(boolean()))],
 });

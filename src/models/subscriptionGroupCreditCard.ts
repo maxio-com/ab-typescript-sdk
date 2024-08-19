@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -18,7 +18,7 @@ import {
   SubscriptionGroupCreditCardFullNumber,
   subscriptionGroupCreditCardFullNumberSchema,
 } from './containers/subscriptionGroupCreditCardFullNumber';
-import { CurrentVault, currentVaultSchema } from './currentVault';
+import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
 
 export interface SubscriptionGroupCreditCard {
   fullNumber?: SubscriptionGroupCreditCardFullNumber;
@@ -27,7 +27,7 @@ export interface SubscriptionGroupCreditCard {
   chargifyToken?: string;
   vaultToken?: string;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
-  currentVault?: CurrentVault;
+  currentVault?: CreditCardVault;
   gatewayHandle?: string;
   firstName?: string;
   lastName?: string;
@@ -62,7 +62,7 @@ export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCa
     ],
     chargifyToken: ['chargify_token', optional(string())],
     vaultToken: ['vault_token', optional(string())],
-    currentVault: ['current_vault', optional(currentVaultSchema)],
+    currentVault: ['current_vault', optional(creditCardVaultSchema)],
     gatewayHandle: ['gateway_handle', optional(string())],
     firstName: ['first_name', optional(string())],
     lastName: ['last_name', optional(string())],

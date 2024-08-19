@@ -22,13 +22,13 @@
 | `issueDate` | `string \| undefined` | Optional | Date the invoice was issued to the customer.  This is the date that the invoice was made available for payment.<br><br>The format is `"YYYY-MM-DD"`. |
 | `dueDate` | `string \| undefined` | Optional | Date the invoice is due.<br><br>The format is `"YYYY-MM-DD"`. |
 | `paidDate` | `string \| null \| undefined` | Optional | Date the invoice became fully paid.<br><br>If partial payments are applied to the invoice, this date will not be present until payment has been made in full.<br><br>The format is `"YYYY-MM-DD"`. |
-| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Optional | The current status of the invoice. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statuses) for more. |
+| `status` | [`InvoiceStatus \| undefined`](../../doc/models/invoice-status.md) | Optional | The current status of the invoice. See [Invoice Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview#invoice-statuses) for more. |
 | `role` | [`InvoiceRole \| undefined`](../../doc/models/invoice-role.md) | Optional | - |
 | `parentInvoiceId` | `number \| null \| undefined` | Optional | - |
 | `collectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `paymentInstructions` | `string \| undefined` | Optional | A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant. |
 | `currency` | `string \| undefined` | Optional | The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. |
-| `consolidationLevel` | [`InvoiceConsolidationLevel \| undefined`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835). |
+| `consolidationLevel` | [`InvoiceConsolidationLevel \| undefined`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-Invoice-Consolidation). |
 | `parentInvoiceUid` | `string \| null \| undefined` | Optional | For invoices with `consolidation_level` of `child`, this specifies the UID of the parent (consolidated) invoice. |
 | `subscriptionGroupId` | `number \| null \| undefined` | Optional | - |
 | `parentInvoiceNumber` | `number \| null \| undefined` | Optional | For invoices with `consolidation_level` of `child`, this specifies the number of the parent (consolidated) invoice. |
@@ -61,6 +61,7 @@
 | `displaySettings` | [`InvoiceDisplaySettings \| undefined`](../../doc/models/invoice-display-settings.md) | Optional | - |
 | `publicUrl` | `string \| undefined` | Optional | The public URL of the invoice |
 | `previousBalanceData` | [`InvoicePreviousBalance \| undefined`](../../doc/models/invoice-previous-balance.md) | Optional | - |
+| `publicUrlExpiresOn` | `string \| undefined` | Optional | The format is `"YYYY-MM-DD"`. |
 
 ## Example (as JSON)
 
@@ -69,6 +70,7 @@
   "issue_date": "2024-01-01",
   "due_date": "2024-01-01",
   "paid_date": "2024-01-01",
+  "public_url_expires_on": "2024-01-21",
   "id": 252,
   "uid": "uid0",
   "site_id": 178,

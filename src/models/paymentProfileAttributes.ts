@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -12,6 +12,7 @@ import {
   Schema,
   string,
 } from '../schema';
+import { AllVaults, allVaultsSchema } from './allVaults';
 import { CardType, cardTypeSchema } from './cardType';
 import {
   PaymentProfileAttributesExpirationMonth,
@@ -21,14 +22,14 @@ import {
   PaymentProfileAttributesExpirationYear,
   paymentProfileAttributesExpirationYearSchema,
 } from './containers/paymentProfileAttributesExpirationYear';
-import { CurrentVault, currentVaultSchema } from './currentVault';
+import { PaymentType, paymentTypeSchema } from './paymentType';
 
 /** alias to credit_card_attributes */
 export interface PaymentProfileAttributes {
-  /** (Optional) Token received after sending billing informations using chargify.js. This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
+  /** (Optional) Token received after sending billing information using chargify.js. This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
   chargifyToken?: string;
   id?: number;
-  paymentType?: string;
+  paymentType?: PaymentType;
   /** (Optional) First name on card or bank account. If omitted, the first_name from customer attributes will be used. */
   firstName?: string;
   /** (Optional) Last name on card or bank account. If omitted, the last_name from customer attributes will be used. */
@@ -55,7 +56,7 @@ export interface PaymentProfileAttributes {
   /** (Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway. */
   billingZip?: string;
   /** (Optional, used only for Subscription Import) The vault that stores the payment profile with the provided vault_token. */
-  currentVault?: CurrentVault;
+  currentVault?: AllVaults;
   /** (Optional, used only for Subscription Import) The “token” provided by your vault storage for an already stored payment profile */
   vaultToken?: string;
   /** (Optional, used only for Subscription Import) (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token */
@@ -77,7 +78,7 @@ export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = 
   {
     chargifyToken: ['chargify_token', optional(string())],
     id: ['id', optional(number())],
-    paymentType: ['payment_type', optional(string())],
+    paymentType: ['payment_type', optional(paymentTypeSchema)],
     firstName: ['first_name', optional(string())],
     lastName: ['last_name', optional(string())],
     maskedCardNumber: ['masked_card_number', optional(string())],
@@ -97,7 +98,7 @@ export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = 
     billingState: ['billing_state', optional(string())],
     billingCountry: ['billing_country', optional(string())],
     billingZip: ['billing_zip', optional(string())],
-    currentVault: ['current_vault', optional(currentVaultSchema)],
+    currentVault: ['current_vault', optional(allVaultsSchema)],
     vaultToken: ['vault_token', optional(string())],
     customerVaultToken: ['customer_vault_token', optional(string())],
     customerId: ['customer_id', optional(number())],

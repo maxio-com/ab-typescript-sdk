@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `amount` |
-| `percent` |
+| `Amount` |
+| `Percent` |
 

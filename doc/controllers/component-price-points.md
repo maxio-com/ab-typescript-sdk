@@ -27,7 +27,7 @@ const componentPricePointsController = new ComponentPricePointsController(client
 
 Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
 
-See [Price Points Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-points) for more information on price points and moving subscriptions between price points.
+See [Price Points Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261191737101-Price-Points-Components) for more information on price points and moving subscriptions between price points.
 
 Note: Custom price points are not able to be set as the default for a component.
 
@@ -41,8 +41,8 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `number` | Template, Required | The Chargify id of the component to which the price point belongs |
-| `pricePointId` | `number` | Template, Required | The Chargify id of the price point |
+| `componentId` | `number` | Template, Required | The Advanced Billing id of the component to which the price point belongs |
+| `pricePointId` | `number` | Template, Required | The Advanced Billing id of the price point |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -119,7 +119,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointRespons
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `number` | Template, Required | The Chargify id of the component |
+| `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `body` | [`CreateComponentPricePointRequest \| undefined`](../../doc/models/create-component-price-point-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -191,7 +191,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointsRespon
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `number` | Template, Required | The Chargify id of the component |
+| `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | Include an array of currency price data |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
@@ -210,6 +210,7 @@ const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
   perPage: 50
 }
+
 try {
   const { result, ...httpResponse } = await componentPricePointsController.listComponentPricePoints(collect);
   // Get more response info...
@@ -286,7 +287,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointsRespon
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `string` | Template, Required | The Chargify id of the component for which you want to fetch price points. |
+| `componentId` | `string` | Template, Required | The Advanced Billing id of the component for which you want to fetch price points. |
 | `body` | [`CreateComponentPricePointsRequest \| undefined`](../../doc/models/create-component-price-points-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -627,8 +628,8 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointRespons
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `number` | Template, Required | The Chargify id of the component to which the price point belongs |
-| `pricePointId` | `number` | Template, Required | The Chargify id of the price point |
+| `componentId` | `number` | Template, Required | The Advanced Billing id of the component to which the price point belongs |
+| `pricePointId` | `number` | Template, Required | The Advanced Billing id of the price point |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -710,7 +711,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentCurrencyPricesRes
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `pricePointId` | `number` | Template, Required | The Chargify id of the price point |
+| `pricePointId` | `number` | Template, Required | The Advanced Billing id of the price point |
 | `body` | [`CreateCurrencyPricesRequest \| undefined`](../../doc/models/create-currency-prices-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -793,7 +794,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentCurrencyPricesRes
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `pricePointId` | `number` | Template, Required | The Chargify id of the price point |
+| `pricePointId` | `number` | Template, Required | The Advanced Billing id of the price point |
 | `body` | [`UpdateCurrencyPricesRequest \| undefined`](../../doc/models/update-currency-prices-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -910,6 +911,7 @@ const collect = {
     ],
   }
 }
+
 try {
   const { result, ...httpResponse } = await componentPricePointsController.listAllComponentPricePoints(collect);
   // Get more response info...

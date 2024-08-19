@@ -20,10 +20,10 @@ const productsController = new ProductsController(client);
 
 # Create Product
 
-Use this method to create a product within your Chargify site.
+Use this method to create a product within your Advanced Billing site.
 
-+ [Products Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709)
-+ [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
++ [Products Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
++ [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Changes-and-Migrations)
 
 ```ts
 async createProduct(  productFamilyId: string,
@@ -136,7 +136,7 @@ try {
 
 # Read Product
 
-This endpoint allows you to read the current details of a product that you've created in Chargify.
+This endpoint allows you to read the current details of a product that you've created in Advanced Billing.
 
 ```ts
 async readProduct(  productId: number,
@@ -147,7 +147,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product |
+| `productId` | `number` | Template, Required | The Advanced Billing id of the product |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -237,7 +237,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product |
+| `productId` | `number` | Template, Required | The Advanced Billing id of the product |
 | `body` | [`CreateOrUpdateProductRequest \| undefined`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -332,7 +332,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product |
+| `productId` | `number` | Template, Required | The Advanced Billing id of the product |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -560,6 +560,7 @@ const collect = {
   includeArchived: true,
   include: ListProductsInclude.PrepaidProductPricePoint
 }
+
 try {
   const { result, ...httpResponse } = await productsController.listProducts(collect);
   // Get more response info...

@@ -12,7 +12,7 @@ Available values: `full`, `prorated`, `none`.
 
 | Name |
 |  --- |
-| `full` |
-| `prorated` |
-| `none` |
+| `Full` |
+| `Prorated` |
+| `None` |
 

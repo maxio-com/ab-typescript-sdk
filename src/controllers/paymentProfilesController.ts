@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -40,10 +40,10 @@ export class PaymentProfilesController extends BaseController {
    * Use this endpoint to create a payment profile for a customer.
    *
    * Payment Profiles house the credit card, ACH (Authorize.Net or Stripe only,) or PayPal (Braintree
-   * only,) data for a customer. The payment information is attached to the customer within Chargify, as
-   * opposed to the Subscription itself.
+   * only,) data for a customer. The payment information is attached to the customer within Advanced
+   * Billing, as opposed to the Subscription itself.
    *
-   * You must include a customer_id so that Chargify will attach it to the customer entry. If no
+   * You must include a customer_id so that Advanced Billing will attach it to the customer entry. If no
    * customer_id is included the API will return a 404.
    *
    * ## Create a Payment Profile for ACH usage
@@ -73,15 +73,15 @@ export class PaymentProfilesController extends BaseController {
    *
    * ## Payment Profile Documentation
    *
-   * Full documentation on how Payment Profiles operate within Chargify can be located under the
+   * Full documentation on how Payment Profiles operate within Advanced Billing can be located under the
    * following links:
    *
-   * + [Subscriber Payment Details](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405212558349-
-   * Customers-Reference#customers-reference-0-0)
-   * + [Self Service Pages](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021) (Allows
-   * credit card updates by Subscriber)
-   * + [Public Signup Pages payment settings](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405267754381-Individual-Page-Settings#credit-card-settings)
+   * + [Subscriber Payment Details](https://maxio.zendesk.com/hc/en-us/articles/24251599929613-
+   * Subscription-Summary-Payment-Details-Tab)
+   * + [Self Service Pages](https://maxio.zendesk.com/hc/en-us/articles/24261425318541-Self-Service-
+   * Pages) (Allows credit card updates by Subscriber)
+   * + [Public Signup Pages payment settings](https://maxio.zendesk.com/hc/en-us/articles/24261368332557-
+   * Individual-Page-Settings)
    *
    * ## Create a Payment Profile with a Chargify.js token
    *
@@ -124,8 +124,8 @@ export class PaymentProfilesController extends BaseController {
    *
    * For more information on GoCardless, please view the following resources:
    *
-   * + [Full documentation on GoCardless](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5404501889677)
+   * + [Full documentation on GoCardless](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-
+   * GoCardless)
    *
    * + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.
    * com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-
@@ -178,8 +178,8 @@ export class PaymentProfilesController extends BaseController {
    *
    * If the customer, bank account, and mandate already exist in GoCardless, a payment profile can be
    * created by using the IDs. In order to create masked versions of `bank_account_number` and
-   * `bank_routing_number` that are used to display within Chargify Admin UI, you can pass the last four
-   * digits for this fields which then will be saved in this form `XXXX[four-provided-digits]`.
+   * `bank_routing_number` that are used to display within Advanced Billing Admin UI, you can pass the
+   * last four digits for this fields which then will be saved in this form `XXXX[four-provided-digits]`.
    *
    * ```json
    * {
@@ -205,8 +205,8 @@ export class PaymentProfilesController extends BaseController {
    *
    * For more information on Stripe SEPA Direct Debit, please view the following resources:
    *
-   * + [Full documentation on Stripe SEPA Direct Debit](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
+   * + [Full documentation on Stripe SEPA Direct Debit](https://maxio.zendesk.com/hc/en-
+   * us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
    *
    * + [Using Chargify.js with Stripe Direct Debit - minimal example](https://developers.chargify.
    * com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-
@@ -241,8 +241,8 @@ export class PaymentProfilesController extends BaseController {
    *
    * For more information on Stripe BECS Direct Debit, please view the following resources:
    *
-   * + [Full documentation on Stripe BECS Direct Debit](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
+   * + [Full documentation on Stripe BECS Direct Debit](https://maxio.zendesk.com/hc/en-
+   * us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
    *
    * + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](https://developers.chargify.
    * com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-
@@ -279,8 +279,8 @@ export class PaymentProfilesController extends BaseController {
    * Contact the support team to enable this payment method.
    * For more information on Stripe BACS Direct Debit, please view the following resources:
    *
-   * + [Full documentation on Stripe BACS Direct Debit](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
+   * + [Full documentation on Stripe BACS Direct Debit](https://maxio.zendesk.com/hc/en-
+   * us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
    *
    * ### Stripe BACS Direct Debit Payment Profiles
    *
@@ -307,9 +307,10 @@ export class PaymentProfilesController extends BaseController {
    * ## 3D Secure - Checkout
    *
    * It may happen that a payment needs 3D Secure Authentication when the payment profile is created;
-   * this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.
-   * com/hc/en-us/articles/5405177432077#psd2-flows-pre-authentication-and-post-authentication). The
-   * server returns `422 Unprocessable Entity` in this case with the following response:
+   * this is referred to in our help docs as a [post-authentication flow](https://maxio.zendesk.com/hc/en-
+   * us/articles/24176278996493-Testing-Implementing-3D-Secure#psd2-flows-pre-authentication-and-post-
+   * authentication). The server returns `422 Unprocessable Entity` in this case with the following
+   * response:
    *
    * ```json
    * {
@@ -381,7 +382,7 @@ export class PaymentProfilesController extends BaseController {
    *                                                           created in your current vault. If the customer, bank
    *                                                           account, and mandate already exist in your vault, follow
    *                                                           the Import example to link the payment profile into
-   *                                                           Chargify.
+   *                                                           Advanced Billing.
    * @return Response from the API call
    */
   async createPaymentProfile(
@@ -535,9 +536,9 @@ export class PaymentProfilesController extends BaseController {
    * card number and CVV.
    *
    * - If you are using **Authorize.net**, **Cybersource**, **Forte**, **Braintree Blue** or **Stripe**,
-   * Chargify will ignore the credit card number and CVV when processing an update via the API, and
-   * attempt a partial update instead. If you wish to change the card number on a payment profile, you
-   * will need to create a new payment profile for the given customer.
+   * Advanced Billing will ignore the credit card number and CVV when processing an update via the API,
+   * and attempt a partial update instead. If you wish to change the card number on a payment profile,
+   * you will need to create a new payment profile for the given customer.
    *
    * - A Payment Profile cannot be updated with the attributes of another type of Payment Profile. For
    * example, if the payment profile you are attempting to update is a credit card, you cannot pass in
@@ -762,16 +763,16 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * One Time Tokens aka Chargify Tokens house the credit card or ACH (Authorize.Net or Stripe only) data
-   * for a customer.
+   * One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe
+   * only) data for a customer.
    *
    * You can use One Time Tokens while creating a subscription or payment profile instead of passing all
    * bank account or credit card data directly to a given API endpoint.
    *
-   * To obtain a One Time Token you have to use [chargify.js](https://developers.chargify.
+   * To obtain a One Time Token you have to use [Chargify.js](https://developers.chargify.
    * com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview).
    *
-   * @param chargifyToken  Chargify Token
+   * @param chargifyToken  Advanced Billing Token
    * @return Response from the API call
    */
   async readOneTimeToken(

@@ -1,12 +1,12 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
 import { expandoObject, nullable, optional, Schema, string } from '../schema';
+import { AllVaults, allVaultsSchema } from './allVaults';
 import { CardType, cardTypeSchema } from './cardType';
-import { CurrentVault, currentVaultSchema } from './currentVault';
 
 export interface UpdatePaymentProfile {
   /** The first name of the card holder. */
@@ -22,7 +22,7 @@ export interface UpdatePaymentProfile {
   /** (Optional when performing a Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012 */
   expirationYear?: string;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
-  currentVault?: CurrentVault;
+  currentVault?: AllVaults;
   /** The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway. */
   billingAddress?: string;
   /** The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway. */
@@ -46,7 +46,7 @@ export const updatePaymentProfileSchema: Schema<UpdatePaymentProfile> = expandoO
     cardType: ['card_type', optional(cardTypeSchema)],
     expirationMonth: ['expiration_month', optional(string())],
     expirationYear: ['expiration_year', optional(string())],
-    currentVault: ['current_vault', optional(currentVaultSchema)],
+    currentVault: ['current_vault', optional(allVaultsSchema)],
     billingAddress: ['billing_address', optional(string())],
     billingCity: ['billing_city', optional(string())],
     billingState: ['billing_state', optional(string())],

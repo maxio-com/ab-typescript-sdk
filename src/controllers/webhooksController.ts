@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -49,18 +49,18 @@ export class WebhooksController extends BaseController {
    * groups of webhooks. Webhooks will be sent on endpoints specified by you. Endpoints can be added via
    * API or Web UI. There is also an option to enable / disable webhooks via API request.
    *
-   * We recommend that you review Chargify's webhook documentation located in our help site. The
-   * following resources will help guide you on how to use webhooks in Chargify, in addition to these
-   * webhook endpoints:
+   * We recommend that you review Advanced Billing's webhook documentation located in our help site. The
+   * following resources will help guide you on how to use webhooks in Advanced Billing, in addition to
+   * these webhook endpoints:
    *
-   * + [Adding/editing new webhooks](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5404448450317#configure-webhook-url)
-   * + [Webhooks introduction and delivery information](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405568068365#webhooks-introduction-0-0)
-   * + [Main webhook overview](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-
-   * Webhooks-Reference#webhooks-reference-0-0)
-   * + [Available webhooks and payloads](https://maxio-chargify.zendesk.com/hc/en-
-   * us/articles/5405357509645-Webhooks-Reference#events)
+   * + [Adding/editing new webhooks](https://maxio.zendesk.com/hc/en-us/articles/24286723085197-
+   * Webhooks#configure-webhook-url)
+   * + [Webhooks introduction and delivery information](https://maxio.zendesk.com/hc/en-
+   * us/articles/24266143173901-Webhooks-Overview)
+   * + [Main webhook reference](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-
+   * Reference)
+   * + [Available webhooks and payloads](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-
+   * Webhooks-Reference#events)
    *
    * ## List Webhooks for a Site
    *
@@ -82,7 +82,7 @@ export class WebhooksController extends BaseController {
    *                                      value is 20. The maximum allowed values is 200; any per_page value over 200
    *                                      will be changed to 200. Use in query `per_page=200`.
    * @param order        The order in which the Webhooks are returned.
-   * @param subscription The Chargify id of a subscription you'd like to filter for
+   * @param subscription The Advanced Billing id of a subscription you'd like to filter for
    * @return Response from the API call
    */
   async listWebhooks(
@@ -174,8 +174,7 @@ export class WebhooksController extends BaseController {
    * (events) to it.
    *
    * You can check available events here.
-   * [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-
-   * Reference#example-payloads)
+   * [Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-Reference#events)
    *
    * @param body
    * @return Response from the API call
@@ -217,8 +216,8 @@ export class WebhooksController extends BaseController {
    * You can update an Endpoint via the API with a PUT request to the resource endpoint.
    *
    * You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.
-   * Check available [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404448450317-
-   * Webhooks#configure-webhook-url).
+   * Check available [Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-
+   * Reference#events).
    *
    * Always send a complete list of events which you want subscribe/watch.
    * Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end
@@ -227,8 +226,8 @@ export class WebhooksController extends BaseController {
    * If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the
    * specific event key.
    *
-   * @param endpointId   The Chargify id for the endpoint that should be
-   *                                                             updated
+   * @param endpointId   The Advanced Billing id for the endpoint that should
+   *                                                             be updated
    * @param body
    * @return Response from the API call
    */
