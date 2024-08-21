@@ -36,6 +36,7 @@
 | `parentId` | `number \| null \| undefined` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
 | `locale` | `string \| null \| undefined` | Optional | The locale for the customer to identify language-region |
 | `defaultSubscriptionGroupUid` | `string \| null \| undefined` | Optional | - |
+| `salesforceId` | `string \| null \| undefined` | Optional | The Salesforce ID for the customer |
 
 ## Example (as JSON)
 

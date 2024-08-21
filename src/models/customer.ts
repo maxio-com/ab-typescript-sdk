@@ -68,6 +68,8 @@ export interface Customer {
   /** The locale for the customer to identify language-region */
   locale?: string | null;
   defaultSubscriptionGroupUid?: string | null;
+  /** The Salesforce ID for the customer */
+  salesforceId?: string | null;
   [key: string]: unknown;
 }
 
@@ -111,4 +113,5 @@ export const customerSchema: Schema<Customer> = expandoObject({
     'default_subscription_group_uid',
     optional(nullable(string())),
   ],
+  salesforceId: ['salesforce_id', optional(nullable(string()))],
 });
