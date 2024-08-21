@@ -11,6 +11,6 @@ Current status of the credit note.
 
 | Name |
 |  --- |
-| `open` |
-| `applied` |
+| `Open` |
+| `Applied` |
 

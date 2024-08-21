@@ -9,8 +9,8 @@
 
 | Name |
 |  --- |
-| `shippingThenBilling` |
-| `billingThenShipping` |
-| `shippingOnly` |
-| `billingOnly` |
+| `ShippingThenBilling` |
+| `BillingThenShipping` |
+| `ShippingOnly` |
+| `BillingOnly` |
 

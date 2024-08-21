@@ -23,19 +23,19 @@ const customersController = new CustomersController(client);
 
 You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value.
 
-If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Chargify’s unique ID for the customer, which is in the `id` attribute.
+If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Advanced Billing’s unique ID for the customer, which is in the `id` attribute.
 
-Full documentation on how to locate, create and edit Customers in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659914267).
+Full documentation on how to locate, create and edit Customers in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24252190590093-Customer-Details).
 
 ## Required Country Format
 
-Chargify requires that you use the ISO Standard Country codes when formatting country attribute of the customer.
+Advanced Billing requires that you use the ISO Standard Country codes when formatting country attribute of the customer.
 
 Countries should be formatted as 2 characters. For more information, please see the following wikipedia article on [ISO_3166-1.](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 
 ## Required State Format
 
-Chargify requires that you use the ISO Standard State codes when formatting state attribute of the customer.
+Advanced Billing requires that you use the ISO Standard State codes when formatting state attribute of the customer.
 
 + US States (2 characters): [ISO_3166-2](https://en.wikipedia.org/wiki/ISO_3166-2:US)
 
@@ -43,8 +43,8 @@ Chargify requires that you use the ISO Standard State codes when formatting stat
 
 ## Locale
 
-Chargify allows you to attribute a language/region to your customer to deliver invoices in any required language.
-For more: [Customer Locale](https://chargify.zendesk.com/hc/en-us/articles/4407870384283#customer-locale)
+Advanced Billing allows you to attribute a language/region to your customer to deliver invoices in any required language.
+For more: [Customer Locale](https://maxio.zendesk.com/hc/en-us/articles/24286672013709-Customer-Locale)
 
 ```ts
 async createCustomer(  body?: CreateCustomerRequest,
@@ -149,7 +149,7 @@ Use the search feature with the `q` query parameter to retrieve an array of cust
 Common use cases are:
 
 + Search by an email
-+ Search by a Chargify ID
++ Search by an Advanced Billing ID
 + Search by an organization
 + Search by a reference value from your application
 + Search by a first or last name
@@ -196,6 +196,7 @@ const collect = {
   perPage: 30,
   dateField: BasicDateField.UpdatedAt
 }
+
 try {
   const { result, ...httpResponse } = await customersController.listCustomers(collect);
   // Get more response info...
@@ -295,7 +296,7 @@ try {
 
 # Read Customer
 
-This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
+This method allows to retrieve the Customer properties by Advanced Billing-generated Customer ID.
 
 ```ts
 async readCustomer(  id: number,
@@ -306,7 +307,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the customer |
+| `id` | `number` | Template, Required | The Advanced Billing id of the customer |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -345,7 +346,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the customer |
+| `id` | `number` | Template, Required | The Advanced Billing id of the customer |
 | `body` | [`UpdateCustomerRequest \| undefined`](../../doc/models/update-customer-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -433,7 +434,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the customer |
+| `id` | `number` | Template, Required | The Advanced Billing id of the customer |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

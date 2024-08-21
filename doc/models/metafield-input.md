@@ -11,8 +11,8 @@ Indicates how data should be added to the metafield. For example, a text type is
 
 | Name |
 |  --- |
-| `balanceTracker` |
-| `text` |
-| `radio` |
-| `dropdown` |
+| `BalanceTracker` |
+| `Text` |
+| `Radio` |
+| `Dropdown` |
 

@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -9,12 +9,16 @@ import {
   boolean,
   expandoObject,
   lazy,
+  nullable,
   number,
   optional,
   Schema,
   string,
 } from '../schema';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { OveragePricing, overagePricingSchema } from './overagePricing';
 import { Price, priceSchema } from './price';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
@@ -34,7 +38,8 @@ export interface CreatePrepaidUsageComponentPricePoint {
   renewPrepaidAllocation?: boolean;
   /** (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire */
   expirationInterval?: number;
-  expirationIntervalUnit?: IntervalUnit;
+  /** A string representing the expiration interval unit for this component, either month or day */
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   [key: string]: unknown;
 }
 
@@ -54,7 +59,7 @@ export const createPrepaidUsageComponentPricePointSchema: Schema<CreatePrepaidUs
     expirationInterval: ['expiration_interval', optional(number())],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(intervalUnitSchema),
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
   }
 );

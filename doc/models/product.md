@@ -16,7 +16,7 @@
 | `accountingCode` | `string \| null \| undefined` | Optional | E.g. Internal ID or SKU Number |
 | `requestCreditCard` | `boolean \| undefined` | Optional | Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. |
 | `expirationInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
-| `expirationIntervalUnit` | [`ExtendedIntervalUnit \| null \| undefined`](../../doc/models/extended-interval-unit.md) | Optional | A string representing the expiration interval unit for this product, either month or day |
+| `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this product, either month, day or never |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this product was created |
 | `updatedAt` | `string \| undefined` | Optional | Timestamp indicating when this product was last updated |
 | `priceInCents` | `bigint \| undefined` | Optional | The product price, in integer cents |

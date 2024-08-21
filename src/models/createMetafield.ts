@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -21,7 +21,7 @@ export interface CreateMetafield {
   scope?: MetafieldScope;
   /** Indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page. Defaults to 'text' */
   inputType?: MetafieldInput;
-  /** Only applicable when input_type is radio or dropdown */
+  /** Only applicable when input_type is radio or dropdown. Empty strings will not be submitted. */
   mEnum?: string[];
   [key: string]: unknown;
 }

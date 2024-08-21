@@ -25,7 +25,7 @@ const productPricePointsController = new ProductPricePointsController(client);
 
 # Create Product Price Point
 
-[Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)
+[Product Price Point Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-Product-Price-Points)
 
 ```ts
 async createProductPricePoint(  productId: CreateProductPricePointProductId,
@@ -64,7 +64,7 @@ const body: CreateProductPricePointRequest = {
     initialChargeInCents: BigInt(120000),
     initialChargeAfterTrial: false,
     expirationInterval: 12,
-    expirationIntervalUnit: IntervalUnit.Month,
+    expirationIntervalUnit: ExpirationIntervalUnit.Month,
   },
 };
 
@@ -153,6 +153,7 @@ const collect = {Liquid error: Value cannot be null. (Parameter 'key')
   page: 2,
   perPage: 10
 }
+
 try {
   const { result, ...httpResponse } = await productPricePointsController.listProductPricePoints(collect);
   // Get more response info...
@@ -445,8 +446,8 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductPricePointResponse>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product to which the price point belongs |
-| `pricePointId` | `number` | Template, Required | The Chargify id of the product price point |
+| `productId` | `number` | Template, Required | The Advanced Billing id of the product to which the price point belongs |
+| `pricePointId` | `number` | Template, Required | The Advanced Billing id of the product price point |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -519,8 +520,8 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product to which the price point belongs |
-| `pricePointId` | `number` | Template, Required | The Chargify id of the product price point |
+| `productId` | `number` | Template, Required | The Advanced Billing id of the product to which the price point belongs |
+| `pricePointId` | `number` | Template, Required | The Advanced Billing id of the product price point |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -617,7 +618,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<BulkCreateProductPricePoin
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productId` | `number` | Template, Required | The Chargify id of the product to which the price points belong |
+| `productId` | `number` | Template, Required | The Advanced Billing id of the product to which the price points belong |
 | `body` | [`BulkCreateProductPricePointsRequest \| undefined`](../../doc/models/bulk-create-product-price-points-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -645,7 +646,7 @@ const body: BulkCreateProductPricePointsRequest = {
       initialChargeInCents: BigInt(120000),
       initialChargeAfterTrial: false,
       expirationInterval: 12,
-      expirationIntervalUnit: IntervalUnit.Month,
+      expirationIntervalUnit: ExpirationIntervalUnit.Month,
     },
     {
       name: 'More Educational',
@@ -660,7 +661,7 @@ const body: BulkCreateProductPricePointsRequest = {
       initialChargeInCents: BigInt(120000),
       initialChargeAfterTrial: false,
       expirationInterval: 12,
-      expirationIntervalUnit: IntervalUnit.Month,
+      expirationIntervalUnit: ExpirationIntervalUnit.Month,
     }
   ],
 };
@@ -734,7 +735,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CurrencyPricesResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productPricePointId` | `number` | Template, Required | The Chargify id of the product price point |
+| `productPricePointId` | `number` | Template, Required | The Advanced Billing id of the product price point |
 | `body` | [`CreateProductCurrencyPricesRequest \| undefined`](../../doc/models/create-product-currency-prices-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -824,7 +825,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CurrencyPricesResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `productPricePointId` | `number` | Template, Required | The Chargify id of the product price point |
+| `productPricePointId` | `number` | Template, Required | The Advanced Billing id of the product price point |
 | `body` | [`UpdateCurrencyPricesRequest \| undefined`](../../doc/models/update-currency-prices-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -941,6 +942,7 @@ const collect = {
   page: 2,
   perPage: 50
 }
+
 try {
   const { result, ...httpResponse } = await productPricePointsController.listAllProductPricePoints(collect);
   // Get more response info...

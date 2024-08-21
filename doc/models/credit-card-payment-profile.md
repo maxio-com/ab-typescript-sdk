@@ -12,12 +12,12 @@
 | `id` | `number \| undefined` | Optional | The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer. |
 | `firstName` | `string \| undefined` | Optional | The first name of the card holder. |
 | `lastName` | `string \| undefined` | Optional | The last name of the card holder. |
-| `maskedCardNumber` | `string` | Required | A string representation of the credit card number with all but the last 4 digits masked with X’s (i.e. ‘XXXX-XXXX-XXXX-1234’). |
+| `maskedCardNumber` | `string \| undefined` | Optional | A string representation of the credit card number with all but the last 4 digits masked with X’s (i.e. ‘XXXX-XXXX-XXXX-1234’). |
 | `cardType` | [`CardType \| undefined`](../../doc/models/card-type.md) | Optional | The type of card used. |
 | `expirationMonth` | `number \| undefined` | Optional | An integer representing the expiration month of the card(1 – 12). |
 | `expirationYear` | `number \| undefined` | Optional | An integer representing the 4-digit expiration year of the card(i.e. ‘2012’). |
 | `customerId` | `number \| undefined` | Optional | The Chargify-assigned id for the customer record to which the card belongs. |
-| `currentVault` | [`CurrentVault \| undefined`](../../doc/models/current-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
+| `currentVault` | [`CreditCardVault \| undefined`](../../doc/models/credit-card-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `vaultToken` | `string \| null \| undefined` | Optional | The “token” provided by your vault storage for an already stored payment profile. |
 | `billingAddress` | `string \| null \| undefined` | Optional | The current billing street address for the card. |
 | `billingCity` | `string \| null \| undefined` | Optional | The current billing address city for the card. |
@@ -26,7 +26,7 @@
 | `billingCountry` | `string \| null \| undefined` | Optional | The current billing address country for the card. |
 | `customerVaultToken` | `string \| null \| undefined` | Optional | (only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token. |
 | `billingAddress2` | `string \| null \| undefined` | Optional | The current billing street address, second line, for the card. |
-| `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | - |
+| `paymentType` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `PaymentType.CreditCard` |
 | `disabled` | `boolean \| undefined` | Optional | - |
 | `chargifyToken` | `string \| undefined` | Optional | Token received after sending billing information using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) |
 | `siteGatewaySettingId` | `number \| null \| undefined` | Optional | - |

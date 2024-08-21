@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -51,6 +51,8 @@ export interface CustomerAttributes {
   metafields?: Record<string, string>;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
   parentId?: number | null;
+  /** (Optional) The Salesforce ID of the customer. */
+  salesforceId?: string | null;
   [key: string]: unknown;
 }
 
@@ -74,5 +76,6 @@ export const customerAttributesSchema: Schema<CustomerAttributes> = expandoObjec
     vatNumber: ['vat_number', optional(string())],
     metafields: ['metafields', optional(dict(string()))],
     parentId: ['parent_id', optional(nullable(number()))],
+    salesforceId: ['salesforce_id', optional(nullable(string()))],
   }
 );

@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -136,11 +136,11 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * This method will create a Product Family within your Chargify site. Create a Product Family to act
-   * as a container for your products, components and coupons.
+   * This method will create a Product Family within your Advanced Billing site. Create a Product Family
+   * to act as a container for your products, components and coupons.
    *
-   * Full documentation on how Product Families operate within the Chargify UI can be located
-   * [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
+   * Full documentation on how Product Families operate within the Advanced Billing UI can be located
+   * [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
    *
    * @param body
    * @return Response from the API call
@@ -227,7 +227,7 @@ export class ProductFamiliesController extends BaseController {
    *
    * The product family can be specified either with the id number, or with the `handle:my-family` format.
    *
-   * @param id The Chargify id of the product family
+   * @param id The Advanced Billing id of the product family
    * @return Response from the API call
    */
   async readProductFamily(

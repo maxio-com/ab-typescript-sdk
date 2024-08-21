@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -20,13 +20,13 @@ export class EventsController extends BaseController {
   /**
    * ## Events Intro
    *
-   * Chargify Events include various activity that happens around a Site. This information is
+   * Advanced Billing Events include various activity that happens around a Site. This information is
    * **especially** useful to track down issues that arise when subscriptions are not created due to
    * errors.
    *
-   * Within the Chargify UI, "Events" are referred to as "Site Activity".  Full documentation on how to
-   * record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.
-   * com/hc/en-us/articles/4407864698139).
+   * Within the Advanced Billing UI, "Events" are referred to as "Site Activity".  Full documentation on
+   * how to record view Events / Site Activty in the Advanced Billing UI can be located [here](https:
+   * //maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activity).
    *
    * ## List Events for a Site
    *

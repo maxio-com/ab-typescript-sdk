@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `customer` |
-| `subscription` |
+| `Customer` |
+| `Subscription` |
 

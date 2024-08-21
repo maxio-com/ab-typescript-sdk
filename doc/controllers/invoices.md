@@ -187,6 +187,7 @@ const collect = {
   ],
   sort: InvoiceSortField.TotalAmount
 }
+
 try {
   const { result, ...httpResponse } = await invoicesController.listInvoices(collect);
   // Get more response info...
@@ -694,6 +695,7 @@ const collect = {
   page: 2,
   perPage: 100
 }
+
 try {
   const { result, ...httpResponse } = await invoicesController.listInvoiceEvents(collect);
   // Get more response info...
@@ -1036,9 +1038,22 @@ try {
                 "tax_rule_id": 1,
                 "percentage": "6.75",
                 "country_code": "US",
-                "subdivision_code": "NC"
+                "subdivision_code": "NC",
+                "tax_amount": "10.66",
+                "taxable_amount": "157.95",
+                "tax_exempt_amount": "0.0",
+                "non_taxable_amount": "0.0",
+                "tax_name": "NC STATE TAX",
+                "tax_type": "Sales",
+                "rate_type": "General",
+                "tax_authority_type": 45,
+                "state_assigned_no": "",
+                "tax_sub_type": "S"
               }
-            ]
+            ],
+            "eu_vat": false,
+            "type": "Sales",
+            "tax_exempt_amount": "0.0"
           }
         ],
         "credit_amount": "0.0",
@@ -1123,7 +1138,7 @@ In order to apply a service credit to an invoice, specify the `type` as `service
 }
 ```
 
-Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
 
 ```ts
 async recordPaymentForInvoice(  uid: string,
@@ -1311,7 +1326,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ListCreditNotesResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number \| undefined` | Query, Optional | The subscription's Chargify id |
+| `subscriptionId` | `number \| undefined` | Query, Optional | The subscription's Advanced Billing id |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data |
@@ -1337,6 +1352,7 @@ const collect = {
   refunds: false,
   applications: false
 }
+
 try {
   const { result, ...httpResponse } = await invoicesController.listCreditNotes(collect);
   // Get more response info...
@@ -1603,7 +1619,28 @@ try {
               "taxable_amount": "6.87559535",
               "tax_amount": "0.46410269"
             }
-          ]
+          ],
+          "tax_component_breakouts": [
+            {
+              "tax_rule_id": 1,
+              "percentage": "6.75",
+              "country_code": "US",
+              "subdivision_code": "NC",
+              "tax_amount": "10.66",
+              "taxable_amount": "157.95",
+              "tax_exempt_amount": "0.0",
+              "non_taxable_amount": "0.0",
+              "tax_name": "NC STATE TAX",
+              "tax_type": "Sales",
+              "rate_type": "General",
+              "tax_authority_type": 45,
+              "state_assigned_no": "",
+              "tax_sub_type": "S"
+            }
+          ],
+          "eu_vat": false,
+          "type": "Sales",
+          "tax_exempt_amount": "0.0"
         }
       ],
       "applications": [
@@ -1931,7 +1968,28 @@ try {
           "taxable_amount": "6.87559535",
           "tax_amount": "0.46410269"
         }
-      ]
+      ],
+      "tax_component_breakouts": [
+        {
+          "tax_rule_id": 1,
+          "percentage": "6.75",
+          "country_code": "US",
+          "subdivision_code": "NC",
+          "tax_amount": "10.66",
+          "taxable_amount": "157.95",
+          "tax_exempt_amount": "0.0",
+          "non_taxable_amount": "0.0",
+          "tax_name": "NC STATE TAX",
+          "tax_type": "Sales",
+          "rate_type": "General",
+          "tax_authority_type": 45,
+          "state_assigned_no": "",
+          "tax_sub_type": "S"
+        }
+      ],
+      "eu_vat": false,
+      "type": "Sales",
+      "tax_exempt_amount": "0.0"
     }
   ],
   "applications": [
@@ -2189,6 +2247,7 @@ const collect = {
   perPage: 50,
   direction: Direction.Asc
 }
+
 try {
   const { result, ...httpResponse } = await invoicesController.listConsolidatedInvoiceSegments(collect);
   // Get more response info...
@@ -3186,7 +3245,8 @@ try {
         "outstanding_amount": "id"
       }
     ]
-  }
+  },
+  "public_url_expires_on": "2024-11-21"
 }
 ```
 

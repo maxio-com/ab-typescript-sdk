@@ -9,14 +9,14 @@
 
 | Name |
 |  --- |
-| `unset` |
-| `signup` |
-| `renewal` |
-| `usage` |
-| `reactivation` |
-| `proration` |
-| `migration` |
-| `adhoc` |
-| `backport` |
-| `backportbalancereconciliation` |
+| `Unset` |
+| `Signup` |
+| `Renewal` |
+| `Usage` |
+| `Reactivation` |
+| `Proration` |
+| `Migration` |
+| `Adhoc` |
+| `Backport` |
+| `Backportbalancereconciliation` |
 

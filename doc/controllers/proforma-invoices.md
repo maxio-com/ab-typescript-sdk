@@ -117,6 +117,7 @@ const collect = {
   payments: false,
   customFields: false
 }
+
 try {
   const { result, ...httpResponse } = await proformaInvoicesController.listSubscriptionGroupProformaInvoices(collect);
   // Get more response info...
@@ -293,6 +294,7 @@ const collect = {
   payments: false,
   customFields: false
 }
+
 try {
   const { result, ...httpResponse } = await proformaInvoicesController.listProformaInvoices(collect);
   // Get more response info...

@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -74,6 +74,7 @@ export * from './errors/tooManyManagementLinkRequestsError';
 export type { AccountBalance } from './models/accountBalance';
 export type { AccountBalances } from './models/accountBalances';
 export type { ACHAgreement } from './models/aCHAgreement';
+export type { ActivateEventBasedComponent } from './models/activateEventBasedComponent';
 export type { ActivateSubscriptionRequest } from './models/activateSubscriptionRequest';
 export type { AddCouponsRequest } from './models/addCouponsRequest';
 export type { AddressChange } from './models/addressChange';
@@ -90,6 +91,9 @@ export { AllocationPreviewLineItemKind } from './models/allocationPreviewLineIte
 export type { AllocationPreviewResponse } from './models/allocationPreviewResponse';
 export type { AllocationResponse } from './models/allocationResponse';
 export type { AllocationSettings } from './models/allocationSettings';
+export { AllVaults } from './models/allVaults';
+export type { ApplePayPaymentProfile } from './models/applePayPaymentProfile';
+export { ApplePayVault } from './models/applePayVault';
 export type { AppliedCreditNoteData } from './models/appliedCreditNoteData';
 export type { ApplyCreditNoteEvent } from './models/applyCreditNoteEvent';
 export type { ApplyCreditNoteEventData } from './models/applyCreditNoteEventData';
@@ -242,6 +246,7 @@ export type { CreateUsageRequest } from './models/createUsageRequest';
 export type { CreditAccountBalanceChanged } from './models/creditAccountBalanceChanged';
 export type { CreditCardAttributes } from './models/creditCardAttributes';
 export type { CreditCardPaymentProfile } from './models/creditCardPaymentProfile';
+export { CreditCardVault } from './models/creditCardVault';
 export type { CreditNote } from './models/creditNote';
 export type { CreditNoteApplication } from './models/creditNoteApplication';
 export type { CreditNoteLineItem } from './models/creditNoteLineItem';
@@ -252,7 +257,6 @@ export { CreditType } from './models/creditType';
 export type { CurrencyPrice } from './models/currencyPrice';
 export { CurrencyPriceRole } from './models/currencyPriceRole';
 export type { CurrencyPricesResponse } from './models/currencyPricesResponse';
-export { CurrentVault } from './models/currentVault';
 export type { Customer } from './models/customer';
 export type { CustomerAttributes } from './models/customerAttributes';
 export type { CustomerChange } from './models/customerChange';
@@ -286,7 +290,7 @@ export type { Event } from './models/event';
 export type { EventBasedBillingSegmentError } from './models/eventBasedBillingSegmentError';
 export type { EventResponse } from './models/eventResponse';
 export { EventType } from './models/eventType';
-export { ExtendedIntervalUnit } from './models/extendedIntervalUnit';
+export { ExpirationIntervalUnit } from './models/expirationIntervalUnit';
 export { FailedPaymentAction } from './models/failedPaymentAction';
 export type { FailedPaymentEvent } from './models/failedPaymentEvent';
 export type { FailedPaymentEventData } from './models/failedPaymentEventData';
@@ -433,6 +437,8 @@ export type { PaymentProfileAttributes } from './models/paymentProfileAttributes
 export type { PaymentProfileResponse } from './models/paymentProfileResponse';
 export type { PaymentRelatedEvents } from './models/paymentRelatedEvents';
 export { PaymentType } from './models/paymentType';
+export type { PaypalPaymentProfile } from './models/paypalPaymentProfile';
+export { PayPalVault } from './models/payPalVault';
 export type { PendingCancellationChange } from './models/pendingCancellationChange';
 export type { PortalManagementLink } from './models/portalManagementLink';
 export type { PrepaidComponentPricePoint } from './models/prepaidComponentPricePoint';
@@ -695,9 +701,9 @@ export * from './models/containers/listUsagesInputComponentId';
 export * from './models/containers/metafieldEnum';
 export * from './models/containers/meteredComponentUnitPrice';
 export * from './models/containers/onOffComponentUnitPrice';
+export * from './models/containers/paymentProfile';
 export * from './models/containers/paymentProfileAttributesExpirationMonth';
 export * from './models/containers/paymentProfileAttributesExpirationYear';
-export * from './models/containers/paymentProfileResponsePaymentProfile';
 export * from './models/containers/prepaidUsageComponentUnitPrice';
 export * from './models/containers/priceEndingQuantity';
 export * from './models/containers/priceStartingQuantity';

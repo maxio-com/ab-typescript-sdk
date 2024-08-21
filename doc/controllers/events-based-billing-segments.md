@@ -138,6 +138,7 @@ const collect = {
     segmentProperty1Value: 'EU',
   }
 }
+
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.listSegmentsForPricePoint(collect);
   // Get more response info...

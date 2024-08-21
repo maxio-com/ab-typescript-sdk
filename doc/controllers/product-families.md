@@ -66,6 +66,7 @@ const collect = {
   dateField: BasicDateField.UpdatedAt,
   include: ListProductsInclude.PrepaidProductPricePoint
 }
+
 try {
   const { result, ...httpResponse } = await productFamiliesController.listProductsForProductFamily(collect);
   // Get more response info...
@@ -186,9 +187,9 @@ try {
 
 # Create Product Family
 
-This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
+This method will create a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components and coupons.
 
-Full documentation on how Product Families operate within the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
+Full documentation on how Product Families operate within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
 
 ```ts
 async createProductFamily(  body?: CreateProductFamilyRequest,
@@ -283,6 +284,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductFamilyResponse[]>>
 const collect = {
   dateField: BasicDateField.UpdatedAt
 }
+
 try {
   const { result, ...httpResponse } = await productFamiliesController.listProductFamilies(collect);
   // Get more response info...
@@ -340,7 +342,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductFamilyResponse>>
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number` | Template, Required | The Chargify id of the product family |
+| `id` | `number` | Template, Required | The Advanced Billing id of the product family |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type

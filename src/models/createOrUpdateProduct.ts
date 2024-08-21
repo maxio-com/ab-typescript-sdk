@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -8,11 +8,16 @@ import {
   bigint,
   boolean,
   expandoObject,
+  nullable,
   number,
   optional,
   Schema,
   string,
 } from '../schema';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 
 export interface CreateOrUpdateProduct {
@@ -37,12 +42,12 @@ export interface CreateOrUpdateProduct {
   /** The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product trial would last 30 days. */
   trialInterval?: number;
   /** A string representing the trial interval unit for this product, either month or day */
-  trialIntervalUnit?: IntervalUnit;
+  trialIntervalUnit?: IntervalUnit | null;
   trialType?: string;
   /** The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product would expire after 30 days. */
   expirationInterval?: number;
-  /** A string representing the expiration interval unit for this product, either month or day */
-  expirationIntervalUnit?: IntervalUnit;
+  /** A string representing the expiration interval unit for this product, either month, day or never */
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   autoCreateSignupPage?: boolean;
   /** A string representing the tax code related to the product type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
   taxCode?: string;
@@ -61,12 +66,15 @@ export const createOrUpdateProductSchema: Schema<CreateOrUpdateProduct> = expand
     intervalUnit: ['interval_unit', intervalUnitSchema],
     trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
     trialInterval: ['trial_interval', optional(number())],
-    trialIntervalUnit: ['trial_interval_unit', optional(intervalUnitSchema)],
+    trialIntervalUnit: [
+      'trial_interval_unit',
+      optional(nullable(intervalUnitSchema)),
+    ],
     trialType: ['trial_type', optional(string())],
     expirationInterval: ['expiration_interval', optional(number())],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(intervalUnitSchema),
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
     autoCreateSignupPage: ['auto_create_signup_page', optional(boolean())],
     taxCode: ['tax_code', optional(string())],

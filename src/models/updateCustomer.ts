@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -36,6 +36,8 @@ export interface UpdateCustomer {
   parentId?: number | null;
   /** Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway */
   verified?: boolean | null;
+  /** The Salesforce ID of the customer */
+  salesforceId?: string | null;
   [key: string]: unknown;
 }
 
@@ -59,4 +61,5 @@ export const updateCustomerSchema: Schema<UpdateCustomer> = expandoObject({
   taxExemptReason: ['tax_exempt_reason', optional(string())],
   parentId: ['parent_id', optional(nullable(number()))],
   verified: ['verified', optional(nullable(boolean()))],
+  salesforceId: ['salesforce_id', optional(nullable(string()))],
 });

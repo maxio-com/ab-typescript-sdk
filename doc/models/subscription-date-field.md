@@ -9,13 +9,13 @@
 
 | Name |
 |  --- |
-| `currentPeriodEndsAt` |
-| `currentPeriodStartsAt` |
-| `createdAt` |
-| `activatedAt` |
-| `canceledAt` |
-| `expiresAt` |
-| `trialStartedAt` |
-| `trialEndedAt` |
-| `updatedAt` |
+| `CurrentPeriodEndsAt` |
+| `CurrentPeriodStartsAt` |
+| `CreatedAt` |
+| `ActivatedAt` |
+| `CanceledAt` |
+| `ExpiresAt` |
+| `TrialStartedAt` |
+| `TrialEndedAt` |
+| `UpdatedAt` |
 

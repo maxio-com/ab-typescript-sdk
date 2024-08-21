@@ -21,7 +21,7 @@ export async function createComponent({
     unitPrice: 1,
   };
   const response = await componentsController.createMeteredComponent(
-    productFamilyId,
+    productFamilyId.toString(),
     {
       meteredComponent,
     }

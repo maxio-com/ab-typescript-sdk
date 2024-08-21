@@ -23,7 +23,7 @@ Endpoint returns subscriptions with associated sales reps
 
 The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
-Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Maxio support.
 
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
@@ -60,6 +60,7 @@ const collect = {
   page: 2,
   perPage: 100
 }
+
 try {
   const { result, ...httpResponse } = await salesCommissionsController.listSalesCommissionSettings(collect);
   // Get more response info...
@@ -115,7 +116,7 @@ Endpoint returns sales rep list with details
 
 The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
-Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Maxio support.
 
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
@@ -152,6 +153,7 @@ const collect = {
   page: 2,
   perPage: 100
 }
+
 try {
   const { result, ...httpResponse } = await salesCommissionsController.listSalesReps(collect);
   // Get more response info...
@@ -256,7 +258,7 @@ Endpoint returns sales rep and attached subscriptions details.
 
 The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
-Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Maxio support.
 
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
@@ -275,7 +277,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<SaleRep>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `sellerId` | `string` | Template, Required | The Chargify id of your seller account |
-| `salesRepId` | `string` | Template, Required | The Chargify id of sales rep. |
+| `salesRepId` | `string` | Template, Required | The Advanced Billing id of sales rep. |
 | `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication). |
 | `liveMode` | `boolean \| undefined` | Query, Optional | This parameter indicates if records should be fetched from live mode sites. Default value is true. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |

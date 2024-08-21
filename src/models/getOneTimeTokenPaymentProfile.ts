@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -14,7 +14,7 @@ import {
   string,
 } from '../schema';
 import { CardType, cardTypeSchema } from './cardType';
-import { CurrentVault, currentVaultSchema } from './currentVault';
+import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
 
 export interface GetOneTimeTokenPaymentProfile {
   id?: string | null;
@@ -27,7 +27,7 @@ export interface GetOneTimeTokenPaymentProfile {
   expirationYear: number;
   customerId?: string | null;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
-  currentVault: CurrentVault;
+  currentVault: CreditCardVault;
   vaultToken: string;
   billingAddress: string;
   billingAddress2?: string;
@@ -53,7 +53,7 @@ export const getOneTimeTokenPaymentProfileSchema: Schema<GetOneTimeTokenPaymentP
     expirationMonth: ['expiration_month', number()],
     expirationYear: ['expiration_year', number()],
     customerId: ['customer_id', optional(nullable(string()))],
-    currentVault: ['current_vault', currentVaultSchema],
+    currentVault: ['current_vault', creditCardVaultSchema],
     vaultToken: ['vault_token', string()],
     billingAddress: ['billing_address', string()],
     billingAddress2: ['billing_address_2', optional(string())],

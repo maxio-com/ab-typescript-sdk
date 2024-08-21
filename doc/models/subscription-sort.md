@@ -9,10 +9,10 @@
 
 | Name |
 |  --- |
-| `signupDate` |
-| `periodStart` |
-| `periodEnd` |
-| `nextAssessment` |
-| `updatedAt` |
-| `createdAt` |
+| `SignupDate` |
+| `PeriodStart` |
+| `PeriodEnd` |
+| `NextAssessment` |
+| `UpdatedAt` |
+| `CreatedAt` |
 

@@ -11,5 +11,5 @@ Use for subscriptions with product eligible for calendar billing only. Value can
 
 | Name |
 |  --- |
-| `end` |
+| `End` |
 

@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -8,6 +8,7 @@ import {
   array,
   expandoObject,
   lazy,
+  nullable,
   number,
   optional,
   Schema,
@@ -25,7 +26,7 @@ export interface ComponentPricePointItem {
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
-  intervalUnit?: IntervalUnit;
+  intervalUnit?: IntervalUnit | null;
   prices?: Price[];
   [key: string]: unknown;
 }
@@ -36,7 +37,7 @@ export const componentPricePointItemSchema: Schema<ComponentPricePointItem> = ex
     handle: ['handle', optional(string())],
     pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
     interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
+    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     prices: ['prices', optional(array(lazy(() => priceSchema)))],
   }
 );

@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -20,7 +20,10 @@ import {
   prepaidUsageComponentUnitPriceSchema,
 } from './containers/prepaidUsageComponentUnitPrice';
 import { CreditType, creditTypeSchema } from './creditType';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { OveragePricing, overagePricingSchema } from './overagePricing';
 import {
   PrepaidComponentPricePoint,
@@ -42,7 +45,7 @@ export interface PrepaidUsageComponent {
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme?: PricingScheme;
-  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
+  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
   /**
    * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
@@ -70,7 +73,7 @@ export interface PrepaidUsageComponent {
   renewPrepaidAllocation?: boolean;
   /** (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire */
   expirationInterval?: number;
-  expirationIntervalUnit?: IntervalUnit;
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   displayOnHostedPage?: boolean;
   allowFractionalQuantities?: boolean;
   publicSignupPageIds?: number[];
@@ -108,7 +111,7 @@ export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = expand
     expirationInterval: ['expiration_interval', optional(number())],
     expirationIntervalUnit: [
       'expiration_interval_unit',
-      optional(intervalUnitSchema),
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
     displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
     allowFractionalQuantities: [

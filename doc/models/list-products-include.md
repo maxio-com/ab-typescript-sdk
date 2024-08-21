@@ -9,7 +9,7 @@
 
 | Name |
 |  --- |
-| `prepaidProductPricePoint` |
+| `PrepaidProductPricePoint` |
 
 ## Example
 

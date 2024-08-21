@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `coupon` |
-| `referral` |
+| `Coupon` |
+| `Referral` |
 

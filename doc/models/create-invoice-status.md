@@ -9,8 +9,8 @@
 
 | Name |
 |  --- |
-| `draft` |
-| `open` |
+| `Draft` |
+| `Open` |
 
 ## Example
 

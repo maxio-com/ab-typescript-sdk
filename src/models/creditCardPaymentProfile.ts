@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -14,7 +14,7 @@ import {
   string,
 } from '../schema';
 import { CardType, cardTypeSchema } from './cardType';
-import { CurrentVault, currentVaultSchema } from './currentVault';
+import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
 import { PaymentType, paymentTypeSchema } from './paymentType';
 
 export interface CreditCardPaymentProfile {
@@ -25,7 +25,7 @@ export interface CreditCardPaymentProfile {
   /** The last name of the card holder. */
   lastName?: string;
   /** A string representation of the credit card number with all but the last 4 digits masked with X’s (i.e. ‘XXXX-XXXX-XXXX-1234’). */
-  maskedCardNumber: string;
+  maskedCardNumber?: string;
   /** The type of card used. */
   cardType?: CardType;
   /** An integer representing the expiration month of the card(1 – 12). */
@@ -35,7 +35,7 @@ export interface CreditCardPaymentProfile {
   /** The Chargify-assigned id for the customer record to which the card belongs. */
   customerId?: number;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
-  currentVault?: CurrentVault;
+  currentVault?: CreditCardVault;
   /** The “token” provided by your vault storage for an already stored payment profile. */
   vaultToken?: string | null;
   /** The current billing street address for the card. */
@@ -52,7 +52,7 @@ export interface CreditCardPaymentProfile {
   customerVaultToken?: string | null;
   /** The current billing street address, second line, for the card. */
   billingAddress2?: string | null;
-  paymentType?: PaymentType;
+  paymentType: PaymentType;
   disabled?: boolean;
   /** Token received after sending billing information using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
   chargifyToken?: string;
@@ -67,12 +67,12 @@ export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = 
     id: ['id', optional(number())],
     firstName: ['first_name', optional(string())],
     lastName: ['last_name', optional(string())],
-    maskedCardNumber: ['masked_card_number', string()],
+    maskedCardNumber: ['masked_card_number', optional(string())],
     cardType: ['card_type', optional(cardTypeSchema)],
     expirationMonth: ['expiration_month', optional(number())],
     expirationYear: ['expiration_year', optional(number())],
     customerId: ['customer_id', optional(number())],
-    currentVault: ['current_vault', optional(currentVaultSchema)],
+    currentVault: ['current_vault', optional(creditCardVaultSchema)],
     vaultToken: ['vault_token', optional(nullable(string()))],
     billingAddress: ['billing_address', optional(nullable(string()))],
     billingCity: ['billing_city', optional(nullable(string()))],
@@ -81,7 +81,7 @@ export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = 
     billingCountry: ['billing_country', optional(nullable(string()))],
     customerVaultToken: ['customer_vault_token', optional(nullable(string()))],
     billingAddress2: ['billing_address_2', optional(nullable(string()))],
-    paymentType: ['payment_type', optional(paymentTypeSchema)],
+    paymentType: ['payment_type', paymentTypeSchema],
     disabled: ['disabled', optional(boolean())],
     chargifyToken: ['chargify_token', optional(string())],
     siteGatewaySettingId: [

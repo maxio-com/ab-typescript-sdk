@@ -11,12 +11,12 @@
 
 | Name |
 |  --- |
-| `check` |
-| `cash` |
-| `moneyOrder` |
-| `ach` |
-| `paypalAccount` |
-| `creditCard` |
-| `creditCardOnFile` |
-| `other` |
+| `Check` |
+| `Cash` |
+| `MoneyOrder` |
+| `Ach` |
+| `PaypalAccount` |
+| `CreditCard` |
+| `CreditCardOnFile` |
+| `Other` |
 

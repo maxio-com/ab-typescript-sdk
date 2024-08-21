@@ -11,7 +11,7 @@
 
 | Name |
 |  --- |
-| `prorated` |
-| `immediate` |
-| `delayed` |
+| `Prorated` |
+| `Immediate` |
+| `Delayed` |
 

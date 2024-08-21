@@ -11,8 +11,8 @@ The current chargeback status.
 
 | Name |
 |  --- |
-| `open` |
-| `lost` |
-| `won` |
-| `closed` |
+| `Open` |
+| `Lost` |
+| `Won` |
+| `Closed` |
 

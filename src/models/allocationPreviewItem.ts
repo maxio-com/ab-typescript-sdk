@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -48,7 +48,7 @@ export interface AllocationPreviewItem {
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
-  intervalUnit?: IntervalUnit;
+  intervalUnit?: IntervalUnit | null;
   previousPricePointId?: number;
   pricePointHandle?: string;
   pricePointName?: string;
@@ -77,7 +77,7 @@ export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = expand
     downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
     pricePointId: ['price_point_id', optional(number())],
     interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
+    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     previousPricePointId: ['previous_price_point_id', optional(number())],
     pricePointHandle: ['price_point_handle', optional(string())],
     pricePointName: ['price_point_name', optional(string())],

@@ -11,10 +11,10 @@ The type of payment method used. Defaults to other.
 
 | Name |
 |  --- |
-| `creditCard` |
-| `check` |
-| `cash` |
-| `moneyOrder` |
-| `ach` |
-| `other` |
+| `CreditCard` |
+| `Check` |
+| `Cash` |
+| `MoneyOrder` |
+| `Ach` |
+| `Other` |
 

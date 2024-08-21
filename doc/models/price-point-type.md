@@ -15,7 +15,7 @@ Price point type. We expose the following types:
 
 | Name |
 |  --- |
-| `catalog` |
-| `default` |
-| `custom` |
+| `Catalog` |
+| `Default` |
+| `Custom` |
 

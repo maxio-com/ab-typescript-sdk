@@ -1,11 +1,12 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
 import {
   array,
+  boolean,
   expandoObject,
   lazy,
   nullable,
@@ -39,6 +40,9 @@ export interface InvoiceTax {
   transactionId?: number;
   lineItemBreakouts?: InvoiceTaxBreakout[];
   taxComponentBreakouts?: InvoiceTaxComponentBreakout[];
+  euVat?: boolean;
+  type?: string;
+  taxExemptAmount?: string;
   [key: string]: unknown;
 }
 
@@ -60,4 +64,7 @@ export const invoiceTaxSchema: Schema<InvoiceTax> = expandoObject({
     'tax_component_breakouts',
     optional(array(lazy(() => invoiceTaxComponentBreakoutSchema))),
   ],
+  euVat: ['eu_vat', optional(boolean())],
+  type: ['type', optional(string())],
+  taxExemptAmount: ['tax_exempt_amount', optional(string())],
 });

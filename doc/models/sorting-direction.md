@@ -11,6 +11,6 @@ Used for sorting results.
 
 | Name |
 |  --- |
-| `asc` |
-| `desc` |
+| `Asc` |
+| `Desc` |
 

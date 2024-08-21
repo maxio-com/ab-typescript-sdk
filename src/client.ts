@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -51,7 +51,7 @@ export class Client implements ClientInterface {
         ? this._config.httpClientOptions.timeout
         : this._config.timeout;
     this._userAgent = updateUserAgent(
-      'AB SDK TypeScript:4.0.0 on OS {os-info}'
+      'AB SDK TypeScript:5.0.0 on OS {os-info}'
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
       (server) => getBaseUri(server, this._config),
@@ -92,9 +92,9 @@ function createHttpClientAdapter(client: HttpClient): HttpClientInterface {
 function getBaseUri(server: Server = 'default', config: Configuration): string {
   if (config.environment === Environment.Production) {
     if (server === 'default') {
-      return pathTemplate`https://${new SkipEncode(config.subdomain)}.${
-        new SkipEncode(config.domain)
-      }`;
+      return pathTemplate`https://${new SkipEncode(
+        config.subdomain
+      )}.${new SkipEncode(config.domain)}`;
     }
   }
   if (config.environment === Environment.Environment2) {

@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `compound` |
-| `fullprice` |
+| `Compound` |
+| `Fullprice` |
 

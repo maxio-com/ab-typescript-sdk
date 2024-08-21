@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -22,10 +22,9 @@ import { ErrorListResponseError } from '../errors/errorListResponseError';
 export class AdvanceInvoiceController extends BaseController {
   /**
    * Generate an invoice in advance for a subscription's next renewal date. [Please see our docs](https:
-   * //maxio-chargify.zendesk.com/hc/en-us/articles/5404811062541-Issue-Invoice-In-Advance) for more
-   * information on advance invoices, including eligibility on generating one; for the most part, they
-   * function like any other invoice, except they are issued early and have special behavior upon being
-   * voided.
+   * //maxio.zendesk.com/hc/en-us/articles/24252026404749-Issue-Invoice-In-Advance) for more information
+   * on advance invoices, including eligibility on generating one; for the most part, they function like
+   * any other invoice, except they are issued early and have special behavior upon being voided.
    * A subscription may only have one advance invoice per billing period. Attempting to issue an advance
    * invoice when one already exists will return an error.
    * That said, regeneration of the invoice may be forced with the params `force: true`, which will void

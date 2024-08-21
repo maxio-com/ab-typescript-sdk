@@ -15,14 +15,14 @@
 | `handle` | `string \| undefined` | Optional | (Optional) |
 | `priceInCents` | [`SubscriptionCustomPricePriceInCents`](../../doc/models/containers/subscription-custom-price-price-in-cents.md) | Required | This is a container for one-of cases. |
 | `interval` | [`SubscriptionCustomPriceInterval`](../../doc/models/containers/subscription-custom-price-interval.md) | Required | This is a container for one-of cases. |
-| `intervalUnit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Required | Required if using `custom_price` attribute. |
+| `intervalUnit` | [`IntervalUnit \| null`](../../doc/models/interval-unit.md) | Required | Required if using `custom_price` attribute. |
 | `trialPriceInCents` | [`SubscriptionCustomPriceTrialPriceInCents \| undefined`](../../doc/models/containers/subscription-custom-price-trial-price-in-cents.md) | Optional | This is a container for one-of cases. |
 | `trialInterval` | [`SubscriptionCustomPriceTrialInterval \| undefined`](../../doc/models/containers/subscription-custom-price-trial-interval.md) | Optional | This is a container for one-of cases. |
 | `trialIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | (Optional) |
 | `initialChargeInCents` | [`SubscriptionCustomPriceInitialChargeInCents \| undefined`](../../doc/models/containers/subscription-custom-price-initial-charge-in-cents.md) | Optional | This is a container for one-of cases. |
 | `initialChargeAfterTrial` | `boolean \| undefined` | Optional | (Optional) |
 | `expirationInterval` | [`SubscriptionCustomPriceExpirationInterval \| undefined`](../../doc/models/containers/subscription-custom-price-expiration-interval.md) | Optional | This is a container for one-of cases. |
-| `expirationIntervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | (Optional) |
+| `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | (Optional) |
 | `taxIncluded` | `boolean \| undefined` | Optional | (Optional) |
 
 ## Example (as JSON)

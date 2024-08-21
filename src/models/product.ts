@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -17,9 +17,9 @@ import {
   string,
 } from '../schema';
 import {
-  ExtendedIntervalUnit,
-  extendedIntervalUnitSchema,
-} from './extendedIntervalUnit';
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { ProductFamily, productFamilySchema } from './productFamily';
 import { PublicSignupPage, publicSignupPageSchema } from './publicSignupPage';
@@ -38,8 +38,8 @@ export interface Product {
   requestCreditCard?: boolean;
   /** A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
   expirationInterval?: number | null;
-  /** A string representing the expiration interval unit for this product, either month or day */
-  expirationIntervalUnit?: ExtendedIntervalUnit | null;
+  /** A string representing the expiration interval unit for this product, either month, day or never */
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   /** Timestamp indicating when this product was created */
   createdAt?: string;
   /** Timestamp indicating when this product was last updated */
@@ -101,7 +101,7 @@ export const productSchema: Schema<Product> = expandoObject({
   expirationInterval: ['expiration_interval', optional(nullable(number()))],
   expirationIntervalUnit: [
     'expiration_interval_unit',
-    optional(nullable(extendedIntervalUnitSchema)),
+    optional(nullable(expirationIntervalUnitSchema)),
   ],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],

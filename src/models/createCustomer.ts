@@ -1,5 +1,5 @@
 /**
- * Maxio Advanced BillingLib
+ * AdvancedBilling
  *
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
@@ -35,6 +35,8 @@ export interface CreateCustomer {
   taxExemptReason?: string;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
   parentId?: number | null;
+  /** The Salesforce ID of the customer */
+  salesforceId?: string | null;
   [key: string]: unknown;
 }
 
@@ -57,4 +59,5 @@ export const createCustomerSchema: Schema<CreateCustomer> = expandoObject({
   taxExempt: ['tax_exempt', optional(boolean())],
   taxExemptReason: ['tax_exempt_reason', optional(string())],
   parentId: ['parent_id', optional(nullable(number()))],
+  salesforceId: ['salesforce_id', optional(nullable(string()))],
 });

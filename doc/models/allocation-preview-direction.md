@@ -9,6 +9,6 @@
 
 | Name |
 |  --- |
-| `upgrade` |
-| `downgrade` |
+| `Upgrade` |
+| `Downgrade` |
 
