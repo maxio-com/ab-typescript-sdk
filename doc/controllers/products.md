@@ -555,6 +555,13 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse[]>>
 ```ts
 const collect = {
   dateField: BasicDateField.UpdatedAt,
+  filter: {
+    ids: [
+      1,
+      2,
+      3
+    ],
+  },
   page: 2,
   perPage: 50,
   includeArchived: true,

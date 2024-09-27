@@ -64,6 +64,13 @@ const collect = {
   page: 2,
   perPage: 50,
   dateField: BasicDateField.UpdatedAt,
+  filter: {
+    ids: [
+      1,
+      2,
+      3
+    ],
+  },
   include: ListProductsInclude.PrepaidProductPricePoint
 }
 

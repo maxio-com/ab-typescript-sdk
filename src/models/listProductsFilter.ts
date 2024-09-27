@@ -4,13 +4,23 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, lazy, optional, Schema } from '../schema';
+import {
+  array,
+  boolean,
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+} from '../schema';
 import {
   PrepaidProductPricePointFilter,
   prepaidProductPricePointFilterSchema,
 } from './prepaidProductPricePointFilter';
 
 export interface ListProductsFilter {
+  /** Allows fetching products with matching id based on provided values. Use in query `filter[ids]=1,2,3`. */
+  ids?: number[];
   /** Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`. */
   prepaidProductPricePoint?: PrepaidProductPricePointFilter;
   /** Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). Use in query `filter[use_site_exchange_rate]=true`. */
@@ -20,6 +30,7 @@ export interface ListProductsFilter {
 
 export const listProductsFilterSchema: Schema<ListProductsFilter> = expandoObject(
   {
+    ids: ['ids', optional(array(number()))],
     prepaidProductPricePoint: [
       'prepaid_product_price_point',
       optional(lazy(() => prepaidProductPricePointFilterSchema)),
