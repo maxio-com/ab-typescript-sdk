@@ -15,6 +15,7 @@ export enum CancellationMethod {
   Dunning = 'dunning',
   BillingPortal = 'billing_portal',
   Unknown = 'unknown',
+  Imported = 'imported',
 }
 
 /**
