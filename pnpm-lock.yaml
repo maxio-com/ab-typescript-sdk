@@ -15,8 +15,8 @@ importers:
         specifier: ^0.3.4
         version: 0.3.4
       '@apimatic/core':
-        specifier: ^0.10.12
-        version: 0.10.12
+        specifier: ^0.10.14
+        version: 0.10.14
       '@apimatic/schema':
         specifier: ^0.7.12
         version: 0.7.12
@@ -152,8 +152,8 @@ packages:
       tslib: 2.6.3
     dev: false
 
-  /@apimatic/core@0.10.12:
-    resolution: {integrity: sha512-PcOkX5SykmhORfHVQsWvGE8rFgCYA7gRoTaTX5kYXDHQLXOZoo/lIoo5Hc4FLqQkgMma9/bsqvvG8ls1d/suhA==}
+  /@apimatic/core@0.10.14:
+    resolution: {integrity: sha512-NTL82E51Ks/db+OVqntw903JiEpn6lHHM7fHcB7RV5SmPqhlZZiCElln4ThMG+tpcCr6sT3DNZYl47Np+Rblrw==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       '@apimatic/convert-to-stream': 0.0.2
