@@ -51,7 +51,7 @@ export interface Customer {
   countryName?: string | null;
   /** The phone number of the customer */
   phone?: string | null;
-  /** Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway */
+  /** Is the customer verified to use ACH as a payment method. */
   verified?: boolean | null;
   /** The timestamp of when the Billing Portal entry was created at for the customer */
   portalCustomerCreatedAt?: string | null;
@@ -70,6 +70,10 @@ export interface Customer {
   defaultSubscriptionGroupUid?: string | null;
   /** The Salesforce ID for the customer */
   salesforceId?: string | null;
+  /** The Tax Exemption Reason Code for the customer */
+  taxExemptReason?: string | null;
+  /** The default auto-renewal profile ID for the customer */
+  defaultAutoRenewalProfileId?: number | null;
   [key: string]: unknown;
 }
 
@@ -114,4 +118,9 @@ export const customerSchema: Schema<Customer> = expandoObject({
     optional(nullable(string())),
   ],
   salesforceId: ['salesforce_id', optional(nullable(string()))],
+  taxExemptReason: ['tax_exempt_reason', optional(nullable(string()))],
+  defaultAutoRenewalProfileId: [
+    'default_auto_renewal_profile_id',
+    optional(nullable(number())),
+  ],
 });

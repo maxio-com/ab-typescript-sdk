@@ -62,6 +62,10 @@ export interface UpdateSubscription {
   dunningCommunicationDelayEnabled?: boolean | null;
   /** Time zone for the Dunning Communication Delay feature. */
   dunningCommunicationDelayTimeZone?: string | null;
+  /** Set to change the current product's price point. */
+  productPricePointId?: number;
+  /** Set to change the current product's price point. */
+  productPricePointHandle?: string;
   [key: string]: unknown;
 }
 
@@ -105,5 +109,7 @@ export const updateSubscriptionSchema: Schema<UpdateSubscription> = expandoObjec
       'dunning_communication_delay_time_zone',
       optional(nullable(string())),
     ],
+    productPricePointId: ['product_price_point_id', optional(number())],
+    productPricePointHandle: ['product_price_point_handle', optional(string())],
   }
 );
