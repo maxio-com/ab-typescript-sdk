@@ -19,6 +19,8 @@
 | `gatewayHandle` | `string \| null \| undefined` | Optional | - |
 | `gatewayUsed` | `string \| undefined` | Optional | - |
 | `gatewayTransactionId` | `string \| null \| undefined` | Optional | The transaction ID for the payment as returned from the payment gateway |
+| `receivedOn` | `string \| null \| undefined` | Optional | Date reflecting when the payment was received from a customer. Must be in the past. Applicable only to<br>`external` payments. |
+| `uid` | `string \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

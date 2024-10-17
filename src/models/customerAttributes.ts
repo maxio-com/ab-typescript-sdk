@@ -53,6 +53,8 @@ export interface CustomerAttributes {
   parentId?: number | null;
   /** (Optional) The Salesforce ID of the customer. */
   salesforceId?: string | null;
+  /** (Optional) The default auto-renewal profile ID for the customer */
+  defaultAutoRenewalProfileId?: number | null;
   [key: string]: unknown;
 }
 
@@ -77,5 +79,9 @@ export const customerAttributesSchema: Schema<CustomerAttributes> = expandoObjec
     metafields: ['metafields', optional(dict(string()))],
     parentId: ['parent_id', optional(nullable(number()))],
     salesforceId: ['salesforce_id', optional(nullable(string()))],
+    defaultAutoRenewalProfileId: [
+      'default_auto_renewal_profile_id',
+      optional(nullable(number())),
+    ],
   }
 );

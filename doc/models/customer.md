@@ -27,7 +27,7 @@
 | `country` | `string \| null \| undefined` | Optional | The customer shipping address country |
 | `countryName` | `string \| null \| undefined` | Optional | The customer's full name of country |
 | `phone` | `string \| null \| undefined` | Optional | The phone number of the customer |
-| `verified` | `boolean \| null \| undefined` | Optional | Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway |
+| `verified` | `boolean \| null \| undefined` | Optional | Is the customer verified to use ACH as a payment method. |
 | `portalCustomerCreatedAt` | `string \| null \| undefined` | Optional | The timestamp of when the Billing Portal entry was created at for the customer |
 | `portalInviteLastSentAt` | `string \| null \| undefined` | Optional | The timestamp of when the Billing Portal invite was last sent at |
 | `portalInviteLastAcceptedAt` | `string \| null \| undefined` | Optional | The timestamp of when the Billing Portal invite was last accepted |
@@ -37,6 +37,8 @@
 | `locale` | `string \| null \| undefined` | Optional | The locale for the customer to identify language-region |
 | `defaultSubscriptionGroupUid` | `string \| null \| undefined` | Optional | - |
 | `salesforceId` | `string \| null \| undefined` | Optional | The Salesforce ID for the customer |
+| `taxExemptReason` | `string \| null \| undefined` | Optional | The Tax Exemption Reason Code for the customer |
+| `defaultAutoRenewalProfileId` | `number \| null \| undefined` | Optional | The default auto-renewal profile ID for the customer |
 
 ## Example (as JSON)
 

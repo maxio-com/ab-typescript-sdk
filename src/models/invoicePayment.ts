@@ -31,6 +31,12 @@ export interface InvoicePayment {
   gatewayUsed?: string;
   /** The transaction ID for the payment as returned from the payment gateway */
   gatewayTransactionId?: string | null;
+  /**
+   * Date reflecting when the payment was received from a customer. Must be in the past. Applicable only to
+   * `external` payments.
+   */
+  receivedOn?: string | null;
+  uid?: string;
   [key: string]: unknown;
 }
 
@@ -51,4 +57,6 @@ export const invoicePaymentSchema: Schema<InvoicePayment> = expandoObject({
     'gateway_transaction_id',
     optional(nullable(string())),
   ],
+  receivedOn: ['received_on', optional(nullable(string()))],
+  uid: ['uid', optional(string())],
 });
