@@ -53,10 +53,7 @@ describe('Components Controller', () => {
     productFamilyId: string,
     componentPayload: CreateMeteredComponent
   ) => {
-    await productsController.createProduct(
-      productFamilyId.toString(),
-      productPaload
-    );
+    await productsController.createProduct(productFamilyId, productPaload);
 
     const createComponentReponse =
       await componentsController.createMeteredComponent(productFamilyId, {
