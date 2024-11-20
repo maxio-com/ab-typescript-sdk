@@ -50,15 +50,21 @@ describe('Components Controller', () => {
 
   const prepareDataForComponentResponse = async (
     productPaload: CreateOrUpdateProductRequest,
-    productFamilyId: string,
+    productFamilyId: number,
     componentPayload: CreateMeteredComponent
   ) => {
-    await productsController.createProduct(productFamilyId, productPaload);
+    await productsController.createProduct(
+      productFamilyId.toString(),
+      productPaload
+    );
 
     const createComponentReponse =
-      await componentsController.createMeteredComponent(productFamilyId, {
-        ...componentPayload,
-      });
+      await componentsController.createMeteredComponent(
+        productFamilyId.toString(),
+        {
+          ...componentPayload,
+        }
+      );
 
     return createComponentReponse.result;
   };
@@ -77,7 +83,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -95,7 +105,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -122,7 +132,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -140,7 +155,7 @@ describe('Components Controller', () => {
 
       await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -166,7 +181,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -184,7 +204,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -214,7 +234,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -232,7 +256,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
       const componentId = component.id?.toString() || '';
@@ -265,7 +289,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -283,7 +312,7 @@ describe('Components Controller', () => {
 
       await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -310,7 +339,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -328,7 +362,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
       const componentId = component.id?.toString() || '';
@@ -360,7 +394,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -385,7 +423,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -414,7 +452,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -432,7 +475,7 @@ describe('Components Controller', () => {
 
       await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -464,7 +507,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -482,7 +530,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -517,7 +565,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -535,7 +587,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -561,7 +613,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -579,7 +636,7 @@ describe('Components Controller', () => {
 
       await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -606,7 +663,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -624,7 +686,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -663,7 +725,11 @@ describe('Components Controller', () => {
   });
   describe('List Components for product family', () => {
     it('should list components associated with the specifed product family', async () => {
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const componentsControllerResponse =
         await componentsController.listComponentsForProductFamily({
@@ -686,7 +752,11 @@ describe('Components Controller', () => {
       });
     });
     it('should not list components associated with the specifed product family with invalid credentials', async () => {
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const componentsControllerResponse =
         invalidComponentsController.listComponentsForProductFamily({
@@ -714,7 +784,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -739,7 +813,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -769,7 +843,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -787,7 +866,7 @@ describe('Components Controller', () => {
 
       await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -821,7 +900,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -839,7 +923,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -886,7 +970,11 @@ describe('Components Controller', () => {
         unitPrice: '',
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const createComponentPricePointRequestPricePoint: CreateComponentPricePointRequestPricePoint =
         {
@@ -919,7 +1007,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -966,7 +1054,11 @@ describe('Components Controller', () => {
         unitPrice: '',
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const createComponentPricePointRequestPricePoint: CreateComponentPricePointRequestPricePoint =
         {
@@ -999,7 +1091,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
@@ -1044,7 +1136,11 @@ describe('Components Controller', () => {
         unitPrice: '',
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const createComponentPricePointRequestPricePoint: CreateComponentPricePointRequestPricePoint =
         {
@@ -1077,7 +1173,7 @@ describe('Components Controller', () => {
 
       const { component } = await prepareDataForComponentResponse(
         newProductPayload,
-        productFamilyId.toString(),
+        productFamilyId,
         meteredComponent
       );
 
