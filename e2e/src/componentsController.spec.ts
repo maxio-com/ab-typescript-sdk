@@ -1,8 +1,12 @@
 import {
+  ComponentPricePointsController,
   ComponentsController,
+  CreateComponentPricePointRequest,
+  CreateComponentPricePointRequestPricePoint,
   CreateMeteredComponent,
   CreateOrUpdateProductRequest,
   IntervalUnit,
+  Price,
   PricingScheme,
   ProductFamiliesController,
   ProductFamily,
@@ -17,6 +21,8 @@ describe('Components Controller', () => {
   let componentsController: ComponentsController;
   let productsController: ProductsController;
   let invalidComponentsController: ComponentsController;
+  let componentPricePointsController: ComponentPricePointsController;
+  let invalidComponentPricePointsController: ComponentPricePointsController;
 
   beforeAll(async () => {
     const client = createClient();
@@ -24,6 +30,10 @@ describe('Components Controller', () => {
     const productFamiliesController = new ProductFamiliesController(client);
     invalidComponentsController = new ComponentsController(invalidClient);
     componentsController = new ComponentsController(client);
+    componentPricePointsController = new ComponentPricePointsController(client);
+    invalidComponentPricePointsController = new ComponentPricePointsController(
+      invalidClient
+    );
     productsController = new ProductsController(client);
     productFamily =
       (
@@ -49,9 +59,12 @@ describe('Components Controller', () => {
     );
 
     const createComponentReponse =
-      await componentsController.createMeteredComponent(productFamilyId.toString(), {
-        ...componentPayload,
-      });
+      await componentsController.createMeteredComponent(
+        productFamilyId.toString(),
+        {
+          ...componentPayload,
+        }
+      );
 
     return createComponentReponse.result;
   };
@@ -70,7 +83,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -115,7 +132,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -159,7 +181,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -207,7 +234,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -258,7 +289,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -303,7 +339,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -339,7 +380,7 @@ describe('Components Controller', () => {
     });
   });
 
-  describe('Update Product Family Component', () => {
+  describe('Update Component', () => {
     it('should update component with valid id', async () => {
       const newProductPayload: CreateOrUpdateProductRequest = {
         product: {
@@ -353,7 +394,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -407,7 +452,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -457,7 +507,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -510,7 +565,11 @@ describe('Components Controller', () => {
         },
       };
 
-      const productFamilyId = productFamily?.id || 0;
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -554,7 +613,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -599,7 +663,12 @@ describe('Components Controller', () => {
           intervalUnit: IntervalUnit.Month,
         },
       };
-      const productFamilyId = productFamily?.id || 0;
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
 
       const meteredComponent: CreateMeteredComponent = {
         meteredComponent: {
@@ -632,6 +701,498 @@ describe('Components Controller', () => {
       expect(archiveComponentResponse).rejects.toThrow();
 
       await archiveComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+  describe('List Components', () => {
+    it('should list components', async () => {
+      const componentsControllerResponse =
+        await componentsController.listComponents({});
+
+      expect(componentsControllerResponse.statusCode).toBe(200);
+    });
+    it('should not list components with invalid credentials', async () => {
+      const invalidcomponentsControllerResponse =
+        invalidComponentsController.listComponents({});
+
+      expect(invalidcomponentsControllerResponse).rejects.toThrow();
+
+      await invalidcomponentsControllerResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+  describe('List Components for product family', () => {
+    it('should list components associated with the specifed product family', async () => {
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const componentsControllerResponse =
+        await componentsController.listComponentsForProductFamily({
+          productFamilyId,
+        });
+
+      expect(componentsControllerResponse.statusCode).toBe(200);
+    });
+    it('should list components associated with the specifed product family', async () => {
+      const invalidProductFamilyId = 123;
+      const listComponentsForProductFamilyResponse =
+        componentsController.listComponentsForProductFamily({
+          productFamilyId: invalidProductFamilyId,
+        });
+
+      expect(listComponentsForProductFamilyResponse).rejects.toThrow();
+
+      await listComponentsForProductFamilyResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+    it('should not list components associated with the specifed product family with invalid credentials', async () => {
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const componentsControllerResponse =
+        invalidComponentsController.listComponentsForProductFamily({
+          productFamilyId,
+        });
+
+      expect(componentsControllerResponse).rejects.toThrow();
+
+      await componentsControllerResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+  describe('Update Product Family Component', () => {
+    it('should update product family component with valid id', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `update-product-family-component-name-${uid()}`,
+          handle: `update-product-family-component-name-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `update-product-family-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const updatedMeteredComponent: UpdateComponentRequest = {
+        component: {
+          name: 'updated-product-family-component-name',
+          description: 'updated-description',
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const componentId = component.id?.toString() || '';
+
+      const updateComponentResponse =
+        await componentsController.updateProductFamilyComponent(
+          productFamilyId,
+          componentId,
+          updatedMeteredComponent
+        );
+
+      expect(updateComponentResponse.statusCode).toBe(200);
+      expect(updateComponentResponse.result.component.name).toBe(
+        updatedMeteredComponent.component.name
+      );
+    });
+    it('should not update product family component with invalid id', async () => {
+      const newProductPayload = {
+        product: {
+          name: `update-product-family-component-invalid-id-${uid()}`,
+          handle: `update-product-family-component-invalid-id-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `update-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const updateComponentResponse =
+        componentsController.updateProductFamilyComponent(
+          productFamilyId,
+          invalidComponentId,
+          {
+            component: {
+              name: 'updated-product-family-component-name-with-invalid-id',
+              description: 'updated-description-with-invalid-id',
+            },
+          }
+        );
+
+      expect(updateComponentResponse).rejects.toThrow();
+
+      await updateComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+    it('should not update product family component with invalid credentials', async () => {
+      const newProductPayload = {
+        product: {
+          name: `update-product-family-component-with-invalid-credentials-${uid()}`,
+          handle: `update-product-family-component-with-invalid-credentials-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `update-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const componentId = component.id?.toString() || '';
+
+      const updateComponentResponse =
+        invalidComponentsController.updateProductFamilyComponent(
+          productFamilyId,
+          componentId,
+          {
+            component: {
+              name: `updated-product-family-component-name-with-invalid-credentials-${uid()}`,
+              description: `updated-product-family-component-description-with-invalid-credentials-${uid()}`,
+            },
+          }
+        );
+
+      expect(updateComponentResponse).rejects.toThrow();
+
+      await updateComponentResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(401);
+      });
+    });
+  });
+  describe('Promote Component Price Point to default', () => {
+    it('should promote component price to default', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `promote-component-price-to-default-name-${uid()}`,
+          handle: `promote-component-price-to-default-handle-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      const price: Price = {
+        starting_quantity: '1',
+        ending_quantity: '',
+        unit_price: '1',
+        startingQuantity: '',
+        unitPrice: '',
+      };
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const createComponentPricePointRequestPricePoint: CreateComponentPricePointRequestPricePoint =
+        {
+          name: `price-point-name-${uid()}`,
+          handle: `price-point-handle-${uid()}`,
+          prices: [price],
+          pricing_scheme: 'per_unit',
+          tax_included: false,
+          pricingScheme: PricingScheme.PerUnit,
+          overagePricing: [],
+        };
+
+      const pricePoint: CreateComponentPricePointRequest = {
+        pricePoint: createComponentPricePointRequestPricePoint,
+      };
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `promote-component-price-to-default-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      const createComponentPricePointResponse =
+        await componentPricePointsController.createComponentPricePoint(
+          component.id || 0,
+          pricePoint
+        );
+
+      const pricePointId =
+        createComponentPricePointResponse.result.pricePoint?.id || 0;
+
+      const promoteComponentPricePointToDefaultResponse =
+        await componentPricePointsController.promoteComponentPricePointToDefault(
+          component.id || 0,
+          pricePointId
+        );
+
+      expect(promoteComponentPricePointToDefaultResponse.statusCode).toBe(200);
+      expect(
+        promoteComponentPricePointToDefaultResponse.result.component
+          .defaultPricePointId
+      ).toBe(pricePointId);
+    });
+
+    it('should not promote component price to default with invalid price point id', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `promote-component-price-to-default-name-${uid()}`,
+          handle: `promote-component-price-to-default-handle-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      const price: Price = {
+        starting_quantity: '1',
+        ending_quantity: '',
+        unit_price: '1',
+        startingQuantity: '',
+        unitPrice: '',
+      };
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const createComponentPricePointRequestPricePoint: CreateComponentPricePointRequestPricePoint =
+        {
+          name: `price-point-name-${uid()}`,
+          handle: `price-point-handle-${uid()}`,
+          prices: [price],
+          pricing_scheme: 'per_unit',
+          tax_included: false,
+          pricingScheme: PricingScheme.PerUnit,
+          overagePricing: [],
+        };
+
+      const pricePoint: CreateComponentPricePointRequest = {
+        pricePoint: createComponentPricePointRequestPricePoint,
+      };
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `promote-component-price-to-default-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      await componentPricePointsController.createComponentPricePoint(
+        component.id || 0,
+        pricePoint
+      );
+
+      const invalidPricePointId = 0;
+      const invalidComponentId = 0;
+
+      const promoteComponentPricePointToDefaultResponse =
+        componentPricePointsController.promoteComponentPricePointToDefault(
+          invalidComponentId,
+          invalidPricePointId
+        );
+
+      expect(promoteComponentPricePointToDefaultResponse).rejects.toThrow();
+
+      await promoteComponentPricePointToDefaultResponse.catch((reason) => {
+        expect(reason.statusCode).toBe(404);
+      });
+    });
+    it('should not promote component price to default with invalid credentials', async () => {
+      const newProductPayload: CreateOrUpdateProductRequest = {
+        product: {
+          name: `promote-component-price-to-default-name-${uid()}`,
+          handle: `promote-component-price-to-default-handle-${uid()}`,
+          description: '',
+          requireCredit_card: true,
+          priceInCents: BigInt(1000),
+          interval: 1,
+          intervalUnit: IntervalUnit.Month,
+        },
+      };
+
+      const price: Price = {
+        starting_quantity: '1',
+        ending_quantity: '',
+        unit_price: '1',
+        startingQuantity: '',
+        unitPrice: '',
+      };
+
+      if (!productFamily?.id) {
+        throw Error('Test data malformed');
+      }
+
+      const productFamilyId = productFamily.id;
+
+      const createComponentPricePointRequestPricePoint: CreateComponentPricePointRequestPricePoint =
+        {
+          name: `price-point-name-${uid()}`,
+          handle: `price-point-handle-${uid()}`,
+          prices: [price],
+          pricing_scheme: 'per_unit',
+          tax_included: false,
+          pricingScheme: PricingScheme.PerUnit,
+          overagePricing: [],
+        };
+
+      const pricePoint: CreateComponentPricePointRequest = {
+        pricePoint: createComponentPricePointRequestPricePoint,
+      };
+
+      const meteredComponent: CreateMeteredComponent = {
+        meteredComponent: {
+          productFamilyId,
+          name: `promote-component-price-to-default-component-name${uid()}`,
+          description: 'test',
+          quantity: 1,
+          unitName: 'test',
+          price: 1,
+          handle: uid(),
+          pricingScheme: PricingScheme.PerUnit,
+          unitPrice: 1,
+        },
+      };
+
+      const { component } = await prepareDataForComponentResponse(
+        newProductPayload,
+        productFamilyId,
+        meteredComponent
+      );
+
+      await componentPricePointsController.createComponentPricePoint(
+        component.id || 0,
+        pricePoint
+      );
+
+      const invalidPricePointId = 0;
+
+      const promoteComponentPricePointToDefaultResponse =
+        invalidComponentPricePointsController.promoteComponentPricePointToDefault(
+          component.id || 0,
+          invalidPricePointId
+        );
+
+      expect(promoteComponentPricePointToDefaultResponse).rejects.toThrow();
+
+      await promoteComponentPricePointToDefaultResponse.catch((reason) => {
         expect(reason.statusCode).toBe(401);
       });
     });
