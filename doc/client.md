@@ -5,9 +5,8 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `subdomain` | `string` | The subdomain for your Advanced Billing site.<br>*Default*: `'subdomain'` |
-| `domain` | `string` | The Advanced Billing server domain.<br>*Default*: `'chargify.com'` |
-| `environment` | `Environment` | The API environment. <br> **Default: `Environment.Production`** |
+| `site` | `string` | The subdomain for your Advanced Billing site.<br>*Default*: `'subdomain'` |
+| `environment` | `Environment` | The API environment. <br> **Default: `Environment.US`** |
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `120000` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
@@ -43,9 +42,8 @@ const client = new Client({
     password: 'BasicAuthPassword'
   },
   timeout: 120000,
-  environment: Environment.Production,
-  subdomain: 'subdomain',
-  domain: 'chargify.com',
+  environment: Environment.US,
+  site: 'subdomain',
 });
 ```
 

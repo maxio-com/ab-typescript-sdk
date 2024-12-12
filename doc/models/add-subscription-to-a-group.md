@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `group` | [`AddSubscriptionToAGroupGroup \| undefined`](../../doc/models/containers/add-subscription-to-a-group-group.md) | Optional | This is a container for one-of cases. |
+| `group` | [`GroupSettings \| undefined`](../../doc/models/group-settings.md) | Optional | - |
 
 ## Example (as JSON)
 

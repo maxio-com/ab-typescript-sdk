@@ -34,8 +34,10 @@ Full documentation on how to use offers in the Advanced Billing UI can be locate
 You can optionally pass in a `product_price_point_id` that corresponds with the `product_id` and the offer will use that price point. If a `product_price_point_id` is not passed in, the product's default price point will be used.
 
 ```ts
-async createOffer(  body?: CreateOfferRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<OfferResponse>>
+async createOffer(
+  body?: CreateOfferRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<OfferResponse>>
 ```
 
 ## Parameters
@@ -137,10 +139,12 @@ try {
 This endpoint will list offers for a site.
 
 ```ts
-async listOffers(  page?: number,
+async listOffers(
+  page?: number,
   perPage?: number,
   includeArchived?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListOffersResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListOffersResponse>>
 ```
 
 ## Parameters
@@ -232,14 +236,22 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Read Offer
 
 This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
 
 ```ts
-async readOffer(  offerId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<OfferResponse>>
+async readOffer(
+  offerId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<OfferResponse>>
 ```
 
 ## Parameters
@@ -276,8 +288,10 @@ try {
 Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
 
 ```ts
-async archiveOffer(  offerId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async archiveOffer(
+  offerId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -314,8 +328,10 @@ try {
 Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
 
 ```ts
-async unarchiveOffer(  offerId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async unarchiveOffer(
+  offerId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters

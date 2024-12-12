@@ -13,6 +13,7 @@ import {
   CouponCurrencyResponse,
   couponCurrencyResponseSchema,
 } from '../models/couponCurrencyResponse';
+import { CouponRequest, couponRequestSchema } from '../models/couponRequest';
 import { CouponResponse, couponResponseSchema } from '../models/couponResponse';
 import { CouponSubcodes, couponSubcodesSchema } from '../models/couponSubcodes';
 import {
@@ -21,10 +22,6 @@ import {
 } from '../models/couponSubcodesResponse';
 import { CouponUsage, couponUsageSchema } from '../models/couponUsage';
 import {
-  CreateOrUpdateCoupon,
-  createOrUpdateCouponSchema,
-} from '../models/createOrUpdateCoupon';
-import {
   ListCouponsFilter,
   listCouponsFilterSchema,
 } from '../models/listCouponsFilter';
@@ -32,6 +29,7 @@ import { array, boolean, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
 import { ApiError } from '@apimatic/core';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorStringMapResponseError } from '../errors/errorStringMapResponseError';
 import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError';
 
 export class CouponsController extends BaseController {
@@ -50,28 +48,27 @@ export class CouponsController extends BaseController {
    *
    * This request will create a coupon, based on the provided information.
    *
-   * When creating a coupon, you must specify a product family using the `product_family_id`. If no
-   * `product_family_id` is passed, the first product family available is used. You will also need to
-   * formulate your URL to cite the Product Family ID in your request.
+   * You can create either a flat amount coupon, by specyfing `amount_in_cents`, or percentage coupon by
+   * specyfing `percentage`.
    *
    * You can restrict a coupon to only apply to specific products / components by optionally passing in
-   * hashes of `restricted_products` and/or `restricted_components` in the format:
-   * `{ "<product/component_id>": boolean_value }`
+   * `restricted_products` and/or `restricted_components` objects in the format:
+   * `{ "<product_id/component_id>": boolean_value }`
    *
-   * @param productFamilyId   The Advanced Billing id of the product family to which
-   *                                                         the coupon belongs
+   * @param productFamilyId   The Advanced Billing id of the product family to which the
+   *                                                  coupon belongs
    * @param body
    * @return Response from the API call
    */
   async createCoupon(
     productFamilyId: number,
-    body?: CreateOrUpdateCoupon,
+    body?: CouponRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
-      body: [body, optional(createOrUpdateCouponSchema)],
+      body: [body, optional(couponRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
@@ -158,20 +155,26 @@ export class CouponsController extends BaseController {
    *
    * @param productFamilyId   The Advanced Billing id of the product family to which the coupon belongs
    * @param code              The code of the coupon
+   * @param currencyPrices    When fetching coupons, if you have defined multiple currencies at the site
+   *                                     level, you can optionally pass the `?currency_prices=true` query param to
+   *                                     include an array of currency price data in the response.
    * @return Response from the API call
    */
   async findCoupon(
     productFamilyId?: number,
     code?: string,
+    currencyPrices?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse>> {
     const req = this.createRequest('GET', '/coupons/find.json');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, optional(number())],
       code: [code, optional(string())],
+      currencyPrices: [currencyPrices, optional(boolean())],
     });
     req.query('product_family_id', mapped.productFamilyId);
     req.query('code', mapped.code);
+    req.query('currency_prices', mapped.currencyPrices);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
@@ -191,18 +194,24 @@ export class CouponsController extends BaseController {
    *
    * @param productFamilyId   The Advanced Billing id of the product family to which the coupon belongs
    * @param couponId          The Advanced Billing id of the coupon
+   * @param currencyPrices    When fetching coupons, if you have defined multiple currencies at the site
+   *                                     level, you can optionally pass the `?currency_prices=true` query param to
+   *                                     include an array of currency price data in the response.
    * @return Response from the API call
    */
   async readCoupon(
     productFamilyId: number,
     couponId: number,
+    currencyPrices?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
       couponId: [couponId, number()],
+      currencyPrices: [currencyPrices, optional(boolean())],
     });
+    req.query('currency_prices', mapped.currencyPrices);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
@@ -217,8 +226,8 @@ export class CouponsController extends BaseController {
    * hashes of `restricted_products` and/or `restricted_components` in the format:
    * `{ "<product/component_id>": boolean_value }`
    *
-   * @param productFamilyId   The Advanced Billing id of the product family to which
-   *                                                         the coupon belongs
+   * @param productFamilyId   The Advanced Billing id of the product family to which the
+   *                                                  coupon belongs
    * @param couponId          The Advanced Billing id of the coupon
    * @param body
    * @return Response from the API call
@@ -226,18 +235,24 @@ export class CouponsController extends BaseController {
   async updateCoupon(
     productFamilyId: number,
     couponId: number,
-    body?: CreateOrUpdateCoupon,
+    body?: CouponRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CouponResponse>> {
     const req = this.createRequest('PUT');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
       couponId: [couponId, number()],
-      body: [body, optional(createOrUpdateCouponSchema)],
+      body: [body, optional(couponRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
@@ -423,6 +438,12 @@ export class CouponsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/coupons/${mapped.couponId}/currency_prices.json`;
+    req.throwOn(
+      422,
+      ErrorStringMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponCurrencyResponseSchema, requestOptions);
   }

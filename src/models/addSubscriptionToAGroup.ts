@@ -4,17 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema } from '../schema';
-import {
-  AddSubscriptionToAGroupGroup,
-  addSubscriptionToAGroupGroupSchema,
-} from './containers/addSubscriptionToAGroupGroup';
+import { expandoObject, lazy, optional, Schema } from '../schema';
+import { GroupSettings, groupSettingsSchema } from './groupSettings';
 
 export interface AddSubscriptionToAGroup {
-  group?: AddSubscriptionToAGroupGroup;
+  group?: GroupSettings;
   [key: string]: unknown;
 }
 
 export const addSubscriptionToAGroupSchema: Schema<AddSubscriptionToAGroup> = expandoObject(
-  { group: ['group', optional(addSubscriptionToAGroupGroupSchema)] }
+  { group: ['group', optional(lazy(() => groupSettingsSchema))] }
 );

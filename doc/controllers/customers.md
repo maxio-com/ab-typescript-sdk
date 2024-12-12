@@ -47,8 +47,10 @@ Advanced Billing allows you to attribute a language/region to your customer to d
 For more: [Customer Locale](https://maxio.zendesk.com/hc/en-us/articles/24286672013709-Customer-Locale)
 
 ```ts
-async createCustomer(  body?: CreateCustomerRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
+async createCustomer(
+  body?: CreateCustomerRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
 ```
 
 ## Parameters
@@ -157,7 +159,8 @@ Common use cases are:
 To retrieve a single, exact match by reference, please use the [lookup endpoint](https://developers.chargify.com/docs/api-docs/b710d8fbef104-read-customer-by-reference).
 
 ```ts
-async listCustomers(  direction?: SortingDirection,
+async listCustomers(
+  direction?: SortingDirection,
   page?: number,
   perPage?: number,
   dateField?: BasicDateField,
@@ -166,7 +169,8 @@ async listCustomers(  direction?: SortingDirection,
   startDatetime?: string,
   endDatetime?: string,
   q?: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse[]>>
 ```
 
 ## Parameters
@@ -299,8 +303,10 @@ try {
 This method allows to retrieve the Customer properties by Advanced Billing-generated Customer ID.
 
 ```ts
-async readCustomer(  id: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
+async readCustomer(
+  id: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
 ```
 
 ## Parameters
@@ -337,9 +343,11 @@ try {
 This method allows to update the Customer.
 
 ```ts
-async updateCustomer(  id: number,
+async updateCustomer(
+  id: number,
   body?: UpdateCustomerRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
 ```
 
 ## Parameters
@@ -426,8 +434,10 @@ try {
 This method allows you to delete the Customer.
 
 ```ts
-async deleteCustomer(  id: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async deleteCustomer(
+  id: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -464,8 +474,10 @@ try {
 Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
 
 ```ts
-async readCustomerByReference(  reference: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerResponse>>
+async readCustomerByReference(
+  reference: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerResponse>>
 ```
 
 ## Parameters
@@ -502,8 +514,10 @@ try {
 This method lists all subscriptions that belong to a customer.
 
 ```ts
-async listCustomerSubscriptions(  customerId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse[]>>
+async listCustomerSubscriptions(
+  customerId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse[]>>
 ```
 
 ## Parameters

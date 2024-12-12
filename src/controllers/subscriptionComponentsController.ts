@@ -943,7 +943,6 @@ export class SubscriptionComponentsController extends BaseController {
    * https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
    * ```
    *
-   * @param subdomain    Your site's subdomain
    * @param apiHandle    Identifies the Stream for which the event should be published.
    * @param storeUid     If you've attached your own Keen project as an Advanced Billing event data-
    *                                        store, use this parameter to indicate the data-store.
@@ -951,15 +950,14 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async recordEvent(
-    subdomain: string,
     apiHandle: string,
     storeUid?: string,
     body?: EBBEvent,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
+    req.baseUrl('ebb');
     const mapped = req.prepareArgs({
-      subdomain: [subdomain, string()],
       apiHandle: [apiHandle, string()],
       storeUid: [storeUid, optional(string())],
       body: [body, optional(eBBEventSchema)],
@@ -967,7 +965,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.query('store_uid', mapped.storeUid);
     req.json(mapped.body);
-    req.appendTemplatePath`/${mapped.subdomain}/events/${mapped.apiHandle}.json`;
+    req.appendTemplatePath`/events/${mapped.apiHandle}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -981,7 +979,6 @@ export class SubscriptionComponentsController extends BaseController {
    * A maximum of 1000 events can be published in a single request. A 422 will be returned if this limit
    * is exceeded.
    *
-   * @param subdomain    Your site's subdomain
    * @param apiHandle    Identifies the Stream for which the events should be published.
    * @param storeUid     If you've attached your own Keen project as an Advanced Billing event data-
    *                                   store, use this parameter to indicate the data-store.
@@ -989,15 +986,14 @@ export class SubscriptionComponentsController extends BaseController {
    * @return Response from the API call
    */
   async bulkRecordEvents(
-    subdomain: string,
     apiHandle: string,
     storeUid?: string,
     body?: EBBEvent[],
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
     const req = this.createRequest('POST');
+    req.baseUrl('ebb');
     const mapped = req.prepareArgs({
-      subdomain: [subdomain, string()],
       apiHandle: [apiHandle, string()],
       storeUid: [storeUid, optional(string())],
       body: [body, optional(array(eBBEventSchema))],
@@ -1005,7 +1001,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.query('store_uid', mapped.storeUid);
     req.json(mapped.body);
-    req.appendTemplatePath`/${mapped.subdomain}/events/${mapped.apiHandle}/bulk.json`;
+    req.appendTemplatePath`/events/${mapped.apiHandle}/bulk.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }

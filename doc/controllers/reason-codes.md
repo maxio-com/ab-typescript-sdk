@@ -36,8 +36,10 @@ Full documentation on how Reason Codes operate within Advanced Billing can be lo
 This method gives a merchant the option to create a reason codes for a given Site.
 
 ```ts
-async createReasonCode(  body?: CreateReasonCodeRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReasonCodeResponse>>
+async createReasonCode(
+  body?: CreateReasonCodeRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReasonCodeResponse>>
 ```
 
 ## Parameters
@@ -86,9 +88,11 @@ try {
 This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
 
 ```ts
-async listReasonCodes(  page?: number,
+async listReasonCodes(
+  page?: number,
   perPage?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReasonCodeResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReasonCodeResponse[]>>
 ```
 
 ## Parameters
@@ -163,14 +167,22 @@ try {
 ]
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Read Reason Code
 
 This method gives a merchant the option to retrieve a list of a particular code for a given Site by providing the unique numerical ID of the code.
 
 ```ts
-async readReasonCode(  reasonCodeId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReasonCodeResponse>>
+async readReasonCode(
+  reasonCodeId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReasonCodeResponse>>
 ```
 
 ## Parameters
@@ -213,9 +225,11 @@ try {
 This method gives a merchant the option to update an existing reason code for a given site.
 
 ```ts
-async updateReasonCode(  reasonCodeId: number,
+async updateReasonCode(
+  reasonCodeId: number,
   body?: UpdateReasonCodeRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReasonCodeResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReasonCodeResponse>>
 ```
 
 ## Parameters
@@ -252,6 +266,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Delete Reason Code
@@ -259,8 +274,10 @@ try {
 This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
 
 ```ts
-async deleteReasonCode(  reasonCodeId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReasonCodesJsonResponse>>
+async deleteReasonCode(
+  reasonCodeId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<OkResponse>>
 ```
 
 ## Parameters
@@ -272,7 +289,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ReasonCodesJsonResponse>>
 
 ## Response Type
 
-[`ReasonCodesJsonResponse`](../../doc/models/reason-codes-json-response.md)
+[`OkResponse`](../../doc/models/ok-response.md)
 
 ## Example Usage
 

@@ -32,8 +32,10 @@ If the information becomes outdated, simply void the old consolidated proforma i
 Proforma invoices are only available on Relationship Invoicing sites. To create a proforma invoice, the subscription must not be prepaid, and must be in a live state.
 
 ```ts
-async createConsolidatedProformaInvoice(  uid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async createConsolidatedProformaInvoice(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -78,14 +80,16 @@ Only proforma invoices with a `consolidation_level` of parent are returned.
 By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to true.
 
 ```ts
-async listSubscriptionGroupProformaInvoices(  uid: string,
+async listSubscriptionGroupProformaInvoices(
+  uid: string,
   lineItems?: boolean,
   discounts?: boolean,
   taxes?: boolean,
   credits?: boolean,
   payments?: boolean,
   customFields?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListProformaInvoicesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
 
 ## Parameters
@@ -146,8 +150,10 @@ Use this endpoint to read the details of an existing proforma invoice.
 Proforma invoices are only available on Relationship Invoicing sites.
 
 ```ts
-async readProformaInvoice(  proformaInvoiceUid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProformaInvoice>>
+async readProformaInvoice(
+  proformaInvoiceUid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice>>
 ```
 
 ## Parameters
@@ -196,8 +202,10 @@ If you would like to preview the next billing amounts without generating a full 
 Proforma invoices are only available on Relationship Invoicing sites. To create a proforma invoice, the subscription must not be in a group, must not be prepaid, and must be in a live state.
 
 ```ts
-async createProformaInvoice(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProformaInvoice>>
+async createProformaInvoice(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice>>
 ```
 
 ## Parameters
@@ -240,7 +248,8 @@ try {
 By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.
 
 ```ts
-async listProformaInvoices(  subscriptionId: number,
+async listProformaInvoices(
+  subscriptionId: number,
   startDate?: string,
   endDate?: string,
   status?: ProformaInvoiceStatus,
@@ -253,7 +262,8 @@ async listProformaInvoices(  subscriptionId: number,
   credits?: boolean,
   payments?: boolean,
   customFields?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListProformaInvoicesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
 
 ## Parameters
@@ -321,9 +331,11 @@ Only proforma invoices that have the appropriate status may be reopened. If the 
 A reason for the void operation is required to be included in the request body. If one is not provided, the response will have HTTP status code 422 and an error message.
 
 ```ts
-async voidProformaInvoice(  proformaInvoiceUid: string,
+async voidProformaInvoice(
+  proformaInvoiceUid: string,
   body?: VoidInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProformaInvoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice>>
 ```
 
 ## Parameters
@@ -374,8 +386,10 @@ If all the data returned in the preview is as expected, you may then create a st
 Alternatively, if you have some proforma invoices already, you may make a preview call to determine whether any billing information for the subscription's upcoming renewal has changed.
 
 ```ts
-async previewProformaInvoice(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProformaInvoice>>
+async previewProformaInvoice(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice>>
 ```
 
 ## Parameters
@@ -425,8 +439,10 @@ Pass a payload that resembles a subscription create or signup preview request. F
 A product and customer first name, last name, and email are the minimum requirements. We recommend associating the proforma invoice with a customer_id to easily find their proforma invoices, since the subscription_id will always be blank.
 
 ```ts
-async createSignupProformaInvoice(  body?: CreateSubscriptionRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProformaInvoice>>
+async createSignupProformaInvoice(
+  body?: CreateSubscriptionRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice>>
 ```
 
 ## Parameters
@@ -485,9 +501,11 @@ Pass a payload that resembles a subscription create or signup preview request. F
 A product and customer first name, last name, and email are the minimum requirements.
 
 ```ts
-async previewSignupProformaInvoice(  include?: CreateSignupProformaPreviewInclude,
+async previewSignupProformaInvoice(
+  include?: CreateSignupProformaPreviewInclude,
   body?: CreateSubscriptionRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SignupProformaPreviewResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SignupProformaPreviewResponse>>
 ```
 
 ## Parameters
