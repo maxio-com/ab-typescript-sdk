@@ -6,11 +6,11 @@
 
 import { expandoObject, optional, Schema, string } from '../schema';
 
-export interface ReasonCodesJsonResponse {
+export interface OkResponse {
   ok?: string;
   [key: string]: unknown;
 }
 
-export const reasonCodesJsonResponseSchema: Schema<ReasonCodesJsonResponse> = expandoObject(
-  { ok: ['ok', optional(string())] }
-);
+export const okResponseSchema: Schema<OkResponse> = expandoObject({
+  ok: ['ok', optional(string())],
+});

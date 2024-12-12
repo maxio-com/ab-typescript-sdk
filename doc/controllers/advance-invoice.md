@@ -23,9 +23,11 @@ That said, regeneration of the invoice may be forced with the params `force: tru
 We recommend using either the create or preview endpoints for proforma invoices to preview this advance invoice before using this endpoint to generate it.
 
 ```ts
-async issueAdvanceInvoice(  subscriptionId: number,
+async issueAdvanceInvoice(
+  subscriptionId: number,
   body?: IssueAdvanceInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -77,8 +79,10 @@ try {
 Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.
 
 ```ts
-async readAdvanceInvoice(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+async readAdvanceInvoice(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -122,9 +126,11 @@ Void a subscription's existing advance invoice. Once voided, it can later be reg
 A `reason` is required in order to void, and the invoice must have an open status. Voiding will cause any prepayments and credits that were applied to the invoice to be returned to the subscription. For a full overview of the impact of voiding, please [see our help docs](../../doc/models/invoice.md).
 
 ```ts
-async voidAdvanceInvoice(  subscriptionId: number,
+async voidAdvanceInvoice(
+  subscriptionId: number,
   body?: VoidInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters

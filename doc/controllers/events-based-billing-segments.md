@@ -25,10 +25,12 @@ This endpoint creates a new Segment for a Component with segmented Metric. It al
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async createSegment(  componentId: string,
+async createSegment(
+  componentId: string,
   pricePointId: string,
   body?: CreateSegmentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SegmentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SegmentResponse>>
 ```
 
 ## Parameters
@@ -103,12 +105,14 @@ You can pass `page` and `per_page` parameters in order to access all of the segm
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async listSegmentsForPricePoint(  componentId: string,
+async listSegmentsForPricePoint(
+  componentId: string,
   pricePointId: string,
   page?: number,
   perPage?: number,
   filter?: ListSegmentsFilter,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListSegmentsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListSegmentsResponse>>
 ```
 
 ## Parameters
@@ -166,11 +170,13 @@ This endpoint updates a single Segment for a Component with a segmented Metric. 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async updateSegment(  componentId: string,
+async updateSegment(
+  componentId: string,
   pricePointId: string,
   id: number,
   body?: UpdateSegmentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SegmentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SegmentResponse>>
 ```
 
 ## Parameters
@@ -227,10 +233,12 @@ This endpoint allows you to delete a Segment with specified ID.
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async deleteSegment(  componentId: string,
+async deleteSegment(
+  componentId: string,
   pricePointId: string,
   id: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -288,10 +296,12 @@ If any of the records contain an error the whole request would fail and none of 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async bulkCreateSegments(  componentId: string,
+async bulkCreateSegments(
+  componentId: string,
   pricePointId: string,
   body?: BulkCreateSegments,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListSegmentsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListSegmentsResponse>>
 ```
 
 ## Parameters
@@ -346,10 +356,12 @@ If any of the records contain an error the whole request would fail and none of 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
 ```ts
-async bulkUpdateSegments(  componentId: string,
+async bulkUpdateSegments(
+  componentId: string,
   pricePointId: string,
   body?: BulkUpdateSegments,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListSegmentsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListSegmentsResponse>>
 ```
 
 ## Parameters

@@ -48,6 +48,7 @@
 | `taxAmount` | `string \| undefined` | Optional | Total tax on the invoice. |
 | `totalAmount` | `string \| undefined` | Optional | The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.' |
 | `creditAmount` | `string \| undefined` | Optional | The amount of credit (from credit notes) applied to this invoice.<br><br>Credits offset the amount due from the customer. |
+| `debitAmount` | `string \| undefined` | Optional | - |
 | `refundAmount` | `string \| undefined` | Optional | - |
 | `paidAmount` | `string \| undefined` | Optional | The amount paid on the invoice by the customer. |
 | `dueAmount` | `string \| undefined` | Optional | Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`. |
@@ -55,10 +56,12 @@
 | `discounts` | [`InvoiceDiscount[] \| undefined`](../../doc/models/invoice-discount.md) | Optional | - |
 | `taxes` | [`InvoiceTax[] \| undefined`](../../doc/models/invoice-tax.md) | Optional | - |
 | `credits` | [`InvoiceCredit[] \| undefined`](../../doc/models/invoice-credit.md) | Optional | - |
+| `debits` | [`InvoiceDebit[] \| undefined`](../../doc/models/invoice-debit.md) | Optional | - |
 | `refunds` | [`InvoiceRefund[] \| undefined`](../../doc/models/invoice-refund.md) | Optional | - |
 | `payments` | [`InvoicePayment[] \| undefined`](../../doc/models/invoice-payment.md) | Optional | - |
 | `customFields` | [`InvoiceCustomField[] \| undefined`](../../doc/models/invoice-custom-field.md) | Optional | - |
 | `displaySettings` | [`InvoiceDisplaySettings \| undefined`](../../doc/models/invoice-display-settings.md) | Optional | - |
+| `avataxDetails` | [`InvoiceAvataxDetails \| undefined`](../../doc/models/invoice-avatax-details.md) | Optional | - |
 | `publicUrl` | `string \| undefined` | Optional | The public URL of the invoice |
 | `previousBalanceData` | [`InvoicePreviousBalance \| undefined`](../../doc/models/invoice-previous-balance.md) | Optional | - |
 | `publicUrlExpiresOn` | `string \| undefined` | Optional | The format is `"YYYY-MM-DD"`. |

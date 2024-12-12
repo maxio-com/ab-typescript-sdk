@@ -49,9 +49,11 @@ It is possible to create Metafields “on the fly” when you create your Metada
 If configuring metafields in the Admin UI or via the API, be careful sending updates to metafields with the scope attribute – **if a partial update is sent it will overwrite the current configuration**.
 
 ```ts
-async createMetafields(  resourceType: ResourceType,
+async createMetafields(
+  resourceType: ResourceType,
   body?: CreateMetafieldsRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Metafield[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Metafield[]>>
 ```
 
 ## Parameters
@@ -144,12 +146,14 @@ try {
 This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
 
 ```ts
-async listMetafields(  resourceType: ResourceType,
+async listMetafields(
+  resourceType: ResourceType,
   name?: string,
   page?: number,
   perPage?: number,
   direction?: SortingDirection,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListMetafieldsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListMetafieldsResponse>>
 ```
 
 ## Parameters
@@ -222,9 +226,11 @@ try {
 Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
 
 ```ts
-async updateMetafield(  resourceType: ResourceType,
+async updateMetafield(
+  resourceType: ResourceType,
   body?: UpdateMetafieldsRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Metafield[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Metafield[]>>
 ```
 
 ## Parameters
@@ -270,9 +276,11 @@ Use the following method to delete a metafield. This will remove the metafield f
 Additionally, this will remove the metafield and associated metadata with all Subscriptions on the Site.
 
 ```ts
-async deleteMetafield(  resourceType: ResourceType,
+async deleteMetafield(
+  resourceType: ResourceType,
   name?: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -337,10 +345,12 @@ This method will create a metafield for the site on the fly if it does not alrea
 Please pay special attention to the resource you use when creating metadata.
 
 ```ts
-async createMetadata(  resourceType: ResourceType,
+async createMetadata(
+  resourceType: ResourceType,
   resourceId: number,
   body?: CreateMetadataRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Metadata[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Metadata[]>>
 ```
 
 ## Parameters
@@ -408,11 +418,13 @@ This request will list all of the metadata belonging to a particular resource (i
 This endpoint will also display the current stats of your metadata to use as a tool for pagination.
 
 ```ts
-async listMetadata(  resourceType: ResourceType,
+async listMetadata(
+  resourceType: ResourceType,
   resourceId: number,
   page?: number,
   perPage?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaginatedMetadata>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaginatedMetadata>>
 ```
 
 ## Parameters
@@ -457,10 +469,12 @@ try {
 This method allows you to update the existing metadata associated with a subscription or customer.
 
 ```ts
-async updateMetadata(  resourceType: ResourceType,
+async updateMetadata(
+  resourceType: ResourceType,
   resourceId: number,
   body?: UpdateMetadataRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Metadata[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Metadata[]>>
 ```
 
 ## Parameters
@@ -532,11 +546,13 @@ For a success, there will be a code `200` and the plain text response `true`.
 When a failed response is encountered, you will receive a `404` response and the plain text response of `true`.
 
 ```ts
-async deleteMetadata(  resourceType: ResourceType,
+async deleteMetadata(
+  resourceType: ResourceType,
   resourceId: number,
   name?: string,
   names?: string[],
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -599,7 +615,8 @@ This endpoint will also display the current stats of your metadata to use as a t
 This endpoint will list the number of pages of metadata information that are contained within a site.
 
 ```ts
-async listMetadataForResourceType(  resourceType: ResourceType,
+async listMetadataForResourceType(
+  resourceType: ResourceType,
   page?: number,
   perPage?: number,
   dateField?: BasicDateField,
@@ -610,7 +627,8 @@ async listMetadataForResourceType(  resourceType: ResourceType,
   withDeleted?: boolean,
   resourceIds?: number[],
   direction?: SortingDirection,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaginatedMetadata>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaginatedMetadata>>
 ```
 
 ## Parameters

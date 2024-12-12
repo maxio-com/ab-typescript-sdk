@@ -15,6 +15,7 @@ import {
 } from '../models/updateSubscriptionNoteRequest';
 import { array, number, optional } from '../schema';
 import { BaseController } from './baseController';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class SubscriptionNotesController extends BaseController {
   /**
@@ -46,6 +47,12 @@ export class SubscriptionNotesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
   }
@@ -87,6 +94,12 @@ export class SubscriptionNotesController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       array(subscriptionNoteResponseSchema),
@@ -140,6 +153,12 @@ export class SubscriptionNotesController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes/${mapped.noteId}.json`;
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionNoteResponseSchema, requestOptions);
   }

@@ -30,9 +30,11 @@ If you have structured data such as birth date, color, etc., consider using Meta
 Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
 
 ```ts
-async createSubscriptionNote(  subscriptionId: number,
+async createSubscriptionNote(
+  subscriptionId: number,
   body?: UpdateSubscriptionNoteRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
 ## Parameters
@@ -74,16 +76,24 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # List Subscription Notes
 
 Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
 
 ```ts
-async listSubscriptionNotes(  subscriptionId: number,
+async listSubscriptionNotes(
+  subscriptionId: number,
   page?: number,
   perPage?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionNoteResponse[]>>
 ```
 
 ## Parameters
@@ -147,15 +157,23 @@ try {
 ]
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Read Subscription Note
 
 Once you have obtained the ID of the note you wish to read, use this method to show a particular note attached to a subscription.
 
 ```ts
-async readSubscriptionNote(  subscriptionId: number,
+async readSubscriptionNote(
+  subscriptionId: number,
   noteId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
 ## Parameters
@@ -213,10 +231,12 @@ try {
 Use the following method to update a note for a Subscription.
 
 ```ts
-async updateSubscriptionNote(  subscriptionId: number,
+async updateSubscriptionNote(
+  subscriptionId: number,
   noteId: number,
   body?: UpdateSubscriptionNoteRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionNoteResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
 ## Parameters
@@ -262,15 +282,23 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Delete Subscription Note
 
 Use the following method to delete a note for a Subscription.
 
 ```ts
-async deleteSubscriptionNote(  subscriptionId: number,
+async deleteSubscriptionNote(
+  subscriptionId: number,
   noteId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters

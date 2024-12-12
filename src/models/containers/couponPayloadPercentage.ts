@@ -7,13 +7,13 @@
 import { number, oneOf, Schema, string } from '../../schema';
 
 /** This is a container type for one-of types. */
-export type CreateOrUpdatePercentageCouponPercentage = string | number;
+export type CouponPayloadPercentage = string | number;
 
-export const createOrUpdatePercentageCouponPercentageSchema: Schema<CreateOrUpdatePercentageCouponPercentage> = oneOf(
+export const couponPayloadPercentageSchema: Schema<CouponPayloadPercentage> = oneOf(
   [string(), number()]
 );
 
-export namespace CreateOrUpdatePercentageCouponPercentage {
+export namespace CouponPayloadPercentage {
   /**
    * Validation method to narrow down union type to string type case.
    *

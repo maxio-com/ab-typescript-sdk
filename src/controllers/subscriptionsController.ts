@@ -4,12 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  ApiResponse,
-  commaPrefix,
-  RequestOptions,
-  unindexedPrefix,
-} from '../core';
+import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
 import {
   ActivateSubscriptionRequest,
   activateSubscriptionRequestSchema,
@@ -76,11 +71,13 @@ import {
 } from '../models/upsertPrepaidConfigurationRequest';
 import { array, dict, number, optional, string } from '../schema';
 import { BaseController } from './baseController';
+import { ApiError } from '@apimatic/core';
 import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
 import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
 import { SubscriptionAddCouponError } from '../errors/subscriptionAddCouponError';
 import { SubscriptionRemoveCouponErrorsError } from '../errors/subscriptionRemoveCouponErrorsError';
+import { SubscriptionResponseError } from '../errors/subscriptionResponseError';
 
 export class SubscriptionsController extends BaseController {
   /**
@@ -117,6 +114,18 @@ export class SubscriptionsController extends BaseController {
    * `credit_card_attributes` or `bank_account_attributes` for ACH and Direct Debit. That said, when you
    * read the subscription after creation, we return the profile details under `credit_card` or
    * `bank_account`.
+   *
+   * ## Bulk creation of subscriptions
+   *
+   * Bulk creation of subscriptions is currently not supported. For scenarios where multiple
+   * subscriptions must be added, particularly when assigning to the same subscription group, it is
+   * essential to switch to a single-threaded approach.
+   *
+   * To avoid data conflicts or inaccuracies, incorporate a sleep interval between requests.
+   *
+   * While this single-threaded approach may impact performance, it ensures data consistency and accuracy
+   * in cases where concurrent creation attempts could otherwise lead to issues with subscription
+   * alignment and integrity.
    *
    * ## Taxable Subscriptions
    *
@@ -1295,6 +1304,7 @@ export class SubscriptionsController extends BaseController {
       reference: [reference, optional(string())],
     });
     req.query('reference', mapped.reference);
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
@@ -1325,7 +1335,7 @@ export class SubscriptionsController extends BaseController {
     ack: number,
     cascade?: SubscriptionPurgeType[],
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
+  ): Promise<ApiResponse<SubscriptionResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, number()],
@@ -1333,10 +1343,16 @@ export class SubscriptionsController extends BaseController {
       cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
     });
     req.query('ack', mapped.ack);
-    req.query('cascade', mapped.cascade, commaPrefix);
+    req.query('cascade', mapped.cascade, unindexedPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
+    req.throwOn(
+      400,
+      SubscriptionResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
-    return req.call(requestOptions);
+    return req.callAsJson(subscriptionResponseSchema, requestOptions);
   }
 
   /**
@@ -1359,6 +1375,12 @@ export class SubscriptionsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepaid_configurations.json`;
+    req.throwOn(
+      422,
+      ApiError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(prepaidConfigurationResponseSchema, requestOptions);
   }

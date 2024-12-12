@@ -38,15 +38,17 @@ Additionally, for documentation on how to apply a coupon to a subscription withi
 
 This request will create a coupon, based on the provided information.
 
-When creating a coupon, you must specify a product family using the `product_family_id`. If no `product_family_id` is passed, the first product family available is used. You will also need to formulate your URL to cite the Product Family ID in your request.
+You can create either a flat amount coupon, by specyfing `amount_in_cents`, or percentage coupon by specyfing `percentage`.
 
-You can restrict a coupon to only apply to specific products / components by optionally passing in hashes of `restricted_products` and/or `restricted_components` in the format:
-`{ "<product/component_id>": boolean_value }`
+You can restrict a coupon to only apply to specific products / components by optionally passing in `restricted_products` and/or `restricted_components` objects in the format:
+`{ "<product_id/component_id>": boolean_value }`
 
 ```ts
-async createCoupon(  productFamilyId: number,
-  body?: CreateOrUpdateCoupon,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
+async createCoupon(
+  productFamilyId: number,
+  body?: CouponRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
 ```
 
 ## Parameters
@@ -54,7 +56,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
-| `body` | [`CreateOrUpdateCoupon \| undefined`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
+| `body` | [`CouponRequest \| undefined`](../../doc/models/coupon-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -66,15 +68,15 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
 ```ts
 const productFamilyId = 140;
 
-const body: CreateOrUpdateCoupon = {
+const body: CouponRequest = {
   coupon: {
     name: '15% off',
     code: '15OFF',
-    percentage: 15,
     description: '15% off for life',
+    percentage: 15,
     allowNegativeBalance: false,
     recurring: false,
-    endDate: '2012-08-29T12:00:00-04:00',
+    endDate: '2012-08-29',
     productFamilyId: '2',
     stackable: true,
     compoundingStrategy: CompoundingStrategy.Compound,
@@ -119,12 +121,14 @@ List coupons for a specific Product Family in a Site.
 If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
 
 ```ts
-async listCouponsForProductFamily(  productFamilyId: number,
+async listCouponsForProductFamily(
+  productFamilyId: number,
   page?: number,
   perPage?: number,
   filter?: ListCouponsFilter,
   currencyPrices?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse[]>>
 ```
 
 ## Parameters
@@ -278,9 +282,12 @@ You can search for a coupon via the API with the find method. By passing a code 
 If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
 
 ```ts
-async findCoupon(  productFamilyId?: number,
+async findCoupon(
+  productFamilyId?: number,
   code?: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
+  currencyPrices?: boolean,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
 ```
 
 ## Parameters
@@ -289,6 +296,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number \| undefined` | Query, Optional | The Advanced Billing id of the product family to which the coupon belongs |
 | `code` | `string \| undefined` | Query, Optional | The code of the coupon |
+| `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -298,8 +306,14 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
 ## Example Usage
 
 ```ts
+const currencyPrices = true;
+
 try {
-  const { result, ...httpResponse } = await couponsController.findCoupon();
+  const { result, ...httpResponse } = await couponsController.findCoupon(
+  undefined,
+  undefined,
+  currencyPrices
+);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -321,9 +335,12 @@ When fetching a coupon, if you have defined multiple currencies at the site leve
 If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
 
 ```ts
-async readCoupon(  productFamilyId: number,
+async readCoupon(
+  productFamilyId: number,
   couponId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
+  currencyPrices?: boolean,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
 ```
 
 ## Parameters
@@ -332,6 +349,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `couponId` | `number` | Template, Required | The Advanced Billing id of the coupon |
+| `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -345,10 +363,13 @@ const productFamilyId = 140;
 
 const couponId = 162;
 
+const currencyPrices = true;
+
 try {
   const { result, ...httpResponse } = await couponsController.readCoupon(
   productFamilyId,
-  couponId
+  couponId,
+  currencyPrices
 );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
@@ -400,10 +421,12 @@ You can restrict a coupon to only apply to specific products / components by opt
 `{ "<product/component_id>": boolean_value }`
 
 ```ts
-async updateCoupon(  productFamilyId: number,
+async updateCoupon(
+  productFamilyId: number,
   couponId: number,
-  body?: CreateOrUpdateCoupon,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
+  body?: CouponRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
 ```
 
 ## Parameters
@@ -412,7 +435,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `couponId` | `number` | Template, Required | The Advanced Billing id of the coupon |
-| `body` | [`CreateOrUpdateCoupon \| undefined`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
+| `body` | [`CouponRequest \| undefined`](../../doc/models/coupon-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -426,15 +449,15 @@ const productFamilyId = 140;
 
 const couponId = 162;
 
-const body: CreateOrUpdateCoupon = {
+const body: CouponRequest = {
   coupon: {
     name: '15% off',
     code: '15OFF',
-    percentage: 15,
     description: '15% off for life',
+    percentage: 15,
     allowNegativeBalance: false,
     recurring: false,
-    endDate: '2012-08-29T12:00:00-04:00',
+    endDate: '2012-08-29',
     productFamilyId: '2',
     stackable: true,
     compoundingStrategy: CompoundingStrategy.Compound,
@@ -493,6 +516,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Archive Coupon
 
@@ -501,9 +530,11 @@ Archiving makes that Coupon unavailable for future use, but allows it to remain 
 The `archived_at` date and time will be assigned.
 
 ```ts
-async archiveCoupon(  productFamilyId: number,
+async archiveCoupon(
+  productFamilyId: number,
   couponId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
 ```
 
 ## Parameters
@@ -577,11 +608,13 @@ You can retrieve a list of coupons.
 If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
 
 ```ts
-async listCoupons(  page?: number,
+async listCoupons(
+  page?: number,
   perPage?: number,
   filter?: ListCouponsFilter,
   currencyPrices?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse[]>>
 ```
 
 ## Parameters
@@ -688,9 +721,11 @@ try {
 This request will provide details about the coupon usage as an array of data hashes, one per product.
 
 ```ts
-async readCouponUsage(  productFamilyId: number,
+async readCouponUsage(
+  productFamilyId: number,
   couponId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponUsage[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponUsage[]>>
 ```
 
 ## Parameters
@@ -787,9 +822,11 @@ https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon_code>&pr
 ```
 
 ```ts
-async validateCoupon(  code: string,
+async validateCoupon(
+  code: string,
   productFamilyId?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponResponse>>
 ```
 
 ## Parameters
@@ -864,9 +901,11 @@ This endpoint allows you to create and/or update currency prices for an existing
 Currency pricing for coupons must mirror the setup of the primary coupon pricing - if the primary coupon is percentage based, you will not be able to define pricing in non-primary currencies.
 
 ```ts
-async createOrUpdateCouponCurrencyPrices(  couponId: number,
+async createOrUpdateCouponCurrencyPrices(
+  couponId: number,
   body?: CouponCurrencyRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponCurrencyResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponCurrencyResponse>>
 ```
 
 ## Parameters
@@ -914,6 +953,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorStringMapResponseError`](../../doc/models/error-string-map-response-error.md) |
+
 
 # Create Coupon Subcodes
 
@@ -959,9 +1004,11 @@ This request allows you to create specific subcodes underneath an existing coupo
 So, if the coupon subcode is `20%OFF`, the URL to delete this coupon subcode would be: `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`
 
 ```ts
-async createCouponSubcodes(  couponId: number,
+async createCouponSubcodes(
+  couponId: number,
   body?: CouponSubcodes,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponSubcodesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponSubcodesResponse>>
 ```
 
 ## Parameters
@@ -1022,10 +1069,12 @@ try {
 This request allows you to request the subcodes that are attached to a coupon.
 
 ```ts
-async listCouponSubcodes(  couponId: number,
+async listCouponSubcodes(
+  couponId: number,
   page?: number,
   perPage?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponSubcodes>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponSubcodes>>
 ```
 
 ## Parameters
@@ -1107,9 +1156,11 @@ The response will contain:
 + Any subcodes not created because they are invalid.
 
 ```ts
-async updateCouponSubcodes(  couponId: number,
+async updateCouponSubcodes(
+  couponId: number,
   body?: CouponSubcodes,
-requestOptions?: RequestOptions): Promise<ApiResponse<CouponSubcodesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CouponSubcodesResponse>>
 ```
 
 ## Parameters
@@ -1179,9 +1230,11 @@ Note: If you are using any of the allowed special characters (“%”, “@”, 
 Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
 
 ```ts
-async deleteCouponSubcode(  couponId: number,
+async deleteCouponSubcode(
+  couponId: number,
   subcode: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters

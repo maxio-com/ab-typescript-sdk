@@ -10,8 +10,7 @@ import { HttpClientOptions } from './clientAdapter';
 export interface Configuration {
   timeout: number;
   environment: Environment;
-  subdomain: string;
-  domain: string;
+  site: string;
   basicAuthCredentials?: {
     username: string;
     password: string;
@@ -22,6 +21,6 @@ export interface Configuration {
 
 /** Environments available for API */
 export enum Environment {
-  Production = 'production',
-  Environment2 = 'environment2',
+  US = 'US',
+  EU = 'EU',
 }

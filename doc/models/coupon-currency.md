@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number \| undefined` | Optional | - |
+| `id` | `number \| null \| undefined` | Optional | - |
 | `currency` | `string \| undefined` | Optional | - |
-| `price` | `number \| undefined` | Optional | - |
+| `price` | `number \| null \| undefined` | Optional | - |
 | `couponId` | `number \| undefined` | Optional | - |
 
 ## Example (as JSON)
@@ -20,7 +20,7 @@
 {
   "id": 228,
   "currency": "currency8",
-  "price": 100,
+  "price": 169.96,
   "coupon_id": 210
 }
 ```

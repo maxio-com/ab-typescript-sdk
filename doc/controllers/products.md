@@ -26,9 +26,11 @@ Use this method to create a product within your Advanced Billing site.
 + [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Changes-and-Migrations)
 
 ```ts
-async createProduct(  productFamilyId: string,
+async createProduct(
+  productFamilyId: string,
   body?: CreateOrUpdateProductRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -139,8 +141,10 @@ try {
 This endpoint allows you to read the current details of a product that you've created in Advanced Billing.
 
 ```ts
-async readProduct(  productId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
+async readProduct(
+  productId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -228,9 +232,11 @@ Use this method to change aspects of an existing product.
 Updating a product using this endpoint will create a new price point and set it as the default price point for this product. If you should like to update an existing product price point, that must be done separately.
 
 ```ts
-async updateProduct(  productId: number,
+async updateProduct(
+  productId: number,
   body?: CreateOrUpdateProductRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -324,8 +330,10 @@ Sending a DELETE request to this endpoint will archive the product. All current 
 This will restrict the option to chose the product for purchase via the Billing Portal, as well as disable Public Signup Pages for the product.
 
 ```ts
-async archiveProduct(  productId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
+async archiveProduct(
+  productId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -411,8 +419,10 @@ try {
 This method allows to retrieve a Product object by its `api_handle`.
 
 ```ts
-async readProductByHandle(  apiHandle: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse>>
+async readProductByHandle(
+  apiHandle: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse>>
 ```
 
 ## Parameters
@@ -517,7 +527,8 @@ try {
 This method allows to retrieve a list of Products belonging to a Site.
 
 ```ts
-async listProducts(  dateField?: BasicDateField,
+async listProducts(
+  dateField?: BasicDateField,
   filter?: ListProductsFilter,
   endDate?: string,
   endDatetime?: string,
@@ -527,7 +538,8 @@ async listProducts(  dateField?: BasicDateField,
   perPage?: number,
   includeArchived?: boolean,
   include?: ListProductsInclude,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse[]>>
 ```
 
 ## Parameters

@@ -21,7 +21,8 @@ const productFamiliesController = new ProductFamiliesController(client);
 This method allows to retrieve a list of Products belonging to a Product Family.
 
 ```ts
-async listProductsForProductFamily(  productFamilyId: string,
+async listProductsForProductFamily(
+  productFamilyId: string,
   page?: number,
   perPage?: number,
   dateField?: BasicDateField,
@@ -32,7 +33,8 @@ async listProductsForProductFamily(  productFamilyId: string,
   endDatetime?: string,
   includeArchived?: boolean,
   include?: ListProductsInclude,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductResponse[]>>
 ```
 
 ## Parameters
@@ -199,8 +201,10 @@ This method will create a Product Family within your Advanced Billing site. Crea
 Full documentation on how Product Families operate within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
 
 ```ts
-async createProductFamily(  body?: CreateProductFamilyRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductFamilyResponse>>
+async createProductFamily(
+  body?: CreateProductFamilyRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductFamilyResponse>>
 ```
 
 ## Parameters
@@ -262,12 +266,14 @@ try {
 This method allows to retrieve a list of Product Families for a site.
 
 ```ts
-async listProductFamilies(  dateField?: BasicDateField,
+async listProductFamilies(
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
   endDatetime?: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductFamilyResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductFamilyResponse[]>>
 ```
 
 ## Parameters
@@ -341,8 +347,10 @@ This method allows to retrieve a Product Family via the `product_family_id`. The
 The product family can be specified either with the id number, or with the `handle:my-family` format.
 
 ```ts
-async readProductFamily(  id: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProductFamilyResponse>>
+async readProductFamily(
+  id: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProductFamilyResponse>>
 ```
 
 ## Parameters

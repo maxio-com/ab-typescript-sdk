@@ -32,9 +32,11 @@ See [Price Points Documentation](https://maxio.zendesk.com/hc/en-us/articles/242
 Note: Custom price points are not able to be set as the default for a component.
 
 ```ts
-async promoteComponentPricePointToDefault(  componentId: number,
+async promoteComponentPricePointToDefault(
+  componentId: number,
   pricePointId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -110,9 +112,11 @@ try {
 This endpoint can be used to create a new price point for an existing component.
 
 ```ts
-async createComponentPricePoint(  componentId: number,
+async createComponentPricePoint(
+  componentId: number,
   body?: CreateComponentPricePointRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
 ## Parameters
@@ -167,6 +171,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseError`](../../doc/models/error-array-map-response-error.md) |
+
 
 # List Component Price Points
 
@@ -179,12 +189,14 @@ When fetching a component's price points, if you have defined multiple currencie
 If the price point is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
 
 ```ts
-async listComponentPricePoints(  componentId: number,
+async listComponentPricePoints(
+  componentId: number,
   currencyPrices?: boolean,
   page?: number,
   perPage?: number,
   filterType?: PricePointType[],
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
 
 ## Parameters
@@ -278,9 +290,11 @@ try {
 Use this endpoint to create multiple component price points in one request.
 
 ```ts
-async bulkCreateComponentPricePoints(  componentId: string,
+async bulkCreateComponentPricePoints(
+  componentId: string,
   body?: CreateComponentPricePointsRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
 
 ## Parameters
@@ -402,6 +416,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Update Component Price Point
 
@@ -414,10 +434,12 @@ Including an `id` will update the corresponding price, and including the `_destr
 Note: Custom price points cannot be updated directly. They must be edited through the Subscription.
 
 ```ts
-async updateComponentPricePoint(  componentId: UpdateComponentPricePointComponentId,
+async updateComponentPricePoint(
+  componentId: UpdateComponentPricePointComponentId,
   pricePointId: UpdateComponentPricePointPricePointId,
   body?: UpdateComponentPricePointRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
 ## Parameters
@@ -489,9 +511,12 @@ try {
 Use this endpoint to retrieve details for a specific component price point. You can achieve this by using either the component price point ID or handle.
 
 ```ts
-async readComponentPricePoint(  componentId: ReadComponentPricePointComponentId,
+async readComponentPricePoint(
+  componentId: ReadComponentPricePointComponentId,
   pricePointId: ReadComponentPricePointPricePointId,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointResponse>>
+  currencyPrices?: boolean,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
 ## Parameters
@@ -500,6 +525,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointRespons
 |  --- | --- | --- | --- |
 | `componentId` | [`ReadComponentPricePointComponentId`](../../doc/models/containers/read-component-price-point-component-id.md) | Template, Required | This is a container for one-of cases. |
 | `pricePointId` | [`ReadComponentPricePointPricePointId`](../../doc/models/containers/read-component-price-point-price-point-id.md) | Template, Required | This is a container for one-of cases. |
+| `currencyPrices` | `boolean \| undefined` | Query, Optional | Include an array of currency price data |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -534,9 +560,11 @@ try {
 A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
 
 ```ts
-async archiveComponentPricePoint(  componentId: ArchiveComponentPricePointComponentId,
+async archiveComponentPricePoint(
+  componentId: ArchiveComponentPricePointComponentId,
   pricePointId: ArchiveComponentPricePointPricePointId,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
 ## Parameters
@@ -619,9 +647,11 @@ try {
 Use this endpoint to unarchive a component price point.
 
 ```ts
-async unarchiveComponentPricePoint(  componentId: number,
+async unarchiveComponentPricePoint(
+  componentId: number,
   pricePointId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentPricePointResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
 ## Parameters
@@ -702,9 +732,11 @@ When creating currency prices, they need to mirror the structure of your primary
 Note: Currency Prices are not able to be created for custom price points.
 
 ```ts
-async createCurrencyPrices(  pricePointId: number,
+async createCurrencyPrices(
+  pricePointId: number,
   body?: CreateCurrencyPricesRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
 ```
 
 ## Parameters
@@ -785,9 +817,11 @@ This endpoint allows you to update currency prices for a given currency that has
 Note: Currency Prices are not able to be updated for custom price points.
 
 ```ts
-async updateCurrencyPrices(  pricePointId: number,
+async updateCurrencyPrices(
+  pricePointId: number,
   body?: UpdateCurrencyPricesRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
 ```
 
 ## Parameters
@@ -864,12 +898,14 @@ try {
 This method allows to retrieve a list of Components Price Points belonging to a Site.
 
 ```ts
-async listAllComponentPricePoints(  include?: ListComponentsPricePointsInclude,
+async listAllComponentPricePoints(
+  include?: ListComponentsPricePointsInclude,
   page?: number,
   perPage?: number,
   direction?: SortingDirection,
   filter?: ListPricePointsFilter,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListComponentsPricePointsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListComponentsPricePointsResponse>>
 ```
 
 ## Parameters

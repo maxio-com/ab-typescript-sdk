@@ -40,9 +40,11 @@ A refund less than the total of a consolidated invoice will be split across its 
 A $50.00 refund on a $100.00 consolidated invoice with one $60.00 and one $40.00 segment, the refunded amount will be applied as 50% of each ($30.00 and $20.00 respectively).
 
 ```ts
-async refundInvoice(  uid: string,
+async refundInvoice(
+  uid: string,
   body?: RefundInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -100,7 +102,8 @@ try {
 By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.
 
 ```ts
-async listInvoices(  startDate?: string,
+async listInvoices(
+  startDate?: string,
   endDate?: string,
   status?: InvoiceStatus,
   subscriptionId?: number,
@@ -122,7 +125,8 @@ async listInvoices(  startDate?: string,
   mNumber?: string[],
   productIds?: number[],
   sort?: InvoiceSortField,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListInvoicesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListInvoicesResponse>>
 ```
 
 ## Parameters
@@ -492,8 +496,10 @@ Response: A single Invoice.
 ```
 
 ```ts
-async readInvoice(  uid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+async readInvoice(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -661,14 +667,16 @@ If both a `since_date` and `since_id` are provided in request parameters, the `s
 Note - invoice events that occurred prior to 09/05/2018 __will not__ contain an `invoice` snapshot.
 
 ```ts
-async listInvoiceEvents(  sinceDate?: string,
+async listInvoiceEvents(
+  sinceDate?: string,
   sinceId?: bigint,
   page?: number,
   perPage?: number,
   invoiceUid?: string,
   withChangeInvoiceStatus?: string,
   eventTypes?: InvoiceEventType[],
-requestOptions?: RequestOptions): Promise<ApiResponse<ListInvoiceEventsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListInvoiceEventsResponse>>
 ```
 
 ## Parameters
@@ -1141,9 +1149,11 @@ In order to apply a service credit to an invoice, specify the `type` as `service
 Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
 
 ```ts
-async recordPaymentForInvoice(  uid: string,
+async recordPaymentForInvoice(
+  uid: string,
   body?: CreateInvoicePaymentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -1224,8 +1234,10 @@ In order apply a payment to multiple invoices, at minimum, specify the `amount` 
 Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal to invoices payment amount sum.
 
 ```ts
-async recordPaymentForMultipleInvoices(  body?: CreateMultiInvoicePaymentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<MultiInvoicePaymentResponse>>
+async recordPaymentForMultipleInvoices(
+  body?: CreateMultiInvoicePaymentRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<MultiInvoicePaymentResponse>>
 ```
 
 ## Parameters
@@ -1311,7 +1323,8 @@ Credit Notes are like inverse invoices. They reduce the amount a customer owes.
 By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`, `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field as a key in the query with a value set to `true`.
 
 ```ts
-async listCreditNotes(  subscriptionId?: number,
+async listCreditNotes(
+  subscriptionId?: number,
   page?: number,
   perPage?: number,
   lineItems?: boolean,
@@ -1319,7 +1332,8 @@ async listCreditNotes(  subscriptionId?: number,
   taxes?: boolean,
   refunds?: boolean,
   applications?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListCreditNotesResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListCreditNotesResponse>>
 ```
 
 ## Parameters
@@ -1672,8 +1686,10 @@ try {
 Use this endpoint to retrieve the details for a credit note.
 
 ```ts
-async readCreditNote(  uid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<CreditNote>>
+async readCreditNote(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CreditNote>>
 ```
 
 ## Parameters
@@ -2025,9 +2041,11 @@ Excess payment will result in the creation of a prepayment on the Invoice Accoun
 Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
 
 ```ts
-async recordPaymentForSubscription(  subscriptionId: number,
+async recordPaymentForSubscription(
+  subscriptionId: number,
   body?: RecordPaymentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<RecordPaymentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<RecordPaymentResponse>>
 ```
 
 ## Parameters
@@ -2116,8 +2134,10 @@ A note about reactivations: any canceled invoices from the most recent active pe
 When reopening a consolidated invoice, all of its canceled segments will also be reopened.
 
 ```ts
-async reopenInvoice(  uid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+async reopenInvoice(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -2161,9 +2181,11 @@ try {
 This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
 
 ```ts
-async voidInvoice(  uid: string,
+async voidInvoice(
+  uid: string,
   body?: VoidInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -2217,11 +2239,13 @@ try {
 Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
 
 ```ts
-async listConsolidatedInvoiceSegments(  invoiceUid: string,
+async listConsolidatedInvoiceSegments(
+  invoiceUid: string,
   page?: number,
   perPage?: number,
   direction?: Direction,
-requestOptions?: RequestOptions): Promise<ApiResponse<ConsolidatedInvoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ConsolidatedInvoice>>
 ```
 
 ## Parameters
@@ -2705,9 +2729,11 @@ A custom memo can be sent with the `memo` parameter to override the site's defau
 By default, invoices will be created with open status. Possible alternative is `draft`.
 
 ```ts
-async createInvoice(  subscriptionId: number,
+async createInvoice(
+  subscriptionId: number,
   body?: CreateInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<InvoiceResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<InvoiceResponse>>
 ```
 
 ## Parameters
@@ -2867,9 +2893,11 @@ Please note that if no recipient email addresses are specified in the request, t
 On success, a 204 no-content response will be returned. Please note that this does not indicate that email(s) have been delivered, but instead indicates that emails have been successfully queued for delivery. If _any_ invalid or malformed email address is found in the request body, the entire request will be rejected and a 422 response will be returned.
 
 ```ts
-async sendInvoice(  uid: string,
+async sendInvoice(
+  uid: string,
   body?: SendInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -2930,8 +2958,10 @@ Customer information may change after an invoice is issued which may lead to a m
 The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
 
 ```ts
-async previewCustomerInformationChanges(  uid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerChangesPreviewResponse>>
+async previewCustomerInformationChanges(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerChangesPreviewResponse>>
 ```
 
 ## Parameters
@@ -3030,8 +3060,10 @@ This endpoint updates customer information on an open invoice and returns the up
 The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
 
 ```ts
-async updateCustomerInformation(  uid: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+async updateCustomerInformation(
+  uid: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters
@@ -3273,9 +3305,11 @@ For Automatic subscriptions, prepayments and service credits will apply to the i
 - `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
 
 ```ts
-async issueInvoice(  uid: string,
+async issueInvoice(
+  uid: string,
   body?: IssueInvoiceRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice>>
 ```
 
 ## Parameters

@@ -38,11 +38,17 @@ The following keys are no longer supported.
 + `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)
 + `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)
 
+## Event Key
+
+The event type is identified by the key property. You can check supported keys [here](../../doc/models/event-key.md).
+
 ## Event Specific Data
 
-Event Specific Data
+Different event types may include additional data in `event_specific_data` property.
+While some events share the same schema for `event_specific_data`, others may not include it at all.
+For precise mappings from key to event_specific_data, refer to [Event](../../doc/models/event.md).
 
-Each event type has its own `event_specific_data` specified.
+### Example
 
 Here’s an example event for the `subscription_product_change` event:
 
@@ -81,18 +87,20 @@ Here’s an example event for the `subscription_state_change` event:
 ```
 
 ```ts
-async listEvents(  page?: number,
+async listEvents(
+  page?: number,
   perPage?: number,
   sinceId?: bigint,
   maxId?: bigint,
   direction?: Direction,
-  filter?: EventType[],
+  filter?: EventKey[],
   dateField?: ListEventsDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
   endDatetime?: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<EventResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<EventResponse[]>>
 ```
 
 ## Parameters
@@ -104,7 +112,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<EventResponse[]>>
 | `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
 | `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br>**Default**: `Direction.Desc` |
-| `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+| `filter` | [`EventKey[] \| undefined`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `dateField` | [`ListEventsDateField \| undefined`](../../doc/models/list-events-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `startDate` | `string \| undefined` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `endDate` | `string \| undefined` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
@@ -124,8 +132,8 @@ const collect = {
   perPage: 50,
   direction: Direction.Desc,
   filter: [
-    EventType.CustomFieldValueChange,
-    EventType.PaymentSuccess
+    EventKey.CustomFieldValueChange,
+    EventKey.PaymentSuccess
   ],
   dateField: ListEventsDateField.CreatedAt
 }
@@ -209,17 +217,27 @@ try {
 
 The following request will return a list of events for a subscription.
 
-Each event type has its own `event_specific_data` specified.
+## Event Key
+
+The event type is identified by the key property. You can check supported keys [here](../../doc/models/event-key.md).
+
+## Event Specific Data
+
+Different event types may include additional data in `event_specific_data` property.
+While some events share the same schema for `event_specific_data`, others may not include it at all.
+For precise mappings from key to event_specific_data, refer to [Event](../../doc/models/event.md).
 
 ```ts
-async listSubscriptionEvents(  subscriptionId: number,
+async listSubscriptionEvents(
+  subscriptionId: number,
   page?: number,
   perPage?: number,
   sinceId?: bigint,
   maxId?: bigint,
   direction?: Direction,
-  filter?: EventType[],
-requestOptions?: RequestOptions): Promise<ApiResponse<EventResponse[]>>
+  filter?: EventKey[],
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<EventResponse[]>>
 ```
 
 ## Parameters
@@ -232,7 +250,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<EventResponse[]>>
 | `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
 | `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br>**Default**: `Direction.Desc` |
-| `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+| `filter` | [`EventKey[] \| undefined`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -248,8 +266,8 @@ const collect = {
   perPage: 50,
   direction: Direction.Desc,
   filter: [
-    EventType.CustomFieldValueChange,
-    EventType.PaymentSuccess
+    EventKey.CustomFieldValueChange,
+    EventKey.PaymentSuccess
   ]
 }
 
@@ -314,13 +332,15 @@ try {
 Get a count of all the events for a given site by using this method.
 
 ```ts
-async readEventsCount(  page?: number,
+async readEventsCount(
+  page?: number,
   perPage?: number,
   sinceId?: bigint,
   maxId?: bigint,
   direction?: Direction,
-  filter?: EventType[],
-requestOptions?: RequestOptions): Promise<ApiResponse<CountResponse>>
+  filter?: EventKey[],
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CountResponse>>
 ```
 
 ## Parameters
@@ -332,7 +352,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CountResponse>>
 | `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
 | `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br>**Default**: `Direction.Desc` |
-| `filter` | [`EventType[] \| undefined`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+| `filter` | [`EventKey[] \| undefined`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -347,8 +367,8 @@ const collect = {
   perPage: 50,
   direction: Direction.Desc,
   filter: [
-    EventType.CustomFieldValueChange,
-    EventType.PaymentSuccess
+    EventKey.CustomFieldValueChange,
+    EventKey.PaymentSuccess
   ]
 }
 

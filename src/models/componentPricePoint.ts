@@ -20,6 +20,10 @@ import {
   componentCurrencyPriceSchema,
 } from './componentCurrencyPrice';
 import { ComponentPrice, componentPriceSchema } from './componentPrice';
+import {
+  ExpirationIntervalUnit,
+  expirationIntervalUnitSchema,
+} from './expirationIntervalUnit';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
 import { PricePointType, pricePointTypeSchema } from './pricePointType';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
@@ -55,6 +59,18 @@ export interface ComponentPricePoint {
   intervalUnit?: IntervalUnit | null;
   /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
   currencyPrices?: ComponentCurrencyPrice[];
+  /** Applicable only to prepaid usage components. An array of overage price brackets. */
+  overagePrices?: ComponentPrice[];
+  /** Applicable only to prepaid usage components. Pricing scheme for overage pricing. */
+  overagePricingScheme?: PricingScheme;
+  /** Applicable only to prepaid usage components. Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period. */
+  renewPrepaidAllocation?: boolean;
+  /** Applicable only to prepaid usage components. Boolean which controls whether or not remaining units should be rolled over to the next period. */
+  rolloverPrepaidRemainder?: boolean;
+  /** Applicable only to prepaid usage components where rollover_prepaid_remainder is true. The number of `expiration_interval_unit`s after which rollover amounts should expire. */
+  expirationInterval?: number | null;
+  /** Applicable only to prepaid usage components where rollover_prepaid_remainder is true. A string representing the expiration interval unit for this component, either month or day. */
+  expirationIntervalUnit?: ExpirationIntervalUnit | null;
   [key: string]: unknown;
 }
 
@@ -79,6 +95,24 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
     currencyPrices: [
       'currency_prices',
       optional(array(lazy(() => componentCurrencyPriceSchema))),
+    ],
+    overagePrices: [
+      'overage_prices',
+      optional(array(lazy(() => componentPriceSchema))),
+    ],
+    overagePricingScheme: [
+      'overage_pricing_scheme',
+      optional(pricingSchemeSchema),
+    ],
+    renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
+    rolloverPrepaidRemainder: [
+      'rollover_prepaid_remainder',
+      optional(boolean()),
+    ],
+    expirationInterval: ['expiration_interval', optional(nullable(number()))],
+    expirationIntervalUnit: [
+      'expiration_interval_unit',
+      optional(nullable(expirationIntervalUnitSchema)),
     ],
   }
 );

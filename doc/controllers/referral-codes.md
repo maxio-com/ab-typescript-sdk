@@ -22,8 +22,10 @@ Full documentation on how to use the referrals feature in the Advanced Billing U
 If the referral code is valid the status code will be `200` and the referral code will be returned. If the referral code is invalid, a `404` response will be returned.
 
 ```ts
-async validateReferralCode(  code: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReferralValidationResponse>>
+async validateReferralCode(
+  code: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReferralValidationResponse>>
 ```
 
 ## Parameters

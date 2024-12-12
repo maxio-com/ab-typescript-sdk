@@ -32,13 +32,13 @@ export interface CreatePrepaidUsageComponentPricePoint {
   overagePricing: OveragePricing;
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
   useSiteExchangeRate?: boolean;
-  /** Boolean which controls whether or not remaining units should be rolled over to the next period */
+  /** (only for prepaid usage components) Boolean which controls whether or not remaining units should be rolled over to the next period */
   rolloverPrepaidRemainder?: boolean;
-  /** Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period */
+  /** (only for prepaid usage components) Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period */
   renewPrepaidAllocation?: boolean;
   /** (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire */
   expirationInterval?: number;
-  /** A string representing the expiration interval unit for this component, either month or day */
+  /** (only for prepaid usage components where rollover_prepaid_remainder is true) A string representing the expiration interval unit for this component, either month or day */
   expirationIntervalUnit?: ExpirationIntervalUnit | null;
   [key: string]: unknown;
 }

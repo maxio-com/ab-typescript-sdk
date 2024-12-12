@@ -28,10 +28,12 @@ This API returns an array of exported proforma invoices for a provided `batch_id
 Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
 
 ```ts
-async listExportedProformaInvoices(  batchId: string,
+async listExportedProformaInvoices(
+  batchId: string,
   perPage?: number,
   page?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ProformaInvoice[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice[]>>
 ```
 
 ## Parameters
@@ -82,10 +84,12 @@ This API returns an array of exported invoices for a provided `batch_id`. Pay cl
 Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&page=1`.
 
 ```ts
-async listExportedInvoices(  batchId: string,
+async listExportedInvoices(
+  batchId: string,
   perPage?: number,
   page?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<Invoice[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Invoice[]>>
 ```
 
 ## Parameters
@@ -136,10 +140,12 @@ This API returns an array of exported subscriptions for a provided `batch_id`. P
 Example: `GET https://{subdomain}.chargify.com/api_exports/subscriptions/123/rows?per_page=200&page=1`.
 
 ```ts
-async listExportedSubscriptions(  batchId: string,
+async listExportedSubscriptions(
+  batchId: string,
   perPage?: number,
   page?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<Subscription[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Subscription[]>>
 ```
 
 ## Parameters
@@ -190,7 +196,9 @@ This API creates a proforma invoices export and returns a batchjob object.
 It is only available for Relationship Invoicing architecture.
 
 ```ts
-async exportProformaInvoices(requestOptions?: RequestOptions): Promise<ApiResponse<BatchJobResponse>>
+async exportProformaInvoices(
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BatchJobResponse>>
 ```
 
 ## Parameters
@@ -231,7 +239,9 @@ try {
 This API creates an invoices export and returns a batchjob object.
 
 ```ts
-async exportInvoices(requestOptions?: RequestOptions): Promise<ApiResponse<BatchJobResponse>>
+async exportInvoices(
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BatchJobResponse>>
 ```
 
 ## Parameters
@@ -272,7 +282,9 @@ try {
 This API creates a subscriptions export and returns a batchjob object.
 
 ```ts
-async exportSubscriptions(requestOptions?: RequestOptions): Promise<ApiResponse<BatchJobResponse>>
+async exportSubscriptions(
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BatchJobResponse>>
 ```
 
 ## Parameters
@@ -312,8 +324,10 @@ try {
 This API returns a batchjob object for proforma invoices export.
 
 ```ts
-async readProformaInvoicesExport(  batchId: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<BatchJobResponse>>
+async readProformaInvoicesExport(
+  batchId: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BatchJobResponse>>
 ```
 
 ## Parameters
@@ -356,8 +370,10 @@ try {
 This API returns a batchjob object for invoices export.
 
 ```ts
-async readInvoicesExport(  batchId: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<BatchJobResponse>>
+async readInvoicesExport(
+  batchId: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BatchJobResponse>>
 ```
 
 ## Parameters
@@ -400,8 +416,10 @@ try {
 This API returns a batchjob object for subscriptions export.
 
 ```ts
-async readSubscriptionsExport(  batchId: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<BatchJobResponse>>
+async readSubscriptionsExport(
+  batchId: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BatchJobResponse>>
 ```
 
 ## Parameters

@@ -59,7 +59,7 @@ export interface UpdateSubscription {
   /** (Optional) An array of component ids and custom prices to be added to the subscription. */
   components?: UpdateSubscriptionComponent[];
   /** Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute. */
-  dunningCommunicationDelayEnabled?: boolean | null;
+  dunningCommunicationDelayEnabled?: boolean;
   /** Time zone for the Dunning Communication Delay feature. */
   dunningCommunicationDelayTimeZone?: string | null;
   /** Set to change the current product's price point. */
@@ -103,7 +103,7 @@ export const updateSubscriptionSchema: Schema<UpdateSubscription> = expandoObjec
     ],
     dunningCommunicationDelayEnabled: [
       'dunning_communication_delay_enabled',
-      optional(nullable(boolean())),
+      optional(boolean()),
     ],
     dunningCommunicationDelayTimeZone: [
       'dunning_communication_delay_time_zone',

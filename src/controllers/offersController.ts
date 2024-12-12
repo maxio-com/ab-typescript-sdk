@@ -17,6 +17,7 @@ import { OfferResponse, offerResponseSchema } from '../models/offerResponse';
 import { boolean, number, optional } from '../schema';
 import { BaseController } from './baseController';
 import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 
 export class OffersController extends BaseController {
   /**
@@ -97,6 +98,12 @@ export class OffersController extends BaseController {
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('include_archived', mapped.includeArchived);
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listOffersResponseSchema, requestOptions);
   }

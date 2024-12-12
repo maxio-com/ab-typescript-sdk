@@ -21,9 +21,11 @@ const subscriptionGroupInvoiceAccountController = new SubscriptionGroupInvoiceAc
 A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
 
 ```ts
-async createSubscriptionGroupPrepayment(  uid: string,
+async createSubscriptionGroupPrepayment(
+  uid: string,
   body?: SubscriptionGroupPrepaymentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>>
 ```
 
 ## Parameters
@@ -79,11 +81,13 @@ try {
 This request will list a subscription group's prepayments.
 
 ```ts
-async listPrepaymentsForSubscriptionGroup(  uid: string,
+async listPrepaymentsForSubscriptionGroup(
+  uid: string,
   page?: number,
   perPage?: number,
   filter?: ListPrepaymentsFilter,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListSubscriptionGroupPrepaymentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListSubscriptionGroupPrepaymentResponse>>
 ```
 
 ## Parameters
@@ -160,9 +164,11 @@ try {
 Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
 
 ```ts
-async issueSubscriptionGroupServiceCredit(  uid: string,
+async issueSubscriptionGroupServiceCredit(
+  uid: string,
   body?: IssueServiceCreditRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ServiceCreditResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ServiceCreditResponse>>
 ```
 
 ## Parameters
@@ -230,9 +236,11 @@ try {
 Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
 
 ```ts
-async deductSubscriptionGroupServiceCredit(  uid: string,
+async deductSubscriptionGroupServiceCredit(
+  uid: string,
   body?: DeductServiceCreditRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ServiceCredit>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ServiceCredit>>
 ```
 
 ## Parameters

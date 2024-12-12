@@ -300,8 +300,10 @@ You may wish to redirect customers to different pages depending on whether their
 8. Optionally, you can use the applied "msg" param in the `redirect_url` to determine whether it was successful or not
 
 ```ts
-async createPaymentProfile(  body?: CreatePaymentProfileRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentProfileResponse>>
+async createPaymentProfile(
+  body?: CreatePaymentProfileRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
@@ -384,10 +386,12 @@ try {
 This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.
 
 ```ts
-async listPaymentProfiles(  page?: number,
+async listPaymentProfiles(
+  page?: number,
   perPage?: number,
   customerId?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentProfileResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentProfileResponse[]>>
 ```
 
 ## Parameters
@@ -522,8 +526,10 @@ Example response for Bank Account:
 ```
 
 ```ts
-async readPaymentProfile(  paymentProfileId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentProfileResponse>>
+async readPaymentProfile(
+  paymentProfileId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
@@ -628,9 +634,11 @@ The result will be that you have updated the billing information for the card, y
 - If you are using Authorize.net or Stripe, you may elect to manually trigger a retry for a past due subscription after a partial update.
 
 ```ts
-async updatePaymentProfile(  paymentProfileId: number,
+async updatePaymentProfile(
+  paymentProfileId: number,
   body?: UpdatePaymentProfileRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentProfileResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
@@ -727,8 +735,10 @@ Deletes an unused payment profile.
 If the payment profile is in use by one or more subscriptions or groups, a 422 and error message will be returned.
 
 ```ts
-async deleteUnusedPaymentProfile(  paymentProfileId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async deleteUnusedPaymentProfile(
+  paymentProfileId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -776,9 +786,11 @@ This will delete a payment profile belonging to the customer on the subscription
 + If you delete the default payment profile for a subscription, you will need to specify another payment profile to be the default through the api, or either prompt the user to enter a card in the billing portal or on the self-service page, or visit the Payment Details tab on the subscription in the Admin UI and use the “Add New Credit Card” or “Make Active Payment Method” link, (depending on whether there are other cards present).
 
 ```ts
-async deleteSubscriptionsPaymentProfile(  subscriptionId: number,
+async deleteSubscriptionsPaymentProfile(
+  subscriptionId: number,
   paymentProfileId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -821,9 +833,11 @@ try {
 Submit the two small deposit amounts the customer received in their bank account in order to verify the bank account. (Stripe only)
 
 ```ts
-async verifyBankAccount(  bankAccountId: number,
+async verifyBankAccount(
+  bankAccountId: number,
   body?: BankAccountVerificationRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<BankAccountResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<BankAccountResponse>>
 ```
 
 ## Parameters
@@ -908,9 +922,11 @@ This will delete a Payment Profile belonging to a Subscription Group.
 **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it will be removed from all of them.
 
 ```ts
-async deleteSubscriptionGroupPaymentProfile(  uid: string,
+async deleteSubscriptionGroupPaymentProfile(
+  uid: string,
   paymentProfileId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -955,9 +971,11 @@ This will change the default payment profile on the subscription to the existing
 You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
 ```ts
-async changeSubscriptionDefaultPaymentProfile(  subscriptionId: number,
+async changeSubscriptionDefaultPaymentProfile(
+  subscriptionId: number,
   paymentProfileId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentProfileResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
@@ -1040,9 +1058,11 @@ You must elect to change the existing payment profile to a new payment profile I
 The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
 
 ```ts
-async changeSubscriptionGroupDefaultPaymentProfile(  uid: string,
+async changeSubscriptionGroupDefaultPaymentProfile(
+  uid: string,
   paymentProfileId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentProfileResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentProfileResponse>>
 ```
 
 ## Parameters
@@ -1124,8 +1144,10 @@ You can use One Time Tokens while creating a subscription or payment profile ins
 To obtain a One Time Token you have to use [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview).
 
 ```ts
-async readOneTimeToken(  chargifyToken: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<GetOneTimeTokenRequest>>
+async readOneTimeToken(
+  chargifyToken: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<GetOneTimeTokenRequest>>
 ```
 
 ## Parameters
@@ -1174,8 +1196,10 @@ Additionally, if you attempt to send a "request payment update" email for a subs
 These error responses are designed to prevent excessive or invalid requests, and to provide clear and helpful information to users who encounter errors during the request process.
 
 ```ts
-async sendRequestUpdatePaymentEmail(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async sendRequestUpdatePaymentEmail(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters

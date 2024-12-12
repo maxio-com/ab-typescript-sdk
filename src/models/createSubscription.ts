@@ -140,7 +140,7 @@ export interface CreateSubscription {
   /** (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted. */
   achAgreement?: ACHAgreement;
   /** Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute. */
-  dunningCommunicationDelayEnabled?: boolean | null;
+  dunningCommunicationDelayEnabled?: boolean;
   /** Time zone for the Dunning Communication Delay feature. */
   dunningCommunicationDelayTimeZone?: string | null;
   /** Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests. */
@@ -237,7 +237,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObjec
     achAgreement: ['ach_agreement', optional(lazy(() => aCHAgreementSchema))],
     dunningCommunicationDelayEnabled: [
       'dunning_communication_delay_enabled',
-      optional(nullable(boolean())),
+      optional(boolean()),
     ],
     dunningCommunicationDelayTimeZone: [
       'dunning_communication_delay_time_zone',

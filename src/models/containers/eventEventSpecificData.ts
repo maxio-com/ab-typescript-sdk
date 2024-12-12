@@ -54,13 +54,9 @@ import {
 } from '../proformaInvoiceIssued';
 import { RefundSuccess, refundSuccessSchema } from '../refundSuccess';
 import {
-  SubscriptionGroupSignupFailure,
-  subscriptionGroupSignupFailureSchema,
-} from '../subscriptionGroupSignupFailure';
-import {
-  SubscriptionGroupSignupSuccess,
-  subscriptionGroupSignupSuccessSchema,
-} from '../subscriptionGroupSignupSuccess';
+  SubscriptionGroupSignupEventData,
+  subscriptionGroupSignupEventDataSchema,
+} from '../subscriptionGroupSignupEventData';
 import {
   SubscriptionProductChange,
   subscriptionProductChangeSchema,
@@ -84,8 +80,7 @@ export type EventEventSpecificData =
   | PendingCancellationChange
   | PrepaidSubscriptionBalanceChanged
   | ProformaInvoiceIssued
-  | SubscriptionGroupSignupSuccess
-  | SubscriptionGroupSignupFailure
+  | SubscriptionGroupSignupEventData
   | CreditAccountBalanceChanged
   | PrepaymentAccountBalanceChanged
   | PaymentCollectionMethodChanged
@@ -106,8 +101,7 @@ export const eventEventSpecificDataSchema: Schema<EventEventSpecificData> = oneO
     pendingCancellationChangeSchema,
     prepaidSubscriptionBalanceChangedSchema,
     proformaInvoiceIssuedSchema,
-    subscriptionGroupSignupSuccessSchema,
-    subscriptionGroupSignupFailureSchema,
+    subscriptionGroupSignupEventDataSchema,
     creditAccountBalanceChangedSchema,
     prepaymentAccountBalanceChangedSchema,
     paymentCollectionMethodChangedSchema,
@@ -269,31 +263,16 @@ export namespace EventEventSpecificData {
   }
 
   /**
-   * Validation method to narrow down union type to SubscriptionGroupSignupSuccess type case.
+   * Validation method to narrow down union type to SubscriptionGroupSignupEventData type case.
    *
-   * This is Subscription Group Signup Success case.
+   * This is Subscription Group Signup Event Data case.
    */
-  export function isSubscriptionGroupSignupSuccess(
+  export function isSubscriptionGroupSignupEventData(
     value: unknown
-  ): value is SubscriptionGroupSignupSuccess {
+  ): value is SubscriptionGroupSignupEventData {
     const validationResult = validateAndMap(
       value,
-      subscriptionGroupSignupSuccessSchema
-    );
-    return validationResult.errors === false;
-  }
-
-  /**
-   * Validation method to narrow down union type to SubscriptionGroupSignupFailure type case.
-   *
-   * This is Subscription Group Signup Failure case.
-   */
-  export function isSubscriptionGroupSignupFailure(
-    value: unknown
-  ): value is SubscriptionGroupSignupFailure {
-    const validationResult = validateAndMap(
-      value,
-      subscriptionGroupSignupFailureSchema
+      subscriptionGroupSignupEventDataSchema
     );
     return validationResult.errors === false;
   }

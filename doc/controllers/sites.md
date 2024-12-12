@@ -35,7 +35,9 @@ You can read more about these settings here:
 [Who Pays & Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays)
 
 ```ts
-async readSite(requestOptions?: RequestOptions): Promise<ApiResponse<SiteResponse>>
+async readSite(
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SiteResponse>>
 ```
 
 ## Parameters
@@ -121,8 +123,10 @@ This call is asynchronous and there may be a delay before the site data is fully
 **This functionality will only work on sites in TEST mode. Attempts to perform this on sites in “live” mode will result in a response of 403 FORBIDDEN.**
 
 ```ts
-async clearSite(  cleanupScope?: CleanupScope,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async clearSite(
+  cleanupScope?: CleanupScope,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -159,9 +163,11 @@ try {
 This endpoint returns public keys used for Chargify.js.
 
 ```ts
-async listChargifyJsPublicKeys(  page?: number,
+async listChargifyJsPublicKeys(
+  page?: number,
   perPage?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<ListPublicKeysResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListPublicKeysResponse>>
 ```
 
 ## Parameters

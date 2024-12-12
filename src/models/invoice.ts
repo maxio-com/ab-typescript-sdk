@@ -18,6 +18,10 @@ import {
 import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
 import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
 import {
+  InvoiceAvataxDetails,
+  invoiceAvataxDetailsSchema,
+} from './invoiceAvataxDetails';
+import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
 } from './invoiceConsolidationLevel';
@@ -27,6 +31,7 @@ import {
   InvoiceCustomField,
   invoiceCustomFieldSchema,
 } from './invoiceCustomField';
+import { InvoiceDebit, invoiceDebitSchema } from './invoiceDebit';
 import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
 import {
   InvoiceDisplaySettings,
@@ -137,6 +142,7 @@ export interface Invoice {
    * Credits offset the amount due from the customer.
    */
   creditAmount?: string;
+  debitAmount?: string;
   refundAmount?: string;
   /** The amount paid on the invoice by the customer. */
   paidAmount?: string;
@@ -147,10 +153,12 @@ export interface Invoice {
   discounts?: InvoiceDiscount[];
   taxes?: InvoiceTax[];
   credits?: InvoiceCredit[];
+  debits?: InvoiceDebit[];
   refunds?: InvoiceRefund[];
   payments?: InvoicePayment[];
   customFields?: InvoiceCustomField[];
   displaySettings?: InvoiceDisplaySettings;
+  avataxDetails?: InvoiceAvataxDetails;
   /** The public URL of the invoice */
   publicUrl?: string;
   previousBalanceData?: InvoicePreviousBalance;
@@ -211,6 +219,7 @@ export const invoiceSchema: Schema<Invoice> = expandoObject({
   taxAmount: ['tax_amount', optional(string())],
   totalAmount: ['total_amount', optional(string())],
   creditAmount: ['credit_amount', optional(string())],
+  debitAmount: ['debit_amount', optional(string())],
   refundAmount: ['refund_amount', optional(string())],
   paidAmount: ['paid_amount', optional(string())],
   dueAmount: ['due_amount', optional(string())],
@@ -218,6 +227,7 @@ export const invoiceSchema: Schema<Invoice> = expandoObject({
   discounts: ['discounts', optional(array(lazy(() => invoiceDiscountSchema)))],
   taxes: ['taxes', optional(array(lazy(() => invoiceTaxSchema)))],
   credits: ['credits', optional(array(lazy(() => invoiceCreditSchema)))],
+  debits: ['debits', optional(array(lazy(() => invoiceDebitSchema)))],
   refunds: ['refunds', optional(array(lazy(() => invoiceRefundSchema)))],
   payments: ['payments', optional(array(lazy(() => invoicePaymentSchema)))],
   customFields: [
@@ -227,6 +237,10 @@ export const invoiceSchema: Schema<Invoice> = expandoObject({
   displaySettings: [
     'display_settings',
     optional(lazy(() => invoiceDisplaySettingsSchema)),
+  ],
+  avataxDetails: [
+    'avatax_details',
+    optional(lazy(() => invoiceAvataxDetailsSchema)),
   ],
   publicUrl: ['public_url', optional(string())],
   previousBalanceData: [

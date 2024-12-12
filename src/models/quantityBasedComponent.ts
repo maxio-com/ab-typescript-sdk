@@ -60,8 +60,6 @@ export interface QuantityBasedComponent {
   taxCode?: string;
   /** (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. */
   hideDateRangeOnInvoice?: boolean;
-  /** deprecated May 2011 - use unit_price instead */
-  priceInCents?: string;
   recurring?: boolean;
   displayOnHostedPage?: boolean;
   allowFractionalQuantities?: boolean;
@@ -91,7 +89,6 @@ export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = expa
     unitPrice: ['unit_price', optional(quantityBasedComponentUnitPriceSchema)],
     taxCode: ['tax_code', optional(string())],
     hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
-    priceInCents: ['price_in_cents', optional(string())],
     recurring: ['recurring', optional(boolean())],
     displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
     allowFractionalQuantities: [

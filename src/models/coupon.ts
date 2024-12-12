@@ -6,6 +6,7 @@
 
 import {
   array,
+  bigint,
   boolean,
   expandoObject,
   lazy,
@@ -19,6 +20,7 @@ import {
   CompoundingStrategy,
   compoundingStrategySchema,
 } from './compoundingStrategy';
+import { CouponCurrency, couponCurrencySchema } from './couponCurrency';
 import {
   CouponRestriction,
   couponRestrictionSchema,
@@ -32,10 +34,11 @@ export interface Coupon {
   code?: string;
   description?: string;
   amount?: number | null;
-  amountInCents?: number | null;
+  amountInCents?: bigint | null;
   productFamilyId?: number;
   productFamilyName?: string | null;
   startDate?: string;
+  /** After the given time, this coupon code will be invalid for new signups. Recurring discounts started before this date will continue to recur even after this date. */
   endDate?: string | null;
   percentage?: string | null;
   recurring?: boolean;
@@ -44,10 +47,13 @@ export interface Coupon {
   durationInterval?: number | null;
   durationIntervalUnit?: string | null;
   durationIntervalSpan?: string | null;
+  /** If set to true, discount is not limited (credits will carry forward to next billing). */
   allowNegativeBalance?: boolean;
   archivedAt?: string | null;
   conversionLimit?: string | null;
+  /** A stackable coupon can be combined with other coupons on a Subscription. */
   stackable?: boolean;
+  /** Applicable only to stackable coupons. For `compound`, Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated. For `full-price`, Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. */
   compoundingStrategy?: CompoundingStrategy | null;
   useSiteExchangeRate?: boolean;
   createdAt?: string;
@@ -57,6 +63,8 @@ export interface Coupon {
   applyOnCancelAtEndOfPeriod?: boolean;
   applyOnSubscriptionExpiration?: boolean;
   couponRestrictions?: CouponRestriction[];
+  /** Returned in read, find, and list endpoints if the query parameter is provided. */
+  currencyPrices?: CouponCurrency[];
   [key: string]: unknown;
 }
 
@@ -66,7 +74,7 @@ export const couponSchema: Schema<Coupon> = expandoObject({
   code: ['code', optional(string())],
   description: ['description', optional(string())],
   amount: ['amount', optional(nullable(number()))],
-  amountInCents: ['amount_in_cents', optional(nullable(number()))],
+  amountInCents: ['amount_in_cents', optional(nullable(bigint()))],
   productFamilyId: ['product_family_id', optional(number())],
   productFamilyName: ['product_family_name', optional(nullable(string()))],
   startDate: ['start_date', optional(string())],
@@ -111,5 +119,9 @@ export const couponSchema: Schema<Coupon> = expandoObject({
   couponRestrictions: [
     'coupon_restrictions',
     optional(array(lazy(() => couponRestrictionSchema))),
+  ],
+  currencyPrices: [
+    'currency_prices',
+    optional(array(lazy(() => couponCurrencySchema))),
   ],
 });
