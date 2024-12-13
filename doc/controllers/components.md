@@ -35,9 +35,11 @@ Note that this is different from recurring quantity-based components, which DO N
 For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
-async createMeteredComponent(  productFamilyId: string,
+async createMeteredComponent(
+  productFamilyId: string,
   body?: CreateMeteredComponent,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -164,9 +166,11 @@ The allocated quantity for one-time quantity-based components immediately gets r
 For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
-async createQuantityBasedComponent(  productFamilyId: string,
+async createQuantityBasedComponent(
+  productFamilyId: string,
   body?: CreateQuantityBasedComponent,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -284,9 +288,11 @@ On/off components are used for any flat fee, recurring add on (think $99/month f
 For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
-async createOnOffComponent(  productFamilyId: string,
+async createOnOffComponent(
+  productFamilyId: string,
   body?: CreateOnOffComponent,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -309,14 +315,9 @@ const productFamilyId = 'product_family_id4';
 const body: CreateOnOffComponent = {
   onOffComponent: {
     name: 'Annual Support Services',
+    unitPrice: '100.00',
     description: 'Prepay for support services',
     taxable: true,
-    prices: [
-      {
-        startingQuantity: '0',
-        unitPrice: '100.00',
-      }
-    ],
     displayOnHostedPage: true,
     publicSignupPageIds: [
       320495
@@ -394,9 +395,11 @@ Prepaid components allow customers to pre-purchase units that can be used up ove
 For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
-async createPrepaidUsageComponent(  productFamilyId: string,
+async createPrepaidUsageComponent(
+  productFamilyId: string,
   body?: CreatePrepaidComponent,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -421,7 +424,6 @@ const body: CreatePrepaidComponent = {
     name: 'Minutes',
     unitName: 'minutes',
     pricingScheme: PricingScheme.PerUnit,
-    unitPrice: 2,
     overagePricing: {
       pricingScheme: PricingScheme.Stairstep,
       prices: [
@@ -436,6 +438,7 @@ const body: CreatePrepaidComponent = {
         }
       ],
     },
+    unitPrice: 2,
     rolloverPrepaidRemainder: true,
     renewPrepaidAllocation: true,
     expirationInterval: 15,
@@ -539,9 +542,11 @@ So, instead of reporting usage directly for each component (as you would with me
 For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
-async createEventBasedComponent(  productFamilyId: string,
+async createEventBasedComponent(
+  productFamilyId: string,
   body?: CreateEBBComponent,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -646,8 +651,10 @@ try {
 This request will return information regarding a component having the handle you provide. You can identify your components with a handle so you don't have to save or reference the IDs we generate.
 
 ```ts
-async findComponent(  handle: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+async findComponent(
+  handle: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -716,9 +723,11 @@ This request will return information regarding a component from a specific produ
 You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
 
 ```ts
-async readComponent(  productFamilyId: number,
+async readComponent(
+  productFamilyId: number,
   componentId: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -793,10 +802,12 @@ This request will update a component from a specific product family.
 You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
 
 ```ts
-async updateProductFamilyComponent(  productFamilyId: number,
+async updateProductFamilyComponent(
+  productFamilyId: number,
   componentId: string,
   body?: UpdateComponentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -883,9 +894,11 @@ try {
 Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
 
 ```ts
-async archiveComponent(  productFamilyId: number,
+async archiveComponent(
+  productFamilyId: number,
   componentId: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<Component>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Component>>
 ```
 
 ## Parameters
@@ -960,7 +973,8 @@ try {
 This request will return a list of components for a site.
 
 ```ts
-async listComponents(  dateField?: BasicDateField,
+async listComponents(
+  dateField?: BasicDateField,
   startDate?: string,
   endDate?: string,
   startDatetime?: string,
@@ -969,7 +983,8 @@ async listComponents(  dateField?: BasicDateField,
   page?: number,
   perPage?: number,
   filter?: ListComponentsFilter,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse[]>>
 ```
 
 ## Parameters
@@ -1123,9 +1138,11 @@ This request will update a component.
 You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
 
 ```ts
-async updateComponent(  componentId: string,
+async updateComponent(
+  componentId: string,
   body?: UpdateComponentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse>>
 ```
 
 ## Parameters
@@ -1208,7 +1225,8 @@ try {
 This request will return a list of components for a particular product family.
 
 ```ts
-async listComponentsForProductFamily(  productFamilyId: number,
+async listComponentsForProductFamily(
+  productFamilyId: number,
   includeArchived?: boolean,
   page?: number,
   perPage?: number,
@@ -1218,7 +1236,8 @@ async listComponentsForProductFamily(  productFamilyId: number,
   endDatetime?: string,
   startDate?: string,
   startDatetime?: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<ComponentResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentResponse[]>>
 ```
 
 ## Parameters

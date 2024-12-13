@@ -9,14 +9,11 @@ import {
   CreateReasonCodeRequest,
   createReasonCodeRequestSchema,
 } from '../models/createReasonCodeRequest';
+import { OkResponse, okResponseSchema } from '../models/okResponse';
 import {
   ReasonCodeResponse,
   reasonCodeResponseSchema,
 } from '../models/reasonCodeResponse';
-import {
-  ReasonCodesJsonResponse,
-  reasonCodesJsonResponseSchema,
-} from '../models/reasonCodesJsonResponse';
 import {
   UpdateReasonCodeRequest,
   updateReasonCodeRequestSchema,
@@ -101,6 +98,12 @@ export class ReasonCodesController extends BaseController {
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(reasonCodeResponseSchema), requestOptions);
   }
@@ -145,6 +148,12 @@ export class ReasonCodesController extends BaseController {
     req.json(mapped.body);
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(reasonCodeResponseSchema, requestOptions);
   }
@@ -159,12 +168,12 @@ export class ReasonCodesController extends BaseController {
   async deleteReasonCode(
     reasonCodeId: number,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ReasonCodesJsonResponse>> {
+  ): Promise<ApiResponse<OkResponse>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({ reasonCodeId: [reasonCodeId, number()] });
     req.appendTemplatePath`/reason_codes/${mapped.reasonCodeId}.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
-    return req.callAsJson(reasonCodesJsonResponseSchema, requestOptions);
+    return req.callAsJson(okResponseSchema, requestOptions);
   }
 }

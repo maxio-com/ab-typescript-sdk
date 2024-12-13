@@ -35,8 +35,10 @@ The response will be `200 OK` with the updated Subscription.
 The response will be `422 "Unprocessable Entity`.
 
 ```ts
-async retrySubscription(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+async retrySubscription(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -215,9 +217,11 @@ try {
 The DELETE action causes the cancellation of the Subscription. This means, the method sets the Subscription state to "canceled".
 
 ```ts
-async cancelSubscription(  subscriptionId: number,
+async cancelSubscription(
+  subscriptionId: number,
   body?: CancellationRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -398,9 +402,11 @@ try {
 Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.
 
 ```ts
-async resumeSubscription(  subscriptionId: number,
+async resumeSubscription(
+  subscriptionId: number,
   calendarBillingResumptionCharge?: ResumptionCharge,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -557,9 +563,11 @@ This will place the subscription in the on_hold state and it will not renew.
 You may not place a subscription on hold if the `next_billing` date is within 24 hours.
 
 ```ts
-async pauseSubscription(  subscriptionId: number,
+async pauseSubscription(
+  subscriptionId: number,
   body?: PauseRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -727,9 +735,11 @@ To update a subscription's resume date, use this method to change or update the 
 Alternately, you can change the `automatically_resume_at` to `null` if you would like the subscription to not have a resume date.
 
 ```ts
-async updateAutomaticSubscriptionResumption(  subscriptionId: number,
+async updateAutomaticSubscriptionResumption(
+  subscriptionId: number,
   body?: PauseRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -1060,9 +1070,11 @@ PUT request sent to:
 + Any product-related charges should have been collected
 
 ```ts
-async reactivateSubscription(  subscriptionId: number,
+async reactivateSubscription(
+  subscriptionId: number,
   body?: ReactivateSubscriptionRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -1234,9 +1246,11 @@ Requesting to cancel the subscription at the end of the period sets the `cancel_
 Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
 
 ```ts
-async initiateDelayedCancellation(  subscriptionId: number,
+async initiateDelayedCancellation(
+  subscriptionId: number,
   body?: CancellationRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<DelayedCancellationResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<DelayedCancellationResponse>>
 ```
 
 ## Parameters
@@ -1273,6 +1287,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Cancel Delayed Cancellation
@@ -1282,8 +1297,10 @@ Removing the delayed cancellation on a subscription will ensure that it doesn't 
 This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
 
 ```ts
-async cancelDelayedCancellation(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<DelayedCancellationResponse>>
+async cancelDelayedCancellation(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<DelayedCancellationResponse>>
 ```
 
 ## Parameters
@@ -1334,8 +1351,10 @@ try {
 If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.
 
 ```ts
-async cancelDunning(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<SubscriptionResponse>>
+async cancelDunning(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SubscriptionResponse>>
 ```
 
 ## Parameters
@@ -1366,6 +1385,12 @@ try {
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
 
 # Preview Renewal
 
@@ -1393,9 +1418,11 @@ Optionally, **you may provide your own custom quantities** for any component to 
 You can request a `POST` to obtain this data from the endpoint without any side effects. Plain and simple, this will preview data, not log any changes against a subscription.
 
 ```ts
-async previewRenewal(  subscriptionId: number,
+async previewRenewal(
+  subscriptionId: number,
   body?: RenewalPreviewRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<RenewalPreviewResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<RenewalPreviewResponse>>
 ```
 
 ## Parameters

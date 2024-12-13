@@ -50,7 +50,7 @@ export interface Component {
   /** The description of the component. */
   description?: string | null;
   defaultPricePointId?: number | null;
-  /** An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. */
+  /** Applicable only to prepaid usage components. An array of overage price brackets. */
   overagePrices?: ComponentPrice[] | null;
   /** An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. */
   prices?: ComponentPrice[] | null;

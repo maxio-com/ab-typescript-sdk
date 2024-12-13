@@ -55,7 +55,7 @@
 | `activatedAt` | `string \| undefined` | Optional | - |
 | `agreementAcceptance` | [`AgreementAcceptance \| undefined`](../../doc/models/agreement-acceptance.md) | Optional | Required when creating a subscription with Maxio Payments. |
 | `achAgreement` | [`ACHAgreement \| undefined`](../../doc/models/ach-agreement.md) | Optional | (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted. |
-| `dunningCommunicationDelayEnabled` | `boolean \| null \| undefined` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `false` |
+| `dunningCommunicationDelayEnabled` | `boolean \| undefined` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `false` |
 | `dunningCommunicationDelayTimeZone` | `string \| null \| undefined` | Optional | Time zone for the Dunning Communication Delay feature. |
 | `skipBillingManifestTaxes` | `boolean \| undefined` | Optional | Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests.<br>**Default**: `false` |
 

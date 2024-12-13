@@ -16,6 +16,7 @@ export enum InvoiceStatus {
   Pending = 'pending',
   Voided = 'voided',
   Canceled = 'canceled',
+  Processing = 'processing',
 }
 
 /**

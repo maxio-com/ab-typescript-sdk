@@ -51,7 +51,7 @@ export class Client implements ClientInterface {
         ? this._config.httpClientOptions.timeout
         : this._config.timeout;
     this._userAgent = updateUserAgent(
-      'AB SDK TypeScript:5.2.0 on OS {os-info}'
+      'AB SDK TypeScript:6.0.0 on OS {os-info}'
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
       (server) => getBaseUri(server, this._config),
@@ -89,17 +89,30 @@ function createHttpClientAdapter(client: HttpClient): HttpClientInterface {
   };
 }
 
-function getBaseUri(server: Server = 'default', config: Configuration): string {
-  if (config.environment === Environment.Production) {
-    if (server === 'default') {
-      return pathTemplate`https://${new SkipEncode(
-        config.subdomain
-      )}.${new SkipEncode(config.domain)}`;
+function getBaseUri(
+  server: Server = 'production',
+  config: Configuration
+): string {
+  if (config.environment === Environment.US) {
+    if (server === 'production') {
+      return pathTemplate`https://${new SkipEncode(config.site)}.chargify.com`;
+    }
+    if (server === 'ebb') {
+      return pathTemplate`https://events.chargify.com/${new SkipEncode(
+        config.site
+      )}`;
     }
   }
-  if (config.environment === Environment.Environment2) {
-    if (server === 'default') {
-      return 'https://events.chargify.com';
+  if (config.environment === Environment.EU) {
+    if (server === 'production') {
+      return pathTemplate`https://${new SkipEncode(
+        config.site
+      )}.ebilling.maxio.com`;
+    }
+    if (server === 'ebb') {
+      return pathTemplate`https://events.chargify.com/${new SkipEncode(
+        config.site
+      )}`;
     }
   }
   throw new Error('Could not get Base URL. Invalid environment or server.');

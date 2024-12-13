@@ -7,8 +7,8 @@
 import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { CountResponse, countResponseSchema } from '../models/countResponse';
 import { Direction, directionSchema } from '../models/direction';
+import { EventKey, eventKeySchema } from '../models/eventKey';
 import { EventResponse, eventResponseSchema } from '../models/eventResponse';
-import { EventType, eventTypeSchema } from '../models/eventType';
 import {
   ListEventsDateField,
   listEventsDateFieldSchema,
@@ -44,12 +44,17 @@ export class EventsController extends BaseController {
    * + `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)
    * + `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)
    *
+   * ## Event Key
+   * The event type is identified by the key property. You can check supported keys
+   * [here]($m/Event%20Key).
+   *
    * ## Event Specific Data
    *
-   * Event Specific Data
+   * Different event types may include additional data in `event_specific_data` property.
+   * While some events share the same schema for `event_specific_data`, others may not include it at all.
+   * For precise mappings from key to event_specific_data, refer to [Event]($m/Event).
    *
-   * Each event type has its own `event_specific_data` specified.
-   *
+   * ### Example
    * Here’s an example event for the `subscription_product_change` event:
    *
    * ```
@@ -140,7 +145,7 @@ export class EventsController extends BaseController {
       sinceId?: bigint;
       maxId?: bigint;
       direction?: Direction;
-      filter?: EventType[];
+      filter?: EventKey[];
       dateField?: ListEventsDateField;
       startDate?: string;
       endDate?: string;
@@ -156,7 +161,7 @@ export class EventsController extends BaseController {
       sinceId: [sinceId, optional(bigint())],
       maxId: [maxId, optional(bigint())],
       direction: [direction, optional(directionSchema)],
-      filter: [filter, optional(array(eventTypeSchema))],
+      filter: [filter, optional(array(eventKeySchema))],
       dateField: [dateField, optional(listEventsDateFieldSchema)],
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
@@ -181,23 +186,31 @@ export class EventsController extends BaseController {
   /**
    * The following request will return a list of events for a subscription.
    *
-   * Each event type has its own `event_specific_data` specified.
+   * ## Event Key
+   * The event type is identified by the key property. You can check supported keys
+   * [here]($m/Event%20Key).
+   *
+   * ## Event Specific Data
+   *
+   * Different event types may include additional data in `event_specific_data` property.
+   * While some events share the same schema for `event_specific_data`, others may not include it at all.
+   * For precise mappings from key to event_specific_data, refer to [Event]($m/Event).
    *
    * @param subscriptionId  The Chargify id of the subscription
-   * @param page            Result records are organized in pages. By default, the first page of
-   *                                       results is displayed. The page parameter specifies a page number of results
-   *                                       to fetch. You can start navigating through the pages to consume the results.
-   *                                       You do this by passing in a page parameter. Retrieve the next page by adding
-   *                                       ?page=2 to the query string. If there are no results to return, then an
-   *                                       empty result set will be returned. Use in query `page=1`.
+   * @param page            Result records are organized in pages. By default, the first page of results
+   *                                      is displayed. The page parameter specifies a page number of results to fetch.
+   *                                      You can start navigating through the pages to consume the results. You do
+   *                                      this by passing in a page parameter. Retrieve the next page by adding ?page=2
+   *                                      to the query string. If there are no results to return, then an empty result
+   *                                      set will be returned. Use in query `page=1`.
    * @param perPage         This parameter indicates how many records to fetch in each request. Default
-   *                                       value is 20. The maximum allowed values is 200; any per_page value over 200
-   *                                       will be changed to 200. Use in query `per_page=200`.
+   *                                      value is 20. The maximum allowed values is 200; any per_page value over 200
+   *                                      will be changed to 200. Use in query `per_page=200`.
    * @param sinceId         Returns events with an id greater than or equal to the one specified
    * @param maxId           Returns events with an id less than or equal to the one specified
    * @param direction       The sort direction of the returned events.
    * @param filter          You can pass multiple event keys after comma. Use in query
-   *                                       `filter=signup_success,payment_success`.
+   *                                      `filter=signup_success,payment_success`.
    * @return Response from the API call
    */
   async listSubscriptionEvents(
@@ -216,7 +229,7 @@ export class EventsController extends BaseController {
       sinceId?: bigint;
       maxId?: bigint;
       direction?: Direction;
-      filter?: EventType[];
+      filter?: EventKey[];
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<EventResponse[]>> {
@@ -228,7 +241,7 @@ export class EventsController extends BaseController {
       sinceId: [sinceId, optional(bigint())],
       maxId: [maxId, optional(bigint())],
       direction: [direction, optional(directionSchema)],
-      filter: [filter, optional(array(eventTypeSchema))],
+      filter: [filter, optional(array(eventKeySchema))],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
@@ -245,19 +258,19 @@ export class EventsController extends BaseController {
    * Get a count of all the events for a given site by using this method.
    *
    * @param page      Result records are organized in pages. By default, the first page of results is
-   *                                 displayed. The page parameter specifies a page number of results to fetch. You can
-   *                                 start navigating through the pages to consume the results. You do this by passing
-   *                                 in a page parameter. Retrieve the next page by adding ?page=2 to the query string.
-   *                                 If there are no results to return, then an empty result set will be returned. Use
-   *                                 in query `page=1`.
+   *                                displayed. The page parameter specifies a page number of results to fetch. You can
+   *                                start navigating through the pages to consume the results. You do this by passing
+   *                                in a page parameter. Retrieve the next page by adding ?page=2 to the query string.
+   *                                If there are no results to return, then an empty result set will be returned. Use
+   *                                in query `page=1`.
    * @param perPage   This parameter indicates how many records to fetch in each request. Default value
-   *                                 is 20. The maximum allowed values is 200; any per_page value over 200 will be
-   *                                 changed to 200. Use in query `per_page=200`.
+   *                                is 20. The maximum allowed values is 200; any per_page value over 200 will be
+   *                                changed to 200. Use in query `per_page=200`.
    * @param sinceId   Returns events with an id greater than or equal to the one specified
    * @param maxId     Returns events with an id less than or equal to the one specified
    * @param direction The sort direction of the returned events.
    * @param filter    You can pass multiple event keys after comma. Use in query `filter=signup_success,
-   *                                 payment_success`.
+   *                                payment_success`.
    * @return Response from the API call
    */
   async readEventsCount(
@@ -274,7 +287,7 @@ export class EventsController extends BaseController {
       sinceId?: bigint;
       maxId?: bigint;
       direction?: Direction;
-      filter?: EventType[];
+      filter?: EventKey[];
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<CountResponse>> {
@@ -285,7 +298,7 @@ export class EventsController extends BaseController {
       sinceId: [sinceId, optional(bigint())],
       maxId: [maxId, optional(bigint())],
       direction: [direction, optional(directionSchema)],
-      filter: [filter, optional(array(eventTypeSchema))],
+      filter: [filter, optional(array(eventKeySchema))],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);

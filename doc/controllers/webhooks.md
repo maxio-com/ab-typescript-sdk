@@ -36,14 +36,16 @@ We recommend that you review Advanced Billing's webhook documentation located in
 This method allows you to fetch data about webhooks. You can pass query parameters if you want to filter webhooks.
 
 ```ts
-async listWebhooks(  status?: WebhookStatus,
+async listWebhooks(
+  status?: WebhookStatus,
   sinceDate?: string,
   untilDate?: string,
   page?: number,
   perPage?: number,
   order?: WebhookOrder,
   subscription?: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<WebhookResponse[]>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<WebhookResponse[]>>
 ```
 
 ## Parameters
@@ -128,8 +130,10 @@ try {
 This method allows you to enable webhooks via API for your site
 
 ```ts
-async enableWebhooks(  body?: EnableWebhooksRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<EnableWebhooksResponse>>
+async enableWebhooks(
+  body?: EnableWebhooksRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<EnableWebhooksResponse>>
 ```
 
 ## Parameters
@@ -178,8 +182,10 @@ Posting to the replay endpoint does not immediately resend the webhooks. They ar
 You may submit an array of up to 1000 webhook IDs to replay in the request.
 
 ```ts
-async replayWebhooks(  body?: ReplayWebhooksRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ReplayWebhooksResponse>>
+async replayWebhooks(
+  body?: ReplayWebhooksRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ReplayWebhooksResponse>>
 ```
 
 ## Parameters
@@ -232,8 +238,10 @@ You can check available events here.
 [Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-Reference#events)
 
 ```ts
-async createEndpoint(  body?: CreateOrUpdateEndpointRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<EndpointResponse>>
+async createEndpoint(
+  body?: CreateOrUpdateEndpointRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<EndpointResponse>>
 ```
 
 ## Parameters
@@ -301,7 +309,9 @@ try {
 This method returns created endpoints for site.
 
 ```ts
-async listEndpoints(requestOptions?: RequestOptions): Promise<ApiResponse<Endpoint[]>>
+async listEndpoints(
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Endpoint[]>>
 ```
 
 ## Parameters
@@ -371,9 +381,11 @@ Sending an PUT request for existing endpoint with empty list of `webhook_subscri
 If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the specific event key.
 
 ```ts
-async updateEndpoint(  endpointId: number,
+async updateEndpoint(
+  endpointId: number,
   body?: CreateOrUpdateEndpointRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<EndpointResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<EndpointResponse>>
 ```
 
 ## Parameters

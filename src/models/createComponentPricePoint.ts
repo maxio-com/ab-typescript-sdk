@@ -25,9 +25,9 @@ export interface CreateComponentPricePoint {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme: PricingScheme;
   prices: Price[];
-  /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. */
+  /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. Setting not supported when creating price points in bulk. */
   useSiteExchangeRate?: boolean;
-  /** Whether or not the price point includes tax */
+  /** Whether or not the price point includes tax. Setting not supported when creating price points in bulk. */
   taxIncluded?: boolean;
   /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;

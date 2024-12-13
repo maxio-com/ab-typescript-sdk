@@ -84,6 +84,7 @@ export interface InvoiceLineItem {
   componentId?: number | null;
   /** The price point ID of the component being billed. Will be `nil` for non-component charges. */
   pricePointId?: number | null;
+  billingScheduleItemId?: number | null;
   hide?: boolean;
   componentCostData?: InvoiceLineItemComponentCostData | null;
   /** The price point ID of the line item's product */
@@ -111,6 +112,10 @@ export const invoiceLineItemSchema: Schema<InvoiceLineItem> = expandoObject({
   productVersion: ['product_version', optional(nullable(number()))],
   componentId: ['component_id', optional(nullable(number()))],
   pricePointId: ['price_point_id', optional(nullable(number()))],
+  billingScheduleItemId: [
+    'billing_schedule_item_id',
+    optional(nullable(number())),
+  ],
   hide: ['hide', optional(boolean())],
   componentCostData: [
     'component_cost_data',

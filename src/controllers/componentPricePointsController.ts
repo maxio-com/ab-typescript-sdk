@@ -137,6 +137,12 @@ export class ComponentPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points.json`;
+    req.throwOn(
+      422,
+      ErrorArrayMapResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
   }
@@ -223,6 +229,12 @@ export class ComponentPricePointsController extends BaseController {
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/bulk.json`;
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointsResponseSchema, requestOptions);
   }
@@ -278,26 +290,30 @@ export class ComponentPricePointsController extends BaseController {
    * Use this endpoint to retrieve details for a specific component price point. You can achieve this by
    * using either the component price point ID or handle.
    *
-   * @param componentId    The id or handle of the component. When using the
-   *                                                              handle, it must be prefixed with `handle:`. Example:
-   *                                                              `123` for an integer ID, or `handle:example-product-
-   *                                                              handle` for a string handle.
-   * @param pricePointId   The id or handle of the price point. When using the
-   *                                                              handle, it must be prefixed with `handle:`. Example:
-   *                                                              `123` for an integer ID, or `handle:example-
-   *                                                              price_point-handle` for a string handle.
+   * @param componentId     The id or handle of the component. When using the
+   *                                                               handle, it must be prefixed with `handle:`. Example:
+   *                                                               `123` for an integer ID, or `handle:example-product-
+   *                                                               handle` for a string handle.
+   * @param pricePointId    The id or handle of the price point. When using the
+   *                                                               handle, it must be prefixed with `handle:`. Example:
+   *                                                               `123` for an integer ID, or `handle:example-
+   *                                                               price_point-handle` for a string handle.
+   * @param currencyPrices  Include an array of currency price data
    * @return Response from the API call
    */
   async readComponentPricePoint(
     componentId: ReadComponentPricePointComponentId,
     pricePointId: ReadComponentPricePointPricePointId,
+    currencyPrices?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentPricePointResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       componentId: [componentId, readComponentPricePointComponentIdSchema],
       pricePointId: [pricePointId, readComponentPricePointPricePointIdSchema],
+      currencyPrices: [currencyPrices, optional(boolean())],
     });
+    req.query('currency_prices', mapped.currencyPrices);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
@@ -393,7 +409,8 @@ export class ComponentPricePointsController extends BaseController {
     req.throwOn(
       422,
       ErrorArrayMapResponseError,
-      'Unprocessable Entity (WebDAV)'
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
@@ -428,7 +445,8 @@ export class ComponentPricePointsController extends BaseController {
     req.throwOn(
       422,
       ErrorArrayMapResponseError,
-      'Unprocessable Entity (WebDAV)'
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(

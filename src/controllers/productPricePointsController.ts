@@ -158,6 +158,8 @@ export class ProductPricePointsController extends BaseController {
    *                                                                flag is set to false, it will return all of the
    *                                                                defined prices for each currency.
    * @param filterType      Use in query: `filter[type]=catalog,default`.
+   * @param archived        Set to include archived price points in the
+   *                                                                response.
    * @return Response from the API call
    */
   async listProductPricePoints(
@@ -167,12 +169,14 @@ export class ProductPricePointsController extends BaseController {
       perPage,
       currencyPrices,
       filterType,
+      archived,
     }: {
       productId: ListProductPricePointsInputProductId;
       page?: number;
       perPage?: number;
       currencyPrices?: boolean;
       filterType?: PricePointType[];
+      archived?: boolean;
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListProductPricePointsResponse>> {
@@ -183,11 +187,13 @@ export class ProductPricePointsController extends BaseController {
       perPage: [perPage, optional(number())],
       currencyPrices: [currencyPrices, optional(boolean())],
       filterType: [filterType, optional(array(pricePointTypeSchema))],
+      archived: [archived, optional(boolean())],
     });
     req.query('page', mapped.page);
     req.query('per_page', mapped.perPage);
     req.query('currency_prices', mapped.currencyPrices);
     req.query('filter[type]', mapped.filterType, commaPrefix);
+    req.query('archived', mapped.archived);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);

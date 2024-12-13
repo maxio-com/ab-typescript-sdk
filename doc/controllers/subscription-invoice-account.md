@@ -23,8 +23,10 @@ const subscriptionInvoiceAccountController = new SubscriptionInvoiceAccountContr
 Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
 
 ```ts
-async readAccountBalances(  subscriptionId: number,
-requestOptions?: RequestOptions): Promise<ApiResponse<AccountBalances>>
+async readAccountBalances(
+  subscriptionId: number,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<AccountBalances>>
 ```
 
 ## Parameters
@@ -67,9 +69,11 @@ When the `method` specified is `"credit_card_on_file"`, the prepayment amount wi
 Please note that you **can't** pass `amount_in_cents`.
 
 ```ts
-async createPrepayment(  subscriptionId: number,
+async createPrepayment(
+  subscriptionId: number,
   body?: CreatePrepaymentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<CreatePrepaymentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CreatePrepaymentResponse>>
 ```
 
 ## Parameters
@@ -141,11 +145,13 @@ try {
 This request will list a subscription's prepayments.
 
 ```ts
-async listPrepayments(  subscriptionId: number,
+async listPrepayments(
+  subscriptionId: number,
   page?: number,
   perPage?: number,
   filter?: ListPrepaymentsFilter,
-requestOptions?: RequestOptions): Promise<ApiResponse<PrepaymentsResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PrepaymentsResponse>>
 ```
 
 ## Parameters
@@ -221,9 +227,11 @@ try {
 Credit will be added to the subscription in the amount specified in the request body. The credit is subsequently applied to the next generated invoice.
 
 ```ts
-async issueServiceCredit(  subscriptionId: number,
+async issueServiceCredit(
+  subscriptionId: number,
   body?: IssueServiceCreditRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<ServiceCredit>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ServiceCredit>>
 ```
 
 ## Parameters
@@ -288,9 +296,11 @@ try {
 Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
 
 ```ts
-async deductServiceCredit(  subscriptionId: number,
+async deductServiceCredit(
+  subscriptionId: number,
   body?: DeductServiceCreditRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
@@ -346,10 +356,12 @@ This endpoint will refund, completely or partially, a particular prepayment appl
 The amount may be passed either as a decimal, with `amount`, or an integer in cents, with `amount_in_cents`.
 
 ```ts
-async refundPrepayment(  subscriptionId: number,
+async refundPrepayment(
+  subscriptionId: number,
   prepaymentId: bigint,
   body?: RefundPrepaymentRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<PrepaymentResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PrepaymentResponse>>
 ```
 
 ## Parameters
