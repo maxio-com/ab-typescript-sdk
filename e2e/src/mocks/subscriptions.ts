@@ -25,7 +25,7 @@ export const creditCardAttributes = {
   lastName: 'Smith',
   firstName: 'Joe',
   fullNumber: '4111111111111111',
-  expirationYear: 2024,
+  expirationYear: new Date().getFullYear(),
   expirationMonth: 12,
   cardType: CardType.Visa,
   billingZip: '02120',

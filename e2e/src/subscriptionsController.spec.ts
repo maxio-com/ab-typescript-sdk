@@ -57,7 +57,7 @@ describe('Subscriptions Controller', () => {
     lastName: 'Smith',
     firstName: 'Joe',
     fullNumber: '4111111111111111',
-    expirationYear: 2024,
+    expirationYear: new Date().getFullYear(),
     expirationMonth: 12,
     cardType: CardType.Visa,
     billingZip: '02120',
@@ -284,7 +284,7 @@ describe('Subscriptions Controller', () => {
           subscription: {
             creditCardAttributes: {
               fullNumber: '374245455400126',
-              expirationYear: '2025',
+              expirationYear: (new Date().getFullYear() + 1).toString(),
               expirationMonth: '11',
             },
           },
@@ -292,7 +292,7 @@ describe('Subscriptions Controller', () => {
       );
       const updatedCreditCard = updateResponse.result.subscription?.creditCard;
       expect(updatedCreditCard?.expirationMonth).toBe(11);
-      expect(updatedCreditCard?.expirationYear).toBe(2025);
+      expect(updatedCreditCard?.expirationYear).toBe(new Date().getFullYear() + 1);
     });
 
     test('should throw an error 422 error when user sends invalid data', async () => {
@@ -308,7 +308,7 @@ describe('Subscriptions Controller', () => {
           subscription: {
             creditCardAttributes: {
               fullNumber: '000',
-              expirationYear: '2025',
+              expirationYear: (new Date().getFullYear() + 1).toString(),
               expirationMonth: '11',
             },
           },
