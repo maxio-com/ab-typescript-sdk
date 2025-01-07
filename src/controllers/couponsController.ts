@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   CouponCurrencyRequest,
   couponCurrencyRequestSchema,
@@ -136,10 +136,10 @@ export class CouponsController extends BaseController {
       filter: [filter, optional(listCouponsFilterSchema)],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponResponseSchema), requestOptions);
@@ -172,9 +172,9 @@ export class CouponsController extends BaseController {
       code: [code, optional(string())],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
-    req.query('product_family_id', mapped.productFamilyId);
-    req.query('code', mapped.code);
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('product_family_id', mapped.productFamilyId, commaPrefix);
+    req.query('code', mapped.code, commaPrefix);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }
@@ -211,7 +211,7 @@ export class CouponsController extends BaseController {
       couponId: [couponId, number()],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/coupons/${mapped.couponId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
@@ -330,10 +330,10 @@ export class CouponsController extends BaseController {
       filter: [filter, optional(listCouponsFilterSchema)],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(couponResponseSchema), requestOptions);
   }
@@ -406,8 +406,8 @@ export class CouponsController extends BaseController {
       code: [code, string()],
       productFamilyId: [productFamilyId, optional(number())],
     });
-    req.query('code', mapped.code);
-    req.query('product_family_id', mapped.productFamilyId);
+    req.query('code', mapped.code, commaPrefix);
+    req.query('product_family_id', mapped.productFamilyId, commaPrefix);
     req.throwOn(404, SingleStringErrorResponseError, 'Not Found');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
@@ -552,8 +552,8 @@ export class CouponsController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.appendTemplatePath`/coupons/${mapped.couponId}/codes.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponSubcodesSchema, requestOptions);

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   ReferralValidationResponse,
   referralValidationResponseSchema,
@@ -37,7 +37,7 @@ export class ReferralCodesController extends BaseController {
   ): Promise<ApiResponse<ReferralValidationResponse>> {
     const req = this.createRequest('GET', '/referral_codes/validate.json');
     const mapped = req.prepareArgs({ code: [code, string()] });
-    req.query('code', mapped.code);
+    req.query('code', mapped.code, commaPrefix);
     req.throwOn(
       404,
       SingleStringErrorResponseError,

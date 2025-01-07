@@ -189,11 +189,11 @@ export class ProductPricePointsController extends BaseController {
       filterType: [filterType, optional(array(pricePointTypeSchema))],
       archived: [archived, optional(boolean())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.query('filter[type]', mapped.filterType, commaPrefix);
-    req.query('archived', mapped.archived);
+    req.query('archived', mapped.archived, commaPrefix);
     req.appendTemplatePath`/products/${mapped.productId}/price_points.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProductPricePointsResponseSchema, requestOptions);
@@ -270,7 +270,7 @@ export class ProductPricePointsController extends BaseController {
       pricePointId: [pricePointId, readProductPricePointPricePointIdSchema],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.appendTemplatePath`/products/${mapped.productId}/price_points/${mapped.pricePointId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productPricePointResponseSchema, requestOptions);
@@ -512,11 +512,11 @@ export class ProductPricePointsController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
-    req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
-    req.query('include', mapped.include);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('include', mapped.include, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.throwOn(
       422,
       ErrorListResponseError,

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { Direction, directionSchema } from '../models/direction';
 import { ListMrrFilter, listMrrFilterSchema } from '../models/listMrrFilter';
 import {
@@ -68,8 +68,8 @@ export class InsightsController extends BaseController {
       atTime: [atTime, optional(string())],
       subscriptionId: [subscriptionId, optional(number())],
     });
-    req.query('at_time', mapped.atTime);
-    req.query('subscription_id', mapped.subscriptionId);
+    req.query('at_time', mapped.atTime, commaPrefix);
+    req.query('subscription_id', mapped.subscriptionId, commaPrefix);
     req.deprecated('InsightsController.readMrr');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(mRRResponseSchema, requestOptions);
@@ -141,10 +141,10 @@ export class InsightsController extends BaseController {
       perPage: [perPage, optional(number())],
       direction: [direction, optional(sortingDirectionSchema)],
     });
-    req.query('subscription_id', mapped.subscriptionId);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
+    req.query('subscription_id', mapped.subscriptionId, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.deprecated('InsightsController.listMrrMovements');
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listMRRResponseSchema, requestOptions);
@@ -197,11 +197,11 @@ export class InsightsController extends BaseController {
       perPage: [perPage, optional(number())],
       direction: [direction, optional(directionSchema)],
     });
-    req.query('filter', mapped.filter);
-    req.query('at_time', mapped.atTime);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('at_time', mapped.atTime, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.deprecated('InsightsController.listMrrPerSubscription');
     req.throwOn(
       400,

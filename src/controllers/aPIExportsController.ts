@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   BatchJobResponse,
   batchJobResponseSchema,
@@ -57,8 +57,8 @@ export class APIExportsController extends BaseController {
       perPage: [perPage, optional(number())],
       page: [page, optional(number())],
     });
-    req.query('per_page', mapped.perPage);
-    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
     req.appendTemplatePath`/api_exports/proforma_invoices/${mapped.batchId}/rows.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
@@ -100,8 +100,8 @@ export class APIExportsController extends BaseController {
       perPage: [perPage, optional(number())],
       page: [page, optional(number())],
     });
-    req.query('per_page', mapped.perPage);
-    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
     req.appendTemplatePath`/api_exports/invoices/${mapped.batchId}/rows.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
@@ -144,8 +144,8 @@ export class APIExportsController extends BaseController {
       perPage: [perPage, optional(number())],
       page: [page, optional(number())],
     });
-    req.query('per_page', mapped.perPage);
-    req.query('page', mapped.page);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
     req.appendTemplatePath`/api_exports/subscriptions/${mapped.batchId}/rows.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);

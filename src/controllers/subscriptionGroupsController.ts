@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
+import {
+  ApiResponse,
+  commaPrefix,
+  RequestOptions,
+  unindexedPrefix,
+} from '../core';
 import {
   AddSubscriptionToAGroup,
   addSubscriptionToAGroupSchema,
@@ -171,8 +176,8 @@ export class SubscriptionGroupsController extends BaseController {
       perPage: [perPage, optional(number())],
       include: [include, optional(array(subscriptionGroupsListIncludeSchema))],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('page', mapped.page, unindexedPrefix);
+    req.query('per_page', mapped.perPage, unindexedPrefix);
     req.query('include', mapped.include, unindexedPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listSubscriptionGroupsResponseSchema, requestOptions);
@@ -279,7 +284,7 @@ export class SubscriptionGroupsController extends BaseController {
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, string()],
     });
-    req.query('subscription_id', mapped.subscriptionId);
+    req.query('subscription_id', mapped.subscriptionId, commaPrefix);
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(fullSubscriptionGroupResponseSchema, requestOptions);

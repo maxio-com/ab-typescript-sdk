@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
+import {
+  ApiResponse,
+  commaPrefix,
+  RequestOptions,
+  unindexedPrefix,
+} from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateMetadataRequest,
@@ -156,10 +161,10 @@ export class CustomFieldsController extends BaseController {
       perPage: [perPage, optional(number())],
       direction: [direction, optional(sortingDirectionSchema)],
     });
-    req.query('name', mapped.name);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
+    req.query('name', mapped.name, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listMetafieldsResponseSchema, requestOptions);
@@ -216,7 +221,7 @@ export class CustomFieldsController extends BaseController {
       resourceType: [resourceType, resourceTypeSchema],
       name: [name, optional(string())],
     });
-    req.query('name', mapped.name);
+    req.query('name', mapped.name, commaPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/metafields.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
@@ -332,8 +337,8 @@ export class CustomFieldsController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);
@@ -421,7 +426,7 @@ export class CustomFieldsController extends BaseController {
       name: [name, optional(string())],
       names: [names, optional(array(string()))],
     });
-    req.query('name', mapped.name);
+    req.query('name', mapped.name, unindexedPrefix);
     req.query('names', mapped.names, unindexedPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/${mapped.resourceId}/metadata.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
@@ -522,16 +527,16 @@ export class CustomFieldsController extends BaseController {
       resourceIds: [resourceIds, optional(array(number()))],
       direction: [direction, optional(sortingDirectionSchema)],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('with_deleted', mapped.withDeleted);
+    req.query('page', mapped.page, unindexedPrefix);
+    req.query('per_page', mapped.perPage, unindexedPrefix);
+    req.query('date_field', mapped.dateField, unindexedPrefix);
+    req.query('start_date', mapped.startDate, unindexedPrefix);
+    req.query('end_date', mapped.endDate, unindexedPrefix);
+    req.query('start_datetime', mapped.startDatetime, unindexedPrefix);
+    req.query('end_datetime', mapped.endDatetime, unindexedPrefix);
+    req.query('with_deleted', mapped.withDeleted, unindexedPrefix);
     req.query('resource_ids', mapped.resourceIds, unindexedPrefix);
-    req.query('direction', mapped.direction);
+    req.query('direction', mapped.direction, unindexedPrefix);
     req.appendTemplatePath`/${mapped.resourceType}/metadata.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(paginatedMetadataSchema, requestOptions);

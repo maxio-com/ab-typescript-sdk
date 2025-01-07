@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   CancellationRequest,
   cancellationRequestSchema,
@@ -132,7 +132,8 @@ export class SubscriptionStatusController extends BaseController {
     });
     req.query(
       "calendar_billing['resumption_charge']",
-      mapped.calendarBillingResumptionCharge
+      mapped.calendarBillingResumptionCharge,
+      commaPrefix
     );
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/resume.json`;
     req.throwOn(

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   CreateSignupProformaPreviewInclude,
   createSignupProformaPreviewIncludeSchema,
@@ -123,12 +123,12 @@ export class ProformaInvoicesController extends BaseController {
       payments: [payments, optional(boolean())],
       customFields: [customFields, optional(boolean())],
     });
-    req.query('line_items', mapped.lineItems);
-    req.query('discounts', mapped.discounts);
-    req.query('taxes', mapped.taxes);
-    req.query('credits', mapped.credits);
-    req.query('payments', mapped.payments);
-    req.query('custom_fields', mapped.customFields);
+    req.query('line_items', mapped.lineItems, commaPrefix);
+    req.query('discounts', mapped.discounts, commaPrefix);
+    req.query('taxes', mapped.taxes, commaPrefix);
+    req.query('credits', mapped.credits, commaPrefix);
+    req.query('payments', mapped.payments, commaPrefix);
+    req.query('custom_fields', mapped.customFields, commaPrefix);
     req.appendTemplatePath`/subscription_groups/${mapped.uid}/proforma_invoices.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
@@ -273,18 +273,18 @@ export class ProformaInvoicesController extends BaseController {
       payments: [payments, optional(boolean())],
       customFields: [customFields, optional(boolean())],
     });
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('status', mapped.status);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
-    req.query('line_items', mapped.lineItems);
-    req.query('discounts', mapped.discounts);
-    req.query('taxes', mapped.taxes);
-    req.query('credits', mapped.credits);
-    req.query('payments', mapped.payments);
-    req.query('custom_fields', mapped.customFields);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('status', mapped.status, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('line_items', mapped.lineItems, commaPrefix);
+    req.query('discounts', mapped.discounts, commaPrefix);
+    req.query('taxes', mapped.taxes, commaPrefix);
+    req.query('credits', mapped.credits, commaPrefix);
+    req.query('payments', mapped.payments, commaPrefix);
+    req.query('custom_fields', mapped.customFields, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProformaInvoicesResponseSchema, requestOptions);
@@ -453,7 +453,7 @@ export class ProformaInvoicesController extends BaseController {
       body: [body, optional(createSubscriptionRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('include', mapped.include);
+    req.query('include', mapped.include, commaPrefix);
     req.json(mapped.body);
     req.throwOn(
       400,

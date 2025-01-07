@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   CreateOfferRequest,
   createOfferRequestSchema,
@@ -95,9 +95,9 @@ export class OffersController extends BaseController {
       perPage: [perPage, optional(number())],
       includeArchived: [includeArchived, optional(boolean())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('include_archived', mapped.includeArchived);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('include_archived', mapped.includeArchived, commaPrefix);
     req.throwOn(
       422,
       ErrorListResponseError,

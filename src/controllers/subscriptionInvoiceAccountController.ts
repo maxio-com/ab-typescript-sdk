@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   AccountBalances,
   accountBalancesSchema,
@@ -148,9 +148,9 @@ export class SubscriptionInvoiceAccountController extends BaseController {
       perPage: [perPage, optional(number())],
       filter: [filter, optional(listPrepaymentsFilterSchema)],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/prepayments.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
