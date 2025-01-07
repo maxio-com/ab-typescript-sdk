@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { CleanupScope, cleanupScopeSchema } from '../models/cleanupScope';
 import {
   ListPublicKeysResponse,
@@ -67,7 +67,7 @@ export class SitesController extends BaseController {
     const mapped = req.prepareArgs({
       cleanupScope: [cleanupScope, optional(cleanupScopeSchema)],
     });
-    req.query('cleanup_scope', mapped.cleanupScope);
+    req.query('cleanup_scope', mapped.cleanupScope, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
   }
@@ -100,8 +100,8 @@ export class SitesController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listPublicKeysResponseSchema, requestOptions);
   }

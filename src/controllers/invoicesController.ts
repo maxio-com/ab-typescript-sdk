@@ -269,28 +269,32 @@ export class InvoicesController extends BaseController {
       productIds: [productIds, optional(array(number()))],
       sort: [sort, optional(invoiceSortFieldSchema)],
     });
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('status', mapped.status);
-    req.query('subscription_id', mapped.subscriptionId);
-    req.query('subscription_group_uid', mapped.subscriptionGroupUid);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
-    req.query('line_items', mapped.lineItems);
-    req.query('discounts', mapped.discounts);
-    req.query('taxes', mapped.taxes);
-    req.query('credits', mapped.credits);
-    req.query('payments', mapped.payments);
-    req.query('custom_fields', mapped.customFields);
-    req.query('refunds', mapped.refunds);
-    req.query('date_field', mapped.dateField);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('status', mapped.status, commaPrefix);
+    req.query('subscription_id', mapped.subscriptionId, commaPrefix);
+    req.query(
+      'subscription_group_uid',
+      mapped.subscriptionGroupUid,
+      commaPrefix
+    );
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('line_items', mapped.lineItems, commaPrefix);
+    req.query('discounts', mapped.discounts, commaPrefix);
+    req.query('taxes', mapped.taxes, commaPrefix);
+    req.query('credits', mapped.credits, commaPrefix);
+    req.query('payments', mapped.payments, commaPrefix);
+    req.query('custom_fields', mapped.customFields, commaPrefix);
+    req.query('refunds', mapped.refunds, commaPrefix);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
     req.query('customer_ids', mapped.customerIds, commaPrefix);
     req.query('number', mapped.mNumber, commaPrefix);
     req.query('product_ids', mapped.productIds, commaPrefix);
-    req.query('sort', mapped.sort);
+    req.query('sort', mapped.sort, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listInvoicesResponseSchema, requestOptions);
   }
@@ -414,12 +418,16 @@ export class InvoicesController extends BaseController {
       withChangeInvoiceStatus: [withChangeInvoiceStatus, optional(string())],
       eventTypes: [eventTypes, optional(array(invoiceEventTypeSchema))],
     });
-    req.query('since_date', mapped.sinceDate);
-    req.query('since_id', mapped.sinceId);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('invoice_uid', mapped.invoiceUid);
-    req.query('with_change_invoice_status', mapped.withChangeInvoiceStatus);
+    req.query('since_date', mapped.sinceDate, commaPrefix);
+    req.query('since_id', mapped.sinceId, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('invoice_uid', mapped.invoiceUid, commaPrefix);
+    req.query(
+      'with_change_invoice_status',
+      mapped.withChangeInvoiceStatus,
+      commaPrefix
+    );
     req.query('event_types', mapped.eventTypes, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listInvoiceEventsResponseSchema, requestOptions);
@@ -619,14 +627,14 @@ export class InvoicesController extends BaseController {
       refunds: [refunds, optional(boolean())],
       applications: [applications, optional(boolean())],
     });
-    req.query('subscription_id', mapped.subscriptionId);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('line_items', mapped.lineItems);
-    req.query('discounts', mapped.discounts);
-    req.query('taxes', mapped.taxes);
-    req.query('refunds', mapped.refunds);
-    req.query('applications', mapped.applications);
+    req.query('subscription_id', mapped.subscriptionId, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('line_items', mapped.lineItems, commaPrefix);
+    req.query('discounts', mapped.discounts, commaPrefix);
+    req.query('taxes', mapped.taxes, commaPrefix);
+    req.query('refunds', mapped.refunds, commaPrefix);
+    req.query('applications', mapped.applications, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listCreditNotesResponseSchema, requestOptions);
   }
@@ -800,9 +808,9 @@ export class InvoicesController extends BaseController {
       perPage: [perPage, optional(number())],
       direction: [direction, optional(directionSchema)],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.appendTemplatePath`/invoices/${mapped.invoiceUid}/segments.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(consolidatedInvoiceSchema, requestOptions);

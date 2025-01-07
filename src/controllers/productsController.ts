@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateOrUpdateProductRequest,
@@ -249,16 +249,16 @@ export class ProductsController extends BaseController {
       includeArchived: [includeArchived, optional(boolean())],
       include: [include, optional(listProductsIncludeSchema)],
     });
-    req.query('date_field', mapped.dateField);
-    req.query('filter', mapped.filter);
-    req.query('end_date', mapped.endDate);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('start_date', mapped.startDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('include_archived', mapped.includeArchived);
-    req.query('include', mapped.include);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('include_archived', mapped.includeArchived, commaPrefix);
+    req.query('include', mapped.include, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productResponseSchema), requestOptions);
   }

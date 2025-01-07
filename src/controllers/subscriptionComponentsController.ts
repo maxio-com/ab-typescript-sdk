@@ -236,18 +236,18 @@ export class SubscriptionComponentsController extends BaseController {
       ],
       inUse: [inUse, optional(boolean())],
     });
-    req.query('date_field', mapped.dateField);
-    req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
-    req.query('end_date', mapped.endDate);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('price_point_ids', mapped.pricePointIds);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
+    req.query('price_point_ids', mapped.pricePointIds, commaPrefix);
     req.query('product_family_ids', mapped.productFamilyIds, commaPrefix);
-    req.query('sort', mapped.sort);
-    req.query('start_date', mapped.startDate);
-    req.query('start_datetime', mapped.startDatetime);
+    req.query('sort', mapped.sort, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
     req.query('include', mapped.include, commaPrefix);
-    req.query('in_use', mapped.inUse);
+    req.query('in_use', mapped.inUse, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
@@ -462,7 +462,7 @@ export class SubscriptionComponentsController extends BaseController {
       componentId: [componentId, number()],
       page: [page, optional(number())],
     });
-    req.query('page', mapped.page);
+    req.query('page', mapped.page, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/allocations.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
@@ -846,12 +846,12 @@ export class SubscriptionComponentsController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
-    req.query('since_id', mapped.sinceId);
-    req.query('max_id', mapped.maxId);
-    req.query('since_date', mapped.sinceDate);
-    req.query('until_date', mapped.untilDate);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('since_id', mapped.sinceId, commaPrefix);
+    req.query('max_id', mapped.maxId, commaPrefix);
+    req.query('since_date', mapped.sinceDate, commaPrefix);
+    req.query('until_date', mapped.untilDate, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/usages.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(usageResponseSchema), requestOptions);
@@ -963,7 +963,7 @@ export class SubscriptionComponentsController extends BaseController {
       body: [body, optional(eBBEventSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('store_uid', mapped.storeUid);
+    req.query('store_uid', mapped.storeUid, commaPrefix);
     req.json(mapped.body);
     req.appendTemplatePath`/events/${mapped.apiHandle}.json`;
     req.authenticate([{ basicAuth: true }]);
@@ -999,7 +999,7 @@ export class SubscriptionComponentsController extends BaseController {
       body: [body, optional(array(eBBEventSchema))],
     });
     req.header('Content-Type', 'application/json');
-    req.query('store_uid', mapped.storeUid);
+    req.query('store_uid', mapped.storeUid, commaPrefix);
     req.json(mapped.body);
     req.appendTemplatePath`/events/${mapped.apiHandle}/bulk.json`;
     req.authenticate([{ basicAuth: true }]);
@@ -1138,20 +1138,20 @@ export class SubscriptionComponentsController extends BaseController {
       productFamilyIds: [productFamilyIds, optional(array(number()))],
       include: [include, optional(listSubscriptionComponentsIncludeSchema)],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('sort', mapped.sort);
-    req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_date', mapped.endDate);
-    req.query('end_datetime', mapped.endDatetime);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('sort', mapped.sort, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
     req.query('subscription_ids', mapped.subscriptionIds, commaPrefix);
-    req.query('price_point_ids', mapped.pricePointIds);
+    req.query('price_point_ids', mapped.pricePointIds, commaPrefix);
     req.query('product_family_ids', mapped.productFamilyIds, commaPrefix);
-    req.query('include', mapped.include);
+    req.query('include', mapped.include, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(
       listSubscriptionComponentsResponseSchema,

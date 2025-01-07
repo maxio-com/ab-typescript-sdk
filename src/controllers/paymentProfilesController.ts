@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   BankAccountResponse,
   bankAccountResponseSchema,
@@ -440,9 +440,9 @@ export class PaymentProfilesController extends BaseController {
       perPage: [perPage, optional(number())],
       customerId: [customerId, optional(number())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('customer_id', mapped.customerId);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('customer_id', mapped.customerId, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(paymentProfileResponseSchema), requestOptions);
   }

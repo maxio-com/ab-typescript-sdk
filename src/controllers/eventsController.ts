@@ -168,17 +168,17 @@ export class EventsController extends BaseController {
       startDatetime: [startDatetime, optional(string())],
       endDatetime: [endDatetime, optional(string())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('since_id', mapped.sinceId);
-    req.query('max_id', mapped.maxId);
-    req.query('direction', mapped.direction);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('since_id', mapped.sinceId, commaPrefix);
+    req.query('max_id', mapped.maxId, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.query('filter', mapped.filter, commaPrefix);
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(eventResponseSchema), requestOptions);
   }
@@ -243,11 +243,11 @@ export class EventsController extends BaseController {
       direction: [direction, optional(directionSchema)],
       filter: [filter, optional(array(eventKeySchema))],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('since_id', mapped.sinceId);
-    req.query('max_id', mapped.maxId);
-    req.query('direction', mapped.direction);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('since_id', mapped.sinceId, commaPrefix);
+    req.query('max_id', mapped.maxId, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.query('filter', mapped.filter, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/events.json`;
     req.authenticate([{ basicAuth: true }]);
@@ -300,11 +300,11 @@ export class EventsController extends BaseController {
       direction: [direction, optional(directionSchema)],
       filter: [filter, optional(array(eventKeySchema))],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('since_id', mapped.sinceId);
-    req.query('max_id', mapped.maxId);
-    req.query('direction', mapped.direction);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('since_id', mapped.sinceId, commaPrefix);
+    req.query('max_id', mapped.maxId, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.query('filter', mapped.filter, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(countResponseSchema, requestOptions);

@@ -166,6 +166,26 @@ describe('Coupons Controller', () => {
       expect(listResponse.result.length >= 1).toBeTruthy();
     });
 
+    test('should list coupons filtering by code for product family', async () => {
+      const listResponse = await couponsController.listCouponsForProductFamily({
+        productFamilyId: productFamily?.id || 0,
+        filter: {
+          codes: ['CREATE001']
+        }
+      });
+      expect(listResponse.statusCode).toBe(200);
+      expect(listResponse.result.length >= 1).toBeTruthy();
+
+      const listResponse2 = await couponsController.listCouponsForProductFamily({
+        productFamilyId: productFamily?.id || 0,
+        filter: {
+          codes: ['abc']
+        }
+      });
+      expect(listResponse2.statusCode).toBe(200);
+      expect(listResponse2.result.length == 0).toBeTruthy();
+    });
+
     test('should throw and 404 error when user sends incorrect family id ', async () => {
       const promise = couponsController.listCouponsForProductFamily({
         productFamilyId: 2001,

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateProductFamilyRequest,
@@ -119,16 +119,16 @@ export class ProductFamiliesController extends BaseController {
       includeArchived: [includeArchived, optional(boolean())],
       include: [include, optional(listProductsIncludeSchema)],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('date_field', mapped.dateField);
-    req.query('filter', mapped.filter);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('include_archived', mapped.includeArchived);
-    req.query('include', mapped.include);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
+    req.query('include_archived', mapped.includeArchived, commaPrefix);
+    req.query('include', mapped.include, commaPrefix);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
     req.throwOn(404, ApiError, 'Not Found');
     req.authenticate([{ basicAuth: true }]);
@@ -212,11 +212,11 @@ export class ProductFamiliesController extends BaseController {
       startDatetime: [startDatetime, optional(string())],
       endDatetime: [endDatetime, optional(string())],
     });
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productFamilyResponseSchema), requestOptions);
   }

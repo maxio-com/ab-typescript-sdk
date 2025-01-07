@@ -199,9 +199,9 @@ export class ComponentPricePointsController extends BaseController {
       perPage: [perPage, optional(number())],
       filterType: [filterType, optional(array(pricePointTypeSchema))],
     });
-    req.query('currency_prices', mapped.currencyPrices);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.query('filter[type]', mapped.filterType, commaPrefix);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points.json`;
     req.authenticate([{ basicAuth: true }]);
@@ -313,7 +313,7 @@ export class ComponentPricePointsController extends BaseController {
       pricePointId: [pricePointId, readComponentPricePointPricePointIdSchema],
       currencyPrices: [currencyPrices, optional(boolean())],
     });
-    req.query('currency_prices', mapped.currencyPrices);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentPricePointResponseSchema, requestOptions);
@@ -501,11 +501,11 @@ export class ComponentPricePointsController extends BaseController {
       direction: [direction, optional(sortingDirectionSchema)],
       filter: [filter, optional(listPricePointsFilterSchema)],
     });
-    req.query('include', mapped.include);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('direction', mapped.direction);
-    req.query('filter', mapped.filter);
+    req.query('include', mapped.include, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
     req.throwOn(
       422,
       ErrorListResponseError,

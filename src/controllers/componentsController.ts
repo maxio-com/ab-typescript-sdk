@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import { Component, componentSchema } from '../models/component';
 import {
@@ -278,7 +278,7 @@ export class ComponentsController extends BaseController {
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('GET', '/components/lookup.json');
     const mapped = req.prepareArgs({ handle: [handle, string()] });
-    req.query('handle', mapped.handle);
+    req.query('handle', mapped.handle, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);
   }
@@ -453,15 +453,15 @@ export class ComponentsController extends BaseController {
       perPage: [perPage, optional(number())],
       filter: [filter, optional(listComponentsFilterSchema)],
     });
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('include_archived', mapped.includeArchived);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
+    req.query('include_archived', mapped.includeArchived, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(componentResponseSchema), requestOptions);
   }
@@ -580,15 +580,15 @@ export class ComponentsController extends BaseController {
       startDate: [startDate, optional(string())],
       startDatetime: [startDatetime, optional(string())],
     });
-    req.query('include_archived', mapped.includeArchived);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('filter', mapped.filter);
-    req.query('date_field', mapped.dateField);
-    req.query('end_date', mapped.endDate);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('start_date', mapped.startDate);
-    req.query('start_datetime', mapped.startDatetime);
+    req.query('include_archived', mapped.includeArchived, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('filter', mapped.filter, commaPrefix);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(componentResponseSchema), requestOptions);

@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   SubscriptionNoteResponse,
   subscriptionNoteResponseSchema,
@@ -91,8 +91,8 @@ export class SubscriptionNotesController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/notes.json`;
     req.throwOn(
       422,

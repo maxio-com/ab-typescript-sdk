@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import {
   CreateOrUpdateEndpointRequest,
   createOrUpdateEndpointRequestSchema,
@@ -115,13 +115,13 @@ export class WebhooksController extends BaseController {
       order: [order, optional(webhookOrderSchema)],
       subscription: [subscription, optional(number())],
     });
-    req.query('status', mapped.status);
-    req.query('since_date', mapped.sinceDate);
-    req.query('until_date', mapped.untilDate);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('order', mapped.order);
-    req.query('subscription', mapped.subscription);
+    req.query('status', mapped.status, commaPrefix);
+    req.query('since_date', mapped.sinceDate, commaPrefix);
+    req.query('until_date', mapped.untilDate, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('order', mapped.order, commaPrefix);
+    req.query('subscription', mapped.subscription, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(webhookResponseSchema), requestOptions);
   }

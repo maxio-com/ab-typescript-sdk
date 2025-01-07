@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { AutoInvite, autoInviteSchema } from '../models/autoInvite';
 import {
   CustomerResponse,
@@ -71,7 +71,7 @@ export class BillingPortalController extends BaseController {
       customerId: [customerId, number()],
       autoInvite: [autoInvite, optional(autoInviteSchema)],
     });
-    req.query('auto_invite', mapped.autoInvite);
+    req.query('auto_invite', mapped.autoInvite, commaPrefix);
     req.appendTemplatePath`/portal/customers/${mapped.customerId}/enable.json`;
     req.throwOn(
       422,

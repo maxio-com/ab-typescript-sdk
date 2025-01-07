@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions, unindexedPrefix } from '../core';
+import {
+  ApiResponse,
+  commaPrefix,
+  RequestOptions,
+  unindexedPrefix,
+} from '../core';
 import {
   ActivateSubscriptionRequest,
   activateSubscriptionRequestSchema,
@@ -1081,20 +1086,24 @@ export class SubscriptionsController extends BaseController {
       sort: [sort, optional(subscriptionSortSchema)],
       include: [include, optional(array(subscriptionListIncludeSchema))],
     });
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('state', mapped.state);
-    req.query('product', mapped.product);
-    req.query('product_price_point_id', mapped.productPricePointId);
-    req.query('coupon', mapped.coupon);
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('metadata', mapped.metadata);
-    req.query('direction', mapped.direction);
-    req.query('sort', mapped.sort);
+    req.query('page', mapped.page, unindexedPrefix);
+    req.query('per_page', mapped.perPage, unindexedPrefix);
+    req.query('state', mapped.state, unindexedPrefix);
+    req.query('product', mapped.product, unindexedPrefix);
+    req.query(
+      'product_price_point_id',
+      mapped.productPricePointId,
+      unindexedPrefix
+    );
+    req.query('coupon', mapped.coupon, unindexedPrefix);
+    req.query('date_field', mapped.dateField, unindexedPrefix);
+    req.query('start_date', mapped.startDate, unindexedPrefix);
+    req.query('end_date', mapped.endDate, unindexedPrefix);
+    req.query('start_datetime', mapped.startDatetime, unindexedPrefix);
+    req.query('end_datetime', mapped.endDatetime, unindexedPrefix);
+    req.query('metadata', mapped.metadata, unindexedPrefix);
+    req.query('direction', mapped.direction, unindexedPrefix);
+    req.query('sort', mapped.sort, unindexedPrefix);
     req.query('include', mapped.include, unindexedPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
@@ -1303,7 +1312,7 @@ export class SubscriptionsController extends BaseController {
     const mapped = req.prepareArgs({
       reference: [reference, optional(string())],
     });
-    req.query('reference', mapped.reference);
+    req.query('reference', mapped.reference, commaPrefix);
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(subscriptionResponseSchema, requestOptions);
@@ -1342,7 +1351,7 @@ export class SubscriptionsController extends BaseController {
       ack: [ack, number()],
       cascade: [cascade, optional(array(subscriptionPurgeTypeSchema))],
     });
-    req.query('ack', mapped.ack);
+    req.query('ack', mapped.ack, unindexedPrefix);
     req.query('cascade', mapped.cascade, unindexedPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/purge.json`;
     req.throwOn(
@@ -1476,7 +1485,7 @@ export class SubscriptionsController extends BaseController {
       body: [body, optional(addCouponsRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
-    req.query('code', mapped.code);
+    req.query('code', mapped.code, commaPrefix);
     req.json(mapped.body);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/add_coupon.json`;
     req.throwOn(
@@ -1510,7 +1519,7 @@ export class SubscriptionsController extends BaseController {
       subscriptionId: [subscriptionId, number()],
       couponCode: [couponCode, optional(string())],
     });
-    req.query('coupon_code', mapped.couponCode);
+    req.query('coupon_code', mapped.couponCode, commaPrefix);
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/remove_coupon.json`;
     req.throwOn(
       422,

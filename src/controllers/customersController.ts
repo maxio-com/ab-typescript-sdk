@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core';
 import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
 import {
   CreateCustomerRequest,
@@ -182,15 +182,15 @@ export class CustomersController extends BaseController {
       endDatetime: [endDatetime, optional(string())],
       q: [q, optional(string())],
     });
-    req.query('direction', mapped.direction);
-    req.query('page', mapped.page);
-    req.query('per_page', mapped.perPage);
-    req.query('date_field', mapped.dateField);
-    req.query('start_date', mapped.startDate);
-    req.query('end_date', mapped.endDate);
-    req.query('start_datetime', mapped.startDatetime);
-    req.query('end_datetime', mapped.endDatetime);
-    req.query('q', mapped.q);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
+    req.query('q', mapped.q, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(customerResponseSchema), requestOptions);
   }
@@ -273,7 +273,7 @@ export class CustomersController extends BaseController {
   ): Promise<ApiResponse<CustomerResponse>> {
     const req = this.createRequest('GET', '/customers/lookup.json');
     const mapped = req.prepareArgs({ reference: [reference, string()] });
-    req.query('reference', mapped.reference);
+    req.query('reference', mapped.reference, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(customerResponseSchema, requestOptions);
   }
