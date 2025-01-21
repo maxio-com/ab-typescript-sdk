@@ -14,6 +14,7 @@ describe('SitesController', () => {
       brighton_v1_enabled: false,
       sellerId: 58665,
       nonPrimaryCurrencies: ['EUR', 'GBP'],
+      scheduleSubscriptionCancellationEnabled: false,
       relationshipInvoicingEnabled: true,
       customerHierarchyEnabled: false,
       whopaysEnabled: false,

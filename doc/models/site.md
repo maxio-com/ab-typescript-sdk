@@ -16,6 +16,7 @@
 | `sellerId` | `number \| undefined` | Optional | - |
 | `nonPrimaryCurrencies` | `string[] \| undefined` | Optional | - |
 | `relationshipInvoicingEnabled` | `boolean \| undefined` | Optional | - |
+| `scheduleSubscriptionCancellationEnabled` | `boolean \| undefined` | Optional | - |
 | `customerHierarchyEnabled` | `boolean \| undefined` | Optional | - |
 | `whopaysEnabled` | `boolean \| undefined` | Optional | - |
 | `whopaysDefaultPayer` | `string \| undefined` | Optional | - |
