@@ -33,6 +33,7 @@ export interface Site {
   sellerId?: number;
   nonPrimaryCurrencies?: string[];
   relationshipInvoicingEnabled?: boolean;
+  scheduleSubscriptionCancellationEnabled?: boolean;
   customerHierarchyEnabled?: boolean;
   whopaysEnabled?: boolean;
   whopaysDefaultPayer?: string;
@@ -54,6 +55,10 @@ export const siteSchema: Schema<Site> = expandoObject({
   nonPrimaryCurrencies: ['non_primary_currencies', optional(array(string()))],
   relationshipInvoicingEnabled: [
     'relationship_invoicing_enabled',
+    optional(boolean()),
+  ],
+  scheduleSubscriptionCancellationEnabled: [
+    'schedule_subscription_cancellation_enabled',
     optional(boolean()),
   ],
   customerHierarchyEnabled: ['customer_hierarchy_enabled', optional(boolean())],
