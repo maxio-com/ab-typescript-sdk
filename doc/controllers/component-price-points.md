@@ -49,7 +49,7 @@ async promoteComponentPricePointToDefault(
 
 ## Response Type
 
-[`ComponentResponse`](../../doc/models/component-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -129,7 +129,7 @@ async createComponentPricePoint(
 
 ## Response Type
 
-[`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -205,14 +205,14 @@ async listComponentPricePoints(
 |  --- | --- | --- | --- |
 | `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | Include an array of currency price data |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `filterType` | [`PricePointType[] \| undefined`](../../doc/models/price-point-type.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointsResponse](../../doc/models/component-price-points-response.md).
 
 ## Example Usage
 
@@ -307,7 +307,7 @@ async bulkCreateComponentPricePoints(
 
 ## Response Type
 
-[`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointsResponse](../../doc/models/component-price-points-response.md).
 
 ## Example Usage
 
@@ -453,7 +453,7 @@ async updateComponentPricePoint(
 
 ## Response Type
 
-[`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -530,7 +530,7 @@ async readComponentPricePoint(
 
 ## Response Type
 
-[`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -577,7 +577,7 @@ async archiveComponentPricePoint(
 
 ## Response Type
 
-[`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -664,7 +664,7 @@ async unarchiveComponentPricePoint(
 
 ## Response Type
 
-[`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -749,7 +749,7 @@ async createCurrencyPrices(
 
 ## Response Type
 
-[`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentCurrencyPricesResponse](../../doc/models/component-currency-prices-response.md).
 
 ## Example Usage
 
@@ -834,7 +834,7 @@ async updateCurrencyPrices(
 
 ## Response Type
 
-[`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentCurrencyPricesResponse](../../doc/models/component-currency-prices-response.md).
 
 ## Example Usage
 
@@ -913,15 +913,15 @@ async listAllComponentPricePoints(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `include` | [`ListComponentsPricePointsInclude \| undefined`](../../doc/models/list-components-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `filter` | [`ListPricePointsFilter \| undefined`](../../doc/models/list-price-points-filter.md) | Query, Optional | Filter to use for List PricePoints operations |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ListComponentsPricePointsResponse`](../../doc/models/list-components-price-points-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListComponentsPricePointsResponse](../../doc/models/list-components-price-points-response.md).
 
 ## Example Usage
 

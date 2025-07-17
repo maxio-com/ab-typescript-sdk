@@ -408,7 +408,12 @@ export class CouponsController extends BaseController {
     });
     req.query('code', mapped.code, commaPrefix);
     req.query('product_family_id', mapped.productFamilyId, commaPrefix);
-    req.throwOn(404, SingleStringErrorResponseError, 'Not Found');
+    req.throwOn(
+      404,
+      SingleStringErrorResponseError,
+      true,
+      "Not Found: '{$response.body}'"
+    );
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(couponResponseSchema, requestOptions);
   }

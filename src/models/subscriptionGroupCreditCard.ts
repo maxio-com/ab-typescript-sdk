@@ -21,9 +21,6 @@ import {
 import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
 
 export interface SubscriptionGroupCreditCard {
-  fullNumber?: SubscriptionGroupCreditCardFullNumber;
-  expirationMonth?: SubscriptionGroupCreditCardExpirationMonth;
-  expirationYear?: SubscriptionGroupCreditCardExpirationYear;
   chargifyToken?: string;
   vaultToken?: string;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
@@ -37,6 +34,9 @@ export interface SubscriptionGroupCreditCard {
   billingState?: string;
   billingZip?: string;
   billingCountry?: string;
+  fullNumber?: SubscriptionGroupCreditCardFullNumber;
+  expirationMonth?: SubscriptionGroupCreditCardExpirationMonth;
+  expirationYear?: SubscriptionGroupCreditCardExpirationYear;
   lastFour?: string;
   /** The type of card used. */
   cardType?: CardType;
@@ -48,18 +48,6 @@ export interface SubscriptionGroupCreditCard {
 
 export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCard> = expandoObject(
   {
-    fullNumber: [
-      'full_number',
-      optional(subscriptionGroupCreditCardFullNumberSchema),
-    ],
-    expirationMonth: [
-      'expiration_month',
-      optional(subscriptionGroupCreditCardExpirationMonthSchema),
-    ],
-    expirationYear: [
-      'expiration_year',
-      optional(subscriptionGroupCreditCardExpirationYearSchema),
-    ],
     chargifyToken: ['chargify_token', optional(string())],
     vaultToken: ['vault_token', optional(string())],
     currentVault: ['current_vault', optional(creditCardVaultSchema)],
@@ -72,6 +60,18 @@ export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCa
     billingState: ['billing_state', optional(string())],
     billingZip: ['billing_zip', optional(string())],
     billingCountry: ['billing_country', optional(string())],
+    fullNumber: [
+      'full_number',
+      optional(subscriptionGroupCreditCardFullNumberSchema),
+    ],
+    expirationMonth: [
+      'expiration_month',
+      optional(subscriptionGroupCreditCardExpirationMonthSchema),
+    ],
+    expirationYear: [
+      'expiration_year',
+      optional(subscriptionGroupCreditCardExpirationYearSchema),
+    ],
     lastFour: ['last_four', optional(string())],
     cardType: ['card_type', optional(cardTypeSchema)],
     customerVaultToken: ['customer_vault_token', optional(string())],

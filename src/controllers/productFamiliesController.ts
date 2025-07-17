@@ -130,7 +130,7 @@ export class ProductFamiliesController extends BaseController {
     req.query('include_archived', mapped.includeArchived, commaPrefix);
     req.query('include', mapped.include, commaPrefix);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/products.json`;
-    req.throwOn(404, ApiError, 'Not Found');
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productResponseSchema), requestOptions);
   }

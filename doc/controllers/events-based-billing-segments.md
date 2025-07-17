@@ -44,7 +44,7 @@ async createSegment(
 
 ## Response Type
 
-[`SegmentResponse`](../../doc/models/segment-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SegmentResponse](../../doc/models/segment-response.md).
 
 ## Example Usage
 
@@ -121,14 +121,14 @@ async listSegmentsForPricePoint(
 |  --- | --- | --- | --- |
 | `componentId` | `string` | Template, Required | ID or Handle for the Component |
 | `pricePointId` | `string` | Template, Required | ID or Handle for the Price Point belonging to the Component |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `30`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `30`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListSegmentsFilter \| undefined`](../../doc/models/list-segments-filter.md) | Query, Optional | Filter to use for List Segments for a Price Point operation |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSegmentsResponse](../../doc/models/list-segments-response.md).
 
 ## Example Usage
 
@@ -191,7 +191,7 @@ async updateSegment(
 
 ## Response Type
 
-[`SegmentResponse`](../../doc/models/segment-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SegmentResponse](../../doc/models/segment-response.md).
 
 ## Example Usage
 
@@ -252,7 +252,7 @@ async deleteSegment(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
@@ -315,7 +315,7 @@ async bulkCreateSegments(
 
 ## Response Type
 
-[`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSegmentsResponse](../../doc/models/list-segments-response.md).
 
 ## Example Usage
 
@@ -375,7 +375,7 @@ async bulkUpdateSegments(
 
 ## Response Type
 
-[`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSegmentsResponse](../../doc/models/list-segments-response.md).
 
 ## Example Usage
 

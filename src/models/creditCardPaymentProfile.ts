@@ -59,6 +59,10 @@ export interface CreditCardPaymentProfile {
   siteGatewaySettingId?: number | null;
   /** An identifier of connected gateway. */
   gatewayHandle?: string | null;
+  /** A timestamp indicating when this payment profile was created */
+  createdAt?: string;
+  /** A timestamp indicating when this payment profile was last updated */
+  updatedAt?: string;
   [key: string]: unknown;
 }
 
@@ -89,5 +93,7 @@ export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = 
       optional(nullable(number())),
     ],
     gatewayHandle: ['gateway_handle', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
   }
 );

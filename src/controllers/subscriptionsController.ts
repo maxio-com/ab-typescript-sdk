@@ -277,42 +277,6 @@ export class SubscriptionsController extends BaseController {
    * }
    * ```
    *
-   * ## Subscription with Credit Card
-   *
-   * ```json
-   * "subscription": {
-   * "product_handle": "basic",
-   * "customer_attributes": {
-   * "first_name": "Joe",
-   * "last_name": "Blow",
-   * "email": "joe@example.com",
-   * "zip": "02120",
-   * "state": "MA",
-   * "reference": "XYZ",
-   * "phone": "(617) 111 - 0000",
-   * "organization": "Acme",
-   * "country": "US",
-   * "city": "Boston",
-   * "address_2": null,
-   * "address": "123 Mass Ave."
-   * },
-   * "credit_card_attributes": {
-   * "last_name": "Smith",
-   * "first_name": "Joe",
-   * "full_number": "4111111111111111",
-   * "expiration_year": "2021",
-   * "expiration_month": "1",
-   * "card_type": "visa",
-   * "billing_zip": "02120",
-   * "billing_state": "MA",
-   * "billing_country": "US",
-   * "billing_city": "Boston",
-   * "billing_address_2": null,
-   * "billing_address": "123 Mass Ave."
-   * }
-   * }
-   * ```
-   *
    * ## Subscription with ACH as Payment Profile
    *
    * ```json
@@ -991,6 +955,7 @@ export class SubscriptionsController extends BaseController {
    *                                                            subscription. (This can be found in the URL when
    *                                                            editing a coupon. Note that the coupon code cannot be
    *                                                            used.)
+   * @param couponCode             The coupon code currently applied to the subscription
    * @param dateField              The type of filter you'd like to apply to your search.
    *                                                            Allowed Values: , current_period_ends_at,
    *                                                            current_period_starts_at, created_at, activated_at,
@@ -1040,6 +1005,7 @@ export class SubscriptionsController extends BaseController {
       product,
       productPricePointId,
       coupon,
+      couponCode,
       dateField,
       startDate,
       endDate,
@@ -1056,6 +1022,7 @@ export class SubscriptionsController extends BaseController {
       product?: number;
       productPricePointId?: number;
       coupon?: number;
+      couponCode?: string;
       dateField?: SubscriptionDateField;
       startDate?: string;
       endDate?: string;
@@ -1076,6 +1043,7 @@ export class SubscriptionsController extends BaseController {
       product: [product, optional(number())],
       productPricePointId: [productPricePointId, optional(number())],
       coupon: [coupon, optional(number())],
+      couponCode: [couponCode, optional(string())],
       dateField: [dateField, optional(subscriptionDateFieldSchema)],
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
@@ -1096,6 +1064,7 @@ export class SubscriptionsController extends BaseController {
       unindexedPrefix
     );
     req.query('coupon', mapped.coupon, unindexedPrefix);
+    req.query('coupon_code', mapped.couponCode, unindexedPrefix);
     req.query('date_field', mapped.dateField, unindexedPrefix);
     req.query('start_date', mapped.startDate, unindexedPrefix);
     req.query('end_date', mapped.endDate, unindexedPrefix);
@@ -1398,14 +1367,12 @@ export class SubscriptionsController extends BaseController {
    * The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a
    * subscription creation.
    *
-   * The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For
-   * more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary.
+   *
+   * A subscription will not be created by utilizing this endpoint; it is meant to serve as a prediction.
+   *
+   * For more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-
    * us/articles/24252493695757-Subscriber-Interface-Overview).
-   *
-   * ## Side effects
-   *
-   * A subscription will not be created by sending a POST to this endpoint. It is meant to serve as a
-   * prediction.
    *
    * ## Taxable Subscriptions
    *

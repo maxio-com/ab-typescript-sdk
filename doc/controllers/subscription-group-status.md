@@ -40,7 +40,7 @@ async cancelSubscriptionsInGroup(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
@@ -95,7 +95,7 @@ async initiateDelayedCancellationForGroup(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
@@ -141,7 +141,7 @@ async cancelDelayedCancellationForGroup(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
@@ -207,7 +207,7 @@ async reactivateSubscriptionGroup(
 
 ## Response Type
 
-[`ReactivateSubscriptionGroupResponse`](../../doc/models/reactivate-subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReactivateSubscriptionGroupResponse](../../doc/models/reactivate-subscription-group-response.md).
 
 ## Example Usage
 

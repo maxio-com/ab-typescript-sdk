@@ -55,15 +55,15 @@ async listWebhooks(
 | `status` | [`WebhookStatus \| undefined`](../../doc/models/webhook-status.md) | Query, Optional | Webhooks with matching status would be returned. |
 | `sinceDate` | `string \| undefined` | Query, Optional | Format YYYY-MM-DD. Returns Webhooks with the created_at date greater than or equal to the one specified. |
 | `untilDate` | `string \| undefined` | Query, Optional | Format YYYY-MM-DD. Returns Webhooks with the created_at date less than or equal to the one specified. |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `order` | [`WebhookOrder \| undefined`](../../doc/models/webhook-order.md) | Query, Optional | The order in which the Webhooks are returned. |
 | `subscription` | `number \| undefined` | Query, Optional | The Advanced Billing id of a subscription you'd like to filter for |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`WebhookResponse[]`](../../doc/models/webhook-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [WebhookResponse[]](../../doc/models/webhook-response.md).
 
 ## Example Usage
 
@@ -145,7 +145,7 @@ async enableWebhooks(
 
 ## Response Type
 
-[`EnableWebhooksResponse`](../../doc/models/enable-webhooks-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EnableWebhooksResponse](../../doc/models/enable-webhooks-response.md).
 
 ## Example Usage
 
@@ -197,7 +197,7 @@ async replayWebhooks(
 
 ## Response Type
 
-[`ReplayWebhooksResponse`](../../doc/models/replay-webhooks-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReplayWebhooksResponse](../../doc/models/replay-webhooks-response.md).
 
 ## Example Usage
 
@@ -253,7 +253,7 @@ async createEndpoint(
 
 ## Response Type
 
-[`EndpointResponse`](../../doc/models/endpoint-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EndpointResponse](../../doc/models/endpoint-response.md).
 
 ## Example Usage
 
@@ -322,7 +322,7 @@ async listEndpoints(
 
 ## Response Type
 
-[`Endpoint[]`](../../doc/models/endpoint.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Endpoint[]](../../doc/models/endpoint.md).
 
 ## Example Usage
 
@@ -398,7 +398,7 @@ async updateEndpoint(
 
 ## Response Type
 
-[`EndpointResponse`](../../doc/models/endpoint-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EndpointResponse](../../doc/models/endpoint-response.md).
 
 ## Example Usage
 

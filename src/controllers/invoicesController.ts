@@ -149,6 +149,9 @@ export class InvoicesController extends BaseController {
    * @param subscriptionGroupUid   The UID of the subscription group you want to fetch
    *                                                   consolidated invoices for. This will return a paginated list of
    *                                                   consolidated invoices for the specified group.
+   * @param consolidationLevel     The consolidation level of the invoice. Allowed Values: none,
+   *                                                   parent, child or comma-separated lists of thereof, e.g. none,
+   *                                                   parent.
    * @param page                   Result records are organized in pages. By default, the first
    *                                                   page of results is displayed. The page parameter specifies a
    *                                                   page number of results to fetch. You can start navigating
@@ -201,6 +204,7 @@ export class InvoicesController extends BaseController {
       status,
       subscriptionId,
       subscriptionGroupUid,
+      consolidationLevel,
       page,
       perPage,
       direction,
@@ -224,6 +228,7 @@ export class InvoicesController extends BaseController {
       status?: InvoiceStatus;
       subscriptionId?: number;
       subscriptionGroupUid?: string;
+      consolidationLevel?: string;
       page?: number;
       perPage?: number;
       direction?: Direction;
@@ -251,6 +256,7 @@ export class InvoicesController extends BaseController {
       status: [status, optional(invoiceStatusSchema)],
       subscriptionId: [subscriptionId, optional(number())],
       subscriptionGroupUid: [subscriptionGroupUid, optional(string())],
+      consolidationLevel: [consolidationLevel, optional(string())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       direction: [direction, optional(directionSchema)],
@@ -278,6 +284,7 @@ export class InvoicesController extends BaseController {
       mapped.subscriptionGroupUid,
       commaPrefix
     );
+    req.query('consolidation_level', mapped.consolidationLevel, commaPrefix);
     req.query('page', mapped.page, commaPrefix);
     req.query('per_page', mapped.perPage, commaPrefix);
     req.query('direction', mapped.direction, commaPrefix);
@@ -434,60 +441,8 @@ export class InvoicesController extends BaseController {
   }
 
   /**
-   * This API call should be used when you want to record a payment of a given type against a specific
-   * invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment
-   * endpoint.
-   *
-   * ## Create a Payment from the existing payment profile
-   *
-   * In order to apply a payment to an invoice using an existing payment profile, specify `type` as
-   * `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID
-   * of a payment profile might be retrieved via the Payment Profiles API endpoint.
-   *
-   * ```
-   * {
-   * "type": "payment",
-   * "payment": {
-   * "amount": 10.00,
-   * "payment_profile_id": 123
-   * }
-   * }
-   * ```
-   *
-   * ## Create a Payment from the Subscription's Prepayment Account
-   *
-   * In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
-   *
-   * ```
-   * {
-   * "type": "prepayment",
-   * "payment": {
-   * "amount": 10.00
-   * }
-   * }
-   * ```
-   *
-   * Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
-   *
-   * ## Create a Payment from the Subscription's Service Credit Account
-   *
-   * In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also
-   * the `amount`:
-   *
-   *
-   * ```
-   * {
-   * "type": "service_credit",
-   * "payment": {
-   * "amount": 10.00
-   * }
-   * }
-   * ```
-   *
-   * Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the
-   * Subscription's Service Credit account. At this time, partial payments from a Service Credit Account
-   * are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the
-   * Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+   * Applies a payment of a given type against a specific invoice. If you would like to apply a payment
+   * across multiple invoices, you can use the Bulk Payment endpoint.
    *
    * @param uid          The unique identifier for the invoice, this does not
    *                                                           refer to the public facing invoice number.

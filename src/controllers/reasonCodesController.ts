@@ -27,8 +27,8 @@ export class ReasonCodesController extends BaseController {
   /**
    * # Reason Codes Intro
    *
-   * ReasonCodes are a way to gain a high level view of why your customers are cancelling the subcription
-   * to your product or service.
+   * ReasonCodes are a way to gain a high level view of why your customers are cancelling the
+   * subscription to your product or service.
    *
    * Add a set of churn reason codes to be displayed in-app and/or the Maxio Billing Portal. As your
    * subscribers decide to cancel their subscription, learn why they decided to cancel.
@@ -160,7 +160,7 @@ export class ReasonCodesController extends BaseController {
 
   /**
    * This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This
-   * code will be immediately removed. This action is not reversable.
+   * code will be immediately removed. This action is not reversible.
    *
    * @param reasonCodeId   The Advanced Billing id of the reason code
    * @return Response from the API call

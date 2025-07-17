@@ -15,6 +15,7 @@ const subscriptionInvoiceAccountController = new SubscriptionInvoiceAccountContr
 * [List Prepayments](../../doc/controllers/subscription-invoice-account.md#list-prepayments)
 * [Issue Service Credit](../../doc/controllers/subscription-invoice-account.md#issue-service-credit)
 * [Deduct Service Credit](../../doc/controllers/subscription-invoice-account.md#deduct-service-credit)
+* [List Service Credits](../../doc/controllers/subscription-invoice-account.md#list-service-credits)
 * [Refund Prepayment](../../doc/controllers/subscription-invoice-account.md#refund-prepayment)
 
 
@@ -38,7 +39,7 @@ async readAccountBalances(
 
 ## Response Type
 
-[`AccountBalances`](../../doc/models/account-balances.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [AccountBalances](../../doc/models/account-balances.md).
 
 ## Example Usage
 
@@ -86,7 +87,7 @@ async createPrepayment(
 
 ## Response Type
 
-[`CreatePrepaymentResponse`](../../doc/models/create-prepayment-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CreatePrepaymentResponse](../../doc/models/create-prepayment-response.md).
 
 ## Example Usage
 
@@ -159,14 +160,14 @@ async listPrepayments(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListPrepaymentsFilter \| undefined`](../../doc/models/list-prepayments-filter.md) | Query, Optional | Filter to use for List Prepayments operations |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`PrepaymentsResponse`](../../doc/models/prepayments-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PrepaymentsResponse](../../doc/models/prepayments-response.md).
 
 ## Example Usage
 
@@ -244,7 +245,7 @@ async issueServiceCredit(
 
 ## Response Type
 
-[`ServiceCredit`](../../doc/models/service-credit.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ServiceCredit](../../doc/models/service-credit.md).
 
 ## Example Usage
 
@@ -313,7 +314,7 @@ async deductServiceCredit(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
@@ -349,6 +350,96 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
+# List Service Credits
+
+This request will list a subscription's service credits.
+
+```ts
+async listServiceCredits(
+  subscriptionId: number,
+  page?: number,
+  perPage?: number,
+  direction?: SortingDirection,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ListServiceCreditsResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
+| `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListServiceCreditsResponse](../../doc/models/list-service-credits-response.md).
+
+## Example Usage
+
+```ts
+const subscriptionId = 222;
+
+const page = 2;
+
+const perPage = 50;
+
+try {
+  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.listServiceCredits(
+  subscriptionId,
+  page,
+  perPage
+);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "service_credits": [
+    {
+      "id": 68,
+      "amount_in_cents": 2200,
+      "ending_balance_in_cents": 1100,
+      "entry_type": "Debit",
+      "memo": "Service credit memo",
+      "invoice_uid": "inv_brntdvmmqxc3j",
+      "remaining_balance_in_cents": 1100,
+      "created_at": "2025-04-01T09:54:49-04:00"
+    },
+    {
+      "id": 67,
+      "amount_in_cents": 3300,
+      "ending_balance_in_cents": 3300,
+      "entry_type": "Credit",
+      "memo": "Service credit memo",
+      "invoice_uid": null,
+      "remaining_balance_in_cents": 1100,
+      "created_at": "2025-03-05T16:06:08-05:00"
+    }
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
 # Refund Prepayment
 
 This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
@@ -375,7 +466,7 @@ async refundPrepayment(
 
 ## Response Type
 
-[`PrepaymentResponse`](../../doc/models/prepayment-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PrepaymentResponse](../../doc/models/prepayment-response.md).
 
 ## Example Usage
 
