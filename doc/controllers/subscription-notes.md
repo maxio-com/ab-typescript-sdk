@@ -47,7 +47,7 @@ async createSubscriptionNote(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionNoteResponse](../../doc/models/subscription-note-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md).
 
 ## Example Usage
 
@@ -63,9 +63,9 @@ const body: UpdateSubscriptionNoteRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionNotesController.createSubscriptionNote(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -89,9 +89,15 @@ Use this method to retrieve a list of Notes associated with a Subscription. The 
 
 ```ts
 async listSubscriptionNotes(
-  subscriptionId: number,
-  page?: number,
-  perPage?: number,
+  {
+    subscriptionId,
+    page,
+    perPage,
+  }: {
+    subscriptionId: number;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionNoteResponse[]>>
 ```
@@ -107,7 +113,7 @@ async listSubscriptionNotes(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionNoteResponse[]](../../doc/models/subscription-note-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse[]`](../../doc/models/subscription-note-response.md).
 
 ## Example Usage
 
@@ -186,7 +192,7 @@ async readSubscriptionNote(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionNoteResponse](../../doc/models/subscription-note-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md).
 
 ## Example Usage
 
@@ -197,9 +203,9 @@ const noteId = 66;
 
 try {
   const { result, ...httpResponse } = await subscriptionNotesController.readSubscriptionNote(
-  subscriptionId,
-  noteId
-);
+    subscriptionId,
+    noteId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -250,7 +256,7 @@ async updateSubscriptionNote(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionNoteResponse](../../doc/models/subscription-note-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md).
 
 ## Example Usage
 
@@ -268,10 +274,10 @@ const body: UpdateSubscriptionNoteRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionNotesController.updateSubscriptionNote(
-  subscriptionId,
-  noteId,
-  body
-);
+    subscriptionId,
+    noteId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -322,9 +328,9 @@ const noteId = 66;
 
 try {
   const { result, ...httpResponse } = await subscriptionNotesController.deleteSubscriptionNote(
-  subscriptionId,
-  noteId
-);
+    subscriptionId,
+    noteId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

@@ -37,13 +37,23 @@ This method allows you to fetch data about webhooks. You can pass query paramete
 
 ```ts
 async listWebhooks(
-  status?: WebhookStatus,
-  sinceDate?: string,
-  untilDate?: string,
-  page?: number,
-  perPage?: number,
-  order?: WebhookOrder,
-  subscription?: number,
+  {
+    status,
+    sinceDate,
+    untilDate,
+    page,
+    perPage,
+    order,
+    subscription,
+  }: {
+    status?: WebhookStatus;
+    sinceDate?: string;
+    untilDate?: string;
+    page?: number;
+    perPage?: number;
+    order?: WebhookOrder;
+    subscription?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<WebhookResponse[]>>
 ```
@@ -63,7 +73,7 @@ async listWebhooks(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [WebhookResponse[]](../../doc/models/webhook-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`WebhookResponse[]`](../../doc/models/webhook-response.md).
 
 ## Example Usage
 
@@ -145,7 +155,7 @@ async enableWebhooks(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EnableWebhooksResponse](../../doc/models/enable-webhooks-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EnableWebhooksResponse`](../../doc/models/enable-webhooks-response.md).
 
 ## Example Usage
 
@@ -197,7 +207,7 @@ async replayWebhooks(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReplayWebhooksResponse](../../doc/models/replay-webhooks-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReplayWebhooksResponse`](../../doc/models/replay-webhooks-response.md).
 
 ## Example Usage
 
@@ -253,7 +263,7 @@ async createEndpoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EndpointResponse](../../doc/models/endpoint-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EndpointResponse`](../../doc/models/endpoint-response.md).
 
 ## Example Usage
 
@@ -322,7 +332,7 @@ async listEndpoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Endpoint[]](../../doc/models/endpoint.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Endpoint[]`](../../doc/models/endpoint.md).
 
 ## Example Usage
 
@@ -398,7 +408,7 @@ async updateEndpoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EndpointResponse](../../doc/models/endpoint-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EndpointResponse`](../../doc/models/endpoint-response.md).
 
 ## Example Usage
 
@@ -418,9 +428,9 @@ const body: CreateOrUpdateEndpointRequest = {
 
 try {
   const { result, ...httpResponse } = await webhooksController.updateEndpoint(
-  endpointId,
-  body
-);
+    endpointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

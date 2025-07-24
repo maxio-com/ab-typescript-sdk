@@ -37,7 +37,7 @@ async validateReferralCode(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReferralValidationResponse](../../doc/models/referral-validation-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReferralValidationResponse`](../../doc/models/referral-validation-response.md).
 
 ## Example Usage
 

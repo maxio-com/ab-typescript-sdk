@@ -52,7 +52,7 @@ async createMeteredComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -76,9 +76,9 @@ const body: CreateMeteredComponent = {
 
 try {
   const { result, ...httpResponse } = await componentsController.createMeteredComponent(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -183,7 +183,7 @@ async createQuantityBasedComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -208,9 +208,9 @@ const body: CreateQuantityBasedComponent = {
 
 try {
   const { result, ...httpResponse } = await componentsController.createQuantityBasedComponent(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -305,7 +305,7 @@ async createOnOffComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -327,9 +327,9 @@ const body: CreateOnOffComponent = {
 
 try {
   const { result, ...httpResponse } = await componentsController.createOnOffComponent(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -412,7 +412,7 @@ async createPrepaidUsageComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -448,9 +448,9 @@ const body: CreatePrepaidComponent = {
 
 try {
   const { result, ...httpResponse } = await componentsController.createPrepaidUsageComponent(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -559,7 +559,7 @@ async createEventBasedComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -586,9 +586,9 @@ const body: CreateEBBComponent = {
 
 try {
   const { result, ...httpResponse } = await componentsController.createEventBasedComponent(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -666,7 +666,7 @@ async findComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -740,7 +740,7 @@ async readComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -751,9 +751,9 @@ const componentId = 'component_id8';
 
 try {
   const { result, ...httpResponse } = await componentsController.readComponent(
-  productFamilyId,
-  componentId
-);
+    productFamilyId,
+    componentId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -822,7 +822,7 @@ async updateProductFamilyComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -839,10 +839,10 @@ const body: UpdateComponentRequest = {
 
 try {
   const { result, ...httpResponse } = await componentsController.updateProductFamilyComponent(
-  productFamilyId,
-  componentId,
-  body
-);
+    productFamilyId,
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -912,7 +912,7 @@ async archiveComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Component](../../doc/models/component.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Component`](../../doc/models/component.md).
 
 ## Example Usage
 
@@ -923,9 +923,9 @@ const componentId = 'component_id8';
 
 try {
   const { result, ...httpResponse } = await componentsController.archiveComponent(
-  productFamilyId,
-  componentId
-);
+    productFamilyId,
+    componentId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -975,15 +975,27 @@ This request will return a list of components for a site.
 
 ```ts
 async listComponents(
-  dateField?: BasicDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  includeArchived?: boolean,
-  page?: number,
-  perPage?: number,
-  filter?: ListComponentsFilter,
+  {
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    includeArchived,
+    page,
+    perPage,
+    filter,
+  }: {
+    dateField?: BasicDateField;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+    includeArchived?: boolean;
+    page?: number;
+    perPage?: number;
+    filter?: ListComponentsFilter;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentResponse[]>>
 ```
@@ -1005,7 +1017,7 @@ async listComponents(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse[]](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse[]`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -1159,7 +1171,7 @@ async updateComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -1174,9 +1186,9 @@ const body: UpdateComponentRequest = {
 
 try {
   const { result, ...httpResponse } = await componentsController.updateComponent(
-  componentId,
-  body
-);
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1230,16 +1242,29 @@ This request will return a list of components for a particular product family.
 
 ```ts
 async listComponentsForProductFamily(
-  productFamilyId: number,
-  includeArchived?: boolean,
-  page?: number,
-  perPage?: number,
-  filter?: ListComponentsFilter,
-  dateField?: BasicDateField,
-  endDate?: string,
-  endDatetime?: string,
-  startDate?: string,
-  startDatetime?: string,
+  {
+    productFamilyId,
+    includeArchived,
+    page,
+    perPage,
+    filter,
+    dateField,
+    endDate,
+    endDatetime,
+    startDate,
+    startDatetime,
+  }: {
+    productFamilyId: number;
+    includeArchived?: boolean;
+    page?: number;
+    perPage?: number;
+    filter?: ListComponentsFilter;
+    dateField?: BasicDateField;
+    endDate?: string;
+    endDatetime?: string;
+    startDate?: string;
+    startDatetime?: string;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentResponse[]>>
 ```
@@ -1262,7 +1287,7 @@ async listComponentsForProductFamily(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse[]](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse[]`](../../doc/models/component-response.md).
 
 ## Example Usage
 

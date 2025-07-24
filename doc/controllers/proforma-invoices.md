@@ -81,13 +81,23 @@ By default, proforma invoices returned on the index will only include totals, no
 
 ```ts
 async listSubscriptionGroupProformaInvoices(
-  uid: string,
-  lineItems?: boolean,
-  discounts?: boolean,
-  taxes?: boolean,
-  credits?: boolean,
-  payments?: boolean,
-  customFields?: boolean,
+  {
+    uid,
+    lineItems,
+    discounts,
+    taxes,
+    credits,
+    payments,
+    customFields,
+  }: {
+    uid: string;
+    lineItems?: boolean;
+    discounts?: boolean;
+    taxes?: boolean;
+    credits?: boolean;
+    payments?: boolean;
+    customFields?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
@@ -107,7 +117,7 @@ async listSubscriptionGroupProformaInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListProformaInvoicesResponse](../../doc/models/list-proforma-invoices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md).
 
 ## Example Usage
 
@@ -165,7 +175,7 @@ async readProformaInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProformaInvoice](../../doc/models/proforma-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
 ## Example Usage
 
@@ -217,7 +227,7 @@ async createProformaInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProformaInvoice](../../doc/models/proforma-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
 ## Example Usage
 
@@ -249,19 +259,35 @@ By default, proforma invoices returned on the index will only include totals, no
 
 ```ts
 async listProformaInvoices(
-  subscriptionId: number,
-  startDate?: string,
-  endDate?: string,
-  status?: ProformaInvoiceStatus,
-  page?: number,
-  perPage?: number,
-  direction?: Direction,
-  lineItems?: boolean,
-  discounts?: boolean,
-  taxes?: boolean,
-  credits?: boolean,
-  payments?: boolean,
-  customFields?: boolean,
+  {
+    subscriptionId,
+    startDate,
+    endDate,
+    status,
+    page,
+    perPage,
+    direction,
+    lineItems,
+    discounts,
+    taxes,
+    credits,
+    payments,
+    customFields,
+  }: {
+    subscriptionId: number;
+    startDate?: string;
+    endDate?: string;
+    status?: ProformaInvoiceStatus;
+    page?: number;
+    perPage?: number;
+    direction?: Direction;
+    lineItems?: boolean;
+    discounts?: boolean;
+    taxes?: boolean;
+    credits?: boolean;
+    payments?: boolean;
+    customFields?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
@@ -287,7 +313,7 @@ async listProformaInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListProformaInvoicesResponse](../../doc/models/list-proforma-invoices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md).
 
 ## Example Usage
 
@@ -348,7 +374,7 @@ async voidProformaInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProformaInvoice](../../doc/models/proforma-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
 ## Example Usage
 
@@ -401,7 +427,7 @@ async previewProformaInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProformaInvoice](../../doc/models/proforma-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
 ## Example Usage
 
@@ -454,7 +480,7 @@ async createSignupProformaInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProformaInvoice](../../doc/models/proforma-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
 ## Example Usage
 
@@ -518,7 +544,7 @@ async previewSignupProformaInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SignupProformaPreviewResponse](../../doc/models/signup-proforma-preview-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SignupProformaPreviewResponse`](../../doc/models/signup-proforma-preview-response.md).
 
 ## Example Usage
 
@@ -536,9 +562,9 @@ const body: CreateSubscriptionRequest = {
 
 try {
   const { result, ...httpResponse } = await proformaInvoicesController.previewSignupProformaInvoice(
-  undefined,
-  body
-);
+    undefined,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

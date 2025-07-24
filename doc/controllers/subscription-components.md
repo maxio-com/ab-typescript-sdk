@@ -51,7 +51,7 @@ async readSubscriptionComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionComponentResponse](../../doc/models/subscription-component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionComponentResponse`](../../doc/models/subscription-component-response.md).
 
 ## Example Usage
 
@@ -62,9 +62,9 @@ const componentId = 222;
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.readSubscriptionComponent(
-  subscriptionId,
-  componentId
-);
+    subscriptionId,
+    componentId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -111,19 +111,35 @@ When requesting to list components for a given subscription, if the subscription
 
 ```ts
 async listSubscriptionComponents(
-  subscriptionId: number,
-  dateField?: SubscriptionListDateField,
-  direction?: SortingDirection,
-  filter?: ListSubscriptionComponentsFilter,
-  endDate?: string,
-  endDatetime?: string,
-  pricePointIds?: IncludeNotNull,
-  productFamilyIds?: number[],
-  sort?: ListSubscriptionComponentsSort,
-  startDate?: string,
-  startDatetime?: string,
-  include?: ListSubscriptionComponentsInclude[],
-  inUse?: boolean,
+  {
+    subscriptionId,
+    dateField,
+    direction,
+    filter,
+    endDate,
+    endDatetime,
+    pricePointIds,
+    productFamilyIds,
+    sort,
+    startDate,
+    startDatetime,
+    include,
+    inUse,
+  }: {
+    subscriptionId: number;
+    dateField?: SubscriptionListDateField;
+    direction?: SortingDirection;
+    filter?: ListSubscriptionComponentsFilter;
+    endDate?: string;
+    endDatetime?: string;
+    pricePointIds?: IncludeNotNull;
+    productFamilyIds?: number[];
+    sort?: ListSubscriptionComponentsSort;
+    startDate?: string;
+    startDatetime?: string;
+    include?: ListSubscriptionComponentsInclude[];
+    inUse?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionComponentResponse[]>>
 ```
@@ -149,7 +165,7 @@ async listSubscriptionComponents(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionComponentResponse[]](../../doc/models/subscription-component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionComponentResponse[]`](../../doc/models/subscription-component-response.md).
 
 ## Example Usage
 
@@ -247,7 +263,7 @@ async bulkUpdateSubscriptionComponentsPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BulkComponentsPricePointAssignment](../../doc/models/bulk-components-price-point-assignment.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BulkComponentsPricePointAssignment`](../../doc/models/bulk-components-price-point-assignment.md).
 
 ## Example Usage
 
@@ -273,9 +289,9 @@ const body: BulkComponentsPricePointAssignment = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.bulkUpdateSubscriptionComponentsPricePoints(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -332,7 +348,7 @@ async bulkResetSubscriptionComponentsPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -524,7 +540,7 @@ async allocateComponent(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [AllocationResponse](../../doc/models/allocation-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`AllocationResponse`](../../doc/models/allocation-response.md).
 
 ## Example Usage
 
@@ -542,10 +558,10 @@ const body: CreateAllocationRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.allocateComponent(
-  subscriptionId,
-  componentId,
-  body
-);
+    subscriptionId,
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -634,7 +650,7 @@ async listAllocations(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [AllocationResponse[]](../../doc/models/allocation-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`AllocationResponse[]`](../../doc/models/allocation-response.md).
 
 ## Example Usage
 
@@ -647,10 +663,10 @@ const page = 2;
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.listAllocations(
-  subscriptionId,
-  componentId,
-  page
-);
+    subscriptionId,
+    componentId,
+    page
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -740,7 +756,7 @@ async allocateComponents(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [AllocationResponse[]](../../doc/models/allocation-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`AllocationResponse[]`](../../doc/models/allocation-response.md).
 
 ## Example Usage
 
@@ -766,9 +782,9 @@ const body: AllocateComponents = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.allocateComponents(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -858,7 +874,7 @@ async previewAllocations(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [AllocationPreviewResponse](../../doc/models/allocation-preview-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`AllocationPreviewResponse`](../../doc/models/allocation-preview-response.md).
 
 ## Example Usage
 
@@ -881,9 +897,9 @@ const body: PreviewAllocationsRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.previewAllocations(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1059,11 +1075,11 @@ const body: UpdateAllocationExpirationDate = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.updatePrepaidUsageAllocationExpirationDate(
-  subscriptionId,
-  componentId,
-  allocationId,
-  body
-);
+    subscriptionId,
+    componentId,
+    allocationId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1133,11 +1149,11 @@ const body: CreditSchemeRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.deletePrepaidUsageAllocation(
-  subscriptionId,
-  componentId,
-  allocationId,
-  body
-);
+    subscriptionId,
+    componentId,
+    allocationId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1235,7 +1251,7 @@ async createUsage(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [UsageResponse](../../doc/models/usage-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`UsageResponse`](../../doc/models/usage-response.md).
 
 ## Example Usage
 
@@ -1254,10 +1270,10 @@ const body: CreateUsageRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.createUsage(
-  subscriptionId,
-  componentId,
-  body
-);
+    subscriptionId,
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1312,14 +1328,25 @@ Use this endpoint to read the previously recorded components for a subscription.
 
 ```ts
 async listUsages(
-  subscriptionId: number,
-  componentId: ListUsagesInputComponentId,
-  sinceId?: bigint,
-  maxId?: bigint,
-  sinceDate?: string,
-  untilDate?: string,
-  page?: number,
-  perPage?: number,
+  {
+    subscriptionId,
+    componentId,
+    sinceId,
+    maxId,
+    sinceDate,
+    untilDate,
+    page,
+    perPage,
+  }: {
+    subscriptionId: number;
+    componentId: ListUsagesInputComponentId;
+    sinceId?: bigint;
+    maxId?: bigint;
+    sinceDate?: string;
+    untilDate?: string;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<UsageResponse[]>>
 ```
@@ -1340,7 +1367,7 @@ async listUsages(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [UsageResponse[]](../../doc/models/usage-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`UsageResponse[]`](../../doc/models/usage-response.md).
 
 ## Example Usage
 
@@ -1456,10 +1483,10 @@ const body: ActivateEventBasedComponent = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.activateEventBasedComponent(
-  subscriptionId,
-  componentId,
-  body
-);
+    subscriptionId,
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1504,9 +1531,9 @@ const componentId = 222;
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.deactivateEventBasedComponent(
-  subscriptionId,
-  componentId
-);
+    subscriptionId,
+    componentId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1576,10 +1603,10 @@ const body: EBBEvent = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.recordEvent(
-  apiHandle,
-  undefined,
-  body
-);
+    apiHandle,
+    undefined,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1637,10 +1664,10 @@ const body: EBBEvent[] = [
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.bulkRecordEvents(
-  apiHandle,
-  undefined,
-  body
-);
+    apiHandle,
+    undefined,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1658,20 +1685,37 @@ This request will list components applied to each subscription.
 
 ```ts
 async listSubscriptionComponentsForSite(
-  page?: number,
-  perPage?: number,
-  sort?: ListSubscriptionComponentsSort,
-  direction?: SortingDirection,
-  filter?: ListSubscriptionComponentsForSiteFilter,
-  dateField?: SubscriptionListDateField,
-  startDate?: string,
-  startDatetime?: string,
-  endDate?: string,
-  endDatetime?: string,
-  subscriptionIds?: number[],
-  pricePointIds?: IncludeNotNull,
-  productFamilyIds?: number[],
-  include?: ListSubscriptionComponentsInclude,
+  {
+    page,
+    perPage,
+    sort,
+    direction,
+    filter,
+    dateField,
+    startDate,
+    startDatetime,
+    endDate,
+    endDatetime,
+    subscriptionIds,
+    pricePointIds,
+    productFamilyIds,
+    include,
+  }: {
+    page?: number;
+    perPage?: number;
+    sort?: ListSubscriptionComponentsSort;
+    direction?: SortingDirection;
+    filter?: ListSubscriptionComponentsForSiteFilter;
+    dateField?: SubscriptionListDateField;
+    startDate?: string;
+    startDatetime?: string;
+    endDate?: string;
+    endDatetime?: string;
+    subscriptionIds?: number[];
+    pricePointIds?: IncludeNotNull;
+    productFamilyIds?: number[];
+    include?: ListSubscriptionComponentsInclude;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSubscriptionComponentsResponse>>
 ```
@@ -1698,7 +1742,7 @@ async listSubscriptionComponentsForSite(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSubscriptionComponentsResponse](../../doc/models/list-subscription-components-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSubscriptionComponentsResponse`](../../doc/models/list-subscription-components-response.md).
 
 ## Example Usage
 

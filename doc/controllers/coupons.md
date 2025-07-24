@@ -61,7 +61,7 @@ async createCoupon(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -94,9 +94,9 @@ const body: CouponRequest = {
 
 try {
   const { result, ...httpResponse } = await couponsController.createCoupon(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -122,11 +122,19 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 
 ```ts
 async listCouponsForProductFamily(
-  productFamilyId: number,
-  page?: number,
-  perPage?: number,
-  filter?: ListCouponsFilter,
-  currencyPrices?: boolean,
+  {
+    productFamilyId,
+    page,
+    perPage,
+    filter,
+    currencyPrices,
+  }: {
+    productFamilyId: number;
+    page?: number;
+    perPage?: number;
+    filter?: ListCouponsFilter;
+    currencyPrices?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse[]>>
 ```
@@ -144,7 +152,7 @@ async listCouponsForProductFamily(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse[]](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse[]`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -301,7 +309,7 @@ async findCoupon(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -310,10 +318,10 @@ const currencyPrices = true;
 
 try {
   const { result, ...httpResponse } = await couponsController.findCoupon(
-  undefined,
-  undefined,
-  currencyPrices
-);
+    undefined,
+    undefined,
+    currencyPrices
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -354,7 +362,7 @@ async readCoupon(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -367,10 +375,10 @@ const currencyPrices = true;
 
 try {
   const { result, ...httpResponse } = await couponsController.readCoupon(
-  productFamilyId,
-  couponId,
-  currencyPrices
-);
+    productFamilyId,
+    couponId,
+    currencyPrices
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -440,7 +448,7 @@ async updateCoupon(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -473,10 +481,10 @@ const body: CouponRequest = {
 
 try {
   const { result, ...httpResponse } = await couponsController.updateCoupon(
-  productFamilyId,
-  couponId,
-  body
-);
+    productFamilyId,
+    couponId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -547,7 +555,7 @@ async archiveCoupon(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -558,9 +566,9 @@ const couponId = 162;
 
 try {
   const { result, ...httpResponse } = await couponsController.archiveCoupon(
-  productFamilyId,
-  couponId
-);
+    productFamilyId,
+    couponId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -609,10 +617,17 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 
 ```ts
 async listCoupons(
-  page?: number,
-  perPage?: number,
-  filter?: ListCouponsFilter,
-  currencyPrices?: boolean,
+  {
+    page,
+    perPage,
+    filter,
+    currencyPrices,
+  }: {
+    page?: number;
+    perPage?: number;
+    filter?: ListCouponsFilter;
+    currencyPrices?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponResponse[]>>
 ```
@@ -629,7 +644,7 @@ async listCoupons(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse[]](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse[]`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -738,7 +753,7 @@ async readCouponUsage(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponUsage[]](../../doc/models/coupon-usage.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponUsage[]`](../../doc/models/coupon-usage.md).
 
 ## Example Usage
 
@@ -749,9 +764,9 @@ const couponId = 162;
 
 try {
   const { result, ...httpResponse } = await couponsController.readCouponUsage(
-  productFamilyId,
-  couponId
-);
+    productFamilyId,
+    couponId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -839,7 +854,7 @@ async validateCoupon(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -918,7 +933,7 @@ async createOrUpdateCouponCurrencyPrices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponCurrencyResponse](../../doc/models/coupon-currency-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md).
 
 ## Example Usage
 
@@ -940,9 +955,9 @@ const body: CouponCurrencyRequest = {
 
 try {
   const { result, ...httpResponse } = await couponsController.createOrUpdateCouponCurrencyPrices(
-  couponId,
-  body
-);
+    couponId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1021,7 +1036,7 @@ async createCouponSubcodes(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponSubcodesResponse](../../doc/models/coupon-subcodes-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponSubcodesResponse`](../../doc/models/coupon-subcodes-response.md).
 
 ## Example Usage
 
@@ -1038,9 +1053,9 @@ const body: CouponSubcodes = {
 
 try {
   const { result, ...httpResponse } = await couponsController.createCouponSubcodes(
-  couponId,
-  body
-);
+    couponId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1070,9 +1085,15 @@ This request allows you to request the subcodes that are attached to a coupon.
 
 ```ts
 async listCouponSubcodes(
-  couponId: number,
-  page?: number,
-  perPage?: number,
+  {
+    couponId,
+    page,
+    perPage,
+  }: {
+    couponId: number;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CouponSubcodes>>
 ```
@@ -1088,7 +1109,7 @@ async listCouponSubcodes(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponSubcodes](../../doc/models/coupon-subcodes.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponSubcodes`](../../doc/models/coupon-subcodes.md).
 
 ## Example Usage
 
@@ -1173,7 +1194,7 @@ async updateCouponSubcodes(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponSubcodesResponse](../../doc/models/coupon-subcodes-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponSubcodesResponse`](../../doc/models/coupon-subcodes-response.md).
 
 ## Example Usage
 
@@ -1190,9 +1211,9 @@ const body: CouponSubcodes = {
 
 try {
   const { result, ...httpResponse } = await couponsController.updateCouponSubcodes(
-  couponId,
-  body
-);
+    couponId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1258,9 +1279,9 @@ const subcode = 'subcode4';
 
 try {
   const { result, ...httpResponse } = await couponsController.deleteCouponSubcode(
-  couponId,
-  subcode
-);
+    couponId,
+    subcode
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

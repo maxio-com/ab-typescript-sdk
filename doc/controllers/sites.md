@@ -48,7 +48,7 @@ async readSite(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SiteResponse](../../doc/models/site-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SiteResponse`](../../doc/models/site-response.md).
 
 ## Example Usage
 
@@ -165,8 +165,13 @@ This endpoint returns public keys used for Chargify.js.
 
 ```ts
 async listChargifyJsPublicKeys(
-  page?: number,
-  perPage?: number,
+  {
+    page,
+    perPage,
+  }: {
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListPublicKeysResponse>>
 ```
@@ -181,7 +186,7 @@ async listChargifyJsPublicKeys(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListPublicKeysResponse](../../doc/models/list-public-keys-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListPublicKeysResponse`](../../doc/models/list-public-keys-response.md).
 
 ## Example Usage
 

@@ -49,7 +49,7 @@ async signupWithSubscriptionGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupSignupResponse](../../doc/models/subscription-group-signup-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionGroupSignupResponse`](../../doc/models/subscription-group-signup-response.md).
 
 ## Example Usage
 
@@ -112,7 +112,7 @@ async createSubscriptionGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupResponse](../../doc/models/subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md).
 
 ## Example Usage
 
@@ -179,9 +179,15 @@ Account balance information for the subscription groups is not returned by defau
 
 ```ts
 async listSubscriptionGroups(
-  page?: number,
-  perPage?: number,
-  include?: SubscriptionGroupsListInclude[],
+  {
+    page,
+    perPage,
+    include,
+  }: {
+    page?: number;
+    perPage?: number;
+    include?: SubscriptionGroupsListInclude[];
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSubscriptionGroupsResponse>>
 ```
@@ -197,7 +203,7 @@ async listSubscriptionGroups(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSubscriptionGroupsResponse](../../doc/models/list-subscription-groups-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSubscriptionGroupsResponse`](../../doc/models/list-subscription-groups-response.md).
 
 ## Example Usage
 
@@ -287,7 +293,7 @@ async readSubscriptionGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [FullSubscriptionGroupResponse](../../doc/models/full-subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`FullSubscriptionGroupResponse`](../../doc/models/full-subscription-group-response.md).
 
 ## Example Usage
 
@@ -300,9 +306,9 @@ const include: SubscriptionGroupInclude[] = [
 
 try {
   const { result, ...httpResponse } = await subscriptionGroupsController.readSubscriptionGroup(
-  uid,
-  include
-);
+    uid,
+    include
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -379,7 +385,7 @@ async updateSubscriptionGroupMembers(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupResponse](../../doc/models/subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md).
 
 ## Example Usage
 
@@ -398,9 +404,9 @@ const body: UpdateSubscriptionGroupRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionGroupsController.updateSubscriptionGroupMembers(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -460,7 +466,7 @@ async deleteSubscriptionGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [DeleteSubscriptionGroupResponse](../../doc/models/delete-subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`DeleteSubscriptionGroupResponse`](../../doc/models/delete-subscription-group-response.md).
 
 ## Example Usage
 
@@ -517,7 +523,7 @@ async findSubscriptionGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [FullSubscriptionGroupResponse](../../doc/models/full-subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`FullSubscriptionGroupResponse`](../../doc/models/full-subscription-group-response.md).
 
 ## Example Usage
 
@@ -619,7 +625,7 @@ async addSubscriptionToGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupResponse](../../doc/models/subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md).
 
 ## Example Usage
 
@@ -642,9 +648,9 @@ const body: AddSubscriptionToAGroup = {
 
 try {
   const { result, ...httpResponse } = await subscriptionGroupsController.addSubscriptionToGroup(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

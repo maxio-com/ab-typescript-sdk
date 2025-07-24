@@ -51,7 +51,7 @@ async createReasonCode(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReasonCodeResponse](../../doc/models/reason-code-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
 ## Example Usage
 
@@ -89,8 +89,13 @@ This method gives a merchant the option to retrieve a list of all of the current
 
 ```ts
 async listReasonCodes(
-  page?: number,
-  perPage?: number,
+  {
+    page,
+    perPage,
+  }: {
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ReasonCodeResponse[]>>
 ```
@@ -105,7 +110,7 @@ async listReasonCodes(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReasonCodeResponse[]](../../doc/models/reason-code-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse[]`](../../doc/models/reason-code-response.md).
 
 ## Example Usage
 
@@ -194,7 +199,7 @@ async readReasonCode(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReasonCodeResponse](../../doc/models/reason-code-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
 ## Example Usage
 
@@ -242,7 +247,7 @@ async updateReasonCode(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReasonCodeResponse](../../doc/models/reason-code-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
 ## Example Usage
 
@@ -289,7 +294,7 @@ async deleteReasonCode(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [OkResponse](../../doc/models/ok-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OkResponse`](../../doc/models/ok-response.md).
 
 ## Example Usage
 

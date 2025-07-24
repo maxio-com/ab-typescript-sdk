@@ -44,10 +44,10 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@apimatic/authentication-adapters": "^0.5.4",
-    "@apimatic/axios-client-adapter": "^0.3.7",
-    "@apimatic/core": "^0.10.16",
-    "@apimatic/schema": "^0.7.14"
+    "@apimatic/authentication-adapters": "^0.5.10",
+    "@apimatic/axios-client-adapter": "^0.3.11",
+    "@apimatic/core": "^0.10.21",
+    "@apimatic/schema": "^0.7.17"
   },
   "repository": {
     "type": "git",

@@ -53,9 +53,9 @@ const body: CancelGroupedSubscriptionsRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionGroupStatusController.cancelSubscriptionsInGroup(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -207,7 +207,7 @@ async reactivateSubscriptionGroup(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ReactivateSubscriptionGroupResponse](../../doc/models/reactivate-subscription-group-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReactivateSubscriptionGroupResponse`](../../doc/models/reactivate-subscription-group-response.md).
 
 ## Example Usage
 
@@ -220,9 +220,9 @@ const body: ReactivateSubscriptionGroupRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionGroupStatusController.reactivateSubscriptionGroup(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

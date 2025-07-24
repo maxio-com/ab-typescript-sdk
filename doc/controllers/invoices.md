@@ -57,7 +57,7 @@ async refundInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -77,9 +77,9 @@ const body: RefundInvoiceRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.refundInvoice(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -103,29 +103,55 @@ By default, invoices returned on the index will only include totals, not detaile
 
 ```ts
 async listInvoices(
-  startDate?: string,
-  endDate?: string,
-  status?: InvoiceStatus,
-  subscriptionId?: number,
-  subscriptionGroupUid?: string,
-  consolidationLevel?: string,
-  page?: number,
-  perPage?: number,
-  direction?: Direction,
-  lineItems?: boolean,
-  discounts?: boolean,
-  taxes?: boolean,
-  credits?: boolean,
-  payments?: boolean,
-  customFields?: boolean,
-  refunds?: boolean,
-  dateField?: InvoiceDateField,
-  startDatetime?: string,
-  endDatetime?: string,
-  customerIds?: number[],
-  mNumber?: string[],
-  productIds?: number[],
-  sort?: InvoiceSortField,
+  {
+    startDate,
+    endDate,
+    status,
+    subscriptionId,
+    subscriptionGroupUid,
+    consolidationLevel,
+    page,
+    perPage,
+    direction,
+    lineItems,
+    discounts,
+    taxes,
+    credits,
+    payments,
+    customFields,
+    refunds,
+    dateField,
+    startDatetime,
+    endDatetime,
+    customerIds,
+    mNumber,
+    productIds,
+    sort,
+  }: {
+    startDate?: string;
+    endDate?: string;
+    status?: InvoiceStatus;
+    subscriptionId?: number;
+    subscriptionGroupUid?: string;
+    consolidationLevel?: string;
+    page?: number;
+    perPage?: number;
+    direction?: Direction;
+    lineItems?: boolean;
+    discounts?: boolean;
+    taxes?: boolean;
+    credits?: boolean;
+    payments?: boolean;
+    customFields?: boolean;
+    refunds?: boolean;
+    dateField?: InvoiceDateField;
+    startDatetime?: string;
+    endDatetime?: string;
+    customerIds?: number[];
+    mNumber?: string[];
+    productIds?: number[];
+    sort?: InvoiceSortField;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListInvoicesResponse>>
 ```
@@ -161,7 +187,7 @@ async listInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListInvoicesResponse](../../doc/models/list-invoices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListInvoicesResponse`](../../doc/models/list-invoices-response.md).
 
 ## Example Usage
 
@@ -513,7 +539,7 @@ async readInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -671,13 +697,23 @@ Note - invoice events that occurred prior to 09/05/2018 __will not__ contain an 
 
 ```ts
 async listInvoiceEvents(
-  sinceDate?: string,
-  sinceId?: bigint,
-  page?: number,
-  perPage?: number,
-  invoiceUid?: string,
-  withChangeInvoiceStatus?: string,
-  eventTypes?: InvoiceEventType[],
+  {
+    sinceDate,
+    sinceId,
+    page,
+    perPage,
+    invoiceUid,
+    withChangeInvoiceStatus,
+    eventTypes,
+  }: {
+    sinceDate?: string;
+    sinceId?: bigint;
+    page?: number;
+    perPage?: number;
+    invoiceUid?: string;
+    withChangeInvoiceStatus?: string;
+    eventTypes?: InvoiceEventType[];
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListInvoiceEventsResponse>>
 ```
@@ -697,7 +733,7 @@ async listInvoiceEvents(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListInvoiceEventsResponse](../../doc/models/list-invoice-events-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListInvoiceEventsResponse`](../../doc/models/list-invoice-events-response.md).
 
 ## Example Usage
 
@@ -1125,7 +1161,7 @@ async recordPaymentForInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -1143,9 +1179,9 @@ const body: CreateInvoicePaymentRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.recordPaymentForInvoice(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1208,7 +1244,7 @@ async recordPaymentForMultipleInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [MultiInvoicePaymentResponse](../../doc/models/multi-invoice-payment-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`MultiInvoicePaymentResponse`](../../doc/models/multi-invoice-payment-response.md).
 
 ## Example Usage
 
@@ -1283,14 +1319,25 @@ By default, the credit notes returned by this endpoint will exclude the arrays o
 
 ```ts
 async listCreditNotes(
-  subscriptionId?: number,
-  page?: number,
-  perPage?: number,
-  lineItems?: boolean,
-  discounts?: boolean,
-  taxes?: boolean,
-  refunds?: boolean,
-  applications?: boolean,
+  {
+    subscriptionId,
+    page,
+    perPage,
+    lineItems,
+    discounts,
+    taxes,
+    refunds,
+    applications,
+  }: {
+    subscriptionId?: number;
+    page?: number;
+    perPage?: number;
+    lineItems?: boolean;
+    discounts?: boolean;
+    taxes?: boolean;
+    refunds?: boolean;
+    applications?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListCreditNotesResponse>>
 ```
@@ -1311,7 +1358,7 @@ async listCreditNotes(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListCreditNotesResponse](../../doc/models/list-credit-notes-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListCreditNotesResponse`](../../doc/models/list-credit-notes-response.md).
 
 ## Example Usage
 
@@ -1660,7 +1707,7 @@ async readCreditNote(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CreditNote](../../doc/models/credit-note.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CreditNote`](../../doc/models/credit-note.md).
 
 ## Example Usage
 
@@ -2017,7 +2064,7 @@ async recordPaymentForSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [RecordPaymentResponse](../../doc/models/record-payment-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`RecordPaymentResponse`](../../doc/models/record-payment-response.md).
 
 ## Example Usage
 
@@ -2035,9 +2082,9 @@ const body: RecordPaymentRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.recordPaymentForSubscription(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2108,7 +2155,7 @@ async reopenInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -2157,7 +2204,7 @@ async voidInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -2172,9 +2219,9 @@ const body: VoidInvoiceRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.voidInvoice(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2199,10 +2246,17 @@ Invoice segments returned on the index will only include totals, not detailed br
 
 ```ts
 async listConsolidatedInvoiceSegments(
-  invoiceUid: string,
-  page?: number,
-  perPage?: number,
-  direction?: Direction,
+  {
+    invoiceUid,
+    page,
+    perPage,
+    direction,
+  }: {
+    invoiceUid: string;
+    page?: number;
+    perPage?: number;
+    direction?: Direction;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ConsolidatedInvoice>>
 ```
@@ -2219,7 +2273,7 @@ async listConsolidatedInvoiceSegments(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ConsolidatedInvoice](../../doc/models/consolidated-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ConsolidatedInvoice`](../../doc/models/consolidated-invoice.md).
 
 ## Example Usage
 
@@ -2705,7 +2759,7 @@ async createInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [InvoiceResponse](../../doc/models/invoice-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`InvoiceResponse`](../../doc/models/invoice-response.md).
 
 ## Example Usage
 
@@ -2726,9 +2780,9 @@ const body: CreateInvoiceRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.createInvoice(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2890,9 +2944,9 @@ const body: SendInvoiceRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.sendInvoice(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2932,7 +2986,7 @@ async previewCustomerInformationChanges(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerChangesPreviewResponse](../../doc/models/customer-changes-preview-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerChangesPreviewResponse`](../../doc/models/customer-changes-preview-response.md).
 
 ## Example Usage
 
@@ -3034,7 +3088,7 @@ async updateCustomerInformation(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -3281,7 +3335,7 @@ async issueInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -3294,9 +3348,9 @@ const body: IssueInvoiceRequest = {
 
 try {
   const { result, ...httpResponse } = await invoicesController.issueInvoice(
-  uid,
-  body
-);
+    uid,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

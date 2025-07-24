@@ -44,7 +44,7 @@ async createSegment(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SegmentResponse](../../doc/models/segment-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SegmentResponse`](../../doc/models/segment-response.md).
 
 ## Example Usage
 
@@ -74,10 +74,10 @@ const body: CreateSegmentRequest = {
 
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.createSegment(
-  componentId,
-  pricePointId,
-  body
-);
+    componentId,
+    pricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -106,11 +106,19 @@ You may specify component and/or price point by using either the numeric ID or t
 
 ```ts
 async listSegmentsForPricePoint(
-  componentId: string,
-  pricePointId: string,
-  page?: number,
-  perPage?: number,
-  filter?: ListSegmentsFilter,
+  {
+    componentId,
+    pricePointId,
+    page,
+    perPage,
+    filter,
+  }: {
+    componentId: string;
+    pricePointId: string;
+    page?: number;
+    perPage?: number;
+    filter?: ListSegmentsFilter;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSegmentsResponse>>
 ```
@@ -128,7 +136,7 @@ async listSegmentsForPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSegmentsResponse](../../doc/models/list-segments-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSegmentsResponse`](../../doc/models/list-segments-response.md).
 
 ## Example Usage
 
@@ -191,7 +199,7 @@ async updateSegment(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SegmentResponse](../../doc/models/segment-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SegmentResponse`](../../doc/models/segment-response.md).
 
 ## Example Usage
 
@@ -204,10 +212,10 @@ const id = 60;
 
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.updateSegment(
-  componentId,
-  pricePointId,
-  id
-);
+    componentId,
+    pricePointId,
+    id
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -265,10 +273,10 @@ const id = 60;
 
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.deleteSegment(
-  componentId,
-  pricePointId,
-  id
-);
+    componentId,
+    pricePointId,
+    id
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -315,7 +323,7 @@ async bulkCreateSegments(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSegmentsResponse](../../doc/models/list-segments-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSegmentsResponse`](../../doc/models/list-segments-response.md).
 
 ## Example Usage
 
@@ -326,9 +334,9 @@ const pricePointId = 'price_point_id8';
 
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.bulkCreateSegments(
-  componentId,
-  pricePointId
-);
+    componentId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -375,7 +383,7 @@ async bulkUpdateSegments(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSegmentsResponse](../../doc/models/list-segments-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSegmentsResponse`](../../doc/models/list-segments-response.md).
 
 ## Example Usage
 
@@ -386,9 +394,9 @@ const pricePointId = 'price_point_id8';
 
 try {
   const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.bulkUpdateSegments(
-  componentId,
-  pricePointId
-);
+    componentId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

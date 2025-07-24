@@ -42,7 +42,7 @@ async readSiteStats(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SiteSummary](../../doc/models/site-summary.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SiteSummary`](../../doc/models/site-summary.md).
 
 ## Example Usage
 
@@ -103,7 +103,7 @@ async readMrr(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [MRRResponse](../../doc/models/mrr-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`MRRResponse`](../../doc/models/mrr-response.md).
 
 ## Example Usage
 
@@ -172,10 +172,17 @@ Usage includes revenue from:
 
 ```ts
 async listMrrMovements(
-  subscriptionId?: number,
-  page?: number,
-  perPage?: number,
-  direction?: SortingDirection,
+  {
+    subscriptionId,
+    page,
+    perPage,
+    direction,
+  }: {
+    subscriptionId?: number;
+    page?: number;
+    perPage?: number;
+    direction?: SortingDirection;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListMRRResponse>>
 ```
@@ -192,7 +199,7 @@ async listMrrMovements(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListMRRResponse](../../doc/models/list-mrr-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListMRRResponse`](../../doc/models/list-mrr-response.md).
 
 ## Example Usage
 
@@ -275,11 +282,19 @@ This endpoint returns your site's current MRR, including plan and usage breakout
 
 ```ts
 async listMrrPerSubscription(
-  filter?: ListMrrFilter,
-  atTime?: string,
-  page?: number,
-  perPage?: number,
-  direction?: Direction,
+  {
+    filter,
+    atTime,
+    page,
+    perPage,
+    direction,
+  }: {
+    filter?: ListMrrFilter;
+    atTime?: string;
+    page?: number;
+    perPage?: number;
+    direction?: Direction;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionMRRResponse>>
 ```
@@ -297,7 +312,7 @@ async listMrrPerSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionMRRResponse](../../doc/models/subscription-mrr-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionMRRResponse`](../../doc/models/subscription-mrr-response.md).
 
 ## Example Usage
 

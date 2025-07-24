@@ -315,7 +315,7 @@ async createPaymentProfile(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentProfileResponse](../../doc/models/payment-profile-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentProfileResponse`](../../doc/models/payment-profile-response.md).
 
 ## Example Usage
 
@@ -387,9 +387,15 @@ This method will return all of the active `payment_profiles` for a Site, or for 
 
 ```ts
 async listPaymentProfiles(
-  page?: number,
-  perPage?: number,
-  customerId?: number,
+  {
+    page,
+    perPage,
+    customerId,
+  }: {
+    page?: number;
+    perPage?: number;
+    customerId?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaymentProfileResponse[]>>
 ```
@@ -405,7 +411,7 @@ async listPaymentProfiles(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentProfileResponse[]](../../doc/models/payment-profile-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentProfileResponse[]`](../../doc/models/payment-profile-response.md).
 
 ## Example Usage
 
@@ -547,7 +553,7 @@ async readPaymentProfile(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentProfileResponse](../../doc/models/payment-profile-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentProfileResponse`](../../doc/models/payment-profile-response.md).
 
 ## Example Usage
 
@@ -659,7 +665,7 @@ async updatePaymentProfile(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentProfileResponse](../../doc/models/payment-profile-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentProfileResponse`](../../doc/models/payment-profile-response.md).
 
 ## Example Usage
 
@@ -686,9 +692,9 @@ const body: UpdatePaymentProfileRequest = {
 
 try {
   const { result, ...httpResponse } = await paymentProfilesController.updatePaymentProfile(
-  paymentProfileId,
-  body
-);
+    paymentProfileId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -822,9 +828,9 @@ const paymentProfileId = 198;
 
 try {
   const { result, ...httpResponse } = await paymentProfilesController.deleteSubscriptionsPaymentProfile(
-  subscriptionId,
-  paymentProfileId
-);
+    subscriptionId,
+    paymentProfileId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -858,7 +864,7 @@ async verifyBankAccount(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BankAccountResponse](../../doc/models/bank-account-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BankAccountResponse`](../../doc/models/bank-account-response.md).
 
 ## Example Usage
 
@@ -874,9 +880,9 @@ const body: BankAccountVerificationRequest = {
 
 try {
   const { result, ...httpResponse } = await paymentProfilesController.verifyBankAccount(
-  bankAccountId,
-  body
-);
+    bankAccountId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -958,9 +964,9 @@ const paymentProfileId = 198;
 
 try {
   const { result, ...httpResponse } = await paymentProfilesController.deleteSubscriptionGroupPaymentProfile(
-  uid,
-  paymentProfileId
-);
+    uid,
+    paymentProfileId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -996,7 +1002,7 @@ async changeSubscriptionDefaultPaymentProfile(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentProfileResponse](../../doc/models/payment-profile-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentProfileResponse`](../../doc/models/payment-profile-response.md).
 
 ## Example Usage
 
@@ -1007,9 +1013,9 @@ const paymentProfileId = 198;
 
 try {
   const { result, ...httpResponse } = await paymentProfilesController.changeSubscriptionDefaultPaymentProfile(
-  subscriptionId,
-  paymentProfileId
-);
+    subscriptionId,
+    paymentProfileId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1083,7 +1089,7 @@ async changeSubscriptionGroupDefaultPaymentProfile(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentProfileResponse](../../doc/models/payment-profile-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentProfileResponse`](../../doc/models/payment-profile-response.md).
 
 ## Example Usage
 
@@ -1094,9 +1100,9 @@ const paymentProfileId = 198;
 
 try {
   const { result, ...httpResponse } = await paymentProfilesController.changeSubscriptionGroupDefaultPaymentProfile(
-  uid,
-  paymentProfileId
-);
+    uid,
+    paymentProfileId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1167,7 +1173,7 @@ async readOneTimeToken(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [GetOneTimeTokenRequest](../../doc/models/get-one-time-token-request.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`GetOneTimeTokenRequest`](../../doc/models/get-one-time-token-request.md).
 
 ## Example Usage
 

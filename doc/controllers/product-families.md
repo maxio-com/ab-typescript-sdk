@@ -22,17 +22,31 @@ This method allows to retrieve a list of Products belonging to a Product Family.
 
 ```ts
 async listProductsForProductFamily(
-  productFamilyId: string,
-  page?: number,
-  perPage?: number,
-  dateField?: BasicDateField,
-  filter?: ListProductsFilter,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  includeArchived?: boolean,
-  include?: ListProductsInclude,
+  {
+    productFamilyId,
+    page,
+    perPage,
+    dateField,
+    filter,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    includeArchived,
+    include,
+  }: {
+    productFamilyId: string;
+    page?: number;
+    perPage?: number;
+    dateField?: BasicDateField;
+    filter?: ListProductsFilter;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+    includeArchived?: boolean;
+    include?: ListProductsInclude;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductResponse[]>>
 ```
@@ -56,7 +70,7 @@ async listProductsForProductFamily(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse[]](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse[]`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -216,7 +230,7 @@ async createProductFamily(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductFamilyResponse](../../doc/models/product-family-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse`](../../doc/models/product-family-response.md).
 
 ## Example Usage
 
@@ -267,11 +281,19 @@ This method allows to retrieve a list of Product Families for a site.
 
 ```ts
 async listProductFamilies(
-  dateField?: BasicDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
+  {
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+  }: {
+    dateField?: BasicDateField;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductFamilyResponse[]>>
 ```
@@ -289,7 +311,7 @@ async listProductFamilies(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductFamilyResponse[]](../../doc/models/product-family-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse[]`](../../doc/models/product-family-response.md).
 
 ## Example Usage
 
@@ -362,7 +384,7 @@ async readProductFamily(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductFamilyResponse](../../doc/models/product-family-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse`](../../doc/models/product-family-response.md).
 
 ## Example Usage
 

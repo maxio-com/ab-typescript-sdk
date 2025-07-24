@@ -39,7 +39,7 @@ async readAccountBalances(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [AccountBalances](../../doc/models/account-balances.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`AccountBalances`](../../doc/models/account-balances.md).
 
 ## Example Usage
 
@@ -87,7 +87,7 @@ async createPrepayment(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CreatePrepaymentResponse](../../doc/models/create-prepayment-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CreatePrepaymentResponse`](../../doc/models/create-prepayment-response.md).
 
 ## Example Usage
 
@@ -105,9 +105,9 @@ const body: CreatePrepaymentRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.createPrepayment(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -147,10 +147,17 @@ This request will list a subscription's prepayments.
 
 ```ts
 async listPrepayments(
-  subscriptionId: number,
-  page?: number,
-  perPage?: number,
-  filter?: ListPrepaymentsFilter,
+  {
+    subscriptionId,
+    page,
+    perPage,
+    filter,
+  }: {
+    subscriptionId: number;
+    page?: number;
+    perPage?: number;
+    filter?: ListPrepaymentsFilter;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PrepaymentsResponse>>
 ```
@@ -167,7 +174,7 @@ async listPrepayments(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PrepaymentsResponse](../../doc/models/prepayments-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PrepaymentsResponse`](../../doc/models/prepayments-response.md).
 
 ## Example Usage
 
@@ -245,7 +252,7 @@ async issueServiceCredit(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ServiceCredit](../../doc/models/service-credit.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ServiceCredit`](../../doc/models/service-credit.md).
 
 ## Example Usage
 
@@ -260,9 +267,9 @@ const body: IssueServiceCreditRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.issueServiceCredit(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -330,9 +337,9 @@ const body: DeductServiceCreditRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.deductServiceCredit(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -376,7 +383,7 @@ async listServiceCredits(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListServiceCreditsResponse](../../doc/models/list-service-credits-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListServiceCreditsResponse`](../../doc/models/list-service-credits-response.md).
 
 ## Example Usage
 
@@ -389,10 +396,10 @@ const perPage = 50;
 
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.listServiceCredits(
-  subscriptionId,
-  page,
-  perPage
-);
+    subscriptionId,
+    page,
+    perPage
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -466,7 +473,7 @@ async refundPrepayment(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PrepaymentResponse](../../doc/models/prepayment-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PrepaymentResponse`](../../doc/models/prepayment-response.md).
 
 ## Example Usage
 
@@ -477,9 +484,9 @@ const prepaymentId = BigInt(228);
 
 try {
   const { result, ...httpResponse } = await subscriptionInvoiceAccountController.refundPrepayment(
-  subscriptionId,
-  prepaymentId
-);
+    subscriptionId,
+    prepaymentId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
