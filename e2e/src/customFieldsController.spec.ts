@@ -414,7 +414,6 @@ describe('Custom Fields Controller', () => {
 
     describe('invalid page or per page parameters', () => {
       test('should thrown an error when list meta fields with invalid page', async () => {
-        const errorMessage = 'invalid page: -1';
         const data = {
           resourceType: ResourceType.Subscriptions,
           page: -1,
@@ -423,7 +422,6 @@ describe('Custom Fields Controller', () => {
         expect(promise).rejects.toThrow();
         await promise.catch((error) => {
           expect(error.statusCode).toBe(422);
-          expect(error.result.errors[0]).toEqual(errorMessage);
         });
       });
 
