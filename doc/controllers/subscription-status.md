@@ -50,7 +50,7 @@ async retrySubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -234,7 +234,7 @@ async cancelSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -419,7 +419,7 @@ async resumeSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -427,7 +427,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 Liquid error: Value cannot be null. (Parameter 'key')try {
-  const { result, ...httpResponse } = Liquid error: Value cannot be null. (Parameter 'key')await subscriptionStatusController.resumeSubscription(subscriptionId);
+  const { result, ...httpResponse } = await subscriptionStatusController.resumeSubscription(Liquid error: Value cannot be null. (Parameter 'key')subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -580,7 +580,7 @@ async pauseSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -595,9 +595,9 @@ const body: PauseRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionStatusController.pauseSubscription(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -752,7 +752,7 @@ async updateAutomaticSubscriptionResumption(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -767,9 +767,9 @@ const body: PauseRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionStatusController.updateAutomaticSubscriptionResumption(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1087,7 +1087,7 @@ async reactivateSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1107,9 +1107,9 @@ const body: ReactivateSubscriptionRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionStatusController.reactivateSubscription(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1263,7 +1263,7 @@ async initiateDelayedCancellation(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [DelayedCancellationResponse](../../doc/models/delayed-cancellation-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md).
 
 ## Example Usage
 
@@ -1312,7 +1312,7 @@ async cancelDelayedCancellation(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [DelayedCancellationResponse](../../doc/models/delayed-cancellation-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md).
 
 ## Example Usage
 
@@ -1366,7 +1366,7 @@ async cancelDunning(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1435,7 +1435,7 @@ async previewRenewal(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [RenewalPreviewResponse](../../doc/models/renewal-preview-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`RenewalPreviewResponse`](../../doc/models/renewal-preview-response.md).
 
 ## Example Usage
 
@@ -1463,9 +1463,9 @@ const body: RenewalPreviewRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionStatusController.previewRenewal(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

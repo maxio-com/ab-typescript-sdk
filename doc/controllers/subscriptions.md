@@ -661,7 +661,7 @@ async createSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -859,22 +859,41 @@ Self-Service Page token for the subscriptions is not returned by default. If thi
 
 ```ts
 async listSubscriptions(
-  page?: number,
-  perPage?: number,
-  state?: SubscriptionStateFilter,
-  product?: number,
-  productPricePointId?: number,
-  coupon?: number,
-  couponCode?: string,
-  dateField?: SubscriptionDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  metadata?: Record<string, string>,
-  direction?: SortingDirection,
-  sort?: SubscriptionSort,
-  include?: SubscriptionListInclude[],
+  {
+    page,
+    perPage,
+    state,
+    product,
+    productPricePointId,
+    coupon,
+    couponCode,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    metadata,
+    direction,
+    sort,
+    include,
+  }: {
+    page?: number;
+    perPage?: number;
+    state?: SubscriptionStateFilter;
+    product?: number;
+    productPricePointId?: number;
+    coupon?: number;
+    couponCode?: string;
+    dateField?: SubscriptionDateField;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+    metadata?: Record<string, string>;
+    direction?: SortingDirection;
+    sort?: SubscriptionSort;
+    include?: SubscriptionListInclude[];
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse[]>>
 ```
@@ -903,7 +922,7 @@ async listSubscriptions(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse[]](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse[]`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -996,7 +1015,7 @@ async updateSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1012,9 +1031,9 @@ const body: UpdateSubscriptionRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionsController.updateSubscription(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1168,7 +1187,7 @@ async readSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1182,9 +1201,9 @@ const include: SubscriptionInclude[] = [
 
 try {
   const { result, ...httpResponse } = await subscriptionsController.readSubscription(
-  subscriptionId,
-  include
-);
+    subscriptionId,
+    include
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1393,9 +1412,9 @@ const body: OverrideSubscriptionRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionsController.overrideSubscription(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1433,7 +1452,7 @@ async findSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1489,7 +1508,7 @@ async purgeSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1505,10 +1524,10 @@ const cascade: SubscriptionPurgeType[] = [
 
 try {
   const { result, ...httpResponse } = await subscriptionsController.purgeSubscription(
-  subscriptionId,
-  ack,
-  cascade
-);
+    subscriptionId,
+    ack,
+    cascade
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1548,7 +1567,7 @@ async updatePrepaidSubscriptionConfiguration(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PrepaidConfigurationResponse](../../doc/models/prepaid-configuration-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PrepaidConfigurationResponse`](../../doc/models/prepaid-configuration-response.md).
 
 ## Example Usage
 
@@ -1566,9 +1585,9 @@ const body: UpsertPrepaidConfigurationRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionsController.updatePrepaidSubscriptionConfiguration(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -1644,7 +1663,7 @@ async previewSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionPreviewResponse](../../doc/models/subscription-preview-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionPreviewResponse`](../../doc/models/subscription-preview-response.md).
 
 ## Example Usage
 
@@ -1818,7 +1837,7 @@ async applyCouponsToSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -1834,10 +1853,10 @@ const body: AddCouponsRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionsController.applyCouponsToSubscription(
-  subscriptionId,
-  undefined,
-  body
-);
+    subscriptionId,
+    undefined,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -2029,7 +2048,7 @@ async removeCouponFromSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type string.
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type `string`.
 
 ## Example Usage
 
@@ -2125,7 +2144,7 @@ async activateSubscription(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 

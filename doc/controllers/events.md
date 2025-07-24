@@ -88,17 +88,31 @@ Here’s an example event for the `subscription_state_change` event:
 
 ```ts
 async listEvents(
-  page?: number,
-  perPage?: number,
-  sinceId?: bigint,
-  maxId?: bigint,
-  direction?: Direction,
-  filter?: EventKey[],
-  dateField?: ListEventsDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
+  {
+    page,
+    perPage,
+    sinceId,
+    maxId,
+    direction,
+    filter,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+  }: {
+    page?: number;
+    perPage?: number;
+    sinceId?: bigint;
+    maxId?: bigint;
+    direction?: Direction;
+    filter?: EventKey[];
+    dateField?: ListEventsDateField;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EventResponse[]>>
 ```
@@ -122,7 +136,7 @@ async listEvents(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EventResponse[]](../../doc/models/event-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EventResponse[]`](../../doc/models/event-response.md).
 
 ## Example Usage
 
@@ -229,13 +243,23 @@ For precise mappings from key to event_specific_data, refer to [Event](../../doc
 
 ```ts
 async listSubscriptionEvents(
-  subscriptionId: number,
-  page?: number,
-  perPage?: number,
-  sinceId?: bigint,
-  maxId?: bigint,
-  direction?: Direction,
-  filter?: EventKey[],
+  {
+    subscriptionId,
+    page,
+    perPage,
+    sinceId,
+    maxId,
+    direction,
+    filter,
+  }: {
+    subscriptionId: number;
+    page?: number;
+    perPage?: number;
+    sinceId?: bigint;
+    maxId?: bigint;
+    direction?: Direction;
+    filter?: EventKey[];
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EventResponse[]>>
 ```
@@ -255,7 +279,7 @@ async listSubscriptionEvents(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [EventResponse[]](../../doc/models/event-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EventResponse[]`](../../doc/models/event-response.md).
 
 ## Example Usage
 
@@ -333,12 +357,21 @@ Get a count of all the events for a given site by using this method.
 
 ```ts
 async readEventsCount(
-  page?: number,
-  perPage?: number,
-  sinceId?: bigint,
-  maxId?: bigint,
-  direction?: Direction,
-  filter?: EventKey[],
+  {
+    page,
+    perPage,
+    sinceId,
+    maxId,
+    direction,
+    filter,
+  }: {
+    page?: number;
+    perPage?: number;
+    sinceId?: bigint;
+    maxId?: bigint;
+    direction?: Direction;
+    filter?: EventKey[];
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CountResponse>>
 ```
@@ -357,7 +390,7 @@ async readEventsCount(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CountResponse](../../doc/models/count-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CountResponse`](../../doc/models/count-response.md).
 
 ## Example Usage
 

@@ -52,6 +52,8 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```ts
+import { Client, Environment } from '@maxio-com/advanced-billing-sdk';
+
 const client = new Client({
   basicAuthCredentials: {
     username: 'BasicAuthUserName',

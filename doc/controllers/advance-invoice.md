@@ -40,7 +40,7 @@ async issueAdvanceInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -53,9 +53,9 @@ const body: IssueAdvanceInvoiceRequest = {
 
 try {
   const { result, ...httpResponse } = await advanceInvoiceController.issueAdvanceInvoice(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -94,7 +94,7 @@ async readAdvanceInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -143,7 +143,7 @@ async voidAdvanceInvoice(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
 ## Example Usage
 

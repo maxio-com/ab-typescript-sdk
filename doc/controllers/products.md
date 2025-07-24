@@ -43,7 +43,7 @@ async createProduct(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -67,9 +67,9 @@ const body: CreateOrUpdateProductRequest = {
 
 try {
   const { result, ...httpResponse } = await productsController.createProduct(
-  productFamilyId,
-  body
-);
+    productFamilyId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -156,7 +156,7 @@ async readProduct(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -249,7 +249,7 @@ async updateProduct(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -345,7 +345,7 @@ async archiveProduct(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -434,7 +434,7 @@ async readProductByHandle(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -528,16 +528,29 @@ This method allows to retrieve a list of Products belonging to a Site.
 
 ```ts
 async listProducts(
-  dateField?: BasicDateField,
-  filter?: ListProductsFilter,
-  endDate?: string,
-  endDatetime?: string,
-  startDate?: string,
-  startDatetime?: string,
-  page?: number,
-  perPage?: number,
-  includeArchived?: boolean,
-  include?: ListProductsInclude,
+  {
+    dateField,
+    filter,
+    endDate,
+    endDatetime,
+    startDate,
+    startDatetime,
+    page,
+    perPage,
+    includeArchived,
+    include,
+  }: {
+    dateField?: BasicDateField;
+    filter?: ListProductsFilter;
+    endDate?: string;
+    endDatetime?: string;
+    startDate?: string;
+    startDatetime?: string;
+    page?: number;
+    perPage?: number;
+    includeArchived?: boolean;
+    include?: ListProductsInclude;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductResponse[]>>
 ```
@@ -560,7 +573,7 @@ async listProducts(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse[]](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse[]`](../../doc/models/product-response.md).
 
 ## Example Usage
 

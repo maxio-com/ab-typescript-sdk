@@ -91,7 +91,7 @@ async migrateSubscriptionProduct(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 
@@ -110,9 +110,9 @@ const body: SubscriptionProductMigrationRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionProductsController.migrateSubscriptionProduct(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -280,7 +280,7 @@ async previewSubscriptionProductMigration(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionMigrationPreviewResponse](../../doc/models/subscription-migration-preview-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionMigrationPreviewResponse`](../../doc/models/subscription-migration-preview-response.md).
 
 ## Example Usage
 
@@ -298,9 +298,9 @@ const body: SubscriptionMigrationPreviewRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionProductsController.previewSubscriptionProductMigration(
-  subscriptionId,
-  body
-);
+    subscriptionId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

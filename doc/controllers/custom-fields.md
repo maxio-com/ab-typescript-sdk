@@ -66,7 +66,7 @@ async createMetafields(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Metafield[]](../../doc/models/metafield.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Metafield[]`](../../doc/models/metafield.md).
 
 ## Example Usage
 
@@ -90,9 +90,9 @@ const body: CreateMetafieldsRequest = {
 
 try {
   const { result, ...httpResponse } = await customFieldsController.createMetafields(
-  resourceType,
-  body
-);
+    resourceType,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -147,11 +147,19 @@ This endpoint lists metafields associated with a site. The metafield description
 
 ```ts
 async listMetafields(
-  resourceType: ResourceType,
-  name?: string,
-  page?: number,
-  perPage?: number,
-  direction?: SortingDirection,
+  {
+    resourceType,
+    name,
+    page,
+    perPage,
+    direction,
+  }: {
+    resourceType: ResourceType;
+    name?: string;
+    page?: number;
+    perPage?: number;
+    direction?: SortingDirection;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListMetafieldsResponse>>
 ```
@@ -169,7 +177,7 @@ async listMetafields(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListMetafieldsResponse](../../doc/models/list-metafields-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListMetafieldsResponse`](../../doc/models/list-metafields-response.md).
 
 ## Example Usage
 
@@ -243,7 +251,7 @@ async updateMetafield(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Metafield[]](../../doc/models/metafield.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Metafield[]`](../../doc/models/metafield.md).
 
 ## Example Usage
 
@@ -364,7 +372,7 @@ async createMetadata(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Metadata[]](../../doc/models/metadata.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Metadata[]`](../../doc/models/metadata.md).
 
 ## Example Usage
 
@@ -388,10 +396,10 @@ const body: CreateMetadataRequest = {
 
 try {
   const { result, ...httpResponse } = await customFieldsController.createMetadata(
-  resourceType,
-  resourceId,
-  body
-);
+    resourceType,
+    resourceId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -419,10 +427,17 @@ This endpoint will also display the current stats of your metadata to use as a t
 
 ```ts
 async listMetadata(
-  resourceType: ResourceType,
-  resourceId: number,
-  page?: number,
-  perPage?: number,
+  {
+    resourceType,
+    resourceId,
+    page,
+    perPage,
+  }: {
+    resourceType: ResourceType;
+    resourceId: number;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaginatedMetadata>>
 ```
@@ -439,7 +454,7 @@ async listMetadata(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaginatedMetadata](../../doc/models/paginated-metadata.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaginatedMetadata`](../../doc/models/paginated-metadata.md).
 
 ## Example Usage
 
@@ -488,7 +503,7 @@ async updateMetadata(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Metadata[]](../../doc/models/metadata.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Metadata[]`](../../doc/models/metadata.md).
 
 ## Example Usage
 
@@ -499,9 +514,9 @@ const resourceId = 60;
 
 try {
   const { result, ...httpResponse } = await customFieldsController.updateMetadata(
-  resourceType,
-  resourceId
-);
+    resourceType,
+    resourceId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -578,9 +593,9 @@ const resourceId = 60;
 
 try {
   const { result, ...httpResponse } = await customFieldsController.deleteMetadata(
-  resourceType,
-  resourceId
-);
+    resourceType,
+    resourceId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -616,17 +631,31 @@ This endpoint will list the number of pages of metadata information that are con
 
 ```ts
 async listMetadataForResourceType(
-  resourceType: ResourceType,
-  page?: number,
-  perPage?: number,
-  dateField?: BasicDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  withDeleted?: boolean,
-  resourceIds?: number[],
-  direction?: SortingDirection,
+  {
+    resourceType,
+    page,
+    perPage,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    withDeleted,
+    resourceIds,
+    direction,
+  }: {
+    resourceType: ResourceType;
+    page?: number;
+    perPage?: number;
+    dateField?: BasicDateField;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+    withDeleted?: boolean;
+    resourceIds?: number[];
+    direction?: SortingDirection;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaginatedMetadata>>
 ```
@@ -650,7 +679,7 @@ async listMetadataForResourceType(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaginatedMetadata](../../doc/models/paginated-metadata.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaginatedMetadata`](../../doc/models/paginated-metadata.md).
 
 ## Example Usage
 

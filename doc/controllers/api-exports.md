@@ -29,9 +29,15 @@ Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123
 
 ```ts
 async listExportedProformaInvoices(
-  batchId: string,
-  perPage?: number,
-  page?: number,
+  {
+    batchId,
+    perPage,
+    page,
+  }: {
+    batchId: string;
+    perPage?: number;
+    page?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProformaInvoice[]>>
 ```
@@ -47,7 +53,7 @@ async listExportedProformaInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProformaInvoice[]](../../doc/models/proforma-invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice[]`](../../doc/models/proforma-invoice.md).
 
 ## Example Usage
 
@@ -85,9 +91,15 @@ Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per
 
 ```ts
 async listExportedInvoices(
-  batchId: string,
-  perPage?: number,
-  page?: number,
+  {
+    batchId,
+    perPage,
+    page,
+  }: {
+    batchId: string;
+    perPage?: number;
+    page?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Invoice[]>>
 ```
@@ -103,7 +115,7 @@ async listExportedInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice[]](../../doc/models/invoice.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice[]`](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -141,9 +153,15 @@ Example: `GET https://{subdomain}.chargify.com/api_exports/subscriptions/123/row
 
 ```ts
 async listExportedSubscriptions(
-  batchId: string,
-  perPage?: number,
-  page?: number,
+  {
+    batchId,
+    perPage,
+    page,
+  }: {
+    batchId: string;
+    perPage?: number;
+    page?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Subscription[]>>
 ```
@@ -159,7 +177,7 @@ async listExportedSubscriptions(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Subscription[]](../../doc/models/subscription.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Subscription[]`](../../doc/models/subscription.md).
 
 ## Example Usage
 
@@ -209,7 +227,7 @@ async exportProformaInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BatchJobResponse](../../doc/models/batch-job-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
 ## Example Usage
 
@@ -252,7 +270,7 @@ async exportInvoices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BatchJobResponse](../../doc/models/batch-job-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
 ## Example Usage
 
@@ -295,7 +313,7 @@ async exportSubscriptions(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BatchJobResponse](../../doc/models/batch-job-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
 ## Example Usage
 
@@ -339,7 +357,7 @@ async readProformaInvoicesExport(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BatchJobResponse](../../doc/models/batch-job-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
 ## Example Usage
 
@@ -385,7 +403,7 @@ async readInvoicesExport(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BatchJobResponse](../../doc/models/batch-job-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
 ## Example Usage
 
@@ -431,7 +449,7 @@ async readSubscriptionsExport(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BatchJobResponse](../../doc/models/batch-job-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
 ## Example Usage
 

@@ -62,7 +62,7 @@ async createCustomer(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerResponse](../../doc/models/customer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
 ## Example Usage
 
@@ -160,15 +160,27 @@ To retrieve a single, exact match by reference, please use the [lookup endpoint]
 
 ```ts
 async listCustomers(
-  direction?: SortingDirection,
-  page?: number,
-  perPage?: number,
-  dateField?: BasicDateField,
-  startDate?: string,
-  endDate?: string,
-  startDatetime?: string,
-  endDatetime?: string,
-  q?: string,
+  {
+    direction,
+    page,
+    perPage,
+    dateField,
+    startDate,
+    endDate,
+    startDatetime,
+    endDatetime,
+    q,
+  }: {
+    direction?: SortingDirection;
+    page?: number;
+    perPage?: number;
+    dateField?: BasicDateField;
+    startDate?: string;
+    endDate?: string;
+    startDatetime?: string;
+    endDatetime?: string;
+    q?: string;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CustomerResponse[]>>
 ```
@@ -190,7 +202,7 @@ async listCustomers(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerResponse[]](../../doc/models/customer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse[]`](../../doc/models/customer-response.md).
 
 ## Example Usage
 
@@ -318,7 +330,7 @@ async readCustomer(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerResponse](../../doc/models/customer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
 ## Example Usage
 
@@ -360,7 +372,7 @@ async updateCustomer(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerResponse](../../doc/models/customer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
 ## Example Usage
 
@@ -377,9 +389,9 @@ const body: UpdateCustomerRequest = {
 
 try {
   const { result, ...httpResponse } = await customersController.updateCustomer(
-  id,
-  body
-);
+    id,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -489,7 +501,7 @@ async readCustomerByReference(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerResponse](../../doc/models/customer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
 ## Example Usage
 
@@ -529,7 +541,7 @@ async listCustomerSubscriptions(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionResponse[]](../../doc/models/subscription-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse[]`](../../doc/models/subscription-response.md).
 
 ## Example Usage
 

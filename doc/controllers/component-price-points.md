@@ -49,7 +49,7 @@ async promoteComponentPricePointToDefault(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentResponse](../../doc/models/component-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
 ## Example Usage
 
@@ -60,9 +60,9 @@ const pricePointId = 10;
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.promoteComponentPricePointToDefault(
-  componentId,
-  pricePointId
-);
+    componentId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -129,7 +129,7 @@ async createComponentPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -158,9 +158,9 @@ const body: CreateComponentPricePointRequest = {
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.createComponentPricePoint(
-  componentId,
-  body
-);
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -190,11 +190,19 @@ If the price point is set to `use_site_exchange_rate: true`, it will return pric
 
 ```ts
 async listComponentPricePoints(
-  componentId: number,
-  currencyPrices?: boolean,
-  page?: number,
-  perPage?: number,
-  filterType?: PricePointType[],
+  {
+    componentId,
+    currencyPrices,
+    page,
+    perPage,
+    filterType,
+  }: {
+    componentId: number;
+    currencyPrices?: boolean;
+    page?: number;
+    perPage?: number;
+    filterType?: PricePointType[];
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
@@ -212,7 +220,7 @@ async listComponentPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointsResponse](../../doc/models/component-price-points-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md).
 
 ## Example Usage
 
@@ -307,7 +315,7 @@ async bulkCreateComponentPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointsResponse](../../doc/models/component-price-points-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md).
 
 ## Example Usage
 
@@ -354,9 +362,9 @@ const body: CreateComponentPricePointsRequest = {
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.bulkCreateComponentPricePoints(
-  componentId,
-  body
-);
+    componentId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -453,7 +461,7 @@ async updateComponentPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -485,10 +493,10 @@ const body: UpdateComponentPricePointRequest = {
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.updateComponentPricePoint(
-  componentId,
-  pricePointId,
-  body
-);
+    componentId,
+    pricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -530,7 +538,7 @@ async readComponentPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -541,9 +549,9 @@ const pricePointId: ReadComponentPricePointPricePointId = 188;
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.readComponentPricePoint(
-  componentId,
-  pricePointId
-);
+    componentId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -577,7 +585,7 @@ async archiveComponentPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -588,9 +596,9 @@ const pricePointId: ArchiveComponentPricePointPricePointId = 188;
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.archiveComponentPricePoint(
-  componentId,
-  pricePointId
-);
+    componentId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -664,7 +672,7 @@ async unarchiveComponentPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentPricePointResponse](../../doc/models/component-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
 ## Example Usage
 
@@ -675,9 +683,9 @@ const pricePointId = 10;
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.unarchiveComponentPricePoint(
-  componentId,
-  pricePointId
-);
+    componentId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -749,7 +757,7 @@ async createCurrencyPrices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentCurrencyPricesResponse](../../doc/models/component-currency-prices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md).
 
 ## Example Usage
 
@@ -773,9 +781,9 @@ const body: CreateCurrencyPricesRequest = {
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.createCurrencyPrices(
-  pricePointId,
-  body
-);
+    pricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -834,7 +842,7 @@ async updateCurrencyPrices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ComponentCurrencyPricesResponse](../../doc/models/component-currency-prices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md).
 
 ## Example Usage
 
@@ -856,9 +864,9 @@ const body: UpdateCurrencyPricesRequest = {
 
 try {
   const { result, ...httpResponse } = await componentPricePointsController.updateCurrencyPrices(
-  pricePointId,
-  body
-);
+    pricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -899,11 +907,19 @@ This method allows to retrieve a list of Components Price Points belonging to a 
 
 ```ts
 async listAllComponentPricePoints(
-  include?: ListComponentsPricePointsInclude,
-  page?: number,
-  perPage?: number,
-  direction?: SortingDirection,
-  filter?: ListPricePointsFilter,
+  {
+    include,
+    page,
+    perPage,
+    direction,
+    filter,
+  }: {
+    include?: ListComponentsPricePointsInclude;
+    page?: number;
+    perPage?: number;
+    direction?: SortingDirection;
+    filter?: ListPricePointsFilter;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListComponentsPricePointsResponse>>
 ```
@@ -921,7 +937,7 @@ async listAllComponentPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListComponentsPricePointsResponse](../../doc/models/list-components-price-points-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListComponentsPricePointsResponse`](../../doc/models/list-components-price-points-response.md).
 
 ## Example Usage
 

@@ -29,11 +29,19 @@ Access to the Sales Commission API endpoints is available to users with financia
 
 ```ts
 async listSalesCommissionSettings(
-  sellerId: string,
-  authorization?: string,
-  liveMode?: boolean,
-  page?: number,
-  perPage?: number,
+  {
+    sellerId,
+    authorization,
+    liveMode,
+    page,
+    perPage,
+  }: {
+    sellerId: string;
+    authorization?: string;
+    liveMode?: boolean;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SaleRepSettings[]>>
 ```
@@ -51,7 +59,7 @@ async listSalesCommissionSettings(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SaleRepSettings[]](../../doc/models/sale-rep-settings.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SaleRepSettings[]`](../../doc/models/sale-rep-settings.md).
 
 ## Example Usage
 
@@ -124,11 +132,19 @@ Access to the Sales Commission API endpoints is available to users with financia
 
 ```ts
 async listSalesReps(
-  sellerId: string,
-  authorization?: string,
-  liveMode?: boolean,
-  page?: number,
-  perPage?: number,
+  {
+    sellerId,
+    authorization,
+    liveMode,
+    page,
+    perPage,
+  }: {
+    sellerId: string;
+    authorization?: string;
+    liveMode?: boolean;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSaleRepItem[]>>
 ```
@@ -146,7 +162,7 @@ async listSalesReps(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSaleRepItem[]](../../doc/models/list-sale-rep-item.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSaleRepItem[]`](../../doc/models/list-sale-rep-item.md).
 
 ## Example Usage
 
@@ -292,7 +308,7 @@ async readSalesRep(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SaleRep](../../doc/models/sale-rep.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SaleRep`](../../doc/models/sale-rep.md).
 
 ## Example Usage
 
@@ -309,13 +325,13 @@ const perPage = 100;
 
 try {
   const { result, ...httpResponse } = await salesCommissionsController.readSalesRep(
-  sellerId,
-  salesRepId,
-  authorization,
-  undefined,
-  page,
-  perPage
-);
+    sellerId,
+    salesRepId,
+    authorization,
+    undefined,
+    page,
+    perPage
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

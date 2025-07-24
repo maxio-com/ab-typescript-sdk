@@ -49,7 +49,7 @@ async createOffer(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [OfferResponse](../../doc/models/offer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OfferResponse`](../../doc/models/offer-response.md).
 
 ## Example Usage
 
@@ -140,9 +140,15 @@ This endpoint will list offers for a site.
 
 ```ts
 async listOffers(
-  page?: number,
-  perPage?: number,
-  includeArchived?: boolean,
+  {
+    page,
+    perPage,
+    includeArchived,
+  }: {
+    page?: number;
+    perPage?: number;
+    includeArchived?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListOffersResponse>>
 ```
@@ -158,7 +164,7 @@ async listOffers(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListOffersResponse](../../doc/models/list-offers-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListOffersResponse`](../../doc/models/list-offers-response.md).
 
 ## Example Usage
 
@@ -263,7 +269,7 @@ async readOffer(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [OfferResponse](../../doc/models/offer-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OfferResponse`](../../doc/models/offer-response.md).
 
 ## Example Usage
 

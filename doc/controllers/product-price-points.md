@@ -45,7 +45,7 @@ async createProductPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductPricePointResponse](../../doc/models/product-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
 ## Example Usage
 
@@ -72,9 +72,9 @@ const body: CreateProductPricePointRequest = {
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.createProductPricePoint(
-  productId,
-  body
-);
+    productId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -125,12 +125,21 @@ Use this endpoint to retrieve a list of product price points.
 
 ```ts
 async listProductPricePoints(
-  productId: ListProductPricePointsInputProductId,
-  page?: number,
-  perPage?: number,
-  currencyPrices?: boolean,
-  filterType?: PricePointType[],
-  archived?: boolean,
+  {
+    productId,
+    page,
+    perPage,
+    currencyPrices,
+    filterType,
+    archived,
+  }: {
+    productId: ListProductPricePointsInputProductId;
+    page?: number;
+    perPage?: number;
+    currencyPrices?: boolean;
+    filterType?: PricePointType[];
+    archived?: boolean;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
@@ -149,7 +158,7 @@ async listProductPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListProductPricePointsResponse](../../doc/models/list-product-price-points-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProductPricePointsResponse`](../../doc/models/list-product-price-points-response.md).
 
 ## Example Usage
 
@@ -228,7 +237,7 @@ async updateProductPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductPricePointResponse](../../doc/models/product-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
 ## Example Usage
 
@@ -246,10 +255,10 @@ const body: UpdateProductPricePointRequest = {
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.updateProductPricePoint(
-  productId,
-  pricePointId,
-  body
-);
+    productId,
+    pricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -312,7 +321,7 @@ async readProductPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductPricePointResponse](../../doc/models/product-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
 ## Example Usage
 
@@ -323,9 +332,9 @@ const pricePointId: ReadProductPricePointPricePointId = 188;
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.readProductPricePoint(
-  productId,
-  pricePointId
-);
+    productId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -386,7 +395,7 @@ async archiveProductPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductPricePointResponse](../../doc/models/product-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
 ## Example Usage
 
@@ -397,9 +406,9 @@ const pricePointId: ArchiveProductPricePointPricePointId = 188;
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.archiveProductPricePoint(
-  productId,
-  pricePointId
-);
+    productId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -466,7 +475,7 @@ async unarchiveProductPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductPricePointResponse](../../doc/models/product-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
 ## Example Usage
 
@@ -477,9 +486,9 @@ const pricePointId = 10;
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.unarchiveProductPricePoint(
-  productId,
-  pricePointId
-);
+    productId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -542,7 +551,7 @@ async promoteProductPricePointToDefault(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ProductResponse](../../doc/models/product-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
 ## Example Usage
 
@@ -553,9 +562,9 @@ const pricePointId = 10;
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.promoteProductPricePointToDefault(
-  productId,
-  pricePointId
-);
+    productId,
+    pricePointId
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -642,7 +651,7 @@ async bulkCreateProductPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [BulkCreateProductPricePointsResponse](../../doc/models/bulk-create-product-price-points-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BulkCreateProductPricePointsResponse`](../../doc/models/bulk-create-product-price-points-response.md).
 
 ## Example Usage
 
@@ -686,9 +695,9 @@ const body: BulkCreateProductPricePointsRequest = {
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.bulkCreateProductPricePoints(
-  productId,
-  body
-);
+    productId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -761,7 +770,7 @@ async createProductCurrencyPrices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CurrencyPricesResponse](../../doc/models/currency-prices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md).
 
 ## Example Usage
 
@@ -790,9 +799,9 @@ const body: CreateProductCurrencyPricesRequest = {
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.createProductCurrencyPrices(
-  productPricePointId,
-  body
-);
+    productPricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -853,7 +862,7 @@ async updateProductCurrencyPrices(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CurrencyPricesResponse](../../doc/models/currency-prices-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md).
 
 ## Example Usage
 
@@ -875,9 +884,9 @@ const body: UpdateCurrencyPricesRequest = {
 
 try {
   const { result, ...httpResponse } = await productPricePointsController.updateProductCurrencyPrices(
-  productPricePointId,
-  body
-);
+    productPricePointId,
+    body
+  );
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -918,11 +927,19 @@ This method allows retrieval of a list of Products Price Points belonging to a S
 
 ```ts
 async listAllProductPricePoints(
-  direction?: SortingDirection,
-  filter?: ListPricePointsFilter,
-  include?: ListProductsPricePointsInclude,
-  page?: number,
-  perPage?: number,
+  {
+    direction,
+    filter,
+    include,
+    page,
+    perPage,
+  }: {
+    direction?: SortingDirection;
+    filter?: ListPricePointsFilter;
+    include?: ListProductsPricePointsInclude;
+    page?: number;
+    perPage?: number;
+  },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
@@ -940,7 +957,7 @@ async listAllProductPricePoints(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListProductPricePointsResponse](../../doc/models/list-product-price-points-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProductPricePointsResponse`](../../doc/models/list-product-price-points-response.md).
 
 ## Example Usage
 
