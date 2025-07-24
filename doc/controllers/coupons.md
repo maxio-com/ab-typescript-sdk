@@ -61,7 +61,7 @@ async createCoupon(
 
 ## Response Type
 
-[`CouponResponse`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -136,15 +136,15 @@ async listCouponsForProductFamily(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productFamilyId` | `number` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `30`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `30`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListCouponsFilter \| undefined`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CouponResponse[]`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse[]](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -301,7 +301,7 @@ async findCoupon(
 
 ## Response Type
 
-[`CouponResponse`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -354,7 +354,7 @@ async readCoupon(
 
 ## Response Type
 
-[`CouponResponse`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -440,7 +440,7 @@ async updateCoupon(
 
 ## Response Type
 
-[`CouponResponse`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -547,7 +547,7 @@ async archiveCoupon(
 
 ## Response Type
 
-[`CouponResponse`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -621,15 +621,15 @@ async listCoupons(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `30`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `30`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListCouponsFilter \| undefined`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
 | `currencyPrices` | `boolean \| undefined` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CouponResponse[]`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse[]](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -738,7 +738,7 @@ async readCouponUsage(
 
 ## Response Type
 
-[`CouponUsage[]`](../../doc/models/coupon-usage.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponUsage[]](../../doc/models/coupon-usage.md).
 
 ## Example Usage
 
@@ -839,7 +839,7 @@ async validateCoupon(
 
 ## Response Type
 
-[`CouponResponse`](../../doc/models/coupon-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponResponse](../../doc/models/coupon-response.md).
 
 ## Example Usage
 
@@ -918,7 +918,7 @@ async createOrUpdateCouponCurrencyPrices(
 
 ## Response Type
 
-[`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponCurrencyResponse](../../doc/models/coupon-currency-response.md).
 
 ## Example Usage
 
@@ -1021,7 +1021,7 @@ async createCouponSubcodes(
 
 ## Response Type
 
-[`CouponSubcodesResponse`](../../doc/models/coupon-subcodes-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponSubcodesResponse](../../doc/models/coupon-subcodes-response.md).
 
 ## Example Usage
 
@@ -1082,13 +1082,13 @@ async listCouponSubcodes(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `couponId` | `number` | Template, Required | The Advanced Billing id of the coupon |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CouponSubcodes`](../../doc/models/coupon-subcodes.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponSubcodes](../../doc/models/coupon-subcodes.md).
 
 ## Example Usage
 
@@ -1173,7 +1173,7 @@ async updateCouponSubcodes(
 
 ## Response Type
 
-[`CouponSubcodesResponse`](../../doc/models/coupon-subcodes-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CouponSubcodesResponse](../../doc/models/coupon-subcodes-response.md).
 
 ## Example Usage
 
@@ -1247,7 +1247,7 @@ async deleteCouponSubcode(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 

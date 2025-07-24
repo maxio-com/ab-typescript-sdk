@@ -13,7 +13,10 @@ import {
   Schema,
   string,
 } from '../schema';
-import { MetafieldEnum, metafieldEnumSchema } from './containers/metafieldEnum';
+import {
+  MetafieldEnum,
+  metafieldEnumSchema,
+} from './containers/metafieldEnum';
 import { MetafieldInput, metafieldInputSchema } from './metafieldInput';
 import { MetafieldScope, metafieldScopeSchema } from './metafieldScope';
 

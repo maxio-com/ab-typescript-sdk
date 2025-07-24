@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `coupon` | [`CouponPayload \| undefined`](../../doc/models/coupon-payload.md) | Optional | - |
-| `restrictedProducts` | `Record<string, boolean> \| undefined` | Optional | An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product |
-| `restrictedComponents` | `Record<string, boolean> \| undefined` | Optional | An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component |
+| `restrictedProducts` | `Record<string, boolean> \| undefined` | Optional | An object where the keys are product IDs or handles (prefixed with 'handle:'), and the values are booleans indicating if the coupon should be applicable to the product |
+| `restrictedComponents` | `Record<string, boolean> \| undefined` | Optional | An object where the keys are component IDs or handles (prefixed with 'handle:'), and the values are booleans indicating if the coupon should be applicable to the component |
 
 ## Example (as JSON)
 

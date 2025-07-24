@@ -39,6 +39,8 @@ export interface Component {
   productFamilyId?: number;
   /** The name of the Product Family to which the Component belongs */
   productFamilyName?: string;
+  /** The handle of the Product Family to which the Component belongs */
+  productFamilyHandle?: string;
   /** deprecated - use unit_price instead */
   pricePerUnitInCents?: bigint | null;
   /** A handle for the component type */
@@ -104,6 +106,7 @@ export const componentSchema: Schema<Component> = expandoObject({
   unitPrice: ['unit_price', optional(nullable(string()))],
   productFamilyId: ['product_family_id', optional(number())],
   productFamilyName: ['product_family_name', optional(string())],
+  productFamilyHandle: ['product_family_handle', optional(string())],
   pricePerUnitInCents: [
     'price_per_unit_in_cents',
     optional(nullable(bigint())),

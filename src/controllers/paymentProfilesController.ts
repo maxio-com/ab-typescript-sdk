@@ -463,6 +463,8 @@ export class PaymentProfilesController extends BaseController {
    * "id": 10089892,
    * "first_name": "Chester",
    * "last_name": "Tester",
+   * "created_at": "2025-01-01T00:00:00-05:00",
+   * "updated_at": "2025-01-01T00:00:00-05:00",
    * "customer_id": 14543792,
    * "current_vault": "bogus",
    * "vault_token": "0011223344",

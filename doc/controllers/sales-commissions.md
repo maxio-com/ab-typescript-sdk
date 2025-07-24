@@ -43,15 +43,15 @@ async listSalesCommissionSettings(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `sellerId` | `string` | Template, Required | The Chargify id of your seller account |
-| `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).<br>**Default**: `'Bearer <<apiKey>>'` |
+| `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).<br><br>**Default**: `'Bearer <<apiKey>>'` |
 | `liveMode` | `boolean \| undefined` | Query, Optional | This parameter indicates if records should be fetched from live mode sites. Default value is true. |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br>**Default**: `100` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br><br>**Default**: `100` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`SaleRepSettings[]`](../../doc/models/sale-rep-settings.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SaleRepSettings[]](../../doc/models/sale-rep-settings.md).
 
 ## Example Usage
 
@@ -138,15 +138,15 @@ async listSalesReps(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `sellerId` | `string` | Template, Required | The Chargify id of your seller account |
-| `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).<br>**Default**: `'Bearer <<apiKey>>'` |
+| `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).<br><br>**Default**: `'Bearer <<apiKey>>'` |
 | `liveMode` | `boolean \| undefined` | Query, Optional | This parameter indicates if records should be fetched from live mode sites. Default value is true. |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br>**Default**: `100` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br><br>**Default**: `100` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ListSaleRepItem[]`](../../doc/models/list-sale-rep-item.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSaleRepItem[]](../../doc/models/list-sale-rep-item.md).
 
 ## Example Usage
 
@@ -284,15 +284,15 @@ async readSalesRep(
 |  --- | --- | --- | --- |
 | `sellerId` | `string` | Template, Required | The Chargify id of your seller account |
 | `salesRepId` | `string` | Template, Required | The Advanced Billing id of sales rep. |
-| `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).<br>**Default**: `'Bearer <<apiKey>>'` |
+| `authorization` | `string \| undefined` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).<br><br>**Default**: `'Bearer <<apiKey>>'` |
 | `liveMode` | `boolean \| undefined` | Query, Optional | This parameter indicates if records should be fetched from live mode sites. Default value is true. |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br>**Default**: `100` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br><br>**Default**: `100` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`SaleRep`](../../doc/models/sale-rep.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SaleRep](../../doc/models/sale-rep.md).
 
 ## Example Usage
 

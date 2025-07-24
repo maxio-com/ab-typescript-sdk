@@ -26,6 +26,8 @@
 | `siteGatewaySettingId` | `number \| null \| undefined` | Optional | - |
 | `gatewayHandle` | `string \| null \| undefined` | Optional | - |
 | `paypalEmail` | `string \| undefined` | Optional | - |
+| `createdAt` | `string \| undefined` | Optional | A timestamp indicating when this payment profile was created |
+| `updatedAt` | `string \| undefined` | Optional | A timestamp indicating when this payment profile was last updated |
 
 ## Example (as JSON)
 

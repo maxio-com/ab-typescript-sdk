@@ -63,6 +63,10 @@ export interface BankAccountPaymentProfile {
   verified?: boolean;
   siteGatewaySettingId?: number | null;
   gatewayHandle?: string | null;
+  /** A timestamp indicating when this payment profile was created */
+  createdAt?: string;
+  /** A timestamp indicating when this payment profile was last updated */
+  updatedAt?: string;
   [key: string]: unknown;
 }
 
@@ -96,5 +100,7 @@ export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> 
       optional(nullable(number())),
     ],
     gatewayHandle: ['gateway_handle', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
   }
 );

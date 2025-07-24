@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionIds` | `number[] \| undefined` | Optional | Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`.<br>**Constraints**: *Minimum Items*: `1` |
+| `subscriptionIds` | `number[] \| undefined` | Optional | Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`.<br><br>**Constraints**: *Minimum Items*: `1` |
 
 ## Example (as JSON)
 

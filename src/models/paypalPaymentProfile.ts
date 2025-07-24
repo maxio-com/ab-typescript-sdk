@@ -45,6 +45,10 @@ export interface PaypalPaymentProfile {
   siteGatewaySettingId?: number | null;
   gatewayHandle?: string | null;
   paypalEmail?: string;
+  /** A timestamp indicating when this payment profile was created */
+  createdAt?: string;
+  /** A timestamp indicating when this payment profile was last updated */
+  updatedAt?: string;
   [key: string]: unknown;
 }
 
@@ -70,5 +74,7 @@ export const paypalPaymentProfileSchema: Schema<PaypalPaymentProfile> = expandoO
     ],
     gatewayHandle: ['gateway_handle', optional(nullable(string()))],
     paypalEmail: ['paypal_email', optional(string())],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
   }
 );

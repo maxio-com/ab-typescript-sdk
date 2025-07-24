@@ -30,6 +30,10 @@ import {
   listPrepaymentsFilterSchema,
 } from '../models/listPrepaymentsFilter';
 import {
+  ListServiceCreditsResponse,
+  listServiceCreditsResponseSchema,
+} from '../models/listServiceCreditsResponse';
+import {
   PrepaymentResponse,
   prepaymentResponseSchema,
 } from '../models/prepaymentResponse';
@@ -42,9 +46,14 @@ import {
   refundPrepaymentRequestSchema,
 } from '../models/refundPrepaymentRequest';
 import { ServiceCredit, serviceCreditSchema } from '../models/serviceCredit';
+import {
+  SortingDirection,
+  sortingDirectionSchema,
+} from '../models/sortingDirection';
 import { bigint, number, optional } from '../schema';
 import { BaseController } from './baseController';
 import { ApiError } from '@apimatic/core';
+import { ErrorListResponseError } from '../errors/errorListResponseError';
 import { RefundPrepaymentBaseErrorsResponseError } from '../errors/refundPrepaymentBaseErrorsResponseError';
 
 export class SubscriptionInvoiceAccountController extends BaseController {
@@ -217,6 +226,53 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     );
     req.authenticate([{ basicAuth: true }]);
     return req.call(requestOptions);
+  }
+
+  /**
+   * This request will list a subscription's service credits.
+   *
+   * @param subscriptionId  The Chargify id of the subscription
+   * @param page            Result records are organized in pages. By default, the first page of
+   *                                            results is displayed. The page parameter specifies a page number of
+   *                                            results to fetch. You can start navigating through the pages to consume
+   *                                            the results. You do this by passing in a page parameter. Retrieve the
+   *                                            next page by adding ?page=2 to the query string. If there are no
+   *                                            results to return, then an empty result set will be returned. Use in
+   *                                            query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each request.
+   *                                            Default value is 20. The maximum allowed values is 200; any per_page
+   *                                            value over 200 will be changed to 200. Use in query `per_page=200`.
+   * @param direction       Controls the order in which results are returned. Use in query
+   *                                            `direction=asc`.
+   * @return Response from the API call
+   */
+  async listServiceCredits(
+    subscriptionId: number,
+    page?: number,
+    perPage?: number,
+    direction?: SortingDirection,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ListServiceCreditsResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      subscriptionId: [subscriptionId, number()],
+      page: [page, optional(number())],
+      perPage: [perPage, optional(number())],
+      direction: [direction, optional(sortingDirectionSchema)],
+    });
+    req.query('page', mapped.page, commaPrefix);
+    req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credits/list.json`;
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
+    req.authenticate([{ basicAuth: true }]);
+    return req.callAsJson(listServiceCreditsResponseSchema, requestOptions);
   }
 
   /**

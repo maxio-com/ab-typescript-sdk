@@ -13,7 +13,10 @@ import {
   Schema,
   string,
 } from '../schema';
-import { UsageQuantity, usageQuantitySchema } from './containers/usageQuantity';
+import {
+  UsageQuantity,
+  usageQuantitySchema,
+} from './containers/usageQuantity';
 
 export interface Usage {
   id?: bigint;

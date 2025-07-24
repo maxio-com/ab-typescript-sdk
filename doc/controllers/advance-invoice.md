@@ -40,7 +40,7 @@ async issueAdvanceInvoice(
 
 ## Response Type
 
-[`Invoice`](../../doc/models/invoice.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -94,7 +94,7 @@ async readAdvanceInvoice(
 
 ## Response Type
 
-[`Invoice`](../../doc/models/invoice.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
 
 ## Example Usage
 
@@ -143,7 +143,7 @@ async voidAdvanceInvoice(
 
 ## Response Type
 
-[`Invoice`](../../doc/models/invoice.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [Invoice](../../doc/models/invoice.md).
 
 ## Example Usage
 

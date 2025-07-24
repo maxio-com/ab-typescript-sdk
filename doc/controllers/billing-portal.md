@@ -52,7 +52,7 @@ async enableBillingPortalForCustomer(
 
 ## Response Type
 
-[`CustomerResponse`](../../doc/models/customer-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerResponse](../../doc/models/customer-response.md).
 
 ## Example Usage
 
@@ -106,7 +106,7 @@ async readBillingPortalLink(
 
 ## Response Type
 
-[`PortalManagementLink`](../../doc/models/portal-management-link.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PortalManagementLink](../../doc/models/portal-management-link.md).
 
 ## Example Usage
 
@@ -178,7 +178,7 @@ async resendBillingPortalInvitation(
 
 ## Response Type
 
-[`ResentInvitation`](../../doc/models/resent-invitation.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ResentInvitation](../../doc/models/resent-invitation.md).
 
 ## Example Usage
 
@@ -242,7 +242,7 @@ async revokeBillingPortalAccess(
 
 ## Response Type
 
-[`RevokedInvitation`](../../doc/models/revoked-invitation.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [RevokedInvitation](../../doc/models/revoked-invitation.md).
 
 ## Example Usage
 

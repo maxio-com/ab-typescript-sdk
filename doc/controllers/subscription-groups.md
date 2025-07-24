@@ -49,7 +49,7 @@ async signupWithSubscriptionGroup(
 
 ## Response Type
 
-[`SubscriptionGroupSignupResponse`](../../doc/models/subscription-group-signup-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupSignupResponse](../../doc/models/subscription-group-signup-response.md).
 
 ## Example Usage
 
@@ -112,7 +112,7 @@ async createSubscriptionGroup(
 
 ## Response Type
 
-[`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupResponse](../../doc/models/subscription-group-response.md).
 
 ## Example Usage
 
@@ -190,14 +190,14 @@ async listSubscriptionGroups(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `include` | [`SubscriptionGroupsListInclude[] \| undefined`](../../doc/models/subscription-groups-list-include.md) | Query, Optional | A list of additional information to include in the response. The following values are supported:<br><br>- `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`ListSubscriptionGroupsResponse`](../../doc/models/list-subscription-groups-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [ListSubscriptionGroupsResponse](../../doc/models/list-subscription-groups-response.md).
 
 ## Example Usage
 
@@ -287,7 +287,7 @@ async readSubscriptionGroup(
 
 ## Response Type
 
-[`FullSubscriptionGroupResponse`](../../doc/models/full-subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [FullSubscriptionGroupResponse](../../doc/models/full-subscription-group-response.md).
 
 ## Example Usage
 
@@ -379,7 +379,7 @@ async updateSubscriptionGroupMembers(
 
 ## Response Type
 
-[`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupResponse](../../doc/models/subscription-group-response.md).
 
 ## Example Usage
 
@@ -460,7 +460,7 @@ async deleteSubscriptionGroup(
 
 ## Response Type
 
-[`DeleteSubscriptionGroupResponse`](../../doc/models/delete-subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [DeleteSubscriptionGroupResponse](../../doc/models/delete-subscription-group-response.md).
 
 ## Example Usage
 
@@ -517,7 +517,7 @@ async findSubscriptionGroup(
 
 ## Response Type
 
-[`FullSubscriptionGroupResponse`](../../doc/models/full-subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [FullSubscriptionGroupResponse](../../doc/models/full-subscription-group-response.md).
 
 ## Example Usage
 
@@ -619,7 +619,7 @@ async addSubscriptionToGroup(
 
 ## Response Type
 
-[`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SubscriptionGroupResponse](../../doc/models/subscription-group-response.md).
 
 ## Example Usage
 
@@ -698,7 +698,7 @@ async removeSubscriptionFromGroup(
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
