@@ -14,9 +14,9 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CurrencyPrice, currencyPriceSchema } from './currencyPrice';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+} from '../schema.js';
+import { CurrencyPrice, currencyPriceSchema } from './currencyPrice.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 
 export interface OfferItem {
   componentId?: number;

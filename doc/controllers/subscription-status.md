@@ -426,8 +426,8 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const subscriptionId = 222;
 
-Liquid error: Value cannot be null. (Parameter 'key')try {
-  const { result, ...httpResponse } = await subscriptionStatusController.resumeSubscription(Liquid error: Value cannot be null. (Parameter 'key')subscriptionId);
+try {
+  const { result, ...httpResponse } = await subscriptionStatusController.resumeSubscription(subscriptionId);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

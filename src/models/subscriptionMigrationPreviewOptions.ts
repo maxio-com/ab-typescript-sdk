@@ -12,8 +12,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { Proration, prorationSchema } from './proration';
+} from '../schema.js';
+import { Proration, prorationSchema } from './proration.js';
 
 export interface SubscriptionMigrationPreviewOptions {
   /** The ID of the target Product. Either a product_id or product_handle must be present. A Subscription can be migrated to another product for both the current Product Family and another Product Family. Note: Going to another Product Family, components will not be migrated as well. */

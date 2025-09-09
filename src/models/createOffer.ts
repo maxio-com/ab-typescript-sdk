@@ -12,11 +12,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CreateOfferComponent,
   createOfferComponentSchema,
-} from './createOfferComponent';
+} from './createOfferComponent.js';
 
 export interface CreateOffer {
   name: string;

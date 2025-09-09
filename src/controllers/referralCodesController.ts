@@ -4,14 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   ReferralValidationResponse,
   referralValidationResponseSchema,
-} from '../models/referralValidationResponse';
-import { string } from '../schema';
-import { BaseController } from './baseController';
-import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError';
+} from '../models/referralValidationResponse.js';
+import { string } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError.js';
 
 export class ReferralCodesController extends BaseController {
   /**

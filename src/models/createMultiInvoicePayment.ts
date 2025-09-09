@@ -11,19 +11,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CreateMultiInvoicePaymentAmount,
   createMultiInvoicePaymentAmountSchema,
-} from './containers/createMultiInvoicePaymentAmount';
+} from './containers/createMultiInvoicePaymentAmount.js';
 import {
   CreateInvoicePaymentApplication,
   createInvoicePaymentApplicationSchema,
-} from './createInvoicePaymentApplication';
+} from './createInvoicePaymentApplication.js';
 import {
   InvoicePaymentMethodType,
   invoicePaymentMethodTypeSchema,
-} from './invoicePaymentMethodType';
+} from './invoicePaymentMethodType.js';
 
 export interface CreateMultiInvoicePayment {
   /** A description to be attached to the payment. */

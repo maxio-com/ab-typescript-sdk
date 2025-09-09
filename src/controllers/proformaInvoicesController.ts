@@ -4,42 +4,42 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   CreateSignupProformaPreviewInclude,
   createSignupProformaPreviewIncludeSchema,
-} from '../models/createSignupProformaPreviewInclude';
+} from '../models/createSignupProformaPreviewInclude.js';
 import {
   CreateSubscriptionRequest,
   createSubscriptionRequestSchema,
-} from '../models/createSubscriptionRequest';
-import { Direction, directionSchema } from '../models/direction';
+} from '../models/createSubscriptionRequest.js';
+import { Direction, directionSchema } from '../models/direction.js';
 import {
   ListProformaInvoicesResponse,
   listProformaInvoicesResponseSchema,
-} from '../models/listProformaInvoicesResponse';
+} from '../models/listProformaInvoicesResponse.js';
 import {
   ProformaInvoice,
   proformaInvoiceSchema,
-} from '../models/proformaInvoice';
+} from '../models/proformaInvoice.js';
 import {
   ProformaInvoiceStatus,
   proformaInvoiceStatusSchema,
-} from '../models/proformaInvoiceStatus';
+} from '../models/proformaInvoiceStatus.js';
 import {
   SignupProformaPreviewResponse,
   signupProformaPreviewResponseSchema,
-} from '../models/signupProformaPreviewResponse';
+} from '../models/signupProformaPreviewResponse.js';
 import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
-} from '../models/voidInvoiceRequest';
-import { boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/voidInvoiceRequest.js';
+import { boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ProformaBadRequestErrorResponseError } from '../errors/proformaBadRequestErrorResponseError';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { ProformaBadRequestErrorResponseError } from '../errors/proformaBadRequestErrorResponseError.js';
 
 export class ProformaInvoicesController extends BaseController {
   /**

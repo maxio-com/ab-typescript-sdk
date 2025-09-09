@@ -13,10 +13,16 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
-import { CreateAllocation, createAllocationSchema } from './createAllocation';
-import { CreditType, creditTypeSchema } from './creditType';
+} from '../schema.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
+import {
+  CreateAllocation,
+  createAllocationSchema,
+} from './createAllocation.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
 
 export interface AllocateComponents {
   prorationUpgradeScheme?: string;

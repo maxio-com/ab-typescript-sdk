@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   ListPublicKeysMeta,
   listPublicKeysMetaSchema,
-} from './listPublicKeysMeta';
-import { PublicKey, publicKeySchema } from './publicKey';
+} from './listPublicKeysMeta.js';
+import { PublicKey, publicKeySchema } from './publicKey.js';
 
 export interface ListPublicKeysResponse {
   chargifyJsKeys?: PublicKey[];

@@ -14,14 +14,14 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { OveragePricing, overagePricingSchema } from './overagePricing';
-import { Price, priceSchema } from './price';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './expirationIntervalUnit.js';
+import { OveragePricing, overagePricingSchema } from './overagePricing.js';
+import { Price, priceSchema } from './price.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface CreatePrepaidUsageComponentPricePoint {
   name: string;

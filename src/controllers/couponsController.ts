@@ -4,33 +4,39 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   CouponCurrencyRequest,
   couponCurrencyRequestSchema,
-} from '../models/couponCurrencyRequest';
+} from '../models/couponCurrencyRequest.js';
 import {
   CouponCurrencyResponse,
   couponCurrencyResponseSchema,
-} from '../models/couponCurrencyResponse';
-import { CouponRequest, couponRequestSchema } from '../models/couponRequest';
-import { CouponResponse, couponResponseSchema } from '../models/couponResponse';
-import { CouponSubcodes, couponSubcodesSchema } from '../models/couponSubcodes';
+} from '../models/couponCurrencyResponse.js';
+import { CouponRequest, couponRequestSchema } from '../models/couponRequest.js';
+import {
+  CouponResponse,
+  couponResponseSchema,
+} from '../models/couponResponse.js';
+import {
+  CouponSubcodes,
+  couponSubcodesSchema,
+} from '../models/couponSubcodes.js';
 import {
   CouponSubcodesResponse,
   couponSubcodesResponseSchema,
-} from '../models/couponSubcodesResponse';
-import { CouponUsage, couponUsageSchema } from '../models/couponUsage';
+} from '../models/couponSubcodesResponse.js';
+import { CouponUsage, couponUsageSchema } from '../models/couponUsage.js';
 import {
   ListCouponsFilter,
   listCouponsFilterSchema,
-} from '../models/listCouponsFilter';
-import { array, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/listCouponsFilter.js';
+import { array, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ErrorStringMapResponseError } from '../errors/errorStringMapResponseError';
-import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { ErrorStringMapResponseError } from '../errors/errorStringMapResponseError.js';
+import { SingleStringErrorResponseError } from '../errors/singleStringErrorResponseError.js';
 
 export class CouponsController extends BaseController {
   /**

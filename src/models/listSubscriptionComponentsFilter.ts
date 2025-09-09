@@ -11,7 +11,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 export interface ListSubscriptionComponentsFilter {
   /** Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=EUR,USD`. */

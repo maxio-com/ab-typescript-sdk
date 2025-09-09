@@ -4,8 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, oneOf, Schema, string, validateAndMap } from '../../schema';
-import { CustomerError, customerErrorSchema } from '../customerError';
+import {
+  array,
+  isMappedValueValidForSchema,
+  oneOf,
+  Schema,
+  string,
+} from '../../schema.js';
+import { CustomerError, customerErrorSchema } from '../customerError.js';
 
 /** This is a container type for one-of types. */
 export type CustomerErrorResponseErrors = CustomerError | string[];
@@ -21,8 +27,7 @@ export namespace CustomerErrorResponseErrors {
    * This is Customer Error case.
    */
   export function isCustomerError(value: unknown): value is CustomerError {
-    const validationResult = validateAndMap(value, customerErrorSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, customerErrorSchema);
   }
 
   /**

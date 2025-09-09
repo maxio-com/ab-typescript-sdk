@@ -12,17 +12,17 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   AllocationPreviewItemPreviousQuantity,
   allocationPreviewItemPreviousQuantitySchema,
-} from './containers/allocationPreviewItemPreviousQuantity';
+} from './containers/allocationPreviewItemPreviousQuantity.js';
 import {
   AllocationPreviewItemQuantity,
   allocationPreviewItemQuantitySchema,
-} from './containers/allocationPreviewItemQuantity';
-import { CreditType, creditTypeSchema } from './creditType';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+} from './containers/allocationPreviewItemQuantity.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 
 export interface AllocationPreviewItem {
   componentId?: number;

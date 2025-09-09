@@ -14,11 +14,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceLineItemPricingDetail,
   invoiceLineItemPricingDetailSchema,
-} from './invoiceLineItemPricingDetail';
+} from './invoiceLineItemPricingDetail.js';
 
 export interface InvoiceLineItemEventData {
   uid?: string;

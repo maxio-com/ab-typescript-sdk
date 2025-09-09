@@ -11,8 +11,8 @@ import {
   nullable,
   Schema,
   string,
-} from '../schema';
-import { CreditNote, creditNoteSchema } from './creditNote';
+} from '../schema.js';
+import { CreditNote, creditNoteSchema } from './creditNote.js';
 
 /** Example schema for an `void_invoice` event */
 export interface VoidInvoiceEventData {

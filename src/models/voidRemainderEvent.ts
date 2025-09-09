@@ -4,13 +4,16 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, expandoObject, lazy, Schema, string } from '../schema';
-import { Invoice, invoiceSchema } from './invoice';
-import { InvoiceEventType, invoiceEventTypeSchema } from './invoiceEventType';
+import { bigint, expandoObject, lazy, Schema, string } from '../schema.js';
+import { Invoice, invoiceSchema } from './invoice.js';
+import {
+  InvoiceEventType,
+  invoiceEventTypeSchema,
+} from './invoiceEventType.js';
 import {
   VoidRemainderEventData,
   voidRemainderEventDataSchema,
-} from './voidRemainderEventData';
+} from './voidRemainderEventData.js';
 
 export interface VoidRemainderEvent {
   id: bigint;

@@ -4,8 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, oneOf, Schema, validateAndMap } from '../../schema';
-import { ResumeOptions, resumeOptionsSchema } from '../resumeOptions';
+import {
+  boolean,
+  isMappedValueValidForSchema,
+  oneOf,
+  Schema,
+} from '../../schema.js';
+import { ResumeOptions, resumeOptionsSchema } from '../resumeOptions.js';
 
 /** This is a container type for one-of types. */
 export type ReactivateSubscriptionRequestResume = boolean | ResumeOptions;
@@ -30,7 +35,6 @@ export namespace ReactivateSubscriptionRequestResume {
    * This is Resume Options case.
    */
   export function isResumeOptions(value: unknown): value is ResumeOptions {
-    const validationResult = validateAndMap(value, resumeOptionsSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, resumeOptionsSchema);
   }
 }

@@ -12,20 +12,20 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { PayerAttributes, payerAttributesSchema } from './payerAttributes';
+} from '../schema.js';
+import { PayerAttributes, payerAttributesSchema } from './payerAttributes.js';
 import {
   SubscriptionGroupBankAccount,
   subscriptionGroupBankAccountSchema,
-} from './subscriptionGroupBankAccount';
+} from './subscriptionGroupBankAccount.js';
 import {
   SubscriptionGroupCreditCard,
   subscriptionGroupCreditCardSchema,
-} from './subscriptionGroupCreditCard';
+} from './subscriptionGroupCreditCard.js';
 import {
   SubscriptionGroupSignupItem,
   subscriptionGroupSignupItemSchema,
-} from './subscriptionGroupSignupItem';
+} from './subscriptionGroupSignupItem.js';
 
 export interface SubscriptionGroupSignupFailureData {
   payerId?: number;

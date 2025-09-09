@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, optional, Schema } from '../schema';
+import { boolean, expandoObject, optional, Schema } from '../schema.js';
 
 export interface ResumeOptions {
   /** Chargify will only attempt to resume the subscription's billing period. If not resumable, the subscription will be left in it's current state. */

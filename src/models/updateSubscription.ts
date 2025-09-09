@@ -14,27 +14,27 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   UpdateSubscriptionNetTerms,
   updateSubscriptionNetTermsSchema,
-} from './containers/updateSubscriptionNetTerms';
+} from './containers/updateSubscriptionNetTerms.js';
 import {
   UpdateSubscriptionSnapDay,
   updateSubscriptionSnapDaySchema,
-} from './containers/updateSubscriptionSnapDay';
+} from './containers/updateSubscriptionSnapDay.js';
 import {
   CreditCardAttributes,
   creditCardAttributesSchema,
-} from './creditCardAttributes';
+} from './creditCardAttributes.js';
 import {
   SubscriptionCustomPrice,
   subscriptionCustomPriceSchema,
-} from './subscriptionCustomPrice';
+} from './subscriptionCustomPrice.js';
 import {
   UpdateSubscriptionComponent,
   updateSubscriptionComponentSchema,
-} from './updateSubscriptionComponent';
+} from './updateSubscriptionComponent.js';
 
 export interface UpdateSubscription {
   creditCardAttributes?: CreditCardAttributes;

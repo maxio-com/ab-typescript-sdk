@@ -4,15 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   ComponentPricePoint,
   componentPricePointSchema,
-} from './componentPricePoint';
+} from './componentPricePoint.js';
 import {
   ListPublicKeysMeta,
   listPublicKeysMetaSchema,
-} from './listPublicKeysMeta';
+} from './listPublicKeysMeta.js';
 
 export interface ComponentPricePointsResponse {
   pricePoints?: ComponentPricePoint[];

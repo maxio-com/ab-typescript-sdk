@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, expandoObject, optional, Schema } from '../schema';
+import { bigint, expandoObject, optional, Schema } from '../schema.js';
 
 export interface SubscriptionMigrationPreview {
   /** The amount of the prorated adjustment that would be issued for the current subscription. */

@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { Subscription } from '../models/subscription';
+import { ApiError } from '../core.js';
+import { Subscription } from '../models/subscription.js';
 
 /**
  * Creates an instance of SubscriptionResponse

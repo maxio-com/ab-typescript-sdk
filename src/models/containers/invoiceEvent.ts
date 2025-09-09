@@ -4,64 +4,67 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, Schema, validateAndMap } from '../../schema';
+import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
 import {
   ApplyCreditNoteEvent,
   applyCreditNoteEventSchema,
-} from '../applyCreditNoteEvent';
+} from '../applyCreditNoteEvent.js';
 import {
   ApplyDebitNoteEvent,
   applyDebitNoteEventSchema,
-} from '../applyDebitNoteEvent';
+} from '../applyDebitNoteEvent.js';
 import {
   ApplyPaymentEvent,
   applyPaymentEventSchema,
-} from '../applyPaymentEvent';
+} from '../applyPaymentEvent.js';
 import {
   BackportInvoiceEvent,
   backportInvoiceEventSchema,
-} from '../backportInvoiceEvent';
+} from '../backportInvoiceEvent.js';
 import {
   ChangeChargebackStatusEvent,
   changeChargebackStatusEventSchema,
-} from '../changeChargebackStatusEvent';
+} from '../changeChargebackStatusEvent.js';
 import {
   ChangeInvoiceCollectionMethodEvent,
   changeInvoiceCollectionMethodEventSchema,
-} from '../changeInvoiceCollectionMethodEvent';
+} from '../changeInvoiceCollectionMethodEvent.js';
 import {
   ChangeInvoiceStatusEvent,
   changeInvoiceStatusEventSchema,
-} from '../changeInvoiceStatusEvent';
+} from '../changeInvoiceStatusEvent.js';
 import {
   CreateCreditNoteEvent,
   createCreditNoteEventSchema,
-} from '../createCreditNoteEvent';
+} from '../createCreditNoteEvent.js';
 import {
   CreateDebitNoteEvent,
   createDebitNoteEventSchema,
-} from '../createDebitNoteEvent';
+} from '../createDebitNoteEvent.js';
 import {
   FailedPaymentEvent,
   failedPaymentEventSchema,
-} from '../failedPaymentEvent';
+} from '../failedPaymentEvent.js';
 import {
   IssueInvoiceEvent,
   issueInvoiceEventSchema,
-} from '../issueInvoiceEvent';
+} from '../issueInvoiceEvent.js';
 import {
   RefundInvoiceEvent,
   refundInvoiceEventSchema,
-} from '../refundInvoiceEvent';
+} from '../refundInvoiceEvent.js';
 import {
   RemovePaymentEvent,
   removePaymentEventSchema,
-} from '../removePaymentEvent';
-import { VoidInvoiceEvent, voidInvoiceEventSchema } from '../voidInvoiceEvent';
+} from '../removePaymentEvent.js';
+import {
+  VoidInvoiceEvent,
+  voidInvoiceEventSchema,
+} from '../voidInvoiceEvent.js';
 import {
   VoidRemainderEvent,
   voidRemainderEventSchema,
-} from '../voidRemainderEvent';
+} from '../voidRemainderEvent.js';
 
 /** This is a container type for any-of types. */
 export type InvoiceEvent =
@@ -118,7 +121,7 @@ export const invoiceEventSchema: Schema<InvoiceEvent> = anyOf(
     voidRemainderEventSchema,
   ],
   discriminatorMap,
-  'eventType'
+  'event_type'
 );
 
 export namespace InvoiceEvent {
@@ -130,8 +133,7 @@ export namespace InvoiceEvent {
   export function isApplyCreditNoteEvent(
     value: unknown
   ): value is ApplyCreditNoteEvent {
-    const validationResult = validateAndMap(value, applyCreditNoteEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, applyCreditNoteEventSchema);
   }
 
   /**
@@ -142,8 +144,7 @@ export namespace InvoiceEvent {
   export function isApplyDebitNoteEvent(
     value: unknown
   ): value is ApplyDebitNoteEvent {
-    const validationResult = validateAndMap(value, applyDebitNoteEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, applyDebitNoteEventSchema);
   }
 
   /**
@@ -154,8 +155,7 @@ export namespace InvoiceEvent {
   export function isApplyPaymentEvent(
     value: unknown
   ): value is ApplyPaymentEvent {
-    const validationResult = validateAndMap(value, applyPaymentEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, applyPaymentEventSchema);
   }
 
   /**
@@ -166,8 +166,7 @@ export namespace InvoiceEvent {
   export function isBackportInvoiceEvent(
     value: unknown
   ): value is BackportInvoiceEvent {
-    const validationResult = validateAndMap(value, backportInvoiceEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, backportInvoiceEventSchema);
   }
 
   /**
@@ -178,11 +177,10 @@ export namespace InvoiceEvent {
   export function isChangeChargebackStatusEvent(
     value: unknown
   ): value is ChangeChargebackStatusEvent {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       changeChargebackStatusEventSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -193,11 +191,10 @@ export namespace InvoiceEvent {
   export function isChangeInvoiceCollectionMethodEvent(
     value: unknown
   ): value is ChangeInvoiceCollectionMethodEvent {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       changeInvoiceCollectionMethodEventSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -208,11 +205,7 @@ export namespace InvoiceEvent {
   export function isChangeInvoiceStatusEvent(
     value: unknown
   ): value is ChangeInvoiceStatusEvent {
-    const validationResult = validateAndMap(
-      value,
-      changeInvoiceStatusEventSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, changeInvoiceStatusEventSchema);
   }
 
   /**
@@ -223,8 +216,7 @@ export namespace InvoiceEvent {
   export function isCreateCreditNoteEvent(
     value: unknown
   ): value is CreateCreditNoteEvent {
-    const validationResult = validateAndMap(value, createCreditNoteEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, createCreditNoteEventSchema);
   }
 
   /**
@@ -235,8 +227,7 @@ export namespace InvoiceEvent {
   export function isCreateDebitNoteEvent(
     value: unknown
   ): value is CreateDebitNoteEvent {
-    const validationResult = validateAndMap(value, createDebitNoteEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, createDebitNoteEventSchema);
   }
 
   /**
@@ -247,8 +238,7 @@ export namespace InvoiceEvent {
   export function isFailedPaymentEvent(
     value: unknown
   ): value is FailedPaymentEvent {
-    const validationResult = validateAndMap(value, failedPaymentEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, failedPaymentEventSchema);
   }
 
   /**
@@ -259,8 +249,7 @@ export namespace InvoiceEvent {
   export function isIssueInvoiceEvent(
     value: unknown
   ): value is IssueInvoiceEvent {
-    const validationResult = validateAndMap(value, issueInvoiceEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, issueInvoiceEventSchema);
   }
 
   /**
@@ -271,8 +260,7 @@ export namespace InvoiceEvent {
   export function isRefundInvoiceEvent(
     value: unknown
   ): value is RefundInvoiceEvent {
-    const validationResult = validateAndMap(value, refundInvoiceEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, refundInvoiceEventSchema);
   }
 
   /**
@@ -283,8 +271,7 @@ export namespace InvoiceEvent {
   export function isRemovePaymentEvent(
     value: unknown
   ): value is RemovePaymentEvent {
-    const validationResult = validateAndMap(value, removePaymentEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, removePaymentEventSchema);
   }
 
   /**
@@ -295,8 +282,7 @@ export namespace InvoiceEvent {
   export function isVoidInvoiceEvent(
     value: unknown
   ): value is VoidInvoiceEvent {
-    const validationResult = validateAndMap(value, voidInvoiceEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, voidInvoiceEventSchema);
   }
 
   /**
@@ -307,7 +293,6 @@ export namespace InvoiceEvent {
   export function isVoidRemainderEvent(
     value: unknown
   ): value is VoidRemainderEvent {
-    const validationResult = validateAndMap(value, voidRemainderEventSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, voidRemainderEventSchema);
   }
 }

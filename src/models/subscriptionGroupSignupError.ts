@@ -12,12 +12,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { PayerError, payerErrorSchema } from './payerError';
+} from '../schema.js';
+import { PayerError, payerErrorSchema } from './payerError.js';
 import {
   SubscriptionGroupSubscriptionError,
   subscriptionGroupSubscriptionErrorSchema,
-} from './subscriptionGroupSubscriptionError';
+} from './subscriptionGroupSubscriptionError.js';
 
 export interface SubscriptionGroupSignupError {
   /** Object that as key have subscription position in request subscriptions array and as value subscription errors object. */

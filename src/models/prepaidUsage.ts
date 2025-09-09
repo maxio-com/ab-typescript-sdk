@@ -4,11 +4,18 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, number, Schema, string } from '../schema';
+import {
+  array,
+  expandoObject,
+  lazy,
+  number,
+  Schema,
+  string,
+} from '../schema.js';
 import {
   PrepaidUsageAllocationDetail,
   prepaidUsageAllocationDetailSchema,
-} from './prepaidUsageAllocationDetail';
+} from './prepaidUsageAllocationDetail.js';
 
 export interface PrepaidUsage {
   previousUnitBalance: string;

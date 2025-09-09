@@ -4,15 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { CleanupScope, cleanupScopeSchema } from '../models/cleanupScope';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import { CleanupScope, cleanupScopeSchema } from '../models/cleanupScope.js';
 import {
   ListPublicKeysResponse,
   listPublicKeysResponseSchema,
-} from '../models/listPublicKeysResponse';
-import { SiteResponse, siteResponseSchema } from '../models/siteResponse';
-import { number, optional } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/listPublicKeysResponse.js';
+import { SiteResponse, siteResponseSchema } from '../models/siteResponse.js';
+import { number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
 
 export class SitesController extends BaseController {
   /**

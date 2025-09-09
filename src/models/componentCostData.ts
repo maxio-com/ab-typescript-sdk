@@ -13,12 +13,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentCostDataRateTier,
   componentCostDataRateTierSchema,
-} from './componentCostDataRateTier';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './componentCostDataRateTier.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface ComponentCostData {
   componentCodeId?: number | null;

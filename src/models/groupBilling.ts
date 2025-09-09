@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, optional, Schema } from '../schema';
+import { boolean, expandoObject, optional, Schema } from '../schema.js';
 
 /** Optional attributes related to billing date and accrual. Note: Only applicable for new subscriptions. */
 export interface GroupBilling {

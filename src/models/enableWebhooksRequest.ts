@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, Schema } from '../schema';
+import { boolean, expandoObject, Schema } from '../schema.js';
 
 export interface EnableWebhooksRequest {
   webhooksEnabled: boolean;

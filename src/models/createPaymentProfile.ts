@@ -11,23 +11,23 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { AllVaults, allVaultsSchema } from './allVaults';
+} from '../schema.js';
+import { AllVaults, allVaultsSchema } from './allVaults.js';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
-} from './bankAccountHolderType';
-import { BankAccountType, bankAccountTypeSchema } from './bankAccountType';
-import { CardType, cardTypeSchema } from './cardType';
+} from './bankAccountHolderType.js';
+import { BankAccountType, bankAccountTypeSchema } from './bankAccountType.js';
+import { CardType, cardTypeSchema } from './cardType.js';
 import {
   CreatePaymentProfileExpirationMonth,
   createPaymentProfileExpirationMonthSchema,
-} from './containers/createPaymentProfileExpirationMonth';
+} from './containers/createPaymentProfileExpirationMonth.js';
 import {
   CreatePaymentProfileExpirationYear,
   createPaymentProfileExpirationYearSchema,
-} from './containers/createPaymentProfileExpirationYear';
-import { PaymentType, paymentTypeSchema } from './paymentType';
+} from './containers/createPaymentProfileExpirationYear.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface CreatePaymentProfile {
   /** Token received after sending billing informations using chargify.js. */

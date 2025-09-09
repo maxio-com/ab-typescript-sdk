@@ -9,43 +9,46 @@ import {
   commaPrefix,
   RequestOptions,
   unindexedPrefix,
-} from '../core';
-import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
+} from '../core.js';
+import {
+  BasicDateField,
+  basicDateFieldSchema,
+} from '../models/basicDateField.js';
 import {
   CreateMetadataRequest,
   createMetadataRequestSchema,
-} from '../models/createMetadataRequest';
+} from '../models/createMetadataRequest.js';
 import {
   CreateMetafieldsRequest,
   createMetafieldsRequestSchema,
-} from '../models/createMetafieldsRequest';
+} from '../models/createMetafieldsRequest.js';
 import {
   ListMetafieldsResponse,
   listMetafieldsResponseSchema,
-} from '../models/listMetafieldsResponse';
-import { Metadata, metadataSchema } from '../models/metadata';
-import { Metafield, metafieldSchema } from '../models/metafield';
+} from '../models/listMetafieldsResponse.js';
+import { Metadata, metadataSchema } from '../models/metadata.js';
+import { Metafield, metafieldSchema } from '../models/metafield.js';
 import {
   PaginatedMetadata,
   paginatedMetadataSchema,
-} from '../models/paginatedMetadata';
-import { ResourceType, resourceTypeSchema } from '../models/resourceType';
+} from '../models/paginatedMetadata.js';
+import { ResourceType, resourceTypeSchema } from '../models/resourceType.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
+} from '../models/sortingDirection.js';
 import {
   UpdateMetadataRequest,
   updateMetadataRequestSchema,
-} from '../models/updateMetadataRequest';
+} from '../models/updateMetadataRequest.js';
 import {
   UpdateMetafieldsRequest,
   updateMetafieldsRequestSchema,
-} from '../models/updateMetafieldsRequest';
-import { array, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateMetafieldsRequest.js';
+import { array, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError.js';
 
 export class CustomFieldsController extends BaseController {
   /**

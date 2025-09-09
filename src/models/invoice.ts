@@ -14,41 +14,44 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
-import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
+} from '../schema.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
+import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress.js';
 import {
   InvoiceAvataxDetails,
   invoiceAvataxDetailsSchema,
-} from './invoiceAvataxDetails';
+} from './invoiceAvataxDetails.js';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
-} from './invoiceConsolidationLevel';
-import { InvoiceCredit, invoiceCreditSchema } from './invoiceCredit';
-import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer';
+} from './invoiceConsolidationLevel.js';
+import { InvoiceCredit, invoiceCreditSchema } from './invoiceCredit.js';
+import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer.js';
 import {
   InvoiceCustomField,
   invoiceCustomFieldSchema,
-} from './invoiceCustomField';
-import { InvoiceDebit, invoiceDebitSchema } from './invoiceDebit';
-import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
+} from './invoiceCustomField.js';
+import { InvoiceDebit, invoiceDebitSchema } from './invoiceDebit.js';
+import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount.js';
 import {
   InvoiceDisplaySettings,
   invoiceDisplaySettingsSchema,
-} from './invoiceDisplaySettings';
-import { InvoiceLineItem, invoiceLineItemSchema } from './invoiceLineItem';
-import { InvoicePayer, invoicePayerSchema } from './invoicePayer';
-import { InvoicePayment, invoicePaymentSchema } from './invoicePayment';
+} from './invoiceDisplaySettings.js';
+import { InvoiceLineItem, invoiceLineItemSchema } from './invoiceLineItem.js';
+import { InvoicePayer, invoicePayerSchema } from './invoicePayer.js';
+import { InvoicePayment, invoicePaymentSchema } from './invoicePayment.js';
 import {
   InvoicePreviousBalance,
   invoicePreviousBalanceSchema,
-} from './invoicePreviousBalance';
-import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
-import { InvoiceRole, invoiceRoleSchema } from './invoiceRole';
-import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
-import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
-import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
+} from './invoicePreviousBalance.js';
+import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund.js';
+import { InvoiceRole, invoiceRoleSchema } from './invoiceRole.js';
+import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller.js';
+import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus.js';
+import { InvoiceTax, invoiceTaxSchema } from './invoiceTax.js';
 
 export interface Invoice {
   id?: bigint;

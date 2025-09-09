@@ -4,88 +4,91 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   ComponentCurrencyPricesResponse,
   componentCurrencyPricesResponseSchema,
-} from '../models/componentCurrencyPricesResponse';
+} from '../models/componentCurrencyPricesResponse.js';
 import {
   ComponentPricePointResponse,
   componentPricePointResponseSchema,
-} from '../models/componentPricePointResponse';
+} from '../models/componentPricePointResponse.js';
 import {
   ComponentPricePointsResponse,
   componentPricePointsResponseSchema,
-} from '../models/componentPricePointsResponse';
+} from '../models/componentPricePointsResponse.js';
 import {
   ComponentResponse,
   componentResponseSchema,
-} from '../models/componentResponse';
+} from '../models/componentResponse.js';
 import {
   ArchiveComponentPricePointComponentId,
   archiveComponentPricePointComponentIdSchema,
-} from '../models/containers/archiveComponentPricePointComponentId';
+} from '../models/containers/archiveComponentPricePointComponentId.js';
 import {
   ArchiveComponentPricePointPricePointId,
   archiveComponentPricePointPricePointIdSchema,
-} from '../models/containers/archiveComponentPricePointPricePointId';
+} from '../models/containers/archiveComponentPricePointPricePointId.js';
 import {
   ReadComponentPricePointComponentId,
   readComponentPricePointComponentIdSchema,
-} from '../models/containers/readComponentPricePointComponentId';
+} from '../models/containers/readComponentPricePointComponentId.js';
 import {
   ReadComponentPricePointPricePointId,
   readComponentPricePointPricePointIdSchema,
-} from '../models/containers/readComponentPricePointPricePointId';
+} from '../models/containers/readComponentPricePointPricePointId.js';
 import {
   UpdateComponentPricePointComponentId,
   updateComponentPricePointComponentIdSchema,
-} from '../models/containers/updateComponentPricePointComponentId';
+} from '../models/containers/updateComponentPricePointComponentId.js';
 import {
   UpdateComponentPricePointPricePointId,
   updateComponentPricePointPricePointIdSchema,
-} from '../models/containers/updateComponentPricePointPricePointId';
+} from '../models/containers/updateComponentPricePointPricePointId.js';
 import {
   CreateComponentPricePointRequest,
   createComponentPricePointRequestSchema,
-} from '../models/createComponentPricePointRequest';
+} from '../models/createComponentPricePointRequest.js';
 import {
   CreateComponentPricePointsRequest,
   createComponentPricePointsRequestSchema,
-} from '../models/createComponentPricePointsRequest';
+} from '../models/createComponentPricePointsRequest.js';
 import {
   CreateCurrencyPricesRequest,
   createCurrencyPricesRequestSchema,
-} from '../models/createCurrencyPricesRequest';
+} from '../models/createCurrencyPricesRequest.js';
 import {
   ListComponentsPricePointsInclude,
   listComponentsPricePointsIncludeSchema,
-} from '../models/listComponentsPricePointsInclude';
+} from '../models/listComponentsPricePointsInclude.js';
 import {
   ListComponentsPricePointsResponse,
   listComponentsPricePointsResponseSchema,
-} from '../models/listComponentsPricePointsResponse';
+} from '../models/listComponentsPricePointsResponse.js';
 import {
   ListPricePointsFilter,
   listPricePointsFilterSchema,
-} from '../models/listPricePointsFilter';
-import { PricePointType, pricePointTypeSchema } from '../models/pricePointType';
+} from '../models/listPricePointsFilter.js';
+import {
+  PricePointType,
+  pricePointTypeSchema,
+} from '../models/pricePointType.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
+} from '../models/sortingDirection.js';
 import {
   UpdateComponentPricePointRequest,
   updateComponentPricePointRequestSchema,
-} from '../models/updateComponentPricePointRequest';
+} from '../models/updateComponentPricePointRequest.js';
 import {
   UpdateCurrencyPricesRequest,
   updateCurrencyPricesRequestSchema,
-} from '../models/updateCurrencyPricesRequest';
-import { array, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
-import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+} from '../models/updateCurrencyPricesRequest.js';
+import { array, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class ComponentPricePointsController extends BaseController {
   /**

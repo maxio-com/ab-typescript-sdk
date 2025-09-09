@@ -4,15 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, optional, Schema } from '../schema';
+import { expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   CreateInvoicePayment,
   createInvoicePaymentSchema,
-} from './createInvoicePayment';
+} from './createInvoicePayment.js';
 import {
   InvoicePaymentType,
   invoicePaymentTypeSchema,
-} from './invoicePaymentType';
+} from './invoicePaymentType.js';
 
 export interface CreateInvoicePaymentRequest {
   payment: CreateInvoicePayment;

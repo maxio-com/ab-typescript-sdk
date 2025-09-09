@@ -12,11 +12,11 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
+} from '../schema.js';
 import {
   PrepaidProductPricePointFilter,
   prepaidProductPricePointFilterSchema,
-} from './prepaidProductPricePointFilter';
+} from './prepaidProductPricePointFilter.js';
 
 export interface ListProductsFilter {
   /** Allows fetching products with matching id based on provided values. Use in query `filter[ids]=1,2,3`. */

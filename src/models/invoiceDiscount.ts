@@ -13,19 +13,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceDiscountBreakout,
   invoiceDiscountBreakoutSchema,
-} from './invoiceDiscountBreakout';
+} from './invoiceDiscountBreakout.js';
 import {
   InvoiceDiscountSourceType,
   invoiceDiscountSourceTypeSchema,
-} from './invoiceDiscountSourceType';
+} from './invoiceDiscountSourceType.js';
 import {
   InvoiceDiscountType,
   invoiceDiscountTypeSchema,
-} from './invoiceDiscountType';
+} from './invoiceDiscountType.js';
 
 export interface InvoiceDiscount {
   uid?: string;

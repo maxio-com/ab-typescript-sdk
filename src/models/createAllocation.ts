@@ -13,13 +13,13 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { BillingSchedule, billingScheduleSchema } from './billingSchedule';
+} from '../schema.js';
+import { BillingSchedule, billingScheduleSchema } from './billingSchedule.js';
 import {
   CreateAllocationPricePointId,
   createAllocationPricePointIdSchema,
-} from './containers/createAllocationPricePointId';
-import { CreditType, creditTypeSchema } from './creditType';
+} from './containers/createAllocationPricePointId.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
 
 export interface CreateAllocation {
   /** The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off. */

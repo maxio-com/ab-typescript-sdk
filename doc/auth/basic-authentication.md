@@ -23,6 +23,8 @@ Documentation for accessing and setting credentials for BasicAuth.
 You must provide credentials in the client as shown in the following code snippet.
 
 ```ts
+import { Client } from '@maxio-com/advanced-billing-sdk';
+
 const client = new Client({
   basicAuthCredentials: {
     username: 'BasicAuthUserName',

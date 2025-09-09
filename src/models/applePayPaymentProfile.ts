@@ -11,9 +11,9 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { ApplePayVault, applePayVaultSchema } from './applePayVault';
-import { PaymentType, paymentTypeSchema } from './paymentType';
+} from '../schema.js';
+import { ApplePayVault, applePayVaultSchema } from './applePayVault.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface ApplePayPaymentProfile {
   /** The Chargify-assigned ID of the Apple Pay payment profile. */

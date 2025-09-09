@@ -11,12 +11,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { LineItemKind, lineItemKindSchema } from './lineItemKind';
+} from '../schema.js';
+import { LineItemKind, lineItemKindSchema } from './lineItemKind.js';
 import {
   LineItemTransactionType,
   lineItemTransactionTypeSchema,
-} from './lineItemTransactionType';
+} from './lineItemTransactionType.js';
 
 export interface RenewalPreviewLineItem {
   /** A handle for the line item transaction type */

@@ -11,9 +11,9 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CreditType, creditTypeSchema } from './creditType';
-import { ItemCategory, itemCategorySchema } from './itemCategory';
+} from '../schema.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { ItemCategory, itemCategorySchema } from './itemCategory.js';
 
 export interface UpdateComponent {
   handle?: string;

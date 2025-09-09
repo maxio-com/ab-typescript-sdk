@@ -12,11 +12,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   UsageQuantity,
   usageQuantitySchema,
-} from './containers/usageQuantity';
+} from './containers/usageQuantity.js';
 
 export interface Usage {
   id?: bigint;

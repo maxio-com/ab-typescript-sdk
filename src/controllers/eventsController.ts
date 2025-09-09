@@ -4,17 +4,17 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { CountResponse, countResponseSchema } from '../models/countResponse';
-import { Direction, directionSchema } from '../models/direction';
-import { EventKey, eventKeySchema } from '../models/eventKey';
-import { EventResponse, eventResponseSchema } from '../models/eventResponse';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import { CountResponse, countResponseSchema } from '../models/countResponse.js';
+import { Direction, directionSchema } from '../models/direction.js';
+import { EventKey, eventKeySchema } from '../models/eventKey.js';
+import { EventResponse, eventResponseSchema } from '../models/eventResponse.js';
 import {
   ListEventsDateField,
   listEventsDateFieldSchema,
-} from '../models/listEventsDateField';
-import { array, bigint, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/listEventsDateField.js';
+import { array, bigint, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 
 export class EventsController extends BaseController {
   /**

@@ -4,18 +4,18 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   ListSaleRepItem,
   listSaleRepItemSchema,
-} from '../models/listSaleRepItem';
-import { SaleRep, saleRepSchema } from '../models/saleRep';
+} from '../models/listSaleRepItem.js';
+import { SaleRep, saleRepSchema } from '../models/saleRep.js';
 import {
   SaleRepSettings,
   saleRepSettingsSchema,
-} from '../models/saleRepSettings';
-import { array, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/saleRepSettings.js';
+import { array, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 
 export class SalesCommissionsController extends BaseController {
   /**

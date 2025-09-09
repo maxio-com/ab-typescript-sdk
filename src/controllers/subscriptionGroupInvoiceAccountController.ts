@@ -4,40 +4,40 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   DeductServiceCreditRequest,
   deductServiceCreditRequestSchema,
-} from '../models/deductServiceCreditRequest';
+} from '../models/deductServiceCreditRequest.js';
 import {
   IssueServiceCreditRequest,
   issueServiceCreditRequestSchema,
-} from '../models/issueServiceCreditRequest';
+} from '../models/issueServiceCreditRequest.js';
 import {
   ListPrepaymentsFilter,
   listPrepaymentsFilterSchema,
-} from '../models/listPrepaymentsFilter';
+} from '../models/listPrepaymentsFilter.js';
 import {
   ListSubscriptionGroupPrepaymentResponse,
   listSubscriptionGroupPrepaymentResponseSchema,
-} from '../models/listSubscriptionGroupPrepaymentResponse';
-import { ServiceCredit, serviceCreditSchema } from '../models/serviceCredit';
+} from '../models/listSubscriptionGroupPrepaymentResponse.js';
+import { ServiceCredit, serviceCreditSchema } from '../models/serviceCredit.js';
 import {
   ServiceCreditResponse,
   serviceCreditResponseSchema,
-} from '../models/serviceCreditResponse';
+} from '../models/serviceCreditResponse.js';
 import {
   SubscriptionGroupPrepaymentRequest,
   subscriptionGroupPrepaymentRequestSchema,
-} from '../models/subscriptionGroupPrepaymentRequest';
+} from '../models/subscriptionGroupPrepaymentRequest.js';
 import {
   SubscriptionGroupPrepaymentResponse,
   subscriptionGroupPrepaymentResponseSchema,
-} from '../models/subscriptionGroupPrepaymentResponse';
-import { number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/subscriptionGroupPrepaymentResponse.js';
+import { number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class SubscriptionGroupInvoiceAccountController extends BaseController {
   /**

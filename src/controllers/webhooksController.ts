@@ -4,42 +4,42 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   CreateOrUpdateEndpointRequest,
   createOrUpdateEndpointRequestSchema,
-} from '../models/createOrUpdateEndpointRequest';
+} from '../models/createOrUpdateEndpointRequest.js';
 import {
   EnableWebhooksRequest,
   enableWebhooksRequestSchema,
-} from '../models/enableWebhooksRequest';
+} from '../models/enableWebhooksRequest.js';
 import {
   EnableWebhooksResponse,
   enableWebhooksResponseSchema,
-} from '../models/enableWebhooksResponse';
-import { Endpoint, endpointSchema } from '../models/endpoint';
+} from '../models/enableWebhooksResponse.js';
+import { Endpoint, endpointSchema } from '../models/endpoint.js';
 import {
   EndpointResponse,
   endpointResponseSchema,
-} from '../models/endpointResponse';
+} from '../models/endpointResponse.js';
 import {
   ReplayWebhooksRequest,
   replayWebhooksRequestSchema,
-} from '../models/replayWebhooksRequest';
+} from '../models/replayWebhooksRequest.js';
 import {
   ReplayWebhooksResponse,
   replayWebhooksResponseSchema,
-} from '../models/replayWebhooksResponse';
-import { WebhookOrder, webhookOrderSchema } from '../models/webhookOrder';
+} from '../models/replayWebhooksResponse.js';
+import { WebhookOrder, webhookOrderSchema } from '../models/webhookOrder.js';
 import {
   WebhookResponse,
   webhookResponseSchema,
-} from '../models/webhookResponse';
-import { WebhookStatus, webhookStatusSchema } from '../models/webhookStatus';
-import { array, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/webhookResponse.js';
+import { WebhookStatus, webhookStatusSchema } from '../models/webhookStatus.js';
+import { array, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class WebhooksController extends BaseController {
   /**

@@ -12,7 +12,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 /** Information for captured payment, if applicable */
 export interface PaymentForAllocation {

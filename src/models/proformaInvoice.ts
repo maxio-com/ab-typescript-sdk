@@ -13,44 +13,47 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
-import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
+} from '../schema.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
+import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress.js';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
-} from './invoiceConsolidationLevel';
-import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer';
+} from './invoiceConsolidationLevel.js';
+import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer.js';
 import {
   InvoiceCustomField,
   invoiceCustomFieldSchema,
-} from './invoiceCustomField';
-import { InvoiceLineItem, invoiceLineItemSchema } from './invoiceLineItem';
-import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
+} from './invoiceCustomField.js';
+import { InvoiceLineItem, invoiceLineItemSchema } from './invoiceLineItem.js';
+import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller.js';
 import {
   ProformaInvoiceCredit,
   proformaInvoiceCreditSchema,
-} from './proformaInvoiceCredit';
+} from './proformaInvoiceCredit.js';
 import {
   ProformaInvoiceDiscount,
   proformaInvoiceDiscountSchema,
-} from './proformaInvoiceDiscount';
+} from './proformaInvoiceDiscount.js';
 import {
   ProformaInvoicePayment,
   proformaInvoicePaymentSchema,
-} from './proformaInvoicePayment';
+} from './proformaInvoicePayment.js';
 import {
   ProformaInvoiceRole,
   proformaInvoiceRoleSchema,
-} from './proformaInvoiceRole';
+} from './proformaInvoiceRole.js';
 import {
   ProformaInvoiceStatus,
   proformaInvoiceStatusSchema,
-} from './proformaInvoiceStatus';
+} from './proformaInvoiceStatus.js';
 import {
   ProformaInvoiceTax,
   proformaInvoiceTaxSchema,
-} from './proformaInvoiceTax';
+} from './proformaInvoiceTax.js';
 
 export interface ProformaInvoice {
   uid?: string;

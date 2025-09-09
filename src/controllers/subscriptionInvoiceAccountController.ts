@@ -4,57 +4,57 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   AccountBalances,
   accountBalancesSchema,
-} from '../models/accountBalances';
+} from '../models/accountBalances.js';
 import {
   CreatePrepaymentRequest,
   createPrepaymentRequestSchema,
-} from '../models/createPrepaymentRequest';
+} from '../models/createPrepaymentRequest.js';
 import {
   CreatePrepaymentResponse,
   createPrepaymentResponseSchema,
-} from '../models/createPrepaymentResponse';
+} from '../models/createPrepaymentResponse.js';
 import {
   DeductServiceCreditRequest,
   deductServiceCreditRequestSchema,
-} from '../models/deductServiceCreditRequest';
+} from '../models/deductServiceCreditRequest.js';
 import {
   IssueServiceCreditRequest,
   issueServiceCreditRequestSchema,
-} from '../models/issueServiceCreditRequest';
+} from '../models/issueServiceCreditRequest.js';
 import {
   ListPrepaymentsFilter,
   listPrepaymentsFilterSchema,
-} from '../models/listPrepaymentsFilter';
+} from '../models/listPrepaymentsFilter.js';
 import {
   ListServiceCreditsResponse,
   listServiceCreditsResponseSchema,
-} from '../models/listServiceCreditsResponse';
+} from '../models/listServiceCreditsResponse.js';
 import {
   PrepaymentResponse,
   prepaymentResponseSchema,
-} from '../models/prepaymentResponse';
+} from '../models/prepaymentResponse.js';
 import {
   PrepaymentsResponse,
   prepaymentsResponseSchema,
-} from '../models/prepaymentsResponse';
+} from '../models/prepaymentsResponse.js';
 import {
   RefundPrepaymentRequest,
   refundPrepaymentRequestSchema,
-} from '../models/refundPrepaymentRequest';
-import { ServiceCredit, serviceCreditSchema } from '../models/serviceCredit';
+} from '../models/refundPrepaymentRequest.js';
+import { ServiceCredit, serviceCreditSchema } from '../models/serviceCredit.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
-import { bigint, number, optional } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/sortingDirection.js';
+import { bigint, number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { RefundPrepaymentBaseErrorsResponseError } from '../errors/refundPrepaymentBaseErrorsResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { RefundPrepaymentBaseErrorsResponseError } from '../errors/refundPrepaymentBaseErrorsResponseError.js';
 
 export class SubscriptionInvoiceAccountController extends BaseController {
   /**

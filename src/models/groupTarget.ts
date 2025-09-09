@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, number, optional, Schema } from '../schema';
-import { GroupTargetType, groupTargetTypeSchema } from './groupTargetType';
+import { expandoObject, number, optional, Schema } from '../schema.js';
+import { GroupTargetType, groupTargetTypeSchema } from './groupTargetType.js';
 
 /** Attributes of the target customer who will be the responsible payer of the created subscription. Required. */
 export interface GroupTarget {

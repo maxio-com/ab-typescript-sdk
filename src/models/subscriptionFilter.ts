@@ -4,15 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, optional, Schema, string } from '../schema';
+import { array, expandoObject, optional, Schema, string } from '../schema.js';
 import {
   SubscriptionListDateField,
   subscriptionListDateFieldSchema,
-} from './subscriptionListDateField';
+} from './subscriptionListDateField.js';
 import {
   SubscriptionStateFilter,
   subscriptionStateFilterSchema,
-} from './subscriptionStateFilter';
+} from './subscriptionStateFilter.js';
 
 /** Nested filter used for List Subscription Components For Site Filter */
 export interface SubscriptionFilter {

@@ -12,15 +12,15 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceEventPayment,
   invoiceEventPaymentSchema,
-} from './containers/invoiceEventPayment';
+} from './containers/invoiceEventPayment.js';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
-} from './invoiceConsolidationLevel';
+} from './invoiceConsolidationLevel.js';
 
 /** Example schema for an `apply_payment` event */
 export interface ApplyPaymentEventData {

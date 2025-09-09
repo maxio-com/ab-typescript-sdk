@@ -12,12 +12,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CreditNote, creditNoteSchema } from './creditNote';
+} from '../schema.js';
+import { CreditNote, creditNoteSchema } from './creditNote.js';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
-} from './invoiceConsolidationLevel';
+} from './invoiceConsolidationLevel.js';
 
 /** Example schema for an `refund_invoice` event */
 export interface RefundInvoiceEventData {

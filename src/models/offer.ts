@@ -14,10 +14,10 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { OfferDiscount, offerDiscountSchema } from './offerDiscount';
-import { OfferItem, offerItemSchema } from './offerItem';
-import { OfferSignupPage, offerSignupPageSchema } from './offerSignupPage';
+} from '../schema.js';
+import { OfferDiscount, offerDiscountSchema } from './offerDiscount.js';
+import { OfferItem, offerItemSchema } from './offerItem.js';
+import { OfferSignupPage, offerSignupPageSchema } from './offerSignupPage.js';
 
 export interface Offer {
   id?: number;

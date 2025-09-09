@@ -11,15 +11,15 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   BillingManifestLineItemKind,
   billingManifestLineItemKindSchema,
-} from './billingManifestLineItemKind';
+} from './billingManifestLineItemKind.js';
 import {
   LineItemTransactionType,
   lineItemTransactionTypeSchema,
-} from './lineItemTransactionType';
+} from './lineItemTransactionType.js';
 
 export interface BillingManifestItem {
   /** A handle for the line item transaction type */

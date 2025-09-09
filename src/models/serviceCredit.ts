@@ -11,11 +11,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ServiceCreditType,
   serviceCreditTypeSchema,
-} from './serviceCreditType';
+} from './serviceCreditType.js';
 
 export interface ServiceCredit {
   id?: number;

@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema, string } from '../schema';
-import { CreditNote, creditNoteSchema } from './creditNote';
+import { expandoObject, lazy, Schema, string } from '../schema.js';
+import { CreditNote, creditNoteSchema } from './creditNote.js';
 
 /** Example schema for an `void_remainder` event */
 export interface VoidRemainderEventData {

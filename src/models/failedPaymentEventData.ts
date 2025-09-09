@@ -11,11 +11,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoicePaymentMethodType,
   invoicePaymentMethodTypeSchema,
-} from './invoicePaymentMethodType';
+} from './invoicePaymentMethodType.js';
 
 /** Example schema for an `failed_payment` event */
 export interface FailedPaymentEventData {

@@ -11,12 +11,12 @@ import {
   nullable,
   optional,
   Schema,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoicePrePayment,
   invoicePrePaymentSchema,
-} from './invoicePrePayment';
-import { PaidInvoice, paidInvoiceSchema } from './paidInvoice';
+} from './invoicePrePayment.js';
+import { PaidInvoice, paidInvoiceSchema } from './paidInvoice.js';
 
 export interface RecordPaymentResponse {
   paidInvoices?: PaidInvoice[];

@@ -13,11 +13,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   RenewalPreviewLineItem,
   renewalPreviewLineItemSchema,
-} from './renewalPreviewLineItem';
+} from './renewalPreviewLineItem.js';
 
 export interface RenewalPreview {
   /** The timestamp for the subscription’s next renewal */

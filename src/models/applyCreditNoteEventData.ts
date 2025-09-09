@@ -13,11 +13,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   AppliedCreditNoteData,
   appliedCreditNoteDataSchema,
-} from './appliedCreditNoteData';
+} from './appliedCreditNoteData.js';
 
 /** Example schema for an `apply_credit_note` event */
 export interface ApplyCreditNoteEventData {

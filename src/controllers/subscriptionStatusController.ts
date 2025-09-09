@@ -4,40 +4,40 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   CancellationRequest,
   cancellationRequestSchema,
-} from '../models/cancellationRequest';
+} from '../models/cancellationRequest.js';
 import {
   DelayedCancellationResponse,
   delayedCancellationResponseSchema,
-} from '../models/delayedCancellationResponse';
-import { PauseRequest, pauseRequestSchema } from '../models/pauseRequest';
+} from '../models/delayedCancellationResponse.js';
+import { PauseRequest, pauseRequestSchema } from '../models/pauseRequest.js';
 import {
   ReactivateSubscriptionRequest,
   reactivateSubscriptionRequestSchema,
-} from '../models/reactivateSubscriptionRequest';
+} from '../models/reactivateSubscriptionRequest.js';
 import {
   RenewalPreviewRequest,
   renewalPreviewRequestSchema,
-} from '../models/renewalPreviewRequest';
+} from '../models/renewalPreviewRequest.js';
 import {
   RenewalPreviewResponse,
   renewalPreviewResponseSchema,
-} from '../models/renewalPreviewResponse';
+} from '../models/renewalPreviewResponse.js';
 import {
   ResumptionCharge,
   resumptionChargeSchema,
-} from '../models/resumptionCharge';
+} from '../models/resumptionCharge.js';
 import {
   SubscriptionResponse,
   subscriptionResponseSchema,
-} from '../models/subscriptionResponse';
-import { number, optional } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/subscriptionResponse.js';
+import { number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class SubscriptionStatusController extends BaseController {
   /**

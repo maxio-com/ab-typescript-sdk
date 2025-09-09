@@ -4,19 +4,19 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, nullable, optional, Schema } from '../schema';
+import { expandoObject, nullable, optional, Schema } from '../schema.js';
 import {
   PriceEndingQuantity,
   priceEndingQuantitySchema,
-} from './containers/priceEndingQuantity';
+} from './containers/priceEndingQuantity.js';
 import {
   PriceStartingQuantity,
   priceStartingQuantitySchema,
-} from './containers/priceStartingQuantity';
+} from './containers/priceStartingQuantity.js';
 import {
   PriceUnitPrice,
   priceUnitPriceSchema,
-} from './containers/priceUnitPrice';
+} from './containers/priceUnitPrice.js';
 
 export interface Price {
   startingQuantity: PriceStartingQuantity;

@@ -11,11 +11,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   RefundConsolidatedInvoiceSegmentUids,
   refundConsolidatedInvoiceSegmentUidsSchema,
-} from './containers/refundConsolidatedInvoiceSegmentUids';
+} from './containers/refundConsolidatedInvoiceSegmentUids.js';
 
 /** Refund consolidated invoice */
 export interface RefundConsolidatedInvoice {

@@ -4,101 +4,112 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   ActivateEventBasedComponent,
   activateEventBasedComponentSchema,
-} from '../models/activateEventBasedComponent';
+} from '../models/activateEventBasedComponent.js';
 import {
   AllocateComponents,
   allocateComponentsSchema,
-} from '../models/allocateComponents';
+} from '../models/allocateComponents.js';
 import {
   AllocationPreviewResponse,
   allocationPreviewResponseSchema,
-} from '../models/allocationPreviewResponse';
+} from '../models/allocationPreviewResponse.js';
 import {
   AllocationResponse,
   allocationResponseSchema,
-} from '../models/allocationResponse';
+} from '../models/allocationResponse.js';
 import {
   BulkComponentsPricePointAssignment,
   bulkComponentsPricePointAssignmentSchema,
-} from '../models/bulkComponentsPricePointAssignment';
+} from '../models/bulkComponentsPricePointAssignment.js';
 import {
   CreateUsageComponentId,
   createUsageComponentIdSchema,
-} from '../models/containers/createUsageComponentId';
+} from '../models/containers/createUsageComponentId.js';
+import {
+  CreateUsageSubscriptionIdOrReference,
+  createUsageSubscriptionIdOrReferenceSchema,
+} from '../models/containers/createUsageSubscriptionIdOrReference.js';
 import {
   ListUsagesInputComponentId,
   listUsagesInputComponentIdSchema,
-} from '../models/containers/listUsagesInputComponentId';
+} from '../models/containers/listUsagesInputComponentId.js';
+import {
+  ListUsagesInputSubscriptionIdOrReference,
+  listUsagesInputSubscriptionIdOrReferenceSchema,
+} from '../models/containers/listUsagesInputSubscriptionIdOrReference.js';
 import {
   CreateAllocationRequest,
   createAllocationRequestSchema,
-} from '../models/createAllocationRequest';
+} from '../models/createAllocationRequest.js';
 import {
   CreateUsageRequest,
   createUsageRequestSchema,
-} from '../models/createUsageRequest';
+} from '../models/createUsageRequest.js';
 import {
   CreditSchemeRequest,
   creditSchemeRequestSchema,
-} from '../models/creditSchemeRequest';
-import { EBBEvent, eBBEventSchema } from '../models/eBBEvent';
-import { IncludeNotNull, includeNotNullSchema } from '../models/includeNotNull';
+} from '../models/creditSchemeRequest.js';
+import { EBBEvent, eBBEventSchema } from '../models/eBBEvent.js';
+import {
+  IncludeNotNull,
+  includeNotNullSchema,
+} from '../models/includeNotNull.js';
 import {
   ListSubscriptionComponentsFilter,
   listSubscriptionComponentsFilterSchema,
-} from '../models/listSubscriptionComponentsFilter';
+} from '../models/listSubscriptionComponentsFilter.js';
 import {
   ListSubscriptionComponentsForSiteFilter,
   listSubscriptionComponentsForSiteFilterSchema,
-} from '../models/listSubscriptionComponentsForSiteFilter';
+} from '../models/listSubscriptionComponentsForSiteFilter.js';
 import {
   ListSubscriptionComponentsInclude,
   listSubscriptionComponentsIncludeSchema,
-} from '../models/listSubscriptionComponentsInclude';
+} from '../models/listSubscriptionComponentsInclude.js';
 import {
   ListSubscriptionComponentsResponse,
   listSubscriptionComponentsResponseSchema,
-} from '../models/listSubscriptionComponentsResponse';
+} from '../models/listSubscriptionComponentsResponse.js';
 import {
   ListSubscriptionComponentsSort,
   listSubscriptionComponentsSortSchema,
-} from '../models/listSubscriptionComponentsSort';
+} from '../models/listSubscriptionComponentsSort.js';
 import {
   PreviewAllocationsRequest,
   previewAllocationsRequestSchema,
-} from '../models/previewAllocationsRequest';
+} from '../models/previewAllocationsRequest.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
+} from '../models/sortingDirection.js';
 import {
   SubscriptionComponentResponse,
   subscriptionComponentResponseSchema,
-} from '../models/subscriptionComponentResponse';
+} from '../models/subscriptionComponentResponse.js';
 import {
   SubscriptionListDateField,
   subscriptionListDateFieldSchema,
-} from '../models/subscriptionListDateField';
+} from '../models/subscriptionListDateField.js';
 import {
   SubscriptionResponse,
   subscriptionResponseSchema,
-} from '../models/subscriptionResponse';
+} from '../models/subscriptionResponse.js';
 import {
   UpdateAllocationExpirationDate,
   updateAllocationExpirationDateSchema,
-} from '../models/updateAllocationExpirationDate';
-import { UsageResponse, usageResponseSchema } from '../models/usageResponse';
-import { array, bigint, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateAllocationExpirationDate.js';
+import { UsageResponse, usageResponseSchema } from '../models/usageResponse.js';
+import { array, bigint, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ComponentAllocationError } from '../errors/componentAllocationError';
-import { ComponentPricePointError } from '../errors/componentPricePointError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { SubscriptionComponentAllocationError } from '../errors/subscriptionComponentAllocationError';
+import { ComponentAllocationError } from '../errors/componentAllocationError.js';
+import { ComponentPricePointError } from '../errors/componentPricePointError.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { SubscriptionComponentAllocationError } from '../errors/subscriptionComponentAllocationError.js';
 
 export class SubscriptionComponentsController extends BaseController {
   /**
@@ -735,27 +746,43 @@ export class SubscriptionComponentsController extends BaseController {
    * A. No. Usage should be reported as one API call per component on a single subscription. For example,
    * to record that a subscriber has sent both an SMS Message and an Email, send an API call for each.
    *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param componentId     Either the Advanced Billing id for the component or the
-   *                                                     component's handle prefixed by `handle:`
+   * @param subscriptionIdOrReference    Either the Advanced Billing
+   *                                                                             subscription ID (integer) or the
+   *                                                                             subscription reference (string).
+   *                                                                             Important: In cases where a numeric
+   *                                                                             string value matches both an existing
+   *                                                                             subscription ID and an existing
+   *                                                                             subscription reference, the system
+   *                                                                             will prioritize the subscription ID
+   *                                                                             lookup. For example, if both
+   *                                                                             subscription ID 123 and subscription
+   *                                                                             reference "123" exist, passing "123"
+   *                                                                             will return the subscription with ID
+   *                                                                             123.
+   * @param componentId                  Either the Advanced Billing id for
+   *                                                                             the component or the component's
+   *                                                                             handle prefixed by `handle:`
    * @param body
    * @return Response from the API call
    */
   async createUsage(
-    subscriptionId: number,
+    subscriptionIdOrReference: CreateUsageSubscriptionIdOrReference,
     componentId: CreateUsageComponentId,
     body?: CreateUsageRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<UsageResponse>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
+      subscriptionIdOrReference: [
+        subscriptionIdOrReference,
+        createUsageSubscriptionIdOrReferenceSchema,
+      ],
       componentId: [componentId, createUsageComponentIdSchema],
       body: [body, optional(createUsageRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
     req.json(mapped.body);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/usages.json`;
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionIdOrReference}/components/${mapped.componentId}/usages.json`;
     req.throwOn(
       422,
       ErrorListResponseError,
@@ -788,34 +815,63 @@ export class SubscriptionComponentsController extends BaseController {
    * specify either the component id (integer) or the component handle prefixed by "handle:" to specify
    * the unique identifier for the component you are working with.
    *
-   * @param subscriptionId  The Chargify id of the subscription
-   * @param componentId     Either the Advanced Billing id for the component or the
-   *                                                      component's handle prefixed by `handle:`
-   * @param sinceId         Returns usages with an id greater than or equal to the one
-   *                                                      specified
-   * @param maxId           Returns usages with an id less than or equal to the one
-   *                                                      specified
-   * @param sinceDate       Returns usages with a created_at date greater than or equal
-   *                                                      to midnight (12:00 AM) on the date specified.
-   * @param untilDate       Returns usages with a created_at date less than or equal to
-   *                                                      midnight (12:00 AM) on the date specified.
-   * @param page            Result records are organized in pages. By default, the first
-   *                                                      page of results is displayed. The page parameter specifies a
-   *                                                      page number of results to fetch. You can start navigating
-   *                                                      through the pages to consume the results. You do this by
-   *                                                      passing in a page parameter. Retrieve the next page by adding
-   *                                                      ?page=2 to the query string. If there are no results to
-   *                                                      return, then an empty result set will be returned. Use in
-   *                                                      query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each
-   *                                                      request. Default value is 20. The maximum allowed values is
-   *                                                      200; any per_page value over 200 will be changed to 200. Use
-   *                                                      in query `per_page=200`.
+   * @param subscriptionIdOrReference    Either the Advanced Billing
+   *                                                                                 subscription ID (integer) or the
+   *                                                                                 subscription reference (string).
+   *                                                                                 Important: In cases where a
+   *                                                                                 numeric string value matches both
+   *                                                                                 an existing subscription ID and an
+   *                                                                                 existing subscription reference,
+   *                                                                                 the system will prioritize the
+   *                                                                                 subscription ID lookup. For
+   *                                                                                 example, if both subscription ID
+   *                                                                                 123 and subscription reference
+   *                                                                                 "123" exist, passing "123" will
+   *                                                                                 return the subscription with ID
+   *                                                                                 123.
+   * @param componentId                  Either the Advanced Billing id
+   *                                                                                 for the component or the
+   *                                                                                 component's handle prefixed by
+   *                                                                                 `handle:`
+   * @param sinceId                      Returns usages with an id greater
+   *                                                                                 than or equal to the one
+   *                                                                                 specified
+   * @param maxId                        Returns usages with an id less
+   *                                                                                 than or equal to the one
+   *                                                                                 specified
+   * @param sinceDate                    Returns usages with a created_at
+   *                                                                                 date greater than or equal to
+   *                                                                                 midnight (12:00 AM) on the date
+   *                                                                                 specified.
+   * @param untilDate                    Returns usages with a created_at
+   *                                                                                 date less than or equal to
+   *                                                                                 midnight (12:00 AM) on the date
+   *                                                                                 specified.
+   * @param page                         Result records are organized in
+   *                                                                                 pages. By default, the first page
+   *                                                                                 of results is displayed. The page
+   *                                                                                 parameter specifies a page number
+   *                                                                                 of results to fetch. You can start
+   *                                                                                 navigating through the pages to
+   *                                                                                 consume the results. You do this
+   *                                                                                 by passing in a page parameter.
+   *                                                                                 Retrieve the next page by adding ?
+   *                                                                                 page=2 to the query string. If
+   *                                                                                 there are no results to return,
+   *                                                                                 then an empty result set will be
+   *                                                                                 returned. Use in query `page=1`.
+   * @param perPage                      This parameter indicates how many
+   *                                                                                 records to fetch in each request.
+   *                                                                                 Default value is 20. The maximum
+   *                                                                                 allowed values is 200; any
+   *                                                                                 per_page value over 200 will be
+   *                                                                                 changed to 200. Use in query
+   *                                                                                 `per_page=200`.
    * @return Response from the API call
    */
   async listUsages(
     {
-      subscriptionId,
+      subscriptionIdOrReference,
       componentId,
       sinceId,
       maxId,
@@ -824,7 +880,7 @@ export class SubscriptionComponentsController extends BaseController {
       page,
       perPage,
     }: {
-      subscriptionId: number;
+      subscriptionIdOrReference: ListUsagesInputSubscriptionIdOrReference;
       componentId: ListUsagesInputComponentId;
       sinceId?: bigint;
       maxId?: bigint;
@@ -837,7 +893,10 @@ export class SubscriptionComponentsController extends BaseController {
   ): Promise<ApiResponse<UsageResponse[]>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
-      subscriptionId: [subscriptionId, number()],
+      subscriptionIdOrReference: [
+        subscriptionIdOrReference,
+        listUsagesInputSubscriptionIdOrReferenceSchema,
+      ],
       componentId: [componentId, listUsagesInputComponentIdSchema],
       sinceId: [sinceId, optional(bigint())],
       maxId: [maxId, optional(bigint())],
@@ -852,7 +911,7 @@ export class SubscriptionComponentsController extends BaseController {
     req.query('until_date', mapped.untilDate, commaPrefix);
     req.query('page', mapped.page, commaPrefix);
     req.query('per_page', mapped.perPage, commaPrefix);
-    req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/components/${mapped.componentId}/usages.json`;
+    req.appendTemplatePath`/subscriptions/${mapped.subscriptionIdOrReference}/components/${mapped.componentId}/usages.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(usageResponseSchema), requestOptions);
   }

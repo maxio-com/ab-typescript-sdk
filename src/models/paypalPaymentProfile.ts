@@ -11,9 +11,9 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { PaymentType, paymentTypeSchema } from './paymentType';
-import { PayPalVault, payPalVaultSchema } from './payPalVault';
+} from '../schema.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
+import { PayPalVault, payPalVaultSchema } from './payPalVault.js';
 
 export interface PaypalPaymentProfile {
   /** The Chargify-assigned ID of the stored PayPal payment profile. */

@@ -11,19 +11,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceDiscountBreakout,
   invoiceDiscountBreakoutSchema,
-} from './invoiceDiscountBreakout';
+} from './invoiceDiscountBreakout.js';
 import {
   InvoiceDiscountType,
   invoiceDiscountTypeSchema,
-} from './invoiceDiscountType';
+} from './invoiceDiscountType.js';
 import {
   ProformaInvoiceDiscountSourceType,
   proformaInvoiceDiscountSourceTypeSchema,
-} from './proformaInvoiceDiscountSourceType';
+} from './proformaInvoiceDiscountSourceType.js';
 
 export interface ProformaInvoiceDiscount {
   uid?: string;

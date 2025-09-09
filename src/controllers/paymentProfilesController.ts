@@ -4,36 +4,36 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   BankAccountResponse,
   bankAccountResponseSchema,
-} from '../models/bankAccountResponse';
+} from '../models/bankAccountResponse.js';
 import {
   BankAccountVerificationRequest,
   bankAccountVerificationRequestSchema,
-} from '../models/bankAccountVerificationRequest';
+} from '../models/bankAccountVerificationRequest.js';
 import {
   CreatePaymentProfileRequest,
   createPaymentProfileRequestSchema,
-} from '../models/createPaymentProfileRequest';
+} from '../models/createPaymentProfileRequest.js';
 import {
   GetOneTimeTokenRequest,
   getOneTimeTokenRequestSchema,
-} from '../models/getOneTimeTokenRequest';
+} from '../models/getOneTimeTokenRequest.js';
 import {
   PaymentProfileResponse,
   paymentProfileResponseSchema,
-} from '../models/paymentProfileResponse';
+} from '../models/paymentProfileResponse.js';
 import {
   UpdatePaymentProfileRequest,
   updatePaymentProfileRequestSchema,
-} from '../models/updatePaymentProfileRequest';
-import { array, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updatePaymentProfileRequest.js';
+import { array, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ErrorStringMapResponseError } from '../errors/errorStringMapResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { ErrorStringMapResponseError } from '../errors/errorStringMapResponseError.js';
 
 export class PaymentProfilesController extends BaseController {
   /**
@@ -127,12 +127,11 @@ export class PaymentProfilesController extends BaseController {
    * + [Full documentation on GoCardless](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-
    * GoCardless)
    *
-   * + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.
-   * com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-
-   * gateway)
+   * + [Using Chargify.js with GoCardless - minimal example](https://docs.maxio.com/hc/en-
+   * us/articles/38206331271693-Examples#h_01K0PJ15QQZKCER8CFK40MR6XJ)
    *
-   * + [Using Chargify.js with GoCardless - full example](https://developers.chargify.com/docs/developer-
-   * docs/ZG9jOjE0NjAzNDIy-examples#full-example-with-direct-debit-gocardless-gateway)
+   * + [Using Chargify.js with GoCardless - full example](https://docs.maxio.com/hc/en-
+   * us/articles/38206331271693-Examples#h_01K0PJ15QR09JVHWW0MCA7HVJV)
    *
    * ### GoCardless with Local Bank Details
    *
@@ -208,13 +207,11 @@ export class PaymentProfilesController extends BaseController {
    * + [Full documentation on Stripe SEPA Direct Debit](https://maxio.zendesk.com/hc/en-
    * us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
    *
-   * + [Using Chargify.js with Stripe Direct Debit - minimal example](https://developers.chargify.
-   * com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-
-   * stripe-gateway)
+   * + [Using Chargify.js with Stripe Direct Debit - minimal example](https://docs.maxio.com/hc/en-
+   * us/articles/38206331271693-Examples#h_01K0PJ15QQFKKN8Z7B7DZ9AJS5)
    *
-   * + [Using Chargify.js with Stripe Direct Debit - full example](https://developers.chargify.
-   * com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#full-example-with-sepa-direct-debit-stripe-
-   * gateway)
+   * + [Using Chargify.js with Stripe Direct Debit - full example](https://docs.maxio.com/hc/en-
+   * us/articles/38206331271693-Examples#h_01K0PJ15QRECQQ4ECS3ZA55GY7)
    *
    * ### Stripe SEPA Direct Debit Payment Profiles
    *
@@ -771,8 +768,8 @@ export class PaymentProfilesController extends BaseController {
    * You can use One Time Tokens while creating a subscription or payment profile instead of passing all
    * bank account or credit card data directly to a given API endpoint.
    *
-   * To obtain a One Time Token you have to use [Chargify.js](https://developers.chargify.
-   * com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview).
+   * To obtain a One Time Token you have to use [Chargify.js](https://docs.maxio.com/hc/en-
+   * us/articles/38163190843789-Chargify-js-Overview#chargify-js-overview-0-0).
    *
    * @param chargifyToken  Advanced Billing Token
    * @return Response from the API call

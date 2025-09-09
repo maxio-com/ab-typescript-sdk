@@ -11,7 +11,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 /** Information about the customer who is owner or recipient the invoiced subscription. */
 export interface InvoiceCustomer {

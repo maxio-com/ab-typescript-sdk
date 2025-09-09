@@ -11,8 +11,8 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
-import { Metadata, metadataSchema } from './metadata';
+} from '../schema.js';
+import { Metadata, metadataSchema } from './metadata.js';
 
 export interface PaginatedMetadata {
   totalCount?: number;

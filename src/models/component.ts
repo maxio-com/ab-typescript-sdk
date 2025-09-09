@@ -15,13 +15,13 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { ComponentKind, componentKindSchema } from './componentKind';
-import { ComponentPrice, componentPriceSchema } from './componentPrice';
-import { CreditType, creditTypeSchema } from './creditType';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { ItemCategory, itemCategorySchema } from './itemCategory';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from '../schema.js';
+import { ComponentKind, componentKindSchema } from './componentKind.js';
+import { ComponentPrice, componentPriceSchema } from './componentPrice.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { ItemCategory, itemCategorySchema } from './itemCategory.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface Component {
   /** The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. */

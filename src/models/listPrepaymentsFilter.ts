@@ -4,11 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema.js';
 import {
   ListPrepaymentDateField,
   listPrepaymentDateFieldSchema,
-} from './listPrepaymentDateField';
+} from './listPrepaymentDateField.js';
 
 export interface ListPrepaymentsFilter {
   /** The type of filter you would like to apply to your search. `created_at` - Time when prepayment was created. `application_at` - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. */
