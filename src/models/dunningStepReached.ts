@@ -4,9 +4,9 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
-import { DunnerData, dunnerDataSchema } from './dunnerData';
-import { DunningStepData, dunningStepDataSchema } from './dunningStepData';
+import { expandoObject, lazy, Schema } from '../schema.js';
+import { DunnerData, dunnerDataSchema } from './dunnerData.js';
+import { DunningStepData, dunningStepDataSchema } from './dunningStepData.js';
 
 export interface DunningStepReached {
   dunner: DunnerData;

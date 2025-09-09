@@ -11,8 +11,8 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
-import { Metafield, metafieldSchema } from './metafield';
+} from '../schema.js';
+import { Metafield, metafieldSchema } from './metafield.js';
 
 export interface ListMetafieldsResponse {
   totalCount?: number;

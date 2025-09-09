@@ -4,8 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { number, oneOf, Schema, validateAndMap } from '../../schema';
-import { SnapDay, snapDaySchema } from '../snapDay';
+import {
+  isMappedValueValidForSchema,
+  number,
+  oneOf,
+  Schema,
+} from '../../schema.js';
+import { SnapDay, snapDaySchema } from '../snapDay.js';
 
 /** This is a container type for one-of types. */
 export type UpdateSubscriptionSnapDay = SnapDay | number;
@@ -21,8 +26,7 @@ export namespace UpdateSubscriptionSnapDay {
    * This is SnapDay case.
    */
   export function isSnapDay(value: unknown): value is SnapDay {
-    const validationResult = validateAndMap(value, snapDaySchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, snapDaySchema);
   }
 
   /**

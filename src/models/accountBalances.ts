@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, optional, Schema } from '../schema';
-import { AccountBalance, accountBalanceSchema } from './accountBalance';
+import { expandoObject, lazy, optional, Schema } from '../schema.js';
+import { AccountBalance, accountBalanceSchema } from './accountBalance.js';
 
 export interface AccountBalances {
   /** The balance, in cents, of the sum of the subscription's  open, payable invoices. */

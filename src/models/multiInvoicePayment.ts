@@ -12,11 +12,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoicePaymentApplication,
   invoicePaymentApplicationSchema,
-} from './invoicePaymentApplication';
+} from './invoicePaymentApplication.js';
 
 export interface MultiInvoicePayment {
   /** The numeric ID of the transaction. */

@@ -11,8 +11,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { SiteStatistics, siteStatisticsSchema } from './siteStatistics';
+} from '../schema.js';
+import { SiteStatistics, siteStatisticsSchema } from './siteStatistics.js';
 
 export interface SiteSummary {
   sellerName?: string;

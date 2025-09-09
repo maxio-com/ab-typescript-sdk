@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { RefundPrepaymentBaseRefundError } from '../models/refundPrepaymentBaseRefundError';
+import { ApiError } from '../core.js';
+import { RefundPrepaymentBaseRefundError } from '../models/refundPrepaymentBaseRefundError.js';
 
 /**
  * Creates an instance of RefundPrepaymentBaseErrorsResponse

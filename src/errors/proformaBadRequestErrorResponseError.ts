@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { ProformaError } from '../models/proformaError';
+import { ApiError } from '../core.js';
+import { ProformaError } from '../models/proformaError.js';
 
 /**
  * Creates an instance of ProformaBadRequestErrorResponse

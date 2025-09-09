@@ -9,58 +9,58 @@ import {
   commaPrefix,
   RequestOptions,
   unindexedPrefix,
-} from '../core';
+} from '../core.js';
 import {
   AddSubscriptionToAGroup,
   addSubscriptionToAGroupSchema,
-} from '../models/addSubscriptionToAGroup';
+} from '../models/addSubscriptionToAGroup.js';
 import {
   CreateSubscriptionGroupRequest,
   createSubscriptionGroupRequestSchema,
-} from '../models/createSubscriptionGroupRequest';
+} from '../models/createSubscriptionGroupRequest.js';
 import {
   DeleteSubscriptionGroupResponse,
   deleteSubscriptionGroupResponseSchema,
-} from '../models/deleteSubscriptionGroupResponse';
+} from '../models/deleteSubscriptionGroupResponse.js';
 import {
   FullSubscriptionGroupResponse,
   fullSubscriptionGroupResponseSchema,
-} from '../models/fullSubscriptionGroupResponse';
+} from '../models/fullSubscriptionGroupResponse.js';
 import {
   ListSubscriptionGroupsResponse,
   listSubscriptionGroupsResponseSchema,
-} from '../models/listSubscriptionGroupsResponse';
+} from '../models/listSubscriptionGroupsResponse.js';
 import {
   SubscriptionGroupInclude,
   subscriptionGroupIncludeSchema,
-} from '../models/subscriptionGroupInclude';
+} from '../models/subscriptionGroupInclude.js';
 import {
   SubscriptionGroupResponse,
   subscriptionGroupResponseSchema,
-} from '../models/subscriptionGroupResponse';
+} from '../models/subscriptionGroupResponse.js';
 import {
   SubscriptionGroupSignupRequest,
   subscriptionGroupSignupRequestSchema,
-} from '../models/subscriptionGroupSignupRequest';
+} from '../models/subscriptionGroupSignupRequest.js';
 import {
   SubscriptionGroupSignupResponse,
   subscriptionGroupSignupResponseSchema,
-} from '../models/subscriptionGroupSignupResponse';
+} from '../models/subscriptionGroupSignupResponse.js';
 import {
   SubscriptionGroupsListInclude,
   subscriptionGroupsListIncludeSchema,
-} from '../models/subscriptionGroupsListInclude';
+} from '../models/subscriptionGroupsListInclude.js';
 import {
   UpdateSubscriptionGroupRequest,
   updateSubscriptionGroupRequestSchema,
-} from '../models/updateSubscriptionGroupRequest';
-import { array, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateSubscriptionGroupRequest.js';
+import { array, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { SubscriptionGroupCreateErrorResponseError } from '../errors/subscriptionGroupCreateErrorResponseError';
-import { SubscriptionGroupSignupErrorResponseError } from '../errors/subscriptionGroupSignupErrorResponseError';
-import { SubscriptionGroupUpdateErrorResponseError } from '../errors/subscriptionGroupUpdateErrorResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { SubscriptionGroupCreateErrorResponseError } from '../errors/subscriptionGroupCreateErrorResponseError.js';
+import { SubscriptionGroupSignupErrorResponseError } from '../errors/subscriptionGroupSignupErrorResponseError.js';
+import { SubscriptionGroupUpdateErrorResponseError } from '../errors/subscriptionGroupUpdateErrorResponseError.js';
 
 export class SubscriptionGroupsController extends BaseController {
   /**

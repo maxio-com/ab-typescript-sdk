@@ -4,31 +4,31 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, optional, Schema, string } from '../schema';
+import { boolean, expandoObject, optional, Schema, string } from '../schema.js';
 import {
   CreateInvoiceItemComponentId,
   createInvoiceItemComponentIdSchema,
-} from './containers/createInvoiceItemComponentId';
+} from './containers/createInvoiceItemComponentId.js';
 import {
   CreateInvoiceItemPricePointId,
   createInvoiceItemPricePointIdSchema,
-} from './containers/createInvoiceItemPricePointId';
+} from './containers/createInvoiceItemPricePointId.js';
 import {
   CreateInvoiceItemProductId,
   createInvoiceItemProductIdSchema,
-} from './containers/createInvoiceItemProductId';
+} from './containers/createInvoiceItemProductId.js';
 import {
   CreateInvoiceItemProductPricePointId,
   createInvoiceItemProductPricePointIdSchema,
-} from './containers/createInvoiceItemProductPricePointId';
+} from './containers/createInvoiceItemProductPricePointId.js';
 import {
   CreateInvoiceItemQuantity,
   createInvoiceItemQuantitySchema,
-} from './containers/createInvoiceItemQuantity';
+} from './containers/createInvoiceItemQuantity.js';
 import {
   CreateInvoiceItemUnitPrice,
   createInvoiceItemUnitPriceSchema,
-} from './containers/createInvoiceItemUnitPrice';
+} from './containers/createInvoiceItemUnitPrice.js';
 
 export interface CreateInvoiceItem {
   title?: string;

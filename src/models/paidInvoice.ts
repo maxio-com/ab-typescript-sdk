@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
-import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
+import { expandoObject, optional, Schema, string } from '../schema.js';
+import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus.js';
 
 export interface PaidInvoice {
   /** The uid of the paid invoice */

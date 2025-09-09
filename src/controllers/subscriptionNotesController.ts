@@ -4,18 +4,18 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   SubscriptionNoteResponse,
   subscriptionNoteResponseSchema,
-} from '../models/subscriptionNoteResponse';
+} from '../models/subscriptionNoteResponse.js';
 import {
   UpdateSubscriptionNoteRequest,
   updateSubscriptionNoteRequestSchema,
-} from '../models/updateSubscriptionNoteRequest';
-import { array, number, optional } from '../schema';
-import { BaseController } from './baseController';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+} from '../models/updateSubscriptionNoteRequest.js';
+import { array, number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class SubscriptionNotesController extends BaseController {
   /**

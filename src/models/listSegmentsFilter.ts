@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema.js';
 
 export interface ListSegmentsFilter {
   /** The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected. Use in query `filter[segment_property_1_value]=EU`. */

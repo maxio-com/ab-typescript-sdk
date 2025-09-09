@@ -4,15 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, number, optional, Schema, string } from '../schema';
+import { expandoObject, number, optional, Schema, string } from '../schema.js';
 import {
   CreateInvoicePaymentAmount,
   createInvoicePaymentAmountSchema,
-} from './containers/createInvoicePaymentAmount';
+} from './containers/createInvoicePaymentAmount.js';
 import {
   InvoicePaymentMethodType,
   invoicePaymentMethodTypeSchema,
-} from './invoicePaymentMethodType';
+} from './invoicePaymentMethodType.js';
 
 export interface CreateInvoicePayment {
   /** A string of the dollar amount to be refunded (eg. "10.50" => $10.50) */

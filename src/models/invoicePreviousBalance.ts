@@ -11,11 +11,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceBalanceItem,
   invoiceBalanceItemSchema,
-} from './invoiceBalanceItem';
+} from './invoiceBalanceItem.js';
 
 export interface InvoicePreviousBalance {
   capturedAt?: string;

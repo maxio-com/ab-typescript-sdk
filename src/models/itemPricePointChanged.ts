@@ -4,11 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, number, Schema, string } from '../schema';
+import { expandoObject, lazy, number, Schema, string } from '../schema.js';
 import {
   ItemPricePointData,
   itemPricePointDataSchema,
-} from './itemPricePointData';
+} from './itemPricePointData.js';
 
 export interface ItemPricePointChanged {
   itemId: number;

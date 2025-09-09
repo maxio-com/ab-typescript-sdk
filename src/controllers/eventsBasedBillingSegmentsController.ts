@@ -4,41 +4,41 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   BulkCreateSegments,
   bulkCreateSegmentsSchema,
-} from '../models/bulkCreateSegments';
+} from '../models/bulkCreateSegments.js';
 import {
   BulkUpdateSegments,
   bulkUpdateSegmentsSchema,
-} from '../models/bulkUpdateSegments';
+} from '../models/bulkUpdateSegments.js';
 import {
   CreateSegmentRequest,
   createSegmentRequestSchema,
-} from '../models/createSegmentRequest';
+} from '../models/createSegmentRequest.js';
 import {
   ListSegmentsFilter,
   listSegmentsFilterSchema,
-} from '../models/listSegmentsFilter';
+} from '../models/listSegmentsFilter.js';
 import {
   ListSegmentsResponse,
   listSegmentsResponseSchema,
-} from '../models/listSegmentsResponse';
+} from '../models/listSegmentsResponse.js';
 import {
   SegmentResponse,
   segmentResponseSchema,
-} from '../models/segmentResponse';
+} from '../models/segmentResponse.js';
 import {
   UpdateSegmentRequest,
   updateSegmentRequestSchema,
-} from '../models/updateSegmentRequest';
-import { number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateSegmentRequest.js';
+import { number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { EventBasedBillingListSegmentsErrorsError } from '../errors/eventBasedBillingListSegmentsErrorsError';
-import { EventBasedBillingSegmentError } from '../errors/eventBasedBillingSegmentError';
-import { EventBasedBillingSegmentErrorsError } from '../errors/eventBasedBillingSegmentErrorsError';
+import { EventBasedBillingListSegmentsErrorsError } from '../errors/eventBasedBillingListSegmentsErrorsError.js';
+import { EventBasedBillingSegmentError } from '../errors/eventBasedBillingSegmentError.js';
+import { EventBasedBillingSegmentErrorsError } from '../errors/eventBasedBillingSegmentErrorsError.js';
 
 export class EventsBasedBillingSegmentsController extends BaseController {
   /**

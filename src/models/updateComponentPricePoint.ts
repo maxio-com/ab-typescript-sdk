@@ -14,10 +14,10 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
-import { UpdatePrice, updatePriceSchema } from './updatePrice';
+} from '../schema.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import { UpdatePrice, updatePriceSchema } from './updatePrice.js';
 
 export interface UpdateComponentPricePoint {
   name?: string;

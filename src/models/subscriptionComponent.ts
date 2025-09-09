@@ -14,21 +14,21 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { ComponentKind, componentKindSchema } from './componentKind';
+} from '../schema.js';
+import { ComponentKind, componentKindSchema } from './componentKind.js';
 import {
   SubscriptionComponentAllocatedQuantity,
   subscriptionComponentAllocatedQuantitySchema,
-} from './containers/subscriptionComponentAllocatedQuantity';
-import { CreditType, creditTypeSchema } from './creditType';
-import { HistoricUsage, historicUsageSchema } from './historicUsage';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { PricePointType, pricePointTypeSchema } from './pricePointType';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './containers/subscriptionComponentAllocatedQuantity.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { HistoricUsage, historicUsageSchema } from './historicUsage.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { PricePointType, pricePointTypeSchema } from './pricePointType.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 import {
   SubscriptionComponentSubscription,
   subscriptionComponentSubscriptionSchema,
-} from './subscriptionComponentSubscription';
+} from './subscriptionComponentSubscription.js';
 
 export interface SubscriptionComponent {
   id?: number;

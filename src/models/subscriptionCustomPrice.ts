@@ -11,36 +11,36 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   SubscriptionCustomPriceExpirationInterval,
   subscriptionCustomPriceExpirationIntervalSchema,
-} from './containers/subscriptionCustomPriceExpirationInterval';
+} from './containers/subscriptionCustomPriceExpirationInterval.js';
 import {
   SubscriptionCustomPriceInitialChargeInCents,
   subscriptionCustomPriceInitialChargeInCentsSchema,
-} from './containers/subscriptionCustomPriceInitialChargeInCents';
+} from './containers/subscriptionCustomPriceInitialChargeInCents.js';
 import {
   SubscriptionCustomPriceInterval,
   subscriptionCustomPriceIntervalSchema,
-} from './containers/subscriptionCustomPriceInterval';
+} from './containers/subscriptionCustomPriceInterval.js';
 import {
   SubscriptionCustomPricePriceInCents,
   subscriptionCustomPricePriceInCentsSchema,
-} from './containers/subscriptionCustomPricePriceInCents';
+} from './containers/subscriptionCustomPricePriceInCents.js';
 import {
   SubscriptionCustomPriceTrialInterval,
   subscriptionCustomPriceTrialIntervalSchema,
-} from './containers/subscriptionCustomPriceTrialInterval';
+} from './containers/subscriptionCustomPriceTrialInterval.js';
 import {
   SubscriptionCustomPriceTrialPriceInCents,
   subscriptionCustomPriceTrialPriceInCentsSchema,
-} from './containers/subscriptionCustomPriceTrialPriceInCents';
+} from './containers/subscriptionCustomPriceTrialPriceInCents.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+} from './expirationIntervalUnit.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 
 /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
 export interface SubscriptionCustomPrice {

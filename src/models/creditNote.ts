@@ -12,23 +12,26 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CreditNoteApplication,
   creditNoteApplicationSchema,
-} from './creditNoteApplication';
+} from './creditNoteApplication.js';
 import {
   CreditNoteLineItem,
   creditNoteLineItemSchema,
-} from './creditNoteLineItem';
-import { CreditNoteStatus, creditNoteStatusSchema } from './creditNoteStatus';
-import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
-import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer';
-import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
-import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
-import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
-import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
-import { OriginInvoice, originInvoiceSchema } from './originInvoice';
+} from './creditNoteLineItem.js';
+import {
+  CreditNoteStatus,
+  creditNoteStatusSchema,
+} from './creditNoteStatus.js';
+import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress.js';
+import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer.js';
+import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount.js';
+import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund.js';
+import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller.js';
+import { InvoiceTax, invoiceTaxSchema } from './invoiceTax.js';
+import { OriginInvoice, originInvoiceSchema } from './originInvoice.js';
 
 export interface CreditNote {
   /** Unique identifier for the credit note. It is generated automatically by Chargify and has the prefix "cn_" followed by alphanumeric characters. */

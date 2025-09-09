@@ -11,7 +11,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 /** Refund an invoice or a segment of a consolidated invoice. */
 export interface RefundInvoice {

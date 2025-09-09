@@ -4,67 +4,67 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { oneOf, Schema, validateAndMap } from '../../schema';
+import { isMappedValueValidForSchema, oneOf, Schema } from '../../schema.js';
 import {
   ComponentAllocationChange,
   componentAllocationChangeSchema,
-} from '../componentAllocationChange';
+} from '../componentAllocationChange.js';
 import {
   CreditAccountBalanceChanged,
   creditAccountBalanceChangedSchema,
-} from '../creditAccountBalanceChanged';
+} from '../creditAccountBalanceChanged.js';
 import {
   CustomFieldValueChange,
   customFieldValueChangeSchema,
-} from '../customFieldValueChange';
+} from '../customFieldValueChange.js';
 import {
   DunningStepReached,
   dunningStepReachedSchema,
-} from '../dunningStepReached';
-import { InvoiceIssued, invoiceIssuedSchema } from '../invoiceIssued';
+} from '../dunningStepReached.js';
+import { InvoiceIssued, invoiceIssuedSchema } from '../invoiceIssued.js';
 import {
   ItemPricePointChanged,
   itemPricePointChangedSchema,
-} from '../itemPricePointChanged';
-import { MeteredUsage, meteredUsageSchema } from '../meteredUsage';
+} from '../itemPricePointChanged.js';
+import { MeteredUsage, meteredUsageSchema } from '../meteredUsage.js';
 import {
   PaymentCollectionMethodChanged,
   paymentCollectionMethodChangedSchema,
-} from '../paymentCollectionMethodChanged';
+} from '../paymentCollectionMethodChanged.js';
 import {
   PaymentRelatedEvents,
   paymentRelatedEventsSchema,
-} from '../paymentRelatedEvents';
+} from '../paymentRelatedEvents.js';
 import {
   PendingCancellationChange,
   pendingCancellationChangeSchema,
-} from '../pendingCancellationChange';
+} from '../pendingCancellationChange.js';
 import {
   PrepaidSubscriptionBalanceChanged,
   prepaidSubscriptionBalanceChangedSchema,
-} from '../prepaidSubscriptionBalanceChanged';
-import { PrepaidUsage, prepaidUsageSchema } from '../prepaidUsage';
+} from '../prepaidSubscriptionBalanceChanged.js';
+import { PrepaidUsage, prepaidUsageSchema } from '../prepaidUsage.js';
 import {
   PrepaymentAccountBalanceChanged,
   prepaymentAccountBalanceChangedSchema,
-} from '../prepaymentAccountBalanceChanged';
+} from '../prepaymentAccountBalanceChanged.js';
 import {
   ProformaInvoiceIssued,
   proformaInvoiceIssuedSchema,
-} from '../proformaInvoiceIssued';
-import { RefundSuccess, refundSuccessSchema } from '../refundSuccess';
+} from '../proformaInvoiceIssued.js';
+import { RefundSuccess, refundSuccessSchema } from '../refundSuccess.js';
 import {
   SubscriptionGroupSignupEventData,
   subscriptionGroupSignupEventDataSchema,
-} from '../subscriptionGroupSignupEventData';
+} from '../subscriptionGroupSignupEventData.js';
 import {
   SubscriptionProductChange,
   subscriptionProductChangeSchema,
-} from '../subscriptionProductChange';
+} from '../subscriptionProductChange.js';
 import {
   SubscriptionStateChange,
   subscriptionStateChangeSchema,
-} from '../subscriptionStateChange';
+} from '../subscriptionStateChange.js';
 
 /** This is a container type for one-of types. */
 export type EventEventSpecificData =
@@ -119,11 +119,7 @@ export namespace EventEventSpecificData {
   export function isSubscriptionProductChange(
     value: unknown
   ): value is SubscriptionProductChange {
-    const validationResult = validateAndMap(
-      value,
-      subscriptionProductChangeSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, subscriptionProductChangeSchema);
   }
 
   /**
@@ -134,11 +130,7 @@ export namespace EventEventSpecificData {
   export function isSubscriptionStateChange(
     value: unknown
   ): value is SubscriptionStateChange {
-    const validationResult = validateAndMap(
-      value,
-      subscriptionStateChangeSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, subscriptionStateChangeSchema);
   }
 
   /**
@@ -149,8 +141,7 @@ export namespace EventEventSpecificData {
   export function isPaymentRelatedEvents(
     value: unknown
   ): value is PaymentRelatedEvents {
-    const validationResult = validateAndMap(value, paymentRelatedEventsSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paymentRelatedEventsSchema);
   }
 
   /**
@@ -159,8 +150,7 @@ export namespace EventEventSpecificData {
    * This is Refund Success case.
    */
   export function isRefundSuccess(value: unknown): value is RefundSuccess {
-    const validationResult = validateAndMap(value, refundSuccessSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, refundSuccessSchema);
   }
 
   /**
@@ -171,11 +161,7 @@ export namespace EventEventSpecificData {
   export function isComponentAllocationChange(
     value: unknown
   ): value is ComponentAllocationChange {
-    const validationResult = validateAndMap(
-      value,
-      componentAllocationChangeSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, componentAllocationChangeSchema);
   }
 
   /**
@@ -184,8 +170,7 @@ export namespace EventEventSpecificData {
    * This is Metered Usage case.
    */
   export function isMeteredUsage(value: unknown): value is MeteredUsage {
-    const validationResult = validateAndMap(value, meteredUsageSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, meteredUsageSchema);
   }
 
   /**
@@ -194,8 +179,7 @@ export namespace EventEventSpecificData {
    * This is Prepaid Usage case.
    */
   export function isPrepaidUsage(value: unknown): value is PrepaidUsage {
-    const validationResult = validateAndMap(value, prepaidUsageSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, prepaidUsageSchema);
   }
 
   /**
@@ -206,8 +190,7 @@ export namespace EventEventSpecificData {
   export function isDunningStepReached(
     value: unknown
   ): value is DunningStepReached {
-    const validationResult = validateAndMap(value, dunningStepReachedSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, dunningStepReachedSchema);
   }
 
   /**
@@ -216,8 +199,7 @@ export namespace EventEventSpecificData {
    * This is Invoice Issued case.
    */
   export function isInvoiceIssued(value: unknown): value is InvoiceIssued {
-    const validationResult = validateAndMap(value, invoiceIssuedSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, invoiceIssuedSchema);
   }
 
   /**
@@ -228,11 +210,7 @@ export namespace EventEventSpecificData {
   export function isPendingCancellationChange(
     value: unknown
   ): value is PendingCancellationChange {
-    const validationResult = validateAndMap(
-      value,
-      pendingCancellationChangeSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, pendingCancellationChangeSchema);
   }
 
   /**
@@ -243,11 +221,10 @@ export namespace EventEventSpecificData {
   export function isPrepaidSubscriptionBalanceChanged(
     value: unknown
   ): value is PrepaidSubscriptionBalanceChanged {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       prepaidSubscriptionBalanceChangedSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -258,8 +235,7 @@ export namespace EventEventSpecificData {
   export function isProformaInvoiceIssued(
     value: unknown
   ): value is ProformaInvoiceIssued {
-    const validationResult = validateAndMap(value, proformaInvoiceIssuedSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, proformaInvoiceIssuedSchema);
   }
 
   /**
@@ -270,11 +246,10 @@ export namespace EventEventSpecificData {
   export function isSubscriptionGroupSignupEventData(
     value: unknown
   ): value is SubscriptionGroupSignupEventData {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       subscriptionGroupSignupEventDataSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -285,11 +260,10 @@ export namespace EventEventSpecificData {
   export function isCreditAccountBalanceChanged(
     value: unknown
   ): value is CreditAccountBalanceChanged {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       creditAccountBalanceChangedSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -300,11 +274,10 @@ export namespace EventEventSpecificData {
   export function isPrepaymentAccountBalanceChanged(
     value: unknown
   ): value is PrepaymentAccountBalanceChanged {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       prepaymentAccountBalanceChangedSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -315,11 +288,10 @@ export namespace EventEventSpecificData {
   export function isPaymentCollectionMethodChanged(
     value: unknown
   ): value is PaymentCollectionMethodChanged {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       paymentCollectionMethodChangedSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -330,8 +302,7 @@ export namespace EventEventSpecificData {
   export function isItemPricePointChanged(
     value: unknown
   ): value is ItemPricePointChanged {
-    const validationResult = validateAndMap(value, itemPricePointChangedSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, itemPricePointChangedSchema);
   }
 
   /**
@@ -342,10 +313,6 @@ export namespace EventEventSpecificData {
   export function isCustomFieldValueChange(
     value: unknown
   ): value is CustomFieldValueChange {
-    const validationResult = validateAndMap(
-      value,
-      customFieldValueChangeSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, customFieldValueChangeSchema);
   }
 }

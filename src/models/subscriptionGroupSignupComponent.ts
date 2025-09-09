@@ -4,27 +4,27 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, optional, Schema } from '../schema';
+import { expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   SubscriptionGroupSignupComponentAllocatedQuantity,
   subscriptionGroupSignupComponentAllocatedQuantitySchema,
-} from './containers/subscriptionGroupSignupComponentAllocatedQuantity';
+} from './containers/subscriptionGroupSignupComponentAllocatedQuantity.js';
 import {
   SubscriptionGroupSignupComponentComponentId,
   subscriptionGroupSignupComponentComponentIdSchema,
-} from './containers/subscriptionGroupSignupComponentComponentId';
+} from './containers/subscriptionGroupSignupComponentComponentId.js';
 import {
   SubscriptionGroupSignupComponentPricePointId,
   subscriptionGroupSignupComponentPricePointIdSchema,
-} from './containers/subscriptionGroupSignupComponentPricePointId';
+} from './containers/subscriptionGroupSignupComponentPricePointId.js';
 import {
   SubscriptionGroupSignupComponentUnitBalance,
   subscriptionGroupSignupComponentUnitBalanceSchema,
-} from './containers/subscriptionGroupSignupComponentUnitBalance';
+} from './containers/subscriptionGroupSignupComponentUnitBalance.js';
 import {
   SubscriptionGroupComponentCustomPrice,
   subscriptionGroupComponentCustomPriceSchema,
-} from './subscriptionGroupComponentCustomPrice';
+} from './subscriptionGroupComponentCustomPrice.js';
 
 export interface SubscriptionGroupSignupComponent {
   /** Required if passing any component to `components` attribute. */

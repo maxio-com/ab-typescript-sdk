@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema } from '../schema';
+import { expandoObject, optional, Schema } from '../schema.js';
 import {
   CalendarBillingSnapDay,
   calendarBillingSnapDaySchema,
-} from './containers/calendarBillingSnapDay';
-import { FirstChargeType, firstChargeTypeSchema } from './firstChargeType';
+} from './containers/calendarBillingSnapDay.js';
+import { FirstChargeType, firstChargeTypeSchema } from './firstChargeType.js';
 
 /** (Optional). Cannot be used when also specifying next_billing_at */
 export interface CalendarBilling {

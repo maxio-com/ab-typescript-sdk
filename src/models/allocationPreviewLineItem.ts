@@ -11,19 +11,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   AllocationPreviewDirection,
   allocationPreviewDirectionSchema,
-} from './allocationPreviewDirection';
+} from './allocationPreviewDirection.js';
 import {
   AllocationPreviewLineItemKind,
   allocationPreviewLineItemKindSchema,
-} from './allocationPreviewLineItemKind';
+} from './allocationPreviewLineItemKind.js';
 import {
   LineItemTransactionType,
   lineItemTransactionTypeSchema,
-} from './lineItemTransactionType';
+} from './lineItemTransactionType.js';
 
 export interface AllocationPreviewLineItem {
   /** A handle for the line item transaction type */

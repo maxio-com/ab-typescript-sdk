@@ -4,16 +4,16 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, nullable, optional, Schema } from '../schema';
-import { AddressChange, addressChangeSchema } from './addressChange';
+import { expandoObject, lazy, nullable, optional, Schema } from '../schema.js';
+import { AddressChange, addressChangeSchema } from './addressChange.js';
 import {
   CustomerCustomFieldsChange,
   customerCustomFieldsChangeSchema,
-} from './customerCustomFieldsChange';
+} from './customerCustomFieldsChange.js';
 import {
   CustomerPayerChange,
   customerPayerChangeSchema,
-} from './customerPayerChange';
+} from './customerPayerChange.js';
 
 export interface CustomerChange {
   payer?: CustomerPayerChange | null;

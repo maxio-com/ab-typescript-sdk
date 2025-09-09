@@ -11,23 +11,23 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentCustomPrice,
   componentCustomPriceSchema,
-} from './componentCustomPrice';
+} from './componentCustomPrice.js';
 import {
   CreateSubscriptionComponentAllocatedQuantity,
   createSubscriptionComponentAllocatedQuantitySchema,
-} from './containers/createSubscriptionComponentAllocatedQuantity';
+} from './containers/createSubscriptionComponentAllocatedQuantity.js';
 import {
   CreateSubscriptionComponentComponentId,
   createSubscriptionComponentComponentIdSchema,
-} from './containers/createSubscriptionComponentComponentId';
+} from './containers/createSubscriptionComponentComponentId.js';
 import {
   CreateSubscriptionComponentPricePointId,
   createSubscriptionComponentPricePointIdSchema,
-} from './containers/createSubscriptionComponentPricePointId';
+} from './containers/createSubscriptionComponentPricePointId.js';
 
 export interface CreateSubscriptionComponent {
   componentId?: CreateSubscriptionComponentComponentId;

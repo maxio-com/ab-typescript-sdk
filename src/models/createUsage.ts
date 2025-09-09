@@ -11,8 +11,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { BillingSchedule, billingScheduleSchema } from './billingSchedule';
+} from '../schema.js';
+import { BillingSchedule, billingScheduleSchema } from './billingSchedule.js';
 
 export interface CreateUsage {
   /** integer by default or decimal number if fractional quantities are enabled for the component */

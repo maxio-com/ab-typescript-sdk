@@ -15,39 +15,42 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   BankAccountPaymentProfile,
   bankAccountPaymentProfileSchema,
-} from './bankAccountPaymentProfile';
+} from './bankAccountPaymentProfile.js';
 import {
   CancellationMethod,
   cancellationMethodSchema,
-} from './cancellationMethod';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
+} from './cancellationMethod.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
 import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
-} from './creditCardPaymentProfile';
-import { Customer, customerSchema } from './customer';
+} from './creditCardPaymentProfile.js';
+import { Customer, customerSchema } from './customer.js';
 import {
   NestedSubscriptionGroup,
   nestedSubscriptionGroupSchema,
-} from './nestedSubscriptionGroup';
+} from './nestedSubscriptionGroup.js';
 import {
   PrepaidConfiguration,
   prepaidConfigurationSchema,
-} from './prepaidConfiguration';
-import { PricePointType, pricePointTypeSchema } from './pricePointType';
-import { Product, productSchema } from './product';
+} from './prepaidConfiguration.js';
+import { PricePointType, pricePointTypeSchema } from './pricePointType.js';
+import { Product, productSchema } from './product.js';
 import {
   SubscriptionIncludedCoupon,
   subscriptionIncludedCouponSchema,
-} from './subscriptionIncludedCoupon';
+} from './subscriptionIncludedCoupon.js';
 import {
   SubscriptionState,
   subscriptionStateSchema,
-} from './subscriptionState';
+} from './subscriptionState.js';
 
 export interface Subscription {
   /** The subscription unique id within Chargify. */

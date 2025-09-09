@@ -4,92 +4,92 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   ConsolidatedInvoice,
   consolidatedInvoiceSchema,
-} from '../models/consolidatedInvoice';
+} from '../models/consolidatedInvoice.js';
 import {
   CreateInvoicePaymentRequest,
   createInvoicePaymentRequestSchema,
-} from '../models/createInvoicePaymentRequest';
+} from '../models/createInvoicePaymentRequest.js';
 import {
   CreateInvoiceRequest,
   createInvoiceRequestSchema,
-} from '../models/createInvoiceRequest';
+} from '../models/createInvoiceRequest.js';
 import {
   CreateMultiInvoicePaymentRequest,
   createMultiInvoicePaymentRequestSchema,
-} from '../models/createMultiInvoicePaymentRequest';
-import { CreditNote, creditNoteSchema } from '../models/creditNote';
+} from '../models/createMultiInvoicePaymentRequest.js';
+import { CreditNote, creditNoteSchema } from '../models/creditNote.js';
 import {
   CustomerChangesPreviewResponse,
   customerChangesPreviewResponseSchema,
-} from '../models/customerChangesPreviewResponse';
-import { Direction, directionSchema } from '../models/direction';
-import { Invoice, invoiceSchema } from '../models/invoice';
+} from '../models/customerChangesPreviewResponse.js';
+import { Direction, directionSchema } from '../models/direction.js';
+import { Invoice, invoiceSchema } from '../models/invoice.js';
 import {
   InvoiceDateField,
   invoiceDateFieldSchema,
-} from '../models/invoiceDateField';
+} from '../models/invoiceDateField.js';
 import {
   InvoiceEventType,
   invoiceEventTypeSchema,
-} from '../models/invoiceEventType';
+} from '../models/invoiceEventType.js';
 import {
   InvoiceResponse,
   invoiceResponseSchema,
-} from '../models/invoiceResponse';
+} from '../models/invoiceResponse.js';
 import {
   InvoiceSortField,
   invoiceSortFieldSchema,
-} from '../models/invoiceSortField';
-import { InvoiceStatus, invoiceStatusSchema } from '../models/invoiceStatus';
+} from '../models/invoiceSortField.js';
+import { InvoiceStatus, invoiceStatusSchema } from '../models/invoiceStatus.js';
 import {
   IssueInvoiceRequest,
   issueInvoiceRequestSchema,
-} from '../models/issueInvoiceRequest';
+} from '../models/issueInvoiceRequest.js';
 import {
   ListCreditNotesResponse,
   listCreditNotesResponseSchema,
-} from '../models/listCreditNotesResponse';
+} from '../models/listCreditNotesResponse.js';
 import {
   ListInvoiceEventsResponse,
   listInvoiceEventsResponseSchema,
-} from '../models/listInvoiceEventsResponse';
+} from '../models/listInvoiceEventsResponse.js';
 import {
   ListInvoicesResponse,
   listInvoicesResponseSchema,
-} from '../models/listInvoicesResponse';
+} from '../models/listInvoicesResponse.js';
 import {
   MultiInvoicePaymentResponse,
   multiInvoicePaymentResponseSchema,
-} from '../models/multiInvoicePaymentResponse';
+} from '../models/multiInvoicePaymentResponse.js';
 import {
   RecordPaymentRequest,
   recordPaymentRequestSchema,
-} from '../models/recordPaymentRequest';
+} from '../models/recordPaymentRequest.js';
 import {
   RecordPaymentResponse,
   recordPaymentResponseSchema,
-} from '../models/recordPaymentResponse';
+} from '../models/recordPaymentResponse.js';
 import {
   RefundInvoiceRequest,
   refundInvoiceRequestSchema,
-} from '../models/refundInvoiceRequest';
+} from '../models/refundInvoiceRequest.js';
 import {
   SendInvoiceRequest,
   sendInvoiceRequestSchema,
-} from '../models/sendInvoiceRequest';
+} from '../models/sendInvoiceRequest.js';
 import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
-} from '../models/voidInvoiceRequest';
-import { array, bigint, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/voidInvoiceRequest.js';
+import { array, bigint, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class InvoicesController extends BaseController {
   /**

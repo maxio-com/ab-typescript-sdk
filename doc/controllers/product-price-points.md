@@ -163,10 +163,11 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
   productId: 124,
   page: 2,
-  perPage: 10
+  perPage: 10,
+  filterType: Liquid error: Value cannot be null. (Parameter 'key')
 }
 
 try {

@@ -13,11 +13,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoicePaymentMethod,
   invoicePaymentMethodSchema,
-} from './invoicePaymentMethod';
+} from './invoicePaymentMethod.js';
 
 export interface InvoicePayment {
   transactionTime?: string;

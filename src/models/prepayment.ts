@@ -12,8 +12,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { PrepaymentMethod, prepaymentMethodSchema } from './prepaymentMethod';
+} from '../schema.js';
+import {
+  PrepaymentMethod,
+  prepaymentMethodSchema,
+} from './prepaymentMethod.js';
 
 export interface Prepayment {
   id: number;

@@ -1233,7 +1233,7 @@ A. No. Usage should be reported as one API call per component on a single subscr
 
 ```ts
 async createUsage(
-  subscriptionId: number,
+  subscriptionIdOrReference: CreateUsageSubscriptionIdOrReference,
   componentId: CreateUsageComponentId,
   body?: CreateUsageRequest,
   requestOptions?: RequestOptions
@@ -1244,7 +1244,7 @@ async createUsage(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionIdOrReference` | [`CreateUsageSubscriptionIdOrReference`](../../doc/models/containers/create-usage-subscription-id-or-reference.md) | Template, Required | This is a container for one-of cases. |
 | `componentId` | [`CreateUsageComponentId`](../../doc/models/containers/create-usage-component-id.md) | Template, Required | This is a container for one-of cases. |
 | `body` | [`CreateUsageRequest \| undefined`](../../doc/models/create-usage-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1256,7 +1256,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```ts
-const subscriptionId = 222;
+const subscriptionIdOrReference: CreateUsageSubscriptionIdOrReference = 234;
 
 const componentId: CreateUsageComponentId = 144;
 
@@ -1270,7 +1270,7 @@ const body: CreateUsageRequest = {
 
 try {
   const { result, ...httpResponse } = await subscriptionComponentsController.createUsage(
-    subscriptionId,
+    subscriptionIdOrReference,
     componentId,
     body
   );
@@ -1329,7 +1329,7 @@ Use this endpoint to read the previously recorded components for a subscription.
 ```ts
 async listUsages(
   {
-    subscriptionId,
+    subscriptionIdOrReference,
     componentId,
     sinceId,
     maxId,
@@ -1338,7 +1338,7 @@ async listUsages(
     page,
     perPage,
   }: {
-    subscriptionId: number;
+    subscriptionIdOrReference: ListUsagesInputSubscriptionIdOrReference;
     componentId: ListUsagesInputComponentId;
     sinceId?: bigint;
     maxId?: bigint;
@@ -1355,7 +1355,7 @@ async listUsages(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionIdOrReference` | [`ListUsagesInputSubscriptionIdOrReference`](../../doc/models/containers/list-usages-input-subscription-id-or-reference.md) | Template, Required | This is a container for one-of cases. |
 | `componentId` | [`ListUsagesInputComponentId`](../../doc/models/containers/list-usages-input-component-id.md) | Template, Required | This is a container for one-of cases. |
 | `sinceId` | `bigint \| undefined` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
 | `maxId` | `bigint \| undefined` | Query, Optional | Returns usages with an id less than or equal to the one specified |
@@ -1373,7 +1373,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 const collect = {
-  subscriptionId: 222,
+  subscriptionIdOrReference: 234,
   componentId: 144,
   page: 2,
   perPage: 50
@@ -1472,6 +1472,7 @@ const body: ActivateEventBasedComponent = {
       {
         startingQuantity: 1,
         unitPrice: '5.0',
+        endingQuantity: null,
       }
     ],
     taxIncluded: false,

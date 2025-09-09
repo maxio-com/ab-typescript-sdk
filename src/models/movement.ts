@@ -13,9 +13,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { Breakouts, breakoutsSchema } from './breakouts';
-import { MovementLineItem, movementLineItemSchema } from './movementLineItem';
+} from '../schema.js';
+import { Breakouts, breakoutsSchema } from './breakouts.js';
+import {
+  MovementLineItem,
+  movementLineItemSchema,
+} from './movementLineItem.js';
 
 export interface Movement {
   timestamp?: string;

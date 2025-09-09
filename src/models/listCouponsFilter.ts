@@ -12,8 +12,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { BasicDateField, basicDateFieldSchema } from './basicDateField';
+} from '../schema.js';
+import { BasicDateField, basicDateFieldSchema } from './basicDateField.js';
 
 export interface ListCouponsFilter {
   /** The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. */

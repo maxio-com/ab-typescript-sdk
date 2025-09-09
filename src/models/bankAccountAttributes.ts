@@ -4,14 +4,17 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema.js';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
-} from './bankAccountHolderType';
-import { BankAccountType, bankAccountTypeSchema } from './bankAccountType';
-import { BankAccountVault, bankAccountVaultSchema } from './bankAccountVault';
-import { PaymentType, paymentTypeSchema } from './paymentType';
+} from './bankAccountHolderType.js';
+import { BankAccountType, bankAccountTypeSchema } from './bankAccountType.js';
+import {
+  BankAccountVault,
+  bankAccountVaultSchema,
+} from './bankAccountVault.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface BankAccountAttributes {
   chargifyToken?: string;

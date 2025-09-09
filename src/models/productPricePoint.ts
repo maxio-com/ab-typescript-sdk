@@ -15,14 +15,14 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CurrencyPrice, currencyPriceSchema } from './currencyPrice';
+} from '../schema.js';
+import { CurrencyPrice, currencyPriceSchema } from './currencyPrice.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { PricePointType, pricePointTypeSchema } from './pricePointType';
+} from './expirationIntervalUnit.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { PricePointType, pricePointTypeSchema } from './pricePointType.js';
 
 export interface ProductPricePoint {
   id?: number;

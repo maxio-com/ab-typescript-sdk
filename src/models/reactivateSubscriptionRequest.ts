@@ -11,15 +11,15 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ReactivateSubscriptionRequestResume,
   reactivateSubscriptionRequestResumeSchema,
-} from './containers/reactivateSubscriptionRequestResume';
+} from './containers/reactivateSubscriptionRequestResume.js';
 import {
   ReactivationBilling,
   reactivationBillingSchema,
-} from './reactivationBilling';
+} from './reactivationBilling.js';
 
 export interface ReactivateSubscriptionRequest {
   /** These values are only applicable to subscriptions using calendar billing */

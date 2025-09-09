@@ -13,11 +13,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   BillingManifestItem,
   billingManifestItemSchema,
-} from './billingManifestItem';
+} from './billingManifestItem.js';
 
 export interface BillingManifest {
   lineItems?: BillingManifestItem[];

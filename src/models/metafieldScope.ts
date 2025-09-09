@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, optional, Schema, string } from '../schema';
-import { IncludeOption, includeOptionSchema } from './includeOption';
+import { array, expandoObject, optional, Schema, string } from '../schema.js';
+import { IncludeOption, includeOptionSchema } from './includeOption.js';
 
 /** Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings. */
 export interface MetafieldScope {

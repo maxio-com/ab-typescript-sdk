@@ -11,8 +11,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { Breakouts, breakoutsSchema } from './breakouts';
+} from '../schema.js';
+import { Breakouts, breakoutsSchema } from './breakouts.js';
 
 export interface MRR {
   amountInCents?: bigint;

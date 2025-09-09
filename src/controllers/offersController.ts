@@ -4,20 +4,20 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   CreateOfferRequest,
   createOfferRequestSchema,
-} from '../models/createOfferRequest';
+} from '../models/createOfferRequest.js';
 import {
   ListOffersResponse,
   listOffersResponseSchema,
-} from '../models/listOffersResponse';
-import { OfferResponse, offerResponseSchema } from '../models/offerResponse';
-import { boolean, number, optional } from '../schema';
-import { BaseController } from './baseController';
-import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+} from '../models/listOffersResponse.js';
+import { OfferResponse, offerResponseSchema } from '../models/offerResponse.js';
+import { boolean, number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class OffersController extends BaseController {
   /**

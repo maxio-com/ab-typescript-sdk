@@ -11,7 +11,7 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
+} from '../schema.js';
 
 export interface PrepaidConfiguration {
   id?: number;

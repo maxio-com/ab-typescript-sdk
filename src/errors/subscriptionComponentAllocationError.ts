@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { SubscriptionComponentAllocationErrorItem } from '../models/subscriptionComponentAllocationErrorItem';
+import { ApiError } from '../core.js';
+import { SubscriptionComponentAllocationErrorItem } from '../models/subscriptionComponentAllocationErrorItem.js';
 
 /**
  * Creates an instance of SubscriptionComponentAllocation

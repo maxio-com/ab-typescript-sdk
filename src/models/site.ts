@@ -13,17 +13,20 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   AllocationSettings,
   allocationSettingsSchema,
-} from './allocationSettings';
-import { NetTerms, netTermsSchema } from './netTerms';
+} from './allocationSettings.js';
+import { NetTerms, netTermsSchema } from './netTerms.js';
 import {
   OrganizationAddress,
   organizationAddressSchema,
-} from './organizationAddress';
-import { TaxConfiguration, taxConfigurationSchema } from './taxConfiguration';
+} from './organizationAddress.js';
+import {
+  TaxConfiguration,
+  taxConfigurationSchema,
+} from './taxConfiguration.js';
 
 export interface Site {
   id?: number;

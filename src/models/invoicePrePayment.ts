@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, expandoObject, number, optional, Schema } from '../schema';
+import { bigint, expandoObject, number, optional, Schema } from '../schema.js';
 
 export interface InvoicePrePayment {
   /** The subscription id for the prepayment account */

@@ -11,8 +11,8 @@ import {
   lazy,
   optional,
   Schema,
-} from '../schema';
-import { CouponPayload, couponPayloadSchema } from './couponPayload';
+} from '../schema.js';
+import { CouponPayload, couponPayloadSchema } from './couponPayload.js';
 
 export interface CouponRequest {
   coupon?: CouponPayload;

@@ -12,9 +12,9 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CardType, cardTypeSchema } from './cardType';
-import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
+} from '../schema.js';
+import { CardType, cardTypeSchema } from './cardType.js';
+import { CreditCardVault, creditCardVaultSchema } from './creditCardVault.js';
 
 export interface GetOneTimeTokenPaymentProfile {
   id?: string | null;

@@ -4,29 +4,29 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { AutoInvite, autoInviteSchema } from '../models/autoInvite';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import { AutoInvite, autoInviteSchema } from '../models/autoInvite.js';
 import {
   CustomerResponse,
   customerResponseSchema,
-} from '../models/customerResponse';
+} from '../models/customerResponse.js';
 import {
   PortalManagementLink,
   portalManagementLinkSchema,
-} from '../models/portalManagementLink';
+} from '../models/portalManagementLink.js';
 import {
   ResentInvitation,
   resentInvitationSchema,
-} from '../models/resentInvitation';
+} from '../models/resentInvitation.js';
 import {
   RevokedInvitation,
   revokedInvitationSchema,
-} from '../models/revokedInvitation';
-import { number, optional } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/revokedInvitation.js';
+import { number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { TooManyManagementLinkRequestsError } from '../errors/tooManyManagementLinkRequestsError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { TooManyManagementLinkRequestsError } from '../errors/tooManyManagementLinkRequestsError.js';
 
 export class BillingPortalController extends BaseController {
   /**

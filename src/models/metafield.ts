@@ -12,13 +12,13 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   MetafieldEnum,
   metafieldEnumSchema,
-} from './containers/metafieldEnum';
-import { MetafieldInput, metafieldInputSchema } from './metafieldInput';
-import { MetafieldScope, metafieldScopeSchema } from './metafieldScope';
+} from './containers/metafieldEnum.js';
+import { MetafieldInput, metafieldInputSchema } from './metafieldInput.js';
+import { MetafieldScope, metafieldScopeSchema } from './metafieldScope.js';
 
 export interface Metafield {
   id?: number;

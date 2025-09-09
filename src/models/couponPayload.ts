@@ -11,15 +11,15 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CompoundingStrategy,
   compoundingStrategySchema,
-} from './compoundingStrategy';
+} from './compoundingStrategy.js';
 import {
   CouponPayloadPercentage,
   couponPayloadPercentageSchema,
-} from './containers/couponPayloadPercentage';
+} from './containers/couponPayloadPercentage.js';
 
 export interface CouponPayload {
   /** Required when creating a new coupon. This name is not displayed to customers and is limited to 255 characters. */

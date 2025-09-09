@@ -12,10 +12,10 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CardType, cardTypeSchema } from './cardType';
-import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
-import { PaymentType, paymentTypeSchema } from './paymentType';
+} from '../schema.js';
+import { CardType, cardTypeSchema } from './cardType.js';
+import { CreditCardVault, creditCardVaultSchema } from './creditCardVault.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface CreditCardPaymentProfile {
   /** The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer. */

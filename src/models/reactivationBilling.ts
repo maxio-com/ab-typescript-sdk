@@ -4,11 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema } from '../schema';
+import { expandoObject, optional, Schema } from '../schema.js';
 import {
   ReactivationCharge,
   reactivationChargeSchema,
-} from './reactivationCharge';
+} from './reactivationCharge.js';
 
 /** These values are only applicable to subscriptions using calendar billing */
 export interface ReactivationBilling {

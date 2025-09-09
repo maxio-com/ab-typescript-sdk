@@ -11,18 +11,18 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { AllVaults, allVaultsSchema } from './allVaults';
-import { CardType, cardTypeSchema } from './cardType';
+} from '../schema.js';
+import { AllVaults, allVaultsSchema } from './allVaults.js';
+import { CardType, cardTypeSchema } from './cardType.js';
 import {
   PaymentProfileAttributesExpirationMonth,
   paymentProfileAttributesExpirationMonthSchema,
-} from './containers/paymentProfileAttributesExpirationMonth';
+} from './containers/paymentProfileAttributesExpirationMonth.js';
 import {
   PaymentProfileAttributesExpirationYear,
   paymentProfileAttributesExpirationYearSchema,
-} from './containers/paymentProfileAttributesExpirationYear';
-import { PaymentType, paymentTypeSchema } from './paymentType';
+} from './containers/paymentProfileAttributesExpirationYear.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 /** alias to credit_card_attributes */
 export interface PaymentProfileAttributes {

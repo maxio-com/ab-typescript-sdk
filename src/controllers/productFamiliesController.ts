@@ -4,32 +4,35 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import {
+  BasicDateField,
+  basicDateFieldSchema,
+} from '../models/basicDateField.js';
 import {
   CreateProductFamilyRequest,
   createProductFamilyRequestSchema,
-} from '../models/createProductFamilyRequest';
+} from '../models/createProductFamilyRequest.js';
 import {
   ListProductsFilter,
   listProductsFilterSchema,
-} from '../models/listProductsFilter';
+} from '../models/listProductsFilter.js';
 import {
   ListProductsInclude,
   listProductsIncludeSchema,
-} from '../models/listProductsInclude';
+} from '../models/listProductsInclude.js';
 import {
   ProductFamilyResponse,
   productFamilyResponseSchema,
-} from '../models/productFamilyResponse';
+} from '../models/productFamilyResponse.js';
 import {
   ProductResponse,
   productResponseSchema,
-} from '../models/productResponse';
-import { array, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/productResponse.js';
+import { array, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class ProductFamiliesController extends BaseController {
   /**

@@ -12,14 +12,17 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   BankAccountHolderType,
   bankAccountHolderTypeSchema,
-} from './bankAccountHolderType';
-import { BankAccountType, bankAccountTypeSchema } from './bankAccountType';
-import { BankAccountVault, bankAccountVaultSchema } from './bankAccountVault';
-import { PaymentType, paymentTypeSchema } from './paymentType';
+} from './bankAccountHolderType.js';
+import { BankAccountType, bankAccountTypeSchema } from './bankAccountType.js';
+import {
+  BankAccountVault,
+  bankAccountVaultSchema,
+} from './bankAccountVault.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface BankAccountPaymentProfile {
   /** The Chargify-assigned ID of the stored bank account. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer */

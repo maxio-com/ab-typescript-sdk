@@ -14,18 +14,18 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentPricePointItem,
   componentPricePointItemSchema,
-} from './componentPricePointItem';
+} from './componentPricePointItem.js';
 import {
   EBBComponentUnitPrice,
   eBBComponentUnitPriceSchema,
-} from './containers/eBBComponentUnitPrice';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { Price, priceSchema } from './price';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './containers/eBBComponentUnitPrice.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { Price, priceSchema } from './price.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface EBBComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */

@@ -11,8 +11,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { RestrictionType, restrictionTypeSchema } from './restrictionType';
+} from '../schema.js';
+import { RestrictionType, restrictionTypeSchema } from './restrictionType.js';
 
 export interface CouponRestriction {
   id?: number;

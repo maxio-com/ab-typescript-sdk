@@ -12,11 +12,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   RefundPrepaymentAmount,
   refundPrepaymentAmountSchema,
-} from './containers/refundPrepaymentAmount';
+} from './containers/refundPrepaymentAmount.js';
 
 export interface RefundPrepayment {
   /** `amount` is not required if you pass `amount_in_cents`. */

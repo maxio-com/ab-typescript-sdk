@@ -12,25 +12,25 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   SegmentSegmentProperty1Value,
   segmentSegmentProperty1ValueSchema,
-} from './containers/segmentSegmentProperty1Value';
+} from './containers/segmentSegmentProperty1Value.js';
 import {
   SegmentSegmentProperty2Value,
   segmentSegmentProperty2ValueSchema,
-} from './containers/segmentSegmentProperty2Value';
+} from './containers/segmentSegmentProperty2Value.js';
 import {
   SegmentSegmentProperty3Value,
   segmentSegmentProperty3ValueSchema,
-} from './containers/segmentSegmentProperty3Value';
+} from './containers/segmentSegmentProperty3Value.js';
 import {
   SegmentSegmentProperty4Value,
   segmentSegmentProperty4ValueSchema,
-} from './containers/segmentSegmentProperty4Value';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
-import { SegmentPrice, segmentPriceSchema } from './segmentPrice';
+} from './containers/segmentSegmentProperty4Value.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import { SegmentPrice, segmentPriceSchema } from './segmentPrice.js';
 
 export interface Segment {
   id?: number;

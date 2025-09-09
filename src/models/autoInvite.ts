@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { Schema, numberEnum } from '../schema';
+import { Schema, numberEnum } from '../schema.js';
 
 /**
  * Enum for AutoInvite
