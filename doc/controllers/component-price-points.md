@@ -109,7 +109,7 @@ try {
 
 # Create Component Price Point
 
-This endpoint can be used to create a new price point for an existing component.
+Creates a price point for an existing component.
 
 ```ts
 async createComponentPricePoint(
@@ -149,7 +149,7 @@ const body: CreateComponentPricePointRequest = {
       {
         startingQuantity: '101',
         unitPrice: '4.00',
-        endingQuantity: null,
+        endingQuantity: '200',
       }
     ],
     handle: 'wholesale-handle',
