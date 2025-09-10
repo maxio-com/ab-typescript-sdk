@@ -317,6 +317,8 @@ describe('Subscriptions Controller', () => {
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(422);
+        console.log("Good example...");
+        console.log(reason);
         expect(reason.result.errors).toEqual([
           'Credit card number: must be a valid credit card number.',
         ]);

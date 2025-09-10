@@ -305,6 +305,7 @@ describe('Subscription Groups Invoice Account', () => {
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(422);
+        console.log("Failing example...");
         console.log(reason); // TODO: Remove this
         expect(reason.result.errors[0]).toBe(expectedErrorMessage);
       });
