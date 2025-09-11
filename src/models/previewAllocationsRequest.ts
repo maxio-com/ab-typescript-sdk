@@ -12,9 +12,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CreateAllocation, createAllocationSchema } from './createAllocation';
-import { CreditType, creditTypeSchema } from './creditType';
+} from '../schema.js';
+import {
+  CreateAllocation,
+  createAllocationSchema,
+} from './createAllocation.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
 
 export interface PreviewAllocationsRequest {
   allocations: CreateAllocation[];

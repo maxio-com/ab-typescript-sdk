@@ -11,6 +11,7 @@ describe('SitesController', () => {
       name: 'Typescript SDK',
       subdomain: 'ts-sdk',
       currency: 'USD',
+      auto_renewals_enabled: false,
       brighton_v1_enabled: false,
       sellerId: 58665,
       nonPrimaryCurrencies: ['EUR', 'GBP'],

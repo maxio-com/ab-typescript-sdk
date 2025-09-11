@@ -4,9 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, nullable, optional, Schema, string } from '../schema';
-import { AllVaults, allVaultsSchema } from './allVaults';
-import { CardType, cardTypeSchema } from './cardType';
+import {
+  expandoObject,
+  nullable,
+  optional,
+  Schema,
+  string,
+} from '../schema.js';
+import { AllVaults, allVaultsSchema } from './allVaults.js';
+import { CardType, cardTypeSchema } from './cardType.js';
 
 export interface UpdatePaymentProfile {
   /** The first name of the card holder. */

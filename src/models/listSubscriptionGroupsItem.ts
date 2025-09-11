@@ -13,12 +13,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { GroupType, groupTypeSchema } from './groupType';
+} from '../schema.js';
+import { GroupType, groupTypeSchema } from './groupType.js';
 import {
   SubscriptionGroupBalances,
   subscriptionGroupBalancesSchema,
-} from './subscriptionGroupBalances';
+} from './subscriptionGroupBalances.js';
 
 export interface ListSubscriptionGroupsItem {
   uid?: string;

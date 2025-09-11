@@ -4,20 +4,20 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
-import { Invoice, invoiceSchema } from '../models/invoice';
+import { ApiResponse, RequestOptions } from '../core.js';
+import { Invoice, invoiceSchema } from '../models/invoice.js';
 import {
   IssueAdvanceInvoiceRequest,
   issueAdvanceInvoiceRequestSchema,
-} from '../models/issueAdvanceInvoiceRequest';
+} from '../models/issueAdvanceInvoiceRequest.js';
 import {
   VoidInvoiceRequest,
   voidInvoiceRequestSchema,
-} from '../models/voidInvoiceRequest';
-import { number, optional } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/voidInvoiceRequest.js';
+import { number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class AdvanceInvoiceController extends BaseController {
   /**

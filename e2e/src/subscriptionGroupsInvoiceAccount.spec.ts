@@ -305,7 +305,10 @@ describe('Subscription Groups Invoice Account', () => {
       expect(promise).rejects.toThrow();
       await promise.catch((reason) => {
         expect(reason.statusCode).toBe(422);
-        expect(reason.result.errors[0]).toBe(expectedErrorMessage);
+
+        // TODO: A workaround for https://maxioevolution.atlassian.net/browse/FND-151
+        const errors = JSON.parse(reason.body).errors;
+        expect(errors[0]).toBe(expectedErrorMessage);
       });
     });
 
@@ -328,4 +331,3 @@ describe('Subscription Groups Invoice Account', () => {
     });
   });
 });
-

@@ -4,32 +4,35 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import {
+  BasicDateField,
+  basicDateFieldSchema,
+} from '../models/basicDateField.js';
 import {
   CreateCustomerRequest,
   createCustomerRequestSchema,
-} from '../models/createCustomerRequest';
+} from '../models/createCustomerRequest.js';
 import {
   CustomerResponse,
   customerResponseSchema,
-} from '../models/customerResponse';
+} from '../models/customerResponse.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
+} from '../models/sortingDirection.js';
 import {
   SubscriptionResponse,
   subscriptionResponseSchema,
-} from '../models/subscriptionResponse';
+} from '../models/subscriptionResponse.js';
 import {
   UpdateCustomerRequest,
   updateCustomerRequestSchema,
-} from '../models/updateCustomerRequest';
-import { array, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateCustomerRequest.js';
+import { array, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { CustomerErrorResponseError } from '../errors/customerErrorResponseError';
+import { CustomerErrorResponseError } from '../errors/customerErrorResponseError.js';
 
 export class CustomersController extends BaseController {
   /**
@@ -196,7 +199,7 @@ export class CustomersController extends BaseController {
   }
 
   /**
-   * This method allows to retrieve the Customer properties by Advanced Billing-generated Customer ID.
+   * Retrieves the Customer properties by Advanced Billing-generated Customer ID.
    *
    * @param id The Advanced Billing id of the customer
    * @return Response from the API call

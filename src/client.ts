@@ -4,31 +4,31 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { createAuthProviderFromConfig } from './authProvider';
+import { createAuthProviderFromConfig } from './authProvider.js';
 import {
   AuthParams,
   ClientInterface,
   SdkRequestBuilder,
   SdkRequestBuilderFactory,
   Server,
-} from './clientInterface';
-import { Configuration, Environment } from './configuration';
+} from './clientInterface.js';
+import { Configuration, Environment } from './configuration.js';
 import {
   DEFAULT_CONFIGURATION,
   DEFAULT_RETRY_CONFIG,
-} from './defaultConfiguration';
-import { ApiError } from './core';
-import { pathTemplate, SkipEncode } from './core';
-import { setHeader } from './core';
-import { updateUserAgent } from './core';
+} from './defaultConfiguration.js';
+import { ApiError } from './core.js';
+import { pathTemplate, SkipEncode } from './core.js';
+import { setHeader } from './core.js';
+import { updateUserAgent } from './core.js';
 import {
   AbortError,
   AuthenticatorInterface,
   createRequestBuilderFactory,
   HttpClientInterface,
   RetryConfiguration,
-} from './core';
-import { HttpClient } from './clientAdapter';
+} from './core.js';
+import { HttpClient } from './clientAdapter.js';
 
 export class Client implements ClientInterface {
   private _config: Readonly<Configuration>;
@@ -51,7 +51,7 @@ export class Client implements ClientInterface {
         ? this._config.httpClientOptions.timeout
         : this._config.timeout;
     this._userAgent = updateUserAgent(
-      'AB SDK TypeScript:7.0.0 on OS {os-info}'
+      'AB SDK TypeScript:7.0.1 on OS {os-info}'
     );
     this._requestBuilderFactory = createRequestHandlerFactory(
       (server) => getBaseUri(server, this._config),
@@ -61,6 +61,7 @@ export class Client implements ClientInterface {
         clientConfigOverrides: this._config.unstable_httpClientOptions,
         httpAgent: this._config.httpClientOptions?.httpAgent,
         httpsAgent: this._config.httpClientOptions?.httpsAgent,
+        proxySettings: this._config.httpClientOptions?.proxySettings,
       }),
       [
         withErrorHandlers,

@@ -14,23 +14,23 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   PrepaidUsageComponentUnitPrice,
   prepaidUsageComponentUnitPriceSchema,
-} from './containers/prepaidUsageComponentUnitPrice';
+} from './containers/prepaidUsageComponentUnitPrice.js';
 import {
   CreatePrepaidUsageComponentPricePoint,
   createPrepaidUsageComponentPricePointSchema,
-} from './createPrepaidUsageComponentPricePoint';
-import { CreditType, creditTypeSchema } from './creditType';
+} from './createPrepaidUsageComponentPricePoint.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { OveragePricing, overagePricingSchema } from './overagePricing';
-import { Price, priceSchema } from './price';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './expirationIntervalUnit.js';
+import { OveragePricing, overagePricingSchema } from './overagePricing.js';
+import { Price, priceSchema } from './price.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface PrepaidUsageComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */

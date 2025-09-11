@@ -4,23 +4,23 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema.js';
 import {
   CompoundingStrategy,
   compoundingStrategySchema,
-} from './compoundingStrategy';
+} from './compoundingStrategy.js';
 import {
   CreateInvoiceCouponAmount,
   createInvoiceCouponAmountSchema,
-} from './containers/createInvoiceCouponAmount';
+} from './containers/createInvoiceCouponAmount.js';
 import {
   CreateInvoiceCouponPercentage,
   createInvoiceCouponPercentageSchema,
-} from './containers/createInvoiceCouponPercentage';
+} from './containers/createInvoiceCouponPercentage.js';
 import {
   CreateInvoiceCouponProductFamilyId,
   createInvoiceCouponProductFamilyIdSchema,
-} from './containers/createInvoiceCouponProductFamilyId';
+} from './containers/createInvoiceCouponProductFamilyId.js';
 
 export interface CreateInvoiceCoupon {
   code?: string;

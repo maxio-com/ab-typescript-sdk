@@ -4,22 +4,22 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, RequestOptions } from '../core.js';
 import {
   CancelGroupedSubscriptionsRequest,
   cancelGroupedSubscriptionsRequestSchema,
-} from '../models/cancelGroupedSubscriptionsRequest';
+} from '../models/cancelGroupedSubscriptionsRequest.js';
 import {
   ReactivateSubscriptionGroupRequest,
   reactivateSubscriptionGroupRequestSchema,
-} from '../models/reactivateSubscriptionGroupRequest';
+} from '../models/reactivateSubscriptionGroupRequest.js';
 import {
   ReactivateSubscriptionGroupResponse,
   reactivateSubscriptionGroupResponseSchema,
-} from '../models/reactivateSubscriptionGroupResponse';
-import { optional, string } from '../schema';
-import { BaseController } from './baseController';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+} from '../models/reactivateSubscriptionGroupResponse.js';
+import { optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class SubscriptionGroupStatusController extends BaseController {
   /**

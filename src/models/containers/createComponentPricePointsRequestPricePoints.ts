@@ -4,15 +4,15 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, Schema, validateAndMap } from '../../schema';
+import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
 import {
   CreateComponentPricePoint,
   createComponentPricePointSchema,
-} from '../createComponentPricePoint';
+} from '../createComponentPricePoint.js';
 import {
   CreatePrepaidUsageComponentPricePoint,
   createPrepaidUsageComponentPricePointSchema,
-} from '../createPrepaidUsageComponentPricePoint';
+} from '../createPrepaidUsageComponentPricePoint.js';
 
 /** This is a container type for any-of types. */
 export type CreateComponentPricePointsRequestPricePoints =
@@ -32,11 +32,7 @@ export namespace CreateComponentPricePointsRequestPricePoints {
   export function isCreateComponentPricePoint(
     value: unknown
   ): value is CreateComponentPricePoint {
-    const validationResult = validateAndMap(
-      value,
-      createComponentPricePointSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, createComponentPricePointSchema);
   }
 
   /**
@@ -47,10 +43,9 @@ export namespace CreateComponentPricePointsRequestPricePoints {
   export function isCreatePrepaidUsageComponentPricePoint(
     value: unknown
   ): value is CreatePrepaidUsageComponentPricePoint {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       createPrepaidUsageComponentPricePointSchema
     );
-    return validationResult.errors === false;
   }
 }

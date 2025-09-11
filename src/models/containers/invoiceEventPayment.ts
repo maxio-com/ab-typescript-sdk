@@ -4,27 +4,27 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, Schema, validateAndMap } from '../../schema';
+import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
 import {
   PaymentMethodApplePay,
   paymentMethodApplePaySchema,
-} from '../paymentMethodApplePay';
+} from '../paymentMethodApplePay.js';
 import {
   PaymentMethodBankAccount,
   paymentMethodBankAccountSchema,
-} from '../paymentMethodBankAccount';
+} from '../paymentMethodBankAccount.js';
 import {
   PaymentMethodCreditCard,
   paymentMethodCreditCardSchema,
-} from '../paymentMethodCreditCard';
+} from '../paymentMethodCreditCard.js';
 import {
   PaymentMethodExternal,
   paymentMethodExternalSchema,
-} from '../paymentMethodExternal';
+} from '../paymentMethodExternal.js';
 import {
   PaymentMethodPaypal,
   paymentMethodPaypalSchema,
-} from '../paymentMethodPaypal';
+} from '../paymentMethodPaypal.js';
 
 /** This is a container type for any-of types. */
 export type InvoiceEventPayment =
@@ -63,8 +63,7 @@ export namespace InvoiceEventPayment {
   export function isPaymentMethodApplePay(
     value: unknown
   ): value is PaymentMethodApplePay {
-    const validationResult = validateAndMap(value, paymentMethodApplePaySchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paymentMethodApplePaySchema);
   }
 
   /**
@@ -75,11 +74,7 @@ export namespace InvoiceEventPayment {
   export function isPaymentMethodBankAccount(
     value: unknown
   ): value is PaymentMethodBankAccount {
-    const validationResult = validateAndMap(
-      value,
-      paymentMethodBankAccountSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paymentMethodBankAccountSchema);
   }
 
   /**
@@ -90,11 +85,7 @@ export namespace InvoiceEventPayment {
   export function isPaymentMethodCreditCard(
     value: unknown
   ): value is PaymentMethodCreditCard {
-    const validationResult = validateAndMap(
-      value,
-      paymentMethodCreditCardSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paymentMethodCreditCardSchema);
   }
 
   /**
@@ -105,8 +96,7 @@ export namespace InvoiceEventPayment {
   export function isPaymentMethodExternal(
     value: unknown
   ): value is PaymentMethodExternal {
-    const validationResult = validateAndMap(value, paymentMethodExternalSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paymentMethodExternalSchema);
   }
 
   /**
@@ -117,7 +107,6 @@ export namespace InvoiceEventPayment {
   export function isPaymentMethodPaypal(
     value: unknown
   ): value is PaymentMethodPaypal {
-    const validationResult = validateAndMap(value, paymentMethodPaypalSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paymentMethodPaypalSchema);
   }
 }

@@ -14,18 +14,18 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentPricePointItem,
   componentPricePointItemSchema,
-} from './componentPricePointItem';
+} from './componentPricePointItem.js';
 import {
   MeteredComponentUnitPrice,
   meteredComponentUnitPriceSchema,
-} from './containers/meteredComponentUnitPrice';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { Price, priceSchema } from './price';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './containers/meteredComponentUnitPrice.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { Price, priceSchema } from './price.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface MeteredComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */

@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, number, optional, Schema } from '../schema';
-import { BillingSchedule, billingScheduleSchema } from './billingSchedule';
+import { expandoObject, lazy, number, optional, Schema } from '../schema.js';
+import { BillingSchedule, billingScheduleSchema } from './billingSchedule.js';
 import {
   ComponentCustomPrice,
   componentCustomPriceSchema,
-} from './componentCustomPrice';
+} from './componentCustomPrice.js';
 
 export interface ActivateEventBasedComponent {
   /** The Chargify id of the price point */

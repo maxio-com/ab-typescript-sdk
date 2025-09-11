@@ -15,18 +15,18 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CompoundingStrategy,
   compoundingStrategySchema,
-} from './compoundingStrategy';
-import { CouponCurrency, couponCurrencySchema } from './couponCurrency';
+} from './compoundingStrategy.js';
+import { CouponCurrency, couponCurrencySchema } from './couponCurrency.js';
 import {
   CouponRestriction,
   couponRestrictionSchema,
-} from './couponRestriction';
-import { DiscountType, discountTypeSchema } from './discountType';
-import { RecurringScheme, recurringSchemeSchema } from './recurringScheme';
+} from './couponRestriction.js';
+import { DiscountType, discountTypeSchema } from './discountType.js';
+import { RecurringScheme, recurringSchemeSchema } from './recurringScheme.js';
 
 export interface Coupon {
   id?: number;

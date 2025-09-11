@@ -12,7 +12,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 export interface CreditNoteLineItem {
   /** Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists. */

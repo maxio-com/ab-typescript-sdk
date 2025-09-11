@@ -11,12 +11,12 @@ import {
   number,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   EventEventSpecificData,
   eventEventSpecificDataSchema,
-} from './containers/eventEventSpecificData';
-import { EventKey, eventKeySchema } from './eventKey';
+} from './containers/eventEventSpecificData.js';
+import { EventKey, eventKeySchema } from './eventKey.js';
 
 export interface Event {
   id: bigint;

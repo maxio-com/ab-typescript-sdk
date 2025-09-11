@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
-import { DebitNoteRole, debitNoteRoleSchema } from './debitNoteRole';
+import { expandoObject, optional, Schema, string } from '../schema.js';
+import { DebitNoteRole, debitNoteRoleSchema } from './debitNoteRole.js';
 
 export interface InvoiceDebit {
   uid?: string;

@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
-import { VoidInvoice, voidInvoiceSchema } from './voidInvoice';
+import { expandoObject, lazy, Schema } from '../schema.js';
+import { VoidInvoice, voidInvoiceSchema } from './voidInvoice.js';
 
 export interface VoidInvoiceRequest {
   mVoid: VoidInvoice;

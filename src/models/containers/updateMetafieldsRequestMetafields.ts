@@ -4,8 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, oneOf, Schema, validateAndMap } from '../../schema';
-import { UpdateMetafield, updateMetafieldSchema } from '../updateMetafield';
+import {
+  array,
+  isMappedValueValidForSchema,
+  oneOf,
+  Schema,
+} from '../../schema.js';
+import { UpdateMetafield, updateMetafieldSchema } from '../updateMetafield.js';
 
 /** This is a container type for one-of types. */
 export type UpdateMetafieldsRequestMetafields =
@@ -23,8 +28,7 @@ export namespace UpdateMetafieldsRequestMetafields {
    * This is Update Metafield case.
    */
   export function isUpdateMetafield(value: unknown): value is UpdateMetafield {
-    const validationResult = validateAndMap(value, updateMetafieldSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, updateMetafieldSchema);
   }
 
   /**
@@ -38,10 +42,6 @@ export namespace UpdateMetafieldsRequestMetafields {
     if (!Array.isArray(value)) {
       return false;
     }
-    const validationResult = validateAndMap(
-      value,
-      array(updateMetafieldSchema)
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, array(updateMetafieldSchema));
   }
 }

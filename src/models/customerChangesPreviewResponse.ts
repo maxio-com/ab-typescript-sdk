@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
-import { CustomerChange, customerChangeSchema } from './customerChange';
+import { expandoObject, lazy, Schema } from '../schema.js';
+import { CustomerChange, customerChangeSchema } from './customerChange.js';
 
 export interface CustomerChangesPreviewResponse {
   changes: CustomerChange;

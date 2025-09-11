@@ -12,23 +12,23 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CreateInvoiceAddress,
   createInvoiceAddressSchema,
-} from './createInvoiceAddress';
+} from './createInvoiceAddress.js';
 import {
   CreateInvoiceCoupon,
   createInvoiceCouponSchema,
-} from './createInvoiceCoupon';
+} from './createInvoiceCoupon.js';
 import {
   CreateInvoiceItem,
   createInvoiceItemSchema,
-} from './createInvoiceItem';
+} from './createInvoiceItem.js';
 import {
   CreateInvoiceStatus,
   createInvoiceStatusSchema,
-} from './createInvoiceStatus';
+} from './createInvoiceStatus.js';
 
 export interface CreateInvoice {
   lineItems?: CreateInvoiceItem[];

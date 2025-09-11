@@ -14,21 +14,21 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   AllocationPreviousQuantity,
   allocationPreviousQuantitySchema,
-} from './containers/allocationPreviousQuantity';
+} from './containers/allocationPreviousQuantity.js';
 import {
   AllocationQuantity,
   allocationQuantitySchema,
-} from './containers/allocationQuantity';
-import { CreditType, creditTypeSchema } from './creditType';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+} from './containers/allocationQuantity.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import {
   PaymentForAllocation,
   paymentForAllocationSchema,
-} from './paymentForAllocation';
+} from './paymentForAllocation.js';
 
 export interface Allocation {
   /** The allocation unique id */

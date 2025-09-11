@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
+import { expandoObject, optional, Schema, string } from '../schema.js';
 import {
   InvoiceConsolidationLevel,
   invoiceConsolidationLevelSchema,
-} from './invoiceConsolidationLevel';
-import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus';
+} from './invoiceConsolidationLevel.js';
+import { InvoiceStatus, invoiceStatusSchema } from './invoiceStatus.js';
 
 /** Example schema for an `change_invoice_status` event */
 export interface ChangeInvoiceStatusEventData {

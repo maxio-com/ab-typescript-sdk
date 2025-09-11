@@ -14,16 +14,16 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CalendarBilling, calendarBillingSchema } from './calendarBilling';
+} from '../schema.js';
+import { CalendarBilling, calendarBillingSchema } from './calendarBilling.js';
 import {
   SubscriptionCustomPrice,
   subscriptionCustomPriceSchema,
-} from './subscriptionCustomPrice';
+} from './subscriptionCustomPrice.js';
 import {
   SubscriptionGroupSignupComponent,
   subscriptionGroupSignupComponentSchema,
-} from './subscriptionGroupSignupComponent';
+} from './subscriptionGroupSignupComponent.js';
 
 export interface SubscriptionGroupSignupItem {
   /** The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead. */

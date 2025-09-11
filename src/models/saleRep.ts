@@ -13,11 +13,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   SaleRepSubscription,
   saleRepSubscriptionSchema,
-} from './saleRepSubscription';
+} from './saleRepSubscription.js';
 
 export interface SaleRep {
   id?: number;

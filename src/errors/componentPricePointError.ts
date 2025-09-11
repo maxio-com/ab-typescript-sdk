@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { ComponentPricePointErrorItem } from '../models/componentPricePointErrorItem';
+import { ApiError } from '../core.js';
+import { ComponentPricePointErrorItem } from '../models/componentPricePointErrorItem.js';
 
 /**
  * Creates an instance of ComponentPricePoint

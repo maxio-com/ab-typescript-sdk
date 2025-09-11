@@ -14,17 +14,17 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentPricePointItem,
   componentPricePointItemSchema,
-} from './componentPricePointItem';
+} from './componentPricePointItem.js';
 import {
   OnOffComponentUnitPrice,
   onOffComponentUnitPriceSchema,
-} from './containers/onOffComponentUnitPrice';
-import { CreditType, creditTypeSchema } from './creditType';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+} from './containers/onOffComponentUnitPrice.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 
 export interface OnOffComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */

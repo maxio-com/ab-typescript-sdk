@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { SubscriptionGroupSignupError } from '../models/subscriptionGroupSignupError';
+import { ApiError } from '../core.js';
+import { SubscriptionGroupSignupError } from '../models/subscriptionGroupSignupError.js';
 
 /**
  * Creates an instance of SubscriptionGroupSignupErrorResponse

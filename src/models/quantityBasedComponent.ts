@@ -14,19 +14,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentPricePointItem,
   componentPricePointItemSchema,
-} from './componentPricePointItem';
+} from './componentPricePointItem.js';
 import {
   QuantityBasedComponentUnitPrice,
   quantityBasedComponentUnitPriceSchema,
-} from './containers/quantityBasedComponentUnitPrice';
-import { CreditType, creditTypeSchema } from './creditType';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { Price, priceSchema } from './price';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './containers/quantityBasedComponentUnitPrice.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { Price, priceSchema } from './price.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface QuantityBasedComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". */

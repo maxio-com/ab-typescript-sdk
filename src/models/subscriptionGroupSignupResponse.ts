@@ -13,16 +13,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
+} from '../schema.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
 import {
   SubscriptionGroupItem,
   subscriptionGroupItemSchema,
-} from './subscriptionGroupItem';
+} from './subscriptionGroupItem.js';
 import {
   SubscriptionState,
   subscriptionStateSchema,
-} from './subscriptionState';
+} from './subscriptionState.js';
 
 export interface SubscriptionGroupSignupResponse {
   uid?: string;

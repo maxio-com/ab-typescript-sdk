@@ -11,7 +11,7 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
+} from '../schema.js';
 
 export interface ListComponentsFilter {
   /** Allows fetching components with matching id based on provided value. Use in query `filter[ids]=1,2,3`. */

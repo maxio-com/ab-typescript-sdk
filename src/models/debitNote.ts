@@ -12,19 +12,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   CreditNoteLineItem,
   creditNoteLineItemSchema,
-} from './creditNoteLineItem';
-import { DebitNoteRole, debitNoteRoleSchema } from './debitNoteRole';
-import { DebitNoteStatus, debitNoteStatusSchema } from './debitNoteStatus';
-import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
-import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer';
-import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount';
-import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund';
-import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller';
-import { InvoiceTax, invoiceTaxSchema } from './invoiceTax';
+} from './creditNoteLineItem.js';
+import { DebitNoteRole, debitNoteRoleSchema } from './debitNoteRole.js';
+import { DebitNoteStatus, debitNoteStatusSchema } from './debitNoteStatus.js';
+import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress.js';
+import { InvoiceCustomer, invoiceCustomerSchema } from './invoiceCustomer.js';
+import { InvoiceDiscount, invoiceDiscountSchema } from './invoiceDiscount.js';
+import { InvoiceRefund, invoiceRefundSchema } from './invoiceRefund.js';
+import { InvoiceSeller, invoiceSellerSchema } from './invoiceSeller.js';
+import { InvoiceTax, invoiceTaxSchema } from './invoiceTax.js';
 
 export interface DebitNote {
   /** Unique identifier for the debit note. It is generated automatically by Chargify and has the prefix "db_" followed by alphanumeric characters. */

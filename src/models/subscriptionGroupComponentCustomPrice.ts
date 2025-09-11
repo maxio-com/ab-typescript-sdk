@@ -4,13 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   ComponentCustomPrice,
   componentCustomPriceSchema,
-} from './componentCustomPrice';
-import { Price, priceSchema } from './price';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './componentCustomPrice.js';
+import { Price, priceSchema } from './price.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 /** Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`. */
 export interface SubscriptionGroupComponentCustomPrice {

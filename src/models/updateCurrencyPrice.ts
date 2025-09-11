@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, number, Schema } from '../schema';
+import { expandoObject, number, Schema } from '../schema.js';
 
 export interface UpdateCurrencyPrice {
   /** ID of the currency price record being updated */

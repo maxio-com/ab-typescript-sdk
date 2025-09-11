@@ -12,8 +12,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { Movement, movementSchema } from './movement';
+} from '../schema.js';
+import { Movement, movementSchema } from './movement.js';
 
 export interface ListMRRResponseResult {
   page?: number;

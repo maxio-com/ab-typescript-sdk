@@ -109,7 +109,7 @@ try {
 
 # Create Component Price Point
 
-This endpoint can be used to create a new price point for an existing component.
+Creates a price point for an existing component.
 
 ```ts
 async createComponentPricePoint(
@@ -149,6 +149,7 @@ const body: CreateComponentPricePointRequest = {
       {
         startingQuantity: '101',
         unitPrice: '4.00',
+        endingQuantity: '200',
       }
     ],
     handle: 'wholesale-handle',
@@ -225,10 +226,11 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```ts
-const collect = {Liquid error: Value cannot be null. (Parameter 'key')
+const collect = {
   componentId: 222,
   page: 2,
-  perPage: 50
+  perPage: 50,
+  filterType: Liquid error: Value cannot be null. (Parameter 'key')
 }
 
 try {

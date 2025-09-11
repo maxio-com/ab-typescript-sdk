@@ -13,11 +13,11 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceLineItemComponentCostData,
   invoiceLineItemComponentCostDataSchema,
-} from './invoiceLineItemComponentCostData';
+} from './invoiceLineItemComponentCostData.js';
 
 export interface InvoiceLineItem {
   /** Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists. */

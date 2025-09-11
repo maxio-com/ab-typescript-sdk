@@ -4,21 +4,21 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   BatchJobResponse,
   batchJobResponseSchema,
-} from '../models/batchJobResponse';
-import { Invoice, invoiceSchema } from '../models/invoice';
+} from '../models/batchJobResponse.js';
+import { Invoice, invoiceSchema } from '../models/invoice.js';
 import {
   ProformaInvoice,
   proformaInvoiceSchema,
-} from '../models/proformaInvoice';
-import { Subscription, subscriptionSchema } from '../models/subscription';
-import { array, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/proformaInvoice.js';
+import { Subscription, subscriptionSchema } from '../models/subscription.js';
+import { array, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { SingleErrorResponseError } from '../errors/singleErrorResponseError';
+import { SingleErrorResponseError } from '../errors/singleErrorResponseError.js';
 
 export class APIExportsController extends BaseController {
   /**

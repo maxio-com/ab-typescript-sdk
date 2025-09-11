@@ -11,9 +11,9 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { MetafieldInput, metafieldInputSchema } from './metafieldInput';
-import { MetafieldScope, metafieldScopeSchema } from './metafieldScope';
+} from '../schema.js';
+import { MetafieldInput, metafieldInputSchema } from './metafieldInput.js';
+import { MetafieldScope, metafieldScopeSchema } from './metafieldScope.js';
 
 export interface UpdateMetafield {
   currentName?: string;

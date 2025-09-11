@@ -13,19 +13,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   AllocationPreviewDirection,
   allocationPreviewDirectionSchema,
-} from './allocationPreviewDirection';
+} from './allocationPreviewDirection.js';
 import {
   AllocationPreviewItem,
   allocationPreviewItemSchema,
-} from './allocationPreviewItem';
+} from './allocationPreviewItem.js';
 import {
   AllocationPreviewLineItem,
   allocationPreviewLineItemSchema,
-} from './allocationPreviewLineItem';
+} from './allocationPreviewLineItem.js';
 
 export interface AllocationPreview {
   startDate?: string;

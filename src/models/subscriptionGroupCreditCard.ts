@@ -4,21 +4,21 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema';
-import { CardType, cardTypeSchema } from './cardType';
+import { expandoObject, optional, Schema, string } from '../schema.js';
+import { CardType, cardTypeSchema } from './cardType.js';
 import {
   SubscriptionGroupCreditCardExpirationMonth,
   subscriptionGroupCreditCardExpirationMonthSchema,
-} from './containers/subscriptionGroupCreditCardExpirationMonth';
+} from './containers/subscriptionGroupCreditCardExpirationMonth.js';
 import {
   SubscriptionGroupCreditCardExpirationYear,
   subscriptionGroupCreditCardExpirationYearSchema,
-} from './containers/subscriptionGroupCreditCardExpirationYear';
+} from './containers/subscriptionGroupCreditCardExpirationYear.js';
 import {
   SubscriptionGroupCreditCardFullNumber,
   subscriptionGroupCreditCardFullNumberSchema,
-} from './containers/subscriptionGroupCreditCardFullNumber';
-import { CreditCardVault, creditCardVaultSchema } from './creditCardVault';
+} from './containers/subscriptionGroupCreditCardFullNumber.js';
+import { CreditCardVault, creditCardVaultSchema } from './creditCardVault.js';
 
 export interface SubscriptionGroupCreditCard {
   chargifyToken?: string;

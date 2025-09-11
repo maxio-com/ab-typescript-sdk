@@ -14,19 +14,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   SubscriptionGroupBalances,
   subscriptionGroupBalancesSchema,
-} from './subscriptionGroupBalances';
+} from './subscriptionGroupBalances.js';
 import {
   SubscriptionGroupCustomer,
   subscriptionGroupCustomerSchema,
-} from './subscriptionGroupCustomer';
+} from './subscriptionGroupCustomer.js';
 import {
   SubscriptionState,
   subscriptionStateSchema,
-} from './subscriptionState';
+} from './subscriptionState.js';
 
 export interface FullSubscriptionGroupResponse {
   uid?: string;

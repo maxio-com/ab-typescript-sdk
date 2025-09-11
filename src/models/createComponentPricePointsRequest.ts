@@ -4,11 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, Schema } from '../schema';
+import { array, expandoObject, Schema } from '../schema.js';
 import {
   CreateComponentPricePointsRequestPricePoints,
   createComponentPricePointsRequestPricePointsSchema,
-} from './containers/createComponentPricePointsRequestPricePoints';
+} from './containers/createComponentPricePointsRequestPricePoints.js';
 
 export interface CreateComponentPricePointsRequest {
   pricePoints: CreateComponentPricePointsRequestPricePoints[];

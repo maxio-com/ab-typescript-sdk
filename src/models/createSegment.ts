@@ -4,28 +4,28 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   CreateSegmentSegmentProperty1Value,
   createSegmentSegmentProperty1ValueSchema,
-} from './containers/createSegmentSegmentProperty1Value';
+} from './containers/createSegmentSegmentProperty1Value.js';
 import {
   CreateSegmentSegmentProperty2Value,
   createSegmentSegmentProperty2ValueSchema,
-} from './containers/createSegmentSegmentProperty2Value';
+} from './containers/createSegmentSegmentProperty2Value.js';
 import {
   CreateSegmentSegmentProperty3Value,
   createSegmentSegmentProperty3ValueSchema,
-} from './containers/createSegmentSegmentProperty3Value';
+} from './containers/createSegmentSegmentProperty3Value.js';
 import {
   CreateSegmentSegmentProperty4Value,
   createSegmentSegmentProperty4ValueSchema,
-} from './containers/createSegmentSegmentProperty4Value';
+} from './containers/createSegmentSegmentProperty4Value.js';
 import {
   CreateOrUpdateSegmentPrice,
   createOrUpdateSegmentPriceSchema,
-} from './createOrUpdateSegmentPrice';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './createOrUpdateSegmentPrice.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface CreateSegment {
   /** A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric. */

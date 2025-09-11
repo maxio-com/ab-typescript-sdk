@@ -13,7 +13,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 export interface CustomerAttributes {
   /** The first name of the customer. Required when creating a customer via attributes. */

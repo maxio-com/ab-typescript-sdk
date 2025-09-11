@@ -14,19 +14,19 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ComponentCurrencyPrice,
   componentCurrencyPriceSchema,
-} from './componentCurrencyPrice';
-import { ComponentPrice, componentPriceSchema } from './componentPrice';
+} from './componentCurrencyPrice.js';
+import { ComponentPrice, componentPriceSchema } from './componentPrice.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { PricePointType, pricePointTypeSchema } from './pricePointType';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './expirationIntervalUnit.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { PricePointType, pricePointTypeSchema } from './pricePointType.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface ComponentPricePoint {
   id?: number;

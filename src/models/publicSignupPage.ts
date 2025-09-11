@@ -11,7 +11,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 export interface PublicSignupPage {
   /** The id of the signup page (public_signup_pages only) */

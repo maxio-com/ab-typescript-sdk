@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, number, optional, Schema } from '../schema';
-import { InvoiceEvent, invoiceEventSchema } from './containers/invoiceEvent';
+import { array, expandoObject, number, optional, Schema } from '../schema.js';
+import { InvoiceEvent, invoiceEventSchema } from './containers/invoiceEvent.js';
 
 export interface ListInvoiceEventsResponse {
   events?: InvoiceEvent[];

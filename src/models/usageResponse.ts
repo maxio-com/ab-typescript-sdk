@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
-import { Usage, usageSchema } from './usage';
+import { expandoObject, lazy, Schema } from '../schema.js';
+import { Usage, usageSchema } from './usage.js';
 
 export interface UsageResponse {
   usage: Usage;

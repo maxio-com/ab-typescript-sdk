@@ -4,26 +4,26 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, RequestOptions } from '../core';
+import { ApiResponse, RequestOptions } from '../core.js';
 import {
   SubscriptionMigrationPreviewRequest,
   subscriptionMigrationPreviewRequestSchema,
-} from '../models/subscriptionMigrationPreviewRequest';
+} from '../models/subscriptionMigrationPreviewRequest.js';
 import {
   SubscriptionMigrationPreviewResponse,
   subscriptionMigrationPreviewResponseSchema,
-} from '../models/subscriptionMigrationPreviewResponse';
+} from '../models/subscriptionMigrationPreviewResponse.js';
 import {
   SubscriptionProductMigrationRequest,
   subscriptionProductMigrationRequestSchema,
-} from '../models/subscriptionProductMigrationRequest';
+} from '../models/subscriptionProductMigrationRequest.js';
 import {
   SubscriptionResponse,
   subscriptionResponseSchema,
-} from '../models/subscriptionResponse';
-import { number, optional } from '../schema';
-import { BaseController } from './baseController';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+} from '../models/subscriptionResponse.js';
+import { number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class SubscriptionProductsController extends BaseController {
   /**

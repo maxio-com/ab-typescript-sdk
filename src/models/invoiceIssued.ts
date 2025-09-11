@@ -11,11 +11,11 @@ import {
   nullable,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceLineItemEventData,
   invoiceLineItemEventDataSchema,
-} from './invoiceLineItemEventData';
+} from './invoiceLineItemEventData.js';
 
 export interface InvoiceIssued {
   uid: string;

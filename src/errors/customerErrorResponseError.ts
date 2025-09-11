@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiError } from '../core';
-import { CustomerErrorResponseErrors } from '../models/containers/customerErrorResponseErrors';
+import { ApiError } from '../core.js';
+import { CustomerErrorResponseErrors } from '../models/containers/customerErrorResponseErrors.js';
 
 /**
  * Creates an instance of CustomerErrorResponse

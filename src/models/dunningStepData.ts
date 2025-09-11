@@ -12,7 +12,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 export interface DunningStepData {
   dayThreshold: number;

@@ -4,8 +4,8 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
-import { Event, eventSchema } from './event';
+import { expandoObject, lazy, Schema } from '../schema.js';
+import { Event, eventSchema } from './event.js';
 
 export interface EventResponse {
   event: Event;

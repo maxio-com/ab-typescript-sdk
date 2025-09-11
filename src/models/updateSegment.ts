@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   CreateOrUpdateSegmentPrice,
   createOrUpdateSegmentPriceSchema,
-} from './createOrUpdateSegmentPrice';
-import { PricingScheme, pricingSchemeSchema } from './pricingScheme';
+} from './createOrUpdateSegmentPrice.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 
 export interface UpdateSegment {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */

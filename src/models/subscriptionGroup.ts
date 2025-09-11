@@ -12,12 +12,15 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
+} from '../schema.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
 import {
   SubscriptionGroupPaymentProfile,
   subscriptionGroupPaymentProfileSchema,
-} from './subscriptionGroupPaymentProfile';
+} from './subscriptionGroupPaymentProfile.js';
 
 export interface SubscriptionGroup {
   customerId?: number;

@@ -4,45 +4,48 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { BasicDateField, basicDateFieldSchema } from '../models/basicDateField';
-import { Component, componentSchema } from '../models/component';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import {
+  BasicDateField,
+  basicDateFieldSchema,
+} from '../models/basicDateField.js';
+import { Component, componentSchema } from '../models/component.js';
 import {
   ComponentResponse,
   componentResponseSchema,
-} from '../models/componentResponse';
+} from '../models/componentResponse.js';
 import {
   CreateEBBComponent,
   createEBBComponentSchema,
-} from '../models/createEBBComponent';
+} from '../models/createEBBComponent.js';
 import {
   CreateMeteredComponent,
   createMeteredComponentSchema,
-} from '../models/createMeteredComponent';
+} from '../models/createMeteredComponent.js';
 import {
   CreateOnOffComponent,
   createOnOffComponentSchema,
-} from '../models/createOnOffComponent';
+} from '../models/createOnOffComponent.js';
 import {
   CreatePrepaidComponent,
   createPrepaidComponentSchema,
-} from '../models/createPrepaidComponent';
+} from '../models/createPrepaidComponent.js';
 import {
   CreateQuantityBasedComponent,
   createQuantityBasedComponentSchema,
-} from '../models/createQuantityBasedComponent';
+} from '../models/createQuantityBasedComponent.js';
 import {
   ListComponentsFilter,
   listComponentsFilterSchema,
-} from '../models/listComponentsFilter';
+} from '../models/listComponentsFilter.js';
 import {
   UpdateComponentRequest,
   updateComponentRequestSchema,
-} from '../models/updateComponentRequest';
-import { array, boolean, number, optional, string } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateComponentRequest.js';
+import { array, boolean, number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class ComponentsController extends BaseController {
   /**
@@ -284,9 +287,9 @@ export class ComponentsController extends BaseController {
   }
 
   /**
-   * This request will return information regarding a component from a specific product family.
+   * Returns information regarding a component from a specific product family.
    *
-   * You may read the component by either the component's id or handle. When using the handle, it must be
+   * You can read the component by either the component's id or handle. When using the handle, it must be
    * prefixed with `handle:`.
    *
    * @param productFamilyId   The Advanced Billing id of the product family to which the component belongs

@@ -15,14 +15,17 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
-import { ProductFamily, productFamilySchema } from './productFamily';
-import { PublicSignupPage, publicSignupPageSchema } from './publicSignupPage';
+} from './expirationIntervalUnit.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { ProductFamily, productFamilySchema } from './productFamily.js';
+import {
+  PublicSignupPage,
+  publicSignupPageSchema,
+} from './publicSignupPage.js';
 
 export interface Product {
   id?: number;

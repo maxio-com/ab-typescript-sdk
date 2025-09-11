@@ -15,43 +15,46 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { ACHAgreement, aCHAgreementSchema } from './aCHAgreement';
+} from '../schema.js';
+import { ACHAgreement, aCHAgreementSchema } from './aCHAgreement.js';
 import {
   AgreementAcceptance,
   agreementAcceptanceSchema,
-} from './agreementAcceptance';
+} from './agreementAcceptance.js';
 import {
   BankAccountAttributes,
   bankAccountAttributesSchema,
-} from './bankAccountAttributes';
-import { CalendarBilling, calendarBillingSchema } from './calendarBilling';
-import { CollectionMethod, collectionMethodSchema } from './collectionMethod';
+} from './bankAccountAttributes.js';
+import { CalendarBilling, calendarBillingSchema } from './calendarBilling.js';
+import {
+  CollectionMethod,
+  collectionMethodSchema,
+} from './collectionMethod.js';
 import {
   CreateSubscriptionOfferId,
   createSubscriptionOfferIdSchema,
-} from './containers/createSubscriptionOfferId';
+} from './containers/createSubscriptionOfferId.js';
 import {
   CreateSubscriptionComponent,
   createSubscriptionComponentSchema,
-} from './createSubscriptionComponent';
+} from './createSubscriptionComponent.js';
 import {
   CustomerAttributes,
   customerAttributesSchema,
-} from './customerAttributes';
-import { GroupSettings, groupSettingsSchema } from './groupSettings';
+} from './customerAttributes.js';
+import { GroupSettings, groupSettingsSchema } from './groupSettings.js';
 import {
   PaymentProfileAttributes,
   paymentProfileAttributesSchema,
-} from './paymentProfileAttributes';
+} from './paymentProfileAttributes.js';
 import {
   SubscriptionCustomPrice,
   subscriptionCustomPriceSchema,
-} from './subscriptionCustomPrice';
+} from './subscriptionCustomPrice.js';
 import {
   UpsertPrepaidConfiguration,
   upsertPrepaidConfigurationSchema,
-} from './upsertPrepaidConfiguration';
+} from './upsertPrepaidConfiguration.js';
 
 export interface CreateSubscription {
   /** The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead. */

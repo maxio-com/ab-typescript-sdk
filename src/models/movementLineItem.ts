@@ -13,8 +13,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { MRRMovement, mRRMovementSchema } from './mRRMovement';
+} from '../schema.js';
+import { MRRMovement, mRRMovementSchema } from './mRRMovement.js';
 
 export interface MovementLineItem {
   productId?: number;

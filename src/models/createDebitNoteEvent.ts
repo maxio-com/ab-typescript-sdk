@@ -4,10 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { bigint, expandoObject, lazy, Schema, string } from '../schema';
-import { DebitNote, debitNoteSchema } from './debitNote';
-import { Invoice, invoiceSchema } from './invoice';
-import { InvoiceEventType, invoiceEventTypeSchema } from './invoiceEventType';
+import { bigint, expandoObject, lazy, Schema, string } from '../schema.js';
+import { DebitNote, debitNoteSchema } from './debitNote.js';
+import { Invoice, invoiceSchema } from './invoice.js';
+import {
+  InvoiceEventType,
+  invoiceEventTypeSchema,
+} from './invoiceEventType.js';
 
 export interface CreateDebitNoteEvent {
   id: bigint;

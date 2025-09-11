@@ -11,13 +11,13 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { BasicDateField, basicDateFieldSchema } from './basicDateField';
+} from '../schema.js';
+import { BasicDateField, basicDateFieldSchema } from './basicDateField.js';
 import {
   IncludeNullOrNotNull,
   includeNullOrNotNullSchema,
-} from './includeNullOrNotNull';
-import { PricePointType, pricePointTypeSchema } from './pricePointType';
+} from './includeNullOrNotNull.js';
+import { PricePointType, pricePointTypeSchema } from './pricePointType.js';
 
 export interface ListPricePointsFilter {
   /** The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. */

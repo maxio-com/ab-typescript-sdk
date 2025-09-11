@@ -4,11 +4,11 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, lazy, Schema } from '../schema';
+import { expandoObject, lazy, Schema } from '../schema.js';
 import {
   SubscriptionMigrationPreview,
   subscriptionMigrationPreviewSchema,
-} from './subscriptionMigrationPreview';
+} from './subscriptionMigrationPreview.js';
 
 export interface SubscriptionMigrationPreviewResponse {
   migration: SubscriptionMigrationPreview;

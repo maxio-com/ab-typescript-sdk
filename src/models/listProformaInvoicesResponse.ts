@@ -4,12 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, lazy, optional, Schema } from '../schema';
+import { array, expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   ListProformaInvoicesMeta,
   listProformaInvoicesMetaSchema,
-} from './listProformaInvoicesMeta';
-import { ProformaInvoice, proformaInvoiceSchema } from './proformaInvoice';
+} from './listProformaInvoicesMeta.js';
+import { ProformaInvoice, proformaInvoiceSchema } from './proformaInvoice.js';
 
 export interface ListProformaInvoicesResponse {
   proformaInvoices?: ProformaInvoice[];

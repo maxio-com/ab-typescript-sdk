@@ -13,8 +13,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { SaleRepItemMrr, saleRepItemMrrSchema } from './saleRepItemMrr';
+} from '../schema.js';
+import { SaleRepItemMrr, saleRepItemMrrSchema } from './saleRepItemMrr.js';
 
 export interface ListSaleRepItem {
   id?: number;

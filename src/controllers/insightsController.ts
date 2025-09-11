@@ -4,26 +4,26 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
-import { Direction, directionSchema } from '../models/direction';
-import { ListMrrFilter, listMrrFilterSchema } from '../models/listMrrFilter';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
+import { Direction, directionSchema } from '../models/direction.js';
+import { ListMrrFilter, listMrrFilterSchema } from '../models/listMrrFilter.js';
 import {
   ListMRRResponse,
   listMRRResponseSchema,
-} from '../models/listMRRResponse';
-import { MRRResponse, mRRResponseSchema } from '../models/mRRResponse';
-import { SiteSummary, siteSummarySchema } from '../models/siteSummary';
+} from '../models/listMRRResponse.js';
+import { MRRResponse, mRRResponseSchema } from '../models/mRRResponse.js';
+import { SiteSummary, siteSummarySchema } from '../models/siteSummary.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
+} from '../models/sortingDirection.js';
 import {
   SubscriptionMRRResponse,
   subscriptionMRRResponseSchema,
-} from '../models/subscriptionMRRResponse';
-import { number, optional, string } from '../schema';
-import { BaseController } from './baseController';
-import { SubscriptionsMrrErrorResponseError } from '../errors/subscriptionsMrrErrorResponseError';
+} from '../models/subscriptionMRRResponse.js';
+import { number, optional, string } from '../schema.js';
+import { BaseController } from './baseController.js';
+import { SubscriptionsMrrErrorResponseError } from '../errors/subscriptionsMrrErrorResponseError.js';
 
 export class InsightsController extends BaseController {
   /**

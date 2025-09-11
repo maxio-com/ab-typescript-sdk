@@ -12,7 +12,7 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 
 export interface Webhook {
   /** A string describing which event type produced the given webhook */

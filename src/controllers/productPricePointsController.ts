@@ -4,98 +4,101 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { ApiResponse, commaPrefix, RequestOptions } from '../core';
+import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
   BulkCreateProductPricePointsRequest,
   bulkCreateProductPricePointsRequestSchema,
-} from '../models/bulkCreateProductPricePointsRequest';
+} from '../models/bulkCreateProductPricePointsRequest.js';
 import {
   BulkCreateProductPricePointsResponse,
   bulkCreateProductPricePointsResponseSchema,
-} from '../models/bulkCreateProductPricePointsResponse';
+} from '../models/bulkCreateProductPricePointsResponse.js';
 import {
   ArchiveProductPricePointPricePointId,
   archiveProductPricePointPricePointIdSchema,
-} from '../models/containers/archiveProductPricePointPricePointId';
+} from '../models/containers/archiveProductPricePointPricePointId.js';
 import {
   ArchiveProductPricePointProductId,
   archiveProductPricePointProductIdSchema,
-} from '../models/containers/archiveProductPricePointProductId';
+} from '../models/containers/archiveProductPricePointProductId.js';
 import {
   CreateProductPricePointProductId,
   createProductPricePointProductIdSchema,
-} from '../models/containers/createProductPricePointProductId';
+} from '../models/containers/createProductPricePointProductId.js';
 import {
   ListProductPricePointsInputProductId,
   listProductPricePointsInputProductIdSchema,
-} from '../models/containers/listProductPricePointsInputProductId';
+} from '../models/containers/listProductPricePointsInputProductId.js';
 import {
   ReadProductPricePointPricePointId,
   readProductPricePointPricePointIdSchema,
-} from '../models/containers/readProductPricePointPricePointId';
+} from '../models/containers/readProductPricePointPricePointId.js';
 import {
   ReadProductPricePointProductId,
   readProductPricePointProductIdSchema,
-} from '../models/containers/readProductPricePointProductId';
+} from '../models/containers/readProductPricePointProductId.js';
 import {
   UpdateProductPricePointPricePointId,
   updateProductPricePointPricePointIdSchema,
-} from '../models/containers/updateProductPricePointPricePointId';
+} from '../models/containers/updateProductPricePointPricePointId.js';
 import {
   UpdateProductPricePointProductId,
   updateProductPricePointProductIdSchema,
-} from '../models/containers/updateProductPricePointProductId';
+} from '../models/containers/updateProductPricePointProductId.js';
 import {
   CreateProductCurrencyPricesRequest,
   createProductCurrencyPricesRequestSchema,
-} from '../models/createProductCurrencyPricesRequest';
+} from '../models/createProductCurrencyPricesRequest.js';
 import {
   CreateProductPricePointRequest,
   createProductPricePointRequestSchema,
-} from '../models/createProductPricePointRequest';
+} from '../models/createProductPricePointRequest.js';
 import {
   CurrencyPricesResponse,
   currencyPricesResponseSchema,
-} from '../models/currencyPricesResponse';
+} from '../models/currencyPricesResponse.js';
 import {
   ListPricePointsFilter,
   listPricePointsFilterSchema,
-} from '../models/listPricePointsFilter';
+} from '../models/listPricePointsFilter.js';
 import {
   ListProductPricePointsResponse,
   listProductPricePointsResponseSchema,
-} from '../models/listProductPricePointsResponse';
+} from '../models/listProductPricePointsResponse.js';
 import {
   ListProductsPricePointsInclude,
   listProductsPricePointsIncludeSchema,
-} from '../models/listProductsPricePointsInclude';
-import { PricePointType, pricePointTypeSchema } from '../models/pricePointType';
+} from '../models/listProductsPricePointsInclude.js';
+import {
+  PricePointType,
+  pricePointTypeSchema,
+} from '../models/pricePointType.js';
 import {
   ProductPricePointResponse,
   productPricePointResponseSchema,
-} from '../models/productPricePointResponse';
+} from '../models/productPricePointResponse.js';
 import {
   ProductResponse,
   productResponseSchema,
-} from '../models/productResponse';
+} from '../models/productResponse.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
-} from '../models/sortingDirection';
+} from '../models/sortingDirection.js';
 import {
   UpdateCurrencyPricesRequest,
   updateCurrencyPricesRequestSchema,
-} from '../models/updateCurrencyPricesRequest';
+} from '../models/updateCurrencyPricesRequest.js';
 import {
   UpdateProductPricePointRequest,
   updateProductPricePointRequestSchema,
-} from '../models/updateProductPricePointRequest';
-import { array, boolean, number, optional } from '../schema';
-import { BaseController } from './baseController';
+} from '../models/updateProductPricePointRequest.js';
+import { array, boolean, number, optional } from '../schema.js';
+import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
-import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError';
-import { ErrorListResponseError } from '../errors/errorListResponseError';
-import { ProductPricePointErrorResponseError } from '../errors/productPricePointErrorResponseError';
+import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
+import { ErrorListResponseError } from '../errors/errorListResponseError.js';
+import { ProductPricePointErrorResponseError } from '../errors/productPricePointErrorResponseError.js';
 
 export class ProductPricePointsController extends BaseController {
   /**

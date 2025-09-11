@@ -13,12 +13,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
-} from './expirationIntervalUnit';
-import { IntervalUnit, intervalUnitSchema } from './intervalUnit';
+} from './expirationIntervalUnit.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 
 export interface CreateProductPricePoint {
   /** The product price point name */

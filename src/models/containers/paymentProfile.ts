@@ -4,23 +4,23 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, Schema, validateAndMap } from '../../schema';
+import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
 import {
   ApplePayPaymentProfile,
   applePayPaymentProfileSchema,
-} from '../applePayPaymentProfile';
+} from '../applePayPaymentProfile.js';
 import {
   BankAccountPaymentProfile,
   bankAccountPaymentProfileSchema,
-} from '../bankAccountPaymentProfile';
+} from '../bankAccountPaymentProfile.js';
 import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
-} from '../creditCardPaymentProfile';
+} from '../creditCardPaymentProfile.js';
 import {
   PaypalPaymentProfile,
   paypalPaymentProfileSchema,
-} from '../paypalPaymentProfile';
+} from '../paypalPaymentProfile.js';
 
 /** This is a container type for any-of types. */
 export type PaymentProfile =
@@ -44,7 +44,7 @@ export const paymentProfileSchema: Schema<PaymentProfile> = anyOf(
     paypalPaymentProfileSchema,
   ],
   discriminatorMap,
-  'paymentType'
+  'payment_type'
 );
 
 export namespace PaymentProfile {
@@ -56,11 +56,7 @@ export namespace PaymentProfile {
   export function isApplePayPaymentProfile(
     value: unknown
   ): value is ApplePayPaymentProfile {
-    const validationResult = validateAndMap(
-      value,
-      applePayPaymentProfileSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, applePayPaymentProfileSchema);
   }
 
   /**
@@ -71,11 +67,7 @@ export namespace PaymentProfile {
   export function isBankAccountPaymentProfile(
     value: unknown
   ): value is BankAccountPaymentProfile {
-    const validationResult = validateAndMap(
-      value,
-      bankAccountPaymentProfileSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, bankAccountPaymentProfileSchema);
   }
 
   /**
@@ -86,11 +78,7 @@ export namespace PaymentProfile {
   export function isCreditCardPaymentProfile(
     value: unknown
   ): value is CreditCardPaymentProfile {
-    const validationResult = validateAndMap(
-      value,
-      creditCardPaymentProfileSchema
-    );
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, creditCardPaymentProfileSchema);
   }
 
   /**
@@ -101,7 +89,6 @@ export namespace PaymentProfile {
   export function isPaypalPaymentProfile(
     value: unknown
   ): value is PaypalPaymentProfile {
-    const validationResult = validateAndMap(value, paypalPaymentProfileSchema);
-    return validationResult.errors === false;
+    return isMappedValueValidForSchema(value, paypalPaymentProfileSchema);
   }
 }

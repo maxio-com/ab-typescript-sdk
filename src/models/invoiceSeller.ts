@@ -11,8 +11,8 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress';
+} from '../schema.js';
+import { InvoiceAddress, invoiceAddressSchema } from './invoiceAddress.js';
 
 /** Information about the seller (merchant) listed on the masthead of the invoice. */
 export interface InvoiceSeller {

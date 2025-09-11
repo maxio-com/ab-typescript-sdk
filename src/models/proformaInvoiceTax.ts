@@ -11,15 +11,15 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
+} from '../schema.js';
 import {
   InvoiceTaxBreakout,
   invoiceTaxBreakoutSchema,
-} from './invoiceTaxBreakout';
+} from './invoiceTaxBreakout.js';
 import {
   ProformaInvoiceTaxSourceType,
   proformaInvoiceTaxSourceTypeSchema,
-} from './proformaInvoiceTaxSourceType';
+} from './proformaInvoiceTaxSourceType.js';
 
 export interface ProformaInvoiceTax {
   uid?: string;

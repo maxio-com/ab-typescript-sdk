@@ -4,15 +4,20 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { oneOf, Schema, string, validateAndMap } from '../../schema';
+import {
+  isMappedValueValidForSchema,
+  oneOf,
+  Schema,
+  string,
+} from '../../schema.js';
 import {
   SubscriptionGroupMembersArrayError,
   subscriptionGroupMembersArrayErrorSchema,
-} from '../subscriptionGroupMembersArrayError';
+} from '../subscriptionGroupMembersArrayError.js';
 import {
   SubscriptionGroupSingleError,
   subscriptionGroupSingleErrorSchema,
-} from '../subscriptionGroupSingleError';
+} from '../subscriptionGroupSingleError.js';
 
 /** This is a container type for one-of types. */
 export type SubscriptionGroupCreateErrorResponseErrors =
@@ -37,11 +42,10 @@ export namespace SubscriptionGroupCreateErrorResponseErrors {
   export function isSubscriptionGroupMembersArrayError(
     value: unknown
   ): value is SubscriptionGroupMembersArrayError {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       subscriptionGroupMembersArrayErrorSchema
     );
-    return validationResult.errors === false;
   }
 
   /**
@@ -52,11 +56,10 @@ export namespace SubscriptionGroupCreateErrorResponseErrors {
   export function isSubscriptionGroupSingleError(
     value: unknown
   ): value is SubscriptionGroupSingleError {
-    const validationResult = validateAndMap(
+    return isMappedValueValidForSchema(
       value,
       subscriptionGroupSingleErrorSchema
     );
-    return validationResult.errors === false;
   }
 
   /**

@@ -11,11 +11,11 @@ import {
   number,
   optional,
   Schema,
-} from '../schema';
+} from '../schema.js';
 import {
   SubscriptionMRRBreakout,
   subscriptionMRRBreakoutSchema,
-} from './subscriptionMRRBreakout';
+} from './subscriptionMRRBreakout.js';
 
 export interface SubscriptionMRR {
   subscriptionId: number;
