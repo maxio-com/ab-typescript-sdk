@@ -220,8 +220,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/service_credit_deductions.json`;
     req.throwOn(
       422,
-      // ApiError,
-      ErrorListResponseError, // TODO: Remove me
+      ApiError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
