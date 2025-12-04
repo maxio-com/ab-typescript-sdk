@@ -45,13 +45,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const code = 'code8';
 
 try {
-  const { result, ...httpResponse } = await referralCodesController.validateReferralCode(code);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await referralCodesController.validateReferralCode(code);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

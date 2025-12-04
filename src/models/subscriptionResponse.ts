@@ -12,6 +12,9 @@ export interface SubscriptionResponse {
   [key: string]: unknown;
 }
 
-export const subscriptionResponseSchema: Schema<SubscriptionResponse> = expandoObject(
-  { subscription: ['subscription', optional(lazy(() => subscriptionSchema))] }
+export const subscriptionResponseSchema: Schema<SubscriptionResponse> = lazy(
+  () =>
+    expandoObject({
+      subscription: ['subscription', optional(subscriptionSchema)],
+    })
 );

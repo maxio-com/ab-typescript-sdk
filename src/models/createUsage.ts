@@ -13,23 +13,29 @@ import {
   string,
 } from '../schema.js';
 import { BillingSchedule, billingScheduleSchema } from './billingSchedule.js';
+import {
+  ComponentCustomPrice,
+  componentCustomPriceSchema,
+} from './componentCustomPrice.js';
 
 export interface CreateUsage {
   /** integer by default or decimal number if fractional quantities are enabled for the component */
   quantity?: number;
   pricePointId?: string;
   memo?: string;
-  /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. Please note this only works for site with Multifrequency enabled */
+  /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. This only works for site with Multifrequency enabled. */
   billingSchedule?: BillingSchedule;
+  /** Create or update custom pricing unique to the subscription. Used in place of `price_point_id`. */
+  customPrice?: ComponentCustomPrice;
   [key: string]: unknown;
 }
 
-export const createUsageSchema: Schema<CreateUsage> = expandoObject({
-  quantity: ['quantity', optional(number())],
-  pricePointId: ['price_point_id', optional(string())],
-  memo: ['memo', optional(string())],
-  billingSchedule: [
-    'billing_schedule',
-    optional(lazy(() => billingScheduleSchema)),
-  ],
-});
+export const createUsageSchema: Schema<CreateUsage> = lazy(() =>
+  expandoObject({
+    quantity: ['quantity', optional(number())],
+    pricePointId: ['price_point_id', optional(string())],
+    memo: ['memo', optional(string())],
+    billingSchedule: ['billing_schedule', optional(billingScheduleSchema)],
+    customPrice: ['custom_price', optional(componentCustomPriceSchema)],
+  })
+);

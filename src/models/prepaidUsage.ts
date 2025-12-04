@@ -31,18 +31,20 @@ export interface PrepaidUsage {
   [key: string]: unknown;
 }
 
-export const prepaidUsageSchema: Schema<PrepaidUsage> = expandoObject({
-  previousUnitBalance: ['previous_unit_balance', string()],
-  previousOverageUnitBalance: ['previous_overage_unit_balance', string()],
-  newUnitBalance: ['new_unit_balance', number()],
-  newOverageUnitBalance: ['new_overage_unit_balance', number()],
-  usageQuantity: ['usage_quantity', number()],
-  overageUsageQuantity: ['overage_usage_quantity', number()],
-  componentId: ['component_id', number()],
-  componentHandle: ['component_handle', string()],
-  memo: ['memo', string()],
-  allocationDetails: [
-    'allocation_details',
-    array(lazy(() => prepaidUsageAllocationDetailSchema)),
-  ],
-});
+export const prepaidUsageSchema: Schema<PrepaidUsage> = lazy(() =>
+  expandoObject({
+    previousUnitBalance: ['previous_unit_balance', string()],
+    previousOverageUnitBalance: ['previous_overage_unit_balance', string()],
+    newUnitBalance: ['new_unit_balance', number()],
+    newOverageUnitBalance: ['new_overage_unit_balance', number()],
+    usageQuantity: ['usage_quantity', number()],
+    overageUsageQuantity: ['overage_usage_quantity', number()],
+    componentId: ['component_id', number()],
+    componentHandle: ['component_handle', string()],
+    memo: ['memo', string()],
+    allocationDetails: [
+      'allocation_details',
+      array(prepaidUsageAllocationDetailSchema),
+    ],
+  })
+);

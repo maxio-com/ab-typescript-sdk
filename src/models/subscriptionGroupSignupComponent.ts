@@ -37,27 +37,28 @@ export interface SubscriptionGroupSignupComponent {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupComponentSchema: Schema<SubscriptionGroupSignupComponent> = expandoObject(
-  {
-    componentId: [
-      'component_id',
-      optional(subscriptionGroupSignupComponentComponentIdSchema),
-    ],
-    allocatedQuantity: [
-      'allocated_quantity',
-      optional(subscriptionGroupSignupComponentAllocatedQuantitySchema),
-    ],
-    unitBalance: [
-      'unit_balance',
-      optional(subscriptionGroupSignupComponentUnitBalanceSchema),
-    ],
-    pricePointId: [
-      'price_point_id',
-      optional(subscriptionGroupSignupComponentPricePointIdSchema),
-    ],
-    customPrice: [
-      'custom_price',
-      optional(lazy(() => subscriptionGroupComponentCustomPriceSchema)),
-    ],
-  }
+export const subscriptionGroupSignupComponentSchema: Schema<SubscriptionGroupSignupComponent> = lazy(
+  () =>
+    expandoObject({
+      componentId: [
+        'component_id',
+        optional(subscriptionGroupSignupComponentComponentIdSchema),
+      ],
+      allocatedQuantity: [
+        'allocated_quantity',
+        optional(subscriptionGroupSignupComponentAllocatedQuantitySchema),
+      ],
+      unitBalance: [
+        'unit_balance',
+        optional(subscriptionGroupSignupComponentUnitBalanceSchema),
+      ],
+      pricePointId: [
+        'price_point_id',
+        optional(subscriptionGroupSignupComponentPricePointIdSchema),
+      ],
+      customPrice: [
+        'custom_price',
+        optional(subscriptionGroupComponentCustomPriceSchema),
+      ],
+    })
 );

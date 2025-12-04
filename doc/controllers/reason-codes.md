@@ -65,13 +65,25 @@ const body: CreateReasonCodeRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await reasonCodesController.createReasonCode(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await reasonCodesController.createReasonCode(body);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -116,18 +128,30 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 const collect = {
-  page: 2,
+  page: 1,
   perPage: 50
 }
 
 try {
-  const { result, ...httpResponse } = await reasonCodesController.listReasonCodes(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await reasonCodesController.listReasonCodes(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -207,13 +231,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const reasonCodeId = 32;
 
 try {
-  const { result, ...httpResponse } = await reasonCodesController.readReasonCode(reasonCodeId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await reasonCodesController.readReasonCode(reasonCodeId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -255,13 +291,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const reasonCodeId = 32;
 
 try {
-  const { result, ...httpResponse } = await reasonCodesController.updateReasonCode(reasonCodeId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await reasonCodesController.updateReasonCode(reasonCodeId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -302,13 +350,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const reasonCodeId = 32;
 
 try {
-  const { result, ...httpResponse } = await reasonCodesController.deleteReasonCode(reasonCodeId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await reasonCodesController.deleteReasonCode(reasonCodeId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

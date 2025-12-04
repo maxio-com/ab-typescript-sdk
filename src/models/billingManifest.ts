@@ -32,17 +32,16 @@ export interface BillingManifest {
   [key: string]: unknown;
 }
 
-export const billingManifestSchema: Schema<BillingManifest> = expandoObject({
-  lineItems: [
-    'line_items',
-    optional(array(lazy(() => billingManifestItemSchema))),
-  ],
-  totalInCents: ['total_in_cents', optional(bigint())],
-  totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
-  totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
-  subtotalInCents: ['subtotal_in_cents', optional(bigint())],
-  startDate: ['start_date', optional(nullable(string()))],
-  endDate: ['end_date', optional(nullable(string()))],
-  periodType: ['period_type', optional(nullable(string()))],
-  existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
-});
+export const billingManifestSchema: Schema<BillingManifest> = lazy(() =>
+  expandoObject({
+    lineItems: ['line_items', optional(array(billingManifestItemSchema))],
+    totalInCents: ['total_in_cents', optional(bigint())],
+    totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
+    totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
+    subtotalInCents: ['subtotal_in_cents', optional(bigint())],
+    startDate: ['start_date', optional(nullable(string()))],
+    endDate: ['end_date', optional(nullable(string()))],
+    periodType: ['period_type', optional(nullable(string()))],
+    existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
+  })
+);

@@ -17,12 +17,10 @@ export interface UpdateSubscriptionComponent {
   [key: string]: unknown;
 }
 
-export const updateSubscriptionComponentSchema: Schema<UpdateSubscriptionComponent> = expandoObject(
-  {
-    componentId: ['component_id', optional(number())],
-    customPrice: [
-      'custom_price',
-      optional(lazy(() => componentCustomPriceSchema)),
-    ],
-  }
+export const updateSubscriptionComponentSchema: Schema<UpdateSubscriptionComponent> = lazy(
+  () =>
+    expandoObject({
+      componentId: ['component_id', optional(number())],
+      customPrice: ['custom_price', optional(componentCustomPriceSchema)],
+    })
 );

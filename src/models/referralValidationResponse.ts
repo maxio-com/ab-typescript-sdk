@@ -12,6 +12,9 @@ export interface ReferralValidationResponse {
   [key: string]: unknown;
 }
 
-export const referralValidationResponseSchema: Schema<ReferralValidationResponse> = expandoObject(
-  { referralCode: ['referral_code', optional(lazy(() => referralCodeSchema))] }
+export const referralValidationResponseSchema: Schema<ReferralValidationResponse> = lazy(
+  () =>
+    expandoObject({
+      referralCode: ['referral_code', optional(referralCodeSchema)],
+    })
 );

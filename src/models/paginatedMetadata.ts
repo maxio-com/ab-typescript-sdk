@@ -23,12 +23,12 @@ export interface PaginatedMetadata {
   [key: string]: unknown;
 }
 
-export const paginatedMetadataSchema: Schema<PaginatedMetadata> = expandoObject(
-  {
+export const paginatedMetadataSchema: Schema<PaginatedMetadata> = lazy(() =>
+  expandoObject({
     totalCount: ['total_count', optional(number())],
     currentPage: ['current_page', optional(number())],
     totalPages: ['total_pages', optional(number())],
     perPage: ['per_page', optional(number())],
-    metadata: ['metadata', optional(array(lazy(() => metadataSchema)))],
-  }
+    metadata: ['metadata', optional(array(metadataSchema))],
+  })
 );

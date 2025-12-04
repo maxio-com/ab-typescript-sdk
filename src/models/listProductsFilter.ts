@@ -28,13 +28,13 @@ export interface ListProductsFilter {
   [key: string]: unknown;
 }
 
-export const listProductsFilterSchema: Schema<ListProductsFilter> = expandoObject(
-  {
+export const listProductsFilterSchema: Schema<ListProductsFilter> = lazy(() =>
+  expandoObject({
     ids: ['ids', optional(array(number()))],
     prepaidProductPricePoint: [
       'prepaid_product_price_point',
-      optional(lazy(() => prepaidProductPricePointFilterSchema)),
+      optional(prepaidProductPricePointFilterSchema),
     ],
     useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-  }
+  })
 );

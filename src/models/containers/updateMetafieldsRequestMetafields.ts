@@ -7,6 +7,7 @@
 import {
   array,
   isMappedValueValidForSchema,
+  lazy,
   oneOf,
   Schema,
 } from '../../schema.js';
@@ -17,8 +18,8 @@ export type UpdateMetafieldsRequestMetafields =
   | UpdateMetafield
   | UpdateMetafield[];
 
-export const updateMetafieldsRequestMetafieldsSchema: Schema<UpdateMetafieldsRequestMetafields> = oneOf(
-  [updateMetafieldSchema, array(updateMetafieldSchema)]
+export const updateMetafieldsRequestMetafieldsSchema: Schema<UpdateMetafieldsRequestMetafields> = lazy(
+  () => oneOf([updateMetafieldSchema, array(updateMetafieldSchema)])
 );
 
 export namespace UpdateMetafieldsRequestMetafields {

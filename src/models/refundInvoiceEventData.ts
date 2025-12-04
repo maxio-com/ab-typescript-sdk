@@ -48,22 +48,20 @@ export interface RefundInvoiceEventData {
   [key: string]: unknown;
 }
 
-export const refundInvoiceEventDataSchema: Schema<RefundInvoiceEventData> = expandoObject(
-  {
-    applyCredit: ['apply_credit', boolean()],
-    consolidationLevel: [
-      'consolidation_level',
-      optional(invoiceConsolidationLevelSchema),
-    ],
-    creditNoteAttributes: [
-      'credit_note_attributes',
-      lazy(() => creditNoteSchema),
-    ],
-    memo: ['memo', optional(string())],
-    originalAmount: ['original_amount', optional(string())],
-    paymentId: ['payment_id', number()],
-    refundAmount: ['refund_amount', string()],
-    refundId: ['refund_id', number()],
-    transactionTime: ['transaction_time', string()],
-  }
+export const refundInvoiceEventDataSchema: Schema<RefundInvoiceEventData> = lazy(
+  () =>
+    expandoObject({
+      applyCredit: ['apply_credit', boolean()],
+      consolidationLevel: [
+        'consolidation_level',
+        optional(invoiceConsolidationLevelSchema),
+      ],
+      creditNoteAttributes: ['credit_note_attributes', creditNoteSchema],
+      memo: ['memo', optional(string())],
+      originalAmount: ['original_amount', optional(string())],
+      paymentId: ['payment_id', number()],
+      refundAmount: ['refund_amount', string()],
+      refundId: ['refund_id', number()],
+      transactionTime: ['transaction_time', string()],
+    })
 );

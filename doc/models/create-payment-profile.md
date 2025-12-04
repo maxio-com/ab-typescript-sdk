@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `chargifyToken` | `string \| undefined` | Optional | Token received after sending billing informations using chargify.js. |
+| `chargifyToken` | `string \| undefined` | Optional | Token received after sending billing information using chargify.js. |
 | `id` | `number \| undefined` | Optional | - |
 | `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | - |
 | `firstName` | `string \| undefined` | Optional | First name on card or bank account. If omitted, the first_name from customer attributes will be used. |
@@ -23,7 +23,7 @@
 | `billingAddress2` | `string \| null \| undefined` | Optional | Second line of the customer’s billing address i.e. Apt. 100 |
 | `billingCity` | `string \| undefined` | Optional | The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway. |
 | `billingState` | `string \| undefined` | Optional | The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes. |
-| `billingCountry` | `string \| undefined` | Optional | The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. |
+| `billingCountry` | `string \| undefined` | Optional | The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. |
 | `billingZip` | `string \| undefined` | Optional | The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway. |
 | `currentVault` | [`AllVaults \| undefined`](../../doc/models/all-vaults.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `vaultToken` | `string \| undefined` | Optional | The “token” provided by your vault storage for an already stored payment profile |

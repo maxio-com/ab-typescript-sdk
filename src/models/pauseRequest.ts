@@ -13,6 +13,6 @@ export interface PauseRequest {
   [key: string]: unknown;
 }
 
-export const pauseRequestSchema: Schema<PauseRequest> = expandoObject({
-  hold: ['hold', optional(lazy(() => autoResumeSchema))],
-});
+export const pauseRequestSchema: Schema<PauseRequest> = lazy(() =>
+  expandoObject({ hold: ['hold', optional(autoResumeSchema)] })
+);

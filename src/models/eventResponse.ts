@@ -12,6 +12,6 @@ export interface EventResponse {
   [key: string]: unknown;
 }
 
-export const eventResponseSchema: Schema<EventResponse> = expandoObject({
-  event: ['event', lazy(() => eventSchema)],
-});
+export const eventResponseSchema: Schema<EventResponse> = lazy(() =>
+  expandoObject({ event: ['event', eventSchema] })
+);

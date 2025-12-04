@@ -17,12 +17,13 @@ export interface SubscriptionGroupSignupEventData {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupEventDataSchema: Schema<SubscriptionGroupSignupEventData> = expandoObject(
-  {
-    subscriptionGroup: [
-      'subscription_group',
-      lazy(() => subscriptionGroupSignupFailureDataSchema),
-    ],
-    customer: ['customer', nullable(lazy(() => customerSchema))],
-  }
+export const subscriptionGroupSignupEventDataSchema: Schema<SubscriptionGroupSignupEventData> = lazy(
+  () =>
+    expandoObject({
+      subscriptionGroup: [
+        'subscription_group',
+        subscriptionGroupSignupFailureDataSchema,
+      ],
+      customer: ['customer', nullable(customerSchema)],
+    })
 );

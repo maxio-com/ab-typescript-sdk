@@ -17,9 +17,9 @@ export interface MetafieldScope {
   statements?: IncludeOption;
   /** Include (1) or exclude (0) metafields from the portal. */
   portal?: IncludeOption;
-  /** Include (1) or exclude (0) metafields from being viewable by your ecosystem. */
+  /** Include (1) or exclude (0) metafields used in [Embeddable Components](page:development-tools/embeddable-components/overview) from being viewable by your ecosystem. */
   publicShow?: IncludeOption;
-  /** Include (1) or exclude (0) metafields from being edited by your ecosystem. */
+  /** Include (1) or exclude (0) metafields used in [Embeddable Components](page:development-tools/embeddable-components/overview) from being editable by your ecosystem. */
   publicEdit?: IncludeOption;
   hosted?: string[];
   [key: string]: unknown;

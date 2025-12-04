@@ -74,8 +74,8 @@ export interface ComponentPricePoint {
   [key: string]: unknown;
 }
 
-export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObject(
-  {
+export const componentPricePointSchema: Schema<ComponentPricePoint> = lazy(() =>
+  expandoObject({
     id: ['id', optional(number())],
     type: ['type', optional(pricePointTypeSchema)],
     mDefault: ['default', optional(boolean())],
@@ -86,7 +86,7 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
     archivedAt: ['archived_at', optional(nullable(string()))],
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],
-    prices: ['prices', optional(array(lazy(() => componentPriceSchema)))],
+    prices: ['prices', optional(array(componentPriceSchema))],
     useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
     subscriptionId: ['subscription_id', optional(number())],
     taxIncluded: ['tax_included', optional(boolean())],
@@ -94,12 +94,9 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
     intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     currencyPrices: [
       'currency_prices',
-      optional(array(lazy(() => componentCurrencyPriceSchema))),
+      optional(array(componentCurrencyPriceSchema)),
     ],
-    overagePrices: [
-      'overage_prices',
-      optional(array(lazy(() => componentPriceSchema))),
-    ],
+    overagePrices: ['overage_prices', optional(array(componentPriceSchema))],
     overagePricingScheme: [
       'overage_pricing_scheme',
       optional(pricingSchemeSchema),
@@ -114,5 +111,5 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = expandoObj
       'expiration_interval_unit',
       optional(nullable(expirationIntervalUnitSchema)),
     ],
-  }
+  })
 );

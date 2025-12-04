@@ -28,13 +28,15 @@ export interface SaleRep {
   [key: string]: unknown;
 }
 
-export const saleRepSchema: Schema<SaleRep> = expandoObject({
-  id: ['id', optional(number())],
-  fullName: ['full_name', optional(string())],
-  subscriptionsCount: ['subscriptions_count', optional(number())],
-  testMode: ['test_mode', optional(boolean())],
-  subscriptions: [
-    'subscriptions',
-    optional(array(lazy(() => saleRepSubscriptionSchema))),
-  ],
-});
+export const saleRepSchema: Schema<SaleRep> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    fullName: ['full_name', optional(string())],
+    subscriptionsCount: ['subscriptions_count', optional(number())],
+    testMode: ['test_mode', optional(boolean())],
+    subscriptions: [
+      'subscriptions',
+      optional(array(saleRepSubscriptionSchema)),
+    ],
+  })
+);

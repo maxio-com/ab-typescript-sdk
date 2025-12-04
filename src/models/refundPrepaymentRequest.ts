@@ -15,6 +15,6 @@ export interface RefundPrepaymentRequest {
   [key: string]: unknown;
 }
 
-export const refundPrepaymentRequestSchema: Schema<RefundPrepaymentRequest> = expandoObject(
-  { refund: ['refund', lazy(() => refundPrepaymentSchema)] }
+export const refundPrepaymentRequestSchema: Schema<RefundPrepaymentRequest> = lazy(
+  () => expandoObject({ refund: ['refund', refundPrepaymentSchema] })
 );

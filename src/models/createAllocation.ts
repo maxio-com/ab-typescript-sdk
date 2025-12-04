@@ -51,27 +51,29 @@ export interface CreateAllocation {
   initiateDunning?: boolean;
   /** Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used. */
   pricePointId?: CreateAllocationPricePointId | null;
-  /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. Please note this only works for site with Multifrequency enabled */
+  /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. This only works for site with Multifrequency enabled. */
   billingSchedule?: BillingSchedule;
   [key: string]: unknown;
 }
 
-export const createAllocationSchema: Schema<CreateAllocation> = expandoObject({
-  quantity: ['quantity', number()],
-  componentId: ['component_id', optional(number())],
-  memo: ['memo', optional(string())],
-  prorationDowngradeScheme: ['proration_downgrade_scheme', optional(string())],
-  prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
-  accrueCharge: ['accrue_charge', optional(boolean())],
-  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-  initiateDunning: ['initiate_dunning', optional(boolean())],
-  pricePointId: [
-    'price_point_id',
-    optional(nullable(createAllocationPricePointIdSchema)),
-  ],
-  billingSchedule: [
-    'billing_schedule',
-    optional(lazy(() => billingScheduleSchema)),
-  ],
-});
+export const createAllocationSchema: Schema<CreateAllocation> = lazy(() =>
+  expandoObject({
+    quantity: ['quantity', number()],
+    componentId: ['component_id', optional(number())],
+    memo: ['memo', optional(string())],
+    prorationDowngradeScheme: [
+      'proration_downgrade_scheme',
+      optional(string()),
+    ],
+    prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
+    accrueCharge: ['accrue_charge', optional(boolean())],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    initiateDunning: ['initiate_dunning', optional(boolean())],
+    pricePointId: [
+      'price_point_id',
+      optional(nullable(createAllocationPricePointIdSchema)),
+    ],
+    billingSchedule: ['billing_schedule', optional(billingScheduleSchema)],
+  })
+);

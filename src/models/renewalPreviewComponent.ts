@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, number, optional, Schema } from '../schema.js';
+import { expandoObject, lazy, number, optional, Schema } from '../schema.js';
 import {
   RenewalPreviewComponentComponentId,
   renewalPreviewComponentComponentIdSchema,
@@ -31,16 +31,17 @@ export interface RenewalPreviewComponent {
   [key: string]: unknown;
 }
 
-export const renewalPreviewComponentSchema: Schema<RenewalPreviewComponent> = expandoObject(
-  {
-    componentId: [
-      'component_id',
-      optional(renewalPreviewComponentComponentIdSchema),
-    ],
-    quantity: ['quantity', optional(number())],
-    pricePointId: [
-      'price_point_id',
-      optional(renewalPreviewComponentPricePointIdSchema),
-    ],
-  }
+export const renewalPreviewComponentSchema: Schema<RenewalPreviewComponent> = lazy(
+  () =>
+    expandoObject({
+      componentId: [
+        'component_id',
+        optional(renewalPreviewComponentComponentIdSchema),
+      ],
+      quantity: ['quantity', optional(number())],
+      pricePointId: [
+        'price_point_id',
+        optional(renewalPreviewComponentPricePointIdSchema),
+      ],
+    })
 );

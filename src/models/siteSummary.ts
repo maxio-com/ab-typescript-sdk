@@ -23,10 +23,12 @@ export interface SiteSummary {
   [key: string]: unknown;
 }
 
-export const siteSummarySchema: Schema<SiteSummary> = expandoObject({
-  sellerName: ['seller_name', optional(string())],
-  siteName: ['site_name', optional(string())],
-  siteId: ['site_id', optional(number())],
-  siteCurrency: ['site_currency', optional(string())],
-  stats: ['stats', optional(lazy(() => siteStatisticsSchema))],
-});
+export const siteSummarySchema: Schema<SiteSummary> = lazy(() =>
+  expandoObject({
+    sellerName: ['seller_name', optional(string())],
+    siteName: ['site_name', optional(string())],
+    siteId: ['site_id', optional(number())],
+    siteCurrency: ['site_currency', optional(string())],
+    stats: ['stats', optional(siteStatisticsSchema)],
+  })
+);

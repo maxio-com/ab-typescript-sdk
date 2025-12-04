@@ -32,17 +32,14 @@ export interface ComponentCostData {
   [key: string]: unknown;
 }
 
-export const componentCostDataSchema: Schema<ComponentCostData> = expandoObject(
-  {
+export const componentCostDataSchema: Schema<ComponentCostData> = lazy(() =>
+  expandoObject({
     componentCodeId: ['component_code_id', optional(nullable(number()))],
     pricePointId: ['price_point_id', optional(number())],
     productId: ['product_id', optional(number())],
     quantity: ['quantity', optional(string())],
     amount: ['amount', optional(string())],
     pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-    tiers: [
-      'tiers',
-      optional(array(lazy(() => componentCostDataRateTierSchema))),
-    ],
-  }
+    tiers: ['tiers', optional(array(componentCostDataRateTierSchema))],
+  })
 );

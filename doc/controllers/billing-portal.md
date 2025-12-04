@@ -32,7 +32,7 @@ If your customer has been invited to the Billing Portal, then they will receive 
 
 If you need to provide your customer their Management URL through other means, you can retrieve it via the API. Because the URL is cryptographically signed with a timestamp, it is not possible for merchants to generate the URL without requesting it from Advanced Billing.
 
-In order to prevent abuse & overuse, we ask that you request a new URL only when absolutely necessary. Management URLs are good for 65 days, so you should re-use a previously generated one as much as possible. If you use the URL frequently (such as to display on your website), please **do not** make an API request to Advanced Billing every time.
+In order to prevent abuse & overuse, we ask that you request a new URL only when absolutely necessary. Management URLs are good for 65 days, so you should re-use a previously generated one as much as possible. If you use the URL frequently (such as to display on your website), **do not** make an API request to Advanced Billing every time.
 
 ```ts
 async enableBillingPortalForCustomer(
@@ -60,13 +60,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const customerId = 150;
 
 try {
-  const { result, ...httpResponse } = await billingPortalController.enableBillingPortalForCustomer(customerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await billingPortalController.enableBillingPortalForCustomer(customerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -114,13 +126,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const customerId = 150;
 
 try {
-  const { result, ...httpResponse } = await billingPortalController.readBillingPortalLink(customerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await billingPortalController.readBillingPortalLink(customerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -186,13 +210,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const customerId = 150;
 
 try {
-  const { result, ...httpResponse } = await billingPortalController.resendBillingPortalInvitation(customerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await billingPortalController.resendBillingPortalInvitation(customerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -250,13 +286,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const customerId = 150;
 
 try {
-  const { result, ...httpResponse } = await billingPortalController.revokeBillingPortalAccess(customerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await billingPortalController.revokeBillingPortalAccess(customerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

@@ -12,6 +12,6 @@ export interface ReasonCodeResponse {
   [key: string]: unknown;
 }
 
-export const reasonCodeResponseSchema: Schema<ReasonCodeResponse> = expandoObject(
-  { reasonCode: ['reason_code', lazy(() => reasonCodeSchema)] }
+export const reasonCodeResponseSchema: Schema<ReasonCodeResponse> = lazy(() =>
+  expandoObject({ reasonCode: ['reason_code', reasonCodeSchema] })
 );

@@ -36,11 +36,15 @@ export interface PreviewAllocationsRequest {
   [key: string]: unknown;
 }
 
-export const previewAllocationsRequestSchema: Schema<PreviewAllocationsRequest> = expandoObject(
-  {
-    allocations: ['allocations', array(lazy(() => createAllocationSchema))],
-    effectiveProrationDate: ['effective_proration_date', optional(string())],
-    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  }
+export const previewAllocationsRequestSchema: Schema<PreviewAllocationsRequest> = lazy(
+  () =>
+    expandoObject({
+      allocations: ['allocations', array(createAllocationSchema)],
+      effectiveProrationDate: ['effective_proration_date', optional(string())],
+      upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+      downgradeCredit: [
+        'downgrade_credit',
+        optional(nullable(creditTypeSchema)),
+      ],
+    })
 );

@@ -12,11 +12,9 @@ export interface ProductFamilyResponse {
   [key: string]: unknown;
 }
 
-export const productFamilyResponseSchema: Schema<ProductFamilyResponse> = expandoObject(
-  {
-    productFamily: [
-      'product_family',
-      optional(lazy(() => productFamilySchema)),
-    ],
-  }
+export const productFamilyResponseSchema: Schema<ProductFamilyResponse> = lazy(
+  () =>
+    expandoObject({
+      productFamily: ['product_family', optional(productFamilySchema)],
+    })
 );

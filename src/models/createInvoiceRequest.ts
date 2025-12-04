@@ -12,6 +12,6 @@ export interface CreateInvoiceRequest {
   [key: string]: unknown;
 }
 
-export const createInvoiceRequestSchema: Schema<CreateInvoiceRequest> = expandoObject(
-  { invoice: ['invoice', lazy(() => createInvoiceSchema)] }
+export const createInvoiceRequestSchema: Schema<CreateInvoiceRequest> = lazy(
+  () => expandoObject({ invoice: ['invoice', createInvoiceSchema] })
 );

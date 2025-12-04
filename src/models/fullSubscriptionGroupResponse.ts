@@ -66,28 +66,26 @@ export interface FullSubscriptionGroupResponse {
   [key: string]: unknown;
 }
 
-export const fullSubscriptionGroupResponseSchema: Schema<FullSubscriptionGroupResponse> = expandoObject(
-  {
-    uid: ['uid', optional(string())],
-    scheme: ['scheme', optional(number())],
-    customerId: ['customer_id', optional(number())],
-    paymentProfileId: ['payment_profile_id', optional(number())],
-    subscriptionIds: ['subscription_ids', optional(array(number()))],
-    primarySubscriptionId: ['primary_subscription_id', optional(number())],
-    nextAssessmentAt: ['next_assessment_at', optional(string())],
-    state: ['state', optional(subscriptionStateSchema)],
-    cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
-    currentBillingAmountInCents: [
-      'current_billing_amount_in_cents',
-      optional(bigint()),
-    ],
-    customer: [
-      'customer',
-      optional(lazy(() => subscriptionGroupCustomerSchema)),
-    ],
-    accountBalances: [
-      'account_balances',
-      optional(lazy(() => subscriptionGroupBalancesSchema)),
-    ],
-  }
+export const fullSubscriptionGroupResponseSchema: Schema<FullSubscriptionGroupResponse> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', optional(string())],
+      scheme: ['scheme', optional(number())],
+      customerId: ['customer_id', optional(number())],
+      paymentProfileId: ['payment_profile_id', optional(number())],
+      subscriptionIds: ['subscription_ids', optional(array(number()))],
+      primarySubscriptionId: ['primary_subscription_id', optional(number())],
+      nextAssessmentAt: ['next_assessment_at', optional(string())],
+      state: ['state', optional(subscriptionStateSchema)],
+      cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
+      currentBillingAmountInCents: [
+        'current_billing_amount_in_cents',
+        optional(bigint()),
+      ],
+      customer: ['customer', optional(subscriptionGroupCustomerSchema)],
+      accountBalances: [
+        'account_balances',
+        optional(subscriptionGroupBalancesSchema),
+      ],
+    })
 );

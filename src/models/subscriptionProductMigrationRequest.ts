@@ -15,6 +15,9 @@ export interface SubscriptionProductMigrationRequest {
   [key: string]: unknown;
 }
 
-export const subscriptionProductMigrationRequestSchema: Schema<SubscriptionProductMigrationRequest> = expandoObject(
-  { migration: ['migration', lazy(() => subscriptionProductMigrationSchema)] }
+export const subscriptionProductMigrationRequestSchema: Schema<SubscriptionProductMigrationRequest> = lazy(
+  () =>
+    expandoObject({
+      migration: ['migration', subscriptionProductMigrationSchema],
+    })
 );

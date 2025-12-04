@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
+import {
+  anyOf,
+  isMappedValueValidForSchema,
+  lazy,
+  Schema,
+} from '../../schema.js';
 import {
   ApplyCreditNoteEvent,
   applyCreditNoteEventSchema,
@@ -102,26 +107,28 @@ const discriminatorMap = {
   'void_remainder': voidRemainderEventSchema,
 };
 
-export const invoiceEventSchema: Schema<InvoiceEvent> = anyOf(
-  [
-    applyCreditNoteEventSchema,
-    applyDebitNoteEventSchema,
-    applyPaymentEventSchema,
-    backportInvoiceEventSchema,
-    changeChargebackStatusEventSchema,
-    changeInvoiceCollectionMethodEventSchema,
-    changeInvoiceStatusEventSchema,
-    createCreditNoteEventSchema,
-    createDebitNoteEventSchema,
-    failedPaymentEventSchema,
-    issueInvoiceEventSchema,
-    refundInvoiceEventSchema,
-    removePaymentEventSchema,
-    voidInvoiceEventSchema,
-    voidRemainderEventSchema,
-  ],
-  discriminatorMap,
-  'event_type'
+export const invoiceEventSchema: Schema<InvoiceEvent> = lazy(() =>
+  anyOf(
+    [
+      applyCreditNoteEventSchema,
+      applyDebitNoteEventSchema,
+      applyPaymentEventSchema,
+      backportInvoiceEventSchema,
+      changeChargebackStatusEventSchema,
+      changeInvoiceCollectionMethodEventSchema,
+      changeInvoiceStatusEventSchema,
+      createCreditNoteEventSchema,
+      createDebitNoteEventSchema,
+      failedPaymentEventSchema,
+      issueInvoiceEventSchema,
+      refundInvoiceEventSchema,
+      removePaymentEventSchema,
+      voidInvoiceEventSchema,
+      voidRemainderEventSchema,
+    ],
+    discriminatorMap,
+    'event_type'
+  )
 );
 
 export namespace InvoiceEvent {

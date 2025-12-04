@@ -33,17 +33,16 @@ export interface Movement {
   [key: string]: unknown;
 }
 
-export const movementSchema: Schema<Movement> = expandoObject({
-  timestamp: ['timestamp', optional(string())],
-  amountInCents: ['amount_in_cents', optional(bigint())],
-  amountFormatted: ['amount_formatted', optional(string())],
-  description: ['description', optional(string())],
-  category: ['category', optional(string())],
-  breakouts: ['breakouts', optional(lazy(() => breakoutsSchema))],
-  lineItems: [
-    'line_items',
-    optional(array(lazy(() => movementLineItemSchema))),
-  ],
-  subscriptionId: ['subscription_id', optional(number())],
-  subscriberName: ['subscriber_name', optional(string())],
-});
+export const movementSchema: Schema<Movement> = lazy(() =>
+  expandoObject({
+    timestamp: ['timestamp', optional(string())],
+    amountInCents: ['amount_in_cents', optional(bigint())],
+    amountFormatted: ['amount_formatted', optional(string())],
+    description: ['description', optional(string())],
+    category: ['category', optional(string())],
+    breakouts: ['breakouts', optional(breakoutsSchema)],
+    lineItems: ['line_items', optional(array(movementLineItemSchema))],
+    subscriptionId: ['subscription_id', optional(number())],
+    subscriberName: ['subscriber_name', optional(string())],
+  })
+);

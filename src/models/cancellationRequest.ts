@@ -15,6 +15,6 @@ export interface CancellationRequest {
   [key: string]: unknown;
 }
 
-export const cancellationRequestSchema: Schema<CancellationRequest> = expandoObject(
-  { subscription: ['subscription', lazy(() => cancellationOptionsSchema)] }
+export const cancellationRequestSchema: Schema<CancellationRequest> = lazy(() =>
+  expandoObject({ subscription: ['subscription', cancellationOptionsSchema] })
 );

@@ -12,6 +12,6 @@ export interface SegmentResponse {
   [key: string]: unknown;
 }
 
-export const segmentResponseSchema: Schema<SegmentResponse> = expandoObject({
-  segment: ['segment', optional(lazy(() => segmentSchema))],
-});
+export const segmentResponseSchema: Schema<SegmentResponse> = lazy(() =>
+  expandoObject({ segment: ['segment', optional(segmentSchema)] })
+);

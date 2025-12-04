@@ -15,6 +15,6 @@ export interface CreateMultiInvoicePaymentRequest {
   [key: string]: unknown;
 }
 
-export const createMultiInvoicePaymentRequestSchema: Schema<CreateMultiInvoicePaymentRequest> = expandoObject(
-  { payment: ['payment', lazy(() => createMultiInvoicePaymentSchema)] }
+export const createMultiInvoicePaymentRequestSchema: Schema<CreateMultiInvoicePaymentRequest> = lazy(
+  () => expandoObject({ payment: ['payment', createMultiInvoicePaymentSchema] })
 );

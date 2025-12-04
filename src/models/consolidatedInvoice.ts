@@ -12,6 +12,6 @@ export interface ConsolidatedInvoice {
   [key: string]: unknown;
 }
 
-export const consolidatedInvoiceSchema: Schema<ConsolidatedInvoice> = expandoObject(
-  { invoices: ['invoices', optional(array(lazy(() => invoiceSchema)))] }
+export const consolidatedInvoiceSchema: Schema<ConsolidatedInvoice> = lazy(() =>
+  expandoObject({ invoices: ['invoices', optional(array(invoiceSchema))] })
 );

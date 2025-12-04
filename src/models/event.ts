@@ -7,6 +7,7 @@
 import {
   bigint,
   expandoObject,
+  lazy,
   nullable,
   number,
   Schema,
@@ -65,15 +66,17 @@ export interface Event {
   [key: string]: unknown;
 }
 
-export const eventSchema: Schema<Event> = expandoObject({
-  id: ['id', bigint()],
-  key: ['key', eventKeySchema],
-  message: ['message', string()],
-  subscriptionId: ['subscription_id', nullable(number())],
-  customerId: ['customer_id', nullable(number())],
-  createdAt: ['created_at', string()],
-  eventSpecificData: [
-    'event_specific_data',
-    nullable(eventEventSpecificDataSchema),
-  ],
-});
+export const eventSchema: Schema<Event> = lazy(() =>
+  expandoObject({
+    id: ['id', bigint()],
+    key: ['key', eventKeySchema],
+    message: ['message', string()],
+    subscriptionId: ['subscription_id', nullable(number())],
+    customerId: ['customer_id', nullable(number())],
+    createdAt: ['created_at', string()],
+    eventSpecificData: [
+      'event_specific_data',
+      nullable(eventEventSpecificDataSchema),
+    ],
+  })
+);

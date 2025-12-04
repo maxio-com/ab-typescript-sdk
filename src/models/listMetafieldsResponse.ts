@@ -23,12 +23,13 @@ export interface ListMetafieldsResponse {
   [key: string]: unknown;
 }
 
-export const listMetafieldsResponseSchema: Schema<ListMetafieldsResponse> = expandoObject(
-  {
-    totalCount: ['total_count', optional(number())],
-    currentPage: ['current_page', optional(number())],
-    totalPages: ['total_pages', optional(number())],
-    perPage: ['per_page', optional(number())],
-    metafields: ['metafields', optional(array(lazy(() => metafieldSchema)))],
-  }
+export const listMetafieldsResponseSchema: Schema<ListMetafieldsResponse> = lazy(
+  () =>
+    expandoObject({
+      totalCount: ['total_count', optional(number())],
+      currentPage: ['current_page', optional(number())],
+      totalPages: ['total_pages', optional(number())],
+      perPage: ['per_page', optional(number())],
+      metafields: ['metafields', optional(array(metafieldSchema))],
+    })
 );

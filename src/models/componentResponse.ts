@@ -12,6 +12,6 @@ export interface ComponentResponse {
   [key: string]: unknown;
 }
 
-export const componentResponseSchema: Schema<ComponentResponse> = expandoObject(
-  { component: ['component', lazy(() => componentSchema)] }
+export const componentResponseSchema: Schema<ComponentResponse> = lazy(() =>
+  expandoObject({ component: ['component', componentSchema] })
 );

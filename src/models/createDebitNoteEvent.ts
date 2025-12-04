@@ -22,12 +22,13 @@ export interface CreateDebitNoteEvent {
   [key: string]: unknown;
 }
 
-export const createDebitNoteEventSchema: Schema<CreateDebitNoteEvent> = expandoObject(
-  {
-    id: ['id', bigint()],
-    timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
-    eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: ['event_data', lazy(() => debitNoteSchema)],
-  }
+export const createDebitNoteEventSchema: Schema<CreateDebitNoteEvent> = lazy(
+  () =>
+    expandoObject({
+      id: ['id', bigint()],
+      timestamp: ['timestamp', string()],
+      invoice: ['invoice', invoiceSchema],
+      eventType: ['event_type', invoiceEventTypeSchema],
+      eventData: ['event_data', debitNoteSchema],
+    })
 );

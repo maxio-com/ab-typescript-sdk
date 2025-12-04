@@ -12,6 +12,7 @@ export interface RenewalPreviewResponse {
   [key: string]: unknown;
 }
 
-export const renewalPreviewResponseSchema: Schema<RenewalPreviewResponse> = expandoObject(
-  { renewalPreview: ['renewal_preview', lazy(() => renewalPreviewSchema)] }
+export const renewalPreviewResponseSchema: Schema<RenewalPreviewResponse> = lazy(
+  () =>
+    expandoObject({ renewalPreview: ['renewal_preview', renewalPreviewSchema] })
 );

@@ -13,15 +13,15 @@ export interface SubscriptionPreview {
   [key: string]: unknown;
 }
 
-export const subscriptionPreviewSchema: Schema<SubscriptionPreview> = expandoObject(
-  {
+export const subscriptionPreviewSchema: Schema<SubscriptionPreview> = lazy(() =>
+  expandoObject({
     currentBillingManifest: [
       'current_billing_manifest',
-      optional(lazy(() => billingManifestSchema)),
+      optional(billingManifestSchema),
     ],
     nextBillingManifest: [
       'next_billing_manifest',
-      optional(lazy(() => billingManifestSchema)),
+      optional(billingManifestSchema),
     ],
-  }
+  })
 );

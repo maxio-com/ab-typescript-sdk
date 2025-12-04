@@ -7,6 +7,7 @@
 import {
   bigint,
   expandoObject,
+  lazy,
   nullable,
   number,
   optional,
@@ -31,14 +32,16 @@ export interface Usage {
   [key: string]: unknown;
 }
 
-export const usageSchema: Schema<Usage> = expandoObject({
-  id: ['id', optional(bigint())],
-  memo: ['memo', optional(nullable(string()))],
-  createdAt: ['created_at', optional(string())],
-  pricePointId: ['price_point_id', optional(number())],
-  quantity: ['quantity', optional(usageQuantitySchema)],
-  overageQuantity: ['overage_quantity', optional(number())],
-  componentId: ['component_id', optional(number())],
-  componentHandle: ['component_handle', optional(string())],
-  subscriptionId: ['subscription_id', optional(number())],
-});
+export const usageSchema: Schema<Usage> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(bigint())],
+    memo: ['memo', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    pricePointId: ['price_point_id', optional(number())],
+    quantity: ['quantity', optional(usageQuantitySchema)],
+    overageQuantity: ['overage_quantity', optional(number())],
+    componentId: ['component_id', optional(number())],
+    componentHandle: ['component_handle', optional(string())],
+    subscriptionId: ['subscription_id', optional(number())],
+  })
+);

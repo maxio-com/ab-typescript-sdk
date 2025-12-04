@@ -23,8 +23,10 @@ export interface CouponRequest {
   [key: string]: unknown;
 }
 
-export const couponRequestSchema: Schema<CouponRequest> = expandoObject({
-  coupon: ['coupon', optional(lazy(() => couponPayloadSchema))],
-  restrictedProducts: ['restricted_products', optional(dict(boolean()))],
-  restrictedComponents: ['restricted_components', optional(dict(boolean()))],
-});
+export const couponRequestSchema: Schema<CouponRequest> = lazy(() =>
+  expandoObject({
+    coupon: ['coupon', optional(couponPayloadSchema)],
+    restrictedProducts: ['restricted_products', optional(dict(boolean()))],
+    restrictedComponents: ['restricted_components', optional(dict(boolean()))],
+  })
+);

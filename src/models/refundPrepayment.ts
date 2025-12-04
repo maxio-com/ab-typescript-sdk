@@ -8,6 +8,7 @@ import {
   bigint,
   boolean,
   expandoObject,
+  lazy,
   nullable,
   optional,
   Schema,
@@ -29,9 +30,11 @@ export interface RefundPrepayment {
   [key: string]: unknown;
 }
 
-export const refundPrepaymentSchema: Schema<RefundPrepayment> = expandoObject({
-  amountInCents: ['amount_in_cents', nullable(bigint())],
-  amount: ['amount', refundPrepaymentAmountSchema],
-  memo: ['memo', string()],
-  external: ['external', optional(boolean())],
-});
+export const refundPrepaymentSchema: Schema<RefundPrepayment> = lazy(() =>
+  expandoObject({
+    amountInCents: ['amount_in_cents', nullable(bigint())],
+    amount: ['amount', refundPrepaymentAmountSchema],
+    memo: ['memo', string()],
+    external: ['external', optional(boolean())],
+  })
+);

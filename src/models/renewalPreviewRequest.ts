@@ -16,11 +16,12 @@ export interface RenewalPreviewRequest {
   [key: string]: unknown;
 }
 
-export const renewalPreviewRequestSchema: Schema<RenewalPreviewRequest> = expandoObject(
-  {
-    components: [
-      'components',
-      optional(array(lazy(() => renewalPreviewComponentSchema))),
-    ],
-  }
+export const renewalPreviewRequestSchema: Schema<RenewalPreviewRequest> = lazy(
+  () =>
+    expandoObject({
+      components: [
+        'components',
+        optional(array(renewalPreviewComponentSchema)),
+      ],
+    })
 );

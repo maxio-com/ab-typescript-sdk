@@ -46,25 +46,27 @@ export interface InvoiceTax {
   [key: string]: unknown;
 }
 
-export const invoiceTaxSchema: Schema<InvoiceTax> = expandoObject({
-  uid: ['uid', optional(string())],
-  title: ['title', optional(string())],
-  description: ['description', optional(nullable(string()))],
-  sourceType: ['source_type', optional(proformaInvoiceTaxSourceTypeSchema)],
-  sourceId: ['source_id', optional(number())],
-  percentage: ['percentage', optional(string())],
-  taxableAmount: ['taxable_amount', optional(string())],
-  taxAmount: ['tax_amount', optional(string())],
-  transactionId: ['transaction_id', optional(number())],
-  lineItemBreakouts: [
-    'line_item_breakouts',
-    optional(array(lazy(() => invoiceTaxBreakoutSchema))),
-  ],
-  taxComponentBreakouts: [
-    'tax_component_breakouts',
-    optional(array(lazy(() => invoiceTaxComponentBreakoutSchema))),
-  ],
-  euVat: ['eu_vat', optional(boolean())],
-  type: ['type', optional(string())],
-  taxExemptAmount: ['tax_exempt_amount', optional(string())],
-});
+export const invoiceTaxSchema: Schema<InvoiceTax> = lazy(() =>
+  expandoObject({
+    uid: ['uid', optional(string())],
+    title: ['title', optional(string())],
+    description: ['description', optional(nullable(string()))],
+    sourceType: ['source_type', optional(proformaInvoiceTaxSourceTypeSchema)],
+    sourceId: ['source_id', optional(number())],
+    percentage: ['percentage', optional(string())],
+    taxableAmount: ['taxable_amount', optional(string())],
+    taxAmount: ['tax_amount', optional(string())],
+    transactionId: ['transaction_id', optional(number())],
+    lineItemBreakouts: [
+      'line_item_breakouts',
+      optional(array(invoiceTaxBreakoutSchema)),
+    ],
+    taxComponentBreakouts: [
+      'tax_component_breakouts',
+      optional(array(invoiceTaxComponentBreakoutSchema)),
+    ],
+    euVat: ['eu_vat', optional(boolean())],
+    type: ['type', optional(string())],
+    taxExemptAmount: ['tax_exempt_amount', optional(string())],
+  })
+);

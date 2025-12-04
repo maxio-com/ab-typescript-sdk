@@ -164,7 +164,7 @@ export class ProformaInvoicesController extends BaseController {
    * outdated, simply void the old proforma invoice and generate a new one.
    *
    * If you would like to preview the next billing amounts without generating a full proforma invoice,
-   * please use the renewal preview endpoint.
+   * use the renewal preview endpoint.
    *
    * ## Restrictions
    *

@@ -76,16 +76,28 @@ const body: RefundInvoiceRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.refundInvoice(
+  const response = await invoicesController.refundInvoice(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -193,7 +205,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 const collect = {
-  page: 2,
+  page: 1,
   perPage: 50,
   direction: Direction.Desc,
   lineItems: false,
@@ -221,13 +233,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await invoicesController.listInvoices(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.listInvoices(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -276,7 +300,7 @@ try {
         "organization": "",
         "email": "meg@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "123 I Love Cats Way",
         "line2": "",
@@ -342,7 +366,7 @@ try {
         "organization": "",
         "email": "food@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "",
         "line2": "",
@@ -408,7 +432,7 @@ try {
         "organization": "123",
         "email": "example@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "123 Anywhere Street",
         "line2": "",
@@ -474,7 +498,7 @@ try {
         "organization": "",
         "email": "example@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "123 I Love Cats Way",
         "line2": "",
@@ -547,13 +571,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await invoicesController.readInvoice(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.readInvoice(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -600,7 +636,7 @@ try {
     "organization": null,
     "email": "joe@example.com"
   },
-  "memo": "Please pay within 15 days.",
+  "memo": "Payment due within 15 days of receipt.",
   "billing_address": {
     "street": null,
     "line2": null,
@@ -739,18 +775,30 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 const collect = {
-  page: 2,
+  page: 1,
   perPage: 100
 }
 
 try {
-  const { result, ...httpResponse } = await invoicesController.listInvoiceEvents(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.listInvoiceEvents(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1178,16 +1226,28 @@ const body: CreateInvoicePaymentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.recordPaymentForInvoice(
+  const response = await invoicesController.recordPaymentForInvoice(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1269,13 +1329,25 @@ const body: CreateMultiInvoicePaymentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.recordPaymentForMultipleInvoices(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.recordPaymentForMultipleInvoices(body);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1364,7 +1436,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 const collect = {
-  page: 2,
+  page: 1,
   perPage: 50,
   lineItems: false,
   discounts: false,
@@ -1374,13 +1446,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await invoicesController.listCreditNotes(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.listCreditNotes(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1715,13 +1799,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await invoicesController.readCreditNote(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.readCreditNote(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2081,16 +2177,28 @@ const body: RecordPaymentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.recordPaymentForSubscription(
+  const response = await invoicesController.recordPaymentForSubscription(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2163,13 +2271,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await invoicesController.reopenInvoice(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.reopenInvoice(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2218,16 +2338,28 @@ const body: VoidInvoiceRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.voidInvoice(
+  const response = await invoicesController.voidInvoice(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2280,19 +2412,31 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   invoiceUid: 'invoice_uid0',
-  page: 2,
+  page: 1,
   perPage: 50,
   direction: Direction.Asc
 }
 
 try {
-  const { result, ...httpResponse } = await invoicesController.listConsolidatedInvoiceSegments(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.listConsolidatedInvoiceSegments(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2341,7 +2485,7 @@ try {
         "organization": "",
         "email": "meg@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "123 I Love Cats Way",
         "line2": "",
@@ -2407,7 +2551,7 @@ try {
         "organization": "",
         "email": "food@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "",
         "line2": "",
@@ -2473,7 +2617,7 @@ try {
         "organization": "123",
         "email": "example@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "123 Anywhere Street",
         "line2": "",
@@ -2539,7 +2683,7 @@ try {
         "organization": "",
         "email": "example@example.com"
       },
-      "memo": "Please pay within 15 days.",
+      "memo": "Payment due within 15 days of receipt.",
       "billing_address": {
         "street": "123 I Love Cats Way",
         "line2": "",
@@ -2664,6 +2808,42 @@ If You want to use existing coupon for discount creation, only `code` and option
 ...
 ```
 
+#### Using Coupon Subcodes
+
+You can also use coupon subcodes to apply existing coupons with specific subcodes:
+
+```json
+...
+ "coupons": [
+      {
+        "subcode": "SUB1",
+        "product_family_id": 1
+      }
+  ]
+...
+```
+
+**Important:** You cannot specify both `code` and `subcode` for the same coupon. Use either:
+
+- `code` to apply a main coupon
+- `subcode` to apply a specific coupon subcode
+
+The API response will include both the main coupon code and the subcode used:
+
+```json
+...
+ "coupons": [
+      {
+        "code": "MAIN123",
+        "subcode": "SUB1",
+        "product_family_id": 1,
+        "percentage": 10,
+        "description": "Special discount"
+      }
+  ]
+...
+```
+
 ### Coupon options
 
 #### Code
@@ -2671,6 +2851,10 @@ If You want to use existing coupon for discount creation, only `code` and option
 Coupon `code` will be displayed on invoice discount section.
 Coupon code can only contain uppercase letters, numbers, and allowed special characters.
 Lowercase letters will be converted to uppercase. It can be used to select an existing coupon from the catalog, or as an ad hoc coupon when passed with `percentage` or `amount`.
+
+#### Subcode
+
+Coupon `subcode` allows you to apply existing coupons using their subcodes. When a subcode is used, the API response will include both the main coupon code and the specific subcode that was applied. Subcodes are case-insensitive and will be converted to uppercase automatically.
 
 #### Percentage
 
@@ -2731,7 +2915,7 @@ By default, invoices will be created with a due date matching the date of invoic
 
 #### Addresses
 
-The seller, shipping and billing addresses can be sent to override the site's defaults. Each address requires to send a `first_name` at a minimum in order to work. Please see below for the details on which parameters can be sent for each address object.
+The seller, shipping and billing addresses can be sent to override the site's defaults. Each address requires to send a `first_name` at a minimum in order to work. See below for the details on which parameters can be sent for each address object.
 
 #### Memo and Payment Instructions
 
@@ -2779,16 +2963,28 @@ const body: CreateInvoiceRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.createInvoice(
+  const response = await invoicesController.createInvoice(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2901,9 +3097,9 @@ try {
 
 This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
 
-Please note that if no recipient email addresses are specified in the request, then the subscription's default email configuration will be used. For example, if `recipient_emails` is left blank, then the invoice will be delivered to the subscription's customer email address.
+If no recipient email addresses are specified in the request, then the subscription's default email configuration will be used. For example, if `recipient_emails` is left blank, then the invoice will be delivered to the subscription's customer email address.
 
-On success, a 204 no-content response will be returned. Please note that this does not indicate that email(s) have been delivered, but instead indicates that emails have been successfully queued for delivery. If _any_ invalid or malformed email address is found in the request body, the entire request will be rejected and a 422 response will be returned.
+On success, a 204 no-content response will be returned. The response does not indicate that email(s) have been delivered, but instead indicates that emails have been successfully queued for delivery. If _any_ invalid or malformed email address is found in the request body, the entire request will be rejected and a 422 response will be returned.
 
 ```ts
 async sendInvoice(
@@ -2943,16 +3139,28 @@ const body: SendInvoiceRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.sendInvoice(
+  const response = await invoicesController.sendInvoice(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -2994,13 +3202,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await invoicesController.previewCustomerInformationChanges(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.previewCustomerInformationChanges(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -3096,13 +3316,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await invoicesController.updateCustomerInformation(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await invoicesController.updateCustomerInformation(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -3347,16 +3579,28 @@ const body: IssueInvoiceRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await invoicesController.issueInvoice(
+  const response = await invoicesController.issueInvoice(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

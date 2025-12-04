@@ -15,6 +15,9 @@ export interface SubscriptionMigrationPreviewResponse {
   [key: string]: unknown;
 }
 
-export const subscriptionMigrationPreviewResponseSchema: Schema<SubscriptionMigrationPreviewResponse> = expandoObject(
-  { migration: ['migration', lazy(() => subscriptionMigrationPreviewSchema)] }
+export const subscriptionMigrationPreviewResponseSchema: Schema<SubscriptionMigrationPreviewResponse> = lazy(
+  () =>
+    expandoObject({
+      migration: ['migration', subscriptionMigrationPreviewSchema],
+    })
 );

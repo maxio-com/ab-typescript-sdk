@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema.js';
+import { expandoObject, lazy, optional, Schema, string } from '../schema.js';
 import {
   DeductServiceCreditAmount,
   deductServiceCreditAmountSchema,
@@ -16,9 +16,9 @@ export interface DeductServiceCredit {
   [key: string]: unknown;
 }
 
-export const deductServiceCreditSchema: Schema<DeductServiceCredit> = expandoObject(
-  {
+export const deductServiceCreditSchema: Schema<DeductServiceCredit> = lazy(() =>
+  expandoObject({
     amount: ['amount', deductServiceCreditAmountSchema],
     memo: ['memo', optional(string())],
-  }
+  })
 );

@@ -62,16 +62,28 @@ const body: UpdateSubscriptionNoteRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionNotesController.createSubscriptionNote(
+  const response = await subscriptionNotesController.createSubscriptionNote(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -120,18 +132,30 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   subscriptionId: 222,
-  page: 2,
+  page: 1,
   perPage: 50
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionNotesController.listSubscriptionNotes(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionNotesController.listSubscriptionNotes(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -202,16 +226,28 @@ const subscriptionId = 222;
 const noteId = 66;
 
 try {
-  const { result, ...httpResponse } = await subscriptionNotesController.readSubscriptionNote(
+  const response = await subscriptionNotesController.readSubscriptionNote(
     subscriptionId,
     noteId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -273,17 +309,29 @@ const body: UpdateSubscriptionNoteRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionNotesController.updateSubscriptionNote(
+  const response = await subscriptionNotesController.updateSubscriptionNote(
     subscriptionId,
     noteId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -327,16 +375,28 @@ const subscriptionId = 222;
 const noteId = 66;
 
 try {
-  const { result, ...httpResponse } = await subscriptionNotesController.deleteSubscriptionNote(
+  const response = await subscriptionNotesController.deleteSubscriptionNote(
     subscriptionId,
     noteId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

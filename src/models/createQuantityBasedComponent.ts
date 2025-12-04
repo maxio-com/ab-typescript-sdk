@@ -15,11 +15,12 @@ export interface CreateQuantityBasedComponent {
   [key: string]: unknown;
 }
 
-export const createQuantityBasedComponentSchema: Schema<CreateQuantityBasedComponent> = expandoObject(
-  {
-    quantityBasedComponent: [
-      'quantity_based_component',
-      lazy(() => quantityBasedComponentSchema),
-    ],
-  }
+export const createQuantityBasedComponentSchema: Schema<CreateQuantityBasedComponent> = lazy(
+  () =>
+    expandoObject({
+      quantityBasedComponent: [
+        'quantity_based_component',
+        quantityBasedComponentSchema,
+      ],
+    })
 );

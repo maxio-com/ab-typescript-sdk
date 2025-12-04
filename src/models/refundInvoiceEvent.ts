@@ -25,12 +25,12 @@ export interface RefundInvoiceEvent {
   [key: string]: unknown;
 }
 
-export const refundInvoiceEventSchema: Schema<RefundInvoiceEvent> = expandoObject(
-  {
+export const refundInvoiceEventSchema: Schema<RefundInvoiceEvent> = lazy(() =>
+  expandoObject({
     id: ['id', bigint()],
     timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
+    invoice: ['invoice', invoiceSchema],
     eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: ['event_data', lazy(() => refundInvoiceEventDataSchema)],
-  }
+    eventData: ['event_data', refundInvoiceEventDataSchema],
+  })
 );

@@ -12,6 +12,6 @@ export interface WebhookResponse {
   [key: string]: unknown;
 }
 
-export const webhookResponseSchema: Schema<WebhookResponse> = expandoObject({
-  webhook: ['webhook', optional(lazy(() => webhookSchema))],
-});
+export const webhookResponseSchema: Schema<WebhookResponse> = lazy(() =>
+  expandoObject({ webhook: ['webhook', optional(webhookSchema)] })
+);

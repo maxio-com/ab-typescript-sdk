@@ -44,39 +44,40 @@ export interface InvoiceLineItemEventData {
   [key: string]: unknown;
 }
 
-export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = expandoObject(
-  {
-    uid: ['uid', optional(string())],
-    title: ['title', optional(string())],
-    description: ['description', optional(string())],
-    quantity: ['quantity', optional(number())],
-    quantityDelta: ['quantity_delta', optional(nullable(number()))],
-    unitPrice: ['unit_price', optional(string())],
-    periodRangeStart: ['period_range_start', optional(string())],
-    periodRangeEnd: ['period_range_end', optional(string())],
-    amount: ['amount', optional(string())],
-    lineReferences: ['line_references', optional(string())],
-    pricingDetailsIndex: [
-      'pricing_details_index',
-      optional(nullable(number())),
-    ],
-    pricingDetails: [
-      'pricing_details',
-      optional(array(lazy(() => invoiceLineItemPricingDetailSchema))),
-    ],
-    taxCode: ['tax_code', optional(nullable(string()))],
-    taxAmount: ['tax_amount', optional(string())],
-    productId: ['product_id', optional(number())],
-    productPricePointId: [
-      'product_price_point_id',
-      optional(nullable(number())),
-    ],
-    pricePointId: ['price_point_id', optional(nullable(number()))],
-    componentId: ['component_id', optional(nullable(number()))],
-    billingScheduleItemId: [
-      'billing_schedule_item_id',
-      optional(nullable(number())),
-    ],
-    customItem: ['custom_item', optional(nullable(boolean()))],
-  }
+export const invoiceLineItemEventDataSchema: Schema<InvoiceLineItemEventData> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', optional(string())],
+      title: ['title', optional(string())],
+      description: ['description', optional(string())],
+      quantity: ['quantity', optional(number())],
+      quantityDelta: ['quantity_delta', optional(nullable(number()))],
+      unitPrice: ['unit_price', optional(string())],
+      periodRangeStart: ['period_range_start', optional(string())],
+      periodRangeEnd: ['period_range_end', optional(string())],
+      amount: ['amount', optional(string())],
+      lineReferences: ['line_references', optional(string())],
+      pricingDetailsIndex: [
+        'pricing_details_index',
+        optional(nullable(number())),
+      ],
+      pricingDetails: [
+        'pricing_details',
+        optional(array(invoiceLineItemPricingDetailSchema)),
+      ],
+      taxCode: ['tax_code', optional(nullable(string()))],
+      taxAmount: ['tax_amount', optional(string())],
+      productId: ['product_id', optional(number())],
+      productPricePointId: [
+        'product_price_point_id',
+        optional(nullable(number())),
+      ],
+      pricePointId: ['price_point_id', optional(nullable(number()))],
+      componentId: ['component_id', optional(nullable(number()))],
+      billingScheduleItemId: [
+        'billing_schedule_item_id',
+        optional(nullable(number())),
+      ],
+      customItem: ['custom_item', optional(nullable(boolean()))],
+    })
 );

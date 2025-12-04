@@ -38,20 +38,22 @@ export interface InvoiceIssued {
   [key: string]: unknown;
 }
 
-export const invoiceIssuedSchema: Schema<InvoiceIssued> = expandoObject({
-  uid: ['uid', string()],
-  number: ['number', string()],
-  role: ['role', string()],
-  dueDate: ['due_date', nullable(string())],
-  issueDate: ['issue_date', string()],
-  paidDate: ['paid_date', string()],
-  dueAmount: ['due_amount', string()],
-  paidAmount: ['paid_amount', string()],
-  taxAmount: ['tax_amount', string()],
-  refundAmount: ['refund_amount', string()],
-  totalAmount: ['total_amount', string()],
-  statusAmount: ['status_amount', string()],
-  productName: ['product_name', string()],
-  consolidationLevel: ['consolidation_level', string()],
-  lineItems: ['line_items', array(lazy(() => invoiceLineItemEventDataSchema))],
-});
+export const invoiceIssuedSchema: Schema<InvoiceIssued> = lazy(() =>
+  expandoObject({
+    uid: ['uid', string()],
+    number: ['number', string()],
+    role: ['role', string()],
+    dueDate: ['due_date', nullable(string())],
+    issueDate: ['issue_date', string()],
+    paidDate: ['paid_date', string()],
+    dueAmount: ['due_amount', string()],
+    paidAmount: ['paid_amount', string()],
+    taxAmount: ['tax_amount', string()],
+    refundAmount: ['refund_amount', string()],
+    totalAmount: ['total_amount', string()],
+    statusAmount: ['status_amount', string()],
+    productName: ['product_name', string()],
+    consolidationLevel: ['consolidation_level', string()],
+    lineItems: ['line_items', array(invoiceLineItemEventDataSchema)],
+  })
+);

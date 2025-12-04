@@ -36,15 +36,16 @@ export interface CreateComponentPricePoint {
   [key: string]: unknown;
 }
 
-export const createComponentPricePointSchema: Schema<CreateComponentPricePoint> = expandoObject(
-  {
-    name: ['name', string()],
-    handle: ['handle', optional(string())],
-    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
-    prices: ['prices', array(lazy(() => priceSchema))],
-    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-    taxIncluded: ['tax_included', optional(boolean())],
-    interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-  }
+export const createComponentPricePointSchema: Schema<CreateComponentPricePoint> = lazy(
+  () =>
+    expandoObject({
+      name: ['name', string()],
+      handle: ['handle', optional(string())],
+      pricingScheme: ['pricing_scheme', pricingSchemeSchema],
+      prices: ['prices', array(priceSchema)],
+      useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+      taxIncluded: ['tax_included', optional(boolean())],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+    })
 );

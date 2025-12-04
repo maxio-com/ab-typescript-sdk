@@ -15,11 +15,9 @@ export interface UpdateAllocationExpirationDate {
   [key: string]: unknown;
 }
 
-export const updateAllocationExpirationDateSchema: Schema<UpdateAllocationExpirationDate> = expandoObject(
-  {
-    allocation: [
-      'allocation',
-      optional(lazy(() => allocationExpirationDateSchema)),
-    ],
-  }
+export const updateAllocationExpirationDateSchema: Schema<UpdateAllocationExpirationDate> = lazy(
+  () =>
+    expandoObject({
+      allocation: ['allocation', optional(allocationExpirationDateSchema)],
+    })
 );

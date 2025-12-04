@@ -60,7 +60,7 @@ export interface PrepaidUsageComponent {
   pricePoints?: CreatePrepaidUsageComponentPricePoint[];
   /** The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065 */
   unitPrice?: PrepaidUsageComponentUnitPrice;
-  /** A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
+  /** A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. */
   taxCode?: string;
   /** (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. */
   hideDateRangeOnInvoice?: boolean;
@@ -78,40 +78,50 @@ export interface PrepaidUsageComponent {
   [key: string]: unknown;
 }
 
-export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = expandoObject(
-  {
-    name: ['name', string()],
-    unitName: ['unit_name', string()],
-    description: ['description', optional(string())],
-    handle: ['handle', optional(string())],
-    taxable: ['taxable', optional(boolean())],
-    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
-    prices: ['prices', optional(array(lazy(() => priceSchema)))],
-    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-    pricePoints: [
-      'price_points',
-      optional(array(lazy(() => createPrepaidUsageComponentPricePointSchema))),
-    ],
-    unitPrice: ['unit_price', optional(prepaidUsageComponentUnitPriceSchema)],
-    taxCode: ['tax_code', optional(string())],
-    hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
-    overagePricing: ['overage_pricing', lazy(() => overagePricingSchema)],
-    rolloverPrepaidRemainder: [
-      'rollover_prepaid_remainder',
-      optional(boolean()),
-    ],
-    renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
-    expirationInterval: ['expiration_interval', optional(number())],
-    expirationIntervalUnit: [
-      'expiration_interval_unit',
-      optional(nullable(expirationIntervalUnitSchema)),
-    ],
-    displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
-    allowFractionalQuantities: [
-      'allow_fractional_quantities',
-      optional(boolean()),
-    ],
-    publicSignupPageIds: ['public_signup_page_ids', optional(array(number()))],
-  }
+export const prepaidUsageComponentSchema: Schema<PrepaidUsageComponent> = lazy(
+  () =>
+    expandoObject({
+      name: ['name', string()],
+      unitName: ['unit_name', string()],
+      description: ['description', optional(string())],
+      handle: ['handle', optional(string())],
+      taxable: ['taxable', optional(boolean())],
+      pricingScheme: ['pricing_scheme', pricingSchemeSchema],
+      prices: ['prices', optional(array(priceSchema))],
+      upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+      downgradeCredit: [
+        'downgrade_credit',
+        optional(nullable(creditTypeSchema)),
+      ],
+      pricePoints: [
+        'price_points',
+        optional(array(createPrepaidUsageComponentPricePointSchema)),
+      ],
+      unitPrice: ['unit_price', optional(prepaidUsageComponentUnitPriceSchema)],
+      taxCode: ['tax_code', optional(string())],
+      hideDateRangeOnInvoice: [
+        'hide_date_range_on_invoice',
+        optional(boolean()),
+      ],
+      overagePricing: ['overage_pricing', overagePricingSchema],
+      rolloverPrepaidRemainder: [
+        'rollover_prepaid_remainder',
+        optional(boolean()),
+      ],
+      renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
+      expirationInterval: ['expiration_interval', optional(number())],
+      expirationIntervalUnit: [
+        'expiration_interval_unit',
+        optional(nullable(expirationIntervalUnitSchema)),
+      ],
+      displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
+      allowFractionalQuantities: [
+        'allow_fractional_quantities',
+        optional(boolean()),
+      ],
+      publicSignupPageIds: [
+        'public_signup_page_ids',
+        optional(array(number())),
+      ],
+    })
 );

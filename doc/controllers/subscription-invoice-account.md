@@ -47,13 +47,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.readAccountBalances(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionInvoiceAccountController.readAccountBalances(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -67,7 +79,7 @@ In order to specify a prepayment made against a subscription, specify the `amoun
 
 When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance.  This is especially useful for manual replenishment of prepaid subscriptions.
 
-Please note that you **can't** pass `amount_in_cents`.
+Note that passing `amount_in_cents` is now allowed.
 
 ```ts
 async createPrepayment(
@@ -104,16 +116,28 @@ const body: CreatePrepaymentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.createPrepayment(
+  const response = await subscriptionInvoiceAccountController.createPrepayment(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -181,7 +205,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   subscriptionId: 222,
-  page: 2,
+  page: 1,
   perPage: 50,
   filter: {
     dateField: ListPrepaymentDateField.CreatedAt,
@@ -191,13 +215,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.listPrepayments(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionInvoiceAccountController.listPrepayments(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -266,16 +302,28 @@ const body: IssueServiceCreditRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.issueServiceCredit(
+  const response = await subscriptionInvoiceAccountController.issueServiceCredit(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -336,16 +384,28 @@ const body: DeductServiceCreditRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.deductServiceCredit(
+  const response = await subscriptionInvoiceAccountController.deductServiceCredit(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -390,22 +450,34 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const subscriptionId = 222;
 
-const page = 2;
+const page = 1;
 
 const perPage = 50;
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.listServiceCredits(
+  const response = await subscriptionInvoiceAccountController.listServiceCredits(
     subscriptionId,
     page,
     perPage
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -483,16 +555,28 @@ const subscriptionId = 222;
 const prepaymentId = BigInt(228);
 
 try {
-  const { result, ...httpResponse } = await subscriptionInvoiceAccountController.refundPrepayment(
+  const response = await subscriptionInvoiceAccountController.refundPrepayment(
     subscriptionId,
     prepaymentId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

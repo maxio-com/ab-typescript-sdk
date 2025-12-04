@@ -12,6 +12,6 @@ export interface BatchJobResponse {
   [key: string]: unknown;
 }
 
-export const batchJobResponseSchema: Schema<BatchJobResponse> = expandoObject({
-  batchjob: ['batchjob', lazy(() => batchJobSchema)],
-});
+export const batchJobResponseSchema: Schema<BatchJobResponse> = lazy(() =>
+  expandoObject({ batchjob: ['batchjob', batchJobSchema] })
+);

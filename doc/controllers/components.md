@@ -32,7 +32,7 @@ Metered components are used to bill for any type of unit that resets to 0 at the
 
 Note that this is different from recurring quantity-based components, which DO NOT reset to zero at the start of every billing period. If you want to bill for a quantity of something that does not change unless you change it, then you want quantity components, instead.
 
-For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
+For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
 async createMeteredComponent(
@@ -75,16 +75,28 @@ const body: CreateMeteredComponent = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.createMeteredComponent(
+  const response = await componentsController.createMeteredComponent(
     productFamilyId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -163,7 +175,7 @@ One-time quantity-based components are used to create ad hoc usage charges that 
 
 The allocated quantity for one-time quantity-based components immediately gets reset back to zero after the allocation is made.
 
-For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
+For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
 async createQuantityBasedComponent(
@@ -207,16 +219,28 @@ const body: CreateQuantityBasedComponent = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.createQuantityBasedComponent(
+  const response = await componentsController.createQuantityBasedComponent(
     productFamilyId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -285,7 +309,7 @@ This request will create a component definition of kind **on_off_component** und
 
 On/off components are used for any flat fee, recurring add on (think $99/month for tech support or a flat add on shipping fee).
 
-For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
+For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
 async createOnOffComponent(
@@ -326,16 +350,28 @@ const body: CreateOnOffComponent = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.createOnOffComponent(
+  const response = await componentsController.createOnOffComponent(
     productFamilyId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -392,7 +428,7 @@ This request will create a component definition of kind **prepaid_usage_componen
 
 Prepaid components allow customers to pre-purchase units that can be used up over time on their subscription. In a sense, they are the mirror image of metered components; while metered components charge at the end of the period for the amount of units used, prepaid components are charged for at the time of purchase, and we subsequently keep track of the usage against the amount purchased.
 
-For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
+For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
 async createPrepaidUsageComponent(
@@ -447,16 +483,28 @@ const body: CreatePrepaidComponent = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.createPrepaidUsageComponent(
+  const response = await componentsController.createPrepaidUsageComponent(
     productFamilyId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -539,7 +587,7 @@ Event-based components are similar to other component types, in that you define 
 
 So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events.
 
-For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
+For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```ts
 async createEventBasedComponent(
@@ -585,16 +633,28 @@ const body: CreateEBBComponent = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.createEventBasedComponent(
+  const response = await componentsController.createEventBasedComponent(
     productFamilyId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -674,13 +734,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const handle = 'handle6';
 
 try {
-  const { result, ...httpResponse } = await componentsController.findComponent(handle);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await componentsController.findComponent(handle);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -750,16 +822,28 @@ const productFamilyId = 140;
 const componentId = 'component_id8';
 
 try {
-  const { result, ...httpResponse } = await componentsController.readComponent(
+  const response = await componentsController.readComponent(
     productFamilyId,
     componentId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -838,17 +922,29 @@ const body: UpdateComponentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.updateProductFamilyComponent(
+  const response = await componentsController.updateProductFamilyComponent(
     productFamilyId,
     componentId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -922,16 +1018,28 @@ const productFamilyId = 140;
 const componentId = 'component_id8';
 
 try {
-  const { result, ...httpResponse } = await componentsController.archiveComponent(
+  const response = await componentsController.archiveComponent(
     productFamilyId,
     componentId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1024,7 +1132,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   dateField: BasicDateField.UpdatedAt,
-  page: 2,
+  page: 1,
   perPage: 50,
   filter: {
     ids: [
@@ -1036,13 +1144,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await componentsController.listComponents(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await componentsController.listComponents(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1185,16 +1305,28 @@ const body: UpdateComponentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentsController.updateComponent(
+  const response = await componentsController.updateComponent(
     componentId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1294,7 +1426,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   productFamilyId: 140,
-  page: 2,
+  page: 1,
   perPage: 50,
   filter: {
     ids: [
@@ -1307,13 +1439,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await componentsController.listComponentsForProductFamily(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await componentsController.listComponentsForProductFamily(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

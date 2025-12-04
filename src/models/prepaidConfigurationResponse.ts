@@ -15,11 +15,12 @@ export interface PrepaidConfigurationResponse {
   [key: string]: unknown;
 }
 
-export const prepaidConfigurationResponseSchema: Schema<PrepaidConfigurationResponse> = expandoObject(
-  {
-    prepaidConfiguration: [
-      'prepaid_configuration',
-      lazy(() => prepaidConfigurationSchema),
-    ],
-  }
+export const prepaidConfigurationResponseSchema: Schema<PrepaidConfigurationResponse> = lazy(
+  () =>
+    expandoObject({
+      prepaidConfiguration: [
+        'prepaid_configuration',
+        prepaidConfigurationSchema,
+      ],
+    })
 );

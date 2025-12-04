@@ -49,40 +49,42 @@ export interface Site {
   [key: string]: unknown;
 }
 
-export const siteSchema: Schema<Site> = expandoObject({
-  id: ['id', optional(number())],
-  name: ['name', optional(string())],
-  subdomain: ['subdomain', optional(string())],
-  currency: ['currency', optional(string())],
-  sellerId: ['seller_id', optional(number())],
-  nonPrimaryCurrencies: ['non_primary_currencies', optional(array(string()))],
-  relationshipInvoicingEnabled: [
-    'relationship_invoicing_enabled',
-    optional(boolean()),
-  ],
-  scheduleSubscriptionCancellationEnabled: [
-    'schedule_subscription_cancellation_enabled',
-    optional(boolean()),
-  ],
-  customerHierarchyEnabled: ['customer_hierarchy_enabled', optional(boolean())],
-  whopaysEnabled: ['whopays_enabled', optional(boolean())],
-  whopaysDefaultPayer: ['whopays_default_payer', optional(string())],
-  allocationSettings: [
-    'allocation_settings',
-    optional(lazy(() => allocationSettingsSchema)),
-  ],
-  defaultPaymentCollectionMethod: [
-    'default_payment_collection_method',
-    optional(string()),
-  ],
-  organizationAddress: [
-    'organization_address',
-    optional(lazy(() => organizationAddressSchema)),
-  ],
-  taxConfiguration: [
-    'tax_configuration',
-    optional(lazy(() => taxConfigurationSchema)),
-  ],
-  netTerms: ['net_terms', optional(lazy(() => netTermsSchema))],
-  test: ['test', optional(boolean())],
-});
+export const siteSchema: Schema<Site> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    name: ['name', optional(string())],
+    subdomain: ['subdomain', optional(string())],
+    currency: ['currency', optional(string())],
+    sellerId: ['seller_id', optional(number())],
+    nonPrimaryCurrencies: ['non_primary_currencies', optional(array(string()))],
+    relationshipInvoicingEnabled: [
+      'relationship_invoicing_enabled',
+      optional(boolean()),
+    ],
+    scheduleSubscriptionCancellationEnabled: [
+      'schedule_subscription_cancellation_enabled',
+      optional(boolean()),
+    ],
+    customerHierarchyEnabled: [
+      'customer_hierarchy_enabled',
+      optional(boolean()),
+    ],
+    whopaysEnabled: ['whopays_enabled', optional(boolean())],
+    whopaysDefaultPayer: ['whopays_default_payer', optional(string())],
+    allocationSettings: [
+      'allocation_settings',
+      optional(allocationSettingsSchema),
+    ],
+    defaultPaymentCollectionMethod: [
+      'default_payment_collection_method',
+      optional(string()),
+    ],
+    organizationAddress: [
+      'organization_address',
+      optional(organizationAddressSchema),
+    ],
+    taxConfiguration: ['tax_configuration', optional(taxConfigurationSchema)],
+    netTerms: ['net_terms', optional(netTermsSchema)],
+    test: ['test', optional(boolean())],
+  })
+);

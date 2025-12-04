@@ -15,6 +15,9 @@ export interface SubscriptionGroupPrepaymentRequest {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupPrepaymentRequestSchema: Schema<SubscriptionGroupPrepaymentRequest> = expandoObject(
-  { prepayment: ['prepayment', lazy(() => subscriptionGroupPrepaymentSchema)] }
+export const subscriptionGroupPrepaymentRequestSchema: Schema<SubscriptionGroupPrepaymentRequest> = lazy(
+  () =>
+    expandoObject({
+      prepayment: ['prepayment', subscriptionGroupPrepaymentSchema],
+    })
 );

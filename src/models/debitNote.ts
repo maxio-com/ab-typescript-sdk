@@ -82,37 +82,30 @@ export interface DebitNote {
   [key: string]: unknown;
 }
 
-export const debitNoteSchema: Schema<DebitNote> = expandoObject({
-  uid: ['uid', optional(string())],
-  siteId: ['site_id', optional(number())],
-  customerId: ['customer_id', optional(number())],
-  subscriptionId: ['subscription_id', optional(number())],
-  number: ['number', optional(number())],
-  sequenceNumber: ['sequence_number', optional(number())],
-  originCreditNoteUid: ['origin_credit_note_uid', optional(string())],
-  originCreditNoteNumber: ['origin_credit_note_number', optional(string())],
-  issueDate: ['issue_date', optional(string())],
-  appliedDate: ['applied_date', optional(string())],
-  dueDate: ['due_date', optional(string())],
-  status: ['status', optional(debitNoteStatusSchema)],
-  memo: ['memo', optional(string())],
-  role: ['role', optional(debitNoteRoleSchema)],
-  currency: ['currency', optional(string())],
-  seller: ['seller', optional(lazy(() => invoiceSellerSchema))],
-  customer: ['customer', optional(lazy(() => invoiceCustomerSchema))],
-  billingAddress: [
-    'billing_address',
-    optional(lazy(() => invoiceAddressSchema)),
-  ],
-  shippingAddress: [
-    'shipping_address',
-    optional(lazy(() => invoiceAddressSchema)),
-  ],
-  lineItems: [
-    'line_items',
-    optional(array(lazy(() => creditNoteLineItemSchema))),
-  ],
-  discounts: ['discounts', optional(array(lazy(() => invoiceDiscountSchema)))],
-  taxes: ['taxes', optional(array(lazy(() => invoiceTaxSchema)))],
-  refunds: ['refunds', optional(array(lazy(() => invoiceRefundSchema)))],
-});
+export const debitNoteSchema: Schema<DebitNote> = lazy(() =>
+  expandoObject({
+    uid: ['uid', optional(string())],
+    siteId: ['site_id', optional(number())],
+    customerId: ['customer_id', optional(number())],
+    subscriptionId: ['subscription_id', optional(number())],
+    number: ['number', optional(number())],
+    sequenceNumber: ['sequence_number', optional(number())],
+    originCreditNoteUid: ['origin_credit_note_uid', optional(string())],
+    originCreditNoteNumber: ['origin_credit_note_number', optional(string())],
+    issueDate: ['issue_date', optional(string())],
+    appliedDate: ['applied_date', optional(string())],
+    dueDate: ['due_date', optional(string())],
+    status: ['status', optional(debitNoteStatusSchema)],
+    memo: ['memo', optional(string())],
+    role: ['role', optional(debitNoteRoleSchema)],
+    currency: ['currency', optional(string())],
+    seller: ['seller', optional(invoiceSellerSchema)],
+    customer: ['customer', optional(invoiceCustomerSchema)],
+    billingAddress: ['billing_address', optional(invoiceAddressSchema)],
+    shippingAddress: ['shipping_address', optional(invoiceAddressSchema)],
+    lineItems: ['line_items', optional(array(creditNoteLineItemSchema))],
+    discounts: ['discounts', optional(array(invoiceDiscountSchema))],
+    taxes: ['taxes', optional(array(invoiceTaxSchema))],
+    refunds: ['refunds', optional(array(invoiceRefundSchema))],
+  })
+);

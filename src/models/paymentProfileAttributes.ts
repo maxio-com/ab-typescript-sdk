@@ -6,6 +6,7 @@
 
 import {
   expandoObject,
+  lazy,
   nullable,
   number,
   optional,
@@ -51,7 +52,7 @@ export interface PaymentProfileAttributes {
   billingCity?: string;
   /** (Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes. */
   billingState?: string;
-  /** (Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. */
+  /** (Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. */
   billingCountry?: string;
   /** (Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway. */
   billingZip?: string;
@@ -74,38 +75,39 @@ export interface PaymentProfileAttributes {
   [key: string]: unknown;
 }
 
-export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = expandoObject(
-  {
-    chargifyToken: ['chargify_token', optional(string())],
-    id: ['id', optional(number())],
-    paymentType: ['payment_type', optional(paymentTypeSchema)],
-    firstName: ['first_name', optional(string())],
-    lastName: ['last_name', optional(string())],
-    maskedCardNumber: ['masked_card_number', optional(string())],
-    fullNumber: ['full_number', optional(string())],
-    cardType: ['card_type', optional(cardTypeSchema)],
-    expirationMonth: [
-      'expiration_month',
-      optional(paymentProfileAttributesExpirationMonthSchema),
-    ],
-    expirationYear: [
-      'expiration_year',
-      optional(paymentProfileAttributesExpirationYearSchema),
-    ],
-    billingAddress: ['billing_address', optional(string())],
-    billingAddress2: ['billing_address_2', optional(nullable(string()))],
-    billingCity: ['billing_city', optional(string())],
-    billingState: ['billing_state', optional(string())],
-    billingCountry: ['billing_country', optional(string())],
-    billingZip: ['billing_zip', optional(string())],
-    currentVault: ['current_vault', optional(allVaultsSchema)],
-    vaultToken: ['vault_token', optional(string())],
-    customerVaultToken: ['customer_vault_token', optional(string())],
-    customerId: ['customer_id', optional(number())],
-    paypalEmail: ['paypal_email', optional(string())],
-    paymentMethodNonce: ['payment_method_nonce', optional(string())],
-    gatewayHandle: ['gateway_handle', optional(string())],
-    cvv: ['cvv', optional(string())],
-    lastFour: ['last_four', optional(string())],
-  }
+export const paymentProfileAttributesSchema: Schema<PaymentProfileAttributes> = lazy(
+  () =>
+    expandoObject({
+      chargifyToken: ['chargify_token', optional(string())],
+      id: ['id', optional(number())],
+      paymentType: ['payment_type', optional(paymentTypeSchema)],
+      firstName: ['first_name', optional(string())],
+      lastName: ['last_name', optional(string())],
+      maskedCardNumber: ['masked_card_number', optional(string())],
+      fullNumber: ['full_number', optional(string())],
+      cardType: ['card_type', optional(cardTypeSchema)],
+      expirationMonth: [
+        'expiration_month',
+        optional(paymentProfileAttributesExpirationMonthSchema),
+      ],
+      expirationYear: [
+        'expiration_year',
+        optional(paymentProfileAttributesExpirationYearSchema),
+      ],
+      billingAddress: ['billing_address', optional(string())],
+      billingAddress2: ['billing_address_2', optional(nullable(string()))],
+      billingCity: ['billing_city', optional(string())],
+      billingState: ['billing_state', optional(string())],
+      billingCountry: ['billing_country', optional(string())],
+      billingZip: ['billing_zip', optional(string())],
+      currentVault: ['current_vault', optional(allVaultsSchema)],
+      vaultToken: ['vault_token', optional(string())],
+      customerVaultToken: ['customer_vault_token', optional(string())],
+      customerId: ['customer_id', optional(number())],
+      paypalEmail: ['paypal_email', optional(string())],
+      paymentMethodNonce: ['payment_method_nonce', optional(string())],
+      gatewayHandle: ['gateway_handle', optional(string())],
+      cvv: ['cvv', optional(string())],
+      lastFour: ['last_four', optional(string())],
+    })
 );

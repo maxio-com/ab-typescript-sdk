@@ -15,6 +15,9 @@ export interface IssueServiceCreditRequest {
   [key: string]: unknown;
 }
 
-export const issueServiceCreditRequestSchema: Schema<IssueServiceCreditRequest> = expandoObject(
-  { serviceCredit: ['service_credit', lazy(() => issueServiceCreditSchema)] }
+export const issueServiceCreditRequestSchema: Schema<IssueServiceCreditRequest> = lazy(
+  () =>
+    expandoObject({
+      serviceCredit: ['service_credit', issueServiceCreditSchema],
+    })
 );

@@ -15,11 +15,12 @@ export interface ListSubscriptionComponentsResponse {
   [key: string]: unknown;
 }
 
-export const listSubscriptionComponentsResponseSchema: Schema<ListSubscriptionComponentsResponse> = expandoObject(
-  {
-    subscriptionsComponents: [
-      'subscriptions_components',
-      array(lazy(() => subscriptionComponentSchema)),
-    ],
-  }
+export const listSubscriptionComponentsResponseSchema: Schema<ListSubscriptionComponentsResponse> = lazy(
+  () =>
+    expandoObject({
+      subscriptionsComponents: [
+        'subscriptions_components',
+        array(subscriptionComponentSchema),
+      ],
+    })
 );

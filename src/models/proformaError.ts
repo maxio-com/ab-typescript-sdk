@@ -13,6 +13,8 @@ export interface ProformaError {
   [key: string]: unknown;
 }
 
-export const proformaErrorSchema: Schema<ProformaError> = expandoObject({
-  subscription: ['subscription', optional(lazy(() => baseStringErrorSchema))],
-});
+export const proformaErrorSchema: Schema<ProformaError> = lazy(() =>
+  expandoObject({
+    subscription: ['subscription', optional(baseStringErrorSchema)],
+  })
+);

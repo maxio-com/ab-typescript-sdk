@@ -7,6 +7,7 @@
 import {
   array,
   isMappedValueValidForSchema,
+  lazy,
   oneOf,
   Schema,
   string,
@@ -16,8 +17,8 @@ import { CustomerError, customerErrorSchema } from '../customerError.js';
 /** This is a container type for one-of types. */
 export type CustomerErrorResponseErrors = CustomerError | string[];
 
-export const customerErrorResponseErrorsSchema: Schema<CustomerErrorResponseErrors> = oneOf(
-  [customerErrorSchema, array(string())]
+export const customerErrorResponseErrorsSchema: Schema<CustomerErrorResponseErrors> = lazy(
+  () => oneOf([customerErrorSchema, array(string())])
 );
 
 export namespace CustomerErrorResponseErrors {

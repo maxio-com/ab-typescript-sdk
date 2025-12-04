@@ -25,10 +25,12 @@ export interface VoidInvoiceEvent {
   [key: string]: unknown;
 }
 
-export const voidInvoiceEventSchema: Schema<VoidInvoiceEvent> = expandoObject({
-  id: ['id', bigint()],
-  timestamp: ['timestamp', string()],
-  invoice: ['invoice', lazy(() => invoiceSchema)],
-  eventType: ['event_type', invoiceEventTypeSchema],
-  eventData: ['event_data', lazy(() => voidInvoiceEventDataSchema)],
-});
+export const voidInvoiceEventSchema: Schema<VoidInvoiceEvent> = lazy(() =>
+  expandoObject({
+    id: ['id', bigint()],
+    timestamp: ['timestamp', string()],
+    invoice: ['invoice', invoiceSchema],
+    eventType: ['event_type', invoiceEventTypeSchema],
+    eventData: ['event_data', voidInvoiceEventDataSchema],
+  })
+);

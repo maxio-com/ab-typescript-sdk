@@ -12,6 +12,6 @@ export interface CreateMetadataRequest {
   [key: string]: unknown;
 }
 
-export const createMetadataRequestSchema: Schema<CreateMetadataRequest> = expandoObject(
-  { metadata: ['metadata', array(lazy(() => createMetadataSchema))] }
+export const createMetadataRequestSchema: Schema<CreateMetadataRequest> = lazy(
+  () => expandoObject({ metadata: ['metadata', array(createMetadataSchema)] })
 );

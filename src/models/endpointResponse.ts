@@ -12,6 +12,6 @@ export interface EndpointResponse {
   [key: string]: unknown;
 }
 
-export const endpointResponseSchema: Schema<EndpointResponse> = expandoObject({
-  endpoint: ['endpoint', optional(lazy(() => endpointSchema))],
-});
+export const endpointResponseSchema: Schema<EndpointResponse> = lazy(() =>
+  expandoObject({ endpoint: ['endpoint', optional(endpointSchema)] })
+);

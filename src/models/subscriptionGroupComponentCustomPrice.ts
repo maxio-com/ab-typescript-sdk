@@ -21,13 +21,14 @@ export interface SubscriptionGroupComponentCustomPrice {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupComponentCustomPriceSchema: Schema<SubscriptionGroupComponentCustomPrice> = expandoObject(
-  {
-    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-    prices: ['prices', optional(array(lazy(() => priceSchema)))],
-    overagePricing: [
-      'overage_pricing',
-      optional(array(lazy(() => componentCustomPriceSchema))),
-    ],
-  }
+export const subscriptionGroupComponentCustomPriceSchema: Schema<SubscriptionGroupComponentCustomPrice> = lazy(
+  () =>
+    expandoObject({
+      pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+      prices: ['prices', optional(array(priceSchema))],
+      overagePricing: [
+        'overage_pricing',
+        optional(array(componentCustomPriceSchema)),
+      ],
+    })
 );

@@ -12,6 +12,6 @@ export interface RecordPaymentRequest {
   [key: string]: unknown;
 }
 
-export const recordPaymentRequestSchema: Schema<RecordPaymentRequest> = expandoObject(
-  { payment: ['payment', lazy(() => createPaymentSchema)] }
+export const recordPaymentRequestSchema: Schema<RecordPaymentRequest> = lazy(
+  () => expandoObject({ payment: ['payment', createPaymentSchema] })
 );

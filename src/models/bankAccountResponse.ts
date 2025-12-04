@@ -15,11 +15,8 @@ export interface BankAccountResponse {
   [key: string]: unknown;
 }
 
-export const bankAccountResponseSchema: Schema<BankAccountResponse> = expandoObject(
-  {
-    paymentProfile: [
-      'payment_profile',
-      lazy(() => bankAccountPaymentProfileSchema),
-    ],
-  }
+export const bankAccountResponseSchema: Schema<BankAccountResponse> = lazy(() =>
+  expandoObject({
+    paymentProfile: ['payment_profile', bankAccountPaymentProfileSchema],
+  })
 );

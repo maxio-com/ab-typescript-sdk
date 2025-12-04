@@ -16,9 +16,9 @@ export interface CustomerPayerChange {
   [key: string]: unknown;
 }
 
-export const customerPayerChangeSchema: Schema<CustomerPayerChange> = expandoObject(
-  {
-    before: ['before', lazy(() => invoicePayerChangeSchema)],
-    after: ['after', lazy(() => invoicePayerChangeSchema)],
-  }
+export const customerPayerChangeSchema: Schema<CustomerPayerChange> = lazy(() =>
+  expandoObject({
+    before: ['before', invoicePayerChangeSchema],
+    after: ['after', invoicePayerChangeSchema],
+  })
 );

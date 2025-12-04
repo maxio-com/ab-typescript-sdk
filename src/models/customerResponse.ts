@@ -12,6 +12,6 @@ export interface CustomerResponse {
   [key: string]: unknown;
 }
 
-export const customerResponseSchema: Schema<CustomerResponse> = expandoObject({
-  customer: ['customer', lazy(() => customerSchema)],
-});
+export const customerResponseSchema: Schema<CustomerResponse> = lazy(() =>
+  expandoObject({ customer: ['customer', customerSchema] })
+);

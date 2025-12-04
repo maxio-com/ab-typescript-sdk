@@ -15,11 +15,9 @@ export interface CouponCurrencyRequest {
   [key: string]: unknown;
 }
 
-export const couponCurrencyRequestSchema: Schema<CouponCurrencyRequest> = expandoObject(
-  {
-    currencyPrices: [
-      'currency_prices',
-      array(lazy(() => updateCouponCurrencySchema)),
-    ],
-  }
+export const couponCurrencyRequestSchema: Schema<CouponCurrencyRequest> = lazy(
+  () =>
+    expandoObject({
+      currencyPrices: ['currency_prices', array(updateCouponCurrencySchema)],
+    })
 );

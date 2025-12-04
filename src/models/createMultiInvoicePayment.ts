@@ -40,16 +40,17 @@ export interface CreateMultiInvoicePayment {
   [key: string]: unknown;
 }
 
-export const createMultiInvoicePaymentSchema: Schema<CreateMultiInvoicePayment> = expandoObject(
-  {
-    memo: ['memo', optional(string())],
-    details: ['details', optional(string())],
-    method: ['method', optional(invoicePaymentMethodTypeSchema)],
-    amount: ['amount', createMultiInvoicePaymentAmountSchema],
-    receivedOn: ['received_on', optional(string())],
-    applications: [
-      'applications',
-      array(lazy(() => createInvoicePaymentApplicationSchema)),
-    ],
-  }
+export const createMultiInvoicePaymentSchema: Schema<CreateMultiInvoicePayment> = lazy(
+  () =>
+    expandoObject({
+      memo: ['memo', optional(string())],
+      details: ['details', optional(string())],
+      method: ['method', optional(invoicePaymentMethodTypeSchema)],
+      amount: ['amount', createMultiInvoicePaymentAmountSchema],
+      receivedOn: ['received_on', optional(string())],
+      applications: [
+        'applications',
+        array(createInvoicePaymentApplicationSchema),
+      ],
+    })
 );

@@ -15,6 +15,6 @@ export interface CreateAllocationRequest {
   [key: string]: unknown;
 }
 
-export const createAllocationRequestSchema: Schema<CreateAllocationRequest> = expandoObject(
-  { allocation: ['allocation', lazy(() => createAllocationSchema)] }
+export const createAllocationRequestSchema: Schema<CreateAllocationRequest> = lazy(
+  () => expandoObject({ allocation: ['allocation', createAllocationSchema] })
 );

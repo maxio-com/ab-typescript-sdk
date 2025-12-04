@@ -23,6 +23,7 @@ import {
 } from './expirationIntervalUnit.js';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { PricePointType, pricePointTypeSchema } from './pricePointType.js';
+import { TrialType, trialTypeSchema } from './trialType.js';
 
 export interface ProductPricePoint {
   id?: number;
@@ -42,7 +43,8 @@ export interface ProductPricePoint {
   trialInterval?: number | null;
   /** A string representing the trial interval unit for this product price point, either month or day */
   trialIntervalUnit?: IntervalUnit | null;
-  trialType?: string;
+  /** Indicates how a trial is handled when the trail period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. */
+  trialType?: TrialType | null;
   /** reserved for future use */
   introductoryOffer?: boolean | null;
   /** The product price point initial charge, in integer cents */
@@ -73,8 +75,8 @@ export interface ProductPricePoint {
   [key: string]: unknown;
 }
 
-export const productPricePointSchema: Schema<ProductPricePoint> = expandoObject(
-  {
+export const productPricePointSchema: Schema<ProductPricePoint> = lazy(() =>
+  expandoObject({
     id: ['id', optional(number())],
     name: ['name', optional(string())],
     handle: ['handle', optional(nullable(string()))],
@@ -87,7 +89,7 @@ export const productPricePointSchema: Schema<ProductPricePoint> = expandoObject(
       'trial_interval_unit',
       optional(nullable(intervalUnitSchema)),
     ],
-    trialType: ['trial_type', optional(string())],
+    trialType: ['trial_type', optional(nullable(trialTypeSchema))],
     introductoryOffer: ['introductory_offer', optional(nullable(boolean()))],
     initialChargeInCents: [
       'initial_charge_in_cents',
@@ -110,9 +112,6 @@ export const productPricePointSchema: Schema<ProductPricePoint> = expandoObject(
     type: ['type', optional(pricePointTypeSchema)],
     taxIncluded: ['tax_included', optional(boolean())],
     subscriptionId: ['subscription_id', optional(nullable(number()))],
-    currencyPrices: [
-      'currency_prices',
-      optional(array(lazy(() => currencyPriceSchema))),
-    ],
-  }
+    currencyPrices: ['currency_prices', optional(array(currencyPriceSchema))],
+  })
 );

@@ -7,6 +7,7 @@
 import {
   boolean,
   expandoObject,
+  lazy,
   nullable,
   number,
   optional,
@@ -44,27 +45,28 @@ export interface ApplyPaymentEventData {
   [key: string]: unknown;
 }
 
-export const applyPaymentEventDataSchema: Schema<ApplyPaymentEventData> = expandoObject(
-  {
-    consolidationLevel: [
-      'consolidation_level',
-      invoiceConsolidationLevelSchema,
-    ],
-    memo: ['memo', string()],
-    originalAmount: ['original_amount', string()],
-    appliedAmount: ['applied_amount', string()],
-    transactionTime: ['transaction_time', string()],
-    paymentMethod: ['payment_method', invoiceEventPaymentSchema],
-    transactionId: ['transaction_id', optional(number())],
-    parentInvoiceNumber: [
-      'parent_invoice_number',
-      optional(nullable(number())),
-    ],
-    remainingPrepaymentAmount: [
-      'remaining_prepayment_amount',
-      optional(nullable(string())),
-    ],
-    prepayment: ['prepayment', optional(boolean())],
-    external: ['external', optional(boolean())],
-  }
+export const applyPaymentEventDataSchema: Schema<ApplyPaymentEventData> = lazy(
+  () =>
+    expandoObject({
+      consolidationLevel: [
+        'consolidation_level',
+        invoiceConsolidationLevelSchema,
+      ],
+      memo: ['memo', string()],
+      originalAmount: ['original_amount', string()],
+      appliedAmount: ['applied_amount', string()],
+      transactionTime: ['transaction_time', string()],
+      paymentMethod: ['payment_method', invoiceEventPaymentSchema],
+      transactionId: ['transaction_id', optional(number())],
+      parentInvoiceNumber: [
+        'parent_invoice_number',
+        optional(nullable(number())),
+      ],
+      remainingPrepaymentAmount: [
+        'remaining_prepayment_amount',
+        optional(nullable(string())),
+      ],
+      prepayment: ['prepayment', optional(boolean())],
+      external: ['external', optional(boolean())],
+    })
 );

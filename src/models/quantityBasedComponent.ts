@@ -56,7 +56,7 @@ export interface QuantityBasedComponent {
   pricePoints?: ComponentPricePointItem[];
   /** The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065 */
   unitPrice?: QuantityBasedComponentUnitPrice;
-  /** A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
+  /** A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. */
   taxCode?: string;
   /** (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. */
   hideDateRangeOnInvoice?: boolean;
@@ -71,32 +71,45 @@ export interface QuantityBasedComponent {
   [key: string]: unknown;
 }
 
-export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = expandoObject(
-  {
-    name: ['name', string()],
-    unitName: ['unit_name', string()],
-    description: ['description', optional(string())],
-    handle: ['handle', optional(string())],
-    taxable: ['taxable', optional(boolean())],
-    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
-    prices: ['prices', optional(array(lazy(() => priceSchema)))],
-    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-    pricePoints: [
-      'price_points',
-      optional(array(lazy(() => componentPricePointItemSchema))),
-    ],
-    unitPrice: ['unit_price', optional(quantityBasedComponentUnitPriceSchema)],
-    taxCode: ['tax_code', optional(string())],
-    hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
-    recurring: ['recurring', optional(boolean())],
-    displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
-    allowFractionalQuantities: [
-      'allow_fractional_quantities',
-      optional(boolean()),
-    ],
-    publicSignupPageIds: ['public_signup_page_ids', optional(array(number()))],
-    interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-  }
+export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = lazy(
+  () =>
+    expandoObject({
+      name: ['name', string()],
+      unitName: ['unit_name', string()],
+      description: ['description', optional(string())],
+      handle: ['handle', optional(string())],
+      taxable: ['taxable', optional(boolean())],
+      pricingScheme: ['pricing_scheme', pricingSchemeSchema],
+      prices: ['prices', optional(array(priceSchema))],
+      upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+      downgradeCredit: [
+        'downgrade_credit',
+        optional(nullable(creditTypeSchema)),
+      ],
+      pricePoints: [
+        'price_points',
+        optional(array(componentPricePointItemSchema)),
+      ],
+      unitPrice: [
+        'unit_price',
+        optional(quantityBasedComponentUnitPriceSchema),
+      ],
+      taxCode: ['tax_code', optional(string())],
+      hideDateRangeOnInvoice: [
+        'hide_date_range_on_invoice',
+        optional(boolean()),
+      ],
+      recurring: ['recurring', optional(boolean())],
+      displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
+      allowFractionalQuantities: [
+        'allow_fractional_quantities',
+        optional(boolean()),
+      ],
+      publicSignupPageIds: [
+        'public_signup_page_ids',
+        optional(array(number())),
+      ],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+    })
 );

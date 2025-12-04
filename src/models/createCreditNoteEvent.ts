@@ -22,12 +22,13 @@ export interface CreateCreditNoteEvent {
   [key: string]: unknown;
 }
 
-export const createCreditNoteEventSchema: Schema<CreateCreditNoteEvent> = expandoObject(
-  {
-    id: ['id', bigint()],
-    timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
-    eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: ['event_data', lazy(() => creditNoteSchema)],
-  }
+export const createCreditNoteEventSchema: Schema<CreateCreditNoteEvent> = lazy(
+  () =>
+    expandoObject({
+      id: ['id', bigint()],
+      timestamp: ['timestamp', string()],
+      invoice: ['invoice', invoiceSchema],
+      eventType: ['event_type', invoiceEventTypeSchema],
+      eventData: ['event_data', creditNoteSchema],
+    })
 );

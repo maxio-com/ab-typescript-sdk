@@ -25,11 +25,13 @@ export interface MRR {
   [key: string]: unknown;
 }
 
-export const mRRSchema: Schema<MRR> = expandoObject({
-  amountInCents: ['amount_in_cents', optional(bigint())],
-  amountFormatted: ['amount_formatted', optional(string())],
-  currency: ['currency', optional(string())],
-  currencySymbol: ['currency_symbol', optional(string())],
-  breakouts: ['breakouts', optional(lazy(() => breakoutsSchema))],
-  atTime: ['at_time', optional(string())],
-});
+export const mRRSchema: Schema<MRR> = lazy(() =>
+  expandoObject({
+    amountInCents: ['amount_in_cents', optional(bigint())],
+    amountFormatted: ['amount_formatted', optional(string())],
+    currency: ['currency', optional(string())],
+    currencySymbol: ['currency_symbol', optional(string())],
+    breakouts: ['breakouts', optional(breakoutsSchema)],
+    atTime: ['at_time', optional(string())],
+  })
+);

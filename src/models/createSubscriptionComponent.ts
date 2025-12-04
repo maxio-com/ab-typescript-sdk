@@ -45,26 +45,24 @@ export interface CreateSubscriptionComponent {
   [key: string]: unknown;
 }
 
-export const createSubscriptionComponentSchema: Schema<CreateSubscriptionComponent> = expandoObject(
-  {
-    componentId: [
-      'component_id',
-      optional(createSubscriptionComponentComponentIdSchema),
-    ],
-    enabled: ['enabled', optional(boolean())],
-    unitBalance: ['unit_balance', optional(number())],
-    allocatedQuantity: [
-      'allocated_quantity',
-      optional(createSubscriptionComponentAllocatedQuantitySchema),
-    ],
-    quantity: ['quantity', optional(number())],
-    pricePointId: [
-      'price_point_id',
-      optional(createSubscriptionComponentPricePointIdSchema),
-    ],
-    customPrice: [
-      'custom_price',
-      optional(lazy(() => componentCustomPriceSchema)),
-    ],
-  }
+export const createSubscriptionComponentSchema: Schema<CreateSubscriptionComponent> = lazy(
+  () =>
+    expandoObject({
+      componentId: [
+        'component_id',
+        optional(createSubscriptionComponentComponentIdSchema),
+      ],
+      enabled: ['enabled', optional(boolean())],
+      unitBalance: ['unit_balance', optional(number())],
+      allocatedQuantity: [
+        'allocated_quantity',
+        optional(createSubscriptionComponentAllocatedQuantitySchema),
+      ],
+      quantity: ['quantity', optional(number())],
+      pricePointId: [
+        'price_point_id',
+        optional(createSubscriptionComponentPricePointIdSchema),
+      ],
+      customPrice: ['custom_price', optional(componentCustomPriceSchema)],
+    })
 );

@@ -7,6 +7,7 @@
 import {
   boolean,
   expandoObject,
+  lazy,
   nullable,
   number,
   optional,
@@ -56,31 +57,35 @@ export interface AllocationPreviewItem {
   [key: string]: unknown;
 }
 
-export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = expandoObject(
-  {
-    componentId: ['component_id', optional(number())],
-    subscriptionId: ['subscription_id', optional(number())],
-    quantity: ['quantity', optional(allocationPreviewItemQuantitySchema)],
-    previousQuantity: [
-      'previous_quantity',
-      optional(allocationPreviewItemPreviousQuantitySchema),
-    ],
-    memo: ['memo', optional(nullable(string()))],
-    timestamp: ['timestamp', optional(nullable(string()))],
-    prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
-    prorationDowngradeScheme: [
-      'proration_downgrade_scheme',
-      optional(string()),
-    ],
-    accrueCharge: ['accrue_charge', optional(boolean())],
-    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-    pricePointId: ['price_point_id', optional(number())],
-    interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-    previousPricePointId: ['previous_price_point_id', optional(number())],
-    pricePointHandle: ['price_point_handle', optional(string())],
-    pricePointName: ['price_point_name', optional(string())],
-    componentHandle: ['component_handle', optional(nullable(string()))],
-  }
+export const allocationPreviewItemSchema: Schema<AllocationPreviewItem> = lazy(
+  () =>
+    expandoObject({
+      componentId: ['component_id', optional(number())],
+      subscriptionId: ['subscription_id', optional(number())],
+      quantity: ['quantity', optional(allocationPreviewItemQuantitySchema)],
+      previousQuantity: [
+        'previous_quantity',
+        optional(allocationPreviewItemPreviousQuantitySchema),
+      ],
+      memo: ['memo', optional(nullable(string()))],
+      timestamp: ['timestamp', optional(nullable(string()))],
+      prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
+      prorationDowngradeScheme: [
+        'proration_downgrade_scheme',
+        optional(string()),
+      ],
+      accrueCharge: ['accrue_charge', optional(boolean())],
+      upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+      downgradeCredit: [
+        'downgrade_credit',
+        optional(nullable(creditTypeSchema)),
+      ],
+      pricePointId: ['price_point_id', optional(number())],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+      previousPricePointId: ['previous_price_point_id', optional(number())],
+      pricePointHandle: ['price_point_handle', optional(string())],
+      pricePointName: ['price_point_name', optional(string())],
+      componentHandle: ['component_handle', optional(nullable(string()))],
+    })
 );

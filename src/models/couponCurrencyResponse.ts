@@ -12,11 +12,12 @@ export interface CouponCurrencyResponse {
   [key: string]: unknown;
 }
 
-export const couponCurrencyResponseSchema: Schema<CouponCurrencyResponse> = expandoObject(
-  {
-    currencyPrices: [
-      'currency_prices',
-      optional(array(lazy(() => couponCurrencySchema))),
-    ],
-  }
+export const couponCurrencyResponseSchema: Schema<CouponCurrencyResponse> = lazy(
+  () =>
+    expandoObject({
+      currencyPrices: [
+        'currency_prices',
+        optional(array(couponCurrencySchema)),
+      ],
+    })
 );

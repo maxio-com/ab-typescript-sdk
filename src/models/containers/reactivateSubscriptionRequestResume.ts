@@ -7,6 +7,7 @@
 import {
   boolean,
   isMappedValueValidForSchema,
+  lazy,
   oneOf,
   Schema,
 } from '../../schema.js';
@@ -15,8 +16,8 @@ import { ResumeOptions, resumeOptionsSchema } from '../resumeOptions.js';
 /** This is a container type for one-of types. */
 export type ReactivateSubscriptionRequestResume = boolean | ResumeOptions;
 
-export const reactivateSubscriptionRequestResumeSchema: Schema<ReactivateSubscriptionRequestResume> = oneOf(
-  [boolean(), resumeOptionsSchema]
+export const reactivateSubscriptionRequestResumeSchema: Schema<ReactivateSubscriptionRequestResume> = lazy(
+  () => oneOf([boolean(), resumeOptionsSchema])
 );
 
 export namespace ReactivateSubscriptionRequestResume {

@@ -31,13 +31,14 @@ export interface ComponentPricePointItem {
   [key: string]: unknown;
 }
 
-export const componentPricePointItemSchema: Schema<ComponentPricePointItem> = expandoObject(
-  {
-    name: ['name', optional(string())],
-    handle: ['handle', optional(string())],
-    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-    interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-    prices: ['prices', optional(array(lazy(() => priceSchema)))],
-  }
+export const componentPricePointItemSchema: Schema<ComponentPricePointItem> = lazy(
+  () =>
+    expandoObject({
+      name: ['name', optional(string())],
+      handle: ['handle', optional(string())],
+      pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+      prices: ['prices', optional(array(priceSchema))],
+    })
 );

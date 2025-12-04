@@ -16,7 +16,9 @@ export interface GroupSettings {
   [key: string]: unknown;
 }
 
-export const groupSettingsSchema: Schema<GroupSettings> = expandoObject({
-  target: ['target', lazy(() => groupTargetSchema)],
-  billing: ['billing', optional(lazy(() => groupBillingSchema))],
-});
+export const groupSettingsSchema: Schema<GroupSettings> = lazy(() =>
+  expandoObject({
+    target: ['target', groupTargetSchema],
+    billing: ['billing', optional(groupBillingSchema)],
+  })
+);

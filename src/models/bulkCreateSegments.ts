@@ -12,6 +12,8 @@ export interface BulkCreateSegments {
   [key: string]: unknown;
 }
 
-export const bulkCreateSegmentsSchema: Schema<BulkCreateSegments> = expandoObject(
-  { segments: ['segments', optional(array(lazy(() => createSegmentSchema)))] }
+export const bulkCreateSegmentsSchema: Schema<BulkCreateSegments> = lazy(() =>
+  expandoObject({
+    segments: ['segments', optional(array(createSegmentSchema))],
+  })
 );

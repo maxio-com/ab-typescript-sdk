@@ -97,47 +97,37 @@ export interface CreditNote {
   [key: string]: unknown;
 }
 
-export const creditNoteSchema: Schema<CreditNote> = expandoObject({
-  uid: ['uid', optional(string())],
-  siteId: ['site_id', optional(number())],
-  customerId: ['customer_id', optional(number())],
-  subscriptionId: ['subscription_id', optional(number())],
-  number: ['number', optional(string())],
-  sequenceNumber: ['sequence_number', optional(number())],
-  issueDate: ['issue_date', optional(string())],
-  appliedDate: ['applied_date', optional(string())],
-  status: ['status', optional(creditNoteStatusSchema)],
-  currency: ['currency', optional(string())],
-  memo: ['memo', optional(string())],
-  seller: ['seller', optional(lazy(() => invoiceSellerSchema))],
-  customer: ['customer', optional(lazy(() => invoiceCustomerSchema))],
-  billingAddress: [
-    'billing_address',
-    optional(lazy(() => invoiceAddressSchema)),
-  ],
-  shippingAddress: [
-    'shipping_address',
-    optional(lazy(() => invoiceAddressSchema)),
-  ],
-  subtotalAmount: ['subtotal_amount', optional(string())],
-  discountAmount: ['discount_amount', optional(string())],
-  taxAmount: ['tax_amount', optional(string())],
-  totalAmount: ['total_amount', optional(string())],
-  appliedAmount: ['applied_amount', optional(string())],
-  remainingAmount: ['remaining_amount', optional(string())],
-  lineItems: [
-    'line_items',
-    optional(array(lazy(() => creditNoteLineItemSchema))),
-  ],
-  discounts: ['discounts', optional(array(lazy(() => invoiceDiscountSchema)))],
-  taxes: ['taxes', optional(array(lazy(() => invoiceTaxSchema)))],
-  applications: [
-    'applications',
-    optional(array(lazy(() => creditNoteApplicationSchema))),
-  ],
-  refunds: ['refunds', optional(array(lazy(() => invoiceRefundSchema)))],
-  originInvoices: [
-    'origin_invoices',
-    optional(array(lazy(() => originInvoiceSchema))),
-  ],
-});
+export const creditNoteSchema: Schema<CreditNote> = lazy(() =>
+  expandoObject({
+    uid: ['uid', optional(string())],
+    siteId: ['site_id', optional(number())],
+    customerId: ['customer_id', optional(number())],
+    subscriptionId: ['subscription_id', optional(number())],
+    number: ['number', optional(string())],
+    sequenceNumber: ['sequence_number', optional(number())],
+    issueDate: ['issue_date', optional(string())],
+    appliedDate: ['applied_date', optional(string())],
+    status: ['status', optional(creditNoteStatusSchema)],
+    currency: ['currency', optional(string())],
+    memo: ['memo', optional(string())],
+    seller: ['seller', optional(invoiceSellerSchema)],
+    customer: ['customer', optional(invoiceCustomerSchema)],
+    billingAddress: ['billing_address', optional(invoiceAddressSchema)],
+    shippingAddress: ['shipping_address', optional(invoiceAddressSchema)],
+    subtotalAmount: ['subtotal_amount', optional(string())],
+    discountAmount: ['discount_amount', optional(string())],
+    taxAmount: ['tax_amount', optional(string())],
+    totalAmount: ['total_amount', optional(string())],
+    appliedAmount: ['applied_amount', optional(string())],
+    remainingAmount: ['remaining_amount', optional(string())],
+    lineItems: ['line_items', optional(array(creditNoteLineItemSchema))],
+    discounts: ['discounts', optional(array(invoiceDiscountSchema))],
+    taxes: ['taxes', optional(array(invoiceTaxSchema))],
+    applications: [
+      'applications',
+      optional(array(creditNoteApplicationSchema)),
+    ],
+    refunds: ['refunds', optional(array(invoiceRefundSchema))],
+    originInvoices: ['origin_invoices', optional(array(originInvoiceSchema))],
+  })
+);

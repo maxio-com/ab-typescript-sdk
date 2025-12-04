@@ -42,26 +42,25 @@ export interface CreateSegment {
   [key: string]: unknown;
 }
 
-export const createSegmentSchema: Schema<CreateSegment> = expandoObject({
-  segmentProperty1Value: [
-    'segment_property_1_value',
-    optional(createSegmentSegmentProperty1ValueSchema),
-  ],
-  segmentProperty2Value: [
-    'segment_property_2_value',
-    optional(createSegmentSegmentProperty2ValueSchema),
-  ],
-  segmentProperty3Value: [
-    'segment_property_3_value',
-    optional(createSegmentSegmentProperty3ValueSchema),
-  ],
-  segmentProperty4Value: [
-    'segment_property_4_value',
-    optional(createSegmentSegmentProperty4ValueSchema),
-  ],
-  pricingScheme: ['pricing_scheme', pricingSchemeSchema],
-  prices: [
-    'prices',
-    optional(array(lazy(() => createOrUpdateSegmentPriceSchema))),
-  ],
-});
+export const createSegmentSchema: Schema<CreateSegment> = lazy(() =>
+  expandoObject({
+    segmentProperty1Value: [
+      'segment_property_1_value',
+      optional(createSegmentSegmentProperty1ValueSchema),
+    ],
+    segmentProperty2Value: [
+      'segment_property_2_value',
+      optional(createSegmentSegmentProperty2ValueSchema),
+    ],
+    segmentProperty3Value: [
+      'segment_property_3_value',
+      optional(createSegmentSegmentProperty3ValueSchema),
+    ],
+    segmentProperty4Value: [
+      'segment_property_4_value',
+      optional(createSegmentSegmentProperty4ValueSchema),
+    ],
+    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
+    prices: ['prices', optional(array(createOrUpdateSegmentPriceSchema))],
+  })
+);

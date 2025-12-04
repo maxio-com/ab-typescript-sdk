@@ -9,6 +9,6 @@
 
 | Type |
 |  --- |
-| [`SnapDay`](../../../doc/models/snap-day.md) |
 | `number` |
+| [`SnapDay`](../../../doc/models/snap-day.md) |
 

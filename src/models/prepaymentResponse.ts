@@ -12,6 +12,6 @@ export interface PrepaymentResponse {
   [key: string]: unknown;
 }
 
-export const prepaymentResponseSchema: Schema<PrepaymentResponse> = expandoObject(
-  { prepayment: ['prepayment', lazy(() => prepaymentSchema)] }
+export const prepaymentResponseSchema: Schema<PrepaymentResponse> = lazy(() =>
+  expandoObject({ prepayment: ['prepayment', prepaymentSchema] })
 );

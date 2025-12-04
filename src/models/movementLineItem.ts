@@ -31,17 +31,16 @@ export interface MovementLineItem {
   [key: string]: unknown;
 }
 
-export const movementLineItemSchema: Schema<MovementLineItem> = expandoObject({
-  productId: ['product_id', optional(number())],
-  componentId: ['component_id', optional(number())],
-  pricePointId: ['price_point_id', optional(number())],
-  name: ['name', optional(string())],
-  mrr: ['mrr', optional(number())],
-  mrrMovements: [
-    'mrr_movements',
-    optional(array(lazy(() => mRRMovementSchema))),
-  ],
-  quantity: ['quantity', optional(number())],
-  prevQuantity: ['prev_quantity', optional(number())],
-  recurring: ['recurring', optional(boolean())],
-});
+export const movementLineItemSchema: Schema<MovementLineItem> = lazy(() =>
+  expandoObject({
+    productId: ['product_id', optional(number())],
+    componentId: ['component_id', optional(number())],
+    pricePointId: ['price_point_id', optional(number())],
+    name: ['name', optional(string())],
+    mrr: ['mrr', optional(number())],
+    mrrMovements: ['mrr_movements', optional(array(mRRMovementSchema))],
+    quantity: ['quantity', optional(number())],
+    prevQuantity: ['prev_quantity', optional(number())],
+    recurring: ['recurring', optional(boolean())],
+  })
+);

@@ -12,6 +12,7 @@ export interface ListCreditNotesResponse {
   [key: string]: unknown;
 }
 
-export const listCreditNotesResponseSchema: Schema<ListCreditNotesResponse> = expandoObject(
-  { creditNotes: ['credit_notes', array(lazy(() => creditNoteSchema))] }
+export const listCreditNotesResponseSchema: Schema<ListCreditNotesResponse> = lazy(
+  () =>
+    expandoObject({ creditNotes: ['credit_notes', array(creditNoteSchema)] })
 );

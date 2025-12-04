@@ -43,20 +43,22 @@ export interface InvoiceDiscount {
   [key: string]: unknown;
 }
 
-export const invoiceDiscountSchema: Schema<InvoiceDiscount> = expandoObject({
-  uid: ['uid', optional(string())],
-  title: ['title', optional(string())],
-  description: ['description', optional(nullable(string()))],
-  code: ['code', optional(string())],
-  sourceType: ['source_type', optional(invoiceDiscountSourceTypeSchema)],
-  sourceId: ['source_id', optional(number())],
-  discountType: ['discount_type', optional(invoiceDiscountTypeSchema)],
-  percentage: ['percentage', optional(string())],
-  eligibleAmount: ['eligible_amount', optional(string())],
-  discountAmount: ['discount_amount', optional(string())],
-  transactionId: ['transaction_id', optional(number())],
-  lineItemBreakouts: [
-    'line_item_breakouts',
-    optional(array(lazy(() => invoiceDiscountBreakoutSchema))),
-  ],
-});
+export const invoiceDiscountSchema: Schema<InvoiceDiscount> = lazy(() =>
+  expandoObject({
+    uid: ['uid', optional(string())],
+    title: ['title', optional(string())],
+    description: ['description', optional(nullable(string()))],
+    code: ['code', optional(string())],
+    sourceType: ['source_type', optional(invoiceDiscountSourceTypeSchema)],
+    sourceId: ['source_id', optional(number())],
+    discountType: ['discount_type', optional(invoiceDiscountTypeSchema)],
+    percentage: ['percentage', optional(string())],
+    eligibleAmount: ['eligible_amount', optional(string())],
+    discountAmount: ['discount_amount', optional(string())],
+    transactionId: ['transaction_id', optional(number())],
+    lineItemBreakouts: [
+      'line_item_breakouts',
+      optional(array(invoiceDiscountBreakoutSchema)),
+    ],
+  })
+);

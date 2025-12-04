@@ -20,12 +20,13 @@ export interface ListSubscriptionGroupsResponse {
   [key: string]: unknown;
 }
 
-export const listSubscriptionGroupsResponseSchema: Schema<ListSubscriptionGroupsResponse> = expandoObject(
-  {
-    subscriptionGroups: [
-      'subscription_groups',
-      optional(array(lazy(() => listSubscriptionGroupsItemSchema))),
-    ],
-    meta: ['meta', optional(lazy(() => listSubscriptionGroupsMetaSchema))],
-  }
+export const listSubscriptionGroupsResponseSchema: Schema<ListSubscriptionGroupsResponse> = lazy(
+  () =>
+    expandoObject({
+      subscriptionGroups: [
+        'subscription_groups',
+        optional(array(listSubscriptionGroupsItemSchema)),
+      ],
+      meta: ['meta', optional(listSubscriptionGroupsMetaSchema)],
+    })
 );

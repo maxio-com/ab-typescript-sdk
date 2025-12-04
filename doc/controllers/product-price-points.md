@@ -25,7 +25,7 @@ const productPricePointsController = new ProductPricePointsController(client);
 
 # Create Product Price Point
 
-[Product Price Point Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-Product-Price-Points)
+Creates a Product Price Point. See the [Product Price Point](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-Product-Price-Points) documentation for details.
 
 ```ts
 async createProductPricePoint(
@@ -62,7 +62,7 @@ const body: CreateProductPricePointRequest = {
     trialPriceInCents: BigInt(4900),
     trialInterval: 1,
     trialIntervalUnit: IntervalUnit.Month,
-    trialType: 'payment_expected',
+    trialType: TrialType.PaymentExpected,
     initialChargeInCents: BigInt(120000),
     initialChargeAfterTrial: false,
     expirationInterval: 12,
@@ -71,16 +71,28 @@ const body: CreateProductPricePointRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.createProductPricePoint(
+  const response = await productPricePointsController.createProductPricePoint(
     productId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -121,7 +133,7 @@ try {
 
 # List Product Price Points
 
-Use this endpoint to retrieve a list of product price points.
+Retrieves a list of product price points.
 
 ```ts
 async listProductPricePoints(
@@ -165,19 +177,31 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   productId: 124,
-  page: 2,
+  page: 1,
   perPage: 10,
   filterType: Liquid error: Value cannot be null. (Parameter 'key')
 }
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.listProductPricePoints(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productPricePointsController.listProductPricePoints(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -214,9 +238,9 @@ try {
 
 # Update Product Price Point
 
-Use this endpoint to update a product price point.
+Updates a product price point.
 
-Note: Custom product price points are not able to be updated.
+Note: Custom product price points cannot be updated.
 
 ```ts
 async updateProductPricePoint(
@@ -255,17 +279,29 @@ const body: UpdateProductPricePointRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.updateProductPricePoint(
+  const response = await productPricePointsController.updateProductPricePoint(
     productId,
     pricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -332,16 +368,28 @@ const productId: ReadProductPricePointProductId = 124;
 const pricePointId: ReadProductPricePointPricePointId = 188;
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.readProductPricePoint(
+  const response = await productPricePointsController.readProductPricePoint(
     productId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -376,7 +424,7 @@ try {
 
 # Archive Product Price Point
 
-Use this endpoint to archive a product price point.
+Archives a product price point.
 
 ```ts
 async archiveProductPricePoint(
@@ -406,16 +454,28 @@ const productId: ArchiveProductPricePointProductId = 124;
 const pricePointId: ArchiveProductPricePointPricePointId = 188;
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.archiveProductPricePoint(
+  const response = await productPricePointsController.archiveProductPricePoint(
     productId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -486,16 +546,28 @@ const productId = 202;
 const pricePointId = 10;
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.unarchiveProductPricePoint(
+  const response = await productPricePointsController.unarchiveProductPricePoint(
     productId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -530,9 +602,9 @@ try {
 
 # Promote Product Price Point to Default
 
-Use this endpoint to make a product price point the default for the product.
+Sets a product price point as the default for the product.
 
-Note: Custom product price points are not able to be set as the default for a product.
+Note: Custom product price points cannot be set as the default for a product.
 
 ```ts
 async promoteProductPricePointToDefault(
@@ -562,16 +634,28 @@ const productId = 202;
 const pricePointId = 10;
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.promoteProductPricePointToDefault(
+  const response = await productPricePointsController.promoteProductPricePointToDefault(
     productId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -632,7 +716,7 @@ try {
 
 # Bulk Create Product Price Points
 
-Use this endpoint to create multiple product price points in one request.
+Creates multiple product price points in one request.
 
 ```ts
 async bulkCreateProductPricePoints(
@@ -670,7 +754,7 @@ const body: BulkCreateProductPricePointsRequest = {
       trialPriceInCents: BigInt(4900),
       trialInterval: 1,
       trialIntervalUnit: IntervalUnit.Month,
-      trialType: 'payment_expected',
+      trialType: TrialType.PaymentExpected,
       initialChargeInCents: BigInt(120000),
       initialChargeAfterTrial: false,
       expirationInterval: 12,
@@ -685,7 +769,7 @@ const body: BulkCreateProductPricePointsRequest = {
       trialPriceInCents: BigInt(4900),
       trialInterval: 1,
       trialIntervalUnit: IntervalUnit.Month,
-      trialType: 'payment_expected',
+      trialType: TrialType.PaymentExpected,
       initialChargeInCents: BigInt(120000),
       initialChargeAfterTrial: false,
       expirationInterval: 12,
@@ -695,16 +779,28 @@ const body: BulkCreateProductPricePointsRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.bulkCreateProductPricePoints(
+  const response = await productPricePointsController.bulkCreateProductPricePoints(
     productId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -747,7 +843,7 @@ try {
 
 # Create Product Currency Prices
 
-This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
+Creates currency prices for a given currency that has been defined on the site level in your settings.
 
 When creating currency prices, they need to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
 
@@ -799,16 +895,28 @@ const body: CreateProductCurrencyPricesRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.createProductCurrencyPrices(
+  const response = await productPricePointsController.createProductCurrencyPrices(
     productPricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -839,11 +947,11 @@ try {
 
 # Update Product Currency Prices
 
-This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
+Updates the `price`s of currency prices for a given currency that exists on the product price point.
 
 When updating the pricing, it needs to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
 
-Note: Currency Prices are not able to be updated for custom product price points.
+Note: Currency Prices cannot be updated for custom product price points.
 
 ```ts
 async updateProductCurrencyPrices(
@@ -884,16 +992,28 @@ const body: UpdateCurrencyPricesRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.updateProductCurrencyPrices(
+  const response = await productPricePointsController.updateProductCurrencyPrices(
     productPricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -981,18 +1101,30 @@ const collect = {
     ],
   },
   include: ListProductsPricePointsInclude.CurrencyPrices,
-  page: 2,
+  page: 1,
   perPage: 50
 }
 
 try {
-  const { result, ...httpResponse } = await productPricePointsController.listAllProductPricePoints(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productPricePointsController.listAllProductPricePoints(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

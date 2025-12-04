@@ -15,7 +15,9 @@ export interface OveragePricing {
   [key: string]: unknown;
 }
 
-export const overagePricingSchema: Schema<OveragePricing> = expandoObject({
-  pricingScheme: ['pricing_scheme', pricingSchemeSchema],
-  prices: ['prices', optional(array(lazy(() => priceSchema)))],
-});
+export const overagePricingSchema: Schema<OveragePricing> = lazy(() =>
+  expandoObject({
+    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
+    prices: ['prices', optional(array(priceSchema))],
+  })
+);

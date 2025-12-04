@@ -59,16 +59,28 @@ const componentId = 222;
 const pricePointId = 10;
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.promoteComponentPricePointToDefault(
+  const response = await componentPricePointsController.promoteComponentPricePointToDefault(
     componentId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -158,16 +170,28 @@ const body: CreateComponentPricePointRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.createComponentPricePoint(
+  const response = await componentPricePointsController.createComponentPricePoint(
     componentId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -228,19 +252,31 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   componentId: 222,
-  page: 2,
+  page: 1,
   perPage: 50,
   filterType: Liquid error: Value cannot be null. (Parameter 'key')
 }
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.listComponentPricePoints(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await componentPricePointsController.listComponentPricePoints(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -363,16 +399,28 @@ const body: CreateComponentPricePointsRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.bulkCreateComponentPricePoints(
+  const response = await componentPricePointsController.bulkCreateComponentPricePoints(
     componentId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -435,7 +483,7 @@ try {
 
 # Update Component Price Point
 
-When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
+When updating a price point, prices can be updated as well by creating new prices or editing / removing existing ones.
 
 Passing in a price bracket without an `id` will attempt to create a new price.
 
@@ -494,17 +542,29 @@ const body: UpdateComponentPricePointRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.updateComponentPricePoint(
+  const response = await componentPricePointsController.updateComponentPricePoint(
     componentId,
     pricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -550,16 +610,28 @@ const componentId: ReadComponentPricePointComponentId = 144;
 const pricePointId: ReadComponentPricePointPricePointId = 188;
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.readComponentPricePoint(
+  const response = await componentPricePointsController.readComponentPricePoint(
     componentId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -597,16 +669,28 @@ const componentId: ArchiveComponentPricePointComponentId = 144;
 const pricePointId: ArchiveComponentPricePointPricePointId = 188;
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.archiveComponentPricePoint(
+  const response = await componentPricePointsController.archiveComponentPricePoint(
     componentId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -684,16 +768,28 @@ const componentId = 222;
 const pricePointId = 10;
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.unarchiveComponentPricePoint(
+  const response = await componentPricePointsController.unarchiveComponentPricePoint(
     componentId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -782,16 +878,28 @@ const body: CreateCurrencyPricesRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.createCurrencyPrices(
+  const response = await componentPricePointsController.createCurrencyPrices(
     pricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -865,16 +973,28 @@ const body: UpdateCurrencyPricesRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.updateCurrencyPrices(
+  const response = await componentPricePointsController.updateCurrencyPrices(
     pricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -946,7 +1066,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   include: ListComponentsPricePointsInclude.CurrencyPrices,
-  page: 2,
+  page: 1,
   perPage: 50,
   filter: {
     startDate: '2011-12-17',
@@ -967,13 +1087,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await componentPricePointsController.listAllComponentPricePoints(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await componentPricePointsController.listAllComponentPricePoints(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

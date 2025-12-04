@@ -29,15 +29,14 @@ export interface CreateOffer {
   [key: string]: unknown;
 }
 
-export const createOfferSchema: Schema<CreateOffer> = expandoObject({
-  name: ['name', string()],
-  handle: ['handle', string()],
-  description: ['description', optional(string())],
-  productId: ['product_id', number()],
-  productPricePointId: ['product_price_point_id', optional(number())],
-  components: [
-    'components',
-    optional(array(lazy(() => createOfferComponentSchema))),
-  ],
-  coupons: ['coupons', optional(array(string()))],
-});
+export const createOfferSchema: Schema<CreateOffer> = lazy(() =>
+  expandoObject({
+    name: ['name', string()],
+    handle: ['handle', string()],
+    description: ['description', optional(string())],
+    productId: ['product_id', number()],
+    productPricePointId: ['product_price_point_id', optional(number())],
+    components: ['components', optional(array(createOfferComponentSchema))],
+    coupons: ['coupons', optional(array(string()))],
+  })
+);

@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
+import {
+  anyOf,
+  isMappedValueValidForSchema,
+  lazy,
+  Schema,
+} from '../../schema.js';
 import {
   CreateComponentPricePoint,
   createComponentPricePointSchema,
@@ -19,8 +24,12 @@ export type CreateComponentPricePointRequestPricePoint =
   | CreateComponentPricePoint
   | CreatePrepaidUsageComponentPricePoint;
 
-export const createComponentPricePointRequestPricePointSchema: Schema<CreateComponentPricePointRequestPricePoint> = anyOf(
-  [createComponentPricePointSchema, createPrepaidUsageComponentPricePointSchema]
+export const createComponentPricePointRequestPricePointSchema: Schema<CreateComponentPricePointRequestPricePoint> = lazy(
+  () =>
+    anyOf([
+      createComponentPricePointSchema,
+      createPrepaidUsageComponentPricePointSchema,
+    ])
 );
 
 export namespace CreateComponentPricePointRequestPricePoint {

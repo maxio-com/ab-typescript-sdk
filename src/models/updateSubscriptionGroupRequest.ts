@@ -15,11 +15,9 @@ export interface UpdateSubscriptionGroupRequest {
   [key: string]: unknown;
 }
 
-export const updateSubscriptionGroupRequestSchema: Schema<UpdateSubscriptionGroupRequest> = expandoObject(
-  {
-    subscriptionGroup: [
-      'subscription_group',
-      lazy(() => updateSubscriptionGroupSchema),
-    ],
-  }
+export const updateSubscriptionGroupRequestSchema: Schema<UpdateSubscriptionGroupRequest> = lazy(
+  () =>
+    expandoObject({
+      subscriptionGroup: ['subscription_group', updateSubscriptionGroupSchema],
+    })
 );

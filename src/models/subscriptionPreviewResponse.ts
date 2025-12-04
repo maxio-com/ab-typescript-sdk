@@ -15,11 +15,9 @@ export interface SubscriptionPreviewResponse {
   [key: string]: unknown;
 }
 
-export const subscriptionPreviewResponseSchema: Schema<SubscriptionPreviewResponse> = expandoObject(
-  {
-    subscriptionPreview: [
-      'subscription_preview',
-      lazy(() => subscriptionPreviewSchema),
-    ],
-  }
+export const subscriptionPreviewResponseSchema: Schema<SubscriptionPreviewResponse> = lazy(
+  () =>
+    expandoObject({
+      subscriptionPreview: ['subscription_preview', subscriptionPreviewSchema],
+    })
 );

@@ -15,11 +15,12 @@ export interface ListSubscriptionGroupPrepaymentResponse {
   [key: string]: unknown;
 }
 
-export const listSubscriptionGroupPrepaymentResponseSchema: Schema<ListSubscriptionGroupPrepaymentResponse> = expandoObject(
-  {
-    prepayments: [
-      'prepayments',
-      array(lazy(() => listSubscriptionGroupPrepaymentSchema)),
-    ],
-  }
+export const listSubscriptionGroupPrepaymentResponseSchema: Schema<ListSubscriptionGroupPrepaymentResponse> = lazy(
+  () =>
+    expandoObject({
+      prepayments: [
+        'prepayments',
+        array(listSubscriptionGroupPrepaymentSchema),
+      ],
+    })
 );

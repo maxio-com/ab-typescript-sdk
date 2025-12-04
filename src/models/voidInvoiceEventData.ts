@@ -30,16 +30,17 @@ export interface VoidInvoiceEventData {
   [key: string]: unknown;
 }
 
-export const voidInvoiceEventDataSchema: Schema<VoidInvoiceEventData> = expandoObject(
-  {
-    creditNoteAttributes: [
-      'credit_note_attributes',
-      nullable(lazy(() => creditNoteSchema)),
-    ],
-    memo: ['memo', nullable(string())],
-    appliedAmount: ['applied_amount', nullable(string())],
-    transactionTime: ['transaction_time', nullable(string())],
-    isAdvanceInvoice: ['is_advance_invoice', boolean()],
-    reason: ['reason', string()],
-  }
+export const voidInvoiceEventDataSchema: Schema<VoidInvoiceEventData> = lazy(
+  () =>
+    expandoObject({
+      creditNoteAttributes: [
+        'credit_note_attributes',
+        nullable(creditNoteSchema),
+      ],
+      memo: ['memo', nullable(string())],
+      appliedAmount: ['applied_amount', nullable(string())],
+      transactionTime: ['transaction_time', nullable(string())],
+      isAdvanceInvoice: ['is_advance_invoice', boolean()],
+      reason: ['reason', string()],
+    })
 );

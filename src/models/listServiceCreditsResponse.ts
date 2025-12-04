@@ -12,11 +12,12 @@ export interface ListServiceCreditsResponse {
   [key: string]: unknown;
 }
 
-export const listServiceCreditsResponseSchema: Schema<ListServiceCreditsResponse> = expandoObject(
-  {
-    serviceCredits: [
-      'service_credits',
-      optional(array(lazy(() => serviceCredit1Schema))),
-    ],
-  }
+export const listServiceCreditsResponseSchema: Schema<ListServiceCreditsResponse> = lazy(
+  () =>
+    expandoObject({
+      serviceCredits: [
+        'service_credits',
+        optional(array(serviceCredit1Schema)),
+      ],
+    })
 );

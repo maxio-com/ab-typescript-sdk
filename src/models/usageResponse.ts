@@ -12,6 +12,6 @@ export interface UsageResponse {
   [key: string]: unknown;
 }
 
-export const usageResponseSchema: Schema<UsageResponse> = expandoObject({
-  usage: ['usage', lazy(() => usageSchema)],
-});
+export const usageResponseSchema: Schema<UsageResponse> = lazy(() =>
+  expandoObject({ usage: ['usage', usageSchema] })
+);

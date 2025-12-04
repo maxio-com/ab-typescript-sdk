@@ -28,13 +28,11 @@ export interface ListSubscriptionComponentsForSiteFilter {
   [key: string]: unknown;
 }
 
-export const listSubscriptionComponentsForSiteFilterSchema: Schema<ListSubscriptionComponentsForSiteFilter> = expandoObject(
-  {
-    currencies: ['currencies', optional(array(string()))],
-    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-    subscription: [
-      'subscription',
-      optional(lazy(() => subscriptionFilterSchema)),
-    ],
-  }
+export const listSubscriptionComponentsForSiteFilterSchema: Schema<ListSubscriptionComponentsForSiteFilter> = lazy(
+  () =>
+    expandoObject({
+      currencies: ['currencies', optional(array(string()))],
+      useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+      subscription: ['subscription', optional(subscriptionFilterSchema)],
+    })
 );

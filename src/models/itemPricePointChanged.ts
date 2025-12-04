@@ -20,19 +20,14 @@ export interface ItemPricePointChanged {
   [key: string]: unknown;
 }
 
-export const itemPricePointChangedSchema: Schema<ItemPricePointChanged> = expandoObject(
-  {
-    itemId: ['item_id', number()],
-    itemType: ['item_type', string()],
-    itemHandle: ['item_handle', string()],
-    itemName: ['item_name', string()],
-    previousPricePoint: [
-      'previous_price_point',
-      lazy(() => itemPricePointDataSchema),
-    ],
-    currentPricePoint: [
-      'current_price_point',
-      lazy(() => itemPricePointDataSchema),
-    ],
-  }
+export const itemPricePointChangedSchema: Schema<ItemPricePointChanged> = lazy(
+  () =>
+    expandoObject({
+      itemId: ['item_id', number()],
+      itemType: ['item_type', string()],
+      itemHandle: ['item_handle', string()],
+      itemName: ['item_name', string()],
+      previousPricePoint: ['previous_price_point', itemPricePointDataSchema],
+      currentPricePoint: ['current_price_point', itemPricePointDataSchema],
+    })
 );

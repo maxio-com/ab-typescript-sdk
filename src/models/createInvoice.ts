@@ -49,27 +49,17 @@ export interface CreateInvoice {
   [key: string]: unknown;
 }
 
-export const createInvoiceSchema: Schema<CreateInvoice> = expandoObject({
-  lineItems: [
-    'line_items',
-    optional(array(lazy(() => createInvoiceItemSchema))),
-  ],
-  issueDate: ['issue_date', optional(string())],
-  netTerms: ['net_terms', optional(number())],
-  paymentInstructions: ['payment_instructions', optional(string())],
-  memo: ['memo', optional(string())],
-  sellerAddress: [
-    'seller_address',
-    optional(lazy(() => createInvoiceAddressSchema)),
-  ],
-  billingAddress: [
-    'billing_address',
-    optional(lazy(() => createInvoiceAddressSchema)),
-  ],
-  shippingAddress: [
-    'shipping_address',
-    optional(lazy(() => createInvoiceAddressSchema)),
-  ],
-  coupons: ['coupons', optional(array(lazy(() => createInvoiceCouponSchema)))],
-  status: ['status', optional(createInvoiceStatusSchema)],
-});
+export const createInvoiceSchema: Schema<CreateInvoice> = lazy(() =>
+  expandoObject({
+    lineItems: ['line_items', optional(array(createInvoiceItemSchema))],
+    issueDate: ['issue_date', optional(string())],
+    netTerms: ['net_terms', optional(number())],
+    paymentInstructions: ['payment_instructions', optional(string())],
+    memo: ['memo', optional(string())],
+    sellerAddress: ['seller_address', optional(createInvoiceAddressSchema)],
+    billingAddress: ['billing_address', optional(createInvoiceAddressSchema)],
+    shippingAddress: ['shipping_address', optional(createInvoiceAddressSchema)],
+    coupons: ['coupons', optional(array(createInvoiceCouponSchema))],
+    status: ['status', optional(createInvoiceStatusSchema)],
+  })
+);

@@ -153,16 +153,13 @@ export interface CreateSubscription {
   [key: string]: unknown;
 }
 
-export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObject(
-  {
+export const createSubscriptionSchema: Schema<CreateSubscription> = lazy(() =>
+  expandoObject({
     productHandle: ['product_handle', optional(string())],
     productId: ['product_id', optional(number())],
     productPricePointHandle: ['product_price_point_handle', optional(string())],
     productPricePointId: ['product_price_point_id', optional(number())],
-    customPrice: [
-      'custom_price',
-      optional(lazy(() => subscriptionCustomPriceSchema)),
-    ],
+    customPrice: ['custom_price', optional(subscriptionCustomPriceSchema)],
     couponCode: ['coupon_code', optional(string())],
     couponCodes: ['coupon_codes', optional(array(string()))],
     paymentCollectionMethod: [
@@ -184,31 +181,28 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObjec
     reference: ['reference', optional(string())],
     customerAttributes: [
       'customer_attributes',
-      optional(lazy(() => customerAttributesSchema)),
+      optional(customerAttributesSchema),
     ],
     paymentProfileAttributes: [
       'payment_profile_attributes',
-      optional(lazy(() => paymentProfileAttributesSchema)),
+      optional(paymentProfileAttributesSchema),
     ],
     creditCardAttributes: [
       'credit_card_attributes',
-      optional(lazy(() => paymentProfileAttributesSchema)),
+      optional(paymentProfileAttributesSchema),
     ],
     bankAccountAttributes: [
       'bank_account_attributes',
-      optional(lazy(() => bankAccountAttributesSchema)),
+      optional(bankAccountAttributesSchema),
     ],
     components: [
       'components',
-      optional(array(lazy(() => createSubscriptionComponentSchema))),
+      optional(array(createSubscriptionComponentSchema)),
     ],
-    calendarBilling: [
-      'calendar_billing',
-      optional(lazy(() => calendarBillingSchema)),
-    ],
+    calendarBilling: ['calendar_billing', optional(calendarBillingSchema)],
     metafields: ['metafields', optional(dict(string()))],
     customerReference: ['customer_reference', optional(string())],
-    group: ['group', optional(lazy(() => groupSettingsSchema))],
+    group: ['group', optional(groupSettingsSchema)],
     ref: ['ref', optional(string())],
     cancellationMessage: ['cancellation_message', optional(string())],
     cancellationMethod: ['cancellation_method', optional(string())],
@@ -230,7 +224,7 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObjec
     offerId: ['offer_id', optional(createSubscriptionOfferIdSchema)],
     prepaidConfiguration: [
       'prepaid_configuration',
-      optional(lazy(() => upsertPrepaidConfigurationSchema)),
+      optional(upsertPrepaidConfigurationSchema),
     ],
     previousBillingAt: ['previous_billing_at', optional(string())],
     importMrr: ['import_mrr', optional(boolean())],
@@ -238,9 +232,9 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObjec
     activatedAt: ['activated_at', optional(string())],
     agreementAcceptance: [
       'agreement_acceptance',
-      optional(lazy(() => agreementAcceptanceSchema)),
+      optional(agreementAcceptanceSchema),
     ],
-    achAgreement: ['ach_agreement', optional(lazy(() => aCHAgreementSchema))],
+    achAgreement: ['ach_agreement', optional(aCHAgreementSchema)],
     dunningCommunicationDelayEnabled: [
       'dunning_communication_delay_enabled',
       optional(boolean()),
@@ -253,5 +247,5 @@ export const createSubscriptionSchema: Schema<CreateSubscription> = expandoObjec
       'skip_billing_manifest_taxes',
       optional(boolean()),
     ],
-  }
+  })
 );

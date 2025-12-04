@@ -12,6 +12,6 @@ export interface CouponResponse {
   [key: string]: unknown;
 }
 
-export const couponResponseSchema: Schema<CouponResponse> = expandoObject({
-  coupon: ['coupon', optional(lazy(() => couponSchema))],
-});
+export const couponResponseSchema: Schema<CouponResponse> = lazy(() =>
+  expandoObject({ coupon: ['coupon', optional(couponSchema)] })
+);

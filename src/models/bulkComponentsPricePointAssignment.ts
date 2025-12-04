@@ -15,11 +15,12 @@ export interface BulkComponentsPricePointAssignment {
   [key: string]: unknown;
 }
 
-export const bulkComponentsPricePointAssignmentSchema: Schema<BulkComponentsPricePointAssignment> = expandoObject(
-  {
-    components: [
-      'components',
-      optional(array(lazy(() => componentPricePointAssignmentSchema))),
-    ],
-  }
+export const bulkComponentsPricePointAssignmentSchema: Schema<BulkComponentsPricePointAssignment> = lazy(
+  () =>
+    expandoObject({
+      components: [
+        'components',
+        optional(array(componentPricePointAssignmentSchema)),
+      ],
+    })
 );

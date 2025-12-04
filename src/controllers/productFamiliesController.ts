@@ -36,7 +36,7 @@ import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class ProductFamiliesController extends BaseController {
   /**
-   * This method allows to retrieve a list of Products belonging to a Product Family.
+   * Retrieves a list of Products belonging to a Product Family.
    *
    * @param productFamilyId   Either the product family's id or its handle prefixed with
    *                                                       `handle:`
@@ -139,8 +139,8 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * This method will create a Product Family within your Advanced Billing site. Create a Product Family
-   * to act as a container for your products, components and coupons.
+   * Creates a Product Family within your Advanced Billing site. Create a Product Family to act as a
+   * container for your products, components and coupons.
    *
    * Full documentation on how Product Families operate within the Advanced Billing UI can be located
    * [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
@@ -169,7 +169,7 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * This method allows to retrieve a list of Product Families for a site.
+   * Retrieve a list of Product Families for a site.
    *
    * @param dateField      The type of filter you would like to apply to your search. Use in query:
    *                                         `date_field=created_at`.
@@ -225,8 +225,8 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * This method allows to retrieve a Product Family via the `product_family_id`. The response will
-   * contain a Product Family object.
+   * Retrieves a Product Family via the `product_family_id`. The response will contain a Product Family
+   * object.
    *
    * The product family can be specified either with the id number, or with the `handle:my-family` format.
    *

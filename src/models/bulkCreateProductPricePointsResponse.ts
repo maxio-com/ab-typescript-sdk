@@ -15,11 +15,9 @@ export interface BulkCreateProductPricePointsResponse {
   [key: string]: unknown;
 }
 
-export const bulkCreateProductPricePointsResponseSchema: Schema<BulkCreateProductPricePointsResponse> = expandoObject(
-  {
-    pricePoints: [
-      'price_points',
-      optional(array(lazy(() => productPricePointSchema))),
-    ],
-  }
+export const bulkCreateProductPricePointsResponseSchema: Schema<BulkCreateProductPricePointsResponse> = lazy(
+  () =>
+    expandoObject({
+      pricePoints: ['price_points', optional(array(productPricePointSchema))],
+    })
 );

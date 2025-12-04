@@ -15,11 +15,12 @@ export interface CreatePrepaidComponent {
   [key: string]: unknown;
 }
 
-export const createPrepaidComponentSchema: Schema<CreatePrepaidComponent> = expandoObject(
-  {
-    prepaidUsageComponent: [
-      'prepaid_usage_component',
-      lazy(() => prepaidUsageComponentSchema),
-    ],
-  }
+export const createPrepaidComponentSchema: Schema<CreatePrepaidComponent> = lazy(
+  () =>
+    expandoObject({
+      prepaidUsageComponent: [
+        'prepaid_usage_component',
+        prepaidUsageComponentSchema,
+      ],
+    })
 );
