@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema } from '../schema.js';
+import { expandoObject, lazy, optional, Schema } from '../schema.js';
 import {
   UpdateMetafieldsRequestMetafields,
   updateMetafieldsRequestMetafieldsSchema,
@@ -15,11 +15,12 @@ export interface UpdateMetafieldsRequest {
   [key: string]: unknown;
 }
 
-export const updateMetafieldsRequestSchema: Schema<UpdateMetafieldsRequest> = expandoObject(
-  {
-    metafields: [
-      'metafields',
-      optional(updateMetafieldsRequestMetafieldsSchema),
-    ],
-  }
+export const updateMetafieldsRequestSchema: Schema<UpdateMetafieldsRequest> = lazy(
+  () =>
+    expandoObject({
+      metafields: [
+        'metafields',
+        optional(updateMetafieldsRequestMetafieldsSchema),
+      ],
+    })
 );

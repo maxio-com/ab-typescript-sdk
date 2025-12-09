@@ -12,8 +12,8 @@
 | `title` | `string \| undefined` | Optional | - |
 | `quantity` | [`CreateInvoiceItemQuantity \| undefined`](../../doc/models/containers/create-invoice-item-quantity.md) | Optional | This is a container for one-of cases. |
 | `unitPrice` | [`CreateInvoiceItemUnitPrice \| undefined`](../../doc/models/containers/create-invoice-item-unit-price.md) | Optional | This is a container for one-of cases. |
-| `taxable` | `boolean \| undefined` | Optional | Set to true to automatically calculate taxes. Site must be configured to use and calculate taxes.<br><br>If using Avalara, a tax_code parameter must also be sent. |
-| `taxCode` | `string \| undefined` | Optional | - |
+| `taxable` | `boolean \| undefined` | Optional | Set to true to automatically calculate taxes. Site must be configured to use and calculate taxes. If using AvaTax, a tax_code parameter must also be sent. |
+| `taxCode` | `string \| undefined` | Optional | A string representing the tax code related to the product type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. |
 | `periodRangeStart` | `string \| undefined` | Optional | YYYY-MM-DD |
 | `periodRangeEnd` | `string \| undefined` | Optional | YYYY-MM-DD |
 | `productId` | [`CreateInvoiceItemProductId \| undefined`](../../doc/models/containers/create-invoice-item-product-id.md) | Optional | This is a container for one-of cases. |

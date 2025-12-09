@@ -42,30 +42,29 @@ export interface Offer {
   [key: string]: unknown;
 }
 
-export const offerSchema: Schema<Offer> = expandoObject({
-  id: ['id', optional(number())],
-  siteId: ['site_id', optional(number())],
-  productFamilyId: ['product_family_id', optional(number())],
-  productId: ['product_id', optional(number())],
-  productPricePointId: ['product_price_point_id', optional(number())],
-  productRevisableNumber: ['product_revisable_number', optional(number())],
-  name: ['name', optional(string())],
-  handle: ['handle', optional(string())],
-  description: ['description', optional(nullable(string()))],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  archivedAt: ['archived_at', optional(nullable(string()))],
-  offerItems: ['offer_items', optional(array(lazy(() => offerItemSchema)))],
-  offerDiscounts: [
-    'offer_discounts',
-    optional(array(lazy(() => offerDiscountSchema))),
-  ],
-  productFamilyName: ['product_family_name', optional(string())],
-  productName: ['product_name', optional(string())],
-  productPricePointName: ['product_price_point_name', optional(string())],
-  productPriceInCents: ['product_price_in_cents', optional(bigint())],
-  offerSignupPages: [
-    'offer_signup_pages',
-    optional(array(lazy(() => offerSignupPageSchema))),
-  ],
-});
+export const offerSchema: Schema<Offer> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    siteId: ['site_id', optional(number())],
+    productFamilyId: ['product_family_id', optional(number())],
+    productId: ['product_id', optional(number())],
+    productPricePointId: ['product_price_point_id', optional(number())],
+    productRevisableNumber: ['product_revisable_number', optional(number())],
+    name: ['name', optional(string())],
+    handle: ['handle', optional(string())],
+    description: ['description', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    archivedAt: ['archived_at', optional(nullable(string()))],
+    offerItems: ['offer_items', optional(array(offerItemSchema))],
+    offerDiscounts: ['offer_discounts', optional(array(offerDiscountSchema))],
+    productFamilyName: ['product_family_name', optional(string())],
+    productName: ['product_name', optional(string())],
+    productPricePointName: ['product_price_point_name', optional(string())],
+    productPriceInCents: ['product_price_in_cents', optional(bigint())],
+    offerSignupPages: [
+      'offer_signup_pages',
+      optional(array(offerSignupPageSchema)),
+    ],
+  })
+);

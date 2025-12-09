@@ -243,7 +243,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * When updating a price point, it's prices can be updated as well by creating new prices or editing /
+   * When updating a price point, prices can be updated as well by creating new prices or editing /
    * removing existing ones.
    *
    * Passing in a price bracket without an `id` will attempt to create a new price.

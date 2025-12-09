@@ -12,6 +12,6 @@ export interface AllocationResponse {
   [key: string]: unknown;
 }
 
-export const allocationResponseSchema: Schema<AllocationResponse> = expandoObject(
-  { allocation: ['allocation', optional(lazy(() => allocationSchema))] }
+export const allocationResponseSchema: Schema<AllocationResponse> = lazy(() =>
+  expandoObject({ allocation: ['allocation', optional(allocationSchema)] })
 );

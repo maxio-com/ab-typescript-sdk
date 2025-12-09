@@ -15,11 +15,9 @@ export interface SubscriptionMigrationPreviewRequest {
   [key: string]: unknown;
 }
 
-export const subscriptionMigrationPreviewRequestSchema: Schema<SubscriptionMigrationPreviewRequest> = expandoObject(
-  {
-    migration: [
-      'migration',
-      lazy(() => subscriptionMigrationPreviewOptionsSchema),
-    ],
-  }
+export const subscriptionMigrationPreviewRequestSchema: Schema<SubscriptionMigrationPreviewRequest> = lazy(
+  () =>
+    expandoObject({
+      migration: ['migration', subscriptionMigrationPreviewOptionsSchema],
+    })
 );

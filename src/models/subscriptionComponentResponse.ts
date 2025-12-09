@@ -15,8 +15,9 @@ export interface SubscriptionComponentResponse {
   [key: string]: unknown;
 }
 
-export const subscriptionComponentResponseSchema: Schema<SubscriptionComponentResponse> = expandoObject(
-  {
-    component: ['component', optional(lazy(() => subscriptionComponentSchema))],
-  }
+export const subscriptionComponentResponseSchema: Schema<SubscriptionComponentResponse> = lazy(
+  () =>
+    expandoObject({
+      component: ['component', optional(subscriptionComponentSchema)],
+    })
 );

@@ -35,21 +35,22 @@ export interface ListSubscriptionGroupsItem {
   [key: string]: unknown;
 }
 
-export const listSubscriptionGroupsItemSchema: Schema<ListSubscriptionGroupsItem> = expandoObject(
-  {
-    uid: ['uid', optional(string())],
-    scheme: ['scheme', optional(number())],
-    customerId: ['customer_id', optional(number())],
-    paymentProfileId: ['payment_profile_id', optional(number())],
-    subscriptionIds: ['subscription_ids', optional(array(number()))],
-    primarySubscriptionId: ['primary_subscription_id', optional(number())],
-    nextAssessmentAt: ['next_assessment_at', optional(string())],
-    state: ['state', optional(string())],
-    cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
-    accountBalances: [
-      'account_balances',
-      optional(lazy(() => subscriptionGroupBalancesSchema)),
-    ],
-    groupType: ['group_type', optional(groupTypeSchema)],
-  }
+export const listSubscriptionGroupsItemSchema: Schema<ListSubscriptionGroupsItem> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', optional(string())],
+      scheme: ['scheme', optional(number())],
+      customerId: ['customer_id', optional(number())],
+      paymentProfileId: ['payment_profile_id', optional(number())],
+      subscriptionIds: ['subscription_ids', optional(array(number()))],
+      primarySubscriptionId: ['primary_subscription_id', optional(number())],
+      nextAssessmentAt: ['next_assessment_at', optional(string())],
+      state: ['state', optional(string())],
+      cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
+      accountBalances: [
+        'account_balances',
+        optional(subscriptionGroupBalancesSchema),
+      ],
+      groupType: ['group_type', optional(groupTypeSchema)],
+    })
 );

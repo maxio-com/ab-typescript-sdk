@@ -15,6 +15,7 @@ export interface CreateSubscriptionRequest {
   [key: string]: unknown;
 }
 
-export const createSubscriptionRequestSchema: Schema<CreateSubscriptionRequest> = expandoObject(
-  { subscription: ['subscription', lazy(() => createSubscriptionSchema)] }
+export const createSubscriptionRequestSchema: Schema<CreateSubscriptionRequest> = lazy(
+  () =>
+    expandoObject({ subscription: ['subscription', createSubscriptionSchema] })
 );

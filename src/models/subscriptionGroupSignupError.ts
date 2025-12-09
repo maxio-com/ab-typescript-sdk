@@ -30,16 +30,17 @@ export interface SubscriptionGroupSignupError {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupErrorSchema: Schema<SubscriptionGroupSignupError> = expandoObject(
-  {
-    subscriptions: [
-      'subscriptions',
-      optional(dict(lazy(() => subscriptionGroupSubscriptionErrorSchema))),
-    ],
-    payerReference: ['payer_reference', optional(string())],
-    payer: ['payer', optional(lazy(() => payerErrorSchema))],
-    subscriptionGroup: ['subscription_group', optional(array(string()))],
-    paymentProfileId: ['payment_profile_id', optional(string())],
-    payerId: ['payer_id', optional(string())],
-  }
+export const subscriptionGroupSignupErrorSchema: Schema<SubscriptionGroupSignupError> = lazy(
+  () =>
+    expandoObject({
+      subscriptions: [
+        'subscriptions',
+        optional(dict(subscriptionGroupSubscriptionErrorSchema)),
+      ],
+      payerReference: ['payer_reference', optional(string())],
+      payer: ['payer', optional(payerErrorSchema)],
+      subscriptionGroup: ['subscription_group', optional(array(string()))],
+      paymentProfileId: ['payment_profile_id', optional(string())],
+      payerId: ['payer_id', optional(string())],
+    })
 );

@@ -13,15 +13,16 @@ export interface SignupProformaPreview {
   [key: string]: unknown;
 }
 
-export const signupProformaPreviewSchema: Schema<SignupProformaPreview> = expandoObject(
-  {
-    currentProformaInvoice: [
-      'current_proforma_invoice',
-      optional(lazy(() => proformaInvoiceSchema)),
-    ],
-    nextProformaInvoice: [
-      'next_proforma_invoice',
-      optional(lazy(() => proformaInvoiceSchema)),
-    ],
-  }
+export const signupProformaPreviewSchema: Schema<SignupProformaPreview> = lazy(
+  () =>
+    expandoObject({
+      currentProformaInvoice: [
+        'current_proforma_invoice',
+        optional(proformaInvoiceSchema),
+      ],
+      nextProformaInvoice: [
+        'next_proforma_invoice',
+        optional(proformaInvoiceSchema),
+      ],
+    })
 );

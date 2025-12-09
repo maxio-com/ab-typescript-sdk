@@ -34,18 +34,17 @@ export interface OfferItem {
   [key: string]: unknown;
 }
 
-export const offerItemSchema: Schema<OfferItem> = expandoObject({
-  componentId: ['component_id', optional(number())],
-  pricePointId: ['price_point_id', optional(number())],
-  startingQuantity: ['starting_quantity', optional(string())],
-  editable: ['editable', optional(boolean())],
-  componentUnitPrice: ['component_unit_price', optional(string())],
-  componentName: ['component_name', optional(string())],
-  pricePointName: ['price_point_name', optional(string())],
-  currencyPrices: [
-    'currency_prices',
-    optional(array(lazy(() => currencyPriceSchema))),
-  ],
-  interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-});
+export const offerItemSchema: Schema<OfferItem> = lazy(() =>
+  expandoObject({
+    componentId: ['component_id', optional(number())],
+    pricePointId: ['price_point_id', optional(number())],
+    startingQuantity: ['starting_quantity', optional(string())],
+    editable: ['editable', optional(boolean())],
+    componentUnitPrice: ['component_unit_price', optional(string())],
+    componentName: ['component_name', optional(string())],
+    pricePointName: ['price_point_name', optional(string())],
+    currencyPrices: ['currency_prices', optional(array(currencyPriceSchema))],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+  })
+);

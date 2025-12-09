@@ -25,15 +25,13 @@ export interface ChangeChargebackStatusEvent {
   [key: string]: unknown;
 }
 
-export const changeChargebackStatusEventSchema: Schema<ChangeChargebackStatusEvent> = expandoObject(
-  {
-    id: ['id', bigint()],
-    timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
-    eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: [
-      'event_data',
-      lazy(() => changeChargebackStatusEventDataSchema),
-    ],
-  }
+export const changeChargebackStatusEventSchema: Schema<ChangeChargebackStatusEvent> = lazy(
+  () =>
+    expandoObject({
+      id: ['id', bigint()],
+      timestamp: ['timestamp', string()],
+      invoice: ['invoice', invoiceSchema],
+      eventType: ['event_type', invoiceEventTypeSchema],
+      eventData: ['event_data', changeChargebackStatusEventDataSchema],
+    })
 );

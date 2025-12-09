@@ -85,36 +85,38 @@ export interface Allocation {
   [key: string]: unknown;
 }
 
-export const allocationSchema: Schema<Allocation> = expandoObject({
-  allocationId: ['allocation_id', optional(number())],
-  componentId: ['component_id', optional(number())],
-  componentHandle: ['component_handle', optional(nullable(string()))],
-  subscriptionId: ['subscription_id', optional(number())],
-  quantity: ['quantity', optional(allocationQuantitySchema)],
-  previousQuantity: [
-    'previous_quantity',
-    optional(allocationPreviousQuantitySchema),
-  ],
-  memo: ['memo', optional(nullable(string()))],
-  timestamp: ['timestamp', optional(string())],
-  createdAt: ['created_at', optional(string())],
-  prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
-  prorationDowngradeScheme: ['proration_downgrade_scheme', optional(string())],
-  pricePointId: ['price_point_id', optional(number())],
-  pricePointName: ['price_point_name', optional(string())],
-  pricePointHandle: ['price_point_handle', optional(string())],
-  interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-  previousPricePointId: ['previous_price_point_id', optional(number())],
-  accrueCharge: ['accrue_charge', optional(boolean())],
-  initiateDunning: ['initiate_dunning', optional(boolean())],
-  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  payment: [
-    'payment',
-    optional(nullable(lazy(() => paymentForAllocationSchema))),
-  ],
-  expiresAt: ['expires_at', optional(string())],
-  usedQuantity: ['used_quantity', optional(bigint())],
-  chargeId: ['charge_id', optional(bigint())],
-});
+export const allocationSchema: Schema<Allocation> = lazy(() =>
+  expandoObject({
+    allocationId: ['allocation_id', optional(number())],
+    componentId: ['component_id', optional(number())],
+    componentHandle: ['component_handle', optional(nullable(string()))],
+    subscriptionId: ['subscription_id', optional(number())],
+    quantity: ['quantity', optional(allocationQuantitySchema)],
+    previousQuantity: [
+      'previous_quantity',
+      optional(allocationPreviousQuantitySchema),
+    ],
+    memo: ['memo', optional(nullable(string()))],
+    timestamp: ['timestamp', optional(string())],
+    createdAt: ['created_at', optional(string())],
+    prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
+    prorationDowngradeScheme: [
+      'proration_downgrade_scheme',
+      optional(string()),
+    ],
+    pricePointId: ['price_point_id', optional(number())],
+    pricePointName: ['price_point_name', optional(string())],
+    pricePointHandle: ['price_point_handle', optional(string())],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+    previousPricePointId: ['previous_price_point_id', optional(number())],
+    accrueCharge: ['accrue_charge', optional(boolean())],
+    initiateDunning: ['initiate_dunning', optional(boolean())],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
+    payment: ['payment', optional(nullable(paymentForAllocationSchema))],
+    expiresAt: ['expires_at', optional(string())],
+    usedQuantity: ['used_quantity', optional(bigint())],
+    chargeId: ['charge_id', optional(bigint())],
+  })
+);

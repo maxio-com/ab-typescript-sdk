@@ -15,17 +15,12 @@ export interface SubscriptionGroupBalances {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupBalancesSchema: Schema<SubscriptionGroupBalances> = expandoObject(
-  {
-    prepayments: ['prepayments', optional(lazy(() => accountBalanceSchema))],
-    serviceCredits: [
-      'service_credits',
-      optional(lazy(() => accountBalanceSchema)),
-    ],
-    openInvoices: ['open_invoices', optional(lazy(() => accountBalanceSchema))],
-    pendingDiscounts: [
-      'pending_discounts',
-      optional(lazy(() => accountBalanceSchema)),
-    ],
-  }
+export const subscriptionGroupBalancesSchema: Schema<SubscriptionGroupBalances> = lazy(
+  () =>
+    expandoObject({
+      prepayments: ['prepayments', optional(accountBalanceSchema)],
+      serviceCredits: ['service_credits', optional(accountBalanceSchema)],
+      openInvoices: ['open_invoices', optional(accountBalanceSchema)],
+      pendingDiscounts: ['pending_discounts', optional(accountBalanceSchema)],
+    })
 );

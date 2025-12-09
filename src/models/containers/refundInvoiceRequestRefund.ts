@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
+import {
+  anyOf,
+  isMappedValueValidForSchema,
+  lazy,
+  Schema,
+} from '../../schema.js';
 import {
   RefundConsolidatedInvoice,
   refundConsolidatedInvoiceSchema,
@@ -16,8 +21,8 @@ export type RefundInvoiceRequestRefund =
   | RefundInvoice
   | RefundConsolidatedInvoice;
 
-export const refundInvoiceRequestRefundSchema: Schema<RefundInvoiceRequestRefund> = anyOf(
-  [refundInvoiceSchema, refundConsolidatedInvoiceSchema]
+export const refundInvoiceRequestRefundSchema: Schema<RefundInvoiceRequestRefund> = lazy(
+  () => anyOf([refundInvoiceSchema, refundConsolidatedInvoiceSchema])
 );
 
 export namespace RefundInvoiceRequestRefund {

@@ -15,6 +15,6 @@ export interface CreateOrUpdateProductRequest {
   [key: string]: unknown;
 }
 
-export const createOrUpdateProductRequestSchema: Schema<CreateOrUpdateProductRequest> = expandoObject(
-  { product: ['product', lazy(() => createOrUpdateProductSchema)] }
+export const createOrUpdateProductRequestSchema: Schema<CreateOrUpdateProductRequest> = lazy(
+  () => expandoObject({ product: ['product', createOrUpdateProductSchema] })
 );

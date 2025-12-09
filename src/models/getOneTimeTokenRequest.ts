@@ -15,11 +15,9 @@ export interface GetOneTimeTokenRequest {
   [key: string]: unknown;
 }
 
-export const getOneTimeTokenRequestSchema: Schema<GetOneTimeTokenRequest> = expandoObject(
-  {
-    paymentProfile: [
-      'payment_profile',
-      lazy(() => getOneTimeTokenPaymentProfileSchema),
-    ],
-  }
+export const getOneTimeTokenRequestSchema: Schema<GetOneTimeTokenRequest> = lazy(
+  () =>
+    expandoObject({
+      paymentProfile: ['payment_profile', getOneTimeTokenPaymentProfileSchema],
+    })
 );

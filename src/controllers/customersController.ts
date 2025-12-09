@@ -53,8 +53,8 @@ export class CustomersController extends BaseController {
    * Advanced Billing requires that you use the ISO Standard Country codes when formatting country
    * attribute of the customer.
    *
-   * Countries should be formatted as 2 characters. For more information, please see the following
-   * wikipedia article on [ISO_3166-1.](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
+   * Countries should be formatted as 2 characters. For more information, see the following wikipedia
+   * article on [ISO_3166-1.](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
    *
    * ## Required State Format
    *
@@ -63,9 +63,9 @@ export class CustomersController extends BaseController {
    *
    * + US States (2 characters): [ISO_3166-2](https://en.wikipedia.org/wiki/ISO_3166-2:US)
    *
-   * + States Outside the US (2-3 characters): To find the correct state codes outside of the US, please
-   * go to [ISO_3166-1](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) and click on the link in
-   * the “ISO 3166-2 codes” column next to country you wish to populate.
+   * + States Outside the US (2-3 characters): To find the correct state codes outside of the US, go to
+   * [ISO_3166-1](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) and click on the link in the
+   * “ISO 3166-2 codes” column next to country you wish to populate.
    *
    * ## Locale
    *
@@ -113,7 +113,7 @@ export class CustomersController extends BaseController {
    * + Search by a reference value from your application
    * + Search by a first or last name
    *
-   * To retrieve a single, exact match by reference, please use the [lookup endpoint](https://developers.
+   * To retrieve a single, exact match by reference, use the [lookup endpoint](https://developers.
    * chargify.com/docs/api-docs/b710d8fbef104-read-customer-by-reference).
    *
    * @param direction      Direction to sort customers by time of creation

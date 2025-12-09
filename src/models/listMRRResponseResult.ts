@@ -26,14 +26,15 @@ export interface ListMRRResponseResult {
   [key: string]: unknown;
 }
 
-export const listMRRResponseResultSchema: Schema<ListMRRResponseResult> = expandoObject(
-  {
-    page: ['page', optional(number())],
-    perPage: ['per_page', optional(number())],
-    totalPages: ['total_pages', optional(number())],
-    totalEntries: ['total_entries', optional(number())],
-    currency: ['currency', optional(string())],
-    currencySymbol: ['currency_symbol', optional(string())],
-    movements: ['movements', optional(array(lazy(() => movementSchema)))],
-  }
+export const listMRRResponseResultSchema: Schema<ListMRRResponseResult> = lazy(
+  () =>
+    expandoObject({
+      page: ['page', optional(number())],
+      perPage: ['per_page', optional(number())],
+      totalPages: ['total_pages', optional(number())],
+      totalEntries: ['total_entries', optional(number())],
+      currency: ['currency', optional(string())],
+      currencySymbol: ['currency_symbol', optional(string())],
+      movements: ['movements', optional(array(movementSchema))],
+    })
 );

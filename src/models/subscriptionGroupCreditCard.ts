@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, optional, Schema, string } from '../schema.js';
+import { expandoObject, lazy, optional, Schema, string } from '../schema.js';
 import { CardType, cardTypeSchema } from './cardType.js';
 import {
   SubscriptionGroupCreditCardExpirationMonth,
@@ -46,36 +46,37 @@ export interface SubscriptionGroupCreditCard {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCard> = expandoObject(
-  {
-    chargifyToken: ['chargify_token', optional(string())],
-    vaultToken: ['vault_token', optional(string())],
-    currentVault: ['current_vault', optional(creditCardVaultSchema)],
-    gatewayHandle: ['gateway_handle', optional(string())],
-    firstName: ['first_name', optional(string())],
-    lastName: ['last_name', optional(string())],
-    billingAddress: ['billing_address', optional(string())],
-    billingAddress2: ['billing_address_2', optional(string())],
-    billingCity: ['billing_city', optional(string())],
-    billingState: ['billing_state', optional(string())],
-    billingZip: ['billing_zip', optional(string())],
-    billingCountry: ['billing_country', optional(string())],
-    fullNumber: [
-      'full_number',
-      optional(subscriptionGroupCreditCardFullNumberSchema),
-    ],
-    expirationMonth: [
-      'expiration_month',
-      optional(subscriptionGroupCreditCardExpirationMonthSchema),
-    ],
-    expirationYear: [
-      'expiration_year',
-      optional(subscriptionGroupCreditCardExpirationYearSchema),
-    ],
-    lastFour: ['last_four', optional(string())],
-    cardType: ['card_type', optional(cardTypeSchema)],
-    customerVaultToken: ['customer_vault_token', optional(string())],
-    cvv: ['cvv', optional(string())],
-    paymentType: ['payment_type', optional(string())],
-  }
+export const subscriptionGroupCreditCardSchema: Schema<SubscriptionGroupCreditCard> = lazy(
+  () =>
+    expandoObject({
+      chargifyToken: ['chargify_token', optional(string())],
+      vaultToken: ['vault_token', optional(string())],
+      currentVault: ['current_vault', optional(creditCardVaultSchema)],
+      gatewayHandle: ['gateway_handle', optional(string())],
+      firstName: ['first_name', optional(string())],
+      lastName: ['last_name', optional(string())],
+      billingAddress: ['billing_address', optional(string())],
+      billingAddress2: ['billing_address_2', optional(string())],
+      billingCity: ['billing_city', optional(string())],
+      billingState: ['billing_state', optional(string())],
+      billingZip: ['billing_zip', optional(string())],
+      billingCountry: ['billing_country', optional(string())],
+      fullNumber: [
+        'full_number',
+        optional(subscriptionGroupCreditCardFullNumberSchema),
+      ],
+      expirationMonth: [
+        'expiration_month',
+        optional(subscriptionGroupCreditCardExpirationMonthSchema),
+      ],
+      expirationYear: [
+        'expiration_year',
+        optional(subscriptionGroupCreditCardExpirationYearSchema),
+      ],
+      lastFour: ['last_four', optional(string())],
+      cardType: ['card_type', optional(cardTypeSchema)],
+      customerVaultToken: ['customer_vault_token', optional(string())],
+      cvv: ['cvv', optional(string())],
+      paymentType: ['payment_type', optional(string())],
+    })
 );

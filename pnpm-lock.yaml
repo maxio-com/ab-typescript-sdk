@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@apimatic/authentication-adapters':
-        specifier: ^0.5.10
-        version: 0.5.12
+        specifier: ^0.5.14
+        version: 0.5.14
       '@apimatic/axios-client-adapter':
-        specifier: ^0.3.16
-        version: 0.3.18
+        specifier: ^0.3.20
+        version: 0.3.20
       '@apimatic/core':
-        specifier: ^0.10.25
-        version: 0.10.26
+        specifier: ^0.10.28
+        version: 0.10.28
       '@apimatic/schema':
-        specifier: ^0.7.19
-        version: 0.7.20
+        specifier: ^0.7.21
+        version: 0.7.21
     devDependencies:
       '@types/jest':
         specifier: ^29.4.0
@@ -97,27 +97,27 @@ importers:
 
 packages:
 
-  /@apimatic/authentication-adapters@0.5.12:
-    resolution: {integrity: sha512-H0dVMsuiPRRS6qPSz42T8ktaOUBlvJgKSj5L+DKr4DwBEZaE6rZx4i5kuEdAUZ5oIuteupbGEx5hMJlPi6Y0XA==}
+  /@apimatic/authentication-adapters@0.5.14:
+    resolution: {integrity: sha512-V7nhHShPrU8LfjKKHoVJNS50SveSL77CexVuS4aeQyXx99HwdQVJwl2MK0KAYM6/b2ufQbJ7Eee2fzQT0TVXSQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
-      '@apimatic/core-interfaces': 0.2.12
-      '@apimatic/http-headers': 0.3.7
-      '@apimatic/http-query': 0.3.7
+      '@apimatic/core-interfaces': 0.2.14
+      '@apimatic/http-headers': 0.3.8
+      '@apimatic/http-query': 0.3.9
       tslib: 2.8.1
     dev: false
 
-  /@apimatic/axios-client-adapter@0.3.18:
-    resolution: {integrity: sha512-4DX6PgMT3VyACsf+EA3IxPrJzE1Schnwm+EGoCDZ8oAt7WYf3nByH1nKbmRVLEw7TGp4ZNU9slUHmdiJZ7FM6A==}
+  /@apimatic/axios-client-adapter@0.3.20:
+    resolution: {integrity: sha512-HuwM3rtM+LLnJC6eu4FmniwEz3rsoy2rtTa0rcHv47JbHdp8/AR6Q1AQii1UzTLP9LA2LU7Cq+3xu1htRzvlQQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
-      '@apimatic/convert-to-stream': 0.1.7
-      '@apimatic/core-interfaces': 0.2.12
-      '@apimatic/file-wrapper': 0.3.7
-      '@apimatic/http-headers': 0.3.7
-      '@apimatic/http-query': 0.3.7
+      '@apimatic/convert-to-stream': 0.1.8
+      '@apimatic/core-interfaces': 0.2.14
+      '@apimatic/file-wrapper': 0.3.9
+      '@apimatic/http-headers': 0.3.8
+      '@apimatic/http-query': 0.3.9
       '@apimatic/json-bigint': 1.2.0
-      '@apimatic/proxy': 0.1.2
+      '@apimatic/proxy': 0.1.3
       axios: 1.11.0
       detect-browser: 5.3.0
       detect-node: 2.1.0
@@ -130,32 +130,33 @@ packages:
       - supports-color
     dev: false
 
-  /@apimatic/convert-to-stream@0.1.7:
-    resolution: {integrity: sha512-uOCSy8YV0umHI4422l6wXcY/CN/oplLgoitpOY+P52I8dSrkQK+P+8HCITLDW4ND1I5OvRfvb1OwvN4+1JdgvA==}
+  /@apimatic/convert-to-stream@0.1.8:
+    resolution: {integrity: sha512-A4VO/wyGFksKtizp4aUOGGtSlejoVI1uAXLGPVymhfpion3wUwrlST/yif9SOj3faVAGeCTNx0w5A+BpVdzSEA==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       tslib: 2.8.1
     dev: false
 
-  /@apimatic/core-interfaces@0.2.12:
-    resolution: {integrity: sha512-XdEbSEfLEUY6KvKWQVXGMMGQmt589Zj0MnssPZ7FdgWFCrqe4aNgYt2Fl/fOC9r64GZvd7o1T9m4HKFilXi4nw==}
+  /@apimatic/core-interfaces@0.2.14:
+    resolution: {integrity: sha512-PQmSU32ndxtDddMCjbkNY/sVvDwQAsHUGKrdG5aGVE7iw/qvB2Tm2zyCarOB5TlDr4OB+/tuLCVhji0icx6MHg==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
-      '@apimatic/file-wrapper': 0.3.7
-      tslib: 2.8.1
-    dev: false
-
-  /@apimatic/core@0.10.26:
-    resolution: {integrity: sha512-wml7KNNP3P8BXXI2bOXyuMugQpLZ1MpOl6EM40nSOCXmR4lTr1ssfoUi+LrK1n7o6JxLoYp9mGkMNHoR7n35Tw==}
-    engines: {node: '>=14.15.0 || >=16.0.0'}
-    dependencies:
-      '@apimatic/convert-to-stream': 0.1.7
-      '@apimatic/core-interfaces': 0.2.12
-      '@apimatic/file-wrapper': 0.3.7
-      '@apimatic/http-headers': 0.3.7
-      '@apimatic/http-query': 0.3.7
+      '@apimatic/file-wrapper': 0.3.9
       '@apimatic/json-bigint': 1.2.0
-      '@apimatic/schema': 0.7.20
+      tslib: 2.8.1
+    dev: false
+
+  /@apimatic/core@0.10.28:
+    resolution: {integrity: sha512-/1TsXtfuS6BOu1qRrKxnHuuBSSg3Q6ckf7ZPRyejzaA32PN0ke/eq+tK0tYGhnHrJtq869EXJ1r84mDw6Yb0zw==}
+    engines: {node: '>=14.15.0 || >=16.0.0'}
+    dependencies:
+      '@apimatic/convert-to-stream': 0.1.8
+      '@apimatic/core-interfaces': 0.2.14
+      '@apimatic/file-wrapper': 0.3.9
+      '@apimatic/http-headers': 0.3.8
+      '@apimatic/http-query': 0.3.9
+      '@apimatic/json-bigint': 1.2.0
+      '@apimatic/schema': 0.7.21
       detect-browser: 5.3.0
       detect-node: 2.1.0
       form-data: 4.0.4
@@ -165,25 +166,26 @@ packages:
       tslib: 2.8.1
     dev: false
 
-  /@apimatic/file-wrapper@0.3.7:
-    resolution: {integrity: sha512-uJh2immpzZiZYOiG+Q9qtArg3bUk7lmx7eYFRI38wIOS2zlxQh90WkuJzaL2nvSmNsJ3p+yg5ePAyRpqoJmw7Q==}
+  /@apimatic/file-wrapper@0.3.9:
+    resolution: {integrity: sha512-Fh3UE7UPs2v4wkJdsD+uJFF147+7X0qkQfKBdeLZx6mZ5RmBJOBbS6ApvstQTV279YsHiiedKUZGJ6XLoVU+pQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       tslib: 2.8.1
     dev: false
 
-  /@apimatic/http-headers@0.3.7:
-    resolution: {integrity: sha512-DxLmwDMnAT5sOiuYI7EIuQq2PAVhbV9ICDLSdICRFflklgfKQ9agVEyNRgYVhuXz1m7IDoqqjGb1hs6iMJJpEg==}
+  /@apimatic/http-headers@0.3.8:
+    resolution: {integrity: sha512-ShvCuT39hYfBTI+H1I16m5i6XZCyUy2kQJ6Jhfj78TwsW5r6AyCbzW7DEro8GN2nNYRU1+E/hrgH6J85YmriOA==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       tslib: 2.8.1
     dev: false
 
-  /@apimatic/http-query@0.3.7:
-    resolution: {integrity: sha512-HauS4Jsuve1tGy1pnAidjHNL/TFVLesOxL7QtOdZyb+s0EHiHF6Vhx/kNroJ4mH/yCN3OHcHcqMJlfg0V5ET9g==}
+  /@apimatic/http-query@0.3.9:
+    resolution: {integrity: sha512-D6nqXcCR3P6iWbJ9uFXyyF2z1PEhTbGFbHNNuwF1NQ4tnThQk67DW9ou7/XcWi21zLh9MUchDWw9I0iE+5F2xA==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
-      '@apimatic/file-wrapper': 0.3.7
+      '@apimatic/core-interfaces': 0.2.14
+      '@apimatic/file-wrapper': 0.3.9
       tslib: 2.8.1
     dev: false
 
@@ -191,8 +193,8 @@ packages:
     resolution: {integrity: sha512-+bmVzYMdZu0Ya5L+my4FXFUih54OvQA/qlZsFOYdOoostyUuB27UDrVWQs/WVCmS0ADdo5vTU0eeTrrBkHoySw==}
     dev: false
 
-  /@apimatic/proxy@0.1.2:
-    resolution: {integrity: sha512-Xo3PO69tos+ssAfjcBGxSxXu1jpdEwse+yYnWC8D8bCsuWKUVJh8TwWl01Zyw3s60FdikyGCGtiQ3LB2cBrbeg==}
+  /@apimatic/proxy@0.1.3:
+    resolution: {integrity: sha512-2UQmmbhOxAXHgbkl6WzGiVLG96ubw7udUsm0cv3jqiCLUyC+c15NgC64pJ+jeYHpZm3BtsLG01rMA+dBdHsxYQ==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       http-proxy-agent: 7.0.2
@@ -201,8 +203,8 @@ packages:
       - supports-color
     dev: false
 
-  /@apimatic/schema@0.7.20:
-    resolution: {integrity: sha512-kMU1LqCypb0AwY8nXLV0aBoyubHHAxD8htyeAMFLYqWmmt+1pUBe33hHIDMdkREkNm+AYpl2n6vHBC1kqgju1w==}
+  /@apimatic/schema@0.7.21:
+    resolution: {integrity: sha512-RCke4toXjA7fBRxQVa1GR+Lj9utVOEJ3voDI26dhk+bZuAac4UXPzkTEaIO3AIe/o8pcKCOkpNIzhzm57Cv2Qg==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
       tslib: 2.8.1

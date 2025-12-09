@@ -37,21 +37,22 @@ export interface ProformaInvoiceDiscount {
   [key: string]: unknown;
 }
 
-export const proformaInvoiceDiscountSchema: Schema<ProformaInvoiceDiscount> = expandoObject(
-  {
-    uid: ['uid', optional(string())],
-    title: ['title', optional(string())],
-    code: ['code', optional(string())],
-    sourceType: [
-      'source_type',
-      optional(proformaInvoiceDiscountSourceTypeSchema),
-    ],
-    discountType: ['discount_type', optional(invoiceDiscountTypeSchema)],
-    eligibleAmount: ['eligible_amount', optional(string())],
-    discountAmount: ['discount_amount', optional(string())],
-    lineItemBreakouts: [
-      'line_item_breakouts',
-      optional(array(lazy(() => invoiceDiscountBreakoutSchema))),
-    ],
-  }
+export const proformaInvoiceDiscountSchema: Schema<ProformaInvoiceDiscount> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', optional(string())],
+      title: ['title', optional(string())],
+      code: ['code', optional(string())],
+      sourceType: [
+        'source_type',
+        optional(proformaInvoiceDiscountSourceTypeSchema),
+      ],
+      discountType: ['discount_type', optional(invoiceDiscountTypeSchema)],
+      eligibleAmount: ['eligible_amount', optional(string())],
+      discountAmount: ['discount_amount', optional(string())],
+      lineItemBreakouts: [
+        'line_item_breakouts',
+        optional(array(invoiceDiscountBreakoutSchema)),
+      ],
+    })
 );

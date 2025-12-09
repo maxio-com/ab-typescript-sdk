@@ -58,13 +58,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.retrySubscription(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionStatusController.retrySubscription(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -242,13 +254,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.cancelSubscription(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionStatusController.cancelSubscription(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -427,13 +451,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.resumeSubscription(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionStatusController.resumeSubscription(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -560,7 +596,7 @@ This will place the subscription in the on_hold state and it will not renew.
 
 ## Limitations
 
-You may not place a subscription on hold if the `next_billing` date is within 24 hours.
+You may not place a subscription on hold if the `next_billing_at` date is within 24 hours.
 
 ```ts
 async pauseSubscription(
@@ -594,16 +630,28 @@ const body: PauseRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.pauseSubscription(
+  const response = await subscriptionStatusController.pauseSubscription(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -766,16 +814,28 @@ const body: PauseRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.updateAutomaticSubscriptionResumption(
+  const response = await subscriptionStatusController.updateAutomaticSubscriptionResumption(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -911,8 +971,7 @@ try {
 
 Advanced Billing offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://maxio.zendesk.com/hc/en-us/articles/24252109503629-Reactivating-and-Resuming).
 
-**Please note: The term
-"resume" is used also during another process in Advanced Billing. This occurs when an on-hold subscription is "resumed". This returns the subscription to an active state.**
+**Note: The term "resume" is used also during another process in Advanced Billing. This occurs when an on-hold subscription is "resumed". This returns the subscription to an active state.**
 
 + The response returns the subscription object in the `active` or `trialing` state.
 + The `canceled_at` and `cancellation_message` fields do not have values.
@@ -1106,16 +1165,28 @@ const body: ReactivateSubscriptionRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.reactivateSubscription(
+  const response = await subscriptionStatusController.reactivateSubscription(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1271,13 +1342,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.initiateDelayedCancellation(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionStatusController.initiateDelayedCancellation(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1320,13 +1403,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.cancelDelayedCancellation(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionStatusController.cancelDelayedCancellation(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1374,13 +1469,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.cancelDunning(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionStatusController.cancelDunning(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1396,7 +1503,7 @@ try {
 
 The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.
 
-The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscriber-Interface-Overview).
+The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscriber-Interface-Overview).
 
 ## Optional Component Fields
 
@@ -1462,16 +1569,28 @@ const body: RenewalPreviewRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionStatusController.previewRenewal(
+  const response = await subscriptionStatusController.previewRenewal(
     subscriptionId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

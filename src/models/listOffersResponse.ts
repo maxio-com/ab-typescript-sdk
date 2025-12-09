@@ -12,6 +12,6 @@ export interface ListOffersResponse {
   [key: string]: unknown;
 }
 
-export const listOffersResponseSchema: Schema<ListOffersResponse> = expandoObject(
-  { offers: ['offers', optional(array(lazy(() => offerSchema)))] }
+export const listOffersResponseSchema: Schema<ListOffersResponse> = lazy(() =>
+  expandoObject({ offers: ['offers', optional(array(offerSchema))] })
 );

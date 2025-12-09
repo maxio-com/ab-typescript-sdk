@@ -37,19 +37,20 @@ export interface ReactivateSubscriptionRequest {
   [key: string]: unknown;
 }
 
-export const reactivateSubscriptionRequestSchema: Schema<ReactivateSubscriptionRequest> = expandoObject(
-  {
-    calendarBilling: [
-      'calendar_billing',
-      optional(lazy(() => reactivationBillingSchema)),
-    ],
-    includeTrial: ['include_trial', optional(boolean())],
-    preserveBalance: ['preserve_balance', optional(boolean())],
-    couponCode: ['coupon_code', optional(string())],
-    useCreditsAndPrepayments: [
-      'use_credits_and_prepayments',
-      optional(boolean()),
-    ],
-    resume: ['resume', optional(reactivateSubscriptionRequestResumeSchema)],
-  }
+export const reactivateSubscriptionRequestSchema: Schema<ReactivateSubscriptionRequest> = lazy(
+  () =>
+    expandoObject({
+      calendarBilling: [
+        'calendar_billing',
+        optional(reactivationBillingSchema),
+      ],
+      includeTrial: ['include_trial', optional(boolean())],
+      preserveBalance: ['preserve_balance', optional(boolean())],
+      couponCode: ['coupon_code', optional(string())],
+      useCreditsAndPrepayments: [
+        'use_credits_and_prepayments',
+        optional(boolean()),
+      ],
+      resume: ['resume', optional(reactivateSubscriptionRequestResumeSchema)],
+    })
 );

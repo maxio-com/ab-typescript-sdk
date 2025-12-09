@@ -12,6 +12,6 @@ export interface AddSubscriptionToAGroup {
   [key: string]: unknown;
 }
 
-export const addSubscriptionToAGroupSchema: Schema<AddSubscriptionToAGroup> = expandoObject(
-  { group: ['group', optional(lazy(() => groupSettingsSchema))] }
+export const addSubscriptionToAGroupSchema: Schema<AddSubscriptionToAGroup> = lazy(
+  () => expandoObject({ group: ['group', optional(groupSettingsSchema)] })
 );

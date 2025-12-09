@@ -19,6 +19,7 @@ import {
   expirationIntervalUnitSchema,
 } from './expirationIntervalUnit.js';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { TrialType, trialTypeSchema } from './trialType.js';
 
 export interface CreateProductPricePoint {
   /** The product price point name */
@@ -37,7 +38,8 @@ export interface CreateProductPricePoint {
   trialInterval?: number;
   /** A string representing the trial interval unit for this product price point, either month or day */
   trialIntervalUnit?: IntervalUnit;
-  trialType?: string;
+  /** Indicates how a trial is handled when the trail period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. */
+  trialType?: TrialType | null;
   /** The product price point initial charge, in integer cents */
   initialChargeInCents?: bigint;
   initialChargeAfterTrial?: boolean;
@@ -60,7 +62,7 @@ export const createProductPricePointSchema: Schema<CreateProductPricePoint> = ex
     trialPriceInCents: ['trial_price_in_cents', optional(bigint())],
     trialInterval: ['trial_interval', optional(number())],
     trialIntervalUnit: ['trial_interval_unit', optional(intervalUnitSchema)],
-    trialType: ['trial_type', optional(string())],
+    trialType: ['trial_type', optional(nullable(trialTypeSchema))],
     initialChargeInCents: ['initial_charge_in_cents', optional(bigint())],
     initialChargeAfterTrial: [
       'initial_charge_after_trial',

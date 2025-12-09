@@ -15,6 +15,6 @@ export interface DeductServiceCreditRequest {
   [key: string]: unknown;
 }
 
-export const deductServiceCreditRequestSchema: Schema<DeductServiceCreditRequest> = expandoObject(
-  { deduction: ['deduction', lazy(() => deductServiceCreditSchema)] }
+export const deductServiceCreditRequestSchema: Schema<DeductServiceCreditRequest> = lazy(
+  () => expandoObject({ deduction: ['deduction', deductServiceCreditSchema] })
 );

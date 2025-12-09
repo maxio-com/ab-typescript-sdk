@@ -68,60 +68,62 @@ export interface Coupon {
   [key: string]: unknown;
 }
 
-export const couponSchema: Schema<Coupon> = expandoObject({
-  id: ['id', optional(number())],
-  name: ['name', optional(string())],
-  code: ['code', optional(string())],
-  description: ['description', optional(string())],
-  amount: ['amount', optional(nullable(number()))],
-  amountInCents: ['amount_in_cents', optional(nullable(bigint()))],
-  productFamilyId: ['product_family_id', optional(number())],
-  productFamilyName: ['product_family_name', optional(nullable(string()))],
-  startDate: ['start_date', optional(string())],
-  endDate: ['end_date', optional(nullable(string()))],
-  percentage: ['percentage', optional(nullable(string()))],
-  recurring: ['recurring', optional(boolean())],
-  recurringScheme: ['recurring_scheme', optional(recurringSchemeSchema)],
-  durationPeriodCount: ['duration_period_count', optional(nullable(number()))],
-  durationInterval: ['duration_interval', optional(nullable(number()))],
-  durationIntervalUnit: [
-    'duration_interval_unit',
-    optional(nullable(string())),
-  ],
-  durationIntervalSpan: [
-    'duration_interval_span',
-    optional(nullable(string())),
-  ],
-  allowNegativeBalance: ['allow_negative_balance', optional(boolean())],
-  archivedAt: ['archived_at', optional(nullable(string()))],
-  conversionLimit: ['conversion_limit', optional(nullable(string()))],
-  stackable: ['stackable', optional(boolean())],
-  compoundingStrategy: [
-    'compounding_strategy',
-    optional(nullable(compoundingStrategySchema)),
-  ],
-  useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  discountType: ['discount_type', optional(discountTypeSchema)],
-  excludeMidPeriodAllocations: [
-    'exclude_mid_period_allocations',
-    optional(boolean()),
-  ],
-  applyOnCancelAtEndOfPeriod: [
-    'apply_on_cancel_at_end_of_period',
-    optional(boolean()),
-  ],
-  applyOnSubscriptionExpiration: [
-    'apply_on_subscription_expiration',
-    optional(boolean()),
-  ],
-  couponRestrictions: [
-    'coupon_restrictions',
-    optional(array(lazy(() => couponRestrictionSchema))),
-  ],
-  currencyPrices: [
-    'currency_prices',
-    optional(array(lazy(() => couponCurrencySchema))),
-  ],
-});
+export const couponSchema: Schema<Coupon> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    name: ['name', optional(string())],
+    code: ['code', optional(string())],
+    description: ['description', optional(string())],
+    amount: ['amount', optional(nullable(number()))],
+    amountInCents: ['amount_in_cents', optional(nullable(bigint()))],
+    productFamilyId: ['product_family_id', optional(number())],
+    productFamilyName: ['product_family_name', optional(nullable(string()))],
+    startDate: ['start_date', optional(string())],
+    endDate: ['end_date', optional(nullable(string()))],
+    percentage: ['percentage', optional(nullable(string()))],
+    recurring: ['recurring', optional(boolean())],
+    recurringScheme: ['recurring_scheme', optional(recurringSchemeSchema)],
+    durationPeriodCount: [
+      'duration_period_count',
+      optional(nullable(number())),
+    ],
+    durationInterval: ['duration_interval', optional(nullable(number()))],
+    durationIntervalUnit: [
+      'duration_interval_unit',
+      optional(nullable(string())),
+    ],
+    durationIntervalSpan: [
+      'duration_interval_span',
+      optional(nullable(string())),
+    ],
+    allowNegativeBalance: ['allow_negative_balance', optional(boolean())],
+    archivedAt: ['archived_at', optional(nullable(string()))],
+    conversionLimit: ['conversion_limit', optional(nullable(string()))],
+    stackable: ['stackable', optional(boolean())],
+    compoundingStrategy: [
+      'compounding_strategy',
+      optional(nullable(compoundingStrategySchema)),
+    ],
+    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    discountType: ['discount_type', optional(discountTypeSchema)],
+    excludeMidPeriodAllocations: [
+      'exclude_mid_period_allocations',
+      optional(boolean()),
+    ],
+    applyOnCancelAtEndOfPeriod: [
+      'apply_on_cancel_at_end_of_period',
+      optional(boolean()),
+    ],
+    applyOnSubscriptionExpiration: [
+      'apply_on_subscription_expiration',
+      optional(boolean()),
+    ],
+    couponRestrictions: [
+      'coupon_restrictions',
+      optional(array(couponRestrictionSchema)),
+    ],
+    currencyPrices: ['currency_prices', optional(array(couponCurrencySchema))],
+  })
+);

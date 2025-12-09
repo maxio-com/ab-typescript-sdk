@@ -15,11 +15,9 @@ export interface SubscriptionGroupResponse {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupResponseSchema: Schema<SubscriptionGroupResponse> = expandoObject(
-  {
-    subscriptionGroup: [
-      'subscription_group',
-      lazy(() => subscriptionGroupSchema),
-    ],
-  }
+export const subscriptionGroupResponseSchema: Schema<SubscriptionGroupResponse> = lazy(
+  () =>
+    expandoObject({
+      subscriptionGroup: ['subscription_group', subscriptionGroupSchema],
+    })
 );

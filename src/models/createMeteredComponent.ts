@@ -15,8 +15,9 @@ export interface CreateMeteredComponent {
   [key: string]: unknown;
 }
 
-export const createMeteredComponentSchema: Schema<CreateMeteredComponent> = expandoObject(
-  {
-    meteredComponent: ['metered_component', lazy(() => meteredComponentSchema)],
-  }
+export const createMeteredComponentSchema: Schema<CreateMeteredComponent> = lazy(
+  () =>
+    expandoObject({
+      meteredComponent: ['metered_component', meteredComponentSchema],
+    })
 );

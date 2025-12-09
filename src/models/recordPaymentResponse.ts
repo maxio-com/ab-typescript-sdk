@@ -24,15 +24,10 @@ export interface RecordPaymentResponse {
   [key: string]: unknown;
 }
 
-export const recordPaymentResponseSchema: Schema<RecordPaymentResponse> = expandoObject(
-  {
-    paidInvoices: [
-      'paid_invoices',
-      optional(array(lazy(() => paidInvoiceSchema))),
-    ],
-    prepayment: [
-      'prepayment',
-      optional(nullable(lazy(() => invoicePrePaymentSchema))),
-    ],
-  }
+export const recordPaymentResponseSchema: Schema<RecordPaymentResponse> = lazy(
+  () =>
+    expandoObject({
+      paidInvoices: ['paid_invoices', optional(array(paidInvoiceSchema))],
+      prepayment: ['prepayment', optional(nullable(invoicePrePaymentSchema))],
+    })
 );

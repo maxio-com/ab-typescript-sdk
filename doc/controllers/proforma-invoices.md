@@ -55,13 +55,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.createConsolidatedProformaInvoice(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.createConsolidatedProformaInvoice(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -133,13 +145,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.listSubscriptionGroupProformaInvoices(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.listSubscriptionGroupProformaInvoices(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -183,13 +207,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const proformaInvoiceUid = 'proforma_invoice_uid4';
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.readProformaInvoice(proformaInvoiceUid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.readProformaInvoice(proformaInvoiceUid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -205,7 +241,7 @@ try {
 
 This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
 
-If you would like to preview the next billing amounts without generating a full proforma invoice, please use the renewal preview endpoint.
+If you would like to preview the next billing amounts without generating a full proforma invoice, use the renewal preview endpoint.
 
 ## Restrictions
 
@@ -235,13 +271,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.createProformaInvoice(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.createProformaInvoice(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -320,7 +368,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   subscriptionId: 222,
-  page: 2,
+  page: 1,
   perPage: 50,
   direction: Direction.Desc,
   lineItems: false,
@@ -332,13 +380,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.listProformaInvoices(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.listProformaInvoices(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -382,13 +442,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const proformaInvoiceUid = 'proforma_invoice_uid4';
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.voidProformaInvoice(proformaInvoiceUid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.voidProformaInvoice(proformaInvoiceUid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -435,13 +507,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const subscriptionId = 222;
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.previewProformaInvoice(subscriptionId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.previewProformaInvoice(subscriptionId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -497,13 +581,25 @@ const body: CreateSubscriptionRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.createSignupProformaInvoice(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await proformaInvoicesController.createSignupProformaInvoice(body);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -561,16 +657,28 @@ const body: CreateSubscriptionRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await proformaInvoicesController.previewSignupProformaInvoice(
+  const response = await proformaInvoicesController.previewSignupProformaInvoice(
     undefined,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

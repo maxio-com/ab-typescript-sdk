@@ -49,17 +49,14 @@ export interface AllocateComponents {
   [key: string]: unknown;
 }
 
-export const allocateComponentsSchema: Schema<AllocateComponents> = expandoObject(
-  {
+export const allocateComponentsSchema: Schema<AllocateComponents> = lazy(() =>
+  expandoObject({
     prorationUpgradeScheme: ['proration_upgrade_scheme', optional(string())],
     prorationDowngradeScheme: [
       'proration_downgrade_scheme',
       optional(string()),
     ],
-    allocations: [
-      'allocations',
-      optional(array(lazy(() => createAllocationSchema))),
-    ],
+    allocations: ['allocations', optional(array(createAllocationSchema))],
     accrueCharge: ['accrue_charge', optional(boolean())],
     upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
     downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
@@ -68,5 +65,5 @@ export const allocateComponentsSchema: Schema<AllocateComponents> = expandoObjec
       optional(collectionMethodSchema),
     ],
     initiateDunning: ['initiate_dunning', optional(boolean())],
-  }
+  })
 );

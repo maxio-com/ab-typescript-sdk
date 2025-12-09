@@ -7,6 +7,7 @@
 import {
   boolean,
   expandoObject,
+  lazy,
   number,
   optional,
   Schema,
@@ -36,14 +37,15 @@ export interface RemovePaymentEventData {
   [key: string]: unknown;
 }
 
-export const removePaymentEventDataSchema: Schema<RemovePaymentEventData> = expandoObject(
-  {
-    transactionId: ['transaction_id', number()],
-    memo: ['memo', string()],
-    originalAmount: ['original_amount', optional(string())],
-    appliedAmount: ['applied_amount', string()],
-    transactionTime: ['transaction_time', string()],
-    paymentMethod: ['payment_method', invoiceEventPaymentSchema],
-    prepayment: ['prepayment', boolean()],
-  }
+export const removePaymentEventDataSchema: Schema<RemovePaymentEventData> = lazy(
+  () =>
+    expandoObject({
+      transactionId: ['transaction_id', number()],
+      memo: ['memo', string()],
+      originalAmount: ['original_amount', optional(string())],
+      appliedAmount: ['applied_amount', string()],
+      transactionTime: ['transaction_time', string()],
+      paymentMethod: ['payment_method', invoiceEventPaymentSchema],
+      prepayment: ['prepayment', boolean()],
+    })
 );

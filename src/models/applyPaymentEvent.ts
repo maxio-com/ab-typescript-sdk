@@ -25,12 +25,12 @@ export interface ApplyPaymentEvent {
   [key: string]: unknown;
 }
 
-export const applyPaymentEventSchema: Schema<ApplyPaymentEvent> = expandoObject(
-  {
+export const applyPaymentEventSchema: Schema<ApplyPaymentEvent> = lazy(() =>
+  expandoObject({
     id: ['id', bigint()],
     timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
+    invoice: ['invoice', invoiceSchema],
     eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: ['event_data', lazy(() => applyPaymentEventDataSchema)],
-  }
+    eventData: ['event_data', applyPaymentEventDataSchema],
+  })
 );

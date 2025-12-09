@@ -6,6 +6,7 @@
 
 import {
   expandoObject,
+  lazy,
   nullable,
   number,
   optional,
@@ -30,7 +31,7 @@ import {
 import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface CreatePaymentProfile {
-  /** Token received after sending billing informations using chargify.js. */
+  /** Token received after sending billing information using chargify.js. */
   chargifyToken?: string;
   id?: number;
   paymentType?: PaymentType;
@@ -55,7 +56,7 @@ export interface CreatePaymentProfile {
   billingCity?: string;
   /** The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes. */
   billingState?: string;
-  /** The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. */
+  /** The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. */
   billingCountry?: string;
   /** The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway. */
   billingZip?: string;
@@ -94,48 +95,49 @@ export interface CreatePaymentProfile {
   [key: string]: unknown;
 }
 
-export const createPaymentProfileSchema: Schema<CreatePaymentProfile> = expandoObject(
-  {
-    chargifyToken: ['chargify_token', optional(string())],
-    id: ['id', optional(number())],
-    paymentType: ['payment_type', optional(paymentTypeSchema)],
-    firstName: ['first_name', optional(string())],
-    lastName: ['last_name', optional(string())],
-    maskedCardNumber: ['masked_card_number', optional(string())],
-    fullNumber: ['full_number', optional(string())],
-    cardType: ['card_type', optional(cardTypeSchema)],
-    expirationMonth: [
-      'expiration_month',
-      optional(createPaymentProfileExpirationMonthSchema),
-    ],
-    expirationYear: [
-      'expiration_year',
-      optional(createPaymentProfileExpirationYearSchema),
-    ],
-    billingAddress: ['billing_address', optional(string())],
-    billingAddress2: ['billing_address_2', optional(nullable(string()))],
-    billingCity: ['billing_city', optional(string())],
-    billingState: ['billing_state', optional(string())],
-    billingCountry: ['billing_country', optional(string())],
-    billingZip: ['billing_zip', optional(string())],
-    currentVault: ['current_vault', optional(allVaultsSchema)],
-    vaultToken: ['vault_token', optional(string())],
-    customerVaultToken: ['customer_vault_token', optional(string())],
-    customerId: ['customer_id', optional(number())],
-    paypalEmail: ['paypal_email', optional(string())],
-    paymentMethodNonce: ['payment_method_nonce', optional(string())],
-    gatewayHandle: ['gateway_handle', optional(string())],
-    cvv: ['cvv', optional(string())],
-    bankName: ['bank_name', optional(string())],
-    bankIban: ['bank_iban', optional(string())],
-    bankRoutingNumber: ['bank_routing_number', optional(string())],
-    bankAccountNumber: ['bank_account_number', optional(string())],
-    bankBranchCode: ['bank_branch_code', optional(string())],
-    bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
-    bankAccountHolderType: [
-      'bank_account_holder_type',
-      optional(bankAccountHolderTypeSchema),
-    ],
-    lastFour: ['last_four', optional(string())],
-  }
+export const createPaymentProfileSchema: Schema<CreatePaymentProfile> = lazy(
+  () =>
+    expandoObject({
+      chargifyToken: ['chargify_token', optional(string())],
+      id: ['id', optional(number())],
+      paymentType: ['payment_type', optional(paymentTypeSchema)],
+      firstName: ['first_name', optional(string())],
+      lastName: ['last_name', optional(string())],
+      maskedCardNumber: ['masked_card_number', optional(string())],
+      fullNumber: ['full_number', optional(string())],
+      cardType: ['card_type', optional(cardTypeSchema)],
+      expirationMonth: [
+        'expiration_month',
+        optional(createPaymentProfileExpirationMonthSchema),
+      ],
+      expirationYear: [
+        'expiration_year',
+        optional(createPaymentProfileExpirationYearSchema),
+      ],
+      billingAddress: ['billing_address', optional(string())],
+      billingAddress2: ['billing_address_2', optional(nullable(string()))],
+      billingCity: ['billing_city', optional(string())],
+      billingState: ['billing_state', optional(string())],
+      billingCountry: ['billing_country', optional(string())],
+      billingZip: ['billing_zip', optional(string())],
+      currentVault: ['current_vault', optional(allVaultsSchema)],
+      vaultToken: ['vault_token', optional(string())],
+      customerVaultToken: ['customer_vault_token', optional(string())],
+      customerId: ['customer_id', optional(number())],
+      paypalEmail: ['paypal_email', optional(string())],
+      paymentMethodNonce: ['payment_method_nonce', optional(string())],
+      gatewayHandle: ['gateway_handle', optional(string())],
+      cvv: ['cvv', optional(string())],
+      bankName: ['bank_name', optional(string())],
+      bankIban: ['bank_iban', optional(string())],
+      bankRoutingNumber: ['bank_routing_number', optional(string())],
+      bankAccountNumber: ['bank_account_number', optional(string())],
+      bankBranchCode: ['bank_branch_code', optional(string())],
+      bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
+      bankAccountHolderType: [
+        'bank_account_holder_type',
+        optional(bankAccountHolderTypeSchema),
+      ],
+      lastFour: ['last_four', optional(string())],
+    })
 );

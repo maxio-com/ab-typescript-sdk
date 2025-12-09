@@ -36,16 +36,20 @@ export interface SubscriptionProductMigration {
   [key: string]: unknown;
 }
 
-export const subscriptionProductMigrationSchema: Schema<SubscriptionProductMigration> = expandoObject(
-  {
-    productId: ['product_id', optional(number())],
-    productPricePointId: ['product_price_point_id', optional(number())],
-    includeTrial: ['include_trial', optional(boolean())],
-    includeInitialCharge: ['include_initial_charge', optional(boolean())],
-    includeCoupons: ['include_coupons', optional(boolean())],
-    preservePeriod: ['preserve_period', optional(boolean())],
-    productHandle: ['product_handle', optional(string())],
-    productPricePointHandle: ['product_price_point_handle', optional(string())],
-    proration: ['proration', optional(lazy(() => prorationSchema))],
-  }
+export const subscriptionProductMigrationSchema: Schema<SubscriptionProductMigration> = lazy(
+  () =>
+    expandoObject({
+      productId: ['product_id', optional(number())],
+      productPricePointId: ['product_price_point_id', optional(number())],
+      includeTrial: ['include_trial', optional(boolean())],
+      includeInitialCharge: ['include_initial_charge', optional(boolean())],
+      includeCoupons: ['include_coupons', optional(boolean())],
+      preservePeriod: ['preserve_period', optional(boolean())],
+      productHandle: ['product_handle', optional(string())],
+      productPricePointHandle: [
+        'product_price_point_handle',
+        optional(string()),
+      ],
+      proration: ['proration', optional(prorationSchema)],
+    })
 );

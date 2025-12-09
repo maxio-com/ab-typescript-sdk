@@ -17,7 +17,7 @@
 | `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `pricePoints` | [`ComponentPricePointItem[] \| undefined`](../../doc/models/component-price-point-item.md) | Optional | - |
 | `unitPrice` | [`OnOffComponentUnitPrice`](../../doc/models/containers/on-off-component-unit-price.md) | Required | This is a container for one-of cases. |
-| `taxCode` | `string \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
+| `taxCode` | `string \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. |
 | `hideDateRangeOnInvoice` | `boolean \| undefined` | Optional | (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. |
 | `displayOnHostedPage` | `boolean \| undefined` | Optional | - |
 | `allowFractionalQuantities` | `boolean \| undefined` | Optional | - |

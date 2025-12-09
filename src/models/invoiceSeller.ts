@@ -23,9 +23,11 @@ export interface InvoiceSeller {
   [key: string]: unknown;
 }
 
-export const invoiceSellerSchema: Schema<InvoiceSeller> = expandoObject({
-  name: ['name', optional(string())],
-  address: ['address', optional(lazy(() => invoiceAddressSchema))],
-  phone: ['phone', optional(string())],
-  logoUrl: ['logo_url', optional(nullable(string()))],
-});
+export const invoiceSellerSchema: Schema<InvoiceSeller> = lazy(() =>
+  expandoObject({
+    name: ['name', optional(string())],
+    address: ['address', optional(invoiceAddressSchema)],
+    phone: ['phone', optional(string())],
+    logoUrl: ['logo_url', optional(nullable(string()))],
+  })
+);

@@ -12,6 +12,6 @@ export interface ListInvoicesResponse {
   [key: string]: unknown;
 }
 
-export const listInvoicesResponseSchema: Schema<ListInvoicesResponse> = expandoObject(
-  { invoices: ['invoices', array(lazy(() => invoiceSchema))] }
+export const listInvoicesResponseSchema: Schema<ListInvoicesResponse> = lazy(
+  () => expandoObject({ invoices: ['invoices', array(invoiceSchema)] })
 );

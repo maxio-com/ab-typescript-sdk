@@ -13,7 +13,9 @@ export interface AddressChange {
   [key: string]: unknown;
 }
 
-export const addressChangeSchema: Schema<AddressChange> = expandoObject({
-  before: ['before', lazy(() => invoiceAddressSchema)],
-  after: ['after', lazy(() => invoiceAddressSchema)],
-});
+export const addressChangeSchema: Schema<AddressChange> = lazy(() =>
+  expandoObject({
+    before: ['before', invoiceAddressSchema],
+    after: ['after', invoiceAddressSchema],
+  })
+);

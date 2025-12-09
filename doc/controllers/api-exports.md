@@ -61,17 +61,29 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const collect = {
   batchId: 'batch_id8',
   perPage: 100,
-  page: 2
+  page: 1
 }
 
 try {
-  const { result, ...httpResponse } = await aPIExportsController.listExportedProformaInvoices(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.listExportedProformaInvoices(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -123,17 +135,29 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const collect = {
   batchId: 'batch_id8',
   perPage: 100,
-  page: 2
+  page: 1
 }
 
 try {
-  const { result, ...httpResponse } = await aPIExportsController.listExportedInvoices(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.listExportedInvoices(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -185,17 +209,29 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const collect = {
   batchId: 'batch_id8',
   perPage: 100,
-  page: 2
+  page: 1
 }
 
 try {
-  const { result, ...httpResponse } = await aPIExportsController.listExportedSubscriptions(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.listExportedSubscriptions(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -233,13 +269,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const { result, ...httpResponse } = await aPIExportsController.exportProformaInvoices();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.exportProformaInvoices();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -276,13 +324,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const { result, ...httpResponse } = await aPIExportsController.exportInvoices();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.exportInvoices();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -319,13 +379,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const { result, ...httpResponse } = await aPIExportsController.exportSubscriptions();
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.exportSubscriptions();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -365,13 +437,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const batchId = 'batch_id8';
 
 try {
-  const { result, ...httpResponse } = await aPIExportsController.readProformaInvoicesExport(batchId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.readProformaInvoicesExport(batchId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -411,13 +495,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const batchId = 'batch_id8';
 
 try {
-  const { result, ...httpResponse } = await aPIExportsController.readInvoicesExport(batchId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.readInvoicesExport(batchId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -457,13 +553,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const batchId = 'batch_id8';
 
 try {
-  const { result, ...httpResponse } = await aPIExportsController.readSubscriptionsExport(batchId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await aPIExportsController.readSubscriptionsExport(batchId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

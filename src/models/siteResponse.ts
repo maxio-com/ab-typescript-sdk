@@ -12,6 +12,6 @@ export interface SiteResponse {
   [key: string]: unknown;
 }
 
-export const siteResponseSchema: Schema<SiteResponse> = expandoObject({
-  site: ['site', lazy(() => siteSchema)],
-});
+export const siteResponseSchema: Schema<SiteResponse> = lazy(() =>
+  expandoObject({ site: ['site', siteSchema] })
+);

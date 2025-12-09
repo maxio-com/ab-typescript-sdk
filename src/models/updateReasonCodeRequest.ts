@@ -15,6 +15,6 @@ export interface UpdateReasonCodeRequest {
   [key: string]: unknown;
 }
 
-export const updateReasonCodeRequestSchema: Schema<UpdateReasonCodeRequest> = expandoObject(
-  { reasonCode: ['reason_code', lazy(() => updateReasonCodeSchema)] }
+export const updateReasonCodeRequestSchema: Schema<UpdateReasonCodeRequest> = lazy(
+  () => expandoObject({ reasonCode: ['reason_code', updateReasonCodeSchema] })
 );

@@ -18,9 +18,9 @@ const subscriptionGroupStatusController = new SubscriptionGroupStatusController(
 
 # Cancel Subscriptions in Group
 
-This endpoint will immediately cancel all subscriptions within the specified group. The group is identified by it's `uid` passed in the URL. To successfully cancel the group, the primary subscription must be on automatic billing. The group members as well must be on automatic billing or they must be prepaid.
+Cancels all subscriptions within the specified group immediately. The group is identified by the `uid` that is passed in the URL. To successfully cancel the group, the primary subscription must be on automatic billing. The group members must be on automatic billing or prepaid.
 
-In order to cancel a subscription group while also charging for any unbilled usage on metered or prepaid components, the `charge_unbilled_usage=true` parameter must be included in the request.
+To cancel a subscription group while also charging for any unbilled usage on metered or prepaid components, the `charge_unbilled_usage=true` parameter must be included in the request.
 
 ```ts
 async cancelSubscriptionsInGroup(
@@ -52,16 +52,28 @@ const body: CancelGroupedSubscriptionsRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionGroupStatusController.cancelSubscriptionsInGroup(
+  const response = await subscriptionGroupStatusController.cancelSubscriptionsInGroup(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -75,7 +87,7 @@ try {
 
 # Initiate Delayed Cancellation for Group
 
-This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by it's uid passed in the URL.
+This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by its uid passed in the URL.
 
 All subscriptions in the group must be on automatic billing in order to successfully cancel them, and the group must not be in a "past_due" state.
 
@@ -103,13 +115,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await subscriptionGroupStatusController.initiateDelayedCancellationForGroup(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionGroupStatusController.initiateDelayedCancellationForGroup(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -149,13 +173,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const uid = 'uid0';
 
 try {
-  const { result, ...httpResponse } = await subscriptionGroupStatusController.cancelDelayedCancellationForGroup(uid);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionGroupStatusController.cancelDelayedCancellationForGroup(uid);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -219,16 +255,28 @@ const body: ReactivateSubscriptionGroupRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await subscriptionGroupStatusController.reactivateSubscriptionGroup(
+  const response = await subscriptionGroupStatusController.reactivateSubscriptionGroup(
     uid,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

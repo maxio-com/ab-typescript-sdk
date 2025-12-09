@@ -12,6 +12,6 @@ export interface EBBEvent {
   [key: string]: unknown;
 }
 
-export const eBBEventSchema: Schema<EBBEvent> = expandoObject({
-  chargify: ['chargify', optional(lazy(() => chargifyEBBSchema))],
-});
+export const eBBEventSchema: Schema<EBBEvent> = lazy(() =>
+  expandoObject({ chargify: ['chargify', optional(chargifyEBBSchema)] })
+);

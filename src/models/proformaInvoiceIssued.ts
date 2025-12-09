@@ -25,21 +25,19 @@ export interface ProformaInvoiceIssued {
   [key: string]: unknown;
 }
 
-export const proformaInvoiceIssuedSchema: Schema<ProformaInvoiceIssued> = expandoObject(
-  {
-    uid: ['uid', string()],
-    number: ['number', string()],
-    role: ['role', string()],
-    deliveryDate: ['delivery_date', string()],
-    createdAt: ['created_at', string()],
-    dueAmount: ['due_amount', string()],
-    paidAmount: ['paid_amount', string()],
-    taxAmount: ['tax_amount', string()],
-    totalAmount: ['total_amount', string()],
-    productName: ['product_name', string()],
-    lineItems: [
-      'line_items',
-      array(lazy(() => invoiceLineItemEventDataSchema)),
-    ],
-  }
+export const proformaInvoiceIssuedSchema: Schema<ProformaInvoiceIssued> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', string()],
+      number: ['number', string()],
+      role: ['role', string()],
+      deliveryDate: ['delivery_date', string()],
+      createdAt: ['created_at', string()],
+      dueAmount: ['due_amount', string()],
+      paidAmount: ['paid_amount', string()],
+      taxAmount: ['tax_amount', string()],
+      totalAmount: ['total_amount', string()],
+      productName: ['product_name', string()],
+      lineItems: ['line_items', array(invoiceLineItemEventDataSchema)],
+    })
 );

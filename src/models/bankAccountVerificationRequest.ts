@@ -15,11 +15,12 @@ export interface BankAccountVerificationRequest {
   [key: string]: unknown;
 }
 
-export const bankAccountVerificationRequestSchema: Schema<BankAccountVerificationRequest> = expandoObject(
-  {
-    bankAccountVerification: [
-      'bank_account_verification',
-      lazy(() => bankAccountVerificationSchema),
-    ],
-  }
+export const bankAccountVerificationRequestSchema: Schema<BankAccountVerificationRequest> = lazy(
+  () =>
+    expandoObject({
+      bankAccountVerification: [
+        'bank_account_verification',
+        bankAccountVerificationSchema,
+      ],
+    })
 );

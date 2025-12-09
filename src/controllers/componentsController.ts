@@ -60,8 +60,8 @@ export class ComponentsController extends BaseController {
    * the start of every billing period. If you want to bill for a quantity of something that does not
    * change unless you change it, then you want quantity components, instead.
    *
-   * For more information on components, please see our documentation [here](https://maxio.zendesk.
-   * com/hc/en-us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * us/articles/24261141522189-Components-Overview).
    *
    * @param productFamilyId   Either the product family's id or its handle prefixed
    *                                                           with `handle:`
@@ -111,8 +111,8 @@ export class ComponentsController extends BaseController {
    * The allocated quantity for one-time quantity-based components immediately gets reset back to zero
    * after the allocation is made.
    *
-   * For more information on components, please see our documentation [here](https://maxio.zendesk.
-   * com/hc/en-us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * us/articles/24261141522189-Components-Overview).
    *
    * @param productFamilyId   Either the product family's id or its handle
    *                                                                 prefixed with `handle:`
@@ -150,8 +150,8 @@ export class ComponentsController extends BaseController {
    * On/off components are used for any flat fee, recurring add on (think $99/month for tech support or a
    * flat add on shipping fee).
    *
-   * For more information on components, please see our documentation [here](https://maxio.zendesk.
-   * com/hc/en-us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * us/articles/24261141522189-Components-Overview).
    *
    * @param productFamilyId   Either the product family's id or its handle prefixed
    *                                                         with `handle:`
@@ -191,8 +191,8 @@ export class ComponentsController extends BaseController {
    * charge at the end of the period for the amount of units used, prepaid components are charged for at
    * the time of purchase, and we subsequently keep track of the usage against the amount purchased.
    *
-   * For more information on components, please see our documentation [here](https://maxio.zendesk.
-   * com/hc/en-us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * us/articles/24261141522189-Components-Overview).
    *
    * @param productFamilyId   Either the product family's id or its handle prefixed
    *                                                           with `handle:`
@@ -236,8 +236,8 @@ export class ComponentsController extends BaseController {
    * So, instead of reporting usage directly for each component (as you would with metered components),
    * the usage is derived from analysis of your events.
    *
-   * For more information on components, please see our documentation [here](https://maxio.zendesk.
-   * com/hc/en-us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * us/articles/24261141522189-Components-Overview).
    *
    * @param productFamilyId   Either the product family's id or its handle prefixed with
    *                                                       `handle:`

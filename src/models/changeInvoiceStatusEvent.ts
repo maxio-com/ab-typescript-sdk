@@ -25,12 +25,13 @@ export interface ChangeInvoiceStatusEvent {
   [key: string]: unknown;
 }
 
-export const changeInvoiceStatusEventSchema: Schema<ChangeInvoiceStatusEvent> = expandoObject(
-  {
-    id: ['id', bigint()],
-    timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
-    eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: ['event_data', lazy(() => changeInvoiceStatusEventDataSchema)],
-  }
+export const changeInvoiceStatusEventSchema: Schema<ChangeInvoiceStatusEvent> = lazy(
+  () =>
+    expandoObject({
+      id: ['id', bigint()],
+      timestamp: ['timestamp', string()],
+      invoice: ['invoice', invoiceSchema],
+      eventType: ['event_type', invoiceEventTypeSchema],
+      eventData: ['event_data', changeInvoiceStatusEventDataSchema],
+    })
 );

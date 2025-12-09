@@ -32,12 +32,12 @@ export interface SubscriptionGroup {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSchema: Schema<SubscriptionGroup> = expandoObject(
-  {
+export const subscriptionGroupSchema: Schema<SubscriptionGroup> = lazy(() =>
+  expandoObject({
     customerId: ['customer_id', optional(number())],
     paymentProfile: [
       'payment_profile',
-      optional(lazy(() => subscriptionGroupPaymentProfileSchema)),
+      optional(subscriptionGroupPaymentProfileSchema),
     ],
     paymentCollectionMethod: [
       'payment_collection_method',
@@ -45,5 +45,5 @@ export const subscriptionGroupSchema: Schema<SubscriptionGroup> = expandoObject(
     ],
     subscriptionIds: ['subscription_ids', optional(array(number()))],
     createdAt: ['created_at', optional(string())],
-  }
+  })
 );

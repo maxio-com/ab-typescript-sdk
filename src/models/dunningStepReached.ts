@@ -15,10 +15,10 @@ export interface DunningStepReached {
   [key: string]: unknown;
 }
 
-export const dunningStepReachedSchema: Schema<DunningStepReached> = expandoObject(
-  {
-    dunner: ['dunner', lazy(() => dunnerDataSchema)],
-    currentStep: ['current_step', lazy(() => dunningStepDataSchema)],
-    nextStep: ['next_step', lazy(() => dunningStepDataSchema)],
-  }
+export const dunningStepReachedSchema: Schema<DunningStepReached> = lazy(() =>
+  expandoObject({
+    dunner: ['dunner', dunnerDataSchema],
+    currentStep: ['current_step', dunningStepDataSchema],
+    nextStep: ['next_step', dunningStepDataSchema],
+  })
 );

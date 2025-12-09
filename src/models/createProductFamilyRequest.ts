@@ -15,6 +15,9 @@ export interface CreateProductFamilyRequest {
   [key: string]: unknown;
 }
 
-export const createProductFamilyRequestSchema: Schema<CreateProductFamilyRequest> = expandoObject(
-  { productFamily: ['product_family', lazy(() => createProductFamilySchema)] }
+export const createProductFamilyRequestSchema: Schema<CreateProductFamilyRequest> = lazy(
+  () =>
+    expandoObject({
+      productFamily: ['product_family', createProductFamilySchema],
+    })
 );

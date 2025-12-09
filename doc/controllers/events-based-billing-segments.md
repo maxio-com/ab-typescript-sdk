@@ -73,17 +73,29 @@ const body: CreateSegmentRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.createSegment(
+  const response = await eventsBasedBillingSegmentsController.createSegment(
     componentId,
     pricePointId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -144,7 +156,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const collect = {
   componentId: 'component_id8',
   pricePointId: 'price_point_id8',
-  page: 2,
+  page: 1,
   perPage: 50,
   filter: {
     segmentProperty1Value: 'EU',
@@ -152,13 +164,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.listSegmentsForPricePoint(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await eventsBasedBillingSegmentsController.listSegmentsForPricePoint(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -211,17 +235,29 @@ const pricePointId = 'price_point_id8';
 const id = 60;
 
 try {
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.updateSegment(
+  const response = await eventsBasedBillingSegmentsController.updateSegment(
     componentId,
     pricePointId,
     id
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -272,17 +308,29 @@ const pricePointId = 'price_point_id8';
 const id = 60;
 
 try {
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.deleteSegment(
+  const response = await eventsBasedBillingSegmentsController.deleteSegment(
     componentId,
     pricePointId,
     id
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -333,16 +381,28 @@ const componentId = 'component_id8';
 const pricePointId = 'price_point_id8';
 
 try {
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.bulkCreateSegments(
+  const response = await eventsBasedBillingSegmentsController.bulkCreateSegments(
     componentId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -393,16 +453,28 @@ const componentId = 'component_id8';
 const pricePointId = 'price_point_id8';
 
 try {
-  const { result, ...httpResponse } = await eventsBasedBillingSegmentsController.bulkUpdateSegments(
+  const response = await eventsBasedBillingSegmentsController.bulkUpdateSegments(
     componentId,
     pricePointId
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

@@ -29,6 +29,10 @@ import {
   collectionMethodSchema,
 } from './collectionMethod.js';
 import {
+  SubscriptionSnapDay,
+  subscriptionSnapDaySchema,
+} from './containers/subscriptionSnapDay.js';
+import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
 } from './creditCardPaymentProfile.js';
@@ -123,7 +127,7 @@ export interface Subscription {
   /** (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. */
   couponCode?: string | null;
   /** The day of the month that the subscription will charge according to calendar billing rules, if used. */
-  snapDay?: string | null;
+  snapDay?: SubscriptionSnapDay | null;
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
   paymentCollectionMethod?: CollectionMethod;
   customer?: Customer;
@@ -153,7 +157,7 @@ export interface Subscription {
   offerId?: number | null;
   /** On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. */
   payerId?: number | null;
-  /** The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation. */
+  /** The balance in cents plus the estimated renewal amount in cents. Returned ONLY for the readSubscription operation as it's a compute intensive operation. */
   currentBillingAmountInCents?: bigint;
   /** The product price point currently subscribed to. */
   productPricePointId?: number;
@@ -197,121 +201,117 @@ export interface Subscription {
   [key: string]: unknown;
 }
 
-export const subscriptionSchema: Schema<Subscription> = expandoObject({
-  id: ['id', optional(number())],
-  state: ['state', optional(subscriptionStateSchema)],
-  balanceInCents: ['balance_in_cents', optional(bigint())],
-  totalRevenueInCents: ['total_revenue_in_cents', optional(bigint())],
-  productPriceInCents: ['product_price_in_cents', optional(bigint())],
-  productVersionNumber: ['product_version_number', optional(number())],
-  currentPeriodEndsAt: ['current_period_ends_at', optional(nullable(string()))],
-  nextAssessmentAt: ['next_assessment_at', optional(nullable(string()))],
-  trialStartedAt: ['trial_started_at', optional(nullable(string()))],
-  trialEndedAt: ['trial_ended_at', optional(nullable(string()))],
-  activatedAt: ['activated_at', optional(nullable(string()))],
-  expiresAt: ['expires_at', optional(nullable(string()))],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  cancellationMessage: ['cancellation_message', optional(nullable(string()))],
-  cancellationMethod: [
-    'cancellation_method',
-    optional(nullable(cancellationMethodSchema)),
-  ],
-  cancelAtEndOfPeriod: [
-    'cancel_at_end_of_period',
-    optional(nullable(boolean())),
-  ],
-  canceledAt: ['canceled_at', optional(nullable(string()))],
-  currentPeriodStartedAt: [
-    'current_period_started_at',
-    optional(nullable(string())),
-  ],
-  previousState: ['previous_state', optional(subscriptionStateSchema)],
-  signupPaymentId: ['signup_payment_id', optional(number())],
-  signupRevenue: ['signup_revenue', optional(string())],
-  delayedCancelAt: ['delayed_cancel_at', optional(nullable(string()))],
-  couponCode: ['coupon_code', optional(nullable(string()))],
-  snapDay: ['snap_day', optional(nullable(string()))],
-  paymentCollectionMethod: [
-    'payment_collection_method',
-    optional(collectionMethodSchema),
-  ],
-  customer: ['customer', optional(lazy(() => customerSchema))],
-  product: ['product', optional(lazy(() => productSchema))],
-  creditCard: [
-    'credit_card',
-    optional(lazy(() => creditCardPaymentProfileSchema)),
-  ],
-  group: [
-    'group',
-    optional(nullable(lazy(() => nestedSubscriptionGroupSchema))),
-  ],
-  bankAccount: [
-    'bank_account',
-    optional(lazy(() => bankAccountPaymentProfileSchema)),
-  ],
-  paymentType: ['payment_type', optional(nullable(string()))],
-  referralCode: ['referral_code', optional(nullable(string()))],
-  nextProductId: ['next_product_id', optional(nullable(number()))],
-  nextProductHandle: ['next_product_handle', optional(nullable(string()))],
-  couponUseCount: ['coupon_use_count', optional(nullable(number()))],
-  couponUsesAllowed: ['coupon_uses_allowed', optional(nullable(number()))],
-  reasonCode: ['reason_code', optional(nullable(string()))],
-  automaticallyResumeAt: [
-    'automatically_resume_at',
-    optional(nullable(string())),
-  ],
-  couponCodes: ['coupon_codes', optional(array(string()))],
-  offerId: ['offer_id', optional(nullable(number()))],
-  payerId: ['payer_id', optional(nullable(number()))],
-  currentBillingAmountInCents: [
-    'current_billing_amount_in_cents',
-    optional(bigint()),
-  ],
-  productPricePointId: ['product_price_point_id', optional(number())],
-  productPricePointType: [
-    'product_price_point_type',
-    optional(pricePointTypeSchema),
-  ],
-  nextProductPricePointId: [
-    'next_product_price_point_id',
-    optional(nullable(number())),
-  ],
-  netTerms: ['net_terms', optional(nullable(number()))],
-  storedCredentialTransactionId: [
-    'stored_credential_transaction_id',
-    optional(nullable(number())),
-  ],
-  reference: ['reference', optional(nullable(string()))],
-  onHoldAt: ['on_hold_at', optional(nullable(string()))],
-  prepaidDunning: ['prepaid_dunning', optional(boolean())],
-  coupons: [
-    'coupons',
-    optional(array(lazy(() => subscriptionIncludedCouponSchema))),
-  ],
-  dunningCommunicationDelayEnabled: [
-    'dunning_communication_delay_enabled',
-    optional(boolean()),
-  ],
-  dunningCommunicationDelayTimeZone: [
-    'dunning_communication_delay_time_zone',
-    optional(nullable(string())),
-  ],
-  receivesInvoiceEmails: [
-    'receives_invoice_emails',
-    optional(nullable(boolean())),
-  ],
-  locale: ['locale', optional(nullable(string()))],
-  currency: ['currency', optional(string())],
-  scheduledCancellationAt: [
-    'scheduled_cancellation_at',
-    optional(nullable(string())),
-  ],
-  creditBalanceInCents: ['credit_balance_in_cents', optional(bigint())],
-  prepaymentBalanceInCents: ['prepayment_balance_in_cents', optional(bigint())],
-  prepaidConfiguration: [
-    'prepaid_configuration',
-    optional(nullable(lazy(() => prepaidConfigurationSchema))),
-  ],
-  selfServicePageToken: ['self_service_page_token', optional(string())],
-});
+export const subscriptionSchema: Schema<Subscription> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    state: ['state', optional(subscriptionStateSchema)],
+    balanceInCents: ['balance_in_cents', optional(bigint())],
+    totalRevenueInCents: ['total_revenue_in_cents', optional(bigint())],
+    productPriceInCents: ['product_price_in_cents', optional(bigint())],
+    productVersionNumber: ['product_version_number', optional(number())],
+    currentPeriodEndsAt: [
+      'current_period_ends_at',
+      optional(nullable(string())),
+    ],
+    nextAssessmentAt: ['next_assessment_at', optional(nullable(string()))],
+    trialStartedAt: ['trial_started_at', optional(nullable(string()))],
+    trialEndedAt: ['trial_ended_at', optional(nullable(string()))],
+    activatedAt: ['activated_at', optional(nullable(string()))],
+    expiresAt: ['expires_at', optional(nullable(string()))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    cancellationMessage: ['cancellation_message', optional(nullable(string()))],
+    cancellationMethod: [
+      'cancellation_method',
+      optional(nullable(cancellationMethodSchema)),
+    ],
+    cancelAtEndOfPeriod: [
+      'cancel_at_end_of_period',
+      optional(nullable(boolean())),
+    ],
+    canceledAt: ['canceled_at', optional(nullable(string()))],
+    currentPeriodStartedAt: [
+      'current_period_started_at',
+      optional(nullable(string())),
+    ],
+    previousState: ['previous_state', optional(subscriptionStateSchema)],
+    signupPaymentId: ['signup_payment_id', optional(number())],
+    signupRevenue: ['signup_revenue', optional(string())],
+    delayedCancelAt: ['delayed_cancel_at', optional(nullable(string()))],
+    couponCode: ['coupon_code', optional(nullable(string()))],
+    snapDay: ['snap_day', optional(nullable(subscriptionSnapDaySchema))],
+    paymentCollectionMethod: [
+      'payment_collection_method',
+      optional(collectionMethodSchema),
+    ],
+    customer: ['customer', optional(customerSchema)],
+    product: ['product', optional(productSchema)],
+    creditCard: ['credit_card', optional(creditCardPaymentProfileSchema)],
+    group: ['group', optional(nullable(nestedSubscriptionGroupSchema))],
+    bankAccount: ['bank_account', optional(bankAccountPaymentProfileSchema)],
+    paymentType: ['payment_type', optional(nullable(string()))],
+    referralCode: ['referral_code', optional(nullable(string()))],
+    nextProductId: ['next_product_id', optional(nullable(number()))],
+    nextProductHandle: ['next_product_handle', optional(nullable(string()))],
+    couponUseCount: ['coupon_use_count', optional(nullable(number()))],
+    couponUsesAllowed: ['coupon_uses_allowed', optional(nullable(number()))],
+    reasonCode: ['reason_code', optional(nullable(string()))],
+    automaticallyResumeAt: [
+      'automatically_resume_at',
+      optional(nullable(string())),
+    ],
+    couponCodes: ['coupon_codes', optional(array(string()))],
+    offerId: ['offer_id', optional(nullable(number()))],
+    payerId: ['payer_id', optional(nullable(number()))],
+    currentBillingAmountInCents: [
+      'current_billing_amount_in_cents',
+      optional(bigint()),
+    ],
+    productPricePointId: ['product_price_point_id', optional(number())],
+    productPricePointType: [
+      'product_price_point_type',
+      optional(pricePointTypeSchema),
+    ],
+    nextProductPricePointId: [
+      'next_product_price_point_id',
+      optional(nullable(number())),
+    ],
+    netTerms: ['net_terms', optional(nullable(number()))],
+    storedCredentialTransactionId: [
+      'stored_credential_transaction_id',
+      optional(nullable(number())),
+    ],
+    reference: ['reference', optional(nullable(string()))],
+    onHoldAt: ['on_hold_at', optional(nullable(string()))],
+    prepaidDunning: ['prepaid_dunning', optional(boolean())],
+    coupons: ['coupons', optional(array(subscriptionIncludedCouponSchema))],
+    dunningCommunicationDelayEnabled: [
+      'dunning_communication_delay_enabled',
+      optional(boolean()),
+    ],
+    dunningCommunicationDelayTimeZone: [
+      'dunning_communication_delay_time_zone',
+      optional(nullable(string())),
+    ],
+    receivesInvoiceEmails: [
+      'receives_invoice_emails',
+      optional(nullable(boolean())),
+    ],
+    locale: ['locale', optional(nullable(string()))],
+    currency: ['currency', optional(string())],
+    scheduledCancellationAt: [
+      'scheduled_cancellation_at',
+      optional(nullable(string())),
+    ],
+    creditBalanceInCents: ['credit_balance_in_cents', optional(bigint())],
+    prepaymentBalanceInCents: [
+      'prepayment_balance_in_cents',
+      optional(bigint()),
+    ],
+    prepaidConfiguration: [
+      'prepaid_configuration',
+      optional(nullable(prepaidConfigurationSchema)),
+    ],
+    selfServicePageToken: ['self_service_page_token', optional(string())],
+  })
+);

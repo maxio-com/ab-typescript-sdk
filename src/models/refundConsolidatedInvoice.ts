@@ -7,6 +7,7 @@
 import {
   boolean,
   expandoObject,
+  lazy,
   number,
   optional,
   Schema,
@@ -34,13 +35,14 @@ export interface RefundConsolidatedInvoice {
   [key: string]: unknown;
 }
 
-export const refundConsolidatedInvoiceSchema: Schema<RefundConsolidatedInvoice> = expandoObject(
-  {
-    memo: ['memo', string()],
-    paymentId: ['payment_id', number()],
-    segmentUids: ['segment_uids', refundConsolidatedInvoiceSegmentUidsSchema],
-    external: ['external', optional(boolean())],
-    applyCredit: ['apply_credit', optional(boolean())],
-    amount: ['amount', optional(string())],
-  }
+export const refundConsolidatedInvoiceSchema: Schema<RefundConsolidatedInvoice> = lazy(
+  () =>
+    expandoObject({
+      memo: ['memo', string()],
+      paymentId: ['payment_id', number()],
+      segmentUids: ['segment_uids', refundConsolidatedInvoiceSegmentUidsSchema],
+      external: ['external', optional(boolean())],
+      applyCredit: ['apply_credit', optional(boolean())],
+      amount: ['amount', optional(string())],
+    })
 );

@@ -23,12 +23,10 @@ export interface InvoicePreviousBalance {
   [key: string]: unknown;
 }
 
-export const invoicePreviousBalanceSchema: Schema<InvoicePreviousBalance> = expandoObject(
-  {
-    capturedAt: ['captured_at', optional(string())],
-    invoices: [
-      'invoices',
-      optional(array(lazy(() => invoiceBalanceItemSchema))),
-    ],
-  }
+export const invoicePreviousBalanceSchema: Schema<InvoicePreviousBalance> = lazy(
+  () =>
+    expandoObject({
+      capturedAt: ['captured_at', optional(string())],
+      invoices: ['invoices', optional(array(invoiceBalanceItemSchema))],
+    })
 );

@@ -7,6 +7,7 @@
 import {
   array,
   isMappedValueValidForSchema,
+  lazy,
   oneOf,
   Schema,
 } from '../../schema.js';
@@ -17,8 +18,8 @@ export type CreateMetafieldsRequestMetafields =
   | CreateMetafield
   | CreateMetafield[];
 
-export const createMetafieldsRequestMetafieldsSchema: Schema<CreateMetafieldsRequestMetafields> = oneOf(
-  [createMetafieldSchema, array(createMetafieldSchema)]
+export const createMetafieldsRequestMetafieldsSchema: Schema<CreateMetafieldsRequestMetafields> = lazy(
+  () => oneOf([createMetafieldSchema, array(createMetafieldSchema)])
 );
 
 export namespace CreateMetafieldsRequestMetafields {

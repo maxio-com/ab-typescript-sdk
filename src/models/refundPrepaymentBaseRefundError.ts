@@ -12,6 +12,6 @@ export interface RefundPrepaymentBaseRefundError {
   [key: string]: unknown;
 }
 
-export const refundPrepaymentBaseRefundErrorSchema: Schema<RefundPrepaymentBaseRefundError> = expandoObject(
-  { refund: ['refund', optional(lazy(() => baseRefundErrorSchema))] }
+export const refundPrepaymentBaseRefundErrorSchema: Schema<RefundPrepaymentBaseRefundError> = lazy(
+  () => expandoObject({ refund: ['refund', optional(baseRefundErrorSchema)] })
 );

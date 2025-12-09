@@ -15,6 +15,9 @@ export interface InvoiceLineItemComponentCostData {
   [key: string]: unknown;
 }
 
-export const invoiceLineItemComponentCostDataSchema: Schema<InvoiceLineItemComponentCostData> = expandoObject(
-  { rates: ['rates', optional(array(lazy(() => componentCostDataSchema)))] }
+export const invoiceLineItemComponentCostDataSchema: Schema<InvoiceLineItemComponentCostData> = lazy(
+  () =>
+    expandoObject({
+      rates: ['rates', optional(array(componentCostDataSchema))],
+    })
 );

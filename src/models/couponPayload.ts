@@ -8,6 +8,7 @@ import {
   bigint,
   boolean,
   expandoObject,
+  lazy,
   optional,
   Schema,
   string,
@@ -48,31 +49,33 @@ export interface CouponPayload {
   [key: string]: unknown;
 }
 
-export const couponPayloadSchema: Schema<CouponPayload> = expandoObject({
-  name: ['name', optional(string())],
-  code: ['code', optional(string())],
-  description: ['description', optional(string())],
-  percentage: ['percentage', optional(couponPayloadPercentageSchema)],
-  amountInCents: ['amount_in_cents', optional(bigint())],
-  allowNegativeBalance: ['allow_negative_balance', optional(boolean())],
-  recurring: ['recurring', optional(boolean())],
-  endDate: ['end_date', optional(string())],
-  productFamilyId: ['product_family_id', optional(string())],
-  stackable: ['stackable', optional(boolean())],
-  compoundingStrategy: [
-    'compounding_strategy',
-    optional(compoundingStrategySchema),
-  ],
-  excludeMidPeriodAllocations: [
-    'exclude_mid_period_allocations',
-    optional(boolean()),
-  ],
-  applyOnCancelAtEndOfPeriod: [
-    'apply_on_cancel_at_end_of_period',
-    optional(boolean()),
-  ],
-  applyOnSubscriptionExpiration: [
-    'apply_on_subscription_expiration',
-    optional(boolean()),
-  ],
-});
+export const couponPayloadSchema: Schema<CouponPayload> = lazy(() =>
+  expandoObject({
+    name: ['name', optional(string())],
+    code: ['code', optional(string())],
+    description: ['description', optional(string())],
+    percentage: ['percentage', optional(couponPayloadPercentageSchema)],
+    amountInCents: ['amount_in_cents', optional(bigint())],
+    allowNegativeBalance: ['allow_negative_balance', optional(boolean())],
+    recurring: ['recurring', optional(boolean())],
+    endDate: ['end_date', optional(string())],
+    productFamilyId: ['product_family_id', optional(string())],
+    stackable: ['stackable', optional(boolean())],
+    compoundingStrategy: [
+      'compounding_strategy',
+      optional(compoundingStrategySchema),
+    ],
+    excludeMidPeriodAllocations: [
+      'exclude_mid_period_allocations',
+      optional(boolean()),
+    ],
+    applyOnCancelAtEndOfPeriod: [
+      'apply_on_cancel_at_end_of_period',
+      optional(boolean()),
+    ],
+    applyOnSubscriptionExpiration: [
+      'apply_on_subscription_expiration',
+      optional(boolean()),
+    ],
+  })
+);

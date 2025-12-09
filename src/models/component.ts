@@ -47,8 +47,6 @@ export interface Component {
   kind?: ComponentKind;
   /** Boolean flag describing whether a component is archived or not. */
   archived?: boolean;
-  /** Boolean flag describing whether a component is taxable or not. */
-  taxable?: boolean;
   /** The description of the component. */
   description?: string | null;
   defaultPricePointId?: number | null;
@@ -61,7 +59,9 @@ export interface Component {
   /** URL that points to the location to read the existing price points via GET request */
   pricePointsUrl?: string | null;
   defaultPricePointName?: string;
-  /** A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
+  /** Boolean flag describing whether a component is taxable or not. */
+  taxable?: boolean;
+  /** A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. */
   taxCode?: string | null;
   recurring?: boolean;
   /**
@@ -97,58 +97,60 @@ export interface Component {
   [key: string]: unknown;
 }
 
-export const componentSchema: Schema<Component> = expandoObject({
-  id: ['id', optional(number())],
-  name: ['name', optional(string())],
-  handle: ['handle', optional(nullable(string()))],
-  pricingScheme: ['pricing_scheme', optional(nullable(pricingSchemeSchema))],
-  unitName: ['unit_name', optional(string())],
-  unitPrice: ['unit_price', optional(nullable(string()))],
-  productFamilyId: ['product_family_id', optional(number())],
-  productFamilyName: ['product_family_name', optional(string())],
-  productFamilyHandle: ['product_family_handle', optional(string())],
-  pricePerUnitInCents: [
-    'price_per_unit_in_cents',
-    optional(nullable(bigint())),
-  ],
-  kind: ['kind', optional(componentKindSchema)],
-  archived: ['archived', optional(boolean())],
-  taxable: ['taxable', optional(boolean())],
-  description: ['description', optional(nullable(string()))],
-  defaultPricePointId: ['default_price_point_id', optional(nullable(number()))],
-  overagePrices: [
-    'overage_prices',
-    optional(nullable(array(lazy(() => componentPriceSchema)))),
-  ],
-  prices: [
-    'prices',
-    optional(nullable(array(lazy(() => componentPriceSchema)))),
-  ],
-  pricePointCount: ['price_point_count', optional(number())],
-  pricePointsUrl: ['price_points_url', optional(nullable(string()))],
-  defaultPricePointName: ['default_price_point_name', optional(string())],
-  taxCode: ['tax_code', optional(nullable(string()))],
-  recurring: ['recurring', optional(boolean())],
-  upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-  downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  archivedAt: ['archived_at', optional(nullable(string()))],
-  hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
-  allowFractionalQuantities: [
-    'allow_fractional_quantities',
-    optional(boolean()),
-  ],
-  itemCategory: ['item_category', optional(nullable(itemCategorySchema))],
-  useSiteExchangeRate: [
-    'use_site_exchange_rate',
-    optional(nullable(boolean())),
-  ],
-  accountingCode: ['accounting_code', optional(nullable(string()))],
-  eventBasedBillingMetricId: [
-    'event_based_billing_metric_id',
-    optional(number()),
-  ],
-  interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-});
+export const componentSchema: Schema<Component> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    name: ['name', optional(string())],
+    handle: ['handle', optional(nullable(string()))],
+    pricingScheme: ['pricing_scheme', optional(nullable(pricingSchemeSchema))],
+    unitName: ['unit_name', optional(string())],
+    unitPrice: ['unit_price', optional(nullable(string()))],
+    productFamilyId: ['product_family_id', optional(number())],
+    productFamilyName: ['product_family_name', optional(string())],
+    productFamilyHandle: ['product_family_handle', optional(string())],
+    pricePerUnitInCents: [
+      'price_per_unit_in_cents',
+      optional(nullable(bigint())),
+    ],
+    kind: ['kind', optional(componentKindSchema)],
+    archived: ['archived', optional(boolean())],
+    description: ['description', optional(nullable(string()))],
+    defaultPricePointId: [
+      'default_price_point_id',
+      optional(nullable(number())),
+    ],
+    overagePrices: [
+      'overage_prices',
+      optional(nullable(array(componentPriceSchema))),
+    ],
+    prices: ['prices', optional(nullable(array(componentPriceSchema)))],
+    pricePointCount: ['price_point_count', optional(number())],
+    pricePointsUrl: ['price_points_url', optional(nullable(string()))],
+    defaultPricePointName: ['default_price_point_name', optional(string())],
+    taxable: ['taxable', optional(boolean())],
+    taxCode: ['tax_code', optional(nullable(string()))],
+    recurring: ['recurring', optional(boolean())],
+    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    archivedAt: ['archived_at', optional(nullable(string()))],
+    hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
+    allowFractionalQuantities: [
+      'allow_fractional_quantities',
+      optional(boolean()),
+    ],
+    itemCategory: ['item_category', optional(nullable(itemCategorySchema))],
+    useSiteExchangeRate: [
+      'use_site_exchange_rate',
+      optional(nullable(boolean())),
+    ],
+    accountingCode: ['accounting_code', optional(nullable(string()))],
+    eventBasedBillingMetricId: [
+      'event_based_billing_metric_id',
+      optional(number()),
+    ],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+  })
+);

@@ -15,6 +15,6 @@ export interface CreateReasonCodeRequest {
   [key: string]: unknown;
 }
 
-export const createReasonCodeRequestSchema: Schema<CreateReasonCodeRequest> = expandoObject(
-  { reasonCode: ['reason_code', lazy(() => createReasonCodeSchema)] }
+export const createReasonCodeRequestSchema: Schema<CreateReasonCodeRequest> = lazy(
+  () => expandoObject({ reasonCode: ['reason_code', createReasonCodeSchema] })
 );

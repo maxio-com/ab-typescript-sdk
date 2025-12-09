@@ -12,6 +12,9 @@ export interface CreateOnOffComponent {
   [key: string]: unknown;
 }
 
-export const createOnOffComponentSchema: Schema<CreateOnOffComponent> = expandoObject(
-  { onOffComponent: ['on_off_component', lazy(() => onOffComponentSchema)] }
+export const createOnOffComponentSchema: Schema<CreateOnOffComponent> = lazy(
+  () =>
+    expandoObject({
+      onOffComponent: ['on_off_component', onOffComponentSchema],
+    })
 );

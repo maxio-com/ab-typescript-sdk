@@ -12,11 +12,8 @@ export interface CreateEBBComponent {
   [key: string]: unknown;
 }
 
-export const createEBBComponentSchema: Schema<CreateEBBComponent> = expandoObject(
-  {
-    eventBasedComponent: [
-      'event_based_component',
-      lazy(() => eBBComponentSchema),
-    ],
-  }
+export const createEBBComponentSchema: Schema<CreateEBBComponent> = lazy(() =>
+  expandoObject({
+    eventBasedComponent: ['event_based_component', eBBComponentSchema],
+  })
 );

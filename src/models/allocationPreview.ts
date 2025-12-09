@@ -45,8 +45,8 @@ export interface AllocationPreview {
   [key: string]: unknown;
 }
 
-export const allocationPreviewSchema: Schema<AllocationPreview> = expandoObject(
-  {
+export const allocationPreviewSchema: Schema<AllocationPreview> = lazy(() =>
+  expandoObject({
     startDate: ['start_date', optional(string())],
     endDate: ['end_date', optional(string())],
     subtotalInCents: ['subtotal_in_cents', optional(bigint())],
@@ -55,16 +55,10 @@ export const allocationPreviewSchema: Schema<AllocationPreview> = expandoObject(
     totalInCents: ['total_in_cents', optional(bigint())],
     direction: ['direction', optional(allocationPreviewDirectionSchema)],
     prorationScheme: ['proration_scheme', optional(string())],
-    lineItems: [
-      'line_items',
-      optional(array(lazy(() => allocationPreviewLineItemSchema))),
-    ],
+    lineItems: ['line_items', optional(array(allocationPreviewLineItemSchema))],
     accrueCharge: ['accrue_charge', optional(boolean())],
-    allocations: [
-      'allocations',
-      optional(array(lazy(() => allocationPreviewItemSchema))),
-    ],
+    allocations: ['allocations', optional(array(allocationPreviewItemSchema))],
     periodType: ['period_type', optional(string())],
     existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
-  }
+  })
 );

@@ -21,7 +21,6 @@
 | `pricePerUnitInCents` | `bigint \| null \| undefined` | Optional | deprecated - use unit_price instead |
 | `kind` | [`ComponentKind \| undefined`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
 | `archived` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is archived or not. |
-| `taxable` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `description` | `string \| null \| undefined` | Optional | The description of the component. |
 | `defaultPricePointId` | `number \| null \| undefined` | Optional | - |
 | `overagePrices` | [`ComponentPrice[] \| null \| undefined`](../../doc/models/component-price.md) | Optional | Applicable only to prepaid usage components. An array of overage price brackets. |
@@ -29,7 +28,8 @@
 | `pricePointCount` | `number \| undefined` | Optional | Count for the number of price points associated with the component |
 | `pricePointsUrl` | `string \| null \| undefined` | Optional | URL that points to the location to read the existing price points via GET request |
 | `defaultPricePointName` | `string \| undefined` | Optional | - |
-| `taxCode` | `string \| null \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
+| `taxable` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is taxable or not. |
+| `taxCode` | `string \| null \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. |
 | `recurring` | `boolean \| undefined` | Optional | - |
 | `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |

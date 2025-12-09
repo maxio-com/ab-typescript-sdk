@@ -65,24 +65,25 @@ export interface SubscriptionGroupSignupResponse {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupResponseSchema: Schema<SubscriptionGroupSignupResponse> = expandoObject(
-  {
-    uid: ['uid', optional(string())],
-    scheme: ['scheme', optional(number())],
-    customerId: ['customer_id', optional(number())],
-    paymentProfileId: ['payment_profile_id', optional(number())],
-    subscriptionIds: ['subscription_ids', optional(array(number()))],
-    primarySubscriptionId: ['primary_subscription_id', optional(number())],
-    nextAssessmentAt: ['next_assessment_at', optional(string())],
-    state: ['state', optional(subscriptionStateSchema)],
-    cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
-    subscriptions: [
-      'subscriptions',
-      optional(array(lazy(() => subscriptionGroupItemSchema))),
-    ],
-    paymentCollectionMethod: [
-      'payment_collection_method',
-      optional(collectionMethodSchema),
-    ],
-  }
+export const subscriptionGroupSignupResponseSchema: Schema<SubscriptionGroupSignupResponse> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', optional(string())],
+      scheme: ['scheme', optional(number())],
+      customerId: ['customer_id', optional(number())],
+      paymentProfileId: ['payment_profile_id', optional(number())],
+      subscriptionIds: ['subscription_ids', optional(array(number()))],
+      primarySubscriptionId: ['primary_subscription_id', optional(number())],
+      nextAssessmentAt: ['next_assessment_at', optional(string())],
+      state: ['state', optional(subscriptionStateSchema)],
+      cancelAtEndOfPeriod: ['cancel_at_end_of_period', optional(boolean())],
+      subscriptions: [
+        'subscriptions',
+        optional(array(subscriptionGroupItemSchema)),
+      ],
+      paymentCollectionMethod: [
+        'payment_collection_method',
+        optional(collectionMethodSchema),
+      ],
+    })
 );

@@ -18,7 +18,7 @@ const productFamiliesController = new ProductFamiliesController(client);
 
 # List Products for Product Family
 
-This method allows to retrieve a list of Products belonging to a Product Family.
+Retrieves a list of Products belonging to a Product Family.
 
 ```ts
 async listProductsForProductFamily(
@@ -77,7 +77,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const collect = {
   productFamilyId: 'product_family_id4',
-  page: 2,
+  page: 1,
   perPage: 50,
   dateField: BasicDateField.UpdatedAt,
   filter: {
@@ -91,13 +91,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await productFamiliesController.listProductsForProductFamily(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productFamiliesController.listProductsForProductFamily(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -210,7 +222,7 @@ try {
 
 # Create Product Family
 
-This method will create a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components and coupons.
+Creates a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components and coupons.
 
 Full documentation on how Product Families operate within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
 
@@ -243,13 +255,25 @@ const body: CreateProductFamilyRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productFamiliesController.createProductFamily(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productFamiliesController.createProductFamily(body);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -277,7 +301,7 @@ try {
 
 # List Product Families
 
-This method allows to retrieve a list of Product Families for a site.
+Retrieve a list of Product Families for a site.
 
 ```ts
 async listProductFamilies(
@@ -321,13 +345,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await productFamiliesController.listProductFamilies(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productFamiliesController.listProductFamilies(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -364,7 +400,7 @@ try {
 
 # Read Product Family
 
-This method allows to retrieve a Product Family via the `product_family_id`. The response will contain a Product Family object.
+Retrieves a Product Family via the `product_family_id`. The response will contain a Product Family object.
 
 The product family can be specified either with the id number, or with the `handle:my-family` format.
 
@@ -392,13 +428,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 112;
 
 try {
-  const { result, ...httpResponse } = await productFamiliesController.readProductFamily(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productFamiliesController.readProductFamily(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

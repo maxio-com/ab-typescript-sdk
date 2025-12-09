@@ -23,18 +23,20 @@ export interface CustomerChange {
   [key: string]: unknown;
 }
 
-export const customerChangeSchema: Schema<CustomerChange> = expandoObject({
-  payer: ['payer', optional(nullable(lazy(() => customerPayerChangeSchema)))],
-  shippingAddress: [
-    'shipping_address',
-    optional(nullable(lazy(() => addressChangeSchema))),
-  ],
-  billingAddress: [
-    'billing_address',
-    optional(nullable(lazy(() => addressChangeSchema))),
-  ],
-  customFields: [
-    'custom_fields',
-    optional(nullable(lazy(() => customerCustomFieldsChangeSchema))),
-  ],
-});
+export const customerChangeSchema: Schema<CustomerChange> = lazy(() =>
+  expandoObject({
+    payer: ['payer', optional(nullable(customerPayerChangeSchema))],
+    shippingAddress: [
+      'shipping_address',
+      optional(nullable(addressChangeSchema)),
+    ],
+    billingAddress: [
+      'billing_address',
+      optional(nullable(addressChangeSchema)),
+    ],
+    customFields: [
+      'custom_fields',
+      optional(nullable(customerCustomFieldsChangeSchema)),
+    ],
+  })
+);

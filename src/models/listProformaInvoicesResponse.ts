@@ -17,12 +17,13 @@ export interface ListProformaInvoicesResponse {
   [key: string]: unknown;
 }
 
-export const listProformaInvoicesResponseSchema: Schema<ListProformaInvoicesResponse> = expandoObject(
-  {
-    proformaInvoices: [
-      'proforma_invoices',
-      optional(array(lazy(() => proformaInvoiceSchema))),
-    ],
-    meta: ['meta', optional(lazy(() => listProformaInvoicesMetaSchema))],
-  }
+export const listProformaInvoicesResponseSchema: Schema<ListProformaInvoicesResponse> = lazy(
+  () =>
+    expandoObject({
+      proformaInvoices: [
+        'proforma_invoices',
+        optional(array(proformaInvoiceSchema)),
+      ],
+      meta: ['meta', optional(listProformaInvoicesMetaSchema)],
+    })
 );

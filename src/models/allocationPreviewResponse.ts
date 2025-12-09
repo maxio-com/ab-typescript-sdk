@@ -15,11 +15,9 @@ export interface AllocationPreviewResponse {
   [key: string]: unknown;
 }
 
-export const allocationPreviewResponseSchema: Schema<AllocationPreviewResponse> = expandoObject(
-  {
-    allocationPreview: [
-      'allocation_preview',
-      lazy(() => allocationPreviewSchema),
-    ],
-  }
+export const allocationPreviewResponseSchema: Schema<AllocationPreviewResponse> = lazy(
+  () =>
+    expandoObject({
+      allocationPreview: ['allocation_preview', allocationPreviewSchema],
+    })
 );

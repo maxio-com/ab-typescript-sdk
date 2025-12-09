@@ -49,32 +49,34 @@ export interface Segment {
   [key: string]: unknown;
 }
 
-export const segmentSchema: Schema<Segment> = expandoObject({
-  id: ['id', optional(number())],
-  componentId: ['component_id', optional(number())],
-  pricePointId: ['price_point_id', optional(number())],
-  eventBasedBillingMetricId: [
-    'event_based_billing_metric_id',
-    optional(number()),
-  ],
-  pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-  segmentProperty1Value: [
-    'segment_property_1_value',
-    optional(segmentSegmentProperty1ValueSchema),
-  ],
-  segmentProperty2Value: [
-    'segment_property_2_value',
-    optional(segmentSegmentProperty2ValueSchema),
-  ],
-  segmentProperty3Value: [
-    'segment_property_3_value',
-    optional(segmentSegmentProperty3ValueSchema),
-  ],
-  segmentProperty4Value: [
-    'segment_property_4_value',
-    optional(segmentSegmentProperty4ValueSchema),
-  ],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  prices: ['prices', optional(array(lazy(() => segmentPriceSchema)))],
-});
+export const segmentSchema: Schema<Segment> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    componentId: ['component_id', optional(number())],
+    pricePointId: ['price_point_id', optional(number())],
+    eventBasedBillingMetricId: [
+      'event_based_billing_metric_id',
+      optional(number()),
+    ],
+    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+    segmentProperty1Value: [
+      'segment_property_1_value',
+      optional(segmentSegmentProperty1ValueSchema),
+    ],
+    segmentProperty2Value: [
+      'segment_property_2_value',
+      optional(segmentSegmentProperty2ValueSchema),
+    ],
+    segmentProperty3Value: [
+      'segment_property_3_value',
+      optional(segmentSegmentProperty3ValueSchema),
+    ],
+    segmentProperty4Value: [
+      'segment_property_4_value',
+      optional(segmentSegmentProperty4ValueSchema),
+    ],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    prices: ['prices', optional(array(segmentPriceSchema))],
+  })
+);

@@ -36,15 +36,16 @@ export interface UpdateComponentPricePoint {
   [key: string]: unknown;
 }
 
-export const updateComponentPricePointSchema: Schema<UpdateComponentPricePoint> = expandoObject(
-  {
-    name: ['name', optional(string())],
-    handle: ['handle', optional(string())],
-    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
-    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-    taxIncluded: ['tax_included', optional(boolean())],
-    interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-    prices: ['prices', optional(array(lazy(() => updatePriceSchema)))],
-  }
+export const updateComponentPricePointSchema: Schema<UpdateComponentPricePoint> = lazy(
+  () =>
+    expandoObject({
+      name: ['name', optional(string())],
+      handle: ['handle', optional(string())],
+      pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+      useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+      taxIncluded: ['tax_included', optional(boolean())],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+      prices: ['prices', optional(array(updatePriceSchema))],
+    })
 );

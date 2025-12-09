@@ -30,8 +30,10 @@ export interface ListCouponsFilter {
   ids?: number[];
   /** Allows fetching coupons with matching codes based on provided values. Use in query `filter[codes]=free,free_trial`. */
   codes?: string[];
-  /** Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. */
+  /** If true, restricts the list to coupons whose pricing is recalculated from the site’s current exchange rates, so their currency_prices array contains on-the-fly conversions rather than stored price records. If false, restricts the list to coupons that have manually defined amounts for each currency, ensuring the response includes the saved currency_prices entries instead of exchange-rate-derived values. Use in query `filter[use_site_exchange_rate]=true`. */
   useSiteExchangeRate?: boolean;
+  /** Controls returning archived coupons. */
+  includeArchived?: boolean;
   [key: string]: unknown;
 }
 
@@ -45,5 +47,6 @@ export const listCouponsFilterSchema: Schema<ListCouponsFilter> = expandoObject(
     ids: ['ids', optional(array(number()))],
     codes: ['codes', optional(array(string()))],
     useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+    includeArchived: ['include_archived', optional(boolean())],
   }
 );

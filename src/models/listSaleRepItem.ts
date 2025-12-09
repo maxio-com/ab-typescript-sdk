@@ -25,10 +25,12 @@ export interface ListSaleRepItem {
   [key: string]: unknown;
 }
 
-export const listSaleRepItemSchema: Schema<ListSaleRepItem> = expandoObject({
-  id: ['id', optional(number())],
-  fullName: ['full_name', optional(string())],
-  subscriptionsCount: ['subscriptions_count', optional(number())],
-  mrrData: ['mrr_data', optional(dict(lazy(() => saleRepItemMrrSchema)))],
-  testMode: ['test_mode', optional(boolean())],
-});
+export const listSaleRepItemSchema: Schema<ListSaleRepItem> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    fullName: ['full_name', optional(string())],
+    subscriptionsCount: ['subscriptions_count', optional(number())],
+    mrrData: ['mrr_data', optional(dict(saleRepItemMrrSchema))],
+    testMode: ['test_mode', optional(boolean())],
+  })
+);

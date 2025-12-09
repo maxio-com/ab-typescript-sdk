@@ -39,27 +39,28 @@ export interface SubscriptionGroupSignupFailureData {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupFailureDataSchema: Schema<SubscriptionGroupSignupFailureData> = expandoObject(
-  {
-    payerId: ['payer_id', optional(number())],
-    payerReference: ['payer_reference', optional(string())],
-    paymentProfileId: ['payment_profile_id', optional(number())],
-    paymentCollectionMethod: ['payment_collection_method', optional(string())],
-    payerAttributes: [
-      'payer_attributes',
-      optional(lazy(() => payerAttributesSchema)),
-    ],
-    creditCardAttributes: [
-      'credit_card_attributes',
-      optional(lazy(() => subscriptionGroupCreditCardSchema)),
-    ],
-    bankAccountAttributes: [
-      'bank_account_attributes',
-      optional(lazy(() => subscriptionGroupBankAccountSchema)),
-    ],
-    subscriptions: [
-      'subscriptions',
-      optional(array(lazy(() => subscriptionGroupSignupItemSchema))),
-    ],
-  }
+export const subscriptionGroupSignupFailureDataSchema: Schema<SubscriptionGroupSignupFailureData> = lazy(
+  () =>
+    expandoObject({
+      payerId: ['payer_id', optional(number())],
+      payerReference: ['payer_reference', optional(string())],
+      paymentProfileId: ['payment_profile_id', optional(number())],
+      paymentCollectionMethod: [
+        'payment_collection_method',
+        optional(string()),
+      ],
+      payerAttributes: ['payer_attributes', optional(payerAttributesSchema)],
+      creditCardAttributes: [
+        'credit_card_attributes',
+        optional(subscriptionGroupCreditCardSchema),
+      ],
+      bankAccountAttributes: [
+        'bank_account_attributes',
+        optional(subscriptionGroupBankAccountSchema),
+      ],
+      subscriptions: [
+        'subscriptions',
+        optional(array(subscriptionGroupSignupItemSchema)),
+      ],
+    })
 );

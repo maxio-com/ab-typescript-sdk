@@ -20,12 +20,10 @@ export interface ComponentPricePointsResponse {
   [key: string]: unknown;
 }
 
-export const componentPricePointsResponseSchema: Schema<ComponentPricePointsResponse> = expandoObject(
-  {
-    pricePoints: [
-      'price_points',
-      optional(array(lazy(() => componentPricePointSchema))),
-    ],
-    meta: ['meta', optional(lazy(() => listPublicKeysMetaSchema))],
-  }
+export const componentPricePointsResponseSchema: Schema<ComponentPricePointsResponse> = lazy(
+  () =>
+    expandoObject({
+      pricePoints: ['price_points', optional(array(componentPricePointSchema))],
+      meta: ['meta', optional(listPublicKeysMetaSchema)],
+    })
 );

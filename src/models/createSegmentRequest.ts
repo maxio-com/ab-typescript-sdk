@@ -12,6 +12,6 @@ export interface CreateSegmentRequest {
   [key: string]: unknown;
 }
 
-export const createSegmentRequestSchema: Schema<CreateSegmentRequest> = expandoObject(
-  { segment: ['segment', lazy(() => createSegmentSchema)] }
+export const createSegmentRequestSchema: Schema<CreateSegmentRequest> = lazy(
+  () => expandoObject({ segment: ['segment', createSegmentSchema] })
 );

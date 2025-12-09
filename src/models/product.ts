@@ -37,7 +37,7 @@ export interface Product {
   description?: string | null;
   /** E.g. Internal ID or SKU Number */
   accountingCode?: string | null;
-  /** Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. */
+  /** Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, read this attribute from under the signup page. */
   requestCreditCard?: boolean;
   /** A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
   expirationInterval?: number | null;
@@ -83,7 +83,7 @@ export interface Product {
   requireBillingAddress?: boolean;
   /** A boolean indicating whether a shipping address is required for the customer, especially at signup. */
   requireShippingAddress?: boolean;
-  /** A string representing the tax code related to the product type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. */
+  /** A string representing the tax code related to the product type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. */
   taxCode?: string | null;
   defaultProductPricePointId?: number;
   useSiteExchangeRate?: boolean | null;
@@ -94,66 +94,68 @@ export interface Product {
   [key: string]: unknown;
 }
 
-export const productSchema: Schema<Product> = expandoObject({
-  id: ['id', optional(number())],
-  name: ['name', optional(string())],
-  handle: ['handle', optional(nullable(string()))],
-  description: ['description', optional(nullable(string()))],
-  accountingCode: ['accounting_code', optional(nullable(string()))],
-  requestCreditCard: ['request_credit_card', optional(boolean())],
-  expirationInterval: ['expiration_interval', optional(nullable(number()))],
-  expirationIntervalUnit: [
-    'expiration_interval_unit',
-    optional(nullable(expirationIntervalUnitSchema)),
-  ],
-  createdAt: ['created_at', optional(string())],
-  updatedAt: ['updated_at', optional(string())],
-  priceInCents: ['price_in_cents', optional(bigint())],
-  interval: ['interval', optional(number())],
-  intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
-  initialChargeInCents: [
-    'initial_charge_in_cents',
-    optional(nullable(bigint())),
-  ],
-  trialPriceInCents: ['trial_price_in_cents', optional(nullable(bigint()))],
-  trialInterval: ['trial_interval', optional(nullable(number()))],
-  trialIntervalUnit: [
-    'trial_interval_unit',
-    optional(nullable(intervalUnitSchema)),
-  ],
-  archivedAt: ['archived_at', optional(nullable(string()))],
-  requireCreditCard: ['require_credit_card', optional(boolean())],
-  returnParams: ['return_params', optional(nullable(string()))],
-  taxable: ['taxable', optional(boolean())],
-  updateReturnUrl: ['update_return_url', optional(nullable(string()))],
-  initialChargeAfterTrial: [
-    'initial_charge_after_trial',
-    optional(nullable(boolean())),
-  ],
-  versionNumber: ['version_number', optional(number())],
-  updateReturnParams: ['update_return_params', optional(nullable(string()))],
-  productFamily: ['product_family', optional(lazy(() => productFamilySchema))],
-  publicSignupPages: [
-    'public_signup_pages',
-    optional(array(lazy(() => publicSignupPageSchema))),
-  ],
-  productPricePointName: ['product_price_point_name', optional(string())],
-  requestBillingAddress: ['request_billing_address', optional(boolean())],
-  requireBillingAddress: ['require_billing_address', optional(boolean())],
-  requireShippingAddress: ['require_shipping_address', optional(boolean())],
-  taxCode: ['tax_code', optional(nullable(string()))],
-  defaultProductPricePointId: [
-    'default_product_price_point_id',
-    optional(number()),
-  ],
-  useSiteExchangeRate: [
-    'use_site_exchange_rate',
-    optional(nullable(boolean())),
-  ],
-  itemCategory: ['item_category', optional(nullable(string()))],
-  productPricePointId: ['product_price_point_id', optional(number())],
-  productPricePointHandle: [
-    'product_price_point_handle',
-    optional(nullable(string())),
-  ],
-});
+export const productSchema: Schema<Product> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    name: ['name', optional(string())],
+    handle: ['handle', optional(nullable(string()))],
+    description: ['description', optional(nullable(string()))],
+    accountingCode: ['accounting_code', optional(nullable(string()))],
+    requestCreditCard: ['request_credit_card', optional(boolean())],
+    expirationInterval: ['expiration_interval', optional(nullable(number()))],
+    expirationIntervalUnit: [
+      'expiration_interval_unit',
+      optional(nullable(expirationIntervalUnitSchema)),
+    ],
+    createdAt: ['created_at', optional(string())],
+    updatedAt: ['updated_at', optional(string())],
+    priceInCents: ['price_in_cents', optional(bigint())],
+    interval: ['interval', optional(number())],
+    intervalUnit: ['interval_unit', optional(intervalUnitSchema)],
+    initialChargeInCents: [
+      'initial_charge_in_cents',
+      optional(nullable(bigint())),
+    ],
+    trialPriceInCents: ['trial_price_in_cents', optional(nullable(bigint()))],
+    trialInterval: ['trial_interval', optional(nullable(number()))],
+    trialIntervalUnit: [
+      'trial_interval_unit',
+      optional(nullable(intervalUnitSchema)),
+    ],
+    archivedAt: ['archived_at', optional(nullable(string()))],
+    requireCreditCard: ['require_credit_card', optional(boolean())],
+    returnParams: ['return_params', optional(nullable(string()))],
+    taxable: ['taxable', optional(boolean())],
+    updateReturnUrl: ['update_return_url', optional(nullable(string()))],
+    initialChargeAfterTrial: [
+      'initial_charge_after_trial',
+      optional(nullable(boolean())),
+    ],
+    versionNumber: ['version_number', optional(number())],
+    updateReturnParams: ['update_return_params', optional(nullable(string()))],
+    productFamily: ['product_family', optional(productFamilySchema)],
+    publicSignupPages: [
+      'public_signup_pages',
+      optional(array(publicSignupPageSchema)),
+    ],
+    productPricePointName: ['product_price_point_name', optional(string())],
+    requestBillingAddress: ['request_billing_address', optional(boolean())],
+    requireBillingAddress: ['require_billing_address', optional(boolean())],
+    requireShippingAddress: ['require_shipping_address', optional(boolean())],
+    taxCode: ['tax_code', optional(nullable(string()))],
+    defaultProductPricePointId: [
+      'default_product_price_point_id',
+      optional(number()),
+    ],
+    useSiteExchangeRate: [
+      'use_site_exchange_rate',
+      optional(nullable(boolean())),
+    ],
+    itemCategory: ['item_category', optional(nullable(string()))],
+    productPricePointId: ['product_price_point_id', optional(number())],
+    productPricePointHandle: [
+      'product_price_point_handle',
+      optional(nullable(string())),
+    ],
+  })
+);

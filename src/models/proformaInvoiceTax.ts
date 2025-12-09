@@ -32,8 +32,8 @@ export interface ProformaInvoiceTax {
   [key: string]: unknown;
 }
 
-export const proformaInvoiceTaxSchema: Schema<ProformaInvoiceTax> = expandoObject(
-  {
+export const proformaInvoiceTaxSchema: Schema<ProformaInvoiceTax> = lazy(() =>
+  expandoObject({
     uid: ['uid', optional(string())],
     title: ['title', optional(string())],
     sourceType: ['source_type', optional(proformaInvoiceTaxSourceTypeSchema)],
@@ -42,7 +42,7 @@ export const proformaInvoiceTaxSchema: Schema<ProformaInvoiceTax> = expandoObjec
     taxAmount: ['tax_amount', optional(string())],
     lineItemBreakouts: [
       'line_item_breakouts',
-      optional(array(lazy(() => invoiceTaxBreakoutSchema))),
+      optional(array(invoiceTaxBreakoutSchema)),
     ],
-  }
+  })
 );

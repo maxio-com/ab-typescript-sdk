@@ -6,6 +6,7 @@
 
 import {
   isMappedValueValidForSchema,
+  lazy,
   oneOf,
   Schema,
   string,
@@ -25,12 +26,13 @@ export type SubscriptionGroupCreateErrorResponseErrors =
   | SubscriptionGroupSingleError
   | string;
 
-export const subscriptionGroupCreateErrorResponseErrorsSchema: Schema<SubscriptionGroupCreateErrorResponseErrors> = oneOf(
-  [
-    subscriptionGroupMembersArrayErrorSchema,
-    subscriptionGroupSingleErrorSchema,
-    string(),
-  ]
+export const subscriptionGroupCreateErrorResponseErrorsSchema: Schema<SubscriptionGroupCreateErrorResponseErrors> = lazy(
+  () =>
+    oneOf([
+      subscriptionGroupMembersArrayErrorSchema,
+      subscriptionGroupSingleErrorSchema,
+      string(),
+    ])
 );
 
 export namespace SubscriptionGroupCreateErrorResponseErrors {

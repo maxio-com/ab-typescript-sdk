@@ -603,6 +603,7 @@ export type { TaxConfiguration } from './models/taxConfiguration.js';
 export { TaxConfigurationKind } from './models/taxConfigurationKind.js';
 export { TaxDestinationAddress } from './models/taxDestinationAddress.js';
 export type { TooManyManagementLinkRequests } from './models/tooManyManagementLinkRequests.js';
+export { TrialType } from './models/trialType.js';
 export type { UpdateAllocationExpirationDate } from './models/updateAllocationExpirationDate.js';
 export type { UpdateComponent } from './models/updateComponent.js';
 export type { UpdateComponentPricePoint } from './models/updateComponentPricePoint.js';
@@ -739,6 +740,7 @@ export * from './models/containers/subscriptionGroupSignupComponentAllocatedQuan
 export * from './models/containers/subscriptionGroupSignupComponentComponentId.js';
 export * from './models/containers/subscriptionGroupSignupComponentPricePointId.js';
 export * from './models/containers/subscriptionGroupSignupComponentUnitBalance.js';
+export * from './models/containers/subscriptionSnapDay.js';
 export * from './models/containers/updateComponentPricePointComponentId.js';
 export * from './models/containers/updateComponentPricePointPricePointId.js';
 export * from './models/containers/updateMetafieldsRequestMetafields.js';

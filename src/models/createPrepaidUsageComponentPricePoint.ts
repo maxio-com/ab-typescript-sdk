@@ -43,23 +43,24 @@ export interface CreatePrepaidUsageComponentPricePoint {
   [key: string]: unknown;
 }
 
-export const createPrepaidUsageComponentPricePointSchema: Schema<CreatePrepaidUsageComponentPricePoint> = expandoObject(
-  {
-    name: ['name', string()],
-    handle: ['handle', optional(string())],
-    pricingScheme: ['pricing_scheme', pricingSchemeSchema],
-    prices: ['prices', array(lazy(() => priceSchema))],
-    overagePricing: ['overage_pricing', lazy(() => overagePricingSchema)],
-    useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
-    rolloverPrepaidRemainder: [
-      'rollover_prepaid_remainder',
-      optional(boolean()),
-    ],
-    renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
-    expirationInterval: ['expiration_interval', optional(number())],
-    expirationIntervalUnit: [
-      'expiration_interval_unit',
-      optional(nullable(expirationIntervalUnitSchema)),
-    ],
-  }
+export const createPrepaidUsageComponentPricePointSchema: Schema<CreatePrepaidUsageComponentPricePoint> = lazy(
+  () =>
+    expandoObject({
+      name: ['name', string()],
+      handle: ['handle', optional(string())],
+      pricingScheme: ['pricing_scheme', pricingSchemeSchema],
+      prices: ['prices', array(priceSchema)],
+      overagePricing: ['overage_pricing', overagePricingSchema],
+      useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
+      rolloverPrepaidRemainder: [
+        'rollover_prepaid_remainder',
+        optional(boolean()),
+      ],
+      renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
+      expirationInterval: ['expiration_interval', optional(number())],
+      expirationIntervalUnit: [
+        'expiration_interval_unit',
+        optional(nullable(expirationIntervalUnitSchema)),
+      ],
+    })
 );

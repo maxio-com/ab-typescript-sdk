@@ -54,29 +54,27 @@ export interface SubscriptionGroupSignupItem {
   [key: string]: unknown;
 }
 
-export const subscriptionGroupSignupItemSchema: Schema<SubscriptionGroupSignupItem> = expandoObject(
-  {
-    productHandle: ['product_handle', optional(string())],
-    productId: ['product_id', optional(number())],
-    productPricePointId: ['product_price_point_id', optional(number())],
-    productPricePointHandle: ['product_price_point_handle', optional(string())],
-    offerId: ['offer_id', optional(number())],
-    reference: ['reference', optional(string())],
-    primary: ['primary', optional(boolean())],
-    currency: ['currency', optional(string())],
-    couponCodes: ['coupon_codes', optional(array(string()))],
-    components: [
-      'components',
-      optional(array(lazy(() => subscriptionGroupSignupComponentSchema))),
-    ],
-    customPrice: [
-      'custom_price',
-      optional(lazy(() => subscriptionCustomPriceSchema)),
-    ],
-    calendarBilling: [
-      'calendar_billing',
-      optional(lazy(() => calendarBillingSchema)),
-    ],
-    metafields: ['metafields', optional(dict(string()))],
-  }
+export const subscriptionGroupSignupItemSchema: Schema<SubscriptionGroupSignupItem> = lazy(
+  () =>
+    expandoObject({
+      productHandle: ['product_handle', optional(string())],
+      productId: ['product_id', optional(number())],
+      productPricePointId: ['product_price_point_id', optional(number())],
+      productPricePointHandle: [
+        'product_price_point_handle',
+        optional(string()),
+      ],
+      offerId: ['offer_id', optional(number())],
+      reference: ['reference', optional(string())],
+      primary: ['primary', optional(boolean())],
+      currency: ['currency', optional(string())],
+      couponCodes: ['coupon_codes', optional(array(string()))],
+      components: [
+        'components',
+        optional(array(subscriptionGroupSignupComponentSchema)),
+      ],
+      customPrice: ['custom_price', optional(subscriptionCustomPriceSchema)],
+      calendarBilling: ['calendar_billing', optional(calendarBillingSchema)],
+      metafields: ['metafields', optional(dict(string()))],
+    })
 );

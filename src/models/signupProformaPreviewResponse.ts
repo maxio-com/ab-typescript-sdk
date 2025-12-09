@@ -15,11 +15,12 @@ export interface SignupProformaPreviewResponse {
   [key: string]: unknown;
 }
 
-export const signupProformaPreviewResponseSchema: Schema<SignupProformaPreviewResponse> = expandoObject(
-  {
-    proformaInvoicePreview: [
-      'proforma_invoice_preview',
-      lazy(() => signupProformaPreviewSchema),
-    ],
-  }
+export const signupProformaPreviewResponseSchema: Schema<SignupProformaPreviewResponse> = lazy(
+  () =>
+    expandoObject({
+      proformaInvoicePreview: [
+        'proforma_invoice_preview',
+        signupProformaPreviewSchema,
+      ],
+    })
 );

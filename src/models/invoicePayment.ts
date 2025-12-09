@@ -40,23 +40,22 @@ export interface InvoicePayment {
   [key: string]: unknown;
 }
 
-export const invoicePaymentSchema: Schema<InvoicePayment> = expandoObject({
-  transactionTime: ['transaction_time', optional(string())],
-  memo: ['memo', optional(string())],
-  originalAmount: ['original_amount', optional(string())],
-  appliedAmount: ['applied_amount', optional(string())],
-  paymentMethod: [
-    'payment_method',
-    optional(lazy(() => invoicePaymentMethodSchema)),
-  ],
-  transactionId: ['transaction_id', optional(number())],
-  prepayment: ['prepayment', optional(boolean())],
-  gatewayHandle: ['gateway_handle', optional(nullable(string()))],
-  gatewayUsed: ['gateway_used', optional(string())],
-  gatewayTransactionId: [
-    'gateway_transaction_id',
-    optional(nullable(string())),
-  ],
-  receivedOn: ['received_on', optional(nullable(string()))],
-  uid: ['uid', optional(string())],
-});
+export const invoicePaymentSchema: Schema<InvoicePayment> = lazy(() =>
+  expandoObject({
+    transactionTime: ['transaction_time', optional(string())],
+    memo: ['memo', optional(string())],
+    originalAmount: ['original_amount', optional(string())],
+    appliedAmount: ['applied_amount', optional(string())],
+    paymentMethod: ['payment_method', optional(invoicePaymentMethodSchema)],
+    transactionId: ['transaction_id', optional(number())],
+    prepayment: ['prepayment', optional(boolean())],
+    gatewayHandle: ['gateway_handle', optional(nullable(string()))],
+    gatewayUsed: ['gateway_used', optional(string())],
+    gatewayTransactionId: [
+      'gateway_transaction_id',
+      optional(nullable(string())),
+    ],
+    receivedOn: ['received_on', optional(nullable(string()))],
+    uid: ['uid', optional(string())],
+  })
+);

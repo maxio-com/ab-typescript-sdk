@@ -6,7 +6,7 @@ const config = {
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.base.json' }],
   },
   moduleNameMapper: {
-    "(.+)\\.js": "$1",
+    "^(\\.{1,2}/.*)\\.js$": "$1",
   },
 };
 

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { boolean, expandoObject, number, optional, Schema } from '../schema.js';
+import {
+  boolean,
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+} from '../schema.js';
 import {
   UpdatePriceEndingQuantity,
   updatePriceEndingQuantitySchema,
@@ -28,16 +35,18 @@ export interface UpdatePrice {
   [key: string]: unknown;
 }
 
-export const updatePriceSchema: Schema<UpdatePrice> = expandoObject({
-  id: ['id', optional(number())],
-  endingQuantity: [
-    'ending_quantity',
-    optional(updatePriceEndingQuantitySchema),
-  ],
-  unitPrice: ['unit_price', optional(updatePriceUnitPriceSchema)],
-  destroy: ['_destroy', optional(boolean())],
-  startingQuantity: [
-    'starting_quantity',
-    optional(updatePriceStartingQuantitySchema),
-  ],
-});
+export const updatePriceSchema: Schema<UpdatePrice> = lazy(() =>
+  expandoObject({
+    id: ['id', optional(number())],
+    endingQuantity: [
+      'ending_quantity',
+      optional(updatePriceEndingQuantitySchema),
+    ],
+    unitPrice: ['unit_price', optional(updatePriceUnitPriceSchema)],
+    destroy: ['_destroy', optional(boolean())],
+    startingQuantity: [
+      'starting_quantity',
+      optional(updatePriceStartingQuantitySchema),
+    ],
+  })
+);

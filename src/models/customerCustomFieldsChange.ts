@@ -16,9 +16,10 @@ export interface CustomerCustomFieldsChange {
   [key: string]: unknown;
 }
 
-export const customerCustomFieldsChangeSchema: Schema<CustomerCustomFieldsChange> = expandoObject(
-  {
-    before: ['before', array(lazy(() => invoiceCustomFieldSchema))],
-    after: ['after', array(lazy(() => invoiceCustomFieldSchema))],
-  }
+export const customerCustomFieldsChangeSchema: Schema<CustomerCustomFieldsChange> = lazy(
+  () =>
+    expandoObject({
+      before: ['before', array(invoiceCustomFieldSchema)],
+      after: ['after', array(invoiceCustomFieldSchema)],
+    })
 );

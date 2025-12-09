@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { isMappedValueValidForSchema, oneOf, Schema } from '../../schema.js';
+import {
+  isMappedValueValidForSchema,
+  lazy,
+  oneOf,
+  Schema,
+} from '../../schema.js';
 import {
   ComponentAllocationChange,
   componentAllocationChangeSchema,
@@ -87,27 +92,28 @@ export type EventEventSpecificData =
   | ItemPricePointChanged
   | CustomFieldValueChange;
 
-export const eventEventSpecificDataSchema: Schema<EventEventSpecificData> = oneOf(
-  [
-    subscriptionProductChangeSchema,
-    subscriptionStateChangeSchema,
-    paymentRelatedEventsSchema,
-    refundSuccessSchema,
-    componentAllocationChangeSchema,
-    meteredUsageSchema,
-    prepaidUsageSchema,
-    dunningStepReachedSchema,
-    invoiceIssuedSchema,
-    pendingCancellationChangeSchema,
-    prepaidSubscriptionBalanceChangedSchema,
-    proformaInvoiceIssuedSchema,
-    subscriptionGroupSignupEventDataSchema,
-    creditAccountBalanceChangedSchema,
-    prepaymentAccountBalanceChangedSchema,
-    paymentCollectionMethodChangedSchema,
-    itemPricePointChangedSchema,
-    customFieldValueChangeSchema,
-  ]
+export const eventEventSpecificDataSchema: Schema<EventEventSpecificData> = lazy(
+  () =>
+    oneOf([
+      subscriptionProductChangeSchema,
+      subscriptionStateChangeSchema,
+      paymentRelatedEventsSchema,
+      refundSuccessSchema,
+      componentAllocationChangeSchema,
+      meteredUsageSchema,
+      prepaidUsageSchema,
+      dunningStepReachedSchema,
+      invoiceIssuedSchema,
+      pendingCancellationChangeSchema,
+      prepaidSubscriptionBalanceChangedSchema,
+      proformaInvoiceIssuedSchema,
+      subscriptionGroupSignupEventDataSchema,
+      creditAccountBalanceChangedSchema,
+      prepaymentAccountBalanceChangedSchema,
+      paymentCollectionMethodChangedSchema,
+      itemPricePointChangedSchema,
+      customFieldValueChangeSchema,
+    ])
 );
 
 export namespace EventEventSpecificData {

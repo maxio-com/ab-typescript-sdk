@@ -17,12 +17,10 @@ export interface ListPublicKeysResponse {
   [key: string]: unknown;
 }
 
-export const listPublicKeysResponseSchema: Schema<ListPublicKeysResponse> = expandoObject(
-  {
-    chargifyJsKeys: [
-      'chargify_js_keys',
-      optional(array(lazy(() => publicKeySchema))),
-    ],
-    meta: ['meta', optional(lazy(() => listPublicKeysMetaSchema))],
-  }
+export const listPublicKeysResponseSchema: Schema<ListPublicKeysResponse> = lazy(
+  () =>
+    expandoObject({
+      chargifyJsKeys: ['chargify_js_keys', optional(array(publicKeySchema))],
+      meta: ['meta', optional(listPublicKeysMetaSchema)],
+    })
 );

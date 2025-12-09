@@ -29,14 +29,14 @@ export interface MultiInvoicePayment {
   [key: string]: unknown;
 }
 
-export const multiInvoicePaymentSchema: Schema<MultiInvoicePayment> = expandoObject(
-  {
+export const multiInvoicePaymentSchema: Schema<MultiInvoicePayment> = lazy(() =>
+  expandoObject({
     transactionId: ['transaction_id', optional(number())],
     totalAmount: ['total_amount', optional(string())],
     currencyCode: ['currency_code', optional(string())],
     applications: [
       'applications',
-      optional(array(lazy(() => invoicePaymentApplicationSchema))),
+      optional(array(invoicePaymentApplicationSchema)),
     ],
-  }
+  })
 );

@@ -4,7 +4,14 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, number, optional, Schema, string } from '../schema.js';
+import {
+  expandoObject,
+  lazy,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema.js';
 import {
   CreateInvoicePaymentAmount,
   createInvoicePaymentAmountSchema,
@@ -33,13 +40,14 @@ export interface CreateInvoicePayment {
   [key: string]: unknown;
 }
 
-export const createInvoicePaymentSchema: Schema<CreateInvoicePayment> = expandoObject(
-  {
-    amount: ['amount', optional(createInvoicePaymentAmountSchema)],
-    memo: ['memo', optional(string())],
-    method: ['method', optional(invoicePaymentMethodTypeSchema)],
-    details: ['details', optional(string())],
-    paymentProfileId: ['payment_profile_id', optional(number())],
-    receivedOn: ['received_on', optional(string())],
-  }
+export const createInvoicePaymentSchema: Schema<CreateInvoicePayment> = lazy(
+  () =>
+    expandoObject({
+      amount: ['amount', optional(createInvoicePaymentAmountSchema)],
+      memo: ['memo', optional(string())],
+      method: ['method', optional(invoicePaymentMethodTypeSchema)],
+      details: ['details', optional(string())],
+      paymentProfileId: ['payment_profile_id', optional(number())],
+      receivedOn: ['received_on', optional(string())],
+    })
 );

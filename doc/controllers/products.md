@@ -20,7 +20,9 @@ const productsController = new ProductsController(client);
 
 # Create Product
 
-Use this method to create a product within your Advanced Billing site.
+Creates a product in your Advanced Billing site.
+
+See the following product docuemation for more information:
 
 + [Products Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
 + [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Changes-and-Migrations)
@@ -66,16 +68,28 @@ const body: CreateOrUpdateProductRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await productsController.createProduct(
+  const response = await productsController.createProduct(
     productFamilyId,
     body
   );
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -138,7 +152,7 @@ try {
 
 # Read Product
 
-This endpoint allows you to read the current details of a product that you've created in Advanced Billing.
+Reads the current details of a product.
 
 ```ts
 async readProduct(
@@ -164,13 +178,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const productId = 202;
 
 try {
-  const { result, ...httpResponse } = await productsController.readProduct(productId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productsController.readProduct(productId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -221,7 +247,7 @@ try {
 
 # Update Product
 
-Use this method to change aspects of an existing product.
+Updates aspects of an existing product.
 
 ### Input Attributes Update Notes
 
@@ -257,13 +283,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const productId = 202;
 
 try {
-  const { result, ...httpResponse } = await productsController.updateProduct(productId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productsController.updateProduct(productId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -325,7 +363,7 @@ try {
 
 # Archive Product
 
-Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthly.
+Archives the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthly.
 
 This will restrict the option to chose the product for purchase via the Billing Portal, as well as disable Public Signup Pages for the product.
 
@@ -353,13 +391,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const productId = 202;
 
 try {
-  const { result, ...httpResponse } = await productsController.archiveProduct(productId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productsController.archiveProduct(productId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -416,7 +466,7 @@ try {
 
 # Read Product by Handle
 
-This method allows to retrieve a Product object by its `api_handle`.
+Retrieves a Product object by its `api_handle`.
 
 ```ts
 async readProductByHandle(
@@ -442,13 +492,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const apiHandle = 'api_handle6';
 
 try {
-  const { result, ...httpResponse } = await productsController.readProductByHandle(apiHandle);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productsController.readProductByHandle(apiHandle);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -587,20 +649,32 @@ const collect = {
       3
     ],
   },
-  page: 2,
+  page: 1,
   perPage: 50,
   includeArchived: true,
   include: ListProductsInclude.PrepaidProductPricePoint
 }
 
 try {
-  const { result, ...httpResponse } = await productsController.listProducts(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await productsController.listProducts(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

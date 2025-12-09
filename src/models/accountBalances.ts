@@ -21,19 +21,12 @@ export interface AccountBalances {
   [key: string]: unknown;
 }
 
-export const accountBalancesSchema: Schema<AccountBalances> = expandoObject({
-  openInvoices: ['open_invoices', optional(lazy(() => accountBalanceSchema))],
-  pendingInvoices: [
-    'pending_invoices',
-    optional(lazy(() => accountBalanceSchema)),
-  ],
-  pendingDiscounts: [
-    'pending_discounts',
-    optional(lazy(() => accountBalanceSchema)),
-  ],
-  serviceCredits: [
-    'service_credits',
-    optional(lazy(() => accountBalanceSchema)),
-  ],
-  prepayments: ['prepayments', optional(lazy(() => accountBalanceSchema))],
-});
+export const accountBalancesSchema: Schema<AccountBalances> = lazy(() =>
+  expandoObject({
+    openInvoices: ['open_invoices', optional(accountBalanceSchema)],
+    pendingInvoices: ['pending_invoices', optional(accountBalanceSchema)],
+    pendingDiscounts: ['pending_discounts', optional(accountBalanceSchema)],
+    serviceCredits: ['service_credits', optional(accountBalanceSchema)],
+    prepayments: ['prepayments', optional(accountBalanceSchema)],
+  })
+);

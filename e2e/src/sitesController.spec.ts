@@ -46,6 +46,7 @@ describe('SitesController', () => {
         automaticNetTerms: 0,
         remittanceNetTerms: 0,
         netTermsOnRemittanceSignupsEnabled: false,
+        net_terms_on_automatic_signups_enabled: false,
         customNetTermsEnabled: false,
       },
       test: true,

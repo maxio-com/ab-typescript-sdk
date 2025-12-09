@@ -19,14 +19,12 @@ export interface VoidRemainderEventData {
   [key: string]: unknown;
 }
 
-export const voidRemainderEventDataSchema: Schema<VoidRemainderEventData> = expandoObject(
-  {
-    creditNoteAttributes: [
-      'credit_note_attributes',
-      lazy(() => creditNoteSchema),
-    ],
-    memo: ['memo', string()],
-    appliedAmount: ['applied_amount', string()],
-    transactionTime: ['transaction_time', string()],
-  }
+export const voidRemainderEventDataSchema: Schema<VoidRemainderEventData> = lazy(
+  () =>
+    expandoObject({
+      creditNoteAttributes: ['credit_note_attributes', creditNoteSchema],
+      memo: ['memo', string()],
+      appliedAmount: ['applied_amount', string()],
+      transactionTime: ['transaction_time', string()],
+    })
 );

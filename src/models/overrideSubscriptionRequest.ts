@@ -15,6 +15,9 @@ export interface OverrideSubscriptionRequest {
   [key: string]: unknown;
 }
 
-export const overrideSubscriptionRequestSchema: Schema<OverrideSubscriptionRequest> = expandoObject(
-  { subscription: ['subscription', lazy(() => overrideSubscriptionSchema)] }
+export const overrideSubscriptionRequestSchema: Schema<OverrideSubscriptionRequest> = lazy(
+  () =>
+    expandoObject({
+      subscription: ['subscription', overrideSubscriptionSchema],
+    })
 );

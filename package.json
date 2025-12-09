@@ -1,5 +1,5 @@
 {
-  "version": "7.0.1",
+  "version": "8.0.0",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -44,10 +44,10 @@
     "typescript": "^5.2.0"
   },
   "dependencies": {
-    "@apimatic/authentication-adapters": "^0.5.10",
-    "@apimatic/axios-client-adapter": "^0.3.16",
-    "@apimatic/core": "^0.10.25",
-    "@apimatic/schema": "^0.7.19"
+    "@apimatic/authentication-adapters": "^0.5.14",
+    "@apimatic/axios-client-adapter": "^0.3.20",
+    "@apimatic/core": "^0.10.28",
+    "@apimatic/schema": "^0.7.21"
   },
   "repository": {
     "type": "git",

@@ -44,20 +44,21 @@ export interface ApplyCreditNoteEventData {
   [key: string]: unknown;
 }
 
-export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = expandoObject(
-  {
-    uid: ['uid', string()],
-    creditNoteNumber: ['credit_note_number', string()],
-    creditNoteUid: ['credit_note_uid', string()],
-    originalAmount: ['original_amount', string()],
-    appliedAmount: ['applied_amount', string()],
-    transactionTime: ['transaction_time', optional(string())],
-    memo: ['memo', optional(nullable(string()))],
-    role: ['role', optional(string())],
-    consolidatedInvoice: ['consolidated_invoice', optional(boolean())],
-    appliedCreditNotes: [
-      'applied_credit_notes',
-      optional(array(lazy(() => appliedCreditNoteDataSchema))),
-    ],
-  }
+export const applyCreditNoteEventDataSchema: Schema<ApplyCreditNoteEventData> = lazy(
+  () =>
+    expandoObject({
+      uid: ['uid', string()],
+      creditNoteNumber: ['credit_note_number', string()],
+      creditNoteUid: ['credit_note_uid', string()],
+      originalAmount: ['original_amount', string()],
+      appliedAmount: ['applied_amount', string()],
+      transactionTime: ['transaction_time', optional(string())],
+      memo: ['memo', optional(nullable(string()))],
+      role: ['role', optional(string())],
+      consolidatedInvoice: ['consolidated_invoice', optional(boolean())],
+      appliedCreditNotes: [
+        'applied_credit_notes',
+        optional(array(appliedCreditNoteDataSchema)),
+      ],
+    })
 );

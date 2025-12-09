@@ -24,8 +24,10 @@ export interface SubscriptionMRR {
   [key: string]: unknown;
 }
 
-export const subscriptionMRRSchema: Schema<SubscriptionMRR> = expandoObject({
-  subscriptionId: ['subscription_id', number()],
-  mrrAmountInCents: ['mrr_amount_in_cents', bigint()],
-  breakouts: ['breakouts', optional(lazy(() => subscriptionMRRBreakoutSchema))],
-});
+export const subscriptionMRRSchema: Schema<SubscriptionMRR> = lazy(() =>
+  expandoObject({
+    subscriptionId: ['subscription_id', number()],
+    mrrAmountInCents: ['mrr_amount_in_cents', bigint()],
+    breakouts: ['breakouts', optional(subscriptionMRRBreakoutSchema)],
+  })
+);

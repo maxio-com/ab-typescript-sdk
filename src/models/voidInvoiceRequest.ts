@@ -12,6 +12,6 @@ export interface VoidInvoiceRequest {
   [key: string]: unknown;
 }
 
-export const voidInvoiceRequestSchema: Schema<VoidInvoiceRequest> = expandoObject(
-  { mVoid: ['void', lazy(() => voidInvoiceSchema)] }
+export const voidInvoiceRequestSchema: Schema<VoidInvoiceRequest> = lazy(() =>
+  expandoObject({ mVoid: ['void', voidInvoiceSchema] })
 );

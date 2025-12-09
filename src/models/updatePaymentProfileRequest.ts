@@ -15,8 +15,9 @@ export interface UpdatePaymentProfileRequest {
   [key: string]: unknown;
 }
 
-export const updatePaymentProfileRequestSchema: Schema<UpdatePaymentProfileRequest> = expandoObject(
-  {
-    paymentProfile: ['payment_profile', lazy(() => updatePaymentProfileSchema)],
-  }
+export const updatePaymentProfileRequestSchema: Schema<UpdatePaymentProfileRequest> = lazy(
+  () =>
+    expandoObject({
+      paymentProfile: ['payment_profile', updatePaymentProfileSchema],
+    })
 );

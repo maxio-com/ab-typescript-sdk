@@ -15,6 +15,6 @@ export interface ListMRRResponse {
   [key: string]: unknown;
 }
 
-export const listMRRResponseSchema: Schema<ListMRRResponse> = expandoObject({
-  mrr: ['mrr', lazy(() => listMRRResponseResultSchema)],
-});
+export const listMRRResponseSchema: Schema<ListMRRResponse> = lazy(() =>
+  expandoObject({ mrr: ['mrr', listMRRResponseResultSchema] })
+);

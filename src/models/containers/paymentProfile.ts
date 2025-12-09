@@ -4,7 +4,12 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { anyOf, isMappedValueValidForSchema, Schema } from '../../schema.js';
+import {
+  anyOf,
+  isMappedValueValidForSchema,
+  lazy,
+  Schema,
+} from '../../schema.js';
 import {
   ApplePayPaymentProfile,
   applePayPaymentProfileSchema,
@@ -36,15 +41,17 @@ const discriminatorMap = {
   'paypal_account': paypalPaymentProfileSchema,
 };
 
-export const paymentProfileSchema: Schema<PaymentProfile> = anyOf(
-  [
-    applePayPaymentProfileSchema,
-    bankAccountPaymentProfileSchema,
-    creditCardPaymentProfileSchema,
-    paypalPaymentProfileSchema,
-  ],
-  discriminatorMap,
-  'payment_type'
+export const paymentProfileSchema: Schema<PaymentProfile> = lazy(() =>
+  anyOf(
+    [
+      applePayPaymentProfileSchema,
+      bankAccountPaymentProfileSchema,
+      creditCardPaymentProfileSchema,
+      paypalPaymentProfileSchema,
+    ],
+    discriminatorMap,
+    'payment_type'
+  )
 );
 
 export namespace PaymentProfile {

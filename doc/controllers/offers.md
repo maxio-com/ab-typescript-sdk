@@ -74,13 +74,25 @@ const body: CreateOfferRequest = {
 };
 
 try {
-  const { result, ...httpResponse } = await offersController.createOffer(body);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await offersController.createOffer(body);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -170,19 +182,31 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 const collect = {
-  page: 2,
+  page: 1,
   perPage: 50,
   includeArchived: true
 }
 
 try {
-  const { result, ...httpResponse } = await offersController.listOffers(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await offersController.listOffers(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -277,13 +301,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const offerId = 130;
 
 try {
-  const { result, ...httpResponse } = await offersController.readOffer(offerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await offersController.readOffer(offerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -317,13 +353,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const offerId = 130;
 
 try {
-  const { result, ...httpResponse } = await offersController.archiveOffer(offerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await offersController.archiveOffer(offerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -357,13 +405,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const offerId = 130;
 
 try {
-  const { result, ...httpResponse } = await offersController.unarchiveOffer(offerId);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await offersController.unarchiveOffer(offerId);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

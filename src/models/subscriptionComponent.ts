@@ -80,57 +80,61 @@ export interface SubscriptionComponent {
   [key: string]: unknown;
 }
 
-export const subscriptionComponentSchema: Schema<SubscriptionComponent> = expandoObject(
-  {
-    id: ['id', optional(number())],
-    name: ['name', optional(string())],
-    kind: ['kind', optional(componentKindSchema)],
-    unitName: ['unit_name', optional(string())],
-    enabled: ['enabled', optional(boolean())],
-    unitBalance: ['unit_balance', optional(number())],
-    currency: ['currency', optional(string())],
-    allocatedQuantity: [
-      'allocated_quantity',
-      optional(subscriptionComponentAllocatedQuantitySchema),
-    ],
-    pricingScheme: ['pricing_scheme', optional(nullable(pricingSchemeSchema))],
-    componentId: ['component_id', optional(number())],
-    componentHandle: ['component_handle', optional(nullable(string()))],
-    subscriptionId: ['subscription_id', optional(number())],
-    recurring: ['recurring', optional(boolean())],
-    upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
-    downgradeCredit: ['downgrade_credit', optional(nullable(creditTypeSchema))],
-    archivedAt: ['archived_at', optional(nullable(string()))],
-    pricePointId: ['price_point_id', optional(nullable(number()))],
-    pricePointHandle: ['price_point_handle', optional(nullable(string()))],
-    pricePointType: [
-      'price_point_type',
-      optional(nullable(pricePointTypeSchema)),
-    ],
-    pricePointName: ['price_point_name', optional(nullable(string()))],
-    productFamilyId: ['product_family_id', optional(number())],
-    productFamilyHandle: ['product_family_handle', optional(string())],
-    createdAt: ['created_at', optional(string())],
-    updatedAt: ['updated_at', optional(string())],
-    useSiteExchangeRate: [
-      'use_site_exchange_rate',
-      optional(nullable(boolean())),
-    ],
-    description: ['description', optional(nullable(string()))],
-    allowFractionalQuantities: [
-      'allow_fractional_quantities',
-      optional(boolean()),
-    ],
-    subscription: [
-      'subscription',
-      optional(lazy(() => subscriptionComponentSubscriptionSchema)),
-    ],
-    historicUsages: [
-      'historic_usages',
-      optional(array(lazy(() => historicUsageSchema))),
-    ],
-    displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
-    interval: ['interval', optional(number())],
-    intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
-  }
+export const subscriptionComponentSchema: Schema<SubscriptionComponent> = lazy(
+  () =>
+    expandoObject({
+      id: ['id', optional(number())],
+      name: ['name', optional(string())],
+      kind: ['kind', optional(componentKindSchema)],
+      unitName: ['unit_name', optional(string())],
+      enabled: ['enabled', optional(boolean())],
+      unitBalance: ['unit_balance', optional(number())],
+      currency: ['currency', optional(string())],
+      allocatedQuantity: [
+        'allocated_quantity',
+        optional(subscriptionComponentAllocatedQuantitySchema),
+      ],
+      pricingScheme: [
+        'pricing_scheme',
+        optional(nullable(pricingSchemeSchema)),
+      ],
+      componentId: ['component_id', optional(number())],
+      componentHandle: ['component_handle', optional(nullable(string()))],
+      subscriptionId: ['subscription_id', optional(number())],
+      recurring: ['recurring', optional(boolean())],
+      upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+      downgradeCredit: [
+        'downgrade_credit',
+        optional(nullable(creditTypeSchema)),
+      ],
+      archivedAt: ['archived_at', optional(nullable(string()))],
+      pricePointId: ['price_point_id', optional(nullable(number()))],
+      pricePointHandle: ['price_point_handle', optional(nullable(string()))],
+      pricePointType: [
+        'price_point_type',
+        optional(nullable(pricePointTypeSchema)),
+      ],
+      pricePointName: ['price_point_name', optional(nullable(string()))],
+      productFamilyId: ['product_family_id', optional(number())],
+      productFamilyHandle: ['product_family_handle', optional(string())],
+      createdAt: ['created_at', optional(string())],
+      updatedAt: ['updated_at', optional(string())],
+      useSiteExchangeRate: [
+        'use_site_exchange_rate',
+        optional(nullable(boolean())),
+      ],
+      description: ['description', optional(nullable(string()))],
+      allowFractionalQuantities: [
+        'allow_fractional_quantities',
+        optional(boolean()),
+      ],
+      subscription: [
+        'subscription',
+        optional(subscriptionComponentSubscriptionSchema),
+      ],
+      historicUsages: ['historic_usages', optional(array(historicUsageSchema))],
+      displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+    })
 );

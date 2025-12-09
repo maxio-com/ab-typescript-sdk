@@ -41,17 +41,16 @@ export interface RenewalPreview {
   [key: string]: unknown;
 }
 
-export const renewalPreviewSchema: Schema<RenewalPreview> = expandoObject({
-  nextAssessmentAt: ['next_assessment_at', optional(string())],
-  subtotalInCents: ['subtotal_in_cents', optional(bigint())],
-  totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
-  totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
-  totalInCents: ['total_in_cents', optional(bigint())],
-  existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
-  totalAmountDueInCents: ['total_amount_due_in_cents', optional(bigint())],
-  uncalculatedTaxes: ['uncalculated_taxes', optional(boolean())],
-  lineItems: [
-    'line_items',
-    optional(array(lazy(() => renewalPreviewLineItemSchema))),
-  ],
-});
+export const renewalPreviewSchema: Schema<RenewalPreview> = lazy(() =>
+  expandoObject({
+    nextAssessmentAt: ['next_assessment_at', optional(string())],
+    subtotalInCents: ['subtotal_in_cents', optional(bigint())],
+    totalTaxInCents: ['total_tax_in_cents', optional(bigint())],
+    totalDiscountInCents: ['total_discount_in_cents', optional(bigint())],
+    totalInCents: ['total_in_cents', optional(bigint())],
+    existingBalanceInCents: ['existing_balance_in_cents', optional(bigint())],
+    totalAmountDueInCents: ['total_amount_due_in_cents', optional(bigint())],
+    uncalculatedTaxes: ['uncalculated_taxes', optional(boolean())],
+    lineItems: ['line_items', optional(array(renewalPreviewLineItemSchema))],
+  })
+);

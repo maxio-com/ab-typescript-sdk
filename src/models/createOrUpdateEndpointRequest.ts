@@ -17,6 +17,6 @@ export interface CreateOrUpdateEndpointRequest {
   [key: string]: unknown;
 }
 
-export const createOrUpdateEndpointRequestSchema: Schema<CreateOrUpdateEndpointRequest> = expandoObject(
-  { endpoint: ['endpoint', lazy(() => createOrUpdateEndpointSchema)] }
+export const createOrUpdateEndpointRequestSchema: Schema<CreateOrUpdateEndpointRequest> = lazy(
+  () => expandoObject({ endpoint: ['endpoint', createOrUpdateEndpointSchema] })
 );

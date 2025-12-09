@@ -4,7 +4,7 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { expandoObject, number, optional, Schema } from '../schema.js';
+import { expandoObject, lazy, number, optional, Schema } from '../schema.js';
 import {
   CreateOrUpdateSegmentPriceUnitPrice,
   createOrUpdateSegmentPriceUnitPriceSchema,
@@ -18,10 +18,11 @@ export interface CreateOrUpdateSegmentPrice {
   [key: string]: unknown;
 }
 
-export const createOrUpdateSegmentPriceSchema: Schema<CreateOrUpdateSegmentPrice> = expandoObject(
-  {
-    startingQuantity: ['starting_quantity', optional(number())],
-    endingQuantity: ['ending_quantity', optional(number())],
-    unitPrice: ['unit_price', createOrUpdateSegmentPriceUnitPriceSchema],
-  }
+export const createOrUpdateSegmentPriceSchema: Schema<CreateOrUpdateSegmentPrice> = lazy(
+  () =>
+    expandoObject({
+      startingQuantity: ['starting_quantity', optional(number())],
+      endingQuantity: ['ending_quantity', optional(number())],
+      unitPrice: ['unit_price', createOrUpdateSegmentPriceUnitPriceSchema],
+    })
 );

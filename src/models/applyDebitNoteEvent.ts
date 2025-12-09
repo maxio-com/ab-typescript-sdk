@@ -25,12 +25,12 @@ export interface ApplyDebitNoteEvent {
   [key: string]: unknown;
 }
 
-export const applyDebitNoteEventSchema: Schema<ApplyDebitNoteEvent> = expandoObject(
-  {
+export const applyDebitNoteEventSchema: Schema<ApplyDebitNoteEvent> = lazy(() =>
+  expandoObject({
     id: ['id', bigint()],
     timestamp: ['timestamp', string()],
-    invoice: ['invoice', lazy(() => invoiceSchema)],
+    invoice: ['invoice', invoiceSchema],
     eventType: ['event_type', invoiceEventTypeSchema],
-    eventData: ['event_data', lazy(() => applyDebitNoteEventDataSchema)],
-  }
+    eventData: ['event_data', applyDebitNoteEventDataSchema],
+  })
 );
