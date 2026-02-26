@@ -6,9 +6,17 @@
 
 import { ApiResponse, commaPrefix, RequestOptions } from '../core.js';
 import {
+  CloneComponentPricePointRequest,
+  cloneComponentPricePointRequestSchema,
+} from '../models/cloneComponentPricePointRequest.js';
+import {
   ComponentCurrencyPricesResponse,
   componentCurrencyPricesResponseSchema,
 } from '../models/componentCurrencyPricesResponse.js';
+import {
+  ComponentPricePointCurrencyOverageResponse,
+  componentPricePointCurrencyOverageResponseSchema,
+} from '../models/componentPricePointCurrencyOverageResponse.js';
 import {
   ComponentPricePointResponse,
   componentPricePointResponseSchema,
@@ -29,6 +37,14 @@ import {
   ArchiveComponentPricePointPricePointId,
   archiveComponentPricePointPricePointIdSchema,
 } from '../models/containers/archiveComponentPricePointPricePointId.js';
+import {
+  CloneComponentPricePointComponentId,
+  cloneComponentPricePointComponentIdSchema,
+} from '../models/containers/cloneComponentPricePointComponentId.js';
+import {
+  CloneComponentPricePointPricePointId,
+  cloneComponentPricePointPricePointIdSchema,
+} from '../models/containers/cloneComponentPricePointPricePointId.js';
 import {
   ReadComponentPricePointComponentId,
   readComponentPricePointComponentIdSchema,
@@ -87,6 +103,7 @@ import {
 } from '../models/updateCurrencyPricesRequest.js';
 import { array, boolean, number, optional, string } from '../schema.js';
 import { BaseController } from './baseController.js';
+import { ApiError } from '@apimatic/core';
 import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
 import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
@@ -243,6 +260,57 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
+   * Clones a component price point. Custom price points (tied to a specific subscription) cannot be
+   * cloned. The following attributes are copied from the source price point:
+   * - Pricing scheme
+   * - All price tiers (with starting/ending quantities and unit prices)
+   * - Tax included setting
+   * - Currency prices (if definitive pricing is set)
+   * - Overage pricing (for prepaid usage components)
+   * - Interval settings (if multi-frequency is enabled)
+   * - Event-based billing segments (if applicable)
+   *
+   * @param componentId    The id or handle of the component. When using the
+   *                                                                 handle, it must be prefixed with `handle:`.
+   *                                                                 Example: `123` for an integer ID, or `handle:
+   *                                                                 example-product-handle` for a string handle.
+   * @param pricePointId   The id or handle of the price point. When using
+   *                                                                 the handle, it must be prefixed with `handle:`.
+   *                                                                 Example: `123` for an integer ID, or `handle:
+   *                                                                 example-price_point-handle` for a string handle.
+   * @param body
+   * @return Response from the API call
+   */
+  async cloneComponentPricePoint(
+    componentId: CloneComponentPricePointComponentId,
+    pricePointId: CloneComponentPricePointPricePointId,
+    body?: CloneComponentPricePointRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      componentId: [componentId, cloneComponentPricePointComponentIdSchema],
+      pricePointId: [pricePointId, cloneComponentPricePointPricePointIdSchema],
+      body: [body, optional(cloneComponentPricePointRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/clone.json`;
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
+    req.authenticate([{ basicAuth: true }]);
+    return req.callAsJson(
+      componentPricePointCurrencyOverageResponseSchema,
+      requestOptions
+    );
+  }
+
+  /**
    * When updating a price point, prices can be updated as well by creating new prices or editing /
    * removing existing ones.
    *
@@ -309,7 +377,7 @@ export class ComponentPricePointsController extends BaseController {
     pricePointId: ReadComponentPricePointPricePointId,
     currencyPrices?: boolean,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ComponentPricePointResponse>> {
+  ): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       componentId: [componentId, readComponentPricePointComponentIdSchema],
@@ -319,7 +387,10 @@ export class ComponentPricePointsController extends BaseController {
     req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}.json`;
     req.authenticate([{ basicAuth: true }]);
-    return req.callAsJson(componentPricePointResponseSchema, requestOptions);
+    return req.callAsJson(
+      componentPricePointCurrencyOverageResponseSchema,
+      requestOptions
+    );
   }
 
   /**

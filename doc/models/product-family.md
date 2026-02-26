@@ -16,6 +16,7 @@
 | `description` | `string \| null \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
+| `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this product family was archived. `null` if the product family is not archived. |
 
 ## Example (as JSON)
 

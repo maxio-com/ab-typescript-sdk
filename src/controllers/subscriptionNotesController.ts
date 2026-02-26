@@ -30,7 +30,7 @@ export class SubscriptionNotesController extends BaseController {
    * Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https:
    * //maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -61,7 +61,7 @@ export class SubscriptionNotesController extends BaseController {
    * Use this method to retrieve a list of Notes associated with a Subscription. The response will be an
    * array of Notes.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param page            Result records are organized in pages. By default, the first page of results is
    *                                  displayed. The page parameter specifies a page number of results to fetch. You
    *                                  can start navigating through the pages to consume the results. You do this by
@@ -111,7 +111,7 @@ export class SubscriptionNotesController extends BaseController {
    * Once you have obtained the ID of the note you wish to read, use this method to show a particular
    * note attached to a subscription.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param noteId          The Advanced Billing id of the note
    * @return Response from the API call
    */
@@ -133,7 +133,7 @@ export class SubscriptionNotesController extends BaseController {
   /**
    * Use the following method to update a note for a Subscription.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param noteId          The Advanced Billing id of the note
    * @param body
    * @return Response from the API call
@@ -164,9 +164,9 @@ export class SubscriptionNotesController extends BaseController {
   }
 
   /**
-   * Use the following method to delete a note for a Subscription.
+   * Deletes a note for a Subscription.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param noteId          The Advanced Billing id of the note
    * @return Response from the API call
    */

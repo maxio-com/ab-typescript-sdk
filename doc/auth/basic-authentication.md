@@ -9,8 +9,8 @@ Documentation for accessing and setting credentials for BasicAuth.
 
 | Name | Type | Description | Setter |
 |  --- | --- | --- | --- |
-| BasicAuthUserName | `string` | The username to use with basic authentication | `username` |
-| BasicAuthPassword | `string` | The password to use with basic authentication | `password` |
+| basicAuthUserName | `string` | The username to use with basic authentication | `username` |
+| basicAuthPassword | `string` | The password to use with basic authentication | `password` |
 
 
 

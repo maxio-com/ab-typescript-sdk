@@ -396,7 +396,7 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * This will delete a payment profile belonging to the customer on the subscription.
+   * Deletes a payment profile belonging to the customer on the subscription.
    *
    * + If the customer has multiple subscriptions, the payment profile will be removed from all of them.
    *
@@ -406,7 +406,7 @@ export class PaymentProfilesController extends BaseController {
    * the Admin UI and use the “Add New Credit Card” or “Make Active Payment Method” link, (depending on
    * whether there are other cards present).
    *
-   * @param subscriptionId     The Chargify id of the subscription
+   * @param subscriptionId     The Chargify id of the subscription.
    * @param paymentProfileId   The Chargify id of the payment profile
    * @return Response from the API call
    */
@@ -458,7 +458,7 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * This will delete a Payment Profile belonging to a Subscription Group.
+   * Deletes a Payment Profile belonging to a Subscription Group.
    *
    * **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it
    * will be removed from all of them.
@@ -489,7 +489,7 @@ export class PaymentProfilesController extends BaseController {
    * You must elect to change the existing payment profile to a new payment profile ID in order to
    * receive a satisfactory response from this endpoint.
    *
-   * @param subscriptionId     The Chargify id of the subscription
+   * @param subscriptionId     The Chargify id of the subscription.
    * @param paymentProfileId   The Chargify id of the payment profile
    * @return Response from the API call
    */
@@ -598,7 +598,7 @@ export class PaymentProfilesController extends BaseController {
    * These error responses are designed to prevent excessive or invalid requests, and to provide clear
    * and helpful information to users who encounter errors during the request process.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async sendRequestUpdatePaymentEmail(

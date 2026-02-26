@@ -122,7 +122,7 @@ export class SubscriptionProductsController extends BaseController {
    * 8. Optionally, you can use the applied "msg" param in the `redirect_url` to determine whether it was
    * successful or not.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -158,7 +158,7 @@ export class SubscriptionProductsController extends BaseController {
    * This will calculate the prorated adjustment, charge, payment and credit applied values assuming the
    * migration is done at that date in the future as opposed to right now.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */

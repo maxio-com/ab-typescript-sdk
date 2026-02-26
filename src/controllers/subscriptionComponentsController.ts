@@ -115,7 +115,7 @@ export class SubscriptionComponentsController extends BaseController {
   /**
    * This request will list information regarding a specific component owned by a subscription.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param componentId     The Advanced Billing id of the component. Alternatively, the component's handle
    *                                  prefixed by `handle:`
    * @return Response from the API call
@@ -144,7 +144,7 @@ export class SubscriptionComponentsController extends BaseController {
    * When requesting to list components for a given subscription, if the subscription contains
    * **archived** components they will be listed in the server response.
    *
-   * @param subscriptionId     The Chargify id of the subscription
+   * @param subscriptionId     The Chargify id of the subscription.
    * @param dateField          The type of filter you'd like to apply to
    *                                                                      your search. Use in query
    *                                                                      `date_field=updated_at`.
@@ -276,7 +276,7 @@ export class SubscriptionComponentsController extends BaseController {
    * 3. `"_default"` string, which will reset the price point to the component's current default price
    * point.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -312,7 +312,7 @@ export class SubscriptionComponentsController extends BaseController {
    * **Note**: this will update the price point for all of the subscription's components, even ones that
    * have not been allocated yet.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async bulkResetSubscriptionComponentsPricePoints(
@@ -329,55 +329,18 @@ export class SubscriptionComponentsController extends BaseController {
   }
 
   /**
-   * This endpoint creates a new allocation, setting the current allocated quantity for the Component and
-   * recording a memo.
+   * Creates an allocation, sets the current allocated quantity for the component, and records a memo.
+   * Allocations can only be updated for Quantity, On/Off, and Prepaid Components.
    *
-   * **Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.
+   * When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and
+   * `accrue_charge` to be applied.
    *
-   * ## Allocations Documentation
-   *
-   * Full documentation on how to record Allocations in the Advanced Billing UI can be located
-   * [here](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview).
-   * It is focused on how allocations operate within the Advanced Billing UI.It goes into greater detail
-   * on how the user interface will react when recording allocations.
-   *
-   * This documentation also goes into greater detail on how proration is taken into consideration when
-   * applying component allocations.
-   *
-   * ## Proration Schemes
-   *
-   * Changing the allocated quantity of a component mid-period can result in either a Charge or Credit
-   * being applied to the subscription. When creating an allocation via the API, you can pass the
-   * `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.
-   *
-   * **Notice:** These proration and accural fields will be ignored for Prepaid Components since this
+   * > **Note:** These proration and accural fields are ignored for Prepaid Components since this
    * component type always generate charges immediately without proration.
    *
-   * For background information on prorated components and upgrade/downgrade schemes, see [Setting
-   * Component Allocations.](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-
-   * Allocations-Proration).
-   * See the tables below for valid values.
-   *
-   * | upgrade_charge | Definition                                                        |
-   * |----------------|-------------------------------------------------------------------|
-   * | `full`         | A charge is added for the full price of the component.            |
-   * | `prorated`     | A charge is added for the prorated price of the component change. |
-   * | `none`         | No charge is added.                                               |
-   *
-   * | downgrade_credit | Definition                                        |
-   * |------------------|---------------------------------------------------|
-   * | `full`           | A full price credit is added for the amount owed. |
-   * | `prorated`       | A prorated credit is added for the amount owed.   |
-   * | `none`           | No charge is added.                               |
-   *
-   * | accrue_charge | Definition
-   *                         |
-   * |---------------|------------------------------------------------------------------------------------
-   * ------------------------|
-   * | `true`        | Attempt to charge the customer at next renewal.
-   * |
-   * | `false`       | Attempt to charge the customer right away. If it fails, the charge will be accrued
-   * until the next renewal. |
+   * For information on prorated components and upgrade/downgrade schemes, see [Setting Component
+   * Allocations.](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-
+   * Proration)
    *
    * ### Order of Resolution for upgrade_charge and downgrade_credit
    *
@@ -394,10 +357,13 @@ export class SubscriptionComponentsController extends BaseController {
    * 2. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-
    * Allocations-Proration#proration-schemes)
    *
-   * **NOTE: Proration uses the current price of the component as well as the current tax rates. Changes
-   * to either may cause the prorated charge/credit to be wrong.**
+   * > **Note:** Proration uses the current price of the component as well as the current tax rates.
+   * Changes to either may cause the prorated charge/credit to be wrong.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * For more informaiton see the [Component Allocations](https://maxio.zendesk.com/hc/en-
+   * us/articles/24251883961485-Component-Allocations-Overview) product Documentation.
+   *
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param componentId     The Advanced Billing id of the component
    * @param body
    * @return Response from the API call
@@ -435,23 +401,7 @@ export class SubscriptionComponentsController extends BaseController {
    * When a subscription's on/off component has been toggled to on (`1`) or off (`0`), usage will be
    * logged in this response.
    *
-   * ## Querying data via Advanced Billing gem
-   *
-   * You can also query the current quantity via the [official Advanced Billing Gem.](http://github.
-   * com/chargify/chargify_api_ares)
-   *
-   * ```# First way
-   * component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
-   * puts component.allocated_quantity
-   * # => 23
-   *
-   * # Second way
-   * component = Chargify::Subscription.find(7).component(1)
-   * puts component.allocated_quantity
-   * # => 23
-   * ```
-   *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param componentId     The Advanced Billing id of the component
    * @param page            Result records are organized in pages. By default, the first page of results is
    *                                  displayed. The page parameter specifies a page number of results to fetch. You
@@ -487,16 +437,34 @@ export class SubscriptionComponentsController extends BaseController {
   }
 
   /**
-   * Creates multiple allocations, setting the current allocated quantity for each of the components and
-   * recording a memo. The charges and/or credits that are created will be rolled up into a single total
-   * which is used to determine whether this is an upgrade or a downgrade. Be aware of the Order of
-   * Resolutions explained below in determining the proration scheme.
+   * Creates multiple allocations, sets the current allocated quantity for each of the components, and
+   * recording a memo.   A `component_id` is required for each allocation.
    *
-   * A `component_id` is required for each allocation.
+   * The charges and/or credits that are created will be rolled up into a single total which is used to
+   * determine whether this is an upgrade or a downgrade.
    *
-   * This endpoint only responds to JSON. It is not available for XML.
+   * ### Order of Resolution for upgrade_charge and downgrade_credit
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * 1. Per allocation in API call (within a single allocation of the `allocations` array)
+   * 2. [Component-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-
+   * Component-Allocations-Overview)
+   * 3. Allocation API call top level (outside of the `allocations` array)
+   * 4. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-
+   * Allocations-Proration#proration-schemes)
+   *
+   * ### Order of Resolution for accrue charge
+   *
+   * 1. Allocation API call top level (outside of the `allocations` array)
+   * 2. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-
+   * Allocations-Proration#proration-schemes)
+   *
+   * > **Note:** Proration uses the current price of the component as well as the current tax rates.
+   * Changes to either may cause the prorated charge/credit to be wrong.
+   *
+   * For more informaiton see the [Component Allocations](https://maxio.zendesk.com/hc/en-
+   * us/articles/24251883961485-Component-Allocations-Overview) product Documentation.
+   *
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -538,7 +506,7 @@ export class SubscriptionComponentsController extends BaseController {
    *
    * See example below for Fine-Grained Component Control response.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -583,7 +551,7 @@ export class SubscriptionComponentsController extends BaseController {
    * - An expiration date can be changed towards the past (essentially expiring it) up to the
    * subscription's current period beginning date.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param componentId     The Advanced Billing id of the component
    * @param allocationId    The Advanced Billing id of the allocation
    * @param body
@@ -635,7 +603,7 @@ export class SubscriptionComponentsController extends BaseController {
    * 3. `refund`: The allocation will be destroyed and the balances will be updated and a refund will be
    * issued along with a Credit Note.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param componentId     The Advanced Billing id of the component
    * @param allocationId    The Advanced Billing id of the allocation
    * @param body

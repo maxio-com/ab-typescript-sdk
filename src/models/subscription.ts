@@ -147,7 +147,7 @@ export interface Subscription {
   couponUseCount?: number | null;
   /** (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons. */
   couponUsesAllowed?: number | null;
-  /** If the subscription is canceled, this is their churn code. */
+  /** The churn reason code associated to a cancelled subscription. */
   reasonCode?: string | null;
   /** The date the subscription is scheduled to automatically resume from the on_hold state. */
   automaticallyResumeAt?: string | null;
@@ -174,7 +174,7 @@ export interface Subscription {
   netTerms?: number | null;
   /** For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. */
   storedCredentialTransactionId?: number | null;
-  /** The reference value (provided by your app) for the subscription itelf. */
+  /** The reference value (provided by your app) for the subscription istelf. */
   reference?: string | null;
   /** The timestamp of the most recent on hold action. */
   onHoldAt?: string | null;

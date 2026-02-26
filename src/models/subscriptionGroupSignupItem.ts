@@ -45,7 +45,7 @@ export interface SubscriptionGroupSignupItem {
   /** An array for all the coupons attached to the subscription. */
   couponCodes?: string[];
   components?: SubscriptionGroupSignupComponent[];
-  /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
+  /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription. A subscription can have up to 30 custom price points. Exceeding this limit will result in an API error. */
   customPrice?: SubscriptionCustomPrice;
   /** (Optional). Cannot be used when also specifying next_billing_at */
   calendarBilling?: CalendarBilling;

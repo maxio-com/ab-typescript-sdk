@@ -61,7 +61,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and
    * Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async readAccountBalances(
@@ -90,7 +90,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * Note that passing `amount_in_cents` is now allowed.
    *
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -120,7 +120,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
   /**
    * This request will list a subscription's prepayments.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param page            Result records are organized in pages. By default, the
    *                                                        first page of results is displayed. The page parameter
    *                                                        specifies a page number of results to fetch. You can start
@@ -170,7 +170,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * Credit will be added to the subscription in the amount specified in the request body. The credit is
    * subsequently applied to the next generated invoice.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -201,7 +201,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * Credit will be removed from the subscription in the amount specified in the request body. The credit
    * amount being deducted must be equal to or less than the current credit balance.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -231,7 +231,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
   /**
    * This request will list a subscription's service credits.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param page            Result records are organized in pages. By default, the first page of
    *                                            results is displayed. The page parameter specifies a page number of
    *                                            results to fetch. You can start navigating through the pages to consume
@@ -283,7 +283,7 @@ export class SubscriptionInvoiceAccountController extends BaseController {
    * The amount may be passed either as a decimal, with `amount`, or an integer in cents, with
    * `amount_in_cents`.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param prepaymentId    id of prepayment
    * @param body
    * @return Response from the API call

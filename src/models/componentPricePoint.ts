@@ -57,7 +57,7 @@ export interface ComponentPricePoint {
   interval?: number | null;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
-  /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. */
+  /** An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. The clone endpoint always returns currency prices if they are present. */
   currencyPrices?: ComponentCurrencyPrice[];
   /** Applicable only to prepaid usage components. An array of overage price brackets. */
   overagePrices?: ComponentPrice[];

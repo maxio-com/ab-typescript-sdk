@@ -30,9 +30,9 @@ export interface ReactivateSubscriptionRequest {
   preserveBalance?: boolean;
   /** The coupon code to be applied during reactivation. */
   couponCode?: string;
-  /** If true is sent, Chargify will use service credits and prepayments upon reactivation. If false is sent, the service credits and prepayments will be ignored. */
+  /** If true is sent, Advanced Billing will use service credits and prepayments upon reactivation. If false is sent, the service credits and prepayments will be ignored. */
   useCreditsAndPrepayments?: boolean;
-  /** If `true`, Chargify will attempt to resume the subscription's billing period. if not resumable, the subscription will be reactivated with a new billing period. If `false`: Chargify will only attempt to reactivate the subscription. */
+  /** If `true`, Advanced Billing will attempt to resume the subscription's billing period. If not resumable, the subscription will be reactivated with a new billing period. If `false` or omitted, Advanced Billing will only attempt to reactivate the subscription with a new billing period, regardless of whether or not the subscription is resumable. */
   resume?: ReactivateSubscriptionRequestResume;
   [key: string]: unknown;
 }

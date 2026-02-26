@@ -60,7 +60,7 @@ export interface UpdateSubscription {
   netTerms?: UpdateSubscriptionNetTerms;
   storedCredentialTransactionId?: number;
   reference?: string;
-  /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
+  /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription. A subscription can have up to 30 custom price points. Exceeding this limit will result in an API error. */
   customPrice?: SubscriptionCustomPrice;
   /** (Optional) An array of component ids and custom prices to be added to the subscription. */
   components?: UpdateSubscriptionComponent[];

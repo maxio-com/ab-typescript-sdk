@@ -196,7 +196,7 @@ export class EventsController extends BaseController {
    * While some events share the same schema for `event_specific_data`, others may not include it at all.
    * For precise mappings from key to event_specific_data, refer to [Event]($m/Event).
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param page            Result records are organized in pages. By default, the first page of results
    *                                      is displayed. The page parameter specifies a page number of results to fetch.
    *                                      You can start navigating through the pages to consume the results. You do

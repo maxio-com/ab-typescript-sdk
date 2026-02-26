@@ -250,8 +250,8 @@ export class SubscriptionGroupsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to delete subscription group.
-   * Only groups without members can be deleted
+   * Deletes a subscription group.
+   * Only groups without members can be deleted.
    *
    * @param uid The uid of the subscription group
    * @return Response from the API call
@@ -323,7 +323,7 @@ export class SubscriptionGroupsController extends BaseController {
    * docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
    *
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -350,7 +350,7 @@ export class SubscriptionGroupsController extends BaseController {
    * //maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-
    * hierarchies) features, it is possible to remove existing subscription from subscription group.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async removeSubscriptionFromGroup(

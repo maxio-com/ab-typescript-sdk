@@ -23,6 +23,7 @@ import {
 } from './subscriptionGroupPaymentProfile.js';
 
 export interface SubscriptionGroup {
+  uid?: string;
   customerId?: number;
   paymentProfile?: SubscriptionGroupPaymentProfile;
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
@@ -34,6 +35,7 @@ export interface SubscriptionGroup {
 
 export const subscriptionGroupSchema: Schema<SubscriptionGroup> = lazy(() =>
   expandoObject({
+    uid: ['uid', optional(string())],
     customerId: ['customer_id', optional(number())],
     paymentProfile: [
       'payment_profile',

@@ -14,6 +14,7 @@ const componentPricePointsController = new ComponentPricePointsController(client
 * [Create Component Price Point](../../doc/controllers/component-price-points.md#create-component-price-point)
 * [List Component Price Points](../../doc/controllers/component-price-points.md#list-component-price-points)
 * [Bulk Create Component Price Points](../../doc/controllers/component-price-points.md#bulk-create-component-price-points)
+* [Clone Component Price Point](../../doc/controllers/component-price-points.md#clone-component-price-point)
 * [Update Component Price Point](../../doc/controllers/component-price-points.md#update-component-price-point)
 * [Read Component Price Point](../../doc/controllers/component-price-points.md#read-component-price-point)
 * [Archive Component Price Point](../../doc/controllers/component-price-points.md#archive-component-price-point)
@@ -192,6 +193,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorArrayMapResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -421,6 +425,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -478,6 +485,164 @@ try {
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
+
+
+# Clone Component Price Point
+
+Clones a component price point. Custom price points (tied to a specific subscription) cannot be cloned. The following attributes are copied from the source price point:
+
+- Pricing scheme
+- All price tiers (with starting/ending quantities and unit prices)
+- Tax included setting
+- Currency prices (if definitive pricing is set)
+- Overage pricing (for prepaid usage components)
+- Interval settings (if multi-frequency is enabled)
+- Event-based billing segments (if applicable)
+
+```ts
+async cloneComponentPricePoint(
+  componentId: CloneComponentPricePointComponentId,
+  pricePointId: CloneComponentPricePointPricePointId,
+  body?: CloneComponentPricePointRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `componentId` | [`CloneComponentPricePointComponentId`](../../doc/models/containers/clone-component-price-point-component-id.md) | Template, Required | This is a container for one-of cases. |
+| `pricePointId` | [`CloneComponentPricePointPricePointId`](../../doc/models/containers/clone-component-price-point-price-point-id.md) | Template, Required | This is a container for one-of cases. |
+| `body` | [`CloneComponentPricePointRequest \| undefined`](../../doc/models/clone-component-price-point-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md).
+
+## Example Usage
+
+```ts
+const componentId: CloneComponentPricePointComponentId = 144;
+
+const pricePointId: CloneComponentPricePointPricePointId = 188;
+
+const body: CloneComponentPricePointRequest = {
+  pricePoint: {
+    name: 'Pro Usage Tiered Clone',
+  },
+};
+
+try {
+  const response = await componentPricePointsController.cloneComponentPricePoint(
+    componentId,
+    pricePointId,
+    body
+  );
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "price_point": {
+    "id": 9012,
+    "name": "Pro Usage Tiered Clone",
+    "type": "catalog",
+    "pricing_scheme": "tiered",
+    "component_id": 1234,
+    "handle": "pro-usage-tiered-clone",
+    "archived_at": null,
+    "created_at": "2024-05-01T12:34:56-04:00",
+    "updated_at": "2024-05-01T12:34:56-04:00",
+    "use_site_exchange_rate": false,
+    "currency_prices": [
+      {
+        "id": 3001,
+        "currency": "EUR",
+        "price": "9.99",
+        "formatted_price": "€9.99",
+        "price_id": 4001,
+        "price_point_id": 9012
+      }
+    ],
+    "currency_overage_prices": [
+      {
+        "id": 3002,
+        "currency": "EUR",
+        "price": "2.50",
+        "formatted_price": "€2.50",
+        "price_id": 4002,
+        "price_point_id": 9012
+      }
+    ],
+    "renew_prepaid_allocation": true,
+    "rollover_prepaid_remainder": false,
+    "expiration_interval": 1,
+    "expiration_interval_unit": "month",
+    "overage_pricing_scheme": "tiered",
+    "subscription_id": 4321,
+    "prices": [
+      {
+        "id": 4001,
+        "component_id": 1234,
+        "starting_quantity": 1,
+        "ending_quantity": 100,
+        "unit_price": "9.99",
+        "price_point_id": 9012,
+        "formatted_unit_price": "$9.99",
+        "segment_id": null
+      }
+    ],
+    "overage_prices": [
+      {
+        "id": 4002,
+        "component_id": 1234,
+        "starting_quantity": 101,
+        "ending_quantity": null,
+        "unit_price": "2.50",
+        "price_point_id": 9012,
+        "formatted_unit_price": "$2.50",
+        "segment_id": null
+      }
+    ],
+    "tax_included": false,
+    "interval": 1,
+    "interval_unit": "month"
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
@@ -565,6 +730,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorArrayMapResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -586,7 +754,7 @@ async readComponentPricePoint(
   pricePointId: ReadComponentPricePointPricePointId,
   currencyPrices?: boolean,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<ComponentPricePointResponse>>
+): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>>
 ```
 
 ## Parameters
@@ -600,7 +768,7 @@ async readComponentPricePoint(
 
 ## Response Type
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md).
 
 ## Example Usage
 
@@ -691,6 +859,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -900,6 +1071,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorArrayMapResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -995,6 +1169,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorArrayMapResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1106,6 +1283,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

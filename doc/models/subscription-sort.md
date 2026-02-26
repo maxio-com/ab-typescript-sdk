@@ -15,4 +15,8 @@
 | `NextAssessment` |
 | `UpdatedAt` |
 | `CreatedAt` |
+| `TotalPayments` |
+| `Id` |
+| `OpenBalance` |
+| `ExpiresAt` |
 
