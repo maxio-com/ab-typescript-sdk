@@ -563,7 +563,6 @@ export type { Site } from './models/site.js';
 export type { SiteResponse } from './models/siteResponse.js';
 export type { SiteStatistics } from './models/siteStatistics.js';
 export type { SiteSummary } from './models/siteSummary.js';
-export { SnapDay } from './models/snapDay.js';
 export { SortingDirection } from './models/sortingDirection.js';
 export { Status } from './models/status.js';
 export type { Subscription } from './models/subscription.js';
@@ -773,7 +772,6 @@ export * from './models/containers/subscriptionGroupSignupComponentAllocatedQuan
 export * from './models/containers/subscriptionGroupSignupComponentComponentId.js';
 export * from './models/containers/subscriptionGroupSignupComponentPricePointId.js';
 export * from './models/containers/subscriptionGroupSignupComponentUnitBalance.js';
-export * from './models/containers/subscriptionSnapDay.js';
 export * from './models/containers/updateComponentPricePointComponentId.js';
 export * from './models/containers/updateComponentPricePointPricePointId.js';
 export * from './models/containers/updateMetafieldsRequestMetafields.js';

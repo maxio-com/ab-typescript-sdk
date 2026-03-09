@@ -4,19 +4,13 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import {
-  isMappedValueValidForSchema,
-  number,
-  oneOf,
-  Schema,
-} from '../../schema.js';
-import { SnapDay, snapDaySchema } from '../snapDay.js';
+import { number, oneOf, Schema, string } from '../../schema.js';
 
 /** This is a container type for one-of types. */
-export type CalendarBillingSnapDay = number | SnapDay;
+export type CalendarBillingSnapDay = number | string;
 
 export const calendarBillingSnapDaySchema: Schema<CalendarBillingSnapDay> = oneOf(
-  [number(), snapDaySchema]
+  [number(), string()]
 );
 
 export namespace CalendarBillingSnapDay {
@@ -30,11 +24,11 @@ export namespace CalendarBillingSnapDay {
   }
 
   /**
-   * Validation method to narrow down union type to SnapDay type case.
+   * Validation method to narrow down union type to string type case.
    *
-   * This is SnapDay case.
+   * This is String case.
    */
-  export function isSnapDay(value: unknown): value is SnapDay {
-    return isMappedValueValidForSchema(value, snapDaySchema);
+  export function isString(value: unknown): value is string {
+    return typeof value === 'string';
   }
 }

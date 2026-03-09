@@ -10,5 +10,5 @@
 | Type |
 |  --- |
 | `number` |
-| [`SnapDay`](../../../doc/models/snap-day.md) |
+| `string` |
 

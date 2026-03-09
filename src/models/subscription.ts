@@ -29,10 +29,6 @@ import {
   collectionMethodSchema,
 } from './collectionMethod.js';
 import {
-  SubscriptionSnapDay,
-  subscriptionSnapDaySchema,
-} from './containers/subscriptionSnapDay.js';
-import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
 } from './creditCardPaymentProfile.js';
@@ -126,8 +122,8 @@ export interface Subscription {
   delayedCancelAt?: string | null;
   /** (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. */
   couponCode?: string | null;
-  /** The day of the month that the subscription will charge according to calendar billing rules, if used. */
-  snapDay?: SubscriptionSnapDay | null;
+  /** A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'. */
+  snapDay?: string | null;
   /** The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. */
   paymentCollectionMethod?: CollectionMethod;
   customer?: Customer;
@@ -239,7 +235,7 @@ export const subscriptionSchema: Schema<Subscription> = lazy(() =>
     signupRevenue: ['signup_revenue', optional(string())],
     delayedCancelAt: ['delayed_cancel_at', optional(nullable(string()))],
     couponCode: ['coupon_code', optional(nullable(string()))],
-    snapDay: ['snap_day', optional(nullable(subscriptionSnapDaySchema))],
+    snapDay: ['snap_day', optional(nullable(string()))],
     paymentCollectionMethod: [
       'payment_collection_method',
       optional(collectionMethodSchema),
