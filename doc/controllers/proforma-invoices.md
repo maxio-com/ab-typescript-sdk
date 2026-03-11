@@ -13,9 +13,9 @@ const proformaInvoicesController = new ProformaInvoicesController(client);
 * [Create Consolidated Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-consolidated-proforma-invoice)
 * [List Subscription Group Proforma Invoices](../../doc/controllers/proforma-invoices.md#list-subscription-group-proforma-invoices)
 * [Read Proforma Invoice](../../doc/controllers/proforma-invoices.md#read-proforma-invoice)
-* [Deliver Proforma Invoice](../../doc/controllers/proforma-invoices.md#deliver-proforma-invoice)
 * [Create Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-proforma-invoice)
 * [List Proforma Invoices](../../doc/controllers/proforma-invoices.md#list-proforma-invoices)
+* [Deliver Proforma Invoice](../../doc/controllers/proforma-invoices.md#deliver-proforma-invoice)
 * [Void Proforma Invoice](../../doc/controllers/proforma-invoices.md#void-proforma-invoice)
 * [Preview Proforma Invoice](../../doc/controllers/proforma-invoices.md#preview-proforma-invoice)
 * [Create Signup Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-signup-proforma-invoice)
@@ -241,90 +241,6 @@ try {
 | 404 | Not Found | `ApiError` |
 
 
-# Deliver Proforma Invoice
-
-Allows for proforma invoices to be programmatically delivered via email. Supports email
-delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
-
-If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from the invoice or
-subscription. At least one recipient must be present, either via the request body or via this default behavior, so an
-empty body may still succeed when defaults are available.
-
-```ts
-async deliverProformaInvoice(
-  proformaInvoiceUid: string,
-  body?: DeliverProformaInvoiceRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<ProformaInvoice>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `proformaInvoiceUid` | `string` | Template, Required | The uid of the proforma invoice |
-| `body` | [`DeliverProformaInvoiceRequest \| undefined`](../../doc/models/deliver-proforma-invoice-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
-
-## Example Usage
-
-```ts
-const proformaInvoiceUid = 'proforma_invoice_uid4';
-
-const body: DeliverProformaInvoiceRequest = {
-  recipientEmails: [
-    'user0@example.com'
-  ],
-  ccRecipientEmails: [
-    'user1@example.com'
-  ],
-  bccRecipientEmails: [
-    'user2@example.com'
-  ],
-};
-
-try {
-  const response = await proformaInvoicesController.deliverProformaInvoice(
-    proformaInvoiceUid,
-    body
-  );
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorListResponseError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
-
-
 # Create Proforma Invoice
 
 This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
@@ -493,6 +409,90 @@ try {
   }
 }
 ```
+
+
+# Deliver Proforma Invoice
+
+Allows for proforma invoices to be programmatically delivered via email. Supports email
+delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
+
+If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from the invoice or
+subscription. At least one recipient must be present, either via the request body or via this default behavior, so an
+empty body may still succeed when defaults are available.
+
+```ts
+async deliverProformaInvoice(
+  proformaInvoiceUid: string,
+  body?: DeliverProformaInvoiceRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<ProformaInvoice>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `proformaInvoiceUid` | `string` | Template, Required | The uid of the proforma invoice |
+| `body` | [`DeliverProformaInvoiceRequest \| undefined`](../../doc/models/deliver-proforma-invoice-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
+
+## Example Usage
+
+```ts
+const proformaInvoiceUid = 'proforma_invoice_uid4';
+
+const body: DeliverProformaInvoiceRequest = {
+  recipientEmails: [
+    'user0@example.com'
+  ],
+  ccRecipientEmails: [
+    'user1@example.com'
+  ],
+  bccRecipientEmails: [
+    'user2@example.com'
+  ],
+};
+
+try {
+  const response = await proformaInvoicesController.deliverProformaInvoice(
+    proformaInvoiceUid,
+    body
+  );
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
 # Void Proforma Invoice

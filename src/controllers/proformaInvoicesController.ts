@@ -164,44 +164,6 @@ export class ProformaInvoicesController extends BaseController {
   }
 
   /**
-   * Allows for proforma invoices to be programmatically delivered via email. Supports email
-   * delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
-   *
-   * If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from
-   * the invoice or
-   * subscription. At least one recipient must be present, either via the request body or via this
-   * default behavior, so an
-   * empty body may still succeed when defaults are available.
-   *
-   * @param proformaInvoiceUid   The uid of the proforma invoice
-   * @param body
-   * @return Response from the API call
-   */
-  async deliverProformaInvoice(
-    proformaInvoiceUid: string,
-    body?: DeliverProformaInvoiceRequest,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<ProformaInvoice>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      proformaInvoiceUid: [proformaInvoiceUid, string()],
-      body: [body, optional(deliverProformaInvoiceRequestSchema)],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}.json`;
-    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
-    req.throwOn(
-      422,
-      ErrorListResponseError,
-      true,
-      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-    );
-    req.authenticate([{ basicAuth: true }]);
-    return req.callAsJson(proformaInvoiceSchema, requestOptions);
-  }
-
-  /**
    * This endpoint will create a proforma invoice and return it as a response. If the information becomes
    * outdated, simply void the old proforma invoice and generate a new one.
    *
@@ -330,6 +292,44 @@ export class ProformaInvoicesController extends BaseController {
     req.appendTemplatePath`/subscriptions/${mapped.subscriptionId}/proforma_invoices.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(listProformaInvoicesResponseSchema, requestOptions);
+  }
+
+  /**
+   * Allows for proforma invoices to be programmatically delivered via email. Supports email
+   * delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
+   *
+   * If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from
+   * the invoice or
+   * subscription. At least one recipient must be present, either via the request body or via this
+   * default behavior, so an
+   * empty body may still succeed when defaults are available.
+   *
+   * @param proformaInvoiceUid   The uid of the proforma invoice
+   * @param body
+   * @return Response from the API call
+   */
+  async deliverProformaInvoice(
+    proformaInvoiceUid: string,
+    body?: DeliverProformaInvoiceRequest,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<ProformaInvoice>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      proformaInvoiceUid: [proformaInvoiceUid, string()],
+      body: [body, optional(deliverProformaInvoiceRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.json(mapped.body);
+    req.appendTemplatePath`/proforma_invoices/${mapped.proformaInvoiceUid}/deliveries.json`;
+    req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
+    req.throwOn(
+      422,
+      ErrorListResponseError,
+      true,
+      "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+    );
+    req.authenticate([{ basicAuth: true }]);
+    return req.callAsJson(proformaInvoiceSchema, requestOptions);
   }
 
   /**
