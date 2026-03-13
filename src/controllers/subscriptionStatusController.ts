@@ -52,7 +52,7 @@ export class SubscriptionStatusController extends BaseController {
    *
    * The response will be `422 "Unprocessable Entity`.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async retrySubscription(
@@ -75,10 +75,11 @@ export class SubscriptionStatusController extends BaseController {
   }
 
   /**
-   * The DELETE action causes the cancellation of the Subscription. This means, the method sets the
-   * Subscription state to "canceled".
+   * Cancels the Subscription. The Delete method sets the Subscription state to `canceled`.
+   * To cancel the subscription immediately, omit any schedule parameters from the request. To use the
+   * schedule options, the Schedule Subscription Cancellation feature must be enabled on your site.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -111,10 +112,10 @@ export class SubscriptionStatusController extends BaseController {
    * subscription will return to active and will renew on that date.  Otherwise, it will behave like a
    * reactivation, setting the billing date to 'now' and charging the subscriber.
    *
-   * @param subscriptionId                        The Chargify id of the subscription
+   * @param subscriptionId                        The Chargify id of the subscription.
    * @param calendarBillingResumptionCharge       (For calendar billing subscriptions only) The
    *                                                                  way that the resumed subscription's charge should
-   *                                                                  be handled
+   *                                                                  be handled.
    * @return Response from the API call
    */
   async resumeSubscription(
@@ -153,7 +154,7 @@ export class SubscriptionStatusController extends BaseController {
    *
    * You may not place a subscription on hold if the `next_billing_at` date is within 24 hours.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -192,7 +193,7 @@ export class SubscriptionStatusController extends BaseController {
    * Alternately, you can change the `automatically_resume_at` to `null` if you would like the
    * subscription to not have a resume date.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -220,9 +221,9 @@ export class SubscriptionStatusController extends BaseController {
   }
 
   /**
-   * Advanced Billing offers the ability to reactivate a previously canceled subscription. For details on
-   * how the reactivation works, and how to reactivate subscriptions through the application, see
-   * [reactivation](https://maxio.zendesk.com/hc/en-us/articles/24252109503629-Reactivating-and-Resuming).
+   * Reactivate a previously canceled subscription. For details on how the reactivation works, and how to
+   * reactivate subscriptions through the application, see [reactivation](https://maxio.zendesk.com/hc/en-
+   * us/articles/24252109503629-Reactivating-and-Resuming).
    *
    * **Note: The term "resume" is used also during another process in Advanced Billing. This occurs when
    * an on-hold subscription is "resumed". This returns the subscription to an active state.**
@@ -251,6 +252,10 @@ export class SubscriptionStatusController extends BaseController {
    * If a reactivation with `resume: true` were attempted _after_ what would have been the next billing
    * date of July 1st, then Advanced Billing would not resume the subscription, and instead it would be
    * reactivated with a new billing period.
+   *
+   * If a reactivation with `resume: false`, or where 'resume" is omited were attempted, then Advanced
+   * Billing would reactivate the subscription with a new billing period regardless of whether or not
+   * resuming the previous billing period were possible.
    *
    * | Canceled | Reactivation | Resumable? |
    * |---|---|---|
@@ -390,7 +395,7 @@ export class SubscriptionStatusController extends BaseController {
    * + The next billing date should not have changed
    * + Any product-related charges should have been collected
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -418,16 +423,11 @@ export class SubscriptionStatusController extends BaseController {
   }
 
   /**
-   * Advanced Billing offers the ability to cancel a subscription at the end of the current billing
-   * period. This period is set by its current product.
-   *
-   * Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period`
-   * flag to true.
-   *
-   * Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription
+   * Cancels a subscription at the end of the current billing period based on the subscription's current
+   * product. You cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription
    * is past due.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */
@@ -463,7 +463,7 @@ export class SubscriptionStatusController extends BaseController {
    * This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the
    * delayed cancellation has no effect and the call will be successful.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async cancelDelayedCancellation(
@@ -484,7 +484,7 @@ export class SubscriptionStatusController extends BaseController {
    * If a subscription is currently in dunning, the subscription will be set to active and the active
    * Dunner will be resolved.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @return Response from the API call
    */
   async cancelDunning(
@@ -538,10 +538,10 @@ export class SubscriptionStatusController extends BaseController {
    *
    * ## Subscription Side Effects
    *
-   * You can request a `POST` to obtain this data from the endpoint without any side effects. Plain and
-   * simple, this will preview data, not log any changes against a subscription.
+   * You can request a `POST` to obtain this data from the endpoint without any side effects. This method
+   * allows you to preview data, but does not log any changes against a subscription.
    *
-   * @param subscriptionId  The Chargify id of the subscription
+   * @param subscriptionId  The Chargify id of the subscription.
    * @param body
    * @return Response from the API call
    */

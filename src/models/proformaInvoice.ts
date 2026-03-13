@@ -15,6 +15,10 @@ import {
   string,
 } from '../schema.js';
 import {
+  AvailableActions,
+  availableActionsSchema,
+} from './availableActions.js';
+import {
   CollectionMethod,
   collectionMethodSchema,
 } from './collectionMethod.js';
@@ -104,6 +108,7 @@ export interface ProformaInvoice {
   payments?: ProformaInvoicePayment[];
   customFields?: InvoiceCustomField[];
   publicUrl?: string | null;
+  availableActions?: AvailableActions;
   [key: string]: unknown;
 }
 
@@ -148,5 +153,6 @@ export const proformaInvoiceSchema: Schema<ProformaInvoice> = lazy(() =>
     payments: ['payments', optional(array(proformaInvoicePaymentSchema))],
     customFields: ['custom_fields', optional(array(invoiceCustomFieldSchema))],
     publicUrl: ['public_url', optional(nullable(string()))],
+    availableActions: ['available_actions', optional(availableActionsSchema)],
   })
 );

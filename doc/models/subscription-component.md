@@ -22,8 +22,8 @@
 | `componentHandle` | `string \| null \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
 | `recurring` | `boolean \| undefined` | Optional | - |
-| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
-| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
+| `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
 | `archivedAt` | `string \| null \| undefined` | Optional | - |
 | `pricePointId` | `number \| null \| undefined` | Optional | - |
 | `pricePointHandle` | `string \| null \| undefined` | Optional | - |

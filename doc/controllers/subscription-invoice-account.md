@@ -34,7 +34,7 @@ async readAccountBalances(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -93,7 +93,7 @@ async createPrepayment(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`CreatePrepaymentRequest \| undefined`](../../doc/models/create-prepayment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -190,7 +190,7 @@ async listPrepayments(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListPrepaymentsFilter \| undefined`](../../doc/models/list-prepayments-filter.md) | Query, Optional | Filter to use for List Prepayments operations |
@@ -282,7 +282,7 @@ async issueServiceCredit(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`IssueServiceCreditRequest \| undefined`](../../doc/models/issue-service-credit-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -363,7 +363,7 @@ async deductServiceCredit(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`DeductServiceCreditRequest \| undefined`](../../doc/models/deduct-service-credit-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -435,7 +435,7 @@ async listServiceCredits(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
@@ -478,6 +478,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -538,7 +541,7 @@ async refundPrepayment(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `prepaymentId` | `bigint` | Template, Required | id of prepayment |
 | `body` | [`RefundPrepaymentRequest \| undefined`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -577,6 +580,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof RefundPrepaymentBaseErrorsResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

@@ -153,6 +153,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -545,6 +548,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorStringMapResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -625,6 +631,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -639,7 +648,7 @@ try {
 
 # Delete Subscriptions Payment Profile
 
-This will delete a payment profile belonging to the customer on the subscription.
+Deletes a payment profile belonging to the customer on the subscription.
 
 + If the customer has multiple subscriptions, the payment profile will be removed from all of them.
 
@@ -657,7 +666,7 @@ async deleteSubscriptionsPaymentProfile(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -759,6 +768,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -801,7 +813,7 @@ try {
 
 # Delete Subscription Group Payment Profile
 
-This will delete a Payment Profile belonging to a Subscription Group.
+Deletes a Payment Profile belonging to a Subscription Group.
 
 **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it will be removed from all of them.
 
@@ -878,7 +890,7 @@ async changeSubscriptionDefaultPaymentProfile(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `paymentProfileId` | `number` | Template, Required | The Chargify id of the payment profile |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -916,6 +928,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1015,6 +1030,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1106,6 +1124,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1138,7 +1159,7 @@ async sendRequestUpdatePaymentEmail(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1170,6 +1191,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

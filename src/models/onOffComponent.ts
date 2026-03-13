@@ -35,15 +35,9 @@ export interface OnOffComponent {
   handle?: string;
   /** Boolean flag describing whether a component is taxable or not. */
   taxable?: boolean;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   downgradeCredit?: CreditType | null;
   pricePoints?: ComponentPricePointItem[];
   /** This is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065 */

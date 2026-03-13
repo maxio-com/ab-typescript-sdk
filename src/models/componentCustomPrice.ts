@@ -32,7 +32,14 @@ export interface ComponentCustomPrice {
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
-  /** On/off components only need one price bracket starting at 1 */
+  /**
+   * Optional id of the price point to use for list price calculations when
+   * overriding the customer price.
+   */
+  listPricePointId?: number | null;
+  /** When true, list price calculations will continue to use the default price point even when a `custom_price` is supplied. */
+  useDefaultListPrice?: boolean;
+  /** On/off components only need one price bracket starting at 1. */
   prices: Price[];
   /** Applicable only to prepaid usage components. Controls whether the allocated quantity renews each period. */
   renewPrepaidAllocation?: boolean;
@@ -52,6 +59,8 @@ export const componentCustomPriceSchema: Schema<ComponentCustomPrice> = lazy(
       pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
       interval: ['interval', optional(number())],
       intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+      listPricePointId: ['list_price_point_id', optional(nullable(number()))],
+      useDefaultListPrice: ['use_default_list_price', optional(boolean())],
       prices: ['prices', array(priceSchema)],
       renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
       rolloverPrepaidRemainder: [

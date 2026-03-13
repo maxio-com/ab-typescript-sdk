@@ -47,15 +47,9 @@ export interface SubscriptionComponent {
   componentHandle?: string | null;
   subscriptionId?: number;
   recurring?: boolean;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   downgradeCredit?: CreditType | null;
   archivedAt?: string | null;
   pricePointId?: number | null;

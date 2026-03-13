@@ -44,7 +44,7 @@ import {
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { TrialType, trialTypeSchema } from './trialType.js';
 
-/** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
+/** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription. A subscription can have up to 30 custom price points. Exceeding this limit will result in an API error. */
 export interface SubscriptionCustomPrice {
   /** (Optional) */
   name?: string;

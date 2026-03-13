@@ -21,6 +21,8 @@ export interface ProductFamily {
   description?: string | null;
   createdAt?: string;
   updatedAt?: string;
+  /** Timestamp indicating when this product family was archived. `null` if the product family is not archived. */
+  archivedAt?: string | null;
   [key: string]: unknown;
 }
 
@@ -32,4 +34,5 @@ export const productFamilySchema: Schema<ProductFamily> = expandoObject({
   description: ['description', optional(nullable(string()))],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
+  archivedAt: ['archived_at', optional(nullable(string()))],
 });

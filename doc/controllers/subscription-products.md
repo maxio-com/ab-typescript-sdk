@@ -85,7 +85,7 @@ async migrateSubscriptionProduct(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`SubscriptionProductMigrationRequest \| undefined`](../../doc/models/subscription-product-migration-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -131,6 +131,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -286,7 +289,7 @@ async previewSubscriptionProductMigration(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`SubscriptionMigrationPreviewRequest \| undefined`](../../doc/models/subscription-migration-preview-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -331,6 +334,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

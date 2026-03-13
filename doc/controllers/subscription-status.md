@@ -45,7 +45,7 @@ async retrySubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -77,6 +77,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -226,7 +229,8 @@ try {
 
 # Cancel Subscription
 
-The DELETE action causes the cancellation of the Subscription. This means, the method sets the Subscription state to "canceled".
+Cancels the Subscription. The Delete method sets the Subscription state to `canceled`.
+To cancel the subscription immediately, omit any schedule parameters from the request. To use the schedule options, the Schedule Subscription Cancellation feature must be enabled on your site.
 
 ```ts
 async cancelSubscription(
@@ -240,7 +244,7 @@ async cancelSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`CancellationRequest \| undefined`](../../doc/models/cancellation-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -437,8 +441,8 @@ async resumeSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
-| `calendarBillingResumptionCharge` | [`ResumptionCharge \| undefined`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled<br><br>**Default**: `ResumptionCharge.Prorated` |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
+| `calendarBillingResumptionCharge` | [`ResumptionCharge \| undefined`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled.<br><br>**Default**: `ResumptionCharge.Prorated` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -470,6 +474,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -610,7 +617,7 @@ async pauseSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`PauseRequest \| undefined`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -652,6 +659,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -794,7 +804,7 @@ async updateAutomaticSubscriptionResumption(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`PauseRequest \| undefined`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -836,6 +846,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -969,7 +982,7 @@ try {
 
 # Reactivate Subscription
 
-Advanced Billing offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://maxio.zendesk.com/hc/en-us/articles/24252109503629-Reactivating-and-Resuming).
+Reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://maxio.zendesk.com/hc/en-us/articles/24252109503629-Reactivating-and-Resuming).
 
 **Note: The term "resume" is used also during another process in Advanced Billing. This occurs when an on-hold subscription is "resumed". This returns the subscription to an active state.**
 
@@ -989,6 +1002,8 @@ Consider a subscription which was created on June 1st, and would renew on July 1
 If a reactivation with `resume: true` were attempted _before_ what would have been the next billing date of July 1st, then Advanced Billing would resume the subscription.
 
 If a reactivation with `resume: true` were attempted _after_ what would have been the next billing date of July 1st, then Advanced Billing would not resume the subscription, and instead it would be reactivated with a new billing period.
+
+If a reactivation with `resume: false`, or where 'resume" is omited were attempted, then Advanced Billing would reactivate the subscription with a new billing period regardless of whether or not resuming the previous billing period were possible.
 
 | Canceled | Reactivation | Resumable? |
 |---|---|---|
@@ -1140,7 +1155,7 @@ async reactivateSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`ReactivateSubscriptionRequest \| undefined`](../../doc/models/reactivate-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1187,6 +1202,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1310,11 +1328,7 @@ try {
 
 # Initiate Delayed Cancellation
 
-Advanced Billing offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
-
-Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period` flag to true.
-
-Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
+Cancels a subscription at the end of the current billing period based on the subscription's current product. You cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
 
 ```ts
 async initiateDelayedCancellation(
@@ -1328,7 +1342,7 @@ async initiateDelayedCancellation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`CancellationRequest \| undefined`](../../doc/models/cancellation-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1361,6 +1375,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1390,7 +1407,7 @@ async cancelDelayedCancellation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1456,7 +1473,7 @@ async cancelDunning(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -1488,6 +1505,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1522,7 +1542,7 @@ Optionally, **you may provide your own custom quantities** for any component to 
 
 ## Subscription Side Effects
 
-You can request a `POST` to obtain this data from the endpoint without any side effects. Plain and simple, this will preview data, not log any changes against a subscription.
+You can request a `POST` to obtain this data from the endpoint without any side effects. This method allows you to preview data, but does not log any changes against a subscription.
 
 ```ts
 async previewRenewal(
@@ -1536,7 +1556,7 @@ async previewRenewal(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`RenewalPreviewRequest \| undefined`](../../doc/models/renewal-preview-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1591,6 +1611,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

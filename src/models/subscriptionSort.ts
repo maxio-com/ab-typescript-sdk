@@ -16,6 +16,10 @@ export enum SubscriptionSort {
   NextAssessment = 'next_assessment',
   UpdatedAt = 'updated_at',
   CreatedAt = 'created_at',
+  TotalPayments = 'total_payments',
+  Id = 'id',
+  OpenBalance = 'open_balance',
+  ExpiresAt = 'expires_at',
 }
 
 /**

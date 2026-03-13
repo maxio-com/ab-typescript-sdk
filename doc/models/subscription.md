@@ -33,7 +33,7 @@
 | `signupRevenue` | `string \| undefined` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
 | `delayedCancelAt` | `string \| null \| undefined` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `couponCode` | `string \| null \| undefined` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
-| `snapDay` | [`SubscriptionSnapDay \| null \| undefined`](../../doc/models/containers/subscription-snap-day.md) | Optional | This is a container for one-of cases. |
+| `snapDay` | `string \| null \| undefined` | Optional | A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'. |
 | `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `customer` | [`Customer \| undefined`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product \| undefined`](../../doc/models/product.md) | Optional | - |
@@ -46,7 +46,7 @@
 | `nextProductHandle` | `string \| null \| undefined` | Optional | If a delayed product change is scheduled, the handle of the product that the subscription will be changed to at the next renewal. |
 | `couponUseCount` | `number \| null \| undefined` | Optional | (deprecated) How many times the subscription's single coupon has been used. This field has no replacement for multiple coupons. |
 | `couponUsesAllowed` | `number \| null \| undefined` | Optional | (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons. |
-| `reasonCode` | `string \| null \| undefined` | Optional | If the subscription is canceled, this is their churn code. |
+| `reasonCode` | `string \| null \| undefined` | Optional | The churn reason code associated to a cancelled subscription. |
 | `automaticallyResumeAt` | `string \| null \| undefined` | Optional | The date the subscription is scheduled to automatically resume from the on_hold state. |
 | `couponCodes` | `string[] \| undefined` | Optional | An array for all the coupons attached to the subscription. |
 | `offerId` | `number \| null \| undefined` | Optional | The ID of the offer associated with the subscription. |
@@ -57,7 +57,7 @@
 | `nextProductPricePointId` | `number \| null \| undefined` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
 | `netTerms` | `number \| null \| undefined` | Optional | On Relationship Invoicing, the number of days before a renewal invoice is due. |
 | `storedCredentialTransactionId` | `number \| null \| undefined` | Optional | For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. |
-| `reference` | `string \| null \| undefined` | Optional | The reference value (provided by your app) for the subscription itelf. |
+| `reference` | `string \| null \| undefined` | Optional | The reference value (provided by your app) for the subscription istelf. |
 | `onHoldAt` | `string \| null \| undefined` | Optional | The timestamp of the most recent on hold action. |
 | `prepaidDunning` | `boolean \| undefined` | Optional | Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled |
 | `coupons` | [`SubscriptionIncludedCoupon[] \| undefined`](../../doc/models/subscription-included-coupon.md) | Optional | Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.<br>Only in Read Subscription Endpoint. |

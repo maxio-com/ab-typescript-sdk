@@ -12,6 +12,7 @@
 | `recipientEmails` | `string[] \| undefined` | Optional | **Constraints**: *Maximum Items*: `5` |
 | `ccRecipientEmails` | `string[] \| undefined` | Optional | **Constraints**: *Maximum Items*: `5` |
 | `bccRecipientEmails` | `string[] \| undefined` | Optional | **Constraints**: *Maximum Items*: `5` |
+| `attachmentUrls` | `string[] \| undefined` | Optional | Array of URLs to files to attach to the invoice email. Max 10 files, 10MB each.<br><br>**Constraints**: *Maximum Items*: `10` |
 
 ## Example (as JSON)
 
@@ -27,6 +28,10 @@
   ],
   "bcc_recipient_emails": [
     "bcc_recipient_emails6"
+  ],
+  "attachment_urls": [
+    "attachment_urls0",
+    "attachment_urls1"
   ]
 }
 ```

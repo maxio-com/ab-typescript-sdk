@@ -64,15 +64,9 @@ export interface Component {
   /** A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. */
   taxCode?: string | null;
   recurring?: boolean;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   downgradeCredit?: CreditType | null;
   /** Timestamp indicating when this component was created */
   createdAt?: string;

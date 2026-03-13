@@ -65,7 +65,7 @@ export interface CreateSubscription {
   productPricePointHandle?: string;
   /** The ID of the particular price point on the product. */
   productPricePointId?: number;
-  /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription */
+  /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription. A subscription can have up to 30 custom price points. Exceeding this limit will result in an API error. */
   customPrice?: SubscriptionCustomPrice;
   /** (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. */
   couponCode?: string;

@@ -45,7 +45,7 @@ async readSubscriptionComponent(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `componentId` | `number` | Template, Required | The Advanced Billing id of the component. Alternatively, the component's handle prefixed by `handle:` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -160,7 +160,7 @@ async listSubscriptionComponents(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `dateField` | [`SubscriptionListDateField \| undefined`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `filter` | [`ListSubscriptionComponentsFilter \| undefined`](../../doc/models/list-subscription-components-filter.md) | Query, Optional | Filter to use for List Subscription Components operation |
@@ -281,7 +281,7 @@ async bulkUpdateSubscriptionComponentsPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`BulkComponentsPricePointAssignment \| undefined`](../../doc/models/bulk-components-price-point-assignment.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -334,6 +334,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ComponentPricePointError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -379,7 +382,7 @@ async bulkResetSubscriptionComponentsPricePoints(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -518,41 +521,13 @@ try {
 
 # Allocate Component
 
-This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.
+Creates an allocation, sets the current allocated quantity for the component, and records a memo. Allocations can only be updated for Quantity, On/Off, and Prepaid Components.
 
-**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.
+When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.
 
-## Allocations Documentation
+> **Note:** These proration and accural fields are ignored for Prepaid Components since this component type always generate charges immediately without proration.
 
-Full documentation on how to record Allocations in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview). It is focused on how allocations operate within the Advanced Billing UI.It goes into greater detail on how the user interface will react when recording allocations.
-
-This documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.
-
-## Proration Schemes
-
-Changing the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.
-
-**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.
-
-For background information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration).
-See the tables below for valid values.
-
-| upgrade_charge | Definition                                                        |
-|----------------|-------------------------------------------------------------------|
-| `full`         | A charge is added for the full price of the component.            |
-| `prorated`     | A charge is added for the prorated price of the component change. |
-| `none`         | No charge is added.                                               |
-
-| downgrade_credit | Definition                                        |
-|------------------|---------------------------------------------------|
-| `full`           | A full price credit is added for the amount owed. |
-| `prorated`       | A prorated credit is added for the amount owed.   |
-| `none`           | No charge is added.                               |
-
-| accrue_charge | Definition                                                                                                 |
-|---------------|------------------------------------------------------------------------------------------------------------|
-| `true`        | Attempt to charge the customer at next renewal.                                                            |
-| `false`       | Attempt to charge the customer right away. If it fails, the charge will be accrued until the next renewal. |
+For information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration)
 
 ### Order of Resolution for upgrade_charge and downgrade_credit
 
@@ -566,7 +541,9 @@ See the tables below for valid values.
 1. Allocation API call top level (outside of the `allocations` array)
 2. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration#proration-schemes)
 
-**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**
+> **Note:** Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.
+
+For more informaiton see the [Component Allocations](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview) product Documentation.
 
 ```ts
 async allocateComponent(
@@ -581,7 +558,7 @@ async allocateComponent(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `body` | [`CreateAllocationRequest \| undefined`](../../doc/models/create-allocation-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -599,8 +576,44 @@ const componentId = 222;
 
 const body: CreateAllocationRequest = {
   allocation: {
-    quantity: 5,
-    memo: 'Recoding component purchase of Acme Support',
+    quantity: 10,
+    decimalQuantity: '10.0',
+    previousQuantity: 5,
+    decimalPreviousQuantity: '5.0',
+    memo: 'Increase seats to 10',
+    prorationDowngradeScheme: 'prorate',
+    prorationUpgradeScheme: 'full-price-attempt-capture',
+    downgradeCredit: DowngradeCreditCreditType.Prorated,
+    upgradeCharge: UpgradeChargeCreditType.Full,
+    accrueCharge: false,
+    pricePointId: 789,
+    billingSchedule: {
+      initialBillingAt: '2025-02-28',
+    },
+    customPrice: {
+      prices: [
+        {
+          startingQuantity: 1,
+          unitPrice: '49.00',
+          endingQuantity: 25,
+        },
+        {
+          startingQuantity: 26,
+          unitPrice: '39.00',
+          endingQuantity: null,
+        }
+      ],
+      taxIncluded: false,
+      pricingScheme: PricingScheme.PerUnit,
+      interval: 1,
+      intervalUnit: IntervalUnit.Month,
+      listPricePointId: 4321,
+      useDefaultListPrice: false,
+      renewPrepaidAllocation: false,
+      rolloverPrepaidRemainder: false,
+      expirationInterval: 150,
+      expirationIntervalUnit: ExpirationIntervalUnit.Never,
+    },
   },
 };
 
@@ -628,6 +641,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -675,21 +691,6 @@ This endpoint returns the 50 most recent Allocations, ordered by most recent fir
 
 When a subscription's on/off component has been toggled to on (`1`) or off (`0`), usage will be logged in this response.
 
-## Querying data via Advanced Billing gem
-
-You can also query the current quantity via the [official Advanced Billing Gem.](http://github.com/chargify/chargify_api_ares)
-
-```# First way
-component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
-puts component.allocated_quantity
-# => 23
-
-# Second way
-component = Chargify::Subscription.find(7).component(1)
-puts component.allocated_quantity
-# => 23
-```
-
 ```ts
 async listAllocations(
   subscriptionId: number,
@@ -703,7 +704,7 @@ async listAllocations(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -745,6 +746,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -804,11 +808,25 @@ try {
 
 # Allocate Components
 
-Creates multiple allocations, setting the current allocated quantity for each of the components and recording a memo. The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade. Be aware of the Order of Resolutions explained below in determining the proration scheme.
+Creates multiple allocations, sets the current allocated quantity for each of the components, and recording a memo.   A `component_id` is required for each allocation.
 
-A `component_id` is required for each allocation.
+The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade.
 
-This endpoint only responds to JSON. It is not available for XML.
+### Order of Resolution for upgrade_charge and downgrade_credit
+
+1. Per allocation in API call (within a single allocation of the `allocations` array)
+2. [Component-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview)
+3. Allocation API call top level (outside of the `allocations` array)
+4. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration#proration-schemes)
+
+### Order of Resolution for accrue charge
+
+1. Allocation API call top level (outside of the `allocations` array)
+2. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration#proration-schemes)
+
+> **Note:** Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.
+
+For more informaiton see the [Component Allocations](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview) product Documentation.
 
 ```ts
 async allocateComponents(
@@ -822,7 +840,7 @@ async allocateComponents(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`AllocateComponents \| undefined`](../../doc/models/allocate-components.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -875,6 +893,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -952,7 +973,7 @@ async previewAllocations(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`PreviewAllocationsRequest \| undefined`](../../doc/models/preview-allocations-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1002,6 +1023,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ComponentAllocationError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1144,7 +1168,7 @@ async updatePrepaidUsageAllocationExpirationDate(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `allocationId` | `number` | Template, Required | The Advanced Billing id of the allocation |
 | `body` | [`UpdateAllocationExpirationDate \| undefined`](../../doc/models/update-allocation-expiration-date.md) | Body, Optional | - |
@@ -1194,6 +1218,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionComponentAllocationError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1232,7 +1259,7 @@ async deletePrepaidUsageAllocation(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `componentId` | `number` | Template, Required | The Advanced Billing id of the component |
 | `allocationId` | `number` | Template, Required | The Advanced Billing id of the allocation |
 | `body` | [`CreditSchemeRequest \| undefined`](../../doc/models/credit-scheme-request.md) | Body, Optional | - |
@@ -1280,6 +1307,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionComponentAllocationError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1407,6 +1437,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

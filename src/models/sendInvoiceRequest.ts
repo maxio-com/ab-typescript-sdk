@@ -10,6 +10,8 @@ export interface SendInvoiceRequest {
   recipientEmails?: string[];
   ccRecipientEmails?: string[];
   bccRecipientEmails?: string[];
+  /** Array of URLs to files to attach to the invoice email. Max 10 files, 10MB each. */
+  attachmentUrls?: string[];
   [key: string]: unknown;
 }
 
@@ -18,5 +20,6 @@ export const sendInvoiceRequestSchema: Schema<SendInvoiceRequest> = expandoObjec
     recipientEmails: ['recipient_emails', optional(array(string()))],
     ccRecipientEmails: ['cc_recipient_emails', optional(array(string()))],
     bccRecipientEmails: ['bcc_recipient_emails', optional(array(string()))],
+    attachmentUrls: ['attachment_urls', optional(array(string()))],
   }
 );

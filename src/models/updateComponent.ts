@@ -29,10 +29,7 @@ export interface UpdateComponent {
   /** One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other */
   itemCategory?: ItemCategory | null;
   displayOnHostedPage?: boolean;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
   [key: string]: unknown;
 }

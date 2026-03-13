@@ -104,6 +104,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -256,7 +259,7 @@ try {
 
 # List Subscriptions
 
-This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
+returns an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
 
 ## Search for a subscription
 
@@ -438,7 +441,7 @@ async updateSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`UpdateSubscriptionRequest \| undefined`](../../doc/models/update-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -481,6 +484,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -604,7 +610,7 @@ try {
 
 # Read Subscription
 
-Use this endpoint to find subscription details.
+Retrieves subscription details.
 
 ## Self-Service Page token
 
@@ -622,7 +628,7 @@ async readSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `include` | [`SubscriptionInclude[] \| undefined`](../../doc/models/subscription-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=coupons&include[]=self_service_page_token`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -841,7 +847,7 @@ async overrideSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`OverrideSubscriptionRequest \| undefined`](../../doc/models/override-subscription-request.md) | Body, Optional | Only these fields are available to be set. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -886,6 +892,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SingleErrorResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -978,7 +987,7 @@ async purgeSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `ack` | `number` | Query, Required | id of the customer. |
 | `cascade` | [`SubscriptionPurgeType[] \| undefined`](../../doc/models/subscription-purge-type.md) | Query, Optional | Options are "customer" or "payment_profile".<br>Use in query: `cascade[]=customer&cascade[]=payment_profile`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1023,6 +1032,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1050,7 +1062,7 @@ async updatePrepaidSubscriptionConfiguration(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`UpsertPrepaidConfigurationRequest \| undefined`](../../doc/models/upsert-prepaid-configuration-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1343,7 +1355,7 @@ async applyCouponsToSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `code` | `string \| undefined` | Query, Optional | A code for the coupon that would be applied to a subscription |
 | `body` | [`AddCouponsRequest \| undefined`](../../doc/models/add-coupons-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -1388,6 +1400,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionAddCouponError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1567,7 +1582,7 @@ async removeCouponFromSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `couponCode` | `string \| undefined` | Query, Optional | The coupon code |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1600,6 +1615,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionRemoveCouponErrorsError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -1675,7 +1693,7 @@ async activateSubscription(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`ActivateSubscriptionRequest \| undefined`](../../doc/models/activate-subscription-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1708,6 +1726,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorArrayMapResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```

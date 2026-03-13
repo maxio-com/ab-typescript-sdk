@@ -68,15 +68,9 @@ export interface Allocation {
    * Otherwise, leave the charges on the subscription to pay for at renewal.
    */
   initiateDunning?: boolean;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
-  /**
-   * The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.
-   * Available values: `full`, `prorated`, `none`.
-   */
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   downgradeCredit?: CreditType | null;
   payment?: PaymentForAllocation | null;
   expiresAt?: string;

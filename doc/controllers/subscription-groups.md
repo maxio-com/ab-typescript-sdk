@@ -95,6 +95,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionGroupSignupErrorResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -162,6 +165,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionGroupCreateErrorResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -171,6 +177,7 @@ try {
 ```json
 {
   "subscription_group": {
+    "uid": "grp_952mvqcnk53wq",
     "customer_id": 1,
     "payment_profile": {
       "id": 1,
@@ -475,6 +482,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SubscriptionGroupUpdateErrorResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -509,8 +519,8 @@ try {
 
 # Delete Subscription Group
 
-Use this endpoint to delete subscription group.
-Only groups without members can be deleted
+Deletes a subscription group.
+Only groups without members can be deleted.
 
 ```ts
 async deleteSubscriptionGroup(
@@ -705,7 +715,7 @@ async addSubscriptionToGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`AddSubscriptionToAGroup \| undefined`](../../doc/models/add-subscription-to-a-group.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -797,7 +807,7 @@ async removeSubscriptionFromGroup(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription |
+| `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -829,6 +839,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof ErrorListResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
