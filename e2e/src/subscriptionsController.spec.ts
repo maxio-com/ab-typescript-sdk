@@ -1,6 +1,9 @@
 import {
+  AllVaults,
   BankAccountType,
   CardType,
+  CustomersController,
+  PaymentProfilesController,
   PaymentType,
   ProductFamiliesController,
   ProductFamilyResponse,
@@ -267,6 +270,60 @@ describe('Subscriptions Controller', () => {
           state: SubscriptionStateFilter.Active,
         });
       expect(subscriptionsResponse.result.length >= 4).toBeTruthy();
+    });
+
+    test('should list subscriptions with null masked_bank_account_number from vault token payment profile', async () => {
+      // Create a customer
+      const client = createClient();
+      const customersController = new CustomersController(client);
+      const paymentProfilesController = new PaymentProfilesController(client);
+
+      const customerResponse = await customersController.createCustomer({
+        customer: {
+          firstName: 'VaultToken',
+          lastName: 'Test',
+          email: `vault-${uid()}@example.com`,
+        },
+      });
+      const customerId = customerResponse.result.customer.id || 0;
+
+      // Create a payment profile using vault token — no real bank account number,
+      // so masked_bank_account_number will be null in API responses
+      const paymentProfileResponse =
+        await paymentProfilesController.createPaymentProfile({
+          paymentProfile: {
+            customerId,
+            currentVault: AllVaults.Bogus,
+            vaultToken: '999999',
+            paymentType: PaymentType.BankAccount,
+            bankName: 'Vault Bank',
+          },
+        });
+      const paymentProfileId =
+        paymentProfileResponse.result.paymentProfile.id;
+
+      // Create subscription with the vault-token-based payment profile
+      const subscriptionResponse =
+        await subscriptionsController.createSubscription({
+          subscription: {
+            productId: productResponse01.product.id,
+            customerId,
+            paymentProfileId,
+          },
+        });
+      expect(subscriptionResponse.statusCode).toBe(201);
+      const subscriptionId =
+        subscriptionResponse.result.subscription?.id || 0;
+
+      // listSubscriptions should parse without schema validation error
+      // even when masked_bank_account_number is null
+      const listResponse =
+        await subscriptionsController.listSubscriptions({});
+      const found = listResponse.result.find(
+        (item) => item.subscription?.id === subscriptionId
+      );
+      expect(found).toBeDefined();
+      expect(found?.subscription?.bankAccount).toBeDefined();
     });
   });
 
