@@ -43,6 +43,7 @@ export enum EventKey {
   TrialEndNotice = 'trial_end_notice',
   DunningStepReached = 'dunning_step_reached',
   InvoiceIssued = 'invoice_issued',
+  InvoicePending = 'invoice_pending',
   PrepaidSubscriptionBalanceChanged = 'prepaid_subscription_balance_changed',
   SubscriptionGroupSignupSuccess = 'subscription_group_signup_success',
   SubscriptionGroupSignupFailure = 'subscription_group_signup_failure',

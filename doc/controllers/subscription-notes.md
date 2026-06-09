@@ -19,7 +19,7 @@ const subscriptionNotesController = new SubscriptionNotesController(client);
 
 # Create Subscription Note
 
-Use the following method to create a note for a subscription.
+Creates a note for a subscription.
 
 ## How to Use Subscription Notes
 
@@ -37,6 +37,10 @@ async createSubscriptionNote(
 ): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -46,6 +50,8 @@ async createSubscriptionNote(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md).
 
@@ -100,7 +106,7 @@ try {
 
 # List Subscription Notes
 
-Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
+Retrieves a list of notes associated with a subscription. The response will be an array of Notes.
 
 ```ts
 async listSubscriptionNotes(
@@ -117,6 +123,10 @@ async listSubscriptionNotes(
 ): Promise<ApiResponse<SubscriptionNoteResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -127,6 +137,8 @@ async listSubscriptionNotes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse[]`](../../doc/models/subscription-note-response.md).
 
@@ -202,7 +214,7 @@ try {
 
 # Read Subscription Note
 
-Once you have obtained the ID of the note you wish to read, use this method to show a particular note attached to a subscription.
+Retrieves a specific note attached to a subscription.
 
 ```ts
 async readSubscriptionNote(
@@ -211,6 +223,10 @@ async readSubscriptionNote(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -221,6 +237,8 @@ async readSubscriptionNote(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md).
 
@@ -276,7 +294,7 @@ try {
 
 # Update Subscription Note
 
-Use the following method to update a note for a Subscription.
+Updates a note for a subscription.
 
 ```ts
 async updateSubscriptionNote(
@@ -286,6 +304,10 @@ async updateSubscriptionNote(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionNoteResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -297,6 +319,8 @@ async updateSubscriptionNote(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md).
 
@@ -364,6 +388,10 @@ async deleteSubscriptionNote(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -373,6 +401,8 @@ async deleteSubscriptionNote(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 

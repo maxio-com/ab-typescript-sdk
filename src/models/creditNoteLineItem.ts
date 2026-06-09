@@ -47,6 +47,12 @@ export interface CreditNoteLineItem {
    */
   taxAmount?: string;
   /**
+   * Whether the unit price for this line item is tax-inclusive.
+   * When `true`, `unit_price` already includes tax and `tax_amount` represents the portion of the price attributable to tax. When `false`, any applicable tax is added on top of the price.
+   * The value is inherited from the source price point's `tax_included` setting. Custom or ad-hoc line items (which have no associated price point) always return `false`.
+   */
+  taxIncluded?: boolean;
+  /**
    * The non-canonical total amount for the line.
    * `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
    */
@@ -83,6 +89,7 @@ export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = expandoObjec
     subtotalAmount: ['subtotal_amount', optional(string())],
     discountAmount: ['discount_amount', optional(string())],
     taxAmount: ['tax_amount', optional(string())],
+    taxIncluded: ['tax_included', optional(boolean())],
     totalAmount: ['total_amount', optional(string())],
     tieredUnitPrice: ['tiered_unit_price', optional(boolean())],
     periodRangeStart: ['period_range_start', optional(string())],

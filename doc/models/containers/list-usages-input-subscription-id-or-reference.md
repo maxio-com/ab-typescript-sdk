@@ -12,3 +12,23 @@
 | `number` |
 | `string` |
 
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ListUsagesInputSubscriptionIdOrReference = 0;
+```
+
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ListUsagesInputSubscriptionIdOrReference = 'String0';
+```
+

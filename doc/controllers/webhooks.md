@@ -20,7 +20,7 @@ const webhooksController = new WebhooksController(client);
 
 # List Webhooks
 
-Allows you to view a list of webhooks.  You can pass query parameters if you want to filter webhooks. See the [Webhooks](page:introduction/webhooks/webhooks) documentation for more information.
+Retrieves a list of webhooks.  You can pass query parameters if you want to filter webhooks. See the [Webhooks](page:introduction/webhooks/webhooks) documentation for more information.
 
 ```ts
 async listWebhooks(
@@ -45,6 +45,10 @@ async listWebhooks(
 ): Promise<ApiResponse<WebhookResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -59,6 +63,8 @@ async listWebhooks(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`WebhookResponse[]`](../../doc/models/webhook-response.md).
 
@@ -136,7 +142,7 @@ try {
 
 # Enable Webhooks
 
-Allows you to enable webhooks for your site
+Enables webhooks for your site.
 
 ```ts
 async enableWebhooks(
@@ -144,6 +150,10 @@ async enableWebhooks(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EnableWebhooksResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -153,6 +163,8 @@ async enableWebhooks(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EnableWebhooksResponse`](../../doc/models/enable-webhooks-response.md).
 
@@ -207,6 +219,10 @@ async replayWebhooks(
 ): Promise<ApiResponse<ReplayWebhooksResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -215,6 +231,8 @@ async replayWebhooks(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReplayWebhooksResponse`](../../doc/models/replay-webhooks-response.md).
 
@@ -263,7 +281,7 @@ try {
 
 # Create Endpoint
 
-Creates an endpoint and assigns a list of webhooks subscriptions (events) to it.
+Creates an endpoint and assigns a list of webhook subscriptions (events) to it.
 See the [Webhooks Reference](page:introduction/webhooks/webhooks-reference#events) page for available events.
 
 ```ts
@@ -273,6 +291,10 @@ async createEndpoint(
 ): Promise<ApiResponse<EndpointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -281,6 +303,8 @@ async createEndpoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EndpointResponse`](../../doc/models/endpoint-response.md).
 
@@ -292,7 +316,8 @@ const body: CreateOrUpdateEndpointRequest = {
     url: 'https://your.site/webhooks',
     webhookSubscriptions: [
       WebhookSubscription.PaymentSuccess,
-      WebhookSubscription.PaymentFailure
+      WebhookSubscription.PaymentFailure,
+      WebhookSubscription.InvoicePending
     ],
   },
 };
@@ -335,7 +360,8 @@ try {
     "status": "enabled",
     "webhook_subscriptions": [
       "payment_success",
-      "payment_failure"
+      "payment_failure",
+      "invoice_pending"
     ]
   }
 }
@@ -358,6 +384,10 @@ async listEndpoints(
 ): Promise<ApiResponse<Endpoint[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -365,6 +395,8 @@ async listEndpoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Endpoint[]`](../../doc/models/endpoint.md).
 
@@ -406,7 +438,8 @@ try {
     "status": "enabled",
     "webhook_subscriptions": [
       "payment_success",
-      "payment_failure"
+      "payment_failure",
+      "invoice_pending"
     ]
   },
   {
@@ -430,7 +463,7 @@ Updates an Endpoint. You can change the `url` of your endpoint or the list of `w
 
 Always send a complete list of events to which you want to subscribe. Sending a PUT request for an existing endpoint with an empty list of `webhook_subscriptions` will unsubscribe all events.
 
-If you want unsubscribe from a specific event, send a list of `webhook_subscriptions` without the specific event key.
+If you want to unsubscribe from a specific event, send a list of `webhook_subscriptions` without the specific event key.
 
 ```ts
 async updateEndpoint(
@@ -439,6 +472,10 @@ async updateEndpoint(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<EndpointResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -449,6 +486,8 @@ async updateEndpoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EndpointResponse`](../../doc/models/endpoint-response.md).
 
@@ -463,7 +502,8 @@ const body: CreateOrUpdateEndpointRequest = {
     webhookSubscriptions: [
       WebhookSubscription.PaymentFailure,
       WebhookSubscription.PaymentSuccess,
-      WebhookSubscription.RefundFailure
+      WebhookSubscription.RefundFailure,
+      WebhookSubscription.InvoicePending
     ],
   },
 };

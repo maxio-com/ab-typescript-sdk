@@ -12,7 +12,7 @@ const componentsController = new ComponentsController(client);
 
 * [Create Metered Component](../../doc/controllers/components.md#create-metered-component)
 * [Create Quantity Based Component](../../doc/controllers/components.md#create-quantity-based-component)
-* [Create on Off Component](../../doc/controllers/components.md#create-on-off-component)
+* [Create On Off Component](../../doc/controllers/components.md#create-on-off-component)
 * [Create Prepaid Usage Component](../../doc/controllers/components.md#create-prepaid-usage-component)
 * [Create Event Based Component](../../doc/controllers/components.md#create-event-based-component)
 * [Find Component](../../doc/controllers/components.md#find-component)
@@ -28,7 +28,7 @@ const componentsController = new ComponentsController(client);
 
 This request will create a component definition of kind **metered_component** under the specified product family. Metered component can then be added and “allocated” for a subscription.
 
-Metered components are used to bill for any type of unit that resets to 0 at the end of the billing period (think daily Google Adwords clicks or monthly cell phone minutes). This is most commonly associated with usage-based billing and many other pricing schemes.
+Metered components are used to bill for any type of unit that resets to 0 at the end of the billing period (think daily Google Ads clicks or monthly cell phone minutes). This is most commonly associated with usage-based billing and many other pricing schemes.
 
 Note that this is different from recurring quantity-based components, which DO NOT reset to zero at the start of every billing period. If you want to bill for a quantity of something that does not change unless you change it, then you want quantity components, instead.
 
@@ -42,6 +42,10 @@ async createMeteredComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -51,6 +55,8 @@ async createMeteredComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -188,6 +194,10 @@ async createQuantityBasedComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -197,6 +207,8 @@ async createQuantityBasedComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -309,7 +321,7 @@ try {
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseError`](../../doc/models/error-list-response-error.md) |
 
 
-# Create on Off Component
+# Create On Off Component
 
 This request will create a component definition of kind **on_off_component** under the specified product family. On/Off component can then be added and “allocated” for a subscription.
 
@@ -325,6 +337,10 @@ async createOnOffComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -334,6 +350,8 @@ async createOnOffComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -447,6 +465,10 @@ async createPrepaidUsageComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -456,6 +478,8 @@ async createPrepaidUsageComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -609,6 +633,10 @@ async createEventBasedComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -618,6 +646,8 @@ async createEventBasedComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -732,6 +762,10 @@ async findComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -740,6 +774,8 @@ async findComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -817,6 +853,10 @@ async readComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -826,6 +866,8 @@ async readComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -910,6 +952,10 @@ async updateProductFamilyComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -920,6 +966,8 @@ async updateProductFamilyComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -1016,6 +1064,10 @@ async archiveComponent(
 ): Promise<ApiResponse<Component>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1025,6 +1077,8 @@ async archiveComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Component`](../../doc/models/component.md).
 
@@ -1129,6 +1183,10 @@ async listComponents(
 ): Promise<ApiResponse<ComponentResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1145,6 +1203,8 @@ async listComponents(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse[]`](../../doc/models/component-response.md).
 
@@ -1302,6 +1362,10 @@ async updateComponent(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1311,6 +1375,8 @@ async updateComponent(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -1425,6 +1491,10 @@ async listComponentsForProductFamily(
 ): Promise<ApiResponse<ComponentResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1442,6 +1512,8 @@ async listComponentsForProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse[]`](../../doc/models/component-response.md).
 

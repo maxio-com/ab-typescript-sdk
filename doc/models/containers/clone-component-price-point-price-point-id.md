@@ -12,3 +12,23 @@
 | `number` |
 | `string` |
 
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: CloneComponentPricePointPricePointId = 0;
+```
+
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: CloneComponentPricePointPricePointId = 'String0';
+```
+

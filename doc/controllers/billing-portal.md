@@ -42,6 +42,10 @@ async enableBillingPortalForCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -51,6 +55,8 @@ async enableBillingPortalForCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -112,6 +118,10 @@ async readBillingPortalLink(
 ): Promise<ApiResponse<PortalManagementLink>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -120,6 +130,8 @@ async readBillingPortalLink(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PortalManagementLink`](../../doc/models/portal-management-link.md).
 
@@ -201,6 +213,10 @@ async resendBillingPortalInvitation(
 ): Promise<ApiResponse<ResentInvitation>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -209,6 +225,8 @@ async resendBillingPortalInvitation(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ResentInvitation`](../../doc/models/resent-invitation.md).
 
@@ -280,6 +298,10 @@ async revokeBillingPortalAccess(
 ): Promise<ApiResponse<RevokedInvitation>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -288,6 +310,8 @@ async revokeBillingPortalAccess(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`RevokedInvitation`](../../doc/models/revoked-invitation.md).
 

@@ -18,7 +18,7 @@ const subscriptionGroupInvoiceAccountController = new SubscriptionGroupInvoiceAc
 
 # Create Subscription Group Prepayment
 
-A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
+Adds a prepayment for a subscription group. This endpoint requires an `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
 
 ```ts
 async createSubscriptionGroupPrepayment(
@@ -27,6 +27,10 @@ async createSubscriptionGroupPrepayment(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionGroupPrepaymentResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -37,6 +41,8 @@ async createSubscriptionGroupPrepayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionGroupPrepaymentResponse`](../../doc/models/subscription-group-prepayment-response.md).
 
@@ -93,7 +99,7 @@ try {
 
 # List Prepayments for Subscription Group
 
-This request will list a subscription group's prepayments.
+Lists a subscription group's prepayments.
 
 ```ts
 async listPrepaymentsForSubscriptionGroup(
@@ -112,6 +118,10 @@ async listPrepaymentsForSubscriptionGroup(
 ): Promise<ApiResponse<ListSubscriptionGroupPrepaymentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -123,6 +133,8 @@ async listPrepaymentsForSubscriptionGroup(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSubscriptionGroupPrepaymentResponse`](../../doc/models/list-subscription-group-prepayment-response.md).
 
@@ -195,7 +207,7 @@ try {
 
 # Issue Subscription Group Service Credit
 
-Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
+Issues service credit for a subscription group. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
 
 ```ts
 async issueSubscriptionGroupServiceCredit(
@@ -204,6 +216,10 @@ async issueSubscriptionGroupServiceCredit(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ServiceCreditResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -214,6 +230,8 @@ async issueSubscriptionGroupServiceCredit(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ServiceCreditResponse`](../../doc/models/service-credit-response.md).
 
@@ -282,7 +300,7 @@ try {
 
 # Deduct Subscription Group Service Credit
 
-Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
+Deducts service credit for a subscription group. Credit will be deducted from the group in the amount specified in the request body.
 
 ```ts
 async deductSubscriptionGroupServiceCredit(
@@ -291,6 +309,10 @@ async deductSubscriptionGroupServiceCredit(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ServiceCredit>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -301,6 +323,8 @@ async deductSubscriptionGroupServiceCredit(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ServiceCredit`](../../doc/models/service-credit.md).
 

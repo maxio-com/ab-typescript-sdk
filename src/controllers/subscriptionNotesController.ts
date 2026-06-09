@@ -19,7 +19,7 @@ import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class SubscriptionNotesController extends BaseController {
   /**
-   * Use the following method to create a note for a subscription.
+   * Creates a note for a subscription.
    *
    * ## How to Use Subscription Notes
    *
@@ -58,8 +58,7 @@ export class SubscriptionNotesController extends BaseController {
   }
 
   /**
-   * Use this method to retrieve a list of Notes associated with a Subscription. The response will be an
-   * array of Notes.
+   * Retrieves a list of notes associated with a subscription. The response will be an array of Notes.
    *
    * @param subscriptionId  The Chargify id of the subscription.
    * @param page            Result records are organized in pages. By default, the first page of results is
@@ -108,8 +107,7 @@ export class SubscriptionNotesController extends BaseController {
   }
 
   /**
-   * Once you have obtained the ID of the note you wish to read, use this method to show a particular
-   * note attached to a subscription.
+   * Retrieves a specific note attached to a subscription.
    *
    * @param subscriptionId  The Chargify id of the subscription.
    * @param noteId          The Advanced Billing id of the note
@@ -131,7 +129,7 @@ export class SubscriptionNotesController extends BaseController {
   }
 
   /**
-   * Use the following method to update a note for a Subscription.
+   * Updates a note for a subscription.
    *
    * @param subscriptionId  The Chargify id of the subscription.
    * @param noteId          The Advanced Billing id of the note

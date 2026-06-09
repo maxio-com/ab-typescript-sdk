@@ -39,6 +39,10 @@ async createConsolidatedProformaInvoice(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -47,6 +51,8 @@ async createConsolidatedProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -118,6 +124,10 @@ async listSubscriptionGroupProformaInvoices(
 ): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -132,6 +142,8 @@ async listSubscriptionGroupProformaInvoices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md).
 
@@ -194,6 +206,10 @@ async readProformaInvoice(
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -202,6 +218,8 @@ async readProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
@@ -258,6 +276,10 @@ async createProformaInvoice(
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -266,6 +288,8 @@ async createProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
@@ -347,6 +371,10 @@ async listProformaInvoices(
 ): Promise<ApiResponse<ListProformaInvoicesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -367,6 +395,8 @@ async listProformaInvoices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md).
 
@@ -428,6 +458,10 @@ async deliverProformaInvoice(
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -437,6 +471,8 @@ async deliverProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
@@ -515,6 +551,10 @@ async voidProformaInvoice(
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -524,6 +564,8 @@ async voidProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
@@ -584,6 +626,10 @@ async previewProformaInvoice(
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -592,6 +638,8 @@ async previewProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
@@ -652,6 +700,10 @@ async createSignupProformaInvoice(
 ): Promise<ApiResponse<ProformaInvoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -660,6 +712,8 @@ async createSignupProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice`](../../doc/models/proforma-invoice.md).
 
@@ -732,6 +786,10 @@ async previewSignupProformaInvoice(
 ): Promise<ApiResponse<SignupProformaPreviewResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -741,6 +799,8 @@ async previewSignupProformaInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SignupProformaPreviewResponse`](../../doc/models/signup-proforma-preview-response.md).
 

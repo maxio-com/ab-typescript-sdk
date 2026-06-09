@@ -13,7 +13,7 @@ const insightsController = new InsightsController(client);
 * [Read Site Stats](../../doc/controllers/insights.md#read-site-stats)
 * [Read Mrr](../../doc/controllers/insights.md#read-mrr)
 * [List Mrr Movements](../../doc/controllers/insights.md#list-mrr-movements)
-* [List Mrr Per Subscription](../../doc/controllers/insights.md#list-mrr-per-subscription)
+* [List Mrr per Subscription](../../doc/controllers/insights.md#list-mrr-per-subscription)
 
 
 # Read Site Stats
@@ -34,6 +34,10 @@ async readSiteStats(
 ): Promise<ApiResponse<SiteSummary>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -41,6 +45,8 @@ async readSiteStats(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SiteSummary`](../../doc/models/site-summary.md).
 
@@ -105,6 +111,10 @@ async readMrr(
 ): Promise<ApiResponse<MRRResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -114,6 +124,8 @@ async readMrr(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`MRRResponse`](../../doc/models/mrr-response.md).
 
@@ -211,6 +223,10 @@ async listMrrMovements(
 ): Promise<ApiResponse<ListMRRResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -222,6 +238,8 @@ async listMrrMovements(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListMRRResponse`](../../doc/models/list-mrr-response.md).
 
@@ -310,7 +328,7 @@ try {
 ```
 
 
-# List Mrr Per Subscription
+# List Mrr per Subscription
 
 **This endpoint is deprecated.**
 
@@ -335,6 +353,10 @@ async listMrrPerSubscription(
 ): Promise<ApiResponse<SubscriptionMRRResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -347,6 +369,8 @@ async listMrrPerSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionMRRResponse`](../../doc/models/subscription-mrr-response.md).
 

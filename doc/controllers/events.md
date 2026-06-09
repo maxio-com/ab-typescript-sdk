@@ -117,6 +117,10 @@ async listEvents(
 ): Promise<ApiResponse<EventResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -135,6 +139,8 @@ async listEvents(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EventResponse[]`](../../doc/models/event-response.md).
 
@@ -276,6 +282,10 @@ async listSubscriptionEvents(
 ): Promise<ApiResponse<EventResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -290,6 +300,8 @@ async listSubscriptionEvents(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`EventResponse[]`](../../doc/models/event-response.md).
 
@@ -400,6 +412,10 @@ async readEventsCount(
 ): Promise<ApiResponse<CountResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -413,6 +429,8 @@ async readEventsCount(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CountResponse`](../../doc/models/count-response.md).
 

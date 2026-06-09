@@ -43,8 +43,8 @@ import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class WebhooksController extends BaseController {
   /**
-   * Allows you to view a list of webhooks.  You can pass query parameters if you want to filter webhooks.
-   * See the [Webhooks](page:introduction/webhooks/webhooks) documentation for more information.
+   * Retrieves a list of webhooks.  You can pass query parameters if you want to filter webhooks. See the
+   * [Webhooks](page:introduction/webhooks/webhooks) documentation for more information.
    *
    * @param status       Webhooks with matching status would be returned.
    * @param sinceDate    Format YYYY-MM-DD. Returns Webhooks with the created_at date greater than or
@@ -106,7 +106,7 @@ export class WebhooksController extends BaseController {
   }
 
   /**
-   * Allows you to enable webhooks for your site
+   * Enables webhooks for your site.
    *
    * @param body
    * @return Response from the API call
@@ -148,7 +148,7 @@ export class WebhooksController extends BaseController {
   }
 
   /**
-   * Creates an endpoint and assigns a list of webhooks subscriptions (events) to it.
+   * Creates an endpoint and assigns a list of webhook subscriptions (events) to it.
    * See the [Webhooks Reference](page:introduction/webhooks/webhooks-reference#events) page for
    * available events.
    *
@@ -196,7 +196,7 @@ export class WebhooksController extends BaseController {
    * Always send a complete list of events to which you want to subscribe. Sending a PUT request for an
    * existing endpoint with an empty list of `webhook_subscriptions` will unsubscribe all events.
    *
-   * If you want unsubscribe from a specific event, send a list of `webhook_subscriptions` without the
+   * If you want to unsubscribe from a specific event, send a list of `webhook_subscriptions` without the
    * specific event key.
    *
    * @param endpointId   The Advanced Billing id for the endpoint that should

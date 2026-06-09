@@ -46,6 +46,10 @@ async listSalesCommissionSettings(
 ): Promise<ApiResponse<SaleRepSettings[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -58,6 +62,8 @@ async listSalesCommissionSettings(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SaleRepSettings[]`](../../doc/models/sale-rep-settings.md).
 
@@ -161,6 +167,10 @@ async listSalesReps(
 ): Promise<ApiResponse<ListSaleRepItem[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -173,6 +183,8 @@ async listSalesReps(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSaleRepItem[]`](../../doc/models/list-sale-rep-item.md).
 
@@ -318,6 +330,10 @@ async readSalesRep(
 ): Promise<ApiResponse<SaleRep>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -331,6 +347,8 @@ async readSalesRep(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SaleRep`](../../doc/models/sale-rep.md).
 

@@ -12,3 +12,23 @@
 | `number` |
 | `string` |
 
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ReadComponentPricePointPricePointId = 0;
+```
+
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ReadComponentPricePointPricePointId = 'String0';
+```
+

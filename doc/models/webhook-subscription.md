@@ -17,6 +17,7 @@
 | `ExpiringCard` |
 | `ExpirationDateChange` |
 | `InvoiceIssued` |
+| `InvoicePending` |
 | `MeteredUsage` |
 | `PaymentFailure` |
 | `PaymentSuccess` |

@@ -42,6 +42,10 @@ async createReasonCode(
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -50,6 +54,8 @@ async createReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
@@ -115,6 +121,10 @@ async listReasonCodes(
 ): Promise<ApiResponse<ReasonCodeResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -124,6 +134,8 @@ async listReasonCodes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse[]`](../../doc/models/reason-code-response.md).
 
@@ -220,6 +232,10 @@ async readReasonCode(
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -228,6 +244,8 @@ async readReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
@@ -279,6 +297,10 @@ async updateReasonCode(
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -288,6 +310,8 @@ async updateReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
@@ -342,6 +366,10 @@ async deleteReasonCode(
 ): Promise<ApiResponse<OkResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -350,6 +378,8 @@ async deleteReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OkResponse`](../../doc/models/ok-response.md).
 

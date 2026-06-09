@@ -30,6 +30,10 @@ async issueAdvanceInvoice(
 ): Promise<ApiResponse<Invoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -39,6 +43,8 @@ async issueAdvanceInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
@@ -100,6 +106,10 @@ async readAdvanceInvoice(
 ): Promise<ApiResponse<Invoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -108,6 +118,8 @@ async readAdvanceInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 
@@ -160,6 +172,10 @@ async voidAdvanceInvoice(
 ): Promise<ApiResponse<Invoice>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -169,6 +185,8 @@ async voidAdvanceInvoice(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice`](../../doc/models/invoice.md).
 

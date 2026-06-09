@@ -12,3 +12,23 @@
 | `string` |
 | `bigint` |
 
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ScheduledRenewalProductPricePointPriceInCents = 'String0';
+```
+
+## bigint
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ScheduledRenewalProductPricePointPriceInCents = BigInt(0);
+```
+

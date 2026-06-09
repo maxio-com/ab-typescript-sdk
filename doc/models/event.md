@@ -22,7 +22,7 @@
 ```json
 {
   "id": 40,
-  "key": "invoice_issued",
+  "key": "expiring_card",
   "message": "message8",
   "subscription_id": 150,
   "customer_id": 78,

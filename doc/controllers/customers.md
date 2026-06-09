@@ -53,6 +53,10 @@ async createCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -61,6 +65,8 @@ async createCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -200,6 +206,10 @@ async listCustomers(
 ): Promise<ApiResponse<CustomerResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -216,6 +226,8 @@ async listCustomers(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse[]`](../../doc/models/customer-response.md).
 
@@ -348,6 +360,10 @@ async readCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -356,6 +372,8 @@ async readCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -438,6 +456,10 @@ async updateCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -447,6 +469,8 @@ async updateCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -543,6 +567,10 @@ async deleteCustomer(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -551,6 +579,8 @@ async deleteCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: No Content
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -595,6 +625,10 @@ async readCustomerByReference(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -603,6 +637,8 @@ async readCustomerByReference(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -647,6 +683,10 @@ async listCustomerSubscriptions(
 ): Promise<ApiResponse<SubscriptionResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -655,6 +695,8 @@ async listCustomerSubscriptions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse[]`](../../doc/models/subscription-response.md).
 

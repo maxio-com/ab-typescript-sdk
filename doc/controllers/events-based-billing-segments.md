@@ -33,6 +33,10 @@ async createSegment(
 ): Promise<ApiResponse<SegmentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -43,6 +47,8 @@ async createSegment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SegmentResponse`](../../doc/models/segment-response.md).
 
@@ -138,6 +144,10 @@ async listSegmentsForPricePoint(
 ): Promise<ApiResponse<ListSegmentsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -150,6 +160,8 @@ async listSegmentsForPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSegmentsResponse`](../../doc/models/list-segments-response.md).
 
@@ -217,6 +229,10 @@ async updateSegment(
 ): Promise<ApiResponse<SegmentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -228,6 +244,8 @@ async updateSegment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SegmentResponse`](../../doc/models/segment-response.md).
 
@@ -294,6 +312,10 @@ async deleteSegment(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -304,6 +326,8 @@ async deleteSegment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: No Content
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -369,6 +393,10 @@ async bulkCreateSegments(
 ): Promise<ApiResponse<ListSegmentsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -379,6 +407,8 @@ async bulkCreateSegments(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSegmentsResponse`](../../doc/models/list-segments-response.md).
 
@@ -444,6 +474,10 @@ async bulkUpdateSegments(
 ): Promise<ApiResponse<ListSegmentsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -454,6 +488,8 @@ async bulkUpdateSegments(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListSegmentsResponse`](../../doc/models/list-segments-response.md).
 

@@ -51,6 +51,10 @@ async createCoupon(
 ): Promise<ApiResponse<CouponResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -60,6 +64,8 @@ async createCoupon(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
@@ -152,6 +158,10 @@ async listCouponsForProductFamily(
 ): Promise<ApiResponse<CouponResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -164,6 +174,8 @@ async listCouponsForProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse[]`](../../doc/models/coupon-response.md).
 
@@ -323,6 +335,10 @@ async findCoupon(
 ): Promise<ApiResponse<CouponResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -333,6 +349,8 @@ async findCoupon(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
@@ -388,6 +406,10 @@ async readCoupon(
 ): Promise<ApiResponse<CouponResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -398,6 +420,8 @@ async readCoupon(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
@@ -486,6 +510,10 @@ async updateCoupon(
 ): Promise<ApiResponse<CouponResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -496,6 +524,8 @@ async updateCoupon(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
@@ -609,6 +639,10 @@ async archiveCoupon(
 ): Promise<ApiResponse<CouponResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -618,6 +652,8 @@ async archiveCoupon(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
@@ -706,6 +742,10 @@ async listCoupons(
 ): Promise<ApiResponse<CouponResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -717,6 +757,8 @@ async listCoupons(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse[]`](../../doc/models/coupon-response.md).
 
@@ -829,6 +871,10 @@ async readCouponUsage(
 ): Promise<ApiResponse<CouponUsage[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -838,6 +884,8 @@ async readCouponUsage(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponUsage[]`](../../doc/models/coupon-usage.md).
 
@@ -942,6 +990,10 @@ async validateCoupon(
 ): Promise<ApiResponse<CouponResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -951,6 +1003,8 @@ async validateCoupon(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponResponse`](../../doc/models/coupon-response.md).
 
@@ -1036,6 +1090,10 @@ async createOrUpdateCouponCurrencyPrices(
 ): Promise<ApiResponse<CouponCurrencyResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1045,6 +1103,8 @@ async createOrUpdateCouponCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md).
 
@@ -1154,6 +1214,10 @@ async createCouponSubcodes(
 ): Promise<ApiResponse<CouponSubcodesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1163,6 +1227,8 @@ async createCouponSubcodes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponSubcodesResponse`](../../doc/models/coupon-subcodes-response.md).
 
@@ -1238,6 +1304,10 @@ async listCouponSubcodes(
 ): Promise<ApiResponse<CouponSubcodes>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1248,6 +1318,8 @@ async listCouponSubcodes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponSubcodes`](../../doc/models/coupon-subcodes.md).
 
@@ -1336,6 +1408,10 @@ async updateCouponSubcodes(
 ): Promise<ApiResponse<CouponSubcodesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1345,6 +1421,8 @@ async updateCouponSubcodes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CouponSubcodesResponse`](../../doc/models/coupon-subcodes-response.md).
 
@@ -1422,6 +1500,10 @@ async deleteCouponSubcode(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1431,6 +1513,8 @@ async deleteCouponSubcode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 

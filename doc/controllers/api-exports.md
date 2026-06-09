@@ -42,6 +42,10 @@ async listExportedProformaInvoices(
 ): Promise<ApiResponse<ProformaInvoice[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -52,6 +56,8 @@ async listExportedProformaInvoices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProformaInvoice[]`](../../doc/models/proforma-invoice.md).
 
@@ -116,6 +122,10 @@ async listExportedInvoices(
 ): Promise<ApiResponse<Invoice[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -126,6 +136,8 @@ async listExportedInvoices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Invoice[]`](../../doc/models/invoice.md).
 
@@ -190,6 +202,10 @@ async listExportedSubscriptions(
 ): Promise<ApiResponse<Subscription[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -200,6 +216,8 @@ async listExportedSubscriptions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Subscription[]`](../../doc/models/subscription.md).
 
@@ -255,6 +273,10 @@ async exportProformaInvoices(
 ): Promise<ApiResponse<BatchJobResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -262,6 +284,8 @@ async exportProformaInvoices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
@@ -313,6 +337,10 @@ async exportInvoices(
 ): Promise<ApiResponse<BatchJobResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -320,6 +348,8 @@ async exportInvoices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
@@ -371,6 +401,10 @@ async exportSubscriptions(
 ): Promise<ApiResponse<BatchJobResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -378,6 +412,8 @@ async exportSubscriptions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
@@ -429,6 +465,10 @@ async readProformaInvoicesExport(
 ): Promise<ApiResponse<BatchJobResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -437,6 +477,8 @@ async readProformaInvoicesExport(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
@@ -487,6 +529,10 @@ async readInvoicesExport(
 ): Promise<ApiResponse<BatchJobResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -495,6 +541,8 @@ async readInvoicesExport(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 
@@ -545,6 +593,10 @@ async readSubscriptionsExport(
 ): Promise<ApiResponse<BatchJobResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -553,6 +605,8 @@ async readSubscriptionsExport(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BatchJobResponse`](../../doc/models/batch-job-response.md).
 

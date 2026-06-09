@@ -12,3 +12,23 @@
 | `number` |
 | `string` |
 
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: UpdatePriceStartingQuantity = 0;
+```
+
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: UpdatePriceStartingQuantity = 'String0';
+```
+

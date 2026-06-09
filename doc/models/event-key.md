@@ -42,6 +42,7 @@
 | `TrialEndNotice` |
 | `DunningStepReached` |
 | `InvoiceIssued` |
+| `InvoicePending` |
 | `PrepaidSubscriptionBalanceChanged` |
 | `SubscriptionGroupSignupSuccess` |
 | `SubscriptionGroupSignupFailure` |

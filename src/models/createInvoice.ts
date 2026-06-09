@@ -32,6 +32,7 @@ import {
 
 export interface CreateInvoice {
   lineItems?: CreateInvoiceItem[];
+  /** Date on which the invoice will be issued (format YYYY-MM-DD). This date is interpreted and validated in your site's time zone. It must be today or a date in the past — future dates are not accepted. If omitted, defaults to today in your site's time zone. */
   issueDate?: string;
   /** By default, invoices will be created with a due date matching the date of invoice creation. If a different due date is desired, the net_terms parameter can be sent indicating the number of days in advance the due date should be. */
   netTerms?: number;

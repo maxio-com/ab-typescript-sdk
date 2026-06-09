@@ -40,6 +40,10 @@ async promoteComponentPricePointToDefault(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -49,6 +53,8 @@ async promoteComponentPricePointToDefault(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -132,6 +138,10 @@ async createComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -141,6 +151,8 @@ async createComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -236,6 +248,10 @@ async listComponentPricePoints(
 ): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -248,6 +264,8 @@ async listComponentPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md).
 
@@ -347,6 +365,10 @@ async bulkCreateComponentPricePoints(
 ): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -356,6 +378,8 @@ async bulkCreateComponentPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md).
 
@@ -509,6 +533,10 @@ async cloneComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -519,6 +547,8 @@ async cloneComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md).
 
@@ -665,6 +695,10 @@ async updateComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -675,6 +709,8 @@ async updateComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -757,6 +793,10 @@ async readComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -767,6 +807,8 @@ async readComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md).
 
@@ -817,6 +859,10 @@ async archiveComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -826,6 +872,8 @@ async archiveComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -919,6 +967,10 @@ async unarchiveComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -928,6 +980,8 @@ async unarchiveComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -1016,6 +1070,10 @@ async createCurrencyPrices(
 ): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1025,6 +1083,8 @@ async createCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md).
 
@@ -1116,6 +1176,10 @@ async updateCurrencyPrices(
 ): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1125,6 +1189,8 @@ async updateCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md).
 
@@ -1223,6 +1289,10 @@ async listAllComponentPricePoints(
 ): Promise<ApiResponse<ListComponentsPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1235,6 +1305,8 @@ async listAllComponentPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListComponentsPricePointsResponse`](../../doc/models/list-components-price-points-response.md).
 

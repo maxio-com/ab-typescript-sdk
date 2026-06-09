@@ -51,6 +51,10 @@ async listProductsForProductFamily(
 ): Promise<ApiResponse<ProductResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -69,6 +73,8 @@ async listProductsForProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse[]`](../../doc/models/product-response.md).
 
@@ -233,6 +239,10 @@ async createProductFamily(
 ): Promise<ApiResponse<ProductFamilyResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -241,6 +251,8 @@ async createProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse`](../../doc/models/product-family-response.md).
 
@@ -325,6 +337,10 @@ async listProductFamilies(
 ): Promise<ApiResponse<ProductFamilyResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -337,6 +353,8 @@ async listProductFamilies(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse[]`](../../doc/models/product-family-response.md).
 
@@ -416,6 +434,10 @@ async readProductFamily(
 ): Promise<ApiResponse<ProductFamilyResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -424,6 +446,8 @@ async readProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse`](../../doc/models/product-family-response.md).
 

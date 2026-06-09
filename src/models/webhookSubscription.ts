@@ -18,6 +18,7 @@ export enum WebhookSubscription {
   ExpiringCard = 'expiring_card',
   ExpirationDateChange = 'expiration_date_change',
   InvoiceIssued = 'invoice_issued',
+  InvoicePending = 'invoice_pending',
   MeteredUsage = 'metered_usage',
   PaymentFailure = 'payment_failure',
   PaymentSuccess = 'payment_success',

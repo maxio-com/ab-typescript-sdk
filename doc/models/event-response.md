@@ -17,7 +17,7 @@
 {
   "event": {
     "id": 242,
-    "key": "subscription_state_change",
+    "key": "prepaid_subscription_balance_changed",
     "message": "message0",
     "subscription_id": 96,
     "customer_id": 24,

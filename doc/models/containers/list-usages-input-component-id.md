@@ -12,3 +12,23 @@
 | `number` |
 | `string` |
 
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ListUsagesInputComponentId = 0;
+```
+
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: ListUsagesInputComponentId = 'String0';
+```
+
