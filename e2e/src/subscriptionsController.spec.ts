@@ -294,7 +294,7 @@ describe('Subscriptions Controller', () => {
           paymentProfile: {
             customerId,
             currentVault: AllVaults.Bogus,
-            vaultToken: '999999',
+            vaultToken: '999991',
             paymentType: PaymentType.BankAccount,
             bankName: 'Vault Bank',
           },
