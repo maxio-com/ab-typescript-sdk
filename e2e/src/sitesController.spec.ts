@@ -26,6 +26,7 @@ describe('SitesController', () => {
         downgradeCredit: 'none',
       },
       defaultPaymentCollectionMethod: 'automatic',
+      portal_enabled: true,
       organizationAddress: {
         street: 'Asdf Street',
         line2: '123/444',
