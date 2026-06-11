@@ -1,9 +1,9 @@
 
-# Payment Profile
+# Tokenized Payment Profile
 
 ## Structure
 
-`PaymentProfile`
+`TokenizedPaymentProfile`
 
 ## Fields
 
@@ -18,10 +18,10 @@
 
 ```json
 {
-  "id": 56,
-  "vault_token": "vault_token0",
-  "gateway_handle": "gateway_handle0",
-  "customer_vault_token": "customer_vault_token6"
+  "id": 72,
+  "vault_token": "vault_token2",
+  "gateway_handle": "gateway_handle8",
+  "customer_vault_token": "customer_vault_token8"
 }
 ```
 

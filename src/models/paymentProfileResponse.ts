@@ -6,18 +6,16 @@
 
 import { expandoObject, lazy, Schema } from '../schema.js';
 import {
-  PaymentProfile2,
-  paymentProfile2Schema,
-} from './containers/paymentProfile2.js';
+  PaymentProfile,
+  paymentProfileSchema,
+} from './containers/paymentProfile.js';
 
 export interface PaymentProfileResponse {
-  paymentProfile: PaymentProfile2;
+  paymentProfile: PaymentProfile;
   [key: string]: unknown;
 }
 
 export const paymentProfileResponseSchema: Schema<PaymentProfileResponse> = lazy(
   () =>
-    expandoObject({
-      paymentProfile: ['payment_profile', paymentProfile2Schema],
-    })
+    expandoObject({ paymentProfile: ['payment_profile', paymentProfileSchema] })
 );

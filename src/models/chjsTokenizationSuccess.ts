@@ -12,10 +12,13 @@ import {
   optional,
   Schema,
 } from '../schema.js';
-import { PaymentProfile, paymentProfileSchema } from './paymentProfile.js';
+import {
+  TokenizedPaymentProfile,
+  tokenizedPaymentProfileSchema,
+} from './tokenizedPaymentProfile.js';
 
 export interface ChjsTokenizationSuccess {
-  paymentProfile: PaymentProfile;
+  paymentProfile: TokenizedPaymentProfile;
   gatewayCustomerId?: number | null;
   [key: string]: unknown;
 }
@@ -23,7 +26,7 @@ export interface ChjsTokenizationSuccess {
 export const chjsTokenizationSuccessSchema: Schema<ChjsTokenizationSuccess> = lazy(
   () =>
     expandoObject({
-      paymentProfile: ['payment_profile', paymentProfileSchema],
+      paymentProfile: ['payment_profile', tokenizedPaymentProfileSchema],
       gatewayCustomerId: ['gateway_customer_id', optional(nullable(number()))],
     })
 );

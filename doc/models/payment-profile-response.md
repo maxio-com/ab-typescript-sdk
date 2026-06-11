@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `paymentProfile` | [`PaymentProfile2`](../../doc/models/containers/payment-profile-2.md) | Required | - |
+| `paymentProfile` | [`PaymentProfile`](../../doc/models/containers/payment-profile.md) | Required | - |
 
 ## Example (as JSON)
 

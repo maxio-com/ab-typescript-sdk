@@ -28,7 +28,7 @@ import {
 } from '../paypalPaymentProfile.js';
 
 /** This is a container type for any-of types. */
-export type PaymentProfile2 =
+export type PaymentProfile =
   | ApplePayPaymentProfile
   | BankAccountPaymentProfile
   | CreditCardPaymentProfile
@@ -41,7 +41,7 @@ const discriminatorMap = {
   'paypal_account': paypalPaymentProfileSchema,
 };
 
-export const paymentProfile2Schema: Schema<PaymentProfile2> = lazy(() =>
+export const paymentProfileSchema: Schema<PaymentProfile> = lazy(() =>
   anyOf(
     [
       applePayPaymentProfileSchema,
@@ -54,7 +54,7 @@ export const paymentProfile2Schema: Schema<PaymentProfile2> = lazy(() =>
   )
 );
 
-export namespace PaymentProfile2 {
+export namespace PaymentProfile {
   /**
    * Validation method to narrow down union type to ApplePayPaymentProfile type case.
    *
