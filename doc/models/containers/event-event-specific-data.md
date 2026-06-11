@@ -27,6 +27,8 @@
 | [`PaymentCollectionMethodChanged`](../../../doc/models/payment-collection-method-changed.md) |
 | [`ItemPricePointChanged`](../../../doc/models/item-price-point-changed.md) |
 | [`CustomFieldValueChange`](../../../doc/models/custom-field-value-change.md) |
+| [`ChjsTokenizationSuccess`](../../../doc/models/chjs-tokenization-success.md) |
+| [`ChjsTokenizationFailure`](../../../doc/models/chjs-tokenization-failure.md) |
 
 ## SubscriptionProductChange
 
@@ -347,6 +349,32 @@ const value: EventEventSpecificData = {
   newValue: 'new_value8',
   resourceType: 'resource_type2',
   resourceId: 74,
+};
+```
+
+## ChjsTokenizationSuccess
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: EventEventSpecificData = {
+  paymentProfile: {
+    id: 44,
+  },
+};
+```
+
+## ChjsTokenizationFailure
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: EventEventSpecificData = {
+  errors: 'errors2',
 };
 ```
 

@@ -76,6 +76,8 @@ export interface CreditNoteLineItem {
   pricePointId?: number | null;
   billingScheduleItemId?: number | null;
   customItem?: boolean;
+  /** The date a prepaid allocation is set to expire. Only present on line items representing prepaid component allocations. The format is `"YYYY-MM-DD"`. */
+  prepaidAllocationExpiresAt?: string | null;
   [key: string]: unknown;
 }
 
@@ -103,5 +105,9 @@ export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = expandoObjec
       optional(nullable(number())),
     ],
     customItem: ['custom_item', optional(boolean())],
+    prepaidAllocationExpiresAt: [
+      'prepaid_allocation_expires_at',
+      optional(nullable(string())),
+    ],
   }
 );

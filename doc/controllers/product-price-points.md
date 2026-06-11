@@ -357,7 +357,7 @@ try {
 
 # Read Product Price Point
 
-Use this endpoint to retrieve details for a specific product price point. You can achieve this by using either the product price point ID or handle.
+Returns details for a specific product price point. You can achieve this by using either the product price point ID or handle.
 
 ```ts
 async readProductPricePoint(
@@ -552,7 +552,7 @@ try {
 
 # Unarchive Product Price Point
 
-Use this endpoint to unarchive an archived product price point.
+Unarchives an archived product price point.
 
 ```ts
 async unarchiveProductPricePoint(
@@ -1116,7 +1116,7 @@ try {
 
 # List All Product Price Points
 
-This method allows retrieval of a list of Products Price Points belonging to a Site.
+Lists Product Price Points belonging to a site.
 
 ```ts
 async listAllProductPricePoints(

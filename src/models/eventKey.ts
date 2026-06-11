@@ -87,6 +87,8 @@ export enum EventKey {
   ChargebackWon = 'chargeback_won',
   PaymentCollectionMethodChanged = 'payment_collection_method_changed',
   ComponentBillingDateChanged = 'component_billing_date_changed',
+  ChjsTokenizationFailure = 'chjs_tokenization_failure',
+  ChjsTokenizationSuccess = 'chjs_tokenization_success',
   SubscriptionTermRenewalScheduled = 'subscription_term_renewal_scheduled',
   SubscriptionTermRenewalPending = 'subscription_term_renewal_pending',
   SubscriptionTermRenewalActivated = 'subscription_term_renewal_activated',

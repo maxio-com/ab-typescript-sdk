@@ -25,9 +25,11 @@ import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class ReasonCodesController extends BaseController {
   /**
+   * Creates a reason code for a given site.
+   *
    * # Reason Codes Intro
    *
-   * ReasonCodes are a way to gain a high level view of why your customers are cancelling the
+   * Reason Codes are a way to gain a high-level view of why your customers are cancelling the
    * subscription to your product or service.
    *
    * Add a set of churn reason codes to be displayed in-app and/or the Maxio Billing Portal. As your
@@ -42,7 +44,7 @@ export class ReasonCodesController extends BaseController {
    *
    * ## Create Reason Code
    *
-   * This method gives a merchant the option to create a reason codes for a given Site.
+   * This method gives a merchant the option to create reason codes for a given site.
    *
    * @param body
    * @return Response from the API call
@@ -68,8 +70,7 @@ export class ReasonCodesController extends BaseController {
   }
 
   /**
-   * This method gives a merchant the option to retrieve a list of all of the current churn codes for a
-   * given site.
+   * Lists all current churn codes for a given site.
    *
    * @param page     Result records are organized in pages. By default, the first page of results is
    *                           displayed. The page parameter specifies a page number of results to fetch. You can start
@@ -109,8 +110,7 @@ export class ReasonCodesController extends BaseController {
   }
 
   /**
-   * This method gives a merchant the option to retrieve a list of a particular code for a given Site by
-   * providing the unique numerical ID of the code.
+   * Returns a particular churn reason code for a given site by its unique ID.
    *
    * @param reasonCodeId   The Advanced Billing id of the reason code
    * @return Response from the API call
@@ -128,7 +128,7 @@ export class ReasonCodesController extends BaseController {
   }
 
   /**
-   * This method gives a merchant the option to update an existing reason code for a given site.
+   * Updates an existing reason code for a given site.
    *
    * @param reasonCodeId   The Advanced Billing id of the reason code
    * @param body
@@ -159,8 +159,8 @@ export class ReasonCodesController extends BaseController {
   }
 
   /**
-   * This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This
-   * code will be immediately removed. This action is not reversible.
+   * Deletes a reason code from the Churn Reason Codes. This code will be immediately removed. This
+   * action is not reversible.
    *
    * @param reasonCodeId   The Advanced Billing id of the reason code
    * @return Response from the API call

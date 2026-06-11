@@ -11,6 +11,8 @@
 |  --- |
 | `BillingDateChange` |
 | `ComponentAllocationChange` |
+| `ChjsTokenizationFailure` |
+| `ChjsTokenizationSuccess` |
 | `CustomerCreate` |
 | `CustomerUpdate` |
 | `DunningStepReached` |

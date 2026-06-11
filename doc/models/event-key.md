@@ -86,6 +86,8 @@
 | `ChargebackWon` |
 | `PaymentCollectionMethodChanged` |
 | `ComponentBillingDateChanged` |
+| `ChjsTokenizationFailure` |
+| `ChjsTokenizationSuccess` |
 | `SubscriptionTermRenewalScheduled` |
 | `SubscriptionTermRenewalPending` |
 | `SubscriptionTermRenewalActivated` |

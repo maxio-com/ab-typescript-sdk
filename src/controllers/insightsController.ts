@@ -27,8 +27,8 @@ import { SubscriptionsMrrErrorResponseError } from '../errors/subscriptionsMrrEr
 
 export class InsightsController extends BaseController {
   /**
-   * The Stats API is a very basic view of some Site-level stats. This API call only answers with JSON
-   * responses. An XML version is not provided.
+   * Returns basic site-level stats. This API call only answers with JSON responses. An XML version is
+   * not provided.
    *
    * ## Stats Documentation
    *
@@ -51,7 +51,7 @@ export class InsightsController extends BaseController {
   }
 
   /**
-   * This endpoint returns your site's current MRR, including plan and usage breakouts.
+   * Returns your site's current MRR, including plan and usage breakouts.
    *
    * @param atTime          submit a timestamp in ISO8601 format to request MRR for a historic time
    * @param subscriptionId  submit the id of a subscription in order to limit results
@@ -76,7 +76,7 @@ export class InsightsController extends BaseController {
   }
 
   /**
-   * This endpoint returns your site's MRR movements.
+   * Lists your site's MRR movements.
    *
    * ## Understanding MRR movements
    *

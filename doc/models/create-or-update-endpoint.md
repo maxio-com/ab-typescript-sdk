@@ -20,7 +20,7 @@ Used to Create or Update Endpoint
 {
   "url": "url8",
   "webhook_subscriptions": [
-    "subscription_prepayment_account_balance_changed"
+    "refund_success"
   ]
 }
 ```

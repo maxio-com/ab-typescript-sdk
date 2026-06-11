@@ -147,6 +147,8 @@ export type { ChangeInvoiceStatusEvent } from './models/changeInvoiceStatusEvent
 export type { ChangeInvoiceStatusEventData } from './models/changeInvoiceStatusEventData.js';
 export { ChargebackStatus } from './models/chargebackStatus.js';
 export type { ChargifyEBB } from './models/chargifyEBB.js';
+export type { ChjsTokenizationFailure } from './models/chjsTokenizationFailure.js';
+export type { ChjsTokenizationSuccess } from './models/chjsTokenizationSuccess.js';
 export { CleanupScope } from './models/cleanupScope.js';
 export type { CloneComponentPricePoint } from './models/cloneComponentPricePoint.js';
 export type { CloneComponentPricePointRequest } from './models/cloneComponentPricePointRequest.js';
@@ -447,7 +449,9 @@ export type { PaymentMethodBankAccount } from './models/paymentMethodBankAccount
 export type { PaymentMethodCreditCard } from './models/paymentMethodCreditCard.js';
 export type { PaymentMethodExternal } from './models/paymentMethodExternal.js';
 export type { PaymentMethodPaypal } from './models/paymentMethodPaypal.js';
+export type { PaymentProfile } from './models/paymentProfile.js';
 export type { PaymentProfileAttributes } from './models/paymentProfileAttributes.js';
+export type { PaymentProfileParams } from './models/paymentProfileParams.js';
 export type { PaymentProfileResponse } from './models/paymentProfileResponse.js';
 export type { PaymentRelatedEvents } from './models/paymentRelatedEvents.js';
 export { PaymentType } from './models/paymentType.js';
@@ -731,7 +735,7 @@ export * from './models/containers/listUsagesInputSubscriptionIdOrReference.js';
 export * from './models/containers/metafieldEnum.js';
 export * from './models/containers/meteredComponentUnitPrice.js';
 export * from './models/containers/onOffComponentUnitPrice.js';
-export * from './models/containers/paymentProfile.js';
+export * from './models/containers/paymentProfile2.js';
 export * from './models/containers/paymentProfileAttributesExpirationMonth.js';
 export * from './models/containers/paymentProfileAttributesExpirationYear.js';
 export * from './models/containers/prepaidUsageComponentUnitPrice.js';

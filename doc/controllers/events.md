@@ -17,11 +17,13 @@ const eventsController = new EventsController(client);
 
 # List Events
 
+Lists events for a site.
+
 ## Events Intro
 
 Advanced Billing Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
 
-Within the Advanced Billing UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activity).
+Within the Advanced Billing UI, "Events" are referred to as "Site Activity".  Full documentation on how to view Events / Site Activity in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activity).
 
 ## List Events for a Site
 
@@ -247,7 +249,7 @@ try {
 
 # List Subscription Events
 
-The following request will return a list of events for a subscription.
+Lists events for a subscription.
 
 ## Event Key
 
@@ -389,7 +391,7 @@ try {
 
 # Read Events Count
 
-Get a count of all the events for a given site by using this method.
+Returns the total count of events for a given site.
 
 ```ts
 async readEventsCount(

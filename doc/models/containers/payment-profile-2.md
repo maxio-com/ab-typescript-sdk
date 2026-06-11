@@ -1,9 +1,9 @@
 
-# Payment Profile
+# Payment Profile 2
 
 ## Class Name
 
-`PaymentProfile`
+`PaymentProfile2`
 
 ## Cases
 
@@ -21,7 +21,7 @@
 #### Example
 
 ```ts
-const value: PaymentProfile = {
+const value: PaymentProfile2 = {
   paymentType: PaymentType.ApplePay,
 };
 ```
@@ -33,7 +33,7 @@ const value: PaymentProfile = {
 #### Example
 
 ```ts
-const value: PaymentProfile = {
+const value: PaymentProfile2 = {
   paymentType: PaymentType.BankAccount,
   verified: false,
 };
@@ -46,7 +46,7 @@ const value: PaymentProfile = {
 #### Example
 
 ```ts
-const value: PaymentProfile = {
+const value: PaymentProfile2 = {
   paymentType: PaymentType.CreditCard,
   id: 10088716,
   firstName: 'Test',
@@ -77,7 +77,7 @@ const value: PaymentProfile = {
 #### Example
 
 ```ts
-const value: PaymentProfile = {
+const value: PaymentProfile2 = {
   paymentType: PaymentType.PaypalAccount,
 };
 ```

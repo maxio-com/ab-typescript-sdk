@@ -97,6 +97,8 @@ export interface InvoiceLineItem {
   productPricePointId?: number | null;
   customItem?: boolean;
   kind?: string;
+  /** The date a prepaid allocation is set to expire. Only present on line items representing prepaid component allocations. The format is `"YYYY-MM-DD"`. */
+  prepaidAllocationExpiresAt?: string | null;
   [key: string]: unknown;
 }
 
@@ -135,5 +137,9 @@ export const invoiceLineItemSchema: Schema<InvoiceLineItem> = lazy(() =>
     ],
     customItem: ['custom_item', optional(boolean())],
     kind: ['kind', optional(string())],
+    prepaidAllocationExpiresAt: [
+      'prepaid_allocation_expires_at',
+      optional(nullable(string())),
+    ],
   })
 );

@@ -74,6 +74,8 @@ export interface Customer {
   taxExemptReason?: string | null;
   /** The default auto-renewal profile ID for the customer */
   defaultAutoRenewalProfileId?: number | null;
+  /** The Maxio-generated unique identifier for the customer. */
+  maxioid?: string | null;
   [key: string]: unknown;
 }
 
@@ -123,4 +125,5 @@ export const customerSchema: Schema<Customer> = expandoObject({
     'default_auto_renewal_profile_id',
     optional(nullable(number())),
   ],
+  maxioid: ['maxioid', optional(nullable(string()))],
 });

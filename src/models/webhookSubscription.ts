@@ -12,6 +12,8 @@ import { Schema, stringEnum } from '../schema.js';
 export enum WebhookSubscription {
   BillingDateChange = 'billing_date_change',
   ComponentAllocationChange = 'component_allocation_change',
+  ChjsTokenizationFailure = 'chjs_tokenization_failure',
+  ChjsTokenizationSuccess = 'chjs_tokenization_success',
   CustomerCreate = 'customer_create',
   CustomerUpdate = 'customer_update',
   DunningStepReached = 'dunning_step_reached',

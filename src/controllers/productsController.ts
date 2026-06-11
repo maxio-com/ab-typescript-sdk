@@ -33,7 +33,7 @@ export class ProductsController extends BaseController {
   /**
    * Creates a product in your Advanced Billing site.
    *
-   * See the following product docuemation for more information:
+   * See the following product documentation for more information:
    *
    * + [Products Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-
    * Overview)
@@ -127,7 +127,7 @@ export class ProductsController extends BaseController {
   }
 
   /**
-   * Archives the product. All current subscribers will be unffected; their subscription/purchase will
+   * Archives the product. All current subscribers will be unaffected; their subscription/purchase will
    * continue to be charged monthly.
    *
    * This will restrict the option to chose the product for purchase via the Billing Portal, as well as
@@ -171,7 +171,7 @@ export class ProductsController extends BaseController {
   }
 
   /**
-   * This method allows to retrieve a list of Products belonging to a Site.
+   * Lists products belonging to a site.
    *
    * @param dateField        The type of filter you would like to apply to your search.
    *                                                      Use in query: `date_field=created_at`.

@@ -47,7 +47,7 @@ See the following articles to learn more about subscriptions and payments:
   + [Maxio.js with GoCardless - full example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01K0PJ15QR09JVHWW0MCA7HVJV)
   + [Maxio.js with Stripe Direct Debit - minimal example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01K0PJ15QQFKKN8Z7B7DZ9AJS5)
   + [Maxio.js with Stripe Direct Debit - full example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01K0PJ15QRECQQ4ECS3ZA55GY7)
-  + [CMaxio.js with Stripe BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
+  + [Maxio.js with Stripe BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
   + [Maxio.js with Stripe BECS Direct Debit - full example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#full-example-with-sepa-direct-debit-stripe-gateway)
 + [Full documentation on GoCardless](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-GoCardless)
 + [Full documentation on Stripe SEPA Direct Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
@@ -160,7 +160,7 @@ try {
 
 # List Payment Profiles
 
-This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.
+Returns all active payment profiles for a site, or for one customer within a site. If no payment profiles are found, this endpoint will return an empty array, not a 404.
 
 ```ts
 async listPaymentProfiles(
@@ -294,7 +294,7 @@ try {
 
 # Read Payment Profile
 
-Using the GET method you can retrieve a Payment Profile identified by its unique ID.
+Returns a payment profile identified by its unique ID.
 
 Note that a different JSON object will be returned if the card method on file is a bank account.
 
@@ -424,6 +424,8 @@ try {
 
 
 # Update Payment Profile
+
+Updates a payment profile.
 
 ## Partial Card Updates
 
@@ -702,7 +704,7 @@ try {
 
 # Verify Bank Account
 
-Submit the two small deposit amounts the customer received in their bank account in order to verify the bank account. (Stripe only)
+Verifies a bank account. Submit the two small deposit amounts the customer received in their bank account to verify the bank account. (Stripe only)
 
 ```ts
 async verifyBankAccount(
@@ -877,7 +879,7 @@ try {
 
 # Change Subscription Default Payment Profile
 
-This will change the default payment profile on the subscription to the existing payment profile with the id specified.
+Changes the default payment profile on the subscription to the existing payment profile with the specified ID.
 
 You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
