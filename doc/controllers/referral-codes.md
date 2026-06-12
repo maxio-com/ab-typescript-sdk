@@ -11,7 +11,7 @@ const referralCodesController = new ReferralCodesController(client);
 
 # Validate Referral Code
 
-Use this method to determine if the referral code is valid and applicable within your Site. This method is useful for validating referral codes that are entered by a customer.
+Validates whether a referral code is valid and applicable within your site. This method is useful for validating referral codes that are entered by a customer.
 
 ## Referrals Documentation
 
@@ -28,6 +28,10 @@ async validateReferralCode(
 ): Promise<ApiResponse<ReferralValidationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -36,6 +40,8 @@ async validateReferralCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReferralValidationResponse`](../../doc/models/referral-validation-response.md).
 

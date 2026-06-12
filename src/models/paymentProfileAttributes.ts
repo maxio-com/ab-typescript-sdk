@@ -27,7 +27,7 @@ import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 /** alias to credit_card_attributes */
 export interface PaymentProfileAttributes {
-  /** (Optional) Token received after sending billing information using chargify.js. This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
+  /** (Optional) Token received after sending billing information using Maxio.js (formerly Chargify.js). This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
   chargifyToken?: string;
   id?: number;
   paymentType?: PaymentType;

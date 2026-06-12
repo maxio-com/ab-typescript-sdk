@@ -12,3 +12,23 @@
 | `string` |
 | `number` |
 
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: CreateAllocationPricePointId = 'String0';
+```
+
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: CreateAllocationPricePointId = 0;
+```
+

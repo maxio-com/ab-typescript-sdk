@@ -182,7 +182,7 @@ export class CustomFieldsController extends BaseController {
    *
    * - Add new metadata to a dropdown or radio for a metafield that was created without metadata.
    *
-   * - Remove  metadata for a dropdown or radio for a metafield.
+   * - Remove metadata for a dropdown or radio for a metafield.
    * >Note: Updates to metadata overwrite existing values. To remove one or more values, specify all
    * metadata values except those you want to remove.
    *
@@ -340,7 +340,7 @@ export class CustomFieldsController extends BaseController {
    * metafield with the Update Metafield endpoint.
    *
    * Each site is limited to 100 unique metafields per resource. This means you can have 100 metafields
-   * for Subscription and another 100 for Customer.
+   * for the Subscription resource and another 100 for the Customer resource.
    *
    * @param resourceType  The resource type to which the metafields belong.
    * @param resourceId    The Advanced Billing id of the customer or the subscription
@@ -407,7 +407,7 @@ export class CustomFieldsController extends BaseController {
   }
 
   /**
-   * Lists  metadata for a specified array of subscriptions or customers.
+   * Lists metadata for a specified array of subscriptions or customers.
    *
    * @param resourceType   The resource type to which the metafields belong.
    * @param page           Result records are organized in pages. By default, the first page of

@@ -39,6 +39,7 @@
 | `salesforceId` | `string \| null \| undefined` | Optional | The Salesforce ID for the customer |
 | `taxExemptReason` | `string \| null \| undefined` | Optional | The Tax Exemption Reason Code for the customer |
 | `defaultAutoRenewalProfileId` | `number \| null \| undefined` | Optional | The default auto-renewal profile ID for the customer |
+| `maxioid` | `string \| null \| undefined` | Optional | The Maxio-generated unique identifier for the customer. |
 
 ## Example (as JSON)
 

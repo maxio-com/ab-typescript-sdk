@@ -12,3 +12,23 @@
 | `string` |
 | `number` |
 
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: SubscriptionGroupSignupComponentUnitBalance = 'String0';
+```
+
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: SubscriptionGroupSignupComponentUnitBalance = 0;
+```
+

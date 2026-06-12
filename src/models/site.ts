@@ -45,6 +45,12 @@ export interface Site {
   organizationAddress?: OrganizationAddress;
   taxConfiguration?: TaxConfiguration;
   netTerms?: NetTerms;
+  /** Whether the site has the multi-frequency billing feature enabled. Only present when relationship invoicing is active. */
+  multiFrequencyEnabled?: boolean;
+  /** Whether the auto-renewals feature is enabled for this site. */
+  autoRenewalsEnabled?: boolean;
+  /** Whether the Billing Portal is enabled for this site. */
+  portalEnabled?: boolean;
   test?: boolean;
   [key: string]: unknown;
 }
@@ -85,6 +91,9 @@ export const siteSchema: Schema<Site> = lazy(() =>
     ],
     taxConfiguration: ['tax_configuration', optional(taxConfigurationSchema)],
     netTerms: ['net_terms', optional(netTermsSchema)],
+    multiFrequencyEnabled: ['multi_frequency_enabled', optional(boolean())],
+    autoRenewalsEnabled: ['auto_renewals_enabled', optional(boolean())],
+    portalEnabled: ['portal_enabled', optional(boolean())],
     test: ['test', optional(boolean())],
   })
 );

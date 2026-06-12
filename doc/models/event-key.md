@@ -42,6 +42,7 @@
 | `TrialEndNotice` |
 | `DunningStepReached` |
 | `InvoiceIssued` |
+| `InvoicePending` |
 | `PrepaidSubscriptionBalanceChanged` |
 | `SubscriptionGroupSignupSuccess` |
 | `SubscriptionGroupSignupFailure` |
@@ -85,6 +86,8 @@
 | `ChargebackWon` |
 | `PaymentCollectionMethodChanged` |
 | `ComponentBillingDateChanged` |
+| `ChjsTokenizationFailure` |
+| `ChjsTokenizationSuccess` |
 | `SubscriptionTermRenewalScheduled` |
 | `SubscriptionTermRenewalPending` |
 | `SubscriptionTermRenewalActivated` |

@@ -17,15 +17,15 @@ const sitesController = new SitesController(client);
 
 # Read Site
 
-This endpoint allows you to fetch some site data.
+Retrieves site data.
 
 Full documentation on Sites in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/sections/24250550707085-Sites).
 
-Specifically, the [Clearing Site Data](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site-Data) section is extremely relevant to this endpoint documentation.
+Specifically, the [Clearing Site Data](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site-Data) section is relevant to this endpoint documentation.
 
 #### Relationship invoicing enabled
 
-If site has RI enabled then you will see more settings like:
+If the site has RI enabled then you will see more settings like:
 
     "customer_hierarchy_enabled": true,
     "whopays_enabled": true,
@@ -40,6 +40,10 @@ async readSite(
 ): Promise<ApiResponse<SiteResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -47,6 +51,8 @@ async readSite(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SiteResponse`](../../doc/models/site-response.md).
 
@@ -131,7 +137,7 @@ try {
 
 # Clear Site
 
-This call is asynchronous and there may be a delay before the site data is fully deleted. If you are clearing site data for an automated test, you will need to build in a delay and/or check that there are no products, etc., in the site before proceeding.
+Clears all data from a test site asynchronously. This call is asynchronous and there may be a delay before the site data is fully deleted. If you are clearing site data for an automated test, you will need to build in a delay and/or check that there are no products, etc., in the site before proceeding.
 
 **This functionality will only work on sites in TEST mode. Attempts to perform this on sites in “live” mode will result in a response of 403 FORBIDDEN.**
 
@@ -142,6 +148,10 @@ async clearSite(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -150,6 +160,8 @@ async clearSite(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -185,7 +197,7 @@ try {
 
 # List Chargify Js Public Keys
 
-This endpoint returns public keys used for Chargify.js.
+Returns public keys used for Maxio.js (formerly Chargify.js).
 
 ```ts
 async listChargifyJsPublicKeys(
@@ -200,6 +212,10 @@ async listChargifyJsPublicKeys(
 ): Promise<ApiResponse<ListPublicKeysResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -209,6 +225,8 @@ async listChargifyJsPublicKeys(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListPublicKeysResponse`](../../doc/models/list-public-keys-response.md).
 

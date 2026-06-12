@@ -12,3 +12,23 @@
 | `string` |
 | `number` |
 
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: CreateInvoiceItemProductId = 'String0';
+```
+
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: CreateInvoiceItemProductId = 0;
+```
+

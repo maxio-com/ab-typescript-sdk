@@ -51,6 +51,10 @@ async listProductsForProductFamily(
 ): Promise<ApiResponse<ProductResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -69,6 +73,8 @@ async listProductsForProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse[]`](../../doc/models/product-response.md).
 
@@ -222,7 +228,7 @@ try {
 
 # Create Product Family
 
-Creates a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components and coupons.
+Creates a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components, and coupons.
 
 Full documentation on how Product Families operate within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
 
@@ -233,6 +239,10 @@ async createProductFamily(
 ): Promise<ApiResponse<ProductFamilyResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -241,6 +251,8 @@ async createProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse`](../../doc/models/product-family-response.md).
 
@@ -304,7 +316,7 @@ try {
 
 # List Product Families
 
-Retrieve a list of Product Families for a site.
+Returns a list of Product Families for a site.
 
 ```ts
 async listProductFamilies(
@@ -325,6 +337,10 @@ async listProductFamilies(
 ): Promise<ApiResponse<ProductFamilyResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -337,6 +353,8 @@ async listProductFamilies(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse[]`](../../doc/models/product-family-response.md).
 
@@ -416,6 +434,10 @@ async readProductFamily(
 ): Promise<ApiResponse<ProductFamilyResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -424,6 +446,8 @@ async readProductFamily(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductFamilyResponse`](../../doc/models/product-family-response.md).
 

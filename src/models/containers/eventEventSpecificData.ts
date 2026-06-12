@@ -11,6 +11,14 @@ import {
   Schema,
 } from '../../schema.js';
 import {
+  ChjsTokenizationFailure,
+  chjsTokenizationFailureSchema,
+} from '../chjsTokenizationFailure.js';
+import {
+  ChjsTokenizationSuccess,
+  chjsTokenizationSuccessSchema,
+} from '../chjsTokenizationSuccess.js';
+import {
   ComponentAllocationChange,
   componentAllocationChangeSchema,
 } from '../componentAllocationChange.js';
@@ -90,7 +98,9 @@ export type EventEventSpecificData =
   | PrepaymentAccountBalanceChanged
   | PaymentCollectionMethodChanged
   | ItemPricePointChanged
-  | CustomFieldValueChange;
+  | CustomFieldValueChange
+  | ChjsTokenizationSuccess
+  | ChjsTokenizationFailure;
 
 export const eventEventSpecificDataSchema: Schema<EventEventSpecificData> = lazy(
   () =>
@@ -113,6 +123,8 @@ export const eventEventSpecificDataSchema: Schema<EventEventSpecificData> = lazy
       paymentCollectionMethodChangedSchema,
       itemPricePointChangedSchema,
       customFieldValueChangeSchema,
+      chjsTokenizationSuccessSchema,
+      chjsTokenizationFailureSchema,
     ])
 );
 
@@ -320,5 +332,27 @@ export namespace EventEventSpecificData {
     value: unknown
   ): value is CustomFieldValueChange {
     return isMappedValueValidForSchema(value, customFieldValueChangeSchema);
+  }
+
+  /**
+   * Validation method to narrow down union type to ChjsTokenizationSuccess type case.
+   *
+   * This is Chjs Tokenization Success case.
+   */
+  export function isChjsTokenizationSuccess(
+    value: unknown
+  ): value is ChjsTokenizationSuccess {
+    return isMappedValueValidForSchema(value, chjsTokenizationSuccessSchema);
+  }
+
+  /**
+   * Validation method to narrow down union type to ChjsTokenizationFailure type case.
+   *
+   * This is Chjs Tokenization Failure case.
+   */
+  export function isChjsTokenizationFailure(
+    value: unknown
+  ): value is ChjsTokenizationFailure {
+    return isMappedValueValidForSchema(value, chjsTokenizationFailureSchema);
   }
 }

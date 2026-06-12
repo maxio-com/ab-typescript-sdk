@@ -11,12 +11,15 @@
 |  --- |
 | `BillingDateChange` |
 | `ComponentAllocationChange` |
+| `ChjsTokenizationFailure` |
+| `ChjsTokenizationSuccess` |
 | `CustomerCreate` |
 | `CustomerUpdate` |
 | `DunningStepReached` |
 | `ExpiringCard` |
 | `ExpirationDateChange` |
 | `InvoiceIssued` |
+| `InvoicePending` |
 | `MeteredUsage` |
 | `PaymentFailure` |
 | `PaymentSuccess` |

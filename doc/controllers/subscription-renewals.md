@@ -35,6 +35,10 @@ async createScheduledRenewalConfiguration(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -44,6 +48,8 @@ async createScheduledRenewalConfiguration(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -153,6 +159,10 @@ async listScheduledRenewalConfigurations(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -162,6 +172,8 @@ async listScheduledRenewalConfigurations(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationsResponse`](../../doc/models/scheduled-renewal-configurations-response.md).
 
@@ -252,6 +264,10 @@ async readScheduledRenewalConfiguration(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -261,6 +277,8 @@ async readScheduledRenewalConfiguration(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -355,6 +373,10 @@ async updateScheduledRenewalConfiguration(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -365,6 +387,8 @@ async updateScheduledRenewalConfiguration(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -477,6 +501,10 @@ async scheduleScheduledRenewalLockIn(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -487,6 +515,8 @@ async scheduleScheduledRenewalLockIn(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -594,6 +624,10 @@ async lockInScheduledRenewalImmediately(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -603,6 +637,8 @@ async lockInScheduledRenewalImmediately(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -704,6 +740,10 @@ async unpublishScheduledRenewalConfiguration(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -713,6 +753,8 @@ async unpublishScheduledRenewalConfiguration(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -806,6 +848,10 @@ async cancelScheduledRenewalConfiguration(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -815,6 +861,8 @@ async cancelScheduledRenewalConfiguration(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationResponse`](../../doc/models/scheduled-renewal-configuration-response.md).
 
@@ -909,6 +957,10 @@ async createScheduledRenewalConfigurationItem(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationItemResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -919,6 +971,8 @@ async createScheduledRenewalConfigurationItem(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationItemResponse`](../../doc/models/scheduled-renewal-configuration-item-response.md).
 
@@ -1019,6 +1073,10 @@ async updateScheduledRenewalConfigurationItem(
 ): Promise<ApiResponse<ScheduledRenewalConfigurationItemResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1030,6 +1088,8 @@ async updateScheduledRenewalConfigurationItem(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ScheduledRenewalConfigurationItemResponse`](../../doc/models/scheduled-renewal-configuration-item-response.md).
 
@@ -1132,6 +1192,10 @@ async deleteScheduledRenewalConfigurationItem(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1142,6 +1206,8 @@ async deleteScheduledRenewalConfigurationItem(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: No Content
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 

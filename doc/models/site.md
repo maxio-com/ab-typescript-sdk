@@ -25,6 +25,9 @@
 | `organizationAddress` | [`OrganizationAddress \| undefined`](../../doc/models/organization-address.md) | Optional | - |
 | `taxConfiguration` | [`TaxConfiguration \| undefined`](../../doc/models/tax-configuration.md) | Optional | - |
 | `netTerms` | [`NetTerms \| undefined`](../../doc/models/net-terms.md) | Optional | - |
+| `multiFrequencyEnabled` | `boolean \| undefined` | Optional | Whether the site has the multi-frequency billing feature enabled. Only present when relationship invoicing is active. |
+| `autoRenewalsEnabled` | `boolean \| undefined` | Optional | Whether the auto-renewals feature is enabled for this site. |
+| `portalEnabled` | `boolean \| undefined` | Optional | Whether the Billing Portal is enabled for this site. |
 | `test` | `boolean \| undefined` | Optional | - |
 
 ## Example (as JSON)

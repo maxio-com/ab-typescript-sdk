@@ -18,11 +18,13 @@ const billingPortalController = new BillingPortalController(client);
 
 # Enable Billing Portal for Customer
 
+Enables Billing Portal access for a customer, with an option to send an invitation email at the same time.
+
 ## Billing Portal Documentation
 
 Full documentation on how the Billing Portal operates within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24252412965133-Billing-Portal-Overview).
 
-This documentation is focused on how the to configure the Billing Portal Settings, as well as Subscriber Interaction and Merchant Management of the Billing Portal.
+This documentation is focused on how to configure the Billing Portal Settings, as well as Subscriber Interaction and Merchant Management of the Billing Portal.
 
 You can use this endpoint to enable Billing Portal access for a Customer, with the option of sending the Customer an Invitation email at the same time.
 
@@ -42,6 +44,10 @@ async enableBillingPortalForCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -51,6 +57,8 @@ async enableBillingPortalForCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -95,7 +103,7 @@ try {
 
 # Read Billing Portal Link
 
-This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
+Returns the exact URL required for a subscriber to access the Billing Portal.
 
 ## Rules for Management Link API
 
@@ -112,6 +120,10 @@ async readBillingPortalLink(
 ): Promise<ApiResponse<PortalManagementLink>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -120,6 +132,8 @@ async readBillingPortalLink(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PortalManagementLink`](../../doc/models/portal-management-link.md).
 
@@ -180,15 +194,13 @@ try {
 
 # Resend Billing Portal Invitation
 
-You can resend a customer's Billing Portal invitation.
+Resends a customer's Billing Portal invitation.
 
-If you attempt to resend an invitation 5 times within 30 minutes, you will receive a `422` response with `error` message in the body.
-
-If you attempt to resend an invitation when the Billing Portal is already disabled for a Customer, you will receive a `422` error response.
+If you attempt to resend an invitation 5 times within 30 minutes, you will receive a `422` response with an `error` message in the body.
 
 If you attempt to resend an invitation when the Billing Portal is already disabled for a Customer, you will receive a `422` error response.
 
-If you attempt to resend an invitation when the Customer does not exist a Customer, you will receive a `404` error response.
+If you attempt to resend an invitation when the Customer does not exist, you will receive a `404` error response.
 
 ## Limitations
 
@@ -201,6 +213,10 @@ async resendBillingPortalInvitation(
 ): Promise<ApiResponse<ResentInvitation>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -209,6 +225,8 @@ async resendBillingPortalInvitation(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ResentInvitation`](../../doc/models/resent-invitation.md).
 
@@ -265,7 +283,7 @@ try {
 
 # Revoke Billing Portal Access
 
-You can revoke a customer's Billing Portal invitation.
+Revokes a customer's Billing Portal invitation.
 
 If you attempt to revoke an invitation when the Billing Portal is already disabled for a Customer, you will receive a 422 error response.
 
@@ -280,6 +298,10 @@ async revokeBillingPortalAccess(
 ): Promise<ApiResponse<RevokedInvitation>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -288,6 +310,8 @@ async revokeBillingPortalAccess(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`RevokedInvitation`](../../doc/models/revoked-invitation.md).
 

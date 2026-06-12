@@ -87,7 +87,7 @@ export interface CreateAllocation {
   initiateDunning?: boolean;
   /** Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used. */
   pricePointId?: CreateAllocationPricePointId | null;
-  /** This attribute is particularly useful when you need to align billing events for different components on distinct schedules within a subscription. This only works for site with Multifrequency enabled. */
+  /** Billing schedule settings for component allocations or usages on multi-frequency subscriptions. Use this to start a component's billing period on a custom date instead of aligning with the product charge schedule. */
   billingSchedule?: BillingSchedule;
   /** Create or update custom pricing unique to the subscription. Used in place of `price_point_id`. */
   customPrice?: ComponentCustomPrice;

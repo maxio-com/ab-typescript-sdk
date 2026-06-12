@@ -19,9 +19,11 @@ const reasonCodesController = new ReasonCodesController(client);
 
 # Create Reason Code
 
+Creates a reason code for a given site.
+
 # Reason Codes Intro
 
-ReasonCodes are a way to gain a high level view of why your customers are cancelling the subscription to your product or service.
+Reason Codes are a way to gain a high-level view of why your customers are cancelling the subscription to your product or service.
 
 Add a set of churn reason codes to be displayed in-app and/or the Maxio Billing Portal. As your subscribers decide to cancel their subscription, learn why they decided to cancel.
 
@@ -33,7 +35,7 @@ Full documentation on how Reason Codes operate within Advanced Billing can be lo
 
 ## Create Reason Code
 
-This method gives a merchant the option to create a reason codes for a given Site.
+This method gives a merchant the option to create reason codes for a given site.
 
 ```ts
 async createReasonCode(
@@ -41,6 +43,10 @@ async createReasonCode(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -50,6 +56,8 @@ async createReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
@@ -100,7 +108,7 @@ try {
 
 # List Reason Codes
 
-This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
+Lists all current churn codes for a given site.
 
 ```ts
 async listReasonCodes(
@@ -115,6 +123,10 @@ async listReasonCodes(
 ): Promise<ApiResponse<ReasonCodeResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -124,6 +136,8 @@ async listReasonCodes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse[]`](../../doc/models/reason-code-response.md).
 
@@ -211,7 +225,7 @@ try {
 
 # Read Reason Code
 
-This method gives a merchant the option to retrieve a list of a particular code for a given Site by providing the unique numerical ID of the code.
+Returns a particular churn reason code for a given site by its unique ID.
 
 ```ts
 async readReasonCode(
@@ -219,6 +233,10 @@ async readReasonCode(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -228,6 +246,8 @@ async readReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
@@ -269,7 +289,7 @@ try {
 
 # Update Reason Code
 
-This method gives a merchant the option to update an existing reason code for a given site.
+Updates an existing reason code for a given site.
 
 ```ts
 async updateReasonCode(
@@ -278,6 +298,10 @@ async updateReasonCode(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ReasonCodeResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -288,6 +312,8 @@ async updateReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ReasonCodeResponse`](../../doc/models/reason-code-response.md).
 
@@ -333,7 +359,7 @@ try {
 
 # Delete Reason Code
 
-This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversible.
+Deletes a reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversible.
 
 ```ts
 async deleteReasonCode(
@@ -341,6 +367,10 @@ async deleteReasonCode(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OkResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -350,6 +380,8 @@ async deleteReasonCode(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OkResponse`](../../doc/models/ok-response.md).
 

@@ -148,7 +148,7 @@ export interface CreateSubscription {
   dunningCommunicationDelayEnabled?: boolean;
   /** Time zone for the Dunning Communication Delay feature. */
   dunningCommunicationDelayTimeZone?: string | null;
-  /** Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests. */
+  /** Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests. Defaults to `false` when not provided. */
   skipBillingManifestTaxes?: boolean;
   [key: string]: unknown;
 }

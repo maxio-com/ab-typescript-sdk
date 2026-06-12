@@ -54,7 +54,7 @@ export interface CreditCardPaymentProfile {
   billingAddress2?: string | null;
   paymentType: PaymentType;
   disabled?: boolean;
-  /** Token received after sending billing information using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
+  /** Token received after sending billing information using Maxio.js (formerly Chargify.js). This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
   chargifyToken?: string;
   siteGatewaySettingId?: number | null;
   /** An identifier of connected gateway. */

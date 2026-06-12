@@ -21,7 +21,7 @@ const customersController = new CustomersController(client);
 
 # Create Customer
 
-You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value.
+Creates a new customer; can also be created alongside a new subscription. The only validation restriction is that you may only create one customer for a given reference value.
 
 If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Advanced Billing’s unique ID for the customer, which is in the `id` attribute.
 
@@ -53,6 +53,10 @@ async createCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -61,6 +65,8 @@ async createCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -157,7 +163,7 @@ try {
 
 # List Customers
 
-This request will by default list all customers associated with your Site.
+Lists all customers associated with your site, or filters results using the search parameter.
 
 ## Find Customer
 
@@ -200,6 +206,10 @@ async listCustomers(
 ): Promise<ApiResponse<CustomerResponse[]>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -216,6 +226,8 @@ async listCustomers(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse[]`](../../doc/models/customer-response.md).
 
@@ -348,6 +360,10 @@ async readCustomer(
 ): Promise<ApiResponse<CustomerResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -356,6 +372,8 @@ async readCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -428,7 +446,7 @@ try {
 
 # Update Customer
 
-This method allows to update the Customer.
+Updates the customer.
 
 ```ts
 async updateCustomer(
@@ -437,6 +455,10 @@ async updateCustomer(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CustomerResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -447,6 +469,8 @@ async updateCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -534,7 +558,7 @@ try {
 
 # Delete Customer
 
-This method allows you to delete the Customer.
+Deletes the customer.
 
 ```ts
 async deleteCustomer(
@@ -542,6 +566,10 @@ async deleteCustomer(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -551,6 +579,8 @@ async deleteCustomer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: No Content
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -586,7 +616,7 @@ try {
 
 # Read Customer by Reference
 
-Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
+Returns a customer by their unique reference ID. It will return a single match.
 
 ```ts
 async readCustomerByReference(
@@ -594,6 +624,10 @@ async readCustomerByReference(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<CustomerResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -603,6 +637,8 @@ async readCustomerByReference(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerResponse`](../../doc/models/customer-response.md).
 
@@ -638,7 +674,7 @@ try {
 
 # List Customer Subscriptions
 
-This method lists all subscriptions that belong to a customer.
+Lists all subscriptions that belong to a customer.
 
 ```ts
 async listCustomerSubscriptions(
@@ -646,6 +682,10 @@ async listCustomerSubscriptions(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<SubscriptionResponse[]>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -655,6 +695,8 @@ async listCustomerSubscriptions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionResponse[]`](../../doc/models/subscription-response.md).
 

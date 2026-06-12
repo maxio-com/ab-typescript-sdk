@@ -147,6 +147,8 @@ export type { ChangeInvoiceStatusEvent } from './models/changeInvoiceStatusEvent
 export type { ChangeInvoiceStatusEventData } from './models/changeInvoiceStatusEventData.js';
 export { ChargebackStatus } from './models/chargebackStatus.js';
 export type { ChargifyEBB } from './models/chargifyEBB.js';
+export type { ChjsTokenizationFailure } from './models/chjsTokenizationFailure.js';
+export type { ChjsTokenizationSuccess } from './models/chjsTokenizationSuccess.js';
 export { CleanupScope } from './models/cleanupScope.js';
 export type { CloneComponentPricePoint } from './models/cloneComponentPricePoint.js';
 export type { CloneComponentPricePointRequest } from './models/cloneComponentPricePointRequest.js';
@@ -448,6 +450,7 @@ export type { PaymentMethodCreditCard } from './models/paymentMethodCreditCard.j
 export type { PaymentMethodExternal } from './models/paymentMethodExternal.js';
 export type { PaymentMethodPaypal } from './models/paymentMethodPaypal.js';
 export type { PaymentProfileAttributes } from './models/paymentProfileAttributes.js';
+export type { PaymentProfileParams } from './models/paymentProfileParams.js';
 export type { PaymentProfileResponse } from './models/paymentProfileResponse.js';
 export type { PaymentRelatedEvents } from './models/paymentRelatedEvents.js';
 export { PaymentType } from './models/paymentType.js';
@@ -627,6 +630,7 @@ export { SubscriptionStateFilter } from './models/subscriptionStateFilter.js';
 export type { TaxConfiguration } from './models/taxConfiguration.js';
 export { TaxConfigurationKind } from './models/taxConfigurationKind.js';
 export { TaxDestinationAddress } from './models/taxDestinationAddress.js';
+export type { TokenizedPaymentProfile } from './models/tokenizedPaymentProfile.js';
 export type { TooManyManagementLinkRequests } from './models/tooManyManagementLinkRequests.js';
 export { TrialType } from './models/trialType.js';
 export type { UpdateAllocationExpirationDate } from './models/updateAllocationExpirationDate.js';

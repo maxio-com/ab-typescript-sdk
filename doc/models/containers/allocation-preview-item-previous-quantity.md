@@ -12,3 +12,23 @@
 | `number` |
 | `string` |
 
+## number
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: AllocationPreviewItemPreviousQuantity = 0;
+```
+
+## string
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: AllocationPreviewItemPreviousQuantity = 'String0';
+```
+

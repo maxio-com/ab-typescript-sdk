@@ -168,7 +168,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to read current price points that are associated with a component.
+   * Lists the price points associated with a component.
    *
    * You may specify the component by using either the numeric id or the `handle:gold` syntax.
    *
@@ -229,7 +229,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to create multiple component price points in one request.
+   * Creates multiple component price points in one request.
    *
    * @param componentId  The Advanced Billing id of the component for
    *                                                                 which you want to fetch price points.
@@ -311,8 +311,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * When updating a price point, prices can be updated as well by creating new prices or editing /
-   * removing existing ones.
+   * Updates a component price point and its associated prices.
    *
    * Passing in a price bracket without an `id` will attempt to create a new price.
    *
@@ -358,8 +357,8 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to retrieve details for a specific component price point. You can achieve this by
-   * using either the component price point ID or handle.
+   * Returns details for a specific component price point. You can achieve this by using either the
+   * component price point ID or handle.
    *
    * @param componentId     The id or handle of the component. When using the
    *                                                               handle, it must be prefixed with `handle:`. Example:
@@ -394,8 +393,8 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * A price point can be archived at any time. Subscriptions using a price point that has been archived
-   * will continue using it until they're moved to another price point.
+   * Archives a component price point. Subscriptions using a price point that has been archived will
+   * continue using it until they're moved to another price point.
    *
    * @param componentId    The id or handle of the component. When using the
    *                                                                 handle, it must be prefixed with `handle:`.
@@ -432,7 +431,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * Use this endpoint to unarchive a component price point.
+   * Unarchives a component price point.
    *
    * @param componentId    The Advanced Billing id of the component to which the price point belongs
    * @param pricePointId   The Advanced Billing id of the price point
@@ -454,8 +453,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * This endpoint allows you to create currency prices for a given currency that has been defined on the
-   * site level in your settings.
+   * Creates currency prices for a given currency defined at the site level.
    *
    * When creating currency prices, they need to mirror the structure of your primary pricing. For each
    * price level defined on the component price point, there should be a matching price level created in
@@ -494,8 +492,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * This endpoint allows you to update currency prices for a given currency that has been defined on the
-   * site level in your settings.
+   * Updates currency prices for a given currency defined at the site level.
    *
    * Note: Currency Prices are not able to be updated for custom price points.
    *
@@ -530,7 +527,7 @@ export class ComponentPricePointsController extends BaseController {
   }
 
   /**
-   * This method allows to retrieve a list of Components Price Points belonging to a Site.
+   * Lists all component price points belonging to a site.
    *
    * @param include   Allows including additional data in the response. Use in
    *                                                      query: `include=currency_prices`.

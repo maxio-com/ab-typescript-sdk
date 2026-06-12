@@ -35,6 +35,10 @@ async createProductPricePoint(
 ): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -44,6 +48,8 @@ async createProductPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
@@ -159,6 +165,10 @@ async listProductPricePoints(
 ): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -172,6 +182,8 @@ async listProductPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProductPricePointsResponse`](../../doc/models/list-product-price-points-response.md).
 
@@ -254,6 +266,10 @@ async updateProductPricePoint(
 ): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -264,6 +280,8 @@ async updateProductPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
@@ -339,7 +357,7 @@ try {
 
 # Read Product Price Point
 
-Use this endpoint to retrieve details for a specific product price point. You can achieve this by using either the product price point ID or handle.
+Returns details for a specific product price point. You can achieve this by using either the product price point ID or handle.
 
 ```ts
 async readProductPricePoint(
@@ -349,6 +367,10 @@ async readProductPricePoint(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductPricePointResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -360,6 +382,8 @@ async readProductPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
@@ -437,6 +461,10 @@ async archiveProductPricePoint(
 ): Promise<ApiResponse<ProductPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -446,6 +474,8 @@ async archiveProductPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
@@ -522,7 +552,7 @@ try {
 
 # Unarchive Product Price Point
 
-Use this endpoint to unarchive an archived product price point.
+Unarchives an archived product price point.
 
 ```ts
 async unarchiveProductPricePoint(
@@ -531,6 +561,10 @@ async unarchiveProductPricePoint(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductPricePointResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -541,6 +575,8 @@ async unarchiveProductPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md).
 
@@ -620,6 +656,10 @@ async promoteProductPricePointToDefault(
 ): Promise<ApiResponse<ProductResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -629,6 +669,8 @@ async promoteProductPricePointToDefault(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ProductResponse`](../../doc/models/product-response.md).
 
@@ -732,6 +774,10 @@ async bulkCreateProductPricePoints(
 ): Promise<ApiResponse<BulkCreateProductPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -741,6 +787,8 @@ async bulkCreateProductPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BulkCreateProductPricePointsResponse`](../../doc/models/bulk-create-product-price-points-response.md).
 
@@ -863,6 +911,10 @@ async createProductCurrencyPrices(
 ): Promise<ApiResponse<CurrencyPricesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -872,6 +924,8 @@ async createProductCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md).
 
@@ -970,6 +1024,10 @@ async updateProductCurrencyPrices(
 ): Promise<ApiResponse<CurrencyPricesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -979,6 +1037,8 @@ async updateProductCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md).
 
@@ -1056,7 +1116,7 @@ try {
 
 # List All Product Price Points
 
-This method allows retrieval of a list of Products Price Points belonging to a Site.
+Lists Product Price Points belonging to a site.
 
 ```ts
 async listAllProductPricePoints(
@@ -1077,6 +1137,10 @@ async listAllProductPricePoints(
 ): Promise<ApiResponse<ListProductPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1089,6 +1153,8 @@ async listAllProductPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListProductPricePointsResponse`](../../doc/models/list-product-price-points-response.md).
 

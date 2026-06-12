@@ -40,6 +40,10 @@ async promoteComponentPricePointToDefault(
 ): Promise<ApiResponse<ComponentResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -49,6 +53,8 @@ async promoteComponentPricePointToDefault(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentResponse`](../../doc/models/component-response.md).
 
@@ -132,6 +138,10 @@ async createComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -141,6 +151,8 @@ async createComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -209,7 +221,7 @@ try {
 
 # List Component Price Points
 
-Use this endpoint to read current price points that are associated with a component.
+Lists the price points associated with a component.
 
 You may specify the component by using either the numeric id or the `handle:gold` syntax.
 
@@ -236,6 +248,10 @@ async listComponentPricePoints(
 ): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -248,6 +264,8 @@ async listComponentPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md).
 
@@ -337,7 +355,7 @@ try {
 
 # Bulk Create Component Price Points
 
-Use this endpoint to create multiple component price points in one request.
+Creates multiple component price points in one request.
 
 ```ts
 async bulkCreateComponentPricePoints(
@@ -346,6 +364,10 @@ async bulkCreateComponentPricePoints(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentPricePointsResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -356,6 +378,8 @@ async bulkCreateComponentPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md).
 
@@ -509,6 +533,10 @@ async cloneComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -519,6 +547,8 @@ async cloneComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md).
 
@@ -648,7 +678,7 @@ try {
 
 # Update Component Price Point
 
-When updating a price point, prices can be updated as well by creating new prices or editing / removing existing ones.
+Updates a component price point and its associated prices.
 
 Passing in a price bracket without an `id` will attempt to create a new price.
 
@@ -665,6 +695,10 @@ async updateComponentPricePoint(
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -675,6 +709,8 @@ async updateComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -746,7 +782,7 @@ try {
 
 # Read Component Price Point
 
-Use this endpoint to retrieve details for a specific component price point. You can achieve this by using either the component price point ID or handle.
+Returns details for a specific component price point. You can achieve this by using either the component price point ID or handle.
 
 ```ts
 async readComponentPricePoint(
@@ -756,6 +792,10 @@ async readComponentPricePoint(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentPricePointCurrencyOverageResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -767,6 +807,8 @@ async readComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md).
 
@@ -807,7 +849,7 @@ try {
 
 # Archive Component Price Point
 
-A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
+Archives a component price point. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
 
 ```ts
 async archiveComponentPricePoint(
@@ -816,6 +858,10 @@ async archiveComponentPricePoint(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -826,6 +872,8 @@ async archiveComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -909,7 +957,7 @@ try {
 
 # Unarchive Component Price Point
 
-Use this endpoint to unarchive a component price point.
+Unarchives a component price point.
 
 ```ts
 async unarchiveComponentPricePoint(
@@ -918,6 +966,10 @@ async unarchiveComponentPricePoint(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ComponentPricePointResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -928,6 +980,8 @@ async unarchiveComponentPricePoint(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md).
 
@@ -1002,7 +1056,7 @@ try {
 
 # Create Currency Prices
 
-This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
+Creates currency prices for a given currency defined at the site level.
 
 When creating currency prices, they need to mirror the structure of your primary pricing. For each price level defined on the component price point, there should be a matching price level created in the given currency.
 
@@ -1016,6 +1070,10 @@ async createCurrencyPrices(
 ): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1025,6 +1083,8 @@ async createCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md).
 
@@ -1104,7 +1164,7 @@ try {
 
 # Update Currency Prices
 
-This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
+Updates currency prices for a given currency defined at the site level.
 
 Note: Currency Prices are not able to be updated for custom price points.
 
@@ -1116,6 +1176,10 @@ async updateCurrencyPrices(
 ): Promise<ApiResponse<ComponentCurrencyPricesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1125,6 +1189,8 @@ async updateCurrencyPrices(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md).
 
@@ -1202,7 +1268,7 @@ try {
 
 # List All Component Price Points
 
-This method allows to retrieve a list of Components Price Points belonging to a Site.
+Lists all component price points belonging to a site.
 
 ```ts
 async listAllComponentPricePoints(
@@ -1223,6 +1289,10 @@ async listAllComponentPricePoints(
 ): Promise<ApiResponse<ListComponentsPricePointsResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1235,6 +1305,8 @@ async listAllComponentPricePoints(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListComponentsPricePointsResponse`](../../doc/models/list-components-price-points-response.md).
 

@@ -11,7 +11,7 @@ describe('SitesController', () => {
       name: 'Typescript SDK',
       subdomain: 'ts-sdk',
       currency: 'USD',
-      auto_renewals_enabled: false,
+      autoRenewalsEnabled: false,
       brighton_v1_enabled: false,
       sellerId: 58665,
       nonPrimaryCurrencies: ['EUR', 'GBP'],
@@ -26,6 +26,7 @@ describe('SitesController', () => {
         downgradeCredit: 'none',
       },
       defaultPaymentCollectionMethod: 'automatic',
+      portalEnabled: true,
       organizationAddress: {
         street: 'Asdf Street',
         line2: '123/444',

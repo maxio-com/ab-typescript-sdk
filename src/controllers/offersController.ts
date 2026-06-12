@@ -21,7 +21,7 @@ import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class OffersController extends BaseController {
   /**
-   * Create an offer within your Advanced Billing site by sending a POST request.
+   * Creates an offer within your Advanced Billing site.
    *
    * ## Documentation
    *
@@ -63,7 +63,7 @@ export class OffersController extends BaseController {
   }
 
   /**
-   * This endpoint will list offers for a site.
+   * Lists offers for a site.
    *
    * @param page             Result records are organized in pages. By default, the first page of results
    *                                    is displayed. The page parameter specifies a page number of results to fetch.
@@ -109,8 +109,8 @@ export class OffersController extends BaseController {
   }
 
   /**
-   * This method allows you to list a specific offer's attributes. This is different than list all offers
-   * for a site, as it requires an `offer_id`.
+   * Returns a specific offer's attributes. This is different from listing all offers for a site, as it
+   * requires an `offer_id`.
    *
    * @param offerId  The Chargify id of the offer
    * @return Response from the API call
@@ -127,7 +127,7 @@ export class OffersController extends BaseController {
   }
 
   /**
-   * Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+   * Archives an existing offer. Please provide an `offer_id` in order to archive the correct item.
    *
    * @param offerId  The Chargify id of the offer
    * @return Response from the API call
@@ -144,7 +144,7 @@ export class OffersController extends BaseController {
   }
 
   /**
-   * Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the
+   * Unarchives a previously archived offer. Please provide an `offer_id` in order to unarchive the
    * correct item.
    *
    * @param offerId  The Chargify id of the offer

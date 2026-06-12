@@ -19,7 +19,7 @@ const offersController = new OffersController(client);
 
 # Create Offer
 
-Create an offer within your Advanced Billing site by sending a POST request.
+Creates an offer within your Advanced Billing site.
 
 ## Documentation
 
@@ -40,6 +40,10 @@ async createOffer(
 ): Promise<ApiResponse<OfferResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -48,6 +52,8 @@ async createOffer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**201**: Created
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OfferResponse`](../../doc/models/offer-response.md).
 
@@ -151,7 +157,7 @@ try {
 
 # List Offers
 
-This endpoint will list offers for a site.
+Lists offers for a site.
 
 ```ts
 async listOffers(
@@ -168,6 +174,10 @@ async listOffers(
 ): Promise<ApiResponse<ListOffersResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -178,6 +188,8 @@ async listOffers(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ListOffersResponse`](../../doc/models/list-offers-response.md).
 
@@ -281,7 +293,7 @@ try {
 
 # Read Offer
 
-This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
+Returns a specific offer's attributes. This is different from listing all offers for a site, as it requires an `offer_id`.
 
 ```ts
 async readOffer(
@@ -289,6 +301,10 @@ async readOffer(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<OfferResponse>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -298,6 +314,8 @@ async readOffer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`OfferResponse`](../../doc/models/offer-response.md).
 
@@ -333,7 +351,7 @@ try {
 
 # Archive Offer
 
-Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+Archives an existing offer. Please provide an `offer_id` in order to archive the correct item.
 
 ```ts
 async archiveOffer(
@@ -341,6 +359,10 @@ async archiveOffer(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -350,6 +372,8 @@ async archiveOffer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -385,7 +409,7 @@ try {
 
 # Unarchive Offer
 
-Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
+Unarchives a previously archived offer. Please provide an `offer_id` in order to unarchive the correct item.
 
 ```ts
 async unarchiveOffer(
@@ -393,6 +417,10 @@ async unarchiveOffer(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<void>>
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -402,6 +430,8 @@ async unarchiveOffer(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: OK
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 

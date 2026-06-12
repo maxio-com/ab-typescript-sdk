@@ -35,7 +35,7 @@ export interface BankAccountPaymentProfile {
   customerId?: number;
   /** The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. */
   currentVault?: BankAccountVault;
-  /** The “token” provided by your vault storage for an already stored payment profile */
+  /** The "token" provided by your vault storage for an already stored payment profile */
   vaultToken?: string;
   /** The current billing street address for the bank account */
   billingAddress?: string | null;
@@ -53,10 +53,10 @@ export interface BankAccountPaymentProfile {
   billingAddress2?: string | null;
   /** The bank where the account resides */
   bankName?: string;
-  /** A string representation of the stored bank routing number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’). payment_type will be bank_account */
-  maskedBankRoutingNumber?: string;
-  /** A string representation of the stored bank account number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’) */
-  maskedBankAccountNumber: string;
+  /** A string representation of the stored bank routing number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). payment_type will be bank_account */
+  maskedBankRoutingNumber?: string | null;
+  /** A string representation of the stored bank account number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111') */
+  maskedBankAccountNumber?: string | null;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;
   /** Defaults to personal */
@@ -89,8 +89,14 @@ export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> 
     customerVaultToken: ['customer_vault_token', optional(nullable(string()))],
     billingAddress2: ['billing_address_2', optional(nullable(string()))],
     bankName: ['bank_name', optional(string())],
-    maskedBankRoutingNumber: ['masked_bank_routing_number', optional(string())],
-    maskedBankAccountNumber: ['masked_bank_account_number', string()],
+    maskedBankRoutingNumber: [
+      'masked_bank_routing_number',
+      optional(nullable(string())),
+    ],
+    maskedBankAccountNumber: [
+      'masked_bank_account_number',
+      optional(nullable(string())),
+    ],
     bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],
     bankAccountHolderType: [
       'bank_account_holder_type',
