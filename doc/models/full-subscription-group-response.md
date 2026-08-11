@@ -22,19 +22,23 @@
 | `customer` | [`SubscriptionGroupCustomer \| undefined`](../../doc/models/subscription-group-customer.md) | Optional | - |
 | `accountBalances` | [`SubscriptionGroupBalances \| undefined`](../../doc/models/subscription-group-balances.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "scheme": 90,
-  "customer_id": 110,
-  "payment_profile_id": 18,
-  "subscription_ids": [
-    220,
-    221,
-    222
-  ]
-}
+```ts
+import {
+  FullSubscriptionGroupResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const fullSubscriptionGroupResponse: FullSubscriptionGroupResponse = {
+  uid: 'uid6',
+  scheme: 80,
+  customerId: 100,
+  paymentProfileId: 8,
+  subscriptionIds: [
+    210,
+    211,
+    212
+  ],
+};
 ```
 

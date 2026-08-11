@@ -12,12 +12,16 @@
 | `kind` | `string \| undefined` | Optional | - |
 | `message` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "kind": "kind0",
-  "message": "message8"
-}
+```ts
+import {
+  SubscriptionComponentAllocationErrorItem,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionComponentAllocationErrorItem: SubscriptionComponentAllocationErrorItem = {
+  kind: 'kind6',
+  message: 'message8',
+};
 ```
 

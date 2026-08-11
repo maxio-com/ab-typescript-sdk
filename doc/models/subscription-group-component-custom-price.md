@@ -15,34 +15,73 @@ Used in place of `price_point_id` to define a custom price point unique to the s
 | `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | - |
 | `overagePricing` | [`ComponentCustomPrice[] \| undefined`](../../doc/models/component-custom-price.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "pricing_scheme": "per_unit",
-  "prices": [
+```ts
+import {
+  IntervalUnit,
+  PricingScheme,
+  SubscriptionGroupComponentCustomPrice,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupComponentCustomPrice: SubscriptionGroupComponentCustomPrice = {
+  pricingScheme: PricingScheme.Stairstep,
+  prices: [
     {
-      "starting_quantity": 242,
-      "ending_quantity": 40,
-      "unit_price": 23.26
+      startingQuantity: 242,
+      unitPrice: 23.26,
+      endingQuantity: 40,
+    },
+    {
+      startingQuantity: 242,
+      unitPrice: 23.26,
+      endingQuantity: 40,
     }
   ],
-  "overage_pricing": [
+  overagePricing: [
     {
-      "tax_included": false,
-      "pricing_scheme": "stairstep",
-      "interval": 230,
-      "interval_unit": "day",
-      "list_price_point_id": 10,
-      "prices": [
+      prices: [
         {
-          "starting_quantity": 242,
-          "ending_quantity": 40,
-          "unit_price": 23.26
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
         }
-      ]
+      ],
+      taxIncluded: false,
+      pricingScheme: PricingScheme.Stairstep,
+      interval: 230,
+      intervalUnit: IntervalUnit.Day,
+      listPricePointId: 10,
+    },
+    {
+      prices: [
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        }
+      ],
+      taxIncluded: false,
+      pricingScheme: PricingScheme.Stairstep,
+      interval: 230,
+      intervalUnit: IntervalUnit.Day,
+      listPricePointId: 10,
+    },
+    {
+      prices: [
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        }
+      ],
+      taxIncluded: false,
+      pricingScheme: PricingScheme.Stairstep,
+      interval: 230,
+      intervalUnit: IntervalUnit.Day,
+      listPricePointId: 10,
     }
-  ]
-}
+  ],
+};
 ```
 

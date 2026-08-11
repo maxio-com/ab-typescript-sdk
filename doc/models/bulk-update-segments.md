@@ -11,54 +11,59 @@
 |  --- | --- | --- | --- |
 | `segments` | [`BulkUpdateSegmentsItem[] \| undefined`](../../doc/models/bulk-update-segments-item.md) | Optional | **Constraints**: *Maximum Items*: `1000` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "segments": [
+```ts
+import {
+  BulkUpdateSegments,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const bulkUpdateSegments: BulkUpdateSegments = {
+  segments: [
     {
-      "id": 50,
-      "pricing_scheme": "stairstep",
-      "prices": [
+      id: 50,
+      pricingScheme: PricingScheme.Stairstep,
+      prices: [
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         },
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         },
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         }
-      ]
+      ],
     },
     {
-      "id": 50,
-      "pricing_scheme": "stairstep",
-      "prices": [
+      id: 50,
+      pricingScheme: PricingScheme.Stairstep,
+      prices: [
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         },
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         },
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         }
-      ]
+      ],
     }
-  ]
-}
+  ],
+};
 ```
 

@@ -13,13 +13,15 @@
 | `expirationMonth` | `string \| undefined` | Optional | - |
 | `expirationYear` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "full_number": "full_number0",
-  "expiration_month": "expiration_month6",
-  "expiration_year": "expiration_year0"
-}
+```ts
+import { CreditCardAttributes } from '@maxio-com/advanced-billing-sdk';
+
+const creditCardAttributes: CreditCardAttributes = {
+  fullNumber: 'full_number8',
+  expirationMonth: 'expiration_month8',
+  expirationYear: 'expiration_year2',
+};
 ```
 

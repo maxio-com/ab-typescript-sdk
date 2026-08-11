@@ -11,22 +11,27 @@
 |  --- | --- | --- | --- |
 | `prepayment` | [`Prepayment`](../../doc/models/prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayment": {
-    "id": 38,
-    "subscription_id": 148,
-    "amount_in_cents": 124,
-    "remaining_amount_in_cents": 182,
-    "refunded_amount_in_cents": 132,
-    "details": "details8",
-    "external": false,
-    "memo": "memo2",
-    "payment_type": "credit_card",
-    "created_at": "2016-03-13T12:52:32.123Z"
-  }
-}
+```ts
+import {
+  PrepaymentMethod,
+  PrepaymentResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const prepaymentResponse: PrepaymentResponse = {
+  prepayment: {
+    id: 38,
+    subscriptionId: 148,
+    amountInCents: BigInt(124),
+    remainingAmountInCents: BigInt(182),
+    external: false,
+    memo: 'memo2',
+    createdAt: '2016-03-13T12:52:32.123Z',
+    refundedAmountInCents: BigInt(132),
+    details: 'details8',
+    paymentType: PrepaymentMethod.CreditCard,
+  },
+};
 ```
 

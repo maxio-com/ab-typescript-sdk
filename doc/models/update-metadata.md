@@ -13,13 +13,15 @@
 | `name` | `string \| undefined` | Optional | - |
 | `value` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "current_name": "current_name4",
-  "name": "name0",
-  "value": "value2"
-}
+```ts
+import { UpdateMetadata } from '@maxio-com/advanced-billing-sdk';
+
+const updateMetadata: UpdateMetadata = {
+  currentName: 'current_name8',
+  name: 'name4',
+  value: 'value6',
+};
 ```
 

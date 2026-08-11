@@ -13,13 +13,15 @@
 | `endingQuantity` | [`PriceEndingQuantity \| null \| undefined`](../../doc/models/containers/price-ending-quantity.md) | Optional | This is a container for one-of cases. |
 | `unitPrice` | [`PriceUnitPrice`](../../doc/models/containers/price-unit-price.md) | Required | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "starting_quantity": 40,
-  "ending_quantity": 14,
-  "unit_price": 125.12
-}
+```ts
+import { Price } from '@maxio-com/advanced-billing-sdk';
+
+const price: Price = {
+  startingQuantity: 132,
+  unitPrice: 70.44,
+  endingQuantity: 6,
+};
 ```
 

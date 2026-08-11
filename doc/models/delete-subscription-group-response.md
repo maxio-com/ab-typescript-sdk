@@ -12,12 +12,16 @@
 | `uid` | `string \| undefined` | Optional | - |
 | `deleted` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "deleted": false
-}
+```ts
+import {
+  DeleteSubscriptionGroupResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const deleteSubscriptionGroupResponse: DeleteSubscriptionGroupResponse = {
+  uid: 'uid0',
+  deleted: false,
+};
 ```
 

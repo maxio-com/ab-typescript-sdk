@@ -18,7 +18,7 @@ import {
   refundConsolidatedInvoiceSegmentUidsSchema,
 } from './containers/refundConsolidatedInvoiceSegmentUids.js';
 
-/** Refund consolidated invoice */
+/** Refund consolidated invoice. */
 export interface RefundConsolidatedInvoice {
   /** A description for the refund */
   memo: string;

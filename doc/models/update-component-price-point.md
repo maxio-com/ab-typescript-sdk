@@ -14,19 +14,24 @@
 | `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. |
 | `taxIncluded` | `boolean \| undefined` | Optional | Whether or not the price point includes tax |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `intervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 | `prices` | [`UpdatePrice[] \| undefined`](../../doc/models/update-price.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name2",
-  "handle": "handle8",
-  "pricing_scheme": "per_unit",
-  "use_site_exchange_rate": false,
-  "tax_included": false
-}
+```ts
+import {
+  PricingScheme,
+  UpdateComponentPricePoint,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateComponentPricePoint: UpdateComponentPricePoint = {
+  name: 'name4',
+  handle: 'handle0',
+  pricingScheme: PricingScheme.Stairstep,
+  useSiteExchangeRate: false,
+  taxIncluded: false,
+};
 ```
 

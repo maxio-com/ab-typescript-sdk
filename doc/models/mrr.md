@@ -16,20 +16,22 @@
 | `breakouts` | [`Breakouts \| undefined`](../../doc/models/breakouts.md) | Optional | - |
 | `atTime` | `string \| undefined` | Optional | ISO8601 timestamp |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount_in_cents": 208,
-  "amount_formatted": "amount_formatted2",
-  "currency": "currency0",
-  "currency_symbol": "currency_symbol8",
-  "breakouts": {
-    "plan_amount_in_cents": 254,
-    "plan_amount_formatted": "plan_amount_formatted0",
-    "usage_amount_in_cents": 106,
-    "usage_amount_formatted": "usage_amount_formatted8"
-  }
-}
+```ts
+import { MRR } from '@maxio-com/advanced-billing-sdk';
+
+const mRR: MRR = {
+  amountInCents: BigInt(122),
+  amountFormatted: 'amount_formatted4',
+  currency: 'currency2',
+  currencySymbol: 'currency_symbol0',
+  breakouts: {
+    planAmountInCents: BigInt(254),
+    planAmountFormatted: 'plan_amount_formatted0',
+    usageAmountInCents: BigInt(106),
+    usageAmountFormatted: 'usage_amount_formatted8',
+  },
+};
 ```
 

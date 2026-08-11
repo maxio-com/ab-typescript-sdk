@@ -12,14 +12,18 @@
 | `name` | `string` | Required | - |
 | `handle` | `string \| null \| undefined` | Optional | - |
 | `description` | `string \| null \| undefined` | Optional | - |
+| `surcharging` | `boolean \| undefined` | Optional | Whether surcharging applies to this product family. Defaults to `true` when omitted. Only applied on sites where surcharging is enabled. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name6",
-  "handle": "handle2",
-  "description": "description6"
-}
+```ts
+import { CreateProductFamily } from '@maxio-com/advanced-billing-sdk';
+
+const createProductFamily: CreateProductFamily = {
+  name: 'name0',
+  handle: 'handle6',
+  description: 'description0',
+  surcharging: false,
+};
 ```
 

@@ -39,11 +39,11 @@ export interface CreateInvoice {
   paymentInstructions?: string;
   /** A custom memo can be sent to override the site's default. */
   memo?: string;
-  /** Overrides the defaults for the site */
+  /** Overrides the defaults for the site. */
   sellerAddress?: CreateInvoiceAddress;
-  /** Overrides the default for the customer */
+  /** Overrides the default for the customer. */
   billingAddress?: CreateInvoiceAddress;
-  /** Overrides the default for the customer */
+  /** Overrides the default for the customer. */
   shippingAddress?: CreateInvoiceAddress;
   coupons?: CreateInvoiceCoupon[];
   status?: CreateInvoiceStatus;

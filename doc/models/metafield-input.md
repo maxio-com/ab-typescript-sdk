@@ -1,7 +1,7 @@
 
 # Metafield Input
 
-Indicates the type of metafield. A text metafield allows any string value. Dropdown and radio metafields have a set of values that can be selected.  Defaults to 'text'.
+Indicates the type of metafield. A text metafield allows any string value. Dropdown and radio metafields have a set of values that can be selected. Defaults to 'text'.
 
 ## Enumeration
 
@@ -15,4 +15,12 @@ Indicates the type of metafield. A text metafield allows any string value. Dropd
 | `Text` |
 | `Radio` |
 | `Dropdown` |
+
+## Example
+
+```ts
+import { MetafieldInput } from '@maxio-com/advanced-billing-sdk';
+
+const metafieldInput = MetafieldInput.BalanceTracker;
+```
 

@@ -14,25 +14,15 @@
 | `couponCodes` | `string[] \| undefined` | Optional | - |
 | `subscription` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "codes": [
-    "codes6",
-    "codes7",
-    "codes8"
-  ],
-  "coupon_code": [
-    "coupon_code8",
-    "coupon_code7"
-  ],
-  "coupon_codes": [
-    "coupon_codes2"
-  ],
-  "subscription": [
-    "subscription8"
-  ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof SubscriptionAddCouponError) {
+    console.log(error.result);
+  }
 }
 ```
 

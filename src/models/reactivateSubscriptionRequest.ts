@@ -22,7 +22,7 @@ import {
 } from './reactivationBilling.js';
 
 export interface ReactivateSubscriptionRequest {
-  /** These values are only applicable to subscriptions using calendar billing */
+  /** These values are only applicable to subscriptions using calendar billing. */
   calendarBilling?: ReactivationBilling;
   /** If `true` is sent, the reactivated Subscription will include a trial if one is available. If `false` is sent, the trial period will be ignored. */
   includeTrial?: boolean;

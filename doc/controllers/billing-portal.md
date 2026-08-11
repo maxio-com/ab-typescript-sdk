@@ -111,7 +111,7 @@ Returns the exact URL required for a subscriber to access the Billing Portal.
 + We will not generate a new URL for 15 days
 + You must cache and remember this URL if you are going to need it again within 15 days
 + Only request a new URL after the `new_link_available_at` date
-+ You are limited to 15 requests for the same URL. If you make more than 15 requests before `new_link_available_at`, you will be blocked from further Management URL requests (with a response code `429`)
++ You are limited to 15 requests for the same URL. If you make more than 15 requests before `new_link_available_at`, you will be blocked from further Management URL requests (with a response code `429`).
 
 ```ts
 async readBillingPortalLink(

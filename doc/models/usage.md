@@ -19,15 +19,17 @@
 | `componentHandle` | `string \| undefined` | Optional | - |
 | `subscriptionId` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 252,
-  "memo": "memo8",
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "price_point_id": 126,
-  "quantity": 130
-}
+```ts
+import { Usage } from '@maxio-com/advanced-billing-sdk';
+
+const usage: Usage = {
+  id: BigInt(150),
+  memo: 'memo2',
+  createdAt: '2016-03-13T12:52:32.123Z',
+  pricePointId: 28,
+  quantity: 28,
+};
 ```
 

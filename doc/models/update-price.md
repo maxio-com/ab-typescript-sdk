@@ -15,15 +15,17 @@
 | `destroy` | `boolean \| undefined` | Optional | - |
 | `startingQuantity` | [`UpdatePriceStartingQuantity \| undefined`](../../doc/models/containers/update-price-starting-quantity.md) | Optional | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 18,
-  "ending_quantity": 216,
-  "unit_price": 166.62,
-  "_destroy": false,
-  "starting_quantity": 242
-}
+```ts
+import { UpdatePrice } from '@maxio-com/advanced-billing-sdk';
+
+const updatePrice: UpdatePrice = {
+  id: 206,
+  endingQuantity: 28,
+  unitPrice: 181.3,
+  destroy: false,
+  startingQuantity: 54,
+};
 ```
 

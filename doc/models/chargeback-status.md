@@ -16,3 +16,11 @@ The current chargeback status.
 | `Won` |
 | `Closed` |
 
+## Example
+
+```ts
+import { ChargebackStatus } from '@maxio-com/advanced-billing-sdk';
+
+const chargebackStatus = ChargebackStatus.Open;
+```
+

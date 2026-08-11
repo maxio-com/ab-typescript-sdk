@@ -14,14 +14,16 @@
 | `originalAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `appliedAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "memo": "memo2",
-  "original_amount": "original_amount2",
-  "applied_amount": "applied_amount0"
-}
+```ts
+import { ProformaInvoiceCredit } from '@maxio-com/advanced-billing-sdk';
+
+const proformaInvoiceCredit: ProformaInvoiceCredit = {
+  uid: 'uid4',
+  memo: 'memo8',
+  originalAmount: 'original_amount8',
+  appliedAmount: 'applied_amount4',
+};
 ```
 

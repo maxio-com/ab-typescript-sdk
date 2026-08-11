@@ -11,13 +11,15 @@
 |  --- | --- | --- | --- |
 | `mVoid` | [`VoidInvoice`](../../doc/models/void-invoice.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "void": {
-    "reason": "reason6"
-  }
-}
+```ts
+import { VoidInvoiceRequest } from '@maxio-com/advanced-billing-sdk';
+
+const voidInvoiceRequest: VoidInvoiceRequest = {
+  mVoid: {
+    reason: 'reason6',
+  },
+};
 ```
 

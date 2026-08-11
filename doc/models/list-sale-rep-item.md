@@ -15,31 +15,33 @@
 | `mrrData` | [`Record<string, SaleRepItemMrr> \| undefined`](../../doc/models/sale-rep-item-mrr.md) | Optional | - |
 | `testMode` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "mrr_data": {
-    "november_2019": {
-      "mrr": "$0.00",
-      "usage": "$0.00",
-      "recurring": "$0.00"
+```ts
+import { ListSaleRepItem } from '@maxio-com/advanced-billing-sdk';
+
+const listSaleRepItem: ListSaleRepItem = {
+  id: 54,
+  fullName: 'full_name2',
+  subscriptionsCount: 126,
+  mrrData: {
+    'november_2019': {
+      mrr: '$0.00',
+      usage: '$0.00',
+      recurring: '$0.00',
     },
-    "december_2019": {
-      "mrr": "$0.00",
-      "usage": "$0.00",
-      "recurring": "$0.00"
+    'december_2019': {
+      mrr: '$0.00',
+      usage: '$0.00',
+      recurring: '$0.00',
     },
-    "january_2020": {
-      "mrr": "$400.00",
-      "usage": "$0.00",
-      "recurring": "$400.00"
+    'january_2020': {
+      mrr: '$400.00',
+      usage: '$0.00',
+      recurring: '$400.00',
     }
   },
-  "id": 26,
-  "full_name": "full_name8",
-  "subscriptions_count": 154,
-  "test_mode": false
-}
+  testMode: false,
+};
 ```
 

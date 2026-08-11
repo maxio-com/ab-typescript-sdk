@@ -23,7 +23,21 @@ Lists events for a site.
 
 Advanced Billing Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
 
-Within the Advanced Billing UI, "Events" are referred to as "Site Activity".  Full documentation on how to view Events / Site Activity in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activity).
+Within the Advanced Billing UI, "Events" are referred to as "Site Activity".  See the [Site Activity](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activity) article in the product documentation for details on how to record view Events / Site Activty in the Advanced Billing UI.
+
+If you’re using the [enhanced Catalog experience](page:help/announcements/2026-announcements#new-catalog-experience-and-terminology), you’ll see updated naming in webhook events and messages.
+
+Event name changes:
+
+- subscription_product_change → subscription_plan_change
+- component_allocation_change → allocation_change
+- component_billing_date_change → product_billing_date_change
+
+Message updates:
+
+- “Plan changed on Subscription from previous plan to new plan”
+- “Successful payment for allocation changes to Product on Subscription”
+- “Failed payment for allocation changes to Product on Subscription”
 
 ## List Events for a Site
 
@@ -59,7 +73,7 @@ Here’s an example event for the `subscription_product_change` event:
     "event": {
         "id": 351,
         "key": "subscription_product_change",
-        "message": "Product changed on Marky Mark's subscription from 'Basic' to 'Pro'",
+        "message": "Product changed on Mark Alan's subscription from 'Basic' to 'Pro'",
         "subscription_id": 205,
         "event_specific_data": {
             "new_product_id": 3,
@@ -77,7 +91,7 @@ Here’s an example event for the `subscription_state_change` event:
      "event": {
          "id": 353,
          "key": "subscription_state_change",
-         "message": "State changed on Marky Mark's subscription to Pro from trialing to active",
+         "message": "State changed on Mark Alan's subscription to Pro from trialing to active",
          "subscription_id": 205,
          "event_specific_data": {
              "new_subscription_state": "active",
@@ -129,8 +143,8 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
-| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified. |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified. |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `Direction.Desc` |
 | `filter` | [`EventKey[] \| undefined`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `dateField` | [`ListEventsDateField \| undefined`](../../doc/models/list-events-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
@@ -255,6 +269,20 @@ Lists events for a subscription.
 
 The event type is identified by the key property. You can check supported keys [here](../../doc/models/event-key.md).
 
+If you’re using the [enhanced Catalog experience](page:help/announcements/2026-announcements#new-catalog-experience-and-terminology), you’ll see updated naming in webhook events and messages.
+
+Event name changes:
+
+- subscription_product_change → subscription_plan_change
+- component_allocation_change → allocation_change
+- component_billing_date_change → product_billing_date_change
+
+Message updates:
+
+- “Successful payment for allocation changes to Product on Subscription”
+- “Failed payment for allocation changes to Product on Subscription”
+- “Plan changed on Subscription from previous plan to new plan”
+
 ## Event Specific Data
 
 Different event types may include additional data in `event_specific_data` property.
@@ -295,8 +323,8 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `subscriptionId` | `number` | Template, Required | The Chargify id of the subscription. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
-| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified. |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified. |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `Direction.Desc` |
 | `filter` | [`EventKey[] \| undefined`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -393,6 +421,20 @@ try {
 
 Returns the total count of events for a given site.
 
+If you’re using the [enhanced Catalog experience](page:help/announcements/2026-announcements#new-catalog-experience-and-terminology), you’ll see updated naming in webhook events and messages.
+
+Event name changes:
+
+- subscription_product_change → subscription_plan_change
+- component_allocation_change → allocation_change
+- component_billing_date_change → product_billing_date_change
+
+Message updates:
+
+- “Successful payment for allocation changes to Product on Subscription”
+- “Failed payment for allocation changes to Product on Subscription”
+- “Plan changed on Subscription from previous plan to new plan”
+
 ```ts
 async readEventsCount(
   {
@@ -424,8 +466,8 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
-| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns events with an id greater than or equal to the one specified. |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns events with an id less than or equal to the one specified. |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `Direction.Desc` |
 | `filter` | [`EventKey[] \| undefined`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |

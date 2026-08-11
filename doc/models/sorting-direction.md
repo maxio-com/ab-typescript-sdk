@@ -14,3 +14,11 @@ Used for sorting results.
 | `Asc` |
 | `Desc` |
 
+## Example
+
+```ts
+import { SortingDirection } from '@maxio-com/advanced-billing-sdk';
+
+const sortingDirection = SortingDirection.Asc;
+```
+

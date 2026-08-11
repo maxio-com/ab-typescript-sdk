@@ -12,12 +12,14 @@
 | `amount` | [`DeductServiceCreditAmount`](../../doc/models/containers/deduct-service-credit-amount.md) | Required | This is a container for one-of cases. |
 | `memo` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": "String1",
-  "memo": "memo2"
-}
+```ts
+import { DeductServiceCredit } from '@maxio-com/advanced-billing-sdk';
+
+const deductServiceCredit: DeductServiceCredit = {
+  amount: 'String5',
+  memo: 'memo6',
+};
 ```
 

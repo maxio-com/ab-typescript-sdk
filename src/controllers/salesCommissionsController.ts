@@ -34,7 +34,7 @@ export class SalesCommissionsController extends BaseController {
    * seller has the Advanced Analytics component enabled. For further information on getting access to
    * Advanced Analytics contact Maxio support.
    *
-   * > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
+   * > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`.
    *
    * @param sellerId      The Chargify id of your seller account
    * @param authorization For authorization use user API key. See details [here](https://developers.
@@ -86,7 +86,7 @@ export class SalesCommissionsController extends BaseController {
   }
 
   /**
-   * Returns a sales rep list with details.
+   * Lists sales reps with details.
    *
    * ## Modified Authentication Process
    *
@@ -101,7 +101,7 @@ export class SalesCommissionsController extends BaseController {
    * seller has the Advanced Analytics component enabled. For further information on getting access to
    * Advanced Analytics contact Maxio support.
    *
-   * > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
+   * > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`.
    *
    * @param sellerId      The Chargify id of your seller account
    * @param authorization For authorization use user API key. See details [here](https://developers.
@@ -168,7 +168,7 @@ export class SalesCommissionsController extends BaseController {
    * seller has the Advanced Analytics component enabled. For further information on getting access to
    * Advanced Analytics contact Maxio support.
    *
-   * > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
+   * > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`.
    *
    * @param sellerId      The Chargify id of your seller account
    * @param salesRepId    The Advanced Billing id of sales rep.

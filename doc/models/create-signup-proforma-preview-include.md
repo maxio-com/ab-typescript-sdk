@@ -13,7 +13,11 @@
 
 ## Example
 
-```
-next_proforma_invoice
+```ts
+import {
+  CreateSignupProformaPreviewInclude,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createSignupProformaPreviewInclude = CreateSignupProformaPreviewInclude.NextProformaInvoice;
 ```
 

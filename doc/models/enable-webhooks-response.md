@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `webhooksEnabled` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "webhooks_enabled": false
-}
+```ts
+import { EnableWebhooksResponse } from '@maxio-com/advanced-billing-sdk';
+
+const enableWebhooksResponse: EnableWebhooksResponse = {
+  webhooksEnabled: false,
+};
 ```
 

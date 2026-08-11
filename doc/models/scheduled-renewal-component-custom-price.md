@@ -12,22 +12,27 @@ Custom pricing for a component within a scheduled renewal.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `taxIncluded` | `boolean \| undefined` | Optional | Whether or not the price point includes tax |
-| `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | Omit for On/Off components |
+| `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | Omit for On/Off components. |
 | `prices` | [`Price[]`](../../doc/models/price.md) | Required | On/off components only need one price bracket starting at 1. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "pricing_scheme": "stairstep",
-  "prices": [
+```ts
+import {
+  PricingScheme,
+  ScheduledRenewalComponentCustomPrice,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalComponentCustomPrice: ScheduledRenewalComponentCustomPrice = {
+  pricingScheme: PricingScheme.PerUnit,
+  prices: [
     {
-      "starting_quantity": 242,
-      "ending_quantity": 40,
-      "unit_price": 23.26
+      startingQuantity: 242,
+      unitPrice: 23.26,
+      endingQuantity: 40,
     }
   ],
-  "tax_included": false
-}
+  taxIncluded: false,
+};
 ```
 

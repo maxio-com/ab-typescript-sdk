@@ -12,24 +12,26 @@
 | `currentProformaInvoice` | [`ProformaInvoice \| undefined`](../../doc/models/proforma-invoice.md) | Optional | - |
 | `nextProformaInvoice` | [`ProformaInvoice \| undefined`](../../doc/models/proforma-invoice.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "current_proforma_invoice": {
-    "uid": "uid6",
-    "site_id": 72,
-    "customer_id": 184,
-    "subscription_id": 0,
-    "number": 132
+```ts
+import { SignupProformaPreview } from '@maxio-com/advanced-billing-sdk';
+
+const signupProformaPreview: SignupProformaPreview = {
+  currentProformaInvoice: {
+    uid: 'uid6',
+    siteId: 72,
+    customerId: 184,
+    subscriptionId: 0,
+    number: 132,
   },
-  "next_proforma_invoice": {
-    "uid": "uid8",
-    "site_id": 212,
-    "customer_id": 68,
-    "subscription_id": 140,
-    "number": 16
-  }
-}
+  nextProformaInvoice: {
+    uid: 'uid8',
+    siteId: 212,
+    customerId: 68,
+    subscriptionId: 140,
+    number: 16,
+  },
+};
 ```
 

@@ -160,7 +160,7 @@ try {
 
 # List Payment Profiles
 
-Returns all active payment profiles for a site, or for one customer within a site. If no payment profiles are found, this endpoint will return an empty array, not a 404.
+Lists all active payment profiles for a site, or for one customer within a site. If no payment profiles are found, this endpoint will return an empty array, not a 404.
 
 ```ts
 async listPaymentProfiles(
@@ -985,7 +985,7 @@ try {
 
 # Change Subscription Group Default Payment Profile
 
-This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
+Changes the default payment profile on the subscription group to the existing payment profile with the specified ID.
 
 You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
@@ -1092,7 +1092,7 @@ try {
 
 # Read One Time Token
 
-One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe only) data for a customer.
+Returns the one-time token data, including credit card or ACH details, associated with the provided token ID. One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe only) data for a customer.
 
 You can use One Time Tokens while creating a subscription or payment profile instead of passing all bank account or credit card data directly to a given API endpoint.
 
@@ -1163,7 +1163,7 @@ try {
 
 # Send Request Update Payment Email
 
-You can send a "request payment update" email to the customer associated with the subscription.
+Sends a "request payment update" email to the customer associated with the subscription.
 
 If you attempt to send a "request payment update" email more than five times within a 30-minute period, you will receive a `422` response with an error message in the body. This error message will indicate that the request has been rejected due to excessive attempts, and will provide instructions on how to resubmit the request.
 

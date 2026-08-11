@@ -13,13 +13,15 @@
 | `number` | `string \| undefined` | Optional | - |
 | `outstandingAmount` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "number": "number6",
-  "outstanding_amount": "outstanding_amount6"
-}
+```ts
+import { InvoiceBalanceItem } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceBalanceItem: InvoiceBalanceItem = {
+  uid: 'uid8',
+  number: 'number6',
+  outstandingAmount: 'outstanding_amount6',
+};
 ```
 

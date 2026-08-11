@@ -15,31 +15,38 @@
 | `eventType` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `InvoiceEventType.IssueInvoice` |
 | `eventData` | [`IssueInvoiceEventData`](../../doc/models/issue-invoice-event-data.md) | Required | Example schema for an `issue_invoice` event |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 130,
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "invoice": {
-    "issue_date": "2024-01-01",
-    "due_date": "2024-01-01",
-    "paid_date": "2024-01-01",
-    "public_url_expires_on": "2024-01-21",
-    "id": 166,
-    "uid": "uid6",
-    "site_id": 92,
-    "customer_id": 204,
-    "subscription_id": 20
+```ts
+import {
+  InvoiceConsolidationLevel,
+  InvoiceEventType,
+  InvoiceStatus,
+  IssueInvoiceEvent,
+} from '@maxio-com/advanced-billing-sdk';
+
+const issueInvoiceEvent: IssueInvoiceEvent = {
+  id: BigInt(144),
+  timestamp: '2016-03-13T12:52:32.123Z',
+  invoice: {
+    id: BigInt(166),
+    uid: 'uid6',
+    siteId: 92,
+    customerId: 204,
+    subscriptionId: 20,
+    issueDate: '2024-01-01',
+    dueDate: '2024-01-01',
+    paidDate: '2024-01-01',
+    publicUrlExpiresOn: '2024-01-21',
   },
-  "event_type": "issue_invoice",
-  "event_data": {
-    "consolidation_level": "child",
-    "from_status": "open",
-    "to_status": "pending",
-    "due_amount": "due_amount8",
-    "total_amount": "total_amount2"
-  }
-}
+  eventType: InvoiceEventType.IssueInvoice,
+  eventData: {
+    consolidationLevel: InvoiceConsolidationLevel.Child,
+    fromStatus: InvoiceStatus.Open,
+    toStatus: InvoiceStatus.Pending,
+    dueAmount: 'due_amount8',
+    totalAmount: 'total_amount2',
+  },
+};
 ```
 

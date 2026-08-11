@@ -14,7 +14,9 @@
 
 ## Example
 
-```
-draft
+```ts
+import { CreateInvoiceStatus } from '@maxio-com/advanced-billing-sdk';
+
+const createInvoiceStatus = CreateInvoiceStatus.Draft;
 ```
 

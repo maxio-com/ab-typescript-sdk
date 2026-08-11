@@ -13,7 +13,9 @@
 
 ## Example
 
-```
-created_at
+```ts
+import { ListEventsDateField } from '@maxio-com/advanced-billing-sdk';
+
+const listEventsDateField = ListEventsDateField.CreatedAt;
 ```
 

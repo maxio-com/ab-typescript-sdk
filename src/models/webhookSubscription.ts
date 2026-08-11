@@ -40,6 +40,7 @@ export enum WebhookSubscription {
   SubscriptionCardUpdate = 'subscription_card_update',
   SubscriptionGroupCardUpdate = 'subscription_group_card_update',
   SubscriptionProductChange = 'subscription_product_change',
+  SubscriptionProductChangeScheduled = 'subscription_product_change_scheduled',
   SubscriptionStateChange = 'subscription_state_change',
   TrialEndNotice = 'trial_end_notice',
   UpcomingRenewalNotice = 'upcoming_renewal_notice',

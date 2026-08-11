@@ -13,3 +13,11 @@
 | `Immediate` |
 | `Delayed` |
 
+## Example
+
+```ts
+import { FirstChargeType } from '@maxio-com/advanced-billing-sdk';
+
+const firstChargeType = FirstChargeType.Delayed;
+```
+

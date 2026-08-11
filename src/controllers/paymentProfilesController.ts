@@ -130,7 +130,7 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * Returns all active payment profiles for a site, or for one customer within a site. If no payment
+   * Lists all active payment profiles for a site, or for one customer within a site. If no payment
    * profiles are found, this endpoint will return an empty array, not a 404.
    *
    * @param page        Result records are organized in pages. By default, the first page of results is
@@ -454,8 +454,8 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * This will change the default payment profile on the subscription group to the existing payment
-   * profile with the id specified.
+   * Changes the default payment profile on the subscription group to the existing payment profile with
+   * the specified ID.
    *
    * You must elect to change the existing payment profile to a new payment profile ID in order to
    * receive a satisfactory response from this endpoint.
@@ -489,8 +489,9 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe
-   * only) data for a customer.
+   * Returns the one-time token data, including credit card or ACH details, associated with the provided
+   * token ID. One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or
+   * Stripe only) data for a customer.
    *
    * You can use One Time Tokens while creating a subscription or payment profile instead of passing all
    * bank account or credit card data directly to a given API endpoint.
@@ -521,7 +522,7 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * You can send a "request payment update" email to the customer associated with the subscription.
+   * Sends a "request payment update" email to the customer associated with the subscription.
    *
    * If you attempt to send a "request payment update" email more than five times within a 30-minute
    * period, you will receive a `422` response with an error message in the body. This error message will

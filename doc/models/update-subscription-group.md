@@ -11,15 +11,17 @@
 |  --- | --- | --- | --- |
 | `memberIds` | `number[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "member_ids": [
-    52,
-    53,
-    54
-  ]
-}
+```ts
+import { UpdateSubscriptionGroup } from '@maxio-com/advanced-billing-sdk';
+
+const updateSubscriptionGroup: UpdateSubscriptionGroup = {
+  memberIds: [
+    248,
+    249,
+    250
+  ],
+};
 ```
 

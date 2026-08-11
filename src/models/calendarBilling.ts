@@ -11,7 +11,7 @@ import {
 } from './containers/calendarBillingSnapDay.js';
 import { FirstChargeType, firstChargeTypeSchema } from './firstChargeType.js';
 
-/** (Optional). Cannot be used when also specifying next_billing_at */
+/** (Optional). Cannot be used when also specifying next_billing_at. */
 export interface CalendarBilling {
   /** A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'. */
   snapDay?: CalendarBillingSnapDay;

@@ -11,14 +11,16 @@
 |  --- | --- | --- | --- |
 | `sendEmail` | [`SendEmail \| undefined`](../../doc/models/send-email.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "send_email": {
-    "can_execute": false,
-    "url": "url0"
-  }
-}
+```ts
+import { AvailableActions } from '@maxio-com/advanced-billing-sdk';
+
+const availableActions: AvailableActions = {
+  sendEmail: {
+    canExecute: false,
+    url: 'url0',
+  },
+};
 ```
 

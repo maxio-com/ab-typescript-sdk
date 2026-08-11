@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `renewalPreview` | [`RenewalPreview`](../../doc/models/renewal-preview.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "renewal_preview": {
-    "next_assessment_at": "2016-03-13T12:52:32.123Z",
-    "subtotal_in_cents": 132,
-    "total_tax_in_cents": 0,
-    "total_discount_in_cents": 250,
-    "total_in_cents": 20
-  }
-}
+```ts
+import { RenewalPreviewResponse } from '@maxio-com/advanced-billing-sdk';
+
+const renewalPreviewResponse: RenewalPreviewResponse = {
+  renewalPreview: {
+    nextAssessmentAt: '2016-03-13T12:52:32.123Z',
+    subtotalInCents: BigInt(132),
+    totalTaxInCents: BigInt(0),
+    totalDiscountInCents: BigInt(250),
+    totalInCents: BigInt(20),
+  },
+};
 ```
 

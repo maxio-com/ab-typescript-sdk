@@ -13,6 +13,14 @@ import {
   string,
 } from '../schema.js';
 import {
+  PrepaidUsageNewOverageUnitBalance,
+  prepaidUsageNewOverageUnitBalanceSchema,
+} from './containers/prepaidUsageNewOverageUnitBalance.js';
+import {
+  PrepaidUsageNewUnitBalance,
+  prepaidUsageNewUnitBalanceSchema,
+} from './containers/prepaidUsageNewUnitBalance.js';
+import {
   PrepaidUsageAllocationDetail,
   prepaidUsageAllocationDetailSchema,
 } from './prepaidUsageAllocationDetail.js';
@@ -20,8 +28,8 @@ import {
 export interface PrepaidUsage {
   previousUnitBalance: string;
   previousOverageUnitBalance: string;
-  newUnitBalance: number;
-  newOverageUnitBalance: number;
+  newUnitBalance: PrepaidUsageNewUnitBalance;
+  newOverageUnitBalance: PrepaidUsageNewOverageUnitBalance;
   usageQuantity: number;
   overageUsageQuantity: number;
   componentId: number;
@@ -35,8 +43,11 @@ export const prepaidUsageSchema: Schema<PrepaidUsage> = lazy(() =>
   expandoObject({
     previousUnitBalance: ['previous_unit_balance', string()],
     previousOverageUnitBalance: ['previous_overage_unit_balance', string()],
-    newUnitBalance: ['new_unit_balance', number()],
-    newOverageUnitBalance: ['new_overage_unit_balance', number()],
+    newUnitBalance: ['new_unit_balance', prepaidUsageNewUnitBalanceSchema],
+    newOverageUnitBalance: [
+      'new_overage_unit_balance',
+      prepaidUsageNewOverageUnitBalanceSchema,
+    ],
     usageQuantity: ['usage_quantity', number()],
     overageUsageQuantity: ['overage_usage_quantity', number()],
     componentId: ['component_id', number()],

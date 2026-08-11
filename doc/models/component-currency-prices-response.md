@@ -11,19 +11,23 @@
 |  --- | --- | --- | --- |
 | `currencyPrices` | [`ComponentCurrencyPrice[]`](../../doc/models/component-currency-price.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
+```ts
+import {
+  ComponentCurrencyPricesResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const componentCurrencyPricesResponse: ComponentCurrencyPricesResponse = {
+  currencyPrices: [
     {
-      "id": 50,
-      "currency": "currency8",
-      "price": "price4",
-      "formatted_price": "formatted_price6",
-      "price_id": 116
+      id: 50,
+      currency: 'currency8',
+      price: 'price4',
+      formattedPrice: 'formatted_price6',
+      priceId: 116,
     }
-  ]
-}
+  ],
+};
 ```
 

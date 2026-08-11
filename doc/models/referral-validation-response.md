@@ -11,16 +11,18 @@
 |  --- | --- | --- | --- |
 | `referralCode` | [`ReferralCode \| undefined`](../../doc/models/referral-code.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "referral_code": {
-    "id": 46,
-    "site_id": 228,
-    "subscription_id": 156,
-    "code": "code0"
-  }
-}
+```ts
+import { ReferralValidationResponse } from '@maxio-com/advanced-billing-sdk';
+
+const referralValidationResponse: ReferralValidationResponse = {
+  referralCode: {
+    id: 46,
+    siteId: 228,
+    subscriptionId: 156,
+    code: 'code0',
+  },
+};
 ```
 

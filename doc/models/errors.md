@@ -12,18 +12,22 @@
 | `perPage` | `string[] \| undefined` | Optional | - |
 | `pricePoint` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "per_page": [
-    "per_page7",
-    "per_page8"
+```ts
+import { Errors } from '@maxio-com/advanced-billing-sdk';
+
+const errors: Errors = {
+  perPage: [
+    'per_page1',
+    'per_page2',
+    'per_page3'
   ],
-  "price_point": [
-    "price_point6",
-    "price_point7"
-  ]
-}
+  pricePoint: [
+    'price_point0',
+    'price_point9',
+    'price_point8'
+  ],
+};
 ```
 

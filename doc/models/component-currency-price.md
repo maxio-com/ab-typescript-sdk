@@ -16,15 +16,17 @@
 | `priceId` | `number \| undefined` | Optional | - |
 | `pricePointId` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 4,
-  "currency": "currency8",
-  "price": "price4",
-  "formatted_price": "formatted_price6",
-  "price_id": 162
-}
+```ts
+import { ComponentCurrencyPrice } from '@maxio-com/advanced-billing-sdk';
+
+const componentCurrencyPrice: ComponentCurrencyPrice = {
+  id: 128,
+  currency: 'currency2',
+  price: 'price4',
+  formattedPrice: 'formatted_price6',
+  priceId: 38,
+};
 ```
 

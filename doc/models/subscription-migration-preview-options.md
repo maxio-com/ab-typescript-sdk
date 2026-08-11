@@ -20,16 +20,20 @@
 | `proration` | [`Proration \| undefined`](../../doc/models/proration.md) | Optional | - |
 | `prorationDate` | `string \| undefined` | Optional | The date that the proration is calculated from for the preview |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "include_trial": false,
-  "include_initial_charge": false,
-  "include_coupons": true,
-  "preserve_period": false,
-  "product_id": 242,
-  "product_price_point_id": 166
-}
+```ts
+import {
+  SubscriptionMigrationPreviewOptions,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionMigrationPreviewOptions: SubscriptionMigrationPreviewOptions = {
+  productId: 70,
+  productPricePointId: 250,
+  includeTrial: false,
+  includeInitialCharge: false,
+  includeCoupons: true,
+  preservePeriod: false,
+};
 ```
 

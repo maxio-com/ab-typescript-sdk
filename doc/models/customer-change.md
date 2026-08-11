@@ -14,97 +14,102 @@
 | `billingAddress` | [`AddressChange \| null \| undefined`](../../doc/models/address-change.md) | Optional | - |
 | `customFields` | [`CustomerCustomFieldsChange \| null \| undefined`](../../doc/models/customer-custom-fields-change.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payer": {
-    "before": {
-      "first_name": "first_name0",
-      "last_name": "last_name8",
-      "organization": "organization4",
-      "email": "email6"
+```ts
+import {
+  CustomFieldOwner,
+  CustomerChange,
+} from '@maxio-com/advanced-billing-sdk';
+
+const customerChange: CustomerChange = {
+  payer: {
+    before: {
+      firstName: 'first_name0',
+      lastName: 'last_name8',
+      organization: 'organization4',
+      email: 'email6',
     },
-    "after": {
-      "first_name": "first_name2",
-      "last_name": "last_name0",
-      "organization": "organization4",
-      "email": "email4"
-    }
-  },
-  "shipping_address": {
-    "before": {
-      "street": "street0",
-      "line2": "line24",
-      "city": "city0",
-      "state": "state6",
-      "zip": "zip4"
+    after: {
+      firstName: 'first_name2',
+      lastName: 'last_name0',
+      organization: 'organization4',
+      email: 'email4',
     },
-    "after": {
-      "street": "street2",
-      "line2": "line26",
-      "city": "city8",
-      "state": "state2",
-      "zip": "zip4"
-    }
   },
-  "billing_address": {
-    "before": {
-      "street": "street0",
-      "line2": "line24",
-      "city": "city0",
-      "state": "state6",
-      "zip": "zip4"
+  shippingAddress: {
+    before: {
+      street: 'street0',
+      line2: 'line24',
+      city: 'city0',
+      state: 'state6',
+      zip: 'zip4',
     },
-    "after": {
-      "street": "street2",
-      "line2": "line26",
-      "city": "city8",
-      "state": "state2",
-      "zip": "zip4"
-    }
+    after: {
+      street: 'street2',
+      line2: 'line26',
+      city: 'city8',
+      state: 'state2',
+      zip: 'zip4',
+    },
   },
-  "custom_fields": {
-    "before": [
+  billingAddress: {
+    before: {
+      street: 'street0',
+      line2: 'line24',
+      city: 'city0',
+      state: 'state6',
+      zip: 'zip4',
+    },
+    after: {
+      street: 'street2',
+      line2: 'line26',
+      city: 'city8',
+      state: 'state2',
+      zip: 'zip4',
+    },
+  },
+  customFields: {
+    before: [
       {
-        "owner_id": 26,
-        "owner_type": "Customer",
-        "name": "name0",
-        "value": "value2",
-        "metadatum_id": 26
+        ownerId: 26,
+        ownerType: CustomFieldOwner.Customer,
+        name: 'name0',
+        value: 'value2',
+        metadatumId: 26,
       },
       {
-        "owner_id": 26,
-        "owner_type": "Customer",
-        "name": "name0",
-        "value": "value2",
-        "metadatum_id": 26
+        ownerId: 26,
+        ownerType: CustomFieldOwner.Customer,
+        name: 'name0',
+        value: 'value2',
+        metadatumId: 26,
       }
     ],
-    "after": [
+    after: [
       {
-        "owner_id": 130,
-        "owner_type": "Customer",
-        "name": "name2",
-        "value": "value4",
-        "metadatum_id": 130
+        ownerId: 130,
+        ownerType: CustomFieldOwner.Customer,
+        name: 'name2',
+        value: 'value4',
+        metadatumId: 130,
       },
       {
-        "owner_id": 130,
-        "owner_type": "Customer",
-        "name": "name2",
-        "value": "value4",
-        "metadatum_id": 130
+        ownerId: 130,
+        ownerType: CustomFieldOwner.Customer,
+        name: 'name2',
+        value: 'value4',
+        metadatumId: 130,
       },
       {
-        "owner_id": 130,
-        "owner_type": "Customer",
-        "name": "name2",
-        "value": "value4",
-        "metadatum_id": 130
+        ownerId: 130,
+        ownerType: CustomFieldOwner.Customer,
+        name: 'name2',
+        value: 'value4',
+        metadatumId: 130,
       }
-    ]
-  }
-}
+    ],
+  },
+};
 ```
 

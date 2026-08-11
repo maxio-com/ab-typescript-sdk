@@ -28,19 +28,21 @@
 | `taxExemptReason` | `string \| undefined` | Optional | - |
 | `metafields` | `Record<string, string> \| undefined` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "metafields": {
-    "custom_field_name_1": "custom_field_value_1",
-    "custom_field_name_2": "custom_field_value_2"
+```ts
+import { PayerAttributes } from '@maxio-com/advanced-billing-sdk';
+
+const payerAttributes: PayerAttributes = {
+  firstName: 'first_name2',
+  lastName: 'last_name0',
+  email: 'email4',
+  ccEmails: 'cc_emails8',
+  organization: 'organization4',
+  metafields: {
+    'custom_field_name_1': 'custom_field_value_1',
+    'custom_field_name_2': 'custom_field_value_2'
   },
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "email": "email2",
-  "cc_emails": "cc_emails4",
-  "organization": "organization8"
-}
+};
 ```
 

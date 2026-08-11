@@ -13,26 +13,32 @@
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `subscription` | [`SubscriptionFilter \| undefined`](../../doc/models/subscription-filter.md) | Optional | Nested filter used for List Subscription Components For Site Filter |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currencies": [
-    "EUR",
-    "USD"
+```ts
+import {
+  ListSubscriptionComponentsForSiteFilter,
+  SubscriptionListDateField,
+  SubscriptionStateFilter,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionComponentsForSiteFilter: ListSubscriptionComponentsForSiteFilter = {
+  currencies: [
+    'EUR',
+    'USD'
   ],
-  "use_site_exchange_rate": false,
-  "subscription": {
-    "states": [
-      "active",
-      "canceled",
-      "expired"
+  useSiteExchangeRate: false,
+  subscription: {
+    states: [
+      SubscriptionStateFilter.Trialing,
+      SubscriptionStateFilter.Unpaid,
+      SubscriptionStateFilter.Active
     ],
-    "date_field": "updated_at",
-    "start_date": "2016-03-13T12:52:32.123Z",
-    "end_date": "2016-03-13T12:52:32.123Z",
-    "start_datetime": "2016-03-13T12:52:32.123Z"
-  }
-}
+    dateField: SubscriptionListDateField.UpdatedAt,
+    startDate: '2016-03-13T12:52:32.123Z',
+    endDate: '2016-03-13T12:52:32.123Z',
+    startDatetime: '2016-03-13T12:52:32.123Z',
+  },
+};
 ```
 

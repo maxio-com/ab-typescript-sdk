@@ -14,14 +14,16 @@
 | `price` | `number \| null \| undefined` | Optional | - |
 | `couponId` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 228,
-  "currency": "currency8",
-  "price": 169.96,
-  "coupon_id": 210
-}
+```ts
+import { CouponCurrency } from '@maxio-com/advanced-billing-sdk';
+
+const couponCurrency: CouponCurrency = {
+  id: 202,
+  currency: 'currency0',
+  price: 14.62,
+  couponId: 184,
+};
 ```
 

@@ -19,3 +19,11 @@ Price point type. We expose the following types:
 | `Default` |
 | `Custom` |
 
+## Example
+
+```ts
+import { PricePointType } from '@maxio-com/advanced-billing-sdk';
+
+const pricePointType = PricePointType.Default;
+```
+

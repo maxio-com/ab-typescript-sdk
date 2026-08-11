@@ -11,14 +11,18 @@
 |  --- | --- | --- | --- |
 | `bankAccountVerification` | [`BankAccountVerification`](../../doc/models/bank-account-verification.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "bank_account_verification": {
-    "deposit_1_in_cents": 244,
-    "deposit_2_in_cents": 6
-  }
-}
+```ts
+import {
+  BankAccountVerificationRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const bankAccountVerificationRequest: BankAccountVerificationRequest = {
+  bankAccountVerification: {
+    deposit1InCents: BigInt(244),
+    deposit2InCents: BigInt(6),
+  },
+};
 ```
 

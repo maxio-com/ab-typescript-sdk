@@ -11,37 +11,43 @@
 |  --- | --- | --- | --- |
 | `usage` | [`CreateUsage`](../../doc/models/create-usage.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "usage": {
-    "quantity": 162.34,
-    "price_point_id": "price_point_id0",
-    "memo": "memo2",
-    "billing_schedule": {
-      "initial_billing_at": "2016-03-13T12:52:32.123Z"
+```ts
+import {
+  CreateUsageRequest,
+  IntervalUnit,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createUsageRequest: CreateUsageRequest = {
+  usage: {
+    quantity: 162.34,
+    pricePointId: 'price_point_id0',
+    memo: 'memo2',
+    billingSchedule: {
+      initialBillingAt: '2016-03-13T12:52:32.123Z',
     },
-    "custom_price": {
-      "tax_included": false,
-      "pricing_scheme": "stairstep",
-      "interval": 66,
-      "interval_unit": "day",
-      "list_price_point_id": 174,
-      "prices": [
+    customPrice: {
+      prices: [
         {
-          "starting_quantity": 242,
-          "ending_quantity": 40,
-          "unit_price": 23.26
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
         },
         {
-          "starting_quantity": 242,
-          "ending_quantity": 40,
-          "unit_price": 23.26
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
         }
-      ]
-    }
-  }
-}
+      ],
+      taxIncluded: false,
+      pricingScheme: PricingScheme.Stairstep,
+      interval: 66,
+      intervalUnit: IntervalUnit.Day,
+      listPricePointId: 174,
+    },
+  },
+};
 ```
 

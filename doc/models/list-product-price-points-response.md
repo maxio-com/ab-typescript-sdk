@@ -11,19 +11,23 @@
 |  --- | --- | --- | --- |
 | `pricePoints` | [`ProductPricePoint[]`](../../doc/models/product-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_points": [
+```ts
+import {
+  ListProductPricePointsResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listProductPricePointsResponse: ListProductPricePointsResponse = {
+  pricePoints: [
     {
-      "id": 40,
-      "name": "name2",
-      "handle": "handle8",
-      "price_in_cents": 108,
-      "interval": 92
+      id: 40,
+      name: 'name2',
+      handle: 'handle8',
+      priceInCents: BigInt(108),
+      interval: 92,
     }
-  ]
-}
+  ],
+};
 ```
 

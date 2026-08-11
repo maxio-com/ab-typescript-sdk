@@ -21,13 +21,13 @@
 | `currency` | `string \| undefined` | Optional | The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields. |
 | `memo` | `string \| undefined` | Optional | The memo printed on credit note, which is a description of the reason for the credit. |
 | `seller` | [`InvoiceSeller \| undefined`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the credit note. |
-| `customer` | [`InvoiceCustomer \| undefined`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient the credited subscription. |
+| `customer` | [`InvoiceCustomer \| undefined`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient of the credited subscription. |
 | `billingAddress` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | The billing address of the credit subscription. |
 | `shippingAddress` | [`InvoiceAddress \| undefined`](../../doc/models/invoice-address.md) | Optional | The shipping address of the credited subscription. |
 | `subtotalAmount` | `string \| undefined` | Optional | Subtotal of the credit note, which is the sum of all line items before discounts or taxes. Note that this is a positive amount representing the credit back to the customer. |
-| `discountAmount` | `string \| undefined` | Optional | Total discount applied to the credit note. Note that this is a positive amount representing the discount amount being credited back to the customer (i.e. a credit on an earlier discount). For example, if the original purchase was $1.00 and the original discount was $0.10, a credit of $0.50 of the original purchase (half) would have a discount credit of $0.05 (also half). |
-| `taxAmount` | `string \| undefined` | Optional | Total tax of the credit note. Note that this is a positive amount representing a previously taxex amount being credited back to the customer (i.e. a credit of an earlier tax). For example, if the original purchase was $1.00 and the original tax was $0.10, a credit of $0.50 of the original purchase (half) would also have a tax credit of $0.05 (also half). |
-| `totalAmount` | `string \| undefined` | Optional | The credit note total, which is `subtotal_amount - discount_amount + tax_amount`.' |
+| `discountAmount` | `string \| undefined` | Optional | Total discount applied to the credit note. Note that this is a positive amount representing the discount amount being credited back to the customer (i.e., a credit on an earlier discount). For example, if the original purchase was $1.00 and the original discount was $0.10, a credit of $0.50 of the original purchase (half) would have a discount credit of $0.05 (also half). |
+| `taxAmount` | `string \| undefined` | Optional | Total tax of the credit note. Note that this is a positive amount representing a previously taxed amount being credited back to the customer (i.e., a credit of an earlier tax). For example, if the original purchase was $1.00 and the original tax was $0.10, a credit of $0.50 of the original purchase (half) would also have a tax credit of $0.05 (also half). |
+| `totalAmount` | `string \| undefined` | Optional | The credit note total, which is `subtotal_amount - discount_amount + tax_amount`. |
 | `appliedAmount` | `string \| undefined` | Optional | The amount of the credit note that has already been applied to invoices. |
 | `remainingAmount` | `string \| undefined` | Optional | The amount of the credit note remaining to be applied to invoices, which is `total_amount - applied_amount`. |
 | `lineItems` | [`CreditNoteLineItem[] \| undefined`](../../doc/models/credit-note-line-item.md) | Optional | Line items on the credit note. |
@@ -35,17 +35,19 @@
 | `taxes` | [`InvoiceTax[] \| undefined`](../../doc/models/invoice-tax.md) | Optional | - |
 | `applications` | [`CreditNoteApplication[] \| undefined`](../../doc/models/credit-note-application.md) | Optional | - |
 | `refunds` | [`InvoiceRefund[] \| undefined`](../../doc/models/invoice-refund.md) | Optional | - |
-| `originInvoices` | [`OriginInvoice[] \| undefined`](../../doc/models/origin-invoice.md) | Optional | An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-Notes-Proration#origin-invoices) |
+| `originInvoices` | [`OriginInvoice[] \| undefined`](../../doc/models/origin-invoice.md) | Optional | An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-Notes-Proration#origin-invoices). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "site_id": 218,
-  "customer_id": 74,
-  "subscription_id": 146,
-  "number": "number0"
-}
+```ts
+import { CreditNote } from '@maxio-com/advanced-billing-sdk';
+
+const creditNote: CreditNote = {
+  uid: 'uid6',
+  siteId: 20,
+  customerId: 132,
+  subscriptionId: 204,
+  number: 'number4',
+};
 ```
 

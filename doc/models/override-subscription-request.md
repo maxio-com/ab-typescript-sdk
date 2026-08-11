@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `subscription` | [`OverrideSubscription`](../../doc/models/override-subscription.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription": {
-    "activated_at": "2016-03-13T12:52:32.123Z",
-    "canceled_at": "2016-03-13T12:52:32.123Z",
-    "cancellation_message": "cancellation_message2",
-    "expires_at": "2016-03-13T12:52:32.123Z",
-    "current_period_starts_at": "2016-03-13T12:52:32.123Z"
-  }
-}
+```ts
+import { OverrideSubscriptionRequest } from '@maxio-com/advanced-billing-sdk';
+
+const overrideSubscriptionRequest: OverrideSubscriptionRequest = {
+  subscription: {
+    activatedAt: '2016-03-13T12:52:32.123Z',
+    canceledAt: '2016-03-13T12:52:32.123Z',
+    cancellationMessage: 'cancellation_message2',
+    expiresAt: '2016-03-13T12:52:32.123Z',
+    currentPeriodStartsAt: '2016-03-13T12:52:32.123Z',
+  },
+};
 ```
 

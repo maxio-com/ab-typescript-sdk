@@ -48,3 +48,11 @@ The type of card used.
 | `Solo` |
 | `Laser` |
 
+## Example
+
+```ts
+import { CardType } from '@maxio-com/advanced-billing-sdk';
+
+const cardType = CardType.Solo;
+```
+

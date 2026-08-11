@@ -14,14 +14,16 @@
 | `subscriberDelta` | `number \| undefined` | Optional | - |
 | `leadDelta` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": 210,
-  "category": "category0",
-  "subscriber_delta": 170,
-  "lead_delta": 198
-}
+```ts
+import { MRRMovement } from '@maxio-com/advanced-billing-sdk';
+
+const mRRMovement: MRRMovement = {
+  amount: 116,
+  category: 'category4',
+  subscriberDelta: 100,
+  leadDelta: 128,
+};
 ```
 

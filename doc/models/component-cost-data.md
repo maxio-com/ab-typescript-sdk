@@ -17,15 +17,17 @@
 | `pricingScheme` | [`PricingScheme \| undefined`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `tiers` | [`ComponentCostDataRateTier[] \| undefined`](../../doc/models/component-cost-data-rate-tier.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_code_id": 16,
-  "price_point_id": 186,
-  "product_id": 250,
-  "quantity": "quantity8",
-  "amount": "amount4"
-}
+```ts
+import { ComponentCostData } from '@maxio-com/advanced-billing-sdk';
+
+const componentCostData: ComponentCostData = {
+  componentCodeId: 40,
+  pricePointId: 210,
+  productId: 18,
+  quantity: 'quantity4',
+  amount: 'amount0',
+};
 ```
 

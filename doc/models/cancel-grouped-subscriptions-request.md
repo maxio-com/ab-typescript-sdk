@@ -11,11 +11,15 @@
 |  --- | --- | --- | --- |
 | `chargeUnbilledUsage` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "charge_unbilled_usage": false
-}
+```ts
+import {
+  CancelGroupedSubscriptionsRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const cancelGroupedSubscriptionsRequest: CancelGroupedSubscriptionsRequest = {
+  chargeUnbilledUsage: false,
+};
 ```
 

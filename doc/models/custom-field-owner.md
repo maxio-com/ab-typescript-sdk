@@ -12,3 +12,11 @@
 | `Customer` |
 | `Subscription` |
 
+## Example
+
+```ts
+import { CustomFieldOwner } from '@maxio-com/advanced-billing-sdk';
+
+const customFieldOwner = CustomFieldOwner.Customer;
+```
+

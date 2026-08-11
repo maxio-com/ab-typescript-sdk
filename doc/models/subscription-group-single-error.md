@@ -11,11 +11,15 @@
 |  --- | --- | --- | --- |
 | `subscriptionGroup` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_group": "subscription_group2"
-}
+```ts
+import {
+  SubscriptionGroupSingleError,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupSingleError: SubscriptionGroupSingleError = {
+  subscriptionGroup: 'subscription_group0',
+};
 ```
 

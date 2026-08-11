@@ -13,15 +13,15 @@ Error which contains list of messages.
 |  --- | --- | --- | --- |
 | `errors` | `string[]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    "errors5",
-    "errors6",
-    "errors7"
-  ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof ErrorListResponseError) {
+    console.log(error.result);
+  }
 }
 ```
 

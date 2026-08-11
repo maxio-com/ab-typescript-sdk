@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `reasonCode` | [`ReasonCode`](../../doc/models/reason-code.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason_code": {
-    "id": 240,
-    "site_id": 166,
-    "code": "code4",
-    "description": "description6",
-    "position": 14
-  }
-}
+```ts
+import { ReasonCodeResponse } from '@maxio-com/advanced-billing-sdk';
+
+const reasonCodeResponse: ReasonCodeResponse = {
+  reasonCode: {
+    id: 240,
+    siteId: 166,
+    code: 'code4',
+    description: 'description6',
+    position: 14,
+  },
+};
 ```
 

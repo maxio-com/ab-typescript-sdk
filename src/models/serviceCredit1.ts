@@ -28,7 +28,7 @@ export interface ServiceCredit1 {
   entryType?: ServiceCreditType;
   /** The memo attached to the entry */
   memo?: string;
-  /** The invoice uid associated with the entry. Only present for debit entries */
+  /** The invoice uid associated with the entry. Only present for debit entries. */
   invoiceUid?: string | null;
   /** The remaining balance for the entry */
   remainingBalanceInCents?: bigint;

@@ -13,23 +13,22 @@
 | `duplicateCodes` | `string[] \| undefined` | Optional | - |
 | `invalidCodes` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "created_codes": [
-    "created_codes1",
-    "created_codes2"
+```ts
+import { CouponSubcodesResponse } from '@maxio-com/advanced-billing-sdk';
+
+const couponSubcodesResponse: CouponSubcodesResponse = {
+  createdCodes: [
+    'created_codes7'
   ],
-  "duplicate_codes": [
-    "duplicate_codes8",
-    "duplicate_codes7"
+  duplicateCodes: [
+    'duplicate_codes8'
   ],
-  "invalid_codes": [
-    "invalid_codes0",
-    "invalid_codes9",
-    "invalid_codes8"
-  ]
-}
+  invalidCodes: [
+    'invalid_codes4',
+    'invalid_codes3'
+  ],
+};
 ```
 

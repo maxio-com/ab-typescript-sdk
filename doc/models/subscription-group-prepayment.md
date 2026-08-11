@@ -14,14 +14,19 @@
 | `memo` | `string` | Required | - |
 | `method` | [`SubscriptionGroupPrepaymentMethod`](../../doc/models/subscription-group-prepayment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": 96,
-  "details": "details2",
-  "memo": "memo6",
-  "method": "money_order"
-}
+```ts
+import {
+  SubscriptionGroupPrepayment,
+  SubscriptionGroupPrepaymentMethod,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupPrepayment: SubscriptionGroupPrepayment = {
+  amount: 12,
+  details: 'details4',
+  memo: 'memo8',
+  method: SubscriptionGroupPrepaymentMethod.MoneyOrder,
+};
 ```
 

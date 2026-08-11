@@ -19,7 +19,9 @@ One of the following: Business Software, Consumer Software, Digital Services, Ph
 
 ## Example
 
-```
-Business Software
+```ts
+import { ItemCategory } from '@maxio-com/advanced-billing-sdk';
+
+const itemCategory = ItemCategory.Other;
 ```
 

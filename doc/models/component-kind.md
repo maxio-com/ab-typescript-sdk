@@ -17,3 +17,11 @@ A handle for the component type
 | `PrepaidUsageComponent` |
 | `EventBasedComponent` |
 
+## Example
+
+```ts
+import { ComponentKind } from '@maxio-com/advanced-billing-sdk';
+
+const componentKind = ComponentKind.PrepaidUsageComponent;
+```
+

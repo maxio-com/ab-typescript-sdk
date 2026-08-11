@@ -12,14 +12,16 @@
 | `subscriptionId` | `number` | Required | - |
 | `memberIds` | `number[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_id": 38,
-  "member_ids": [
-    162
-  ]
-}
+```ts
+import { CreateSubscriptionGroup } from '@maxio-com/advanced-billing-sdk';
+
+const createSubscriptionGroup: CreateSubscriptionGroup = {
+  subscriptionId: 204,
+  memberIds: [
+    48
+  ],
+};
 ```
 

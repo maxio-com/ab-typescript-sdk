@@ -11,25 +11,31 @@
 |  --- | --- | --- | --- |
 | `metafields` | [`UpdateMetafieldsRequestMetafields \| undefined`](../../doc/models/containers/update-metafields-request-metafields.md) | Optional | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "metafields": {
-    "current_name": "current_name0",
-    "name": "name6",
-    "scope": {
-      "csv": "0",
-      "invoices": "0",
-      "statements": "0",
-      "portal": "0",
-      "public_show": "0"
+```ts
+import {
+  IncludeOption,
+  MetafieldInput,
+  UpdateMetafieldsRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateMetafieldsRequest: UpdateMetafieldsRequest = {
+  metafields: {
+    currentName: 'current_name0',
+    name: 'name6',
+    scope: {
+      csv: IncludeOption.Exclude,
+      invoices: IncludeOption.Exclude,
+      statements: IncludeOption.Exclude,
+      portal: IncludeOption.Exclude,
+      publicShow: IncludeOption.Exclude,
     },
-    "input_type": "balance_tracker",
-    "enum": [
-      "enum2"
-    ]
-  }
-}
+    inputType: MetafieldInput.BalanceTracker,
+    mEnum: [
+      'enum2'
+    ],
+  },
+};
 ```
 

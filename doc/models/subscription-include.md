@@ -12,3 +12,11 @@
 | `Coupons` |
 | `SelfServicePageToken` |
 
+## Example
+
+```ts
+import { SubscriptionInclude } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionInclude = SubscriptionInclude.Coupons;
+```
+

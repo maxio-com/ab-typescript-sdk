@@ -13,13 +13,19 @@
 | `destinationAddress` | [`TaxDestinationAddress \| undefined`](../../doc/models/tax-destination-address.md) | Optional | - |
 | `fullyConfigured` | `boolean \| undefined` | Optional | Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio.zendesk.com/hc/en-us/articles/24287012608909-Taxes-Overview<br><br>**Default**: `false` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "kind": "custom",
-  "fully_configured": false,
-  "destination_address": "shipping_only"
-}
+```ts
+import {
+  TaxConfiguration,
+  TaxConfigurationKind,
+  TaxDestinationAddress,
+} from '@maxio-com/advanced-billing-sdk';
+
+const taxConfiguration: TaxConfiguration = {
+  kind: TaxConfigurationKind.Custom,
+  destinationAddress: TaxDestinationAddress.ShippingOnly,
+  fullyConfigured: false,
+};
 ```
 

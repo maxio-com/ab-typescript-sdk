@@ -16,21 +16,26 @@
 | `receivedOn` | `string \| undefined` | Optional | Date reflecting when the payment was received from a customer. Must be in the past. |
 | `applications` | [`CreateInvoicePaymentApplication[]`](../../doc/models/create-invoice-payment-application.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": "String7",
-  "applications": [
+```ts
+import {
+  CreateMultiInvoicePayment,
+  InvoicePaymentMethodType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createMultiInvoicePayment: CreateMultiInvoicePayment = {
+  amount: 'String9',
+  applications: [
     {
-      "invoice_uid": "invoice_uid8",
-      "amount": "amount0"
+      invoiceUid: 'invoice_uid8',
+      amount: 'amount0',
     }
   ],
-  "memo": "memo8",
-  "details": "details4",
-  "method": "credit_card",
-  "received_on": "received_on6"
-}
+  memo: 'memo0',
+  details: 'details6',
+  method: InvoicePaymentMethodType.Ach,
+  receivedOn: 'received_on8',
+};
 ```
 

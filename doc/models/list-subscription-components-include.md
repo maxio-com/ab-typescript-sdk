@@ -14,7 +14,11 @@
 
 ## Example
 
-```
-subscription
+```ts
+import {
+  ListSubscriptionComponentsInclude,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionComponentsInclude = ListSubscriptionComponentsInclude.Subscription;
 ```
 

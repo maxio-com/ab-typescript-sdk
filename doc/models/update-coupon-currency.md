@@ -12,12 +12,14 @@
 | `currency` | `string` | Required | ISO code for the site defined currency. |
 | `price` | `number` | Required | Price for the given currency. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency": "currency4",
-  "price": 146
-}
+```ts
+import { UpdateCouponCurrency } from '@maxio-com/advanced-billing-sdk';
+
+const updateCouponCurrency: UpdateCouponCurrency = {
+  currency: 'currency4',
+  price: 100,
+};
 ```
 

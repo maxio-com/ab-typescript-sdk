@@ -10,6 +10,7 @@
 | Type |
 |  --- |
 | [`SubscriptionProductChange`](../../../doc/models/subscription-product-change.md) |
+| [`SubscriptionProductChangeScheduled`](../../../doc/models/subscription-product-change-scheduled.md) |
 | [`SubscriptionStateChange`](../../../doc/models/subscription-state-change.md) |
 | [`PaymentRelatedEvents`](../../../doc/models/payment-related-events.md) |
 | [`RefundSuccess`](../../../doc/models/refund-success.md) |
@@ -40,6 +41,19 @@
 const value: EventEventSpecificData = {
   previousProductId: 126,
   newProductId: 12,
+};
+```
+
+## SubscriptionProductChangeScheduled
+
+### Initialization Code
+
+#### Example
+
+```ts
+const value: EventEventSpecificData = {
+  previousProductId: 62,
+  newProductId: 52,
 };
 ```
 
@@ -109,7 +123,7 @@ const value: EventEventSpecificData = {
 ```ts
 const value: EventEventSpecificData = {
   previousUnitBalance: 'previous_unit_balance6',
-  newUnitBalance: 80,
+  newUnitBalance: 2,
   usageQuantity: 42,
   componentId: 4,
   componentHandle: 'component_handle8',
@@ -127,8 +141,8 @@ const value: EventEventSpecificData = {
 const value: EventEventSpecificData = {
   previousUnitBalance: 'previous_unit_balance0',
   previousOverageUnitBalance: 'previous_overage_unit_balance4',
-  newUnitBalance: 252,
-  newOverageUnitBalance: 224,
+  newUnitBalance: 174,
+  newOverageUnitBalance: 146,
   usageQuantity: 214,
   overageUsageQuantity: 106,
   componentId: 176,

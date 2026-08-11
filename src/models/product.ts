@@ -35,11 +35,11 @@ export interface Product {
   handle?: string | null;
   /** The product description */
   description?: string | null;
-  /** E.g. Internal ID or SKU Number */
+  /** E.g., Internal ID or SKU Number */
   accountingCode?: string | null;
   /** Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, read this attribute from under the signup page. */
   requestCreditCard?: boolean;
-  /** A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
+  /** A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval. */
   expirationInterval?: number | null;
   /** A string representing the expiration interval unit for this product, either month, day or never */
   expirationIntervalUnit?: ExpirationIntervalUnit | null;
@@ -49,7 +49,7 @@ export interface Product {
   updatedAt?: string;
   /** The product price, in integer cents */
   priceInCents?: bigint;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days. */
   interval?: number;
   /** A string representing the interval unit for this product, either month or day */
   intervalUnit?: IntervalUnit;
@@ -57,7 +57,7 @@ export interface Product {
   initialChargeInCents?: bigint | null;
   /** The price of the trial period for a subscription to this product, in integer cents. */
   trialPriceInCents?: bigint | null;
-  /** A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval */
+  /** A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval. */
   trialInterval?: number | null;
   /** A string representing the trial interval unit for this product, either month or day */
   trialIntervalUnit?: IntervalUnit | null;
@@ -72,7 +72,7 @@ export interface Product {
   initialChargeAfterTrial?: boolean | null;
   /** The version of the product */
   versionNumber?: number;
-  /** The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update) */
+  /** The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update). */
   updateReturnParams?: string | null;
   productFamily?: ProductFamily;
   publicSignupPages?: PublicSignupPage[];
@@ -91,6 +91,8 @@ export interface Product {
   itemCategory?: string | null;
   productPricePointId?: number;
   productPricePointHandle?: string | null;
+  /** (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this product instead of the default derived from item_category. */
+  unspscCode?: string | null;
   [key: string]: unknown;
 }
 
@@ -157,5 +159,6 @@ export const productSchema: Schema<Product> = lazy(() =>
       'product_price_point_handle',
       optional(nullable(string())),
     ],
+    unspscCode: ['unspsc_code', optional(nullable(string()))],
   })
 );

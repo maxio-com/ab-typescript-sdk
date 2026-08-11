@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `customer` | [`UpdateCustomer`](../../doc/models/update-customer.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "customer": {
-    "first_name": "first_name0",
-    "last_name": "last_name8",
-    "email": "email6",
-    "cc_emails": "cc_emails0",
-    "organization": "organization6"
-  }
-}
+```ts
+import { UpdateCustomerRequest } from '@maxio-com/advanced-billing-sdk';
+
+const updateCustomerRequest: UpdateCustomerRequest = {
+  customer: {
+    firstName: 'first_name0',
+    lastName: 'last_name8',
+    email: 'email6',
+    ccEmails: 'cc_emails0',
+    organization: 'organization6',
+  },
+};
 ```
 

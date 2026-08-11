@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `currencyPrices` | [`CreateProductCurrencyPrice[]`](../../doc/models/create-product-currency-price.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
+```ts
+import {
+  CreateProductCurrencyPricesRequest,
+  CurrencyPriceRole,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createProductCurrencyPricesRequest: CreateProductCurrencyPricesRequest = {
+  currencyPrices: [
     {
-      "currency": "currency8",
-      "price": 78,
-      "role": "initial"
+      currency: 'currency8',
+      price: 78,
+      role: CurrencyPriceRole.Initial,
     }
-  ]
-}
+  ],
+};
 ```
 

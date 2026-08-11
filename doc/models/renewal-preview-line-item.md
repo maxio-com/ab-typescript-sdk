@@ -24,15 +24,21 @@
 | `periodRangeStart` | `string \| undefined` | Optional | - |
 | `periodRangeEnd` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_type": "charge",
-  "kind": "prepaid_usage_component",
-  "amount_in_cents": 154,
-  "memo": "memo0",
-  "discount_amount_in_cents": 214
-}
+```ts
+import {
+  LineItemKind,
+  LineItemTransactionType,
+  RenewalPreviewLineItem,
+} from '@maxio-com/advanced-billing-sdk';
+
+const renewalPreviewLineItem: RenewalPreviewLineItem = {
+  transactionType: LineItemTransactionType.Adjustment,
+  kind: LineItemKind.PrepaidUsageComponent,
+  amountInCents: BigInt(32),
+  memo: 'memo0',
+  discountAmountInCents: BigInt(228),
+};
 ```
 

@@ -14,14 +14,16 @@
 | `organization` | `string \| undefined` | Optional | - |
 | `email` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name2",
-  "last_name": "last_name0",
-  "organization": "organization4",
-  "email": "email4"
-}
+```ts
+import { InvoicePayerChange } from '@maxio-com/advanced-billing-sdk';
+
+const invoicePayerChange: InvoicePayerChange = {
+  firstName: 'first_name4',
+  lastName: 'last_name2',
+  organization: 'organization2',
+  email: 'email2',
+};
 ```
 

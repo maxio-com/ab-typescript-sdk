@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `prepayment` | [`CreatePrepayment`](../../doc/models/create-prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayment": {
-    "amount": 11.6,
-    "details": "details8",
-    "memo": "memo2",
-    "method": "money_order",
-    "payment_profile_id": 240
-  }
-}
+```ts
+import {
+  CreatePrepaymentMethod,
+  CreatePrepaymentRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createPrepaymentRequest: CreatePrepaymentRequest = {
+  prepayment: {
+    amount: 11.6,
+    details: 'details8',
+    memo: 'memo2',
+    method: CreatePrepaymentMethod.MoneyOrder,
+    paymentProfileId: 240,
+  },
+};
 ```
 

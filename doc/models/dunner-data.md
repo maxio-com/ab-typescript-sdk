@@ -16,16 +16,18 @@
 | `attempts` | `number` | Required | - |
 | `lastAttemptedAt` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "state": "state4",
-  "subscription_id": 126,
-  "revenue_at_risk_in_cents": 30,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "attempts": 110,
-  "last_attempted_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { DunnerData } from '@maxio-com/advanced-billing-sdk';
+
+const dunnerData: DunnerData = {
+  state: 'state4',
+  subscriptionId: 230,
+  revenueAtRiskInCents: BigInt(134),
+  createdAt: '2016-03-13T12:52:32.123Z',
+  attempts: 6,
+  lastAttemptedAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

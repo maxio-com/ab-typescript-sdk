@@ -11,13 +11,15 @@
 |  --- | --- | --- | --- |
 | `subscription` | `string[]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription": [
-    "subscription0"
-  ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof SubscriptionRemoveCouponErrorsError) {
+    console.log(error.result);
+  }
 }
 ```
 

@@ -133,12 +133,12 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `string` | Template, Required | The uid of the subscription group |
-| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data<br><br>**Default**: `false` |
-| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data<br><br>**Default**: `false` |
-| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data<br><br>**Default**: `false` |
-| `credits` | `boolean \| undefined` | Query, Optional | Include credits data<br><br>**Default**: `false` |
-| `payments` | `boolean \| undefined` | Query, Optional | Include payments data<br><br>**Default**: `false` |
-| `customFields` | `boolean \| undefined` | Query, Optional | Include custom fields data<br><br>**Default**: `false` |
+| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data.<br><br>**Default**: `false` |
+| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data.<br><br>**Default**: `false` |
+| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data.<br><br>**Default**: `false` |
+| `credits` | `boolean \| undefined` | Query, Optional | Include credits data.<br><br>**Default**: `false` |
+| `payments` | `boolean \| undefined` | Query, Optional | Include payments data.<br><br>**Default**: `false` |
+| `customFields` | `boolean \| undefined` | Query, Optional | Include custom fields data.<br><br>**Default**: `false` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -386,12 +386,12 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `direction` | [`Direction \| undefined`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices.<br><br>**Default**: `Direction.Desc` |
-| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data<br><br>**Default**: `false` |
-| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data<br><br>**Default**: `false` |
-| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data<br><br>**Default**: `false` |
-| `credits` | `boolean \| undefined` | Query, Optional | Include credits data<br><br>**Default**: `false` |
-| `payments` | `boolean \| undefined` | Query, Optional | Include payments data<br><br>**Default**: `false` |
-| `customFields` | `boolean \| undefined` | Query, Optional | Include custom fields data<br><br>**Default**: `false` |
+| `lineItems` | `boolean \| undefined` | Query, Optional | Include line items data.<br><br>**Default**: `false` |
+| `discounts` | `boolean \| undefined` | Query, Optional | Include discounts data.<br><br>**Default**: `false` |
+| `taxes` | `boolean \| undefined` | Query, Optional | Include taxes data.<br><br>**Default**: `false` |
+| `credits` | `boolean \| undefined` | Query, Optional | Include credits data.<br><br>**Default**: `false` |
+| `payments` | `boolean \| undefined` | Query, Optional | Include payments data.<br><br>**Default**: `false` |
+| `customFields` | `boolean \| undefined` | Query, Optional | Include custom fields data.<br><br>**Default**: `false` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -611,7 +611,7 @@ try {
 
 # Preview Proforma Invoice
 
-Returns a preview of the data that will be included on a given subscription's proforma invoice if one were to be generated. It will have similar line items and totals as a renewal preview, but the response will be presented in the format of a proforma invoice. Consequently it will include additional information such as the name and addresses that will appear on the proforma invoice.
+Previews the data that will be included on a given subscription's proforma invoice if one were to be generated. It will have similar line items and totals as a renewal preview, but the response will be presented in the format of a proforma invoice. Consequently it will include additional information such as the name and addresses that will appear on the proforma invoice.
 
 The preview endpoint is subject to all the same conditions as the proforma invoice endpoint. For example, previews are only available on the Relationship Invoicing architecture, and previews cannot be made for end-of-life subscriptions.
 

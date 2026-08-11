@@ -39,6 +39,7 @@
 | `SubscriptionCardUpdate` |
 | `SubscriptionGroupCardUpdate` |
 | `SubscriptionProductChange` |
+| `SubscriptionProductChangeScheduled` |
 | `SubscriptionStateChange` |
 | `TrialEndNotice` |
 | `UpcomingRenewalNotice` |
@@ -47,4 +48,12 @@
 | `PendingCancellationChange` |
 | `SubscriptionPrepaymentAccountBalanceChanged` |
 | `SubscriptionServiceCreditAccountBalanceChanged` |
+
+## Example
+
+```ts
+import { WebhookSubscription } from '@maxio-com/advanced-billing-sdk';
+
+const webhookSubscription = WebhookSubscription.DirectDebitPaymentPending;
+```
 

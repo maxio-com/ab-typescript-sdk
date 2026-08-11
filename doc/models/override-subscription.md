@@ -15,15 +15,17 @@
 | `expiresAt` | `string \| undefined` | Optional | Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time. Only ISO8601 format is supported. This field is not supported when Multi-frequency is enabled for the Site. To change the Term End of a Subscription, use the Update Subscription endpoint. |
 | `currentPeriodStartsAt` | `string \| undefined` | Optional | Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration. Only ISO8601 format is supported. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "activated_at": "2016-03-13T12:52:32.123Z",
-  "canceled_at": "2016-03-13T12:52:32.123Z",
-  "cancellation_message": "cancellation_message4",
-  "expires_at": "2016-03-13T12:52:32.123Z",
-  "current_period_starts_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { OverrideSubscription } from '@maxio-com/advanced-billing-sdk';
+
+const overrideSubscription: OverrideSubscription = {
+  activatedAt: '2016-03-13T12:52:32.123Z',
+  canceledAt: '2016-03-13T12:52:32.123Z',
+  cancellationMessage: 'cancellation_message8',
+  expiresAt: '2016-03-13T12:52:32.123Z',
+  currentPeriodStartsAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

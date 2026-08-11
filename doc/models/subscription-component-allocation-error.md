@@ -11,16 +11,15 @@
 |  --- | --- | --- | --- |
 | `errors` | [`SubscriptionComponentAllocationErrorItem[] \| undefined`](../../doc/models/subscription-component-allocation-error-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    {
-      "kind": "kind8",
-      "message": "message0"
-    }
-  ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof SubscriptionComponentAllocationError) {
+    console.log(error.result);
+  }
 }
 ```
 

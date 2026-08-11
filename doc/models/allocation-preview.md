@@ -23,15 +23,17 @@
 | `periodType` | `string \| undefined` | Optional | - |
 | `existingBalanceInCents` | `bigint \| undefined` | Optional | An integer representing the amount of the subscription's current balance |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "start_date": "2016-03-13T12:52:32.123Z",
-  "end_date": "2016-03-13T12:52:32.123Z",
-  "subtotal_in_cents": 4,
-  "total_tax_in_cents": 128,
-  "total_discount_in_cents": 122
-}
+```ts
+import { AllocationPreview } from '@maxio-com/advanced-billing-sdk';
+
+const allocationPreview: AllocationPreview = {
+  startDate: '2016-03-13T12:52:32.123Z',
+  endDate: '2016-03-13T12:52:32.123Z',
+  subtotalInCents: BigInt(140),
+  totalTaxInCents: BigInt(8),
+  totalDiscountInCents: BigInt(242),
+};
 ```
 

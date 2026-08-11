@@ -12,35 +12,28 @@
 | `paidInvoices` | [`PaidInvoice[] \| undefined`](../../doc/models/paid-invoice.md) | Optional | - |
 | `prepayment` | [`InvoicePrePayment \| null \| undefined`](../../doc/models/invoice-pre-payment.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "paid_invoices": [
+```ts
+import {
+  InvoiceStatus,
+  RecordPaymentResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const recordPaymentResponse: RecordPaymentResponse = {
+  paidInvoices: [
     {
-      "invoice_id": "invoice_id8",
-      "status": "draft",
-      "due_amount": "due_amount0",
-      "paid_amount": "paid_amount0"
-    },
-    {
-      "invoice_id": "invoice_id8",
-      "status": "draft",
-      "due_amount": "due_amount0",
-      "paid_amount": "paid_amount0"
-    },
-    {
-      "invoice_id": "invoice_id8",
-      "status": "draft",
-      "due_amount": "due_amount0",
-      "paid_amount": "paid_amount0"
+      invoiceId: 'invoice_id8',
+      status: InvoiceStatus.Draft,
+      dueAmount: 'due_amount0',
+      paidAmount: 'paid_amount0',
     }
   ],
-  "prepayment": {
-    "subscription_id": 148,
-    "amount_in_cents": 124,
-    "ending_balance_in_cents": 164
-  }
-}
+  prepayment: {
+    subscriptionId: 148,
+    amountInCents: BigInt(124),
+    endingBalanceInCents: BigInt(164),
+  },
+};
 ```
 

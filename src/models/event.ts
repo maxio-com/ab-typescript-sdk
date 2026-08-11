@@ -29,6 +29,7 @@ export interface Event {
   /**
    * The schema varies based on the event key. The key-to-event data mapping is as follows:
    * * `subscription_product_change` - SubscriptionProductChange
+   * * `subscription_product_change_scheduled` - SubscriptionProductChangeScheduled
    * * `subscription_state_change` - SubscriptionStateChange
    * * `signup_success`, `delayed_signup_creation_success`, `payment_success`, `payment_failure`, `renewal_success`, `renewal_failure`, `chargeback_lost`, `chargeback_accepted`, `chargeback_closed` - PaymentRelatedEvents
    * * `refund_success` - RefundSuccess

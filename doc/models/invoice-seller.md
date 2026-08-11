@@ -16,20 +16,22 @@ Information about the seller (merchant) listed on the masthead of the invoice.
 | `phone` | `string \| undefined` | Optional | - |
 | `logoUrl` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name0",
-  "address": {
-    "street": "street6",
-    "line2": "line20",
-    "city": "city6",
-    "state": "state2",
-    "zip": "zip0"
+```ts
+import { InvoiceSeller } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceSeller: InvoiceSeller = {
+  name: 'name4',
+  address: {
+    street: 'street6',
+    line2: 'line20',
+    city: 'city6',
+    state: 'state2',
+    zip: 'zip0',
   },
-  "phone": "phone0",
-  "logo_url": "logo_url0"
-}
+  phone: 'phone6',
+  logoUrl: 'logo_url6',
+};
 ```
 

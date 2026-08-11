@@ -18,3 +18,11 @@ The type of payment method used. Defaults to other.
 | `Ach` |
 | `Other` |
 
+## Example
+
+```ts
+import { InvoicePaymentMethodType } from '@maxio-com/advanced-billing-sdk';
+
+const invoicePaymentMethodType = InvoicePaymentMethodType.Cash;
+```
+

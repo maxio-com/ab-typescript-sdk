@@ -11,14 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`SubscriptionGroupCreateErrorResponseErrors`](../../doc/models/containers/subscription-group-create-error-response-errors.md) | Required | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "members": [
-      "members6"
-    ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof SubscriptionGroupCreateErrorResponseError) {
+    console.log(error.result);
   }
 }
 ```

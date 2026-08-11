@@ -13,16 +13,16 @@
 | `name` | `string \| undefined` | Optional | The product price point name |
 | `handle` | `string \| null \| undefined` | Optional | The product price point API handle |
 | `priceInCents` | `bigint \| undefined` | Optional | The product price point price, in integer cents |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days. |
 | `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this product price point, either month or day |
 | `trialPriceInCents` | `bigint \| null \| undefined` | Optional | The product price point trial price, in integer cents |
-| `trialInterval` | `number \| null \| undefined` | Optional | The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days |
+| `trialInterval` | `number \| null \| undefined` | Optional | The numerical trial interval. e.g., an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days. |
 | `trialIntervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product price point, either month or day |
-| `trialType` | [`TrialType \| null \| undefined`](../../doc/models/trial-type.md) | Optional | Indicates how a trial is handled when the trail period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. |
+| `trialType` | [`TrialType \| null \| undefined`](../../doc/models/trial-type.md) | Optional | Indicates how a trial is handled when the trial period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. |
 | `introductoryOffer` | `boolean \| null \| undefined` | Optional | reserved for future use |
 | `initialChargeInCents` | `bigint \| null \| undefined` | Optional | The product price point initial charge, in integer cents |
 | `initialChargeAfterTrial` | `boolean \| null \| undefined` | Optional | - |
-| `expirationInterval` | `number \| null \| undefined` | Optional | The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days |
+| `expirationInterval` | `number \| null \| undefined` | Optional | The numerical expiration interval. e.g., an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. |
 | `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this product price point, either month, day or never |
 | `productId` | `number \| undefined` | Optional | The product id this price point belongs to |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this price point was archived |
@@ -34,15 +34,17 @@
 | `subscriptionId` | `number \| null \| undefined` | Optional | The subscription id this price point belongs to |
 | `currencyPrices` | [`CurrencyPrice[] \| undefined`](../../doc/models/currency-price.md) | Optional | An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 196,
-  "name": "name6",
-  "handle": "handle2",
-  "price_in_cents": 248,
-  "interval": 8
-}
+```ts
+import { ProductPricePoint } from '@maxio-com/advanced-billing-sdk';
+
+const productPricePoint: ProductPricePoint = {
+  id: 10,
+  name: 'name0',
+  handle: 'handle6',
+  priceInCents: BigInt(178),
+  interval: 194,
+};
 ```
 

@@ -31,21 +31,21 @@ import {
 } from './paymentForAllocation.js';
 
 export interface Allocation {
-  /** The allocation unique id */
+  /** The allocation unique ID */
   allocationId?: number;
-  /** The integer component ID for the allocation. This references a component that you have created in your Product setup */
+  /** The integer component ID for the allocation. This references a component that you have created in your Product setup. */
   componentId?: number;
-  /** The handle of the component. This references a component that you have created in your Product setup */
+  /** The handle of the component. This references a component that you have created in your Product setup. */
   componentHandle?: string | null;
-  /** The integer subscription ID for the allocation. This references a unique subscription in your Site */
+  /** The integer subscription ID for the allocation. This references a unique subscription in your Site. */
   subscriptionId?: number;
-  /** The allocated quantity set in to effect by the allocation. String for components supporting fractional quantities */
+  /** The allocated quantity set into effect by the allocation. String for components supporting fractional quantities */
   quantity?: AllocationQuantity;
   /** The allocated quantity that was in effect before this allocation was created. String for components supporting fractional quantities */
   previousQuantity?: AllocationPreviousQuantity;
   /** The memo passed when the allocation was created */
   memo?: string | null;
-  /** The time that the allocation was recorded, in format and UTC timezone, i.e. 2012-11-20T22:00:37Z */
+  /** The time that the allocation was recorded, in ISO 8601 format and UTC timezone, e.g., 2012-11-20T22:00:37Z */
   timestamp?: string;
   /** Timestamp indicating when this allocation was created */
   createdAt?: string;
@@ -56,7 +56,7 @@ export interface Allocation {
   pricePointId?: number;
   pricePointName?: string;
   pricePointHandle?: string;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;

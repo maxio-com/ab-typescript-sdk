@@ -11,15 +11,18 @@
 |  --- | --- | --- | --- |
 | `productFamily` | [`CreateProductFamily`](../../doc/models/create-product-family.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "product_family": {
-    "name": "name0",
-    "handle": "handle6",
-    "description": "description0"
-  }
-}
+```ts
+import { CreateProductFamilyRequest } from '@maxio-com/advanced-billing-sdk';
+
+const createProductFamilyRequest: CreateProductFamilyRequest = {
+  productFamily: {
+    name: 'name0',
+    handle: 'handle6',
+    description: 'description0',
+    surcharging: false,
+  },
+};
 ```
 

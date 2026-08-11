@@ -11,23 +11,28 @@
 |  --- | --- | --- | --- |
 | `payment` | [`CreateMultiInvoicePayment`](../../doc/models/create-multi-invoice-payment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment": {
-    "amount": "String9",
-    "applications": [
+```ts
+import {
+  CreateMultiInvoicePaymentRequest,
+  InvoicePaymentMethodType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createMultiInvoicePaymentRequest: CreateMultiInvoicePaymentRequest = {
+  payment: {
+    amount: 'String9',
+    applications: [
       {
-        "invoice_uid": "invoice_uid8",
-        "amount": "amount0"
+        invoiceUid: 'invoice_uid8',
+        amount: 'amount0',
       }
     ],
-    "memo": "memo0",
-    "details": "details6",
-    "method": "ach",
-    "received_on": "received_on8"
-  }
-}
+    memo: 'memo0',
+    details: 'details6',
+    method: InvoicePaymentMethodType.Ach,
+    receivedOn: 'received_on8',
+  },
+};
 ```
 

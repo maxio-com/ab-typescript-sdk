@@ -22,7 +22,7 @@ export interface ApplePayPaymentProfile {
   firstName?: string;
   /** The last name of the Apple Pay account holder */
   lastName?: string;
-  /** The Chargify-assigned id for the customer record to which the Apple Pay account belongs */
+  /** The Chargify-assigned ID for the customer record to which the Apple Pay account belongs */
   customerId?: number;
   /** The vault that stores the payment profile with the provided vault_token. */
   currentVault?: ApplePayVault;

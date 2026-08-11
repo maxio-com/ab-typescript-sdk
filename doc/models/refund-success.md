@@ -13,13 +13,15 @@
 | `gatewayTransactionId` | `number` | Required | - |
 | `productId` | `number` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "refund_id": 12,
-  "gateway_transaction_id": 182,
-  "product_id": 168
-}
+```ts
+import { RefundSuccess } from '@maxio-com/advanced-billing-sdk';
+
+const refundSuccess: RefundSuccess = {
+  refundId: 34,
+  gatewayTransactionId: 160,
+  productId: 190,
+};
 ```
 

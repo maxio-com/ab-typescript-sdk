@@ -13,18 +13,18 @@
 | `name` | `string \| undefined` | Optional | The product name |
 | `handle` | `string \| null \| undefined` | Optional | The product API handle |
 | `description` | `string \| null \| undefined` | Optional | The product description |
-| `accountingCode` | `string \| null \| undefined` | Optional | E.g. Internal ID or SKU Number |
+| `accountingCode` | `string \| null \| undefined` | Optional | E.g., Internal ID or SKU Number |
 | `requestCreditCard` | `boolean \| undefined` | Optional | Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, read this attribute from under the signup page. |
-| `expirationInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
+| `expirationInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval. |
 | `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this product, either month, day or never |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this product was created |
 | `updatedAt` | `string \| undefined` | Optional | Timestamp indicating when this product was last updated |
 | `priceInCents` | `bigint \| undefined` | Optional | The product price, in integer cents |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days. |
 | `intervalUnit` | [`IntervalUnit \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this product, either month or day |
 | `initialChargeInCents` | `bigint \| null \| undefined` | Optional | The up front charge you have specified. |
 | `trialPriceInCents` | `bigint \| null \| undefined` | Optional | The price of the trial period for a subscription to this product, in integer cents. |
-| `trialInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
+| `trialInterval` | `number \| null \| undefined` | Optional | A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval. |
 | `trialIntervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product, either month or day |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this product was archived |
 | `requireCreditCard` | `boolean \| undefined` | Optional | Boolean that controls whether a payment profile is required to be entered for customers wishing to sign up on this product. |
@@ -33,7 +33,7 @@
 | `updateReturnUrl` | `string \| null \| undefined` | Optional | The url to which a customer will be returned after a successful account update |
 | `initialChargeAfterTrial` | `boolean \| null \| undefined` | Optional | - |
 | `versionNumber` | `number \| undefined` | Optional | The version of the product |
-| `updateReturnParams` | `string \| null \| undefined` | Optional | The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update) |
+| `updateReturnParams` | `string \| null \| undefined` | Optional | The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update). |
 | `productFamily` | [`ProductFamily \| undefined`](../../doc/models/product-family.md) | Optional | - |
 | `publicSignupPages` | [`PublicSignupPage[] \| undefined`](../../doc/models/public-signup-page.md) | Optional | - |
 | `productPricePointName` | `string \| undefined` | Optional | - |
@@ -46,16 +46,19 @@
 | `itemCategory` | `string \| null \| undefined` | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |
 | `productPricePointId` | `number \| undefined` | Optional | - |
 | `productPricePointHandle` | `string \| null \| undefined` | Optional | - |
+| `unspscCode` | `string \| null \| undefined` | Optional | (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this product instead of the default derived from item_category. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 180,
-  "name": "name4",
-  "handle": "handle0",
-  "description": "description4",
-  "accounting_code": "accounting_code0"
-}
+```ts
+import { Product } from '@maxio-com/advanced-billing-sdk';
+
+const product: Product = {
+  id: 134,
+  name: 'name0',
+  handle: 'handle6',
+  description: 'description0',
+  accountingCode: 'accounting_code6',
+};
 ```
 

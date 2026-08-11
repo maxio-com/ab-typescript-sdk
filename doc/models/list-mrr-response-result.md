@@ -17,15 +17,17 @@
 | `currencySymbol` | `string \| undefined` | Optional | - |
 | `movements` | [`Movement[] \| undefined`](../../doc/models/movement.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "page": 150,
-  "per_page": 238,
-  "total_pages": 16,
-  "total_entries": 112,
-  "currency": "currency8"
-}
+```ts
+import { ListMRRResponseResult } from '@maxio-com/advanced-billing-sdk';
+
+const listMRRResponseResult: ListMRRResponseResult = {
+  page: 40,
+  perPage: 208,
+  totalPages: 82,
+  totalEntries: 78,
+  currency: 'currency6',
+};
 ```
 

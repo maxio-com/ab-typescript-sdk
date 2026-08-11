@@ -11,22 +11,15 @@
 |  --- | --- | --- | --- |
 | `errors` | [`ComponentPricePointErrorItem[] \| undefined`](../../doc/models/component-price-point-error-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    {
-      "component_id": 236,
-      "message": "message0",
-      "price_point": 122
-    },
-    {
-      "component_id": 236,
-      "message": "message0",
-      "price_point": 122
-    }
-  ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof ComponentPricePointError) {
+    console.log(error.result);
+  }
 }
 ```
 

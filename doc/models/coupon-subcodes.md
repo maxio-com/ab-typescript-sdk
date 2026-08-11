@@ -11,13 +11,16 @@
 |  --- | --- | --- | --- |
 | `codes` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "codes": [
-    "codes8"
-  ]
-}
+```ts
+import { CouponSubcodes } from '@maxio-com/advanced-billing-sdk';
+
+const couponSubcodes: CouponSubcodes = {
+  codes: [
+    'codes8',
+    'codes9'
+  ],
+};
 ```
 

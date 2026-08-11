@@ -12,12 +12,14 @@
 | `name` | `string \| undefined` | Optional | - |
 | `value` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name4",
-  "value": "value6"
-}
+```ts
+import { CreateMetadata } from '@maxio-com/advanced-billing-sdk';
+
+const createMetadata: CreateMetadata = {
+  name: 'name0',
+  value: 'value2',
+};
 ```
 

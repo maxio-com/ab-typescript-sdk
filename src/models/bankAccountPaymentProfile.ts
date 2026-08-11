@@ -25,13 +25,13 @@ import {
 import { PaymentType, paymentTypeSchema } from './paymentType.js';
 
 export interface BankAccountPaymentProfile {
-  /** The Chargify-assigned ID of the stored bank account. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer */
+  /** The Chargify-assigned ID of the stored bank account. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer. */
   id?: number;
   /** The first name of the bank account holder */
   firstName?: string;
   /** The last name of the bank account holder */
   lastName?: string;
-  /** The Chargify-assigned id for the customer record to which the bank account belongs */
+  /** The Chargify-assigned ID for the customer record to which the bank account belongs */
   customerId?: number;
   /** The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. */
   currentVault?: BankAccountVault;
@@ -53,16 +53,14 @@ export interface BankAccountPaymentProfile {
   billingAddress2?: string | null;
   /** The bank where the account resides */
   bankName?: string;
-  /** A string representation of the stored bank routing number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). payment_type will be bank_account */
+  /** A string representation of the stored bank routing number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). payment_type will be bank_account. */
   maskedBankRoutingNumber?: string | null;
-  /** A string representation of the stored bank account number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111') */
-  maskedBankAccountNumber?: string | null;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;
   /** Defaults to personal */
   bankAccountHolderType?: BankAccountHolderType;
   paymentType: PaymentType;
-  /** denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account */
+  /** Denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account. */
   verified?: boolean;
   siteGatewaySettingId?: number | null;
   gatewayHandle?: string | null;
@@ -91,10 +89,6 @@ export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> 
     bankName: ['bank_name', optional(string())],
     maskedBankRoutingNumber: [
       'masked_bank_routing_number',
-      optional(nullable(string())),
-    ],
-    maskedBankAccountNumber: [
-      'masked_bank_account_number',
       optional(nullable(string())),
     ],
     bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],

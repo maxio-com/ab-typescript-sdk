@@ -11,19 +11,24 @@
 |  --- | --- | --- | --- |
 | `onOffComponent` | [`OnOffComponent`](../../doc/models/on-off-component.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "on_off_component": {
-    "name": "name6",
-    "description": "description6",
-    "handle": "handle2",
-    "taxable": false,
-    "upgrade_charge": "full",
-    "downgrade_credit": "full",
-    "unit_price": "String5"
-  }
-}
+```ts
+import {
+  CreateOnOffComponent,
+  CreditType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createOnOffComponent: CreateOnOffComponent = {
+  onOffComponent: {
+    name: 'name6',
+    unitPrice: 'String5',
+    description: 'description6',
+    handle: 'handle2',
+    taxable: false,
+    upgradeCharge: CreditType.Full,
+    downgradeCredit: CreditType.Full,
+  },
+};
 ```
 

@@ -24,13 +24,13 @@ export interface CreditCardPaymentProfile {
   firstName?: string;
   /** The last name of the card holder. */
   lastName?: string;
-  /** A string representation of the credit card number with all but the last 4 digits masked with X’s (i.e. ‘XXXX-XXXX-XXXX-1234’). */
+  /** A string representation of the credit card number with all but the last 4 digits masked with X’s (e.g., ‘XXXX-XXXX-XXXX-1234’). */
   maskedCardNumber?: string;
   /** The type of card used. */
-  cardType?: CardType;
+  cardType?: CardType | null;
   /** An integer representing the expiration month of the card(1 – 12). */
   expirationMonth?: number;
-  /** An integer representing the 4-digit expiration year of the card(i.e. ‘2012’). */
+  /** An integer representing the 4-digit expiration year of the card(e.g., ‘2012’). */
   expirationYear?: number;
   /** The Chargify-assigned id for the customer record to which the card belongs. */
   customerId?: number;
@@ -54,7 +54,7 @@ export interface CreditCardPaymentProfile {
   billingAddress2?: string | null;
   paymentType: PaymentType;
   disabled?: boolean;
-  /** Token received after sending billing information using Maxio.js (formerly Chargify.js). This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) */
+  /** Token received after sending billing information using Maxio.js (formerly Chargify.js). This token will only be received if passed as a sole attribute of credit_card_attributes (e.g., tok_9g6hw85pnpt6knmskpwp4ttt). */
   chargifyToken?: string;
   siteGatewaySettingId?: number | null;
   /** An identifier of connected gateway. */
@@ -72,7 +72,7 @@ export const creditCardPaymentProfileSchema: Schema<CreditCardPaymentProfile> = 
     firstName: ['first_name', optional(string())],
     lastName: ['last_name', optional(string())],
     maskedCardNumber: ['masked_card_number', optional(string())],
-    cardType: ['card_type', optional(cardTypeSchema)],
+    cardType: ['card_type', optional(nullable(cardTypeSchema))],
     expirationMonth: ['expiration_month', optional(number())],
     expirationYear: ['expiration_year', optional(number())],
     customerId: ['customer_id', optional(number())],

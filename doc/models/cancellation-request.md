@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `subscription` | [`CancellationOptions`](../../doc/models/cancellation-options.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription": {
-    "cancellation_message": "cancellation_message2",
-    "reason_code": "reason_code8",
-    "cancel_at_end_of_period": false,
-    "scheduled_cancellation_at": "2016-03-13T12:52:32.123Z",
-    "refund_prepayment_account_balance": false
-  }
-}
+```ts
+import { CancellationRequest } from '@maxio-com/advanced-billing-sdk';
+
+const cancellationRequest: CancellationRequest = {
+  subscription: {
+    cancellationMessage: 'cancellation_message2',
+    reasonCode: 'reason_code8',
+    cancelAtEndOfPeriod: false,
+    scheduledCancellationAt: '2016-03-13T12:52:32.123Z',
+    refundPrepaymentAccountBalance: false,
+  },
+};
 ```
 

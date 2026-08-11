@@ -12,12 +12,14 @@
 | `cancellationState` | `string` | Required | - |
 | `cancelsAt` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "cancellation_state": "cancellation_state8",
-  "cancels_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { PendingCancellationChange } from '@maxio-com/advanced-billing-sdk';
+
+const pendingCancellationChange: PendingCancellationChange = {
+  cancellationState: 'cancellation_state0',
+  cancelsAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

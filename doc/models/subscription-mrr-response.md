@@ -11,20 +11,22 @@
 |  --- | --- | --- | --- |
 | `subscriptionsMrr` | [`SubscriptionMRR[]`](../../doc/models/subscription-mrr.md) | Required | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscriptions_mrr": [
+```ts
+import { SubscriptionMRRResponse } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionMRRResponse: SubscriptionMRRResponse = {
+  subscriptionsMrr: [
     {
-      "subscription_id": 0,
-      "mrr_amount_in_cents": 0,
-      "breakouts": {
-        "plan_amount_in_cents": 0,
-        "usage_amount_in_cents": 0
-      }
+      subscriptionId: 0,
+      mrrAmountInCents: BigInt(0),
+      breakouts: {
+        planAmountInCents: BigInt(0),
+        usageAmountInCents: BigInt(0),
+      },
     }
-  ]
-}
+  ],
+};
 ```
 

@@ -11,24 +11,30 @@
 |  --- | --- | --- | --- |
 | `pricePoints` | [`CreateProductPricePoint[]`](../../doc/models/create-product-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_points": [
+```ts
+import {
+  BulkCreateProductPricePointsRequest,
+  IntervalUnit,
+  TrialType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const bulkCreateProductPricePointsRequest: BulkCreateProductPricePointsRequest = {
+  pricePoints: [
     {
-      "name": "name2",
-      "price_in_cents": 108,
-      "interval": 92,
-      "interval_unit": "day",
-      "use_site_exchange_rate": true,
-      "handle": "handle8",
-      "trial_price_in_cents": 196,
-      "trial_interval": 250,
-      "trial_interval_unit": "day",
-      "trial_type": "no_obligation"
+      name: 'name2',
+      priceInCents: BigInt(108),
+      interval: 92,
+      intervalUnit: IntervalUnit.Day,
+      handle: 'handle8',
+      trialPriceInCents: BigInt(196),
+      trialInterval: 250,
+      trialIntervalUnit: IntervalUnit.Day,
+      trialType: TrialType.NoObligation,
+      useSiteExchangeRate: true,
     }
-  ]
-}
+  ],
+};
 ```
 

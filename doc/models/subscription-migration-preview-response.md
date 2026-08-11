@@ -11,16 +11,20 @@
 |  --- | --- | --- | --- |
 | `migration` | [`SubscriptionMigrationPreview`](../../doc/models/subscription-migration-preview.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "migration": {
-    "prorated_adjustment_in_cents": 196,
-    "charge_in_cents": 78,
-    "payment_due_in_cents": 250,
-    "credit_applied_in_cents": 210
-  }
-}
+```ts
+import {
+  SubscriptionMigrationPreviewResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionMigrationPreviewResponse: SubscriptionMigrationPreviewResponse = {
+  migration: {
+    proratedAdjustmentInCents: BigInt(196),
+    chargeInCents: BigInt(78),
+    paymentDueInCents: BigInt(250),
+    creditAppliedInCents: BigInt(210),
+  },
+};
 ```
 

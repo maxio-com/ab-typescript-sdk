@@ -11,35 +11,41 @@
 |  --- | --- | --- | --- |
 | `eventBasedComponent` | [`EBBComponent`](../../doc/models/ebb-component.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "event_based_component": {
-    "name": "name8",
-    "unit_name": "unit_name0",
-    "description": "description8",
-    "handle": "handle4",
-    "taxable": false,
-    "pricing_scheme": "stairstep",
-    "prices": [
+```ts
+import {
+  CreateEBBComponent,
+  IntervalUnit,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createEBBComponent: CreateEBBComponent = {
+  eventBasedComponent: {
+    name: 'name8',
+    unitName: 'unit_name0',
+    pricingScheme: PricingScheme.Stairstep,
+    eventBasedBillingMetricId: 68,
+    description: 'description8',
+    handle: 'handle4',
+    taxable: false,
+    prices: [
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       }
     ],
-    "price_points": [
+    pricePoints: [
       {
-        "name": "name2",
-        "handle": "handle8",
-        "pricing_scheme": "per_unit",
-        "interval": 92,
-        "interval_unit": "day"
+        name: 'name2',
+        handle: 'handle8',
+        pricingScheme: PricingScheme.PerUnit,
+        interval: 92,
+        intervalUnit: IntervalUnit.Day,
       }
     ],
-    "event_based_billing_metric_id": 68
-  }
-}
+  },
+};
 ```
 

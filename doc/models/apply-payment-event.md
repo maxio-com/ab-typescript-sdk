@@ -15,39 +15,46 @@
 | `eventType` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `InvoiceEventType.ApplyPayment` |
 | `eventData` | [`ApplyPaymentEventData`](../../doc/models/apply-payment-event-data.md) | Required | Example schema for an `apply_payment` event |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 234,
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "invoice": {
-    "issue_date": "2024-01-01",
-    "due_date": "2024-01-01",
-    "paid_date": "2024-01-01",
-    "public_url_expires_on": "2024-01-21",
-    "id": 166,
-    "uid": "uid6",
-    "site_id": 92,
-    "customer_id": 204,
-    "subscription_id": 20
+```ts
+import {
+  ApplyPaymentEvent,
+  InvoiceConsolidationLevel,
+  InvoiceEventPaymentMethod,
+  InvoiceEventType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const applyPaymentEvent: ApplyPaymentEvent = {
+  id: BigInt(112),
+  timestamp: '2016-03-13T12:52:32.123Z',
+  invoice: {
+    id: BigInt(166),
+    uid: 'uid6',
+    siteId: 92,
+    customerId: 204,
+    subscriptionId: 20,
+    issueDate: '2024-01-01',
+    dueDate: '2024-01-01',
+    paidDate: '2024-01-01',
+    publicUrlExpiresOn: '2024-01-21',
   },
-  "event_type": "apply_payment",
-  "event_data": {
-    "consolidation_level": "child",
-    "memo": "memo0",
-    "original_amount": "original_amount0",
-    "applied_amount": "applied_amount2",
-    "transaction_time": "2016-03-13T12:52:32.123Z",
-    "payment_method": {
-      "type": "apple_pay"
+  eventType: InvoiceEventType.ApplyPayment,
+  eventData: {
+    consolidationLevel: InvoiceConsolidationLevel.Child,
+    memo: 'memo0',
+    originalAmount: 'original_amount0',
+    appliedAmount: 'applied_amount2',
+    transactionTime: '2016-03-13T12:52:32.123Z',
+    paymentMethod: {
+      type: InvoiceEventPaymentMethod.ApplePay,
     },
-    "transaction_id": 78,
-    "parent_invoice_number": 36,
-    "remaining_prepayment_amount": "remaining_prepayment_amount6",
-    "prepayment": false,
-    "external": false
-  }
-}
+    transactionId: 78,
+    parentInvoiceNumber: 36,
+    remainingPrepaymentAmount: 'remaining_prepayment_amount6',
+    prepayment: false,
+    external: false,
+  },
+};
 ```
 

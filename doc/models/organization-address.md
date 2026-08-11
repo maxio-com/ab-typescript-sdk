@@ -18,15 +18,17 @@
 | `name` | `string \| null \| undefined` | Optional | - |
 | `phone` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "street": "street4",
-  "line2": "line28",
-  "city": "city4",
-  "state": "state0",
-  "zip": "zip2"
-}
+```ts
+import { OrganizationAddress } from '@maxio-com/advanced-billing-sdk';
+
+const organizationAddress: OrganizationAddress = {
+  street: 'street2',
+  line2: 'line26',
+  city: 'city2',
+  state: 'state8',
+  zip: 'zip6',
+};
 ```
 

@@ -12,12 +12,14 @@
 | `canExecute` | `boolean` | Required | - |
 | `url` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "can_execute": false,
-  "url": "url2"
-}
+```ts
+import { SendEmail } from '@maxio-com/advanced-billing-sdk';
+
+const sendEmail: SendEmail = {
+  canExecute: false,
+  url: 'url2',
+};
 ```
 

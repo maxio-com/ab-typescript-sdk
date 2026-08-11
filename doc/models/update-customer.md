@@ -25,20 +25,24 @@
 | `locale` | `string \| undefined` | Optional | Set a specific language on a customer record. |
 | `vatNumber` | `string \| undefined` | Optional | - |
 | `taxExempt` | `boolean \| undefined` | Optional | - |
+| `surcharging` | `boolean \| undefined` | Optional | Whether surcharging is enabled for the customer. Only applied on sites where surcharging control is enabled. |
 | `taxExemptReason` | `string \| undefined` | Optional | - |
 | `parentId` | `number \| null \| undefined` | Optional | - |
-| `verified` | `boolean \| null \| undefined` | Optional | Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway |
+| `verified` | `boolean \| null \| undefined` | Optional | Is the customer verified to use ACH as a payment method. Available only on the Authorize.Net gateway. |
 | `salesforceId` | `string \| null \| undefined` | Optional | The Salesforce ID of the customer |
+| `brandingThemeId` | `number \| null \| undefined` | Optional | The ID of the Branding Theme assigned to this customer as the customer's default Branding Theme. This customer-level Branding Theme is used when a subscription does not have its own subscription-level Branding Theme. Available only when Branding Themes are enabled for the site. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name2",
-  "last_name": "last_name0",
-  "email": "email4",
-  "cc_emails": "cc_emails8",
-  "organization": "organization6"
-}
+```ts
+import { UpdateCustomer } from '@maxio-com/advanced-billing-sdk';
+
+const updateCustomer: UpdateCustomer = {
+  firstName: 'first_name2',
+  lastName: 'last_name0',
+  email: 'email4',
+  ccEmails: 'cc_emails8',
+  organization: 'organization6',
+};
 ```
 

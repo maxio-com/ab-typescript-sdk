@@ -32,7 +32,7 @@ export class SitesController extends BaseController {
    * "whopays_default_payer": "self"
    * You can read more about these settings here:
    * [Who Pays & Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-
-   * Hierarchies-WhoPays)
+   * Hierarchies-WhoPays).
    *
    * @return Response from the API call
    */
@@ -74,7 +74,7 @@ export class SitesController extends BaseController {
   }
 
   /**
-   * Returns public keys used for Maxio.js (formerly Chargify.js).
+   * Lists public keys used for Maxio.js (formerly Chargify.js).
    *
    * @param page     Result records are organized in pages. By default, the first page of results is
    *                           displayed. The page parameter specifies a page number of results to fetch. You can start

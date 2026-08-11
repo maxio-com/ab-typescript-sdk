@@ -1,7 +1,7 @@
 
 # Invoice Customer
 
-Information about the customer who is owner or recipient the invoiced subscription.
+Information about the customer who is owner or recipient of the invoiced subscription.
 
 ## Structure
 
@@ -19,15 +19,17 @@ Information about the customer who is owner or recipient the invoiced subscripti
 | `vatNumber` | `string \| null \| undefined` | Optional | - |
 | `reference` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargify_id": 236,
-  "first_name": "first_name0",
-  "last_name": "last_name8",
-  "organization": "organization4",
-  "email": "email6"
-}
+```ts
+import { InvoiceCustomer } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceCustomer: InvoiceCustomer = {
+  chargifyId: 82,
+  firstName: 'first_name2',
+  lastName: 'last_name0',
+  organization: 'organization6',
+  email: 'email4',
+};
 ```
 

@@ -11,33 +11,23 @@
 |  --- | --- | --- | --- |
 | `scheduledRenewalConfigurations` | [`ScheduledRenewalConfiguration[] \| undefined`](../../doc/models/scheduled-renewal-configuration.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "scheduled_renewal_configurations": [
+```ts
+import {
+  ScheduledRenewalConfigurationsResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalConfigurationsResponse: ScheduledRenewalConfigurationsResponse = {
+  scheduledRenewalConfigurations: [
     {
-      "id": 122,
-      "site_id": 48,
-      "subscription_id": 232,
-      "starts_at": "2016-03-13T12:52:32.123Z",
-      "ends_at": "2016-03-13T12:52:32.123Z"
-    },
-    {
-      "id": 122,
-      "site_id": 48,
-      "subscription_id": 232,
-      "starts_at": "2016-03-13T12:52:32.123Z",
-      "ends_at": "2016-03-13T12:52:32.123Z"
-    },
-    {
-      "id": 122,
-      "site_id": 48,
-      "subscription_id": 232,
-      "starts_at": "2016-03-13T12:52:32.123Z",
-      "ends_at": "2016-03-13T12:52:32.123Z"
+      id: 122,
+      siteId: 48,
+      subscriptionId: 232,
+      startsAt: '2016-03-13T12:52:32.123Z',
+      endsAt: '2016-03-13T12:52:32.123Z',
     }
-  ]
-}
+  ],
+};
 ```
 

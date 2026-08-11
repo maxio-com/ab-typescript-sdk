@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `ok` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "ok": "ok4"
-}
+```ts
+import { OkResponse } from '@maxio-com/advanced-billing-sdk';
+
+const okResponse: OkResponse = {
+  ok: 'ok8',
+};
 ```
 

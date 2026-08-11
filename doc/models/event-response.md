@@ -11,34 +11,24 @@
 |  --- | --- | --- | --- |
 | `event` | [`Event`](../../doc/models/event.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "event": {
-    "id": 242,
-    "key": "maxio_payments_direct_debit_payment_rejected",
-    "message": "message0",
-    "subscription_id": 96,
-    "customer_id": 24,
-    "created_at": "2016-03-13T12:52:32.123Z",
-    "event_specific_data": {
-      "previous_unit_balance": null,
-      "previous_overage_unit_balance": null,
-      "new_unit_balance": null,
-      "new_overage_unit_balance": null,
-      "usage_quantity": null,
-      "overage_usage_quantity": null,
-      "component_id": null,
-      "component_handle": null,
-      "memo": null,
-      "allocation_details": [
-        null
-      ],
-      "previous_product_id": 126,
-      "new_product_id": 12
-    }
-  }
-}
+```ts
+import { EventKey, EventResponse } from '@maxio-com/advanced-billing-sdk';
+
+const eventResponse: EventResponse = {
+  event: {
+    id: BigInt(242),
+    key: EventKey.SubscriptionRemovedFromGroup,
+    message: 'message0',
+    subscriptionId: 96,
+    customerId: 24,
+    createdAt: '2016-03-13T12:52:32.123Z',
+    eventSpecificData: {
+      previousProductId: 126,
+      newProductId: 12,
+    },
+  },
+};
 ```
 

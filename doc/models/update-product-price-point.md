@@ -12,12 +12,14 @@
 | `handle` | `string \| undefined` | Optional | - |
 | `priceInCents` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "handle": "handle6",
-  "price_in_cents": 220
-}
+```ts
+import { UpdateProductPricePoint } from '@maxio-com/advanced-billing-sdk';
+
+const updateProductPricePoint: UpdateProductPricePoint = {
+  handle: 'handle2',
+  priceInCents: BigInt(154),
+};
 ```
 

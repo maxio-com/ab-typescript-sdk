@@ -19,37 +19,29 @@
 | `periodType` | `string \| null \| undefined` | Optional | - |
 | `existingBalanceInCents` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "line_items": [
+```ts
+import {
+  BillingManifest,
+  BillingManifestLineItemKind,
+  LineItemTransactionType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const billingManifest: BillingManifest = {
+  lineItems: [
     {
-      "transaction_type": "credit",
-      "kind": "component",
-      "amount_in_cents": 24,
-      "memo": "memo2",
-      "discount_amount_in_cents": 172
-    },
-    {
-      "transaction_type": "credit",
-      "kind": "component",
-      "amount_in_cents": 24,
-      "memo": "memo2",
-      "discount_amount_in_cents": 172
-    },
-    {
-      "transaction_type": "credit",
-      "kind": "component",
-      "amount_in_cents": 24,
-      "memo": "memo2",
-      "discount_amount_in_cents": 172
+      transactionType: LineItemTransactionType.Credit,
+      kind: BillingManifestLineItemKind.Component,
+      amountInCents: BigInt(24),
+      memo: 'memo2',
+      discountAmountInCents: BigInt(172),
     }
   ],
-  "total_in_cents": 192,
-  "total_discount_in_cents": 178,
-  "total_tax_in_cents": 172,
-  "subtotal_in_cents": 48
-}
+  totalInCents: BigInt(96),
+  totalDiscountInCents: BigInt(174),
+  totalTaxInCents: BigInt(76),
+  subtotalInCents: BigInt(208),
+};
 ```
 

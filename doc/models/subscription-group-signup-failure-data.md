@@ -18,21 +18,25 @@
 | `bankAccountAttributes` | [`SubscriptionGroupBankAccount \| undefined`](../../doc/models/subscription-group-bank-account.md) | Optional | - |
 | `subscriptions` | [`SubscriptionGroupSignupItem[] \| undefined`](../../doc/models/subscription-group-signup-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payer_id": 16,
-  "payer_reference": "payer_reference8",
-  "payment_profile_id": 6,
-  "payment_collection_method": "payment_collection_method0",
-  "payer_attributes": {
-    "first_name": "first_name2",
-    "last_name": "last_name0",
-    "email": "email4",
-    "cc_emails": "cc_emails2",
-    "organization": "organization6"
-  }
-}
+```ts
+import {
+  SubscriptionGroupSignupFailureData,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupSignupFailureData: SubscriptionGroupSignupFailureData = {
+  payerId: 236,
+  payerReference: 'payer_reference2',
+  paymentProfileId: 42,
+  paymentCollectionMethod: 'payment_collection_method4',
+  payerAttributes: {
+    firstName: 'first_name2',
+    lastName: 'last_name0',
+    email: 'email4',
+    ccEmails: 'cc_emails2',
+    organization: 'organization6',
+  },
+};
 ```
 

@@ -12,12 +12,14 @@
 | `name` | `string` | Required | - |
 | `handle` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name2",
-  "handle": "handle8"
-}
+```ts
+import { CloneComponentPricePoint } from '@maxio-com/advanced-billing-sdk';
+
+const cloneComponentPricePoint: CloneComponentPricePoint = {
+  name: 'name4',
+  handle: 'handle0',
+};
 ```
 

@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `pricePoint` | [`UpdateComponentPricePoint \| undefined`](../../doc/models/update-component-price-point.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_point": {
-    "name": "name0",
-    "handle": "handle6",
-    "pricing_scheme": "per_unit",
-    "use_site_exchange_rate": false,
-    "tax_included": false
-  }
-}
+```ts
+import {
+  PricingScheme,
+  UpdateComponentPricePointRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateComponentPricePointRequest: UpdateComponentPricePointRequest = {
+  pricePoint: {
+    name: 'name0',
+    handle: 'handle6',
+    pricingScheme: PricingScheme.PerUnit,
+    useSiteExchangeRate: false,
+    taxIncluded: false,
+  },
+};
 ```
 

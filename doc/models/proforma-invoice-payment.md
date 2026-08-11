@@ -14,14 +14,16 @@
 | `appliedAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `prepayment` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "memo": "memo4",
-  "original_amount": "original_amount4",
-  "applied_amount": "applied_amount8",
-  "prepayment": false
-}
+```ts
+import { ProformaInvoicePayment } from '@maxio-com/advanced-billing-sdk';
+
+const proformaInvoicePayment: ProformaInvoicePayment = {
+  memo: 'memo2',
+  originalAmount: 'original_amount2',
+  appliedAmount: 'applied_amount0',
+  prepayment: false,
+};
 ```
 

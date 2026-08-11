@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `automaticallyResumeAt` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "automatically_resume_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { AutoResume } from '@maxio-com/advanced-billing-sdk';
+
+const autoResume: AutoResume = {
+  automaticallyResumeAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

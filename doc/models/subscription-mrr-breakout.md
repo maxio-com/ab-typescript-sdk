@@ -12,12 +12,14 @@
 | `planAmountInCents` | `bigint` | Required | - |
 | `usageAmountInCents` | `bigint` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "plan_amount_in_cents": 208,
-  "usage_amount_in_cents": 60
-}
+```ts
+import { SubscriptionMRRBreakout } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionMRRBreakout: SubscriptionMRRBreakout = {
+  planAmountInCents: BigInt(248),
+  usageAmountInCents: BigInt(100),
+};
 ```
 

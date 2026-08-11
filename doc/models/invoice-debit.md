@@ -18,15 +18,17 @@
 | `originalAmount` | `string \| undefined` | Optional | - |
 | `appliedAmount` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "debit_note_number": "debit_note_number2",
-  "debit_note_uid": "debit_note_uid8",
-  "role": "chargeback",
-  "transaction_time": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { DebitNoteRole, InvoiceDebit } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceDebit: InvoiceDebit = {
+  uid: 'uid8',
+  debitNoteNumber: 'debit_note_number8',
+  debitNoteUid: 'debit_note_uid4',
+  role: DebitNoteRole.Chargeback,
+  transactionTime: '2016-03-13T12:52:32.123Z',
+};
 ```
 

@@ -25,7 +25,7 @@ export interface RefundInvoice {
   external?: boolean;
   /** If set to true, creates credit and applies it to an invoice. Defaults to `false`. */
   applyCredit?: boolean;
-  /** If `apply_credit` set to false and refunding full amount, if `void_invoice` set to true, invoice will be voided after refund. Defaults to `false`. */
+  /** If `apply_credit` is set to false and refunding full amount, if `void_invoice` is set to true, invoice will be voided after refund. Defaults to `false`. */
   voidInvoice?: boolean;
   [key: string]: unknown;
 }

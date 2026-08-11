@@ -16,3 +16,11 @@ Current status of the debit note.
 | `Banished` |
 | `Paid` |
 
+## Example
+
+```ts
+import { DebitNoteStatus } from '@maxio-com/advanced-billing-sdk';
+
+const debitNoteStatus = DebitNoteStatus.Open;
+```
+

@@ -13,13 +13,15 @@
 | `amountInCents` | `bigint \| undefined` | Optional | The amount in cents of the prepayment that was created as a result of this payment. |
 | `endingBalanceInCents` | `bigint \| undefined` | Optional | The total balance of the prepayment account for this subscription including any prior prepayments |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_id": 180,
-  "amount_in_cents": 100,
-  "ending_balance_in_cents": 60
-}
+```ts
+import { InvoicePrePayment } from '@maxio-com/advanced-billing-sdk';
+
+const invoicePrePayment: InvoicePrePayment = {
+  subscriptionId: 252,
+  amountInCents: BigInt(28),
+  endingBalanceInCents: BigInt(244),
+};
 ```
 

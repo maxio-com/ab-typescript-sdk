@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `force` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "force": false
-}
+```ts
+import { IssueAdvanceInvoiceRequest } from '@maxio-com/advanced-billing-sdk';
+
+const issueAdvanceInvoiceRequest: IssueAdvanceInvoiceRequest = {
+  force: false,
+};
 ```
 

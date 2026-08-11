@@ -13,13 +13,15 @@
 | `price` | `number \| undefined` | Optional | Price for the price level in this currency |
 | `priceId` | `number \| undefined` | Optional | ID of the price that this corresponds with |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency": "currency2",
-  "price": 10.4,
-  "price_id": 54
-}
+```ts
+import { CreateCurrencyPrice } from '@maxio-com/advanced-billing-sdk';
+
+const createCurrencyPrice: CreateCurrencyPrice = {
+  currency: 'currency2',
+  price: 54.8,
+  priceId: 142,
+};
 ```
 

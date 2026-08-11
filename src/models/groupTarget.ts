@@ -11,7 +11,7 @@ import { GroupTargetType, groupTargetTypeSchema } from './groupTargetType.js';
 export interface GroupTarget {
   /** The type of object indicated by the id attribute. */
   type: GroupTargetType;
-  /** The id of the target customer or subscription to group the existing subscription with. Ignored and should not be included if type is "self" , "parent", or "eldest" */
+  /** The id of the target customer or subscription to group the existing subscription with. Ignored and should not be included if type is "self", "parent", or "eldest". */
   id?: number;
   [key: string]: unknown;
 }

@@ -119,8 +119,8 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `atTime` | `string \| undefined` | Query, Optional | submit a timestamp in ISO8601 format to request MRR for a historic time |
-| `subscriptionId` | `number \| undefined` | Query, Optional | submit the id of a subscription in order to limit results |
+| `atTime` | `string \| undefined` | Query, Optional | submit a timestamp in ISO8601 format to request MRR for a historic time. |
+| `subscriptionId` | `number \| undefined` | Query, Optional | submit the id of a subscription in order to limit results. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -231,7 +231,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptionId` | `number \| undefined` | Query, Optional | optionally filter results by subscription |
+| `subscriptionId` | `number \| undefined` | Query, Optional | (Optional) Filter results by subscription. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 50; any per_page value over 50 will be changed to 50.<br>Use in query `per_page=20`.<br><br>**Default**: `10`<br><br>**Constraints**: `<= 50` |
 | `direction` | [`SortingDirection \| undefined`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
@@ -332,7 +332,7 @@ try {
 
 **This endpoint is deprecated.**
 
-This endpoint returns your site's current MRR, including plan and usage breakouts split per subscription.
+Lists your site's current MRR, including plan and usage breakouts split per subscription.
 
 ```ts
 async listMrrPerSubscription(

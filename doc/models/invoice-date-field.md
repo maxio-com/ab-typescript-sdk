@@ -17,7 +17,9 @@
 
 ## Example
 
-```
-issue_date
+```ts
+import { InvoiceDateField } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceDateField = InvoiceDateField.UpdatedAt;
 ```
 

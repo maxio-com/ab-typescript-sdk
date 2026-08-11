@@ -17,15 +17,17 @@
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 164,
-  "site_id": 90,
-  "code": "code0",
-  "description": "description2",
-  "position": 194
-}
+```ts
+import { ReasonCode } from '@maxio-com/advanced-billing-sdk';
+
+const reasonCode: ReasonCode = {
+  id: 174,
+  siteId: 100,
+  code: 'code4',
+  description: 'description6',
+  position: 204,
+};
 ```
 

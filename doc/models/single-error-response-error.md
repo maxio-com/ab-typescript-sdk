@@ -11,11 +11,15 @@
 |  --- | --- | --- | --- |
 | `error` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "error": "error2"
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof SingleErrorResponseError) {
+    console.log(error.result);
+  }
 }
 ```
 

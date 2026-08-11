@@ -41,15 +41,17 @@
 | `couponRestrictions` | [`CouponRestriction[] \| undefined`](../../doc/models/coupon-restriction.md) | Optional | - |
 | `currencyPrices` | [`CouponCurrency[] \| undefined`](../../doc/models/coupon-currency.md) | Optional | Returned in read, find, and list endpoints if the query parameter is provided. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 22,
-  "name": "name2",
-  "code": "code0",
-  "description": "description2",
-  "amount": 62.64
-}
+```ts
+import { Coupon } from '@maxio-com/advanced-billing-sdk';
+
+const coupon: Coupon = {
+  id: 196,
+  name: 'name4',
+  code: 'code2',
+  description: 'description6',
+  amount: 97.66,
+};
 ```
 

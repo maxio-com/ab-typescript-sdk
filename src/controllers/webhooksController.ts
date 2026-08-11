@@ -176,7 +176,7 @@ export class WebhooksController extends BaseController {
   }
 
   /**
-   * Returns created endpoints for a site.
+   * Lists endpoints configured for a site.
    *
    * @return Response from the API call
    */

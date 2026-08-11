@@ -11,15 +11,17 @@
 |  --- | --- | --- | --- |
 | `metadata` | [`UpdateMetadata \| undefined`](../../doc/models/update-metadata.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "metadata": {
-    "current_name": "current_name0",
-    "name": "name6",
-    "value": "value8"
-  }
-}
+```ts
+import { UpdateMetadataRequest } from '@maxio-com/advanced-billing-sdk';
+
+const updateMetadataRequest: UpdateMetadataRequest = {
+  metadata: {
+    currentName: 'current_name0',
+    name: 'name6',
+    value: 'value8',
+  },
+};
 ```
 

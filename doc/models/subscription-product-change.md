@@ -12,12 +12,14 @@
 | `previousProductId` | `number` | Required | - |
 | `newProductId` | `number` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "previous_product_id": 126,
-  "new_product_id": 12
-}
+```ts
+import { SubscriptionProductChange } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionProductChange: SubscriptionProductChange = {
+  previousProductId: 104,
+  newProductId: 10,
+};
 ```
 

@@ -20,3 +20,11 @@
 | `Backport` |
 | `Backportbalancereconciliation` |
 
+## Example
+
+```ts
+import { InvoiceRole } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceRole = InvoiceRole.Renewal;
+```
+

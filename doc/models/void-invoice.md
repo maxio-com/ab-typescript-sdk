@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `reason` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason2"
-}
+```ts
+import { VoidInvoice } from '@maxio-com/advanced-billing-sdk';
+
+const voidInvoice: VoidInvoice = {
+  reason: 'reason8',
+};
 ```
 

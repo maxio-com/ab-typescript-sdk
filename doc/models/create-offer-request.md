@@ -11,32 +11,34 @@
 |  --- | --- | --- | --- |
 | `offer` | [`CreateOffer`](../../doc/models/create-offer.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "offer": {
-    "name": "name4",
-    "handle": "handle0",
-    "description": "description6",
-    "product_id": 30,
-    "product_price_point_id": 150,
-    "components": [
+```ts
+import { CreateOfferRequest } from '@maxio-com/advanced-billing-sdk';
+
+const createOfferRequest: CreateOfferRequest = {
+  offer: {
+    name: 'name4',
+    handle: 'handle0',
+    productId: 30,
+    description: 'description6',
+    productPricePointId: 150,
+    components: [
       {
-        "component_id": 108,
-        "price_point_id": 124,
-        "starting_quantity": 84
+        componentId: 108,
+        pricePointId: 124,
+        startingQuantity: 84,
       },
       {
-        "component_id": 108,
-        "price_point_id": 124,
-        "starting_quantity": 84
+        componentId: 108,
+        pricePointId: 124,
+        startingQuantity: 84,
       }
     ],
-    "coupons": [
-      "coupons6"
-    ]
-  }
-}
+    coupons: [
+      'coupons6'
+    ],
+  },
+};
 ```
 

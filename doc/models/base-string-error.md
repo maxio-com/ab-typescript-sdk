@@ -13,13 +13,16 @@ The error is base if it is not directly associated with a single attribute.
 |  --- | --- | --- | --- |
 | `base` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "base": [
-    "base3"
-  ]
-}
+```ts
+import { BaseStringError } from '@maxio-com/advanced-billing-sdk';
+
+const baseStringError: BaseStringError = {
+  base: [
+    'base5',
+    'base6'
+  ],
+};
 ```
 

@@ -14,14 +14,16 @@
 | `memo` | `string` | Required | **Constraints**: *Minimum Length*: `1` |
 | `external` | `boolean \| undefined` | Optional | Specify the type of refund you wish to initiate. When the prepayment is external, the `external` flag is optional. But if the prepayment was made through a payment profile, the `external` flag is required. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount_in_cents": 110,
-  "amount": "String3",
-  "memo": "memo4",
-  "external": false
-}
+```ts
+import { RefundPrepayment } from '@maxio-com/advanced-billing-sdk';
+
+const refundPrepayment: RefundPrepayment = {
+  amountInCents: BigInt(22),
+  amount: 'String1',
+  memo: 'memo2',
+  external: false,
+};
 ```
 

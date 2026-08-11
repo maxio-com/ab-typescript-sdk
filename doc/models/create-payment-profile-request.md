@@ -11,18 +11,23 @@
 |  --- | --- | --- | --- |
 | `paymentProfile` | [`CreatePaymentProfile`](../../doc/models/create-payment-profile.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_profile": {
-    "chargify_token": "tok_9g6hw85pnpt6knmskpwp4ttt",
-    "full_number": "5424000000000015",
-    "id": 44,
-    "payment_type": "credit_card",
-    "first_name": "first_name4",
-    "last_name": "last_name2"
-  }
-}
+```ts
+import {
+  CreatePaymentProfileRequest,
+  PaymentType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createPaymentProfileRequest: CreatePaymentProfileRequest = {
+  paymentProfile: {
+    chargifyToken: 'tok_9g6hw85pnpt6knmskpwp4ttt',
+    id: 44,
+    paymentType: PaymentType.CreditCard,
+    firstName: 'first_name4',
+    lastName: 'last_name2',
+    fullNumber: '5424000000000015',
+  },
+};
 ```
 

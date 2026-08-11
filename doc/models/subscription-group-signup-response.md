@@ -21,19 +21,21 @@
 | `subscriptions` | [`SubscriptionGroupItem[] \| undefined`](../../doc/models/subscription-group-item.md) | Optional | - |
 | `paymentCollectionMethod` | [`CollectionMethod \| undefined`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "scheme": 28,
-  "customer_id": 48,
-  "payment_profile_id": 44,
-  "subscription_ids": [
-    158,
-    159,
-    160
-  ]
-}
+```ts
+import {
+  SubscriptionGroupSignupResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupSignupResponse: SubscriptionGroupSignupResponse = {
+  uid: 'uid4',
+  scheme: 60,
+  customerId: 80,
+  paymentProfileId: 244,
+  subscriptionIds: [
+    190
+  ],
+};
 ```
 

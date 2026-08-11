@@ -15,3 +15,11 @@
 | `Immediate` |
 | `Delayed` |
 
+## Example
+
+```ts
+import { ResumptionCharge } from '@maxio-com/advanced-billing-sdk';
+
+const resumptionCharge = ResumptionCharge.Immediate;
+```
+

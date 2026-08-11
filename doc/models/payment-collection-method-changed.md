@@ -12,12 +12,16 @@
 | `previousValue` | `string` | Required | - |
 | `currentValue` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "previous_value": "previous_value4",
-  "current_value": "current_value2"
-}
+```ts
+import {
+  PaymentCollectionMethodChanged,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentCollectionMethodChanged: PaymentCollectionMethodChanged = {
+  previousValue: 'previous_value4',
+  currentValue: 'current_value2',
+};
 ```
 

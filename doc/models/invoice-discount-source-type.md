@@ -13,3 +13,11 @@
 | `Referral` |
 | `EnumAdHocCoupon` |
 
+## Example
+
+```ts
+import { InvoiceDiscountSourceType } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceDiscountSourceType = InvoiceDiscountSourceType.Referral;
+```
+

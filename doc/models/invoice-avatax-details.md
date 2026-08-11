@@ -15,15 +15,17 @@
 | `commitDate` | `string \| null \| undefined` | Optional | - |
 | `modifyDate` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 112,
-  "status": "status2",
-  "document_code": "document_code0",
-  "commit_date": "2016-03-13T12:52:32.123Z",
-  "modify_date": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { InvoiceAvataxDetails } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceAvataxDetails: InvoiceAvataxDetails = {
+  id: BigInt(184),
+  status: 'status2',
+  documentCode: 'document_code4',
+  commitDate: '2016-03-13T12:52:32.123Z',
+  modifyDate: '2016-03-13T12:52:32.123Z',
+};
 ```
 

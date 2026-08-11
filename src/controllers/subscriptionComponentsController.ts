@@ -394,7 +394,7 @@ export class SubscriptionComponentsController extends BaseController {
   }
 
   /**
-   * Returns the 50 most recent Allocations, ordered by most recent first.
+   * Lists the 50 most recent Allocations, ordered by most recent first.
    *
    * ## On/Off Components
    *
@@ -752,8 +752,8 @@ export class SubscriptionComponentsController extends BaseController {
   }
 
   /**
-   * Returns a list of usages associated with a subscription for a particular metered component. This
-   * will display the previously recorded components for a subscription.
+   * Lists usages associated with a subscription for a particular metered component. This will display
+   * the previously recorded components for a subscription.
    *
    * This endpoint is not compatible with quantity-based components.
    *
@@ -792,11 +792,9 @@ export class SubscriptionComponentsController extends BaseController {
    *                                                                                 component's handle prefixed by
    *                                                                                 `handle:`
    * @param sinceId                      Returns usages with an id greater
-   *                                                                                 than or equal to the one
-   *                                                                                 specified
+   *                                                                                 than or equal to the one specified.
    * @param maxId                        Returns usages with an id less
-   *                                                                                 than or equal to the one
-   *                                                                                 specified
+   *                                                                                 than or equal to the one specified.
    * @param sinceDate                    Returns usages with a created_at
    *                                                                                 date greater than or equal to
    *                                                                                 midnight (12:00 AM) on the date
@@ -966,7 +964,8 @@ export class SubscriptionComponentsController extends BaseController {
    *
    * @param apiHandle    Identifies the Stream for which the event should be published.
    * @param storeUid     If you've attached your own Keen project as an Advanced Billing event data-
-   *                                        store, use this parameter to indicate the data-store.
+   *                                        store, use this parameter to indicate the data-store. This applies to
+   *                                        Legacy Metering sites only — it has no effect on Maxio Metering sites.
    * @param body
    * @return Response from the API call
    */
@@ -1002,7 +1001,8 @@ export class SubscriptionComponentsController extends BaseController {
    *
    * @param apiHandle    Identifies the Stream for which the events should be published.
    * @param storeUid     If you've attached your own Keen project as an Advanced Billing event data-
-   *                                   store, use this parameter to indicate the data-store.
+   *                                   store, use this parameter to indicate the data-store. This applies to Legacy
+   *                                   Metering sites only — it has no effect on Maxio Metering sites.
    * @param body
    * @return Response from the API call
    */

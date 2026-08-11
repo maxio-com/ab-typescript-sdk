@@ -53,8 +53,8 @@ export class InsightsController extends BaseController {
   /**
    * Returns your site's current MRR, including plan and usage breakouts.
    *
-   * @param atTime          submit a timestamp in ISO8601 format to request MRR for a historic time
-   * @param subscriptionId  submit the id of a subscription in order to limit results
+   * @param atTime          submit a timestamp in ISO8601 format to request MRR for a historic time.
+   * @param subscriptionId  submit the id of a subscription in order to limit results.
    * @return Response from the API call
    * @deprecated
    */
@@ -104,7 +104,7 @@ export class InsightsController extends BaseController {
    * * Metered Components
    * * Prepaid Usage Components
    *
-   * @param subscriptionId  optionally filter results by subscription
+   * @param subscriptionId  (Optional) Filter results by subscription.
    * @param page            Result records are organized in pages. By default, the first page of
    *                                            results is displayed. The page parameter specifies a page number of
    *                                            results to fetch. You can start navigating through the pages to consume
@@ -151,8 +151,7 @@ export class InsightsController extends BaseController {
   }
 
   /**
-   * This endpoint returns your site's current MRR, including plan and usage breakouts split per
-   * subscription.
+   * Lists your site's current MRR, including plan and usage breakouts split per subscription.
    *
    * @param filter    Filter to use for List MRR per subscription operation
    * @param atTime    Submit a timestamp in ISO8601 format to request MRR for a historic time.

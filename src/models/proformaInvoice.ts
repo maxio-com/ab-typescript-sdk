@@ -74,7 +74,7 @@ export interface ProformaInvoice {
   paymentInstructions?: string;
   currency?: string;
   /**
-   * Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:
+   * Consolidation level of the invoice, which is applicable to invoice consolidation. It will hold one of the following values:
    * * "none": A normal invoice with no consolidation.
    * * "child": An invoice segment which has been combined into a consolidated invoice.
    * * "parent": A consolidated invoice, whose contents are composed of invoice segments.
@@ -84,11 +84,11 @@ export interface ProformaInvoice {
   consolidationLevel?: InvoiceConsolidationLevel;
   productName?: string;
   productFamilyName?: string;
-  /** 'proforma' value is deprecated in favor of proforma_adhoc and proforma_automatic */
+  /** 'proforma' value is deprecated in favor of proforma_adhoc and proforma_automatic. */
   role?: ProformaInvoiceRole;
   /** Information about the seller (merchant) listed on the masthead of the invoice. */
   seller?: InvoiceSeller;
-  /** Information about the customer who is owner or recipient the invoiced subscription. */
+  /** Information about the customer who is owner or recipient of the invoiced subscription. */
   customer?: InvoiceCustomer;
   memo?: string;
   billingAddress?: InvoiceAddress;

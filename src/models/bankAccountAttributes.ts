@@ -20,15 +20,15 @@ export interface BankAccountAttributes {
   chargifyToken?: string;
   /** (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides */
   bankName?: string;
-  /** (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API */
+  /** (Required when creating a subscription with ACH; optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API. */
   bankRoutingNumber?: string;
   /** (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number */
   bankAccountNumber?: string;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;
-  /** (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided */
+  /** (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided. */
   bankBranchCode?: string;
-  /** (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided */
+  /** (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided. */
   bankIban?: string;
   /** Defaults to personal */
   bankAccountHolderType?: BankAccountHolderType;

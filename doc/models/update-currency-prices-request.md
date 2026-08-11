@@ -11,16 +11,18 @@
 |  --- | --- | --- | --- |
 | `currencyPrices` | [`UpdateCurrencyPrice[]`](../../doc/models/update-currency-price.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
+```ts
+import { UpdateCurrencyPricesRequest } from '@maxio-com/advanced-billing-sdk';
+
+const updateCurrencyPricesRequest: UpdateCurrencyPricesRequest = {
+  currencyPrices: [
     {
-      "id": 50,
-      "price": 233.74
+      id: 50,
+      price: 233.74,
     }
-  ]
-}
+  ],
+};
 ```
 

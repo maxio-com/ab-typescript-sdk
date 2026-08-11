@@ -18,15 +18,21 @@
 | `discountAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `lineItemBreakouts` | [`InvoiceDiscountBreakout[] \| undefined`](../../doc/models/invoice-discount-breakout.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "title": "title8",
-  "code": "code0",
-  "source_type": "Coupon",
-  "discount_type": "percentage"
-}
+```ts
+import {
+  InvoiceDiscountType,
+  ProformaInvoiceDiscount,
+  ProformaInvoiceDiscountSourceType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const proformaInvoiceDiscount: ProformaInvoiceDiscount = {
+  uid: 'uid2',
+  title: 'title8',
+  code: 'code0',
+  sourceType: ProformaInvoiceDiscountSourceType.Coupon,
+  discountType: InvoiceDiscountType.Percentage,
+};
 ```
 

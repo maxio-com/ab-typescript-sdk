@@ -16,19 +16,21 @@ Contract linked to the scheduled renewal configuration.
 | `number` | `string \| null \| undefined` | Optional | - |
 | `register` | [`Register \| undefined`](../../doc/models/register.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 136,
-  "maxio_id": "maxio_id8",
-  "number": "number6",
-  "register": {
-    "id": 54,
-    "maxio_id": "maxio_id4",
-    "name": "name2",
-    "currency_code": "currency_code2"
-  }
-}
+```ts
+import { Contract } from '@maxio-com/advanced-billing-sdk';
+
+const contract: Contract = {
+  id: 112,
+  maxioId: 'maxio_id6',
+  number: 'number2',
+  register: {
+    id: 54,
+    maxioId: 'maxio_id4',
+    name: 'name2',
+    currencyCode: 'currency_code2',
+  },
+};
 ```
 

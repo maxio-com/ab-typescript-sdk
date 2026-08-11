@@ -15,15 +15,20 @@
 | `maskedCardNumber` | `string` | Required | - |
 | `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "card_brand": "card_brand4",
-  "masked_card_number": "masked_card_number0",
-  "type": "credit_card",
-  "card_expiration": "card_expiration2",
-  "last_four": "last_four4"
-}
+```ts
+import {
+  InvoiceEventPaymentMethod,
+  PaymentMethodCreditCard,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentMethodCreditCard: PaymentMethodCreditCard = {
+  cardBrand: 'card_brand4',
+  maskedCardNumber: 'masked_card_number0',
+  type: InvoiceEventPaymentMethod.CreditCard,
+  cardExpiration: 'card_expiration2',
+  lastFour: 'last_four6',
+};
 ```
 

@@ -11,13 +11,17 @@
 |  --- | --- | --- | --- |
 | `allocation` | [`AllocationExpirationDate \| undefined`](../../doc/models/allocation-expiration-date.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation": {
-    "expires_at": "2016-03-13T12:52:32.123Z"
-  }
-}
+```ts
+import {
+  UpdateAllocationExpirationDate,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateAllocationExpirationDate: UpdateAllocationExpirationDate = {
+  allocation: {
+    expiresAt: '2016-03-13T12:52:32.123Z',
+  },
+};
 ```
 

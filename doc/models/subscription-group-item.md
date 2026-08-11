@@ -20,15 +20,17 @@
 | `totalRevenueInCents` | `bigint \| undefined` | Optional | - |
 | `balanceInCents` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 16,
-  "reference": "reference8",
-  "product_id": 214,
-  "product_handle": "product_handle4",
-  "product_price_point_id": 138
-}
+```ts
+import { SubscriptionGroupItem } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupItem: SubscriptionGroupItem = {
+  id: 26,
+  reference: 'reference4',
+  productId: 32,
+  productHandle: 'product_handle8',
+  productPricePointId: 148,
+};
 ```
 

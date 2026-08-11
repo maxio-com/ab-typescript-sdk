@@ -11,15 +11,18 @@
 |  --- | --- | --- | --- |
 | `members` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "members": [
-    "members4",
-    "members5",
-    "members6"
-  ]
-}
+```ts
+import {
+  SubscriptionGroupUpdateError,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupUpdateError: SubscriptionGroupUpdateError = {
+  members: [
+    'members6',
+    'members7'
+  ],
+};
 ```
 

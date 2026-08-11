@@ -34,9 +34,9 @@ export interface SubscriptionGroupSignupItem {
   productPricePointId?: number;
   /** The user-friendly API handle of a product's particular price point. */
   productPricePointHandle?: string;
-  /** Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:` */
+  /** Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`. */
   offerId?: number;
-  /** The reference value (provided by your app) for the subscription itelf. */
+  /** The reference value (provided by your app) for the subscription itself. */
   reference?: string;
   /** One of the subscriptions must be marked as primary in the group. */
   primary?: boolean;
@@ -47,7 +47,7 @@ export interface SubscriptionGroupSignupItem {
   components?: SubscriptionGroupSignupComponent[];
   /** (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription. A subscription can have up to 30 custom price points. Exceeding this limit will result in an API error. */
   customPrice?: SubscriptionCustomPrice;
-  /** (Optional). Cannot be used when also specifying next_billing_at */
+  /** (Optional). Cannot be used when also specifying next_billing_at. */
   calendarBilling?: CalendarBilling;
   /** (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. */
   metafields?: Record<string, string>;

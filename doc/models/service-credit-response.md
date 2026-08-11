@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `serviceCredit` | [`ServiceCredit`](../../doc/models/service-credit.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "service_credit": {
-    "id": 38,
-    "amount_in_cents": 124,
-    "ending_balance_in_cents": 164,
-    "entry_type": "Credit",
-    "memo": "memo0"
-  }
-}
+```ts
+import {
+  ServiceCreditResponse,
+  ServiceCreditType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const serviceCreditResponse: ServiceCreditResponse = {
+  serviceCredit: {
+    id: 38,
+    amountInCents: BigInt(124),
+    endingBalanceInCents: BigInt(164),
+    entryType: ServiceCreditType.Credit,
+    memo: 'memo0',
+  },
+};
 ```
 

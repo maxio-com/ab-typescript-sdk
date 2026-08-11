@@ -19,7 +19,7 @@ import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 export interface ScheduledRenewalComponentCustomPrice {
   /** Whether or not the price point includes tax */
   taxIncluded?: boolean;
-  /** Omit for On/Off components */
+  /** Omit for On/Off components. */
   pricingScheme: PricingScheme;
   /** On/off components only need one price bracket starting at 1. */
   prices: Price[];

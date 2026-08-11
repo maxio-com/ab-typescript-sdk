@@ -17,3 +17,11 @@ The type of object indicated by the id attribute.
 | `Parent` |
 | `Eldest` |
 
+## Example
+
+```ts
+import { GroupTargetType } from '@maxio-com/advanced-billing-sdk';
+
+const groupTargetType = GroupTargetType.Self;
+```
+

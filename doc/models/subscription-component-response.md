@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `component` | [`SubscriptionComponent \| undefined`](../../doc/models/subscription-component.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component": {
-    "id": 80,
-    "name": "name8",
-    "kind": "quantity_based_component",
-    "unit_name": "unit_name0",
-    "enabled": false
-  }
-}
+```ts
+import {
+  ComponentKind,
+  SubscriptionComponentResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionComponentResponse: SubscriptionComponentResponse = {
+  component: {
+    id: 80,
+    name: 'name8',
+    kind: ComponentKind.QuantityBasedComponent,
+    unitName: 'unit_name0',
+    enabled: false,
+  },
+};
 ```
 

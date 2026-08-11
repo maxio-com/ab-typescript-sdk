@@ -11,21 +11,25 @@
 |  --- | --- | --- | --- |
 | `prepayments` | [`ListSubscriptionGroupPrepayment[]`](../../doc/models/list-subscription-group-prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayments": [
+```ts
+import {
+  ListSubscriptionGroupPrepaymentResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionGroupPrepaymentResponse: ListSubscriptionGroupPrepaymentResponse = {
+  prepayments: [
     {
-      "prepayment": {
-        "id": 38,
-        "subscription_group_uid": "subscription_group_uid2",
-        "amount_in_cents": 124,
-        "remaining_amount_in_cents": 182,
-        "details": "details8"
-      }
+      prepayment: {
+        id: 38,
+        subscriptionGroupUid: 'subscription_group_uid2',
+        amountInCents: BigInt(124),
+        remainingAmountInCents: BigInt(182),
+        details: 'details8',
+      },
     }
-  ]
-}
+  ],
+};
 ```
 

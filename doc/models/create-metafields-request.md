@@ -11,25 +11,31 @@
 |  --- | --- | --- | --- |
 | `metafields` | [`CreateMetafieldsRequestMetafields`](../../doc/models/containers/create-metafields-request-metafields.md) | Required | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "metafields": {
-    "name": "my_field",
-    "scope": {
-      "csv": "0",
-      "invoices": "0",
-      "statements": "0",
-      "portal": "0",
-      "public_show": "0",
-      "public_edit": "0"
+```ts
+import {
+  CreateMetafieldsRequest,
+  IncludeOption,
+  MetafieldInput,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createMetafieldsRequest: CreateMetafieldsRequest = {
+  metafields: {
+    name: 'my_field',
+    scope: {
+      csv: IncludeOption.Exclude,
+      invoices: IncludeOption.Exclude,
+      statements: IncludeOption.Exclude,
+      portal: IncludeOption.Exclude,
+      publicShow: IncludeOption.Exclude,
+      publicEdit: IncludeOption.Exclude,
     },
-    "input_type": "text",
-    "enum": [
-      "string"
-    ]
-  }
-}
+    inputType: MetafieldInput.Text,
+    mEnum: [
+      'string'
+    ],
+  },
+};
 ```
 

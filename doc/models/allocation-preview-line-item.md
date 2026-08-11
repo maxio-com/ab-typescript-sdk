@@ -17,17 +17,23 @@
 | `taxableAmountInCents` | `bigint \| undefined` | Optional | - |
 | `componentId` | `number \| undefined` | Optional | - |
 | `componentHandle` | `string \| undefined` | Optional | - |
-| `direction` | [`AllocationPreviewDirection \| undefined`](../../doc/models/allocation-preview-direction.md) | Optional | Visible when using Fine-grained Component Control |
+| `direction` | [`AllocationPreviewDirection \| undefined`](../../doc/models/allocation-preview-direction.md) | Optional | Visible when using Fine-grained Component Control. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_type": "credit",
-  "kind": "quantity_based_component",
-  "amount_in_cents": 24,
-  "memo": "memo6",
-  "discount_amount_in_cents": 172
-}
+```ts
+import {
+  AllocationPreviewLineItem,
+  AllocationPreviewLineItemKind,
+  LineItemTransactionType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const allocationPreviewLineItem: AllocationPreviewLineItem = {
+  transactionType: LineItemTransactionType.Credit,
+  kind: AllocationPreviewLineItemKind.QuantityBasedComponent,
+  amountInCents: BigInt(236),
+  memo: 'memo6',
+  discountAmountInCents: BigInt(40),
+};
 ```
 

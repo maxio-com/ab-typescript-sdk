@@ -45,3 +45,11 @@ The vault that stores the payment profile with the provided `vault_token`. Use `
 | `Unipaas` |
 | `Wirecard` |
 
+## Example
+
+```ts
+import { CreditCardVault } from '@maxio-com/advanced-billing-sdk';
+
+const creditCardVault = CreditCardVault.Unipaas;
+```
+

@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `currencyPrices` | [`CreateCurrencyPrice[]`](../../doc/models/create-currency-price.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
+```ts
+import { CreateCurrencyPricesRequest } from '@maxio-com/advanced-billing-sdk';
+
+const createCurrencyPricesRequest: CreateCurrencyPricesRequest = {
+  currencyPrices: [
     {
-      "currency": "currency8",
-      "price": 233.74,
-      "price_id": 116
+      currency: 'currency8',
+      price: 233.74,
+      priceId: 116,
     }
-  ]
-}
+  ],
+};
 ```
 

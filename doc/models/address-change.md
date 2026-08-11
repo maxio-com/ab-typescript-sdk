@@ -12,24 +12,26 @@
 | `before` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Required | - |
 | `after` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "before": {
-    "street": "street0",
-    "line2": "line24",
-    "city": "city0",
-    "state": "state6",
-    "zip": "zip4"
+```ts
+import { AddressChange } from '@maxio-com/advanced-billing-sdk';
+
+const addressChange: AddressChange = {
+  before: {
+    street: 'street0',
+    line2: 'line24',
+    city: 'city0',
+    state: 'state6',
+    zip: 'zip4',
   },
-  "after": {
-    "street": "street2",
-    "line2": "line26",
-    "city": "city8",
-    "state": "state2",
-    "zip": "zip4"
-  }
-}
+  after: {
+    street: 'street2',
+    line2: 'line26',
+    city: 'city8',
+    state: 'state2',
+    zip: 'zip4',
+  },
+};
 ```
 

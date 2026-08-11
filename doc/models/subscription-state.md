@@ -48,3 +48,11 @@ See [Subscription States](https://maxio.zendesk.com/hc/en-us/articles/2425211902
 | `OnHold` |
 | `AwaitingSignup` |
 
+## Example
+
+```ts
+import { SubscriptionState } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionState = SubscriptionState.AwaitingSignup;
+```
+

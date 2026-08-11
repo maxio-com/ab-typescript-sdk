@@ -13,16 +13,18 @@
 | `mrrAmountInCents` | `bigint` | Required | - |
 | `breakouts` | [`SubscriptionMRRBreakout \| undefined`](../../doc/models/subscription-mrr-breakout.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_id": 4,
-  "mrr_amount_in_cents": 22,
-  "breakouts": {
-    "plan_amount_in_cents": 254,
-    "usage_amount_in_cents": 106
-  }
-}
+```ts
+import { SubscriptionMRR } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionMRR: SubscriptionMRR = {
+  subscriptionId: 192,
+  mrrAmountInCents: BigInt(210),
+  breakouts: {
+    planAmountInCents: BigInt(254),
+    usageAmountInCents: BigInt(106),
+  },
+};
 ```
 

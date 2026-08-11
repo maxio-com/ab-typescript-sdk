@@ -11,26 +11,32 @@
 |  --- | --- | --- | --- |
 | `pricePoint` | [`CreateComponentPricePointRequestPricePoint`](../../doc/models/containers/create-component-price-point-request-price-point.md) | Required | This is a container for any-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_point": {
-    "name": "name0",
-    "pricing_scheme": "per_unit",
-    "prices": [
+```ts
+import {
+  CreateComponentPricePointRequest,
+  IntervalUnit,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createComponentPricePointRequest: CreateComponentPricePointRequest = {
+  pricePoint: {
+    name: 'name0',
+    pricingScheme: PricingScheme.PerUnit,
+    prices: [
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       }
     ],
-    "use_site_exchange_rate": true,
-    "handle": "handle6",
-    "tax_included": false,
-    "interval": 24,
-    "interval_unit": "day"
-  }
-}
+    handle: 'handle6',
+    useSiteExchangeRate: true,
+    taxIncluded: false,
+    interval: 24,
+    intervalUnit: IntervalUnit.Day,
+  },
+};
 ```
 

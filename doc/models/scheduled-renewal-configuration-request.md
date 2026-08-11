@@ -11,17 +11,21 @@
 |  --- | --- | --- | --- |
 | `renewalConfiguration` | [`ScheduledRenewalConfigurationRequestBody`](../../doc/models/scheduled-renewal-configuration-request-body.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "renewal_configuration": {
-    "starts_at": "2016-03-13T12:52:32.123Z",
-    "ends_at": "2016-03-13T12:52:32.123Z",
-    "lock_in_at": "2016-03-13T12:52:32.123Z",
-    "contract_id": 244,
-    "create_new_contract": false
-  }
-}
+```ts
+import {
+  ScheduledRenewalConfigurationRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalConfigurationRequest: ScheduledRenewalConfigurationRequest = {
+  renewalConfiguration: {
+    startsAt: '2016-03-13T12:52:32.123Z',
+    endsAt: '2016-03-13T12:52:32.123Z',
+    lockInAt: '2016-03-13T12:52:32.123Z',
+    contractId: 244,
+    createNewContract: false,
+  },
+};
 ```
 

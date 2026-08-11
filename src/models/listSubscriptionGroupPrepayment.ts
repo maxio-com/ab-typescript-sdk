@@ -6,18 +6,18 @@
 
 import { expandoObject, lazy, Schema } from '../schema.js';
 import {
-  ListSubcriptionGroupPrepaymentItem,
-  listSubcriptionGroupPrepaymentItemSchema,
-} from './listSubcriptionGroupPrepaymentItem.js';
+  ListSubscriptionGroupPrepaymentItem,
+  listSubscriptionGroupPrepaymentItemSchema,
+} from './listSubscriptionGroupPrepaymentItem.js';
 
 export interface ListSubscriptionGroupPrepayment {
-  prepayment: ListSubcriptionGroupPrepaymentItem;
+  prepayment: ListSubscriptionGroupPrepaymentItem;
   [key: string]: unknown;
 }
 
 export const listSubscriptionGroupPrepaymentSchema: Schema<ListSubscriptionGroupPrepayment> = lazy(
   () =>
     expandoObject({
-      prepayment: ['prepayment', listSubcriptionGroupPrepaymentItemSchema],
+      prepayment: ['prepayment', listSubscriptionGroupPrepaymentItemSchema],
     })
 );

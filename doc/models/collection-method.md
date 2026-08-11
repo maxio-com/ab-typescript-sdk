@@ -16,3 +16,11 @@ The type of payment collection to be used in the subscription. For legacy Statem
 | `Prepaid` |
 | `Invoice` |
 
+## Example
+
+```ts
+import { CollectionMethod } from '@maxio-com/advanced-billing-sdk';
+
+const collectionMethod = CollectionMethod.Automatic;
+```
+

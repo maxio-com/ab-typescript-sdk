@@ -37,7 +37,7 @@ export interface ApplyCreditNoteEventData {
   memo?: string | null;
   /** The role of the credit note (e.g. 'general') */
   role?: string;
-  /** Shows whether it was applied to consolidated invoice or not */
+  /** Shows whether it was applied to consolidated invoice or not. */
   consolidatedInvoice?: boolean;
   /** List of credit notes applied to children invoices (if consolidated invoice) */
   appliedCreditNotes?: AppliedCreditNoteData[];

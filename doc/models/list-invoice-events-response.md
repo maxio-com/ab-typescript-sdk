@@ -14,52 +14,131 @@
 | `perPage` | `number \| undefined` | Optional | - |
 | `totalPages` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "events": [
+```ts
+import {
+  InvoiceEventType,
+  ListInvoiceEventsResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listInvoiceEventsResponse: ListInvoiceEventsResponse = {
+  events: [
     {
-      "event_type": "apply_credit_note",
-      "id": 214,
-      "timestamp": "2016-03-13T12:52:32.123Z",
-      "invoice": {
-        "id": 166,
-        "uid": "uid6",
-        "site_id": 92,
-        "customer_id": 204,
-        "subscription_id": 20
+      id: BigInt(214),
+      timestamp: '2016-03-13T12:52:32.123Z',
+      invoice: {
+        id: BigInt(166),
+        uid: 'uid6',
+        siteId: 92,
+        customerId: 204,
+        subscriptionId: 20,
       },
-      "event_data": {
-        "uid": "uid6",
-        "credit_note_number": "credit_note_number0",
-        "credit_note_uid": "credit_note_uid0",
-        "original_amount": "original_amount0",
-        "applied_amount": "applied_amount2",
-        "transaction_time": "2016-03-13T12:52:32.123Z",
-        "memo": "memo0",
-        "role": "role0",
-        "consolidated_invoice": false,
-        "applied_credit_notes": [
+      eventType: InvoiceEventType.ApplyCreditNote,
+      eventData: {
+        uid: 'uid6',
+        creditNoteNumber: 'credit_note_number0',
+        creditNoteUid: 'credit_note_uid0',
+        originalAmount: 'original_amount0',
+        appliedAmount: 'applied_amount2',
+        transactionTime: '2016-03-13T12:52:32.123Z',
+        memo: 'memo0',
+        role: 'role0',
+        consolidatedInvoice: false,
+        appliedCreditNotes: [
           {
-            "uid": "uid4",
-            "number": "number8"
+            uid: 'uid4',
+            number: 'number8',
           },
           {
-            "uid": "uid4",
-            "number": "number8"
+            uid: 'uid4',
+            number: 'number8',
           },
           {
-            "uid": "uid4",
-            "number": "number8"
+            uid: 'uid4',
+            number: 'number8',
           }
-        ]
-      }
+        ],
+      },
+    },
+    {
+      id: BigInt(214),
+      timestamp: '2016-03-13T12:52:32.123Z',
+      invoice: {
+        id: BigInt(166),
+        uid: 'uid6',
+        siteId: 92,
+        customerId: 204,
+        subscriptionId: 20,
+      },
+      eventType: InvoiceEventType.ApplyCreditNote,
+      eventData: {
+        uid: 'uid6',
+        creditNoteNumber: 'credit_note_number0',
+        creditNoteUid: 'credit_note_uid0',
+        originalAmount: 'original_amount0',
+        appliedAmount: 'applied_amount2',
+        transactionTime: '2016-03-13T12:52:32.123Z',
+        memo: 'memo0',
+        role: 'role0',
+        consolidatedInvoice: false,
+        appliedCreditNotes: [
+          {
+            uid: 'uid4',
+            number: 'number8',
+          },
+          {
+            uid: 'uid4',
+            number: 'number8',
+          },
+          {
+            uid: 'uid4',
+            number: 'number8',
+          }
+        ],
+      },
+    },
+    {
+      id: BigInt(214),
+      timestamp: '2016-03-13T12:52:32.123Z',
+      invoice: {
+        id: BigInt(166),
+        uid: 'uid6',
+        siteId: 92,
+        customerId: 204,
+        subscriptionId: 20,
+      },
+      eventType: InvoiceEventType.ApplyCreditNote,
+      eventData: {
+        uid: 'uid6',
+        creditNoteNumber: 'credit_note_number0',
+        creditNoteUid: 'credit_note_uid0',
+        originalAmount: 'original_amount0',
+        appliedAmount: 'applied_amount2',
+        transactionTime: '2016-03-13T12:52:32.123Z',
+        memo: 'memo0',
+        role: 'role0',
+        consolidatedInvoice: false,
+        appliedCreditNotes: [
+          {
+            uid: 'uid4',
+            number: 'number8',
+          },
+          {
+            uid: 'uid4',
+            number: 'number8',
+          },
+          {
+            uid: 'uid4',
+            number: 'number8',
+          }
+        ],
+      },
     }
   ],
-  "page": 184,
-  "per_page": 96,
-  "total_pages": 194
-}
+  page: 28,
+  perPage: 196,
+  totalPages: 94,
+};
 ```
 

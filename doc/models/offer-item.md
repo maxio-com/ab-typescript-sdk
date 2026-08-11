@@ -17,18 +17,20 @@
 | `componentName` | `string \| undefined` | Optional | - |
 | `pricePointName` | `string \| undefined` | Optional | - |
 | `currencyPrices` | [`CurrencyPrice[] \| undefined`](../../doc/models/currency-price.md) | Optional | - |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `intervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 216,
-  "price_point_id": 16,
-  "starting_quantity": "starting_quantity0",
-  "editable": false,
-  "component_unit_price": "component_unit_price8"
-}
+```ts
+import { OfferItem } from '@maxio-com/advanced-billing-sdk';
+
+const offerItem: OfferItem = {
+  componentId: 234,
+  pricePointId: 254,
+  startingQuantity: 'starting_quantity6',
+  editable: false,
+  componentUnitPrice: 'component_unit_price2',
+};
 ```
 

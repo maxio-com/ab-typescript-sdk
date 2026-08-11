@@ -11,30 +11,35 @@
 |  --- | --- | --- | --- |
 | `segment` | [`UpdateSegment`](../../doc/models/update-segment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "segment": {
-    "pricing_scheme": "stairstep",
-    "prices": [
+```ts
+import {
+  PricingScheme,
+  UpdateSegmentRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateSegmentRequest: UpdateSegmentRequest = {
+  segment: {
+    pricingScheme: PricingScheme.Stairstep,
+    prices: [
       {
-        "starting_quantity": 64,
-        "ending_quantity": 38,
-        "unit_price": "String3"
+        unitPrice: 'String3',
+        startingQuantity: 64,
+        endingQuantity: 38,
       },
       {
-        "starting_quantity": 64,
-        "ending_quantity": 38,
-        "unit_price": "String3"
+        unitPrice: 'String3',
+        startingQuantity: 64,
+        endingQuantity: 38,
       },
       {
-        "starting_quantity": 64,
-        "ending_quantity": 38,
-        "unit_price": "String3"
+        unitPrice: 'String3',
+        startingQuantity: 64,
+        endingQuantity: 38,
       }
-    ]
-  }
-}
+    ],
+  },
+};
 ```
 

@@ -13,13 +13,15 @@
 | `automaticBalanceInCents` | `bigint \| null \| undefined` | Optional | The automatic balance in cents. |
 | `remittanceBalanceInCents` | `bigint \| null \| undefined` | Optional | The remittance balance in cents. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "balance_in_cents": 16,
-  "automatic_balance_in_cents": 226,
-  "remittance_balance_in_cents": 62
-}
+```ts
+import { AccountBalance } from '@maxio-com/advanced-billing-sdk';
+
+const accountBalance: AccountBalance = {
+  balanceInCents: BigInt(242),
+  automaticBalanceInCents: BigInt(0),
+  remittanceBalanceInCents: BigInt(32),
+};
 ```
 

@@ -32,11 +32,15 @@ export interface CreateCustomer {
   locale?: string;
   vatNumber?: string;
   taxExempt?: boolean;
+  /** Whether surcharging is enabled for the customer. Defaults to `true` when omitted. Only applied on sites where surcharging control is enabled. */
+  surcharging?: boolean;
   taxExemptReason?: string;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
   parentId?: number | null;
   /** The Salesforce ID of the customer */
   salesforceId?: string | null;
+  /** The ID of the Branding Theme assigned to this customer as the customer's default Branding Theme. This customer-level Branding Theme is used when a subscription does not have its own subscription-level Branding Theme. Available only when Branding Themes are enabled for the site. */
+  brandingThemeId?: number | null;
   [key: string]: unknown;
 }
 
@@ -57,7 +61,9 @@ export const createCustomerSchema: Schema<CreateCustomer> = expandoObject({
   locale: ['locale', optional(string())],
   vatNumber: ['vat_number', optional(string())],
   taxExempt: ['tax_exempt', optional(boolean())],
+  surcharging: ['surcharging', optional(boolean())],
   taxExemptReason: ['tax_exempt_reason', optional(string())],
   parentId: ['parent_id', optional(nullable(number()))],
   salesforceId: ['salesforce_id', optional(nullable(string()))],
+  brandingThemeId: ['branding_theme_id', optional(nullable(number()))],
 });

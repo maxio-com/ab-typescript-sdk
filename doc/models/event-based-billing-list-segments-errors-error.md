@@ -11,21 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`Errors \| undefined`](../../doc/models/errors.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "per_page": [
-      "per_page1",
-      "per_page2",
-      "per_page3"
-    ],
-    "price_point": [
-      "price_point0",
-      "price_point9",
-      "price_point8"
-    ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof EventBasedBillingListSegmentsErrorsError) {
+    console.log(error.result);
   }
 }
 ```

@@ -13,13 +13,18 @@
 | `maskedRoutingNumber` | `string` | Required | - |
 | `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "masked_account_number": "masked_account_number2",
-  "masked_routing_number": "masked_routing_number2",
-  "type": "bank_account"
-}
+```ts
+import {
+  InvoiceEventPaymentMethod,
+  PaymentMethodBankAccount,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentMethodBankAccount: PaymentMethodBankAccount = {
+  maskedAccountNumber: 'masked_account_number4',
+  maskedRoutingNumber: 'masked_routing_number4',
+  type: InvoiceEventPaymentMethod.BankAccount,
+};
 ```
 

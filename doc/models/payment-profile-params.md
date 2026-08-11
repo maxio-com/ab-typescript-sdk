@@ -15,13 +15,15 @@ PCI-safe cardholder fields only. Full card numbers, CVV, and billing address are
 | `lastName` | `string \| undefined` | Optional | - |
 | `cardType` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name2",
-  "last_name": "last_name0",
-  "card_type": "card_type8"
-}
+```ts
+import { PaymentProfileParams } from '@maxio-com/advanced-billing-sdk';
+
+const paymentProfileParams: PaymentProfileParams = {
+  firstName: 'first_name2',
+  lastName: 'last_name0',
+  cardType: 'card_type2',
+};
 ```
 

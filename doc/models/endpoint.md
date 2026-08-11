@@ -15,18 +15,19 @@
 | `status` | `string \| undefined` | Optional | - |
 | `webhookSubscriptions` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 196,
-  "url": "url2",
-  "site_id": 122,
-  "status": "status0",
-  "webhook_subscriptions": [
-    "webhook_subscriptions4",
-    "webhook_subscriptions3"
-  ]
-}
+```ts
+import { Endpoint } from '@maxio-com/advanced-billing-sdk';
+
+const endpoint: Endpoint = {
+  id: 202,
+  url: 'url2',
+  siteId: 128,
+  status: 'status0',
+  webhookSubscriptions: [
+    'webhook_subscriptions4'
+  ],
+};
 ```
 

@@ -12,7 +12,7 @@
 | `id` | `number \| undefined` | Optional | The Chargify-assigned ID of the Apple Pay payment profile. |
 | `firstName` | `string \| undefined` | Optional | The first name of the Apple Pay account holder |
 | `lastName` | `string \| undefined` | Optional | The last name of the Apple Pay account holder |
-| `customerId` | `number \| undefined` | Optional | The Chargify-assigned id for the customer record to which the Apple Pay account belongs |
+| `customerId` | `number \| undefined` | Optional | The Chargify-assigned ID for the customer record to which the Apple Pay account belongs |
 | `currentVault` | [`ApplePayVault \| undefined`](../../doc/models/apple-pay-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
 | `vaultToken` | `string \| undefined` | Optional | The “token” provided by your vault storage for an already stored payment profile |
 | `billingAddress` | `string \| null \| undefined` | Optional | The current billing street address for the Apple Pay account |
@@ -28,16 +28,22 @@
 | `createdAt` | `string \| undefined` | Optional | A timestamp indicating when this payment profile was created |
 | `updatedAt` | `string \| undefined` | Optional | A timestamp indicating when this payment profile was last updated |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_type": "apple_pay",
-  "id": 60,
-  "first_name": "first_name2",
-  "last_name": "last_name0",
-  "customer_id": 98,
-  "current_vault": "braintree_blue"
-}
+```ts
+import {
+  ApplePayPaymentProfile,
+  ApplePayVault,
+  PaymentType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const applePayPaymentProfile: ApplePayPaymentProfile = {
+  paymentType: PaymentType.ApplePay,
+  id: 252,
+  firstName: 'first_name0',
+  lastName: 'last_name8',
+  customerId: 34,
+  currentVault: ApplePayVault.BraintreeBlue,
+};
 ```
 

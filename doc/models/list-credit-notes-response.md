@@ -11,19 +11,21 @@
 |  --- | --- | --- | --- |
 | `creditNotes` | [`CreditNote[]`](../../doc/models/credit-note.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "credit_notes": [
+```ts
+import { ListCreditNotesResponse } from '@maxio-com/advanced-billing-sdk';
+
+const listCreditNotesResponse: ListCreditNotesResponse = {
+  creditNotes: [
     {
-      "uid": "uid2",
-      "site_id": 112,
-      "customer_id": 224,
-      "subscription_id": 40,
-      "number": "number0"
+      uid: 'uid2',
+      siteId: 112,
+      customerId: 224,
+      subscriptionId: 40,
+      number: 'number0',
     }
-  ]
-}
+  ],
+};
 ```
 

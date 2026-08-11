@@ -17,15 +17,17 @@
 | `originalAmount` | `string \| undefined` | Optional | - |
 | `appliedAmount` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid6",
-  "credit_note_number": "credit_note_number0",
-  "credit_note_uid": "credit_note_uid0",
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "memo": "memo0"
-}
+```ts
+import { InvoiceCredit } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceCredit: InvoiceCredit = {
+  uid: 'uid8',
+  creditNoteNumber: 'credit_note_number2',
+  creditNoteUid: 'credit_note_uid2',
+  transactionTime: '2016-03-13T12:52:32.123Z',
+  memo: 'memo2',
+};
 ```
 

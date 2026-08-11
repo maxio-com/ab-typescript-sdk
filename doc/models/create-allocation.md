@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `quantity` | `number` | Required | The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off. |
+| `quantity` | `number` | Required | The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1 for on and 0 for off. |
 | `decimalQuantity` | `string \| undefined` | Optional | Decimal representation of the allocated quantity. Only valid when decimal<br>allocations are enabled for the component. |
 | `previousQuantity` | `number \| undefined` | Optional | The quantity that was in effect before this allocation. Responses always<br>include this value; it may be supplied on preview requests to ensure the<br>expected change is evaluated. |
 | `decimalPreviousQuantity` | `string \| undefined` | Optional | Decimal representation of `previous_quantity`. Only valid when decimal<br>allocations are enabled for the component. |
@@ -25,16 +25,18 @@
 | `billingSchedule` | [`BillingSchedule \| undefined`](../../doc/models/billing-schedule.md) | Optional | Billing schedule settings for component allocations or usages on multi-frequency subscriptions. Use this to start a component's billing period on a custom date instead of aligning with the product charge schedule. |
 | `customPrice` | [`ComponentCustomPrice \| undefined`](../../doc/models/component-custom-price.md) | Optional | Create or update custom pricing unique to the subscription. Used in place of `price_point_id`. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "quantity": 8.06,
-  "decimal_quantity": "decimal_quantity4",
-  "previous_quantity": 218.92,
-  "decimal_previous_quantity": "decimal_previous_quantity0",
-  "component_id": 192,
-  "memo": "memo4"
-}
+```ts
+import { CreateAllocation } from '@maxio-com/advanced-billing-sdk';
+
+const createAllocation: CreateAllocation = {
+  quantity: 6.56,
+  decimalQuantity: 'decimal_quantity6',
+  previousQuantity: 35.58,
+  decimalPreviousQuantity: 'decimal_previous_quantity0',
+  componentId: 42,
+  memo: 'memo4',
+};
 ```
 

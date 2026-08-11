@@ -28,22 +28,22 @@ export interface CreateProductPricePoint {
   handle?: string;
   /** The product price point price, in integer cents */
   priceInCents: bigint;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this product price point would renew every 30 days. */
   interval: number;
   /** A string representing the interval unit for this product price point, either month or day */
   intervalUnit: IntervalUnit;
   /** The product price point trial price, in integer cents */
   trialPriceInCents?: bigint;
-  /** The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days. */
+  /** The numerical trial interval. e.g., an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product price point trial would last 30 days. */
   trialInterval?: number;
   /** A string representing the trial interval unit for this product price point, either month or day */
   trialIntervalUnit?: IntervalUnit;
-  /** Indicates how a trial is handled when the trail period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. */
+  /** Indicates how a trial is handled when the trial period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. */
   trialType?: TrialType | null;
   /** The product price point initial charge, in integer cents */
   initialChargeInCents?: bigint;
   initialChargeAfterTrial?: boolean;
-  /** The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. */
+  /** The numerical expiration interval. e.g., an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. */
   expirationInterval?: number;
   /** A string representing the expiration interval unit for this product price point, either month, day or never */
   expirationIntervalUnit?: ExpirationIntervalUnit | null;

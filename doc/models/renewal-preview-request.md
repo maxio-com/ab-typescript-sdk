@@ -9,29 +9,21 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `components` | [`RenewalPreviewComponent[] \| undefined`](../../doc/models/renewal-preview-component.md) | Optional | An optional array of component definitions to preview. Providing any component definitions here will override the actual components on the subscription (and their quantities), and the billing preview will contain only these components (in addition to any product base fees). |
+| `components` | [`RenewalPreviewComponent[] \| undefined`](../../doc/models/renewal-preview-component.md) | Optional | (Optional) Array of component definitions to preview. Providing any component definitions here will override the actual components on the subscription (and their quantities), and the billing preview will contain only these components (in addition to any product base fees). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "components": [
+```ts
+import { RenewalPreviewRequest } from '@maxio-com/advanced-billing-sdk';
+
+const renewalPreviewRequest: RenewalPreviewRequest = {
+  components: [
     {
-      "component_id": "String5",
-      "quantity": 210,
-      "price_point_id": "String3"
-    },
-    {
-      "component_id": "String5",
-      "quantity": 210,
-      "price_point_id": "String3"
-    },
-    {
-      "component_id": "String5",
-      "quantity": 210,
-      "price_point_id": "String3"
+      componentId: 'String5',
+      quantity: 210,
+      pricePointId: 'String3',
     }
-  ]
-}
+  ],
+};
 ```
 

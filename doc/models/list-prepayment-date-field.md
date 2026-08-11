@@ -14,7 +14,9 @@
 
 ## Example
 
-```
-created_at
+```ts
+import { ListPrepaymentDateField } from '@maxio-com/advanced-billing-sdk';
+
+const listPrepaymentDateField = ListPrepaymentDateField.CreatedAt;
 ```
 

@@ -16,15 +16,17 @@
 | `zip` | `string \| null \| undefined` | Optional | - |
 | `country` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "street": "street0",
-  "line2": "line24",
-  "city": "city0",
-  "state": "state6",
-  "zip": "zip4"
-}
+```ts
+import { InvoiceAddress } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceAddress: InvoiceAddress = {
+  street: 'street2',
+  line2: 'line26',
+  city: 'city2',
+  state: 'state8',
+  zip: 'zip6',
+};
 ```
 

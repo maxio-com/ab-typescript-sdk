@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `segment` | [`Segment \| undefined`](../../doc/models/segment.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "segment": {
-    "id": 118,
-    "component_id": 228,
-    "price_point_id": 4,
-    "event_based_billing_metric_id": 56,
-    "pricing_scheme": "stairstep"
-  }
-}
+```ts
+import {
+  PricingScheme,
+  SegmentResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const segmentResponse: SegmentResponse = {
+  segment: {
+    id: 118,
+    componentId: 228,
+    pricePointId: 4,
+    eventBasedBillingMetricId: 56,
+    pricingScheme: PricingScheme.Stairstep,
+  },
+};
 ```
 

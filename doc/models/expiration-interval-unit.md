@@ -13,3 +13,11 @@
 | `Month` |
 | `Never` |
 
+## Example
+
+```ts
+import { ExpirationIntervalUnit } from '@maxio-com/advanced-billing-sdk';
+
+const expirationIntervalUnit = ExpirationIntervalUnit.Never;
+```
+

@@ -21,29 +21,31 @@
 | `productName` | `string` | Required | - |
 | `lineItems` | [`InvoiceLineItemEventData[]`](../../doc/models/invoice-line-item-event-data.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid0",
-  "number": "number2",
-  "role": "role6",
-  "delivery_date": "2016-03-13T12:52:32.123Z",
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "due_amount": "due_amount2",
-  "paid_amount": "paid_amount8",
-  "tax_amount": "tax_amount6",
-  "total_amount": "total_amount6",
-  "product_name": "product_name6",
-  "line_items": [
+```ts
+import { ProformaInvoiceIssued } from '@maxio-com/advanced-billing-sdk';
+
+const proformaInvoiceIssued: ProformaInvoiceIssued = {
+  uid: 'uid6',
+  number: 'number4',
+  role: 'role0',
+  deliveryDate: '2016-03-13T12:52:32.123Z',
+  createdAt: '2016-03-13T12:52:32.123Z',
+  dueAmount: 'due_amount8',
+  paidAmount: 'paid_amount8',
+  taxAmount: 'tax_amount0',
+  totalAmount: 'total_amount2',
+  productName: 'product_name2',
+  lineItems: [
     {
-      "uid": "uid8",
-      "title": "title4",
-      "description": "description8",
-      "quantity": 102,
-      "quantity_delta": 204
+      uid: 'uid8',
+      title: 'title4',
+      description: 'description8',
+      quantity: 102,
+      quantityDelta: 204,
     }
-  ]
-}
+  ],
+};
 ```
 

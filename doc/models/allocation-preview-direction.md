@@ -12,3 +12,11 @@
 | `Upgrade` |
 | `Downgrade` |
 
+## Example
+
+```ts
+import { AllocationPreviewDirection } from '@maxio-com/advanced-billing-sdk';
+
+const allocationPreviewDirection = AllocationPreviewDirection.Upgrade;
+```
+

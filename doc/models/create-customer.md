@@ -25,22 +25,26 @@
 | `locale` | `string \| undefined` | Optional | Set a specific language on a customer record. |
 | `vatNumber` | `string \| undefined` | Optional | - |
 | `taxExempt` | `boolean \| undefined` | Optional | - |
+| `surcharging` | `boolean \| undefined` | Optional | Whether surcharging is enabled for the customer. Defaults to `true` when omitted. Only applied on sites where surcharging control is enabled. |
 | `taxExemptReason` | `string \| undefined` | Optional | - |
 | `parentId` | `number \| null \| undefined` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
 | `salesforceId` | `string \| null \| undefined` | Optional | The Salesforce ID of the customer |
+| `brandingThemeId` | `number \| null \| undefined` | Optional | The ID of the Branding Theme assigned to this customer as the customer's default Branding Theme. This customer-level Branding Theme is used when a subscription does not have its own subscription-level Branding Theme. Available only when Branding Themes are enabled for the site. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name8",
-  "last_name": "last_name6",
-  "email": "email8",
-  "cc_emails": "cc_emails8",
-  "organization": "organization2",
-  "reference": "reference4",
-  "address": "address4",
-  "address_2": "address_22"
-}
+```ts
+import { CreateCustomer } from '@maxio-com/advanced-billing-sdk';
+
+const createCustomer: CreateCustomer = {
+  firstName: 'first_name0',
+  lastName: 'last_name8',
+  email: 'email6',
+  ccEmails: 'cc_emails0',
+  organization: 'organization6',
+  reference: 'reference4',
+  address: 'address6',
+  address2: 'address_24',
+};
 ```
 

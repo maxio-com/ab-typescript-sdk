@@ -11,17 +11,21 @@
 |  --- | --- | --- | --- |
 | `subscriptionGroup` | [`CreateSubscriptionGroup`](../../doc/models/create-subscription-group.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_group": {
-    "subscription_id": 36,
-    "member_ids": [
+```ts
+import {
+  CreateSubscriptionGroupRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createSubscriptionGroupRequest: CreateSubscriptionGroupRequest = {
+  subscriptionGroup: {
+    subscriptionId: 36,
+    memberIds: [
       164,
       165
-    ]
-  }
-}
+    ],
+  },
+};
 ```
 

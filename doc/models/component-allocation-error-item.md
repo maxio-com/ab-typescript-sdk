@@ -14,14 +14,18 @@
 | `kind` | `string \| undefined` | Optional | - |
 | `on` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 188,
-  "message": "message0",
-  "kind": "kind8",
-  "on": "on0"
-}
+```ts
+import {
+  ComponentAllocationErrorItem,
+} from '@maxio-com/advanced-billing-sdk';
+
+const componentAllocationErrorItem: ComponentAllocationErrorItem = {
+  componentId: 122,
+  message: 'message8',
+  kind: 'kind6',
+  on: 'on8',
+};
 ```
 

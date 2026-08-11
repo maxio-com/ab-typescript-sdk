@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `batchjob` | [`BatchJob`](../../doc/models/batch-job.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "batchjob": {
-    "id": 54,
-    "finished_at": "2016-03-13T12:52:32.123Z",
-    "row_count": 62,
-    "created_at": "2016-03-13T12:52:32.123Z",
-    "completed": "completed4"
-  }
-}
+```ts
+import { BatchJobResponse } from '@maxio-com/advanced-billing-sdk';
+
+const batchJobResponse: BatchJobResponse = {
+  batchjob: {
+    id: 54,
+    finishedAt: '2016-03-13T12:52:32.123Z',
+    rowCount: 62,
+    createdAt: '2016-03-13T12:52:32.123Z',
+    completed: 'completed4',
+  },
+};
 ```
 

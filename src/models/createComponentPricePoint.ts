@@ -29,7 +29,7 @@ export interface CreateComponentPricePoint {
   useSiteExchangeRate?: boolean;
   /** Whether or not the price point includes tax. Setting not supported when creating price points in bulk. */
   taxIncluded?: boolean;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;

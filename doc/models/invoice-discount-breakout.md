@@ -13,13 +13,15 @@
 | `eligibleAmount` | `string \| undefined` | Optional | - |
 | `discountAmount` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "eligible_amount": "eligible_amount0",
-  "discount_amount": "discount_amount8"
-}
+```ts
+import { InvoiceDiscountBreakout } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceDiscountBreakout: InvoiceDiscountBreakout = {
+  uid: 'uid0',
+  eligibleAmount: 'eligible_amount2',
+  discountAmount: 'discount_amount4',
+};
 ```
 

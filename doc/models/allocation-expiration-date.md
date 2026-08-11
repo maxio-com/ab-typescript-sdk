@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `expiresAt` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "expires_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { AllocationExpirationDate } from '@maxio-com/advanced-billing-sdk';
+
+const allocationExpirationDate: AllocationExpirationDate = {
+  expiresAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

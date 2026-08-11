@@ -23,23 +23,29 @@ Example schema for an `apply_payment` event
 | `prepayment` | `boolean \| undefined` | Optional | - |
 | `external` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "consolidation_level": "child",
-  "memo": "memo8",
-  "original_amount": "original_amount8",
-  "applied_amount": "applied_amount4",
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "payment_method": {
-    "type": "apple_pay"
+```ts
+import {
+  ApplyPaymentEventData,
+  InvoiceConsolidationLevel,
+  InvoiceEventPaymentMethod,
+} from '@maxio-com/advanced-billing-sdk';
+
+const applyPaymentEventData: ApplyPaymentEventData = {
+  consolidationLevel: InvoiceConsolidationLevel.Child,
+  memo: 'memo0',
+  originalAmount: 'original_amount0',
+  appliedAmount: 'applied_amount2',
+  transactionTime: '2016-03-13T12:52:32.123Z',
+  paymentMethod: {
+    type: InvoiceEventPaymentMethod.ApplePay,
   },
-  "transaction_id": 196,
-  "parent_invoice_number": 174,
-  "remaining_prepayment_amount": "remaining_prepayment_amount6",
-  "prepayment": false,
-  "external": false
-}
+  transactionId: 142,
+  parentInvoiceNumber: 228,
+  remainingPrepaymentAmount: 'remaining_prepayment_amount4',
+  prepayment: false,
+  external: false,
+};
 ```
 

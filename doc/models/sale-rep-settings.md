@@ -17,15 +17,17 @@
 | `salesRepId` | `number \| undefined` | Optional | - |
 | `salesRepName` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "customer_name": "customer_name8",
-  "subscription_id": 200,
-  "site_link": "site_link4",
-  "site_name": "site_name8",
-  "subscription_mrr": "subscription_mrr6"
-}
+```ts
+import { SaleRepSettings } from '@maxio-com/advanced-billing-sdk';
+
+const saleRepSettings: SaleRepSettings = {
+  customerName: 'customer_name6',
+  subscriptionId: 202,
+  siteLink: 'site_link2',
+  siteName: 'site_name6',
+  subscriptionMrr: 'subscription_mrr4',
+};
 ```
 

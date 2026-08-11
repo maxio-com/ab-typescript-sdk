@@ -14,19 +14,22 @@
 | `handle` | `string \| undefined` | Optional | - |
 | `accountingCode` | `string \| null \| undefined` | Optional | - |
 | `description` | `string \| null \| undefined` | Optional | - |
+| `surcharging` | `boolean \| undefined` | Optional | Whether surcharging applies to this product family. Only included on sites where surcharging is enabled. |
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
 | `archivedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when this product family was archived. `null` if the product family is not archived. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 194,
-  "name": "name2",
-  "handle": "handle8",
-  "accounting_code": "accounting_code8",
-  "description": "description8"
-}
+```ts
+import { ProductFamily } from '@maxio-com/advanced-billing-sdk';
+
+const productFamily: ProductFamily = {
+  id: 134,
+  name: 'name4',
+  handle: 'handle0',
+  accountingCode: 'accounting_code0',
+  description: 'description4',
+};
 ```
 

@@ -20,31 +20,35 @@ Object which contains subscription errors.
 | `paymentProfileExpirationYear` | `string[] \| undefined` | Optional | - |
 | `paymentProfileFullNumber` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "product": [
-    "product7",
-    "product6"
+```ts
+import {
+  SubscriptionGroupSubscriptionError,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupSubscriptionError: SubscriptionGroupSubscriptionError = {
+  product: [
+    'product7',
+    'product8'
   ],
-  "product_price_point_id": [
-    "product_price_point_id9",
-    "product_price_point_id0"
+  productPricePointId: [
+    'product_price_point_id3',
+    'product_price_point_id4'
   ],
-  "payment_profile": [
-    "payment_profile4",
-    "payment_profile5"
+  paymentProfile: [
+    'payment_profile8',
+    'payment_profile9'
   ],
-  "payment_profile.chargify_token": [
-    "payment_profile.chargify_token8",
-    "payment_profile.chargify_token9"
+  paymentProfileChargifyToken: [
+    'payment_profile.chargify_token2',
+    'payment_profile.chargify_token3'
   ],
-  "base": [
-    "base7",
-    "base8",
-    "base9"
-  ]
-}
+  base: [
+    'base1',
+    'base2',
+    'base3'
+  ],
+};
 ```
 

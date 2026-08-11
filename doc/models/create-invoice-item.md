@@ -22,15 +22,17 @@
 | `productPricePointId` | [`CreateInvoiceItemProductPricePointId \| undefined`](../../doc/models/containers/create-invoice-item-product-price-point-id.md) | Optional | This is a container for one-of cases. |
 | `description` | `string \| undefined` | Optional | **Constraints**: *Maximum Length*: `255` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "title": "title2",
-  "quantity": 154.86,
-  "unit_price": 138.08,
-  "taxable": false,
-  "tax_code": "tax_code4"
-}
+```ts
+import { CreateInvoiceItem } from '@maxio-com/advanced-billing-sdk';
+
+const createInvoiceItem: CreateInvoiceItem = {
+  title: 'title8',
+  quantity: 107.22,
+  unitPrice: 90.44,
+  taxable: false,
+  taxCode: 'tax_code0',
+};
 ```
 

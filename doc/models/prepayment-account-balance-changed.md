@@ -14,14 +14,18 @@
 | `prepaymentBalanceChangeInCents` | `bigint` | Required | - |
 | `currencyCode` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason4",
-  "prepayment_account_balance_in_cents": 182,
-  "prepayment_balance_change_in_cents": 206,
-  "currency_code": "currency_code4"
-}
+```ts
+import {
+  PrepaymentAccountBalanceChanged,
+} from '@maxio-com/advanced-billing-sdk';
+
+const prepaymentAccountBalanceChanged: PrepaymentAccountBalanceChanged = {
+  reason: 'reason8',
+  prepaymentAccountBalanceInCents: BigInt(134),
+  prepaymentBalanceChangeInCents: BigInt(158),
+  currencyCode: 'currency_code8',
+};
 ```
 

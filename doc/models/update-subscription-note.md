@@ -14,12 +14,14 @@ Updatable fields for Subscription Note
 | `body` | `string` | Required | - |
 | `sticky` | `boolean` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "body": "body8",
-  "sticky": false
-}
+```ts
+import { UpdateSubscriptionNote } from '@maxio-com/advanced-billing-sdk';
+
+const updateSubscriptionNote: UpdateSubscriptionNote = {
+  body: 'body2',
+  sticky: false,
+};
 ```
 
