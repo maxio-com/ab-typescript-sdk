@@ -55,6 +55,8 @@ export interface BankAccountPaymentProfile {
   bankName?: string;
   /** A string representation of the stored bank routing number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). payment_type will be bank_account. */
   maskedBankRoutingNumber?: string | null;
+  /** A string representation of the stored bank account number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). */
+  maskedBankAccountNumber?: string | null;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;
   /** Defaults to personal */
@@ -89,6 +91,10 @@ export const bankAccountPaymentProfileSchema: Schema<BankAccountPaymentProfile> 
     bankName: ['bank_name', optional(string())],
     maskedBankRoutingNumber: [
       'masked_bank_routing_number',
+      optional(nullable(string())),
+    ],
+    maskedBankAccountNumber: [
+      'masked_bank_account_number',
       optional(nullable(string())),
     ],
     bankAccountType: ['bank_account_type', optional(bankAccountTypeSchema)],

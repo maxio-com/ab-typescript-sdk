@@ -24,6 +24,7 @@
 | `billingAddress2` | `string \| null \| undefined` | Optional | The current billing street address, second line, for the bank account |
 | `bankName` | `string \| undefined` | Optional | The bank where the account resides |
 | `maskedBankRoutingNumber` | `string \| null \| undefined` | Optional | A string representation of the stored bank routing number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). payment_type will be bank_account. |
+| `maskedBankAccountNumber` | `string \| null \| undefined` | Optional | A string representation of the stored bank account number with all but the last 4 digits marked with X's (i.e. 'XXXXXXX1111'). |
 | `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bankAccountHolderType` | [`BankAccountHolderType \| undefined`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
 | `paymentType` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `PaymentType.BankAccount` |
