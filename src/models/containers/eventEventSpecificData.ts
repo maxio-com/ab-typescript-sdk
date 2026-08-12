@@ -75,10 +75,6 @@ import {
   subscriptionProductChangeSchema,
 } from '../subscriptionProductChange.js';
 import {
-  SubscriptionProductChangeScheduled,
-  subscriptionProductChangeScheduledSchema,
-} from '../subscriptionProductChangeScheduled.js';
-import {
   SubscriptionStateChange,
   subscriptionStateChangeSchema,
 } from '../subscriptionStateChange.js';
@@ -86,7 +82,6 @@ import {
 /** This is a container type for one-of types. */
 export type EventEventSpecificData =
   | SubscriptionProductChange
-  | SubscriptionProductChangeScheduled
   | SubscriptionStateChange
   | PaymentRelatedEvents
   | RefundSuccess
@@ -111,7 +106,6 @@ export const eventEventSpecificDataSchema: Schema<EventEventSpecificData> = lazy
   () =>
     oneOf([
       subscriptionProductChangeSchema,
-      subscriptionProductChangeScheduledSchema,
       subscriptionStateChangeSchema,
       paymentRelatedEventsSchema,
       refundSuccessSchema,
@@ -144,20 +138,6 @@ export namespace EventEventSpecificData {
     value: unknown
   ): value is SubscriptionProductChange {
     return isMappedValueValidForSchema(value, subscriptionProductChangeSchema);
-  }
-
-  /**
-   * Validation method to narrow down union type to SubscriptionProductChangeScheduled type case.
-   *
-   * This is Subscription Product Change Scheduled case.
-   */
-  export function isSubscriptionProductChangeScheduled(
-    value: unknown
-  ): value is SubscriptionProductChangeScheduled {
-    return isMappedValueValidForSchema(
-      value,
-      subscriptionProductChangeScheduledSchema
-    );
   }
 
   /**

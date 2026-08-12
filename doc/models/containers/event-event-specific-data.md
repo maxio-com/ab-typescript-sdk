@@ -10,7 +10,6 @@
 | Type |
 |  --- |
 | [`SubscriptionProductChange`](../../../doc/models/subscription-product-change.md) |
-| [`SubscriptionProductChangeScheduled`](../../../doc/models/subscription-product-change-scheduled.md) |
 | [`SubscriptionStateChange`](../../../doc/models/subscription-state-change.md) |
 | [`PaymentRelatedEvents`](../../../doc/models/payment-related-events.md) |
 | [`RefundSuccess`](../../../doc/models/refund-success.md) |
@@ -41,19 +40,6 @@
 const value: EventEventSpecificData = {
   previousProductId: 126,
   newProductId: 12,
-};
-```
-
-## SubscriptionProductChangeScheduled
-
-### Initialization Code
-
-#### Example
-
-```ts
-const value: EventEventSpecificData = {
-  previousProductId: 62,
-  newProductId: 52,
 };
 ```
 

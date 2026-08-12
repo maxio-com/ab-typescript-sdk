@@ -623,7 +623,6 @@ export type { SubscriptionNoteResponse } from './models/subscriptionNoteResponse
 export type { SubscriptionPreview } from './models/subscriptionPreview.js';
 export type { SubscriptionPreviewResponse } from './models/subscriptionPreviewResponse.js';
 export type { SubscriptionProductChange } from './models/subscriptionProductChange.js';
-export type { SubscriptionProductChangeScheduled } from './models/subscriptionProductChangeScheduled.js';
 export type { SubscriptionProductMigration } from './models/subscriptionProductMigration.js';
 export type { SubscriptionProductMigrationRequest } from './models/subscriptionProductMigrationRequest.js';
 export { SubscriptionPurgeType } from './models/subscriptionPurgeType.js';

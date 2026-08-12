@@ -27,6 +27,9 @@ const eventResponse: EventResponse = {
     eventSpecificData: {
       previousProductId: 126,
       newProductId: 12,
+      previousProductPricePointId: 250,
+      newProductPricePointId: 244,
+      effectiveAt: '2016-03-13T12:52:32.123Z',
     },
   },
 };
