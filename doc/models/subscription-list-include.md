@@ -12,7 +12,6 @@
 | `SelfServicePageToken` |
 | `CurrentAccountBalanceInCents` |
 | `CurrentBillingAmount` |
-| `ThreeDsActionLink` |
 | `Coupons` |
 
 ## Example
