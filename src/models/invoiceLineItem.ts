@@ -20,12 +20,12 @@ import {
 } from './invoiceLineItemComponentCostData.js';
 
 export interface InvoiceLineItem {
-  /** Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists. */
+  /** Unique identifier for the line item. Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists. */
   uid?: string;
   /** A short descriptor for the charge or item represented by this line. */
   title?: string;
   /**
-   * Detailed description for the charge or item represented by this line.  May include proration details in plain text.
+   * Detailed description for the charge or item represented by this line. May include proration details in plain text.
    * Note: this string may contain line breaks that are hints for the best display format on the invoice.
    */
   description?: string;
@@ -36,7 +36,7 @@ export interface InvoiceLineItem {
   quantity?: string;
   /**
    * The price per unit for the line item.
-   * When tiered pricing was used (i.e. not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
+   * When tiered pricing was used (i.e., not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
    */
   unitPrice?: string;
   /** The line subtotal, generally calculated as `quantity * unit_price`. This is the canonical amount of record for the line - when rounding differences are in play, `subtotal_amount` takes precedence over the value derived from `quantity * unit_price` (which may not have the proper precision to exactly equal this amount). */
@@ -59,7 +59,7 @@ export interface InvoiceLineItem {
   taxIncluded?: boolean;
   /**
    * The non-canonical total amount for the line.
-   * `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
+   * `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter. Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
    */
   totalAmount?: string;
   /** When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units. */
@@ -67,14 +67,14 @@ export interface InvoiceLineItem {
   /**
    * Start date for the period covered by this line. The format is `"YYYY-MM-DD"`.
    * * For periodic charges paid in advance, this date will match the billing date, and the end date will be in the future.
-   * * For periodic charges paid in arrears (e.g. metered charges), this date will be the date of the previous billing, and the end date will be the current billing date.
+   * * For periodic charges paid in arrears (e.g., metered charges), this date will be the date of the previous billing, and the end date will be the current billing date.
    * * For non-periodic charges, this date and the end date will match.
    */
   periodRangeStart?: string;
   /**
    * End date for the period covered by this line. The format is `"YYYY-MM-DD"`.
    * * For periodic charges paid in advance, this date will match the next (future) billing date.
-   * * For periodic charges paid in arrears (e.g. metered charges), this date will be the date of the current billing date.
+   * * For periodic charges paid in arrears (e.g., metered charges), this date will be the date of the current billing date.
    * * For non-periodic charges, this date and the start date will match.
    */
   periodRangeEnd?: string;

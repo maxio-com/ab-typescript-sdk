@@ -18,15 +18,17 @@
 | `productPricePointId` | `number \| undefined` | Optional | - |
 | `role` | [`CurrencyPriceRole \| undefined`](../../doc/models/currency-price-role.md) | Optional | Role for the price. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 88,
-  "currency": "currency6",
-  "price": 41.36,
-  "formatted_price": "formatted_price4",
-  "price_id": 178
-}
+```ts
+import { CurrencyPrice } from '@maxio-com/advanced-billing-sdk';
+
+const currencyPrice: CurrencyPrice = {
+  id: 208,
+  currency: 'currency4',
+  price: 70.88,
+  formattedPrice: 'formatted_price2',
+  priceId: 214,
+};
 ```
 

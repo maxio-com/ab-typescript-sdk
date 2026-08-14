@@ -13,13 +13,15 @@
 | `handle` | `string \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 192,
-  "handle": "handle6",
-  "name": "name0"
-}
+```ts
+import { ItemPricePointData } from '@maxio-com/advanced-billing-sdk';
+
+const itemPricePointData: ItemPricePointData = {
+  id: 80,
+  handle: 'handle8',
+  name: 'name2',
+};
 ```
 

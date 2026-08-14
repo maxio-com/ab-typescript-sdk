@@ -33,7 +33,7 @@ import {
 } from './upgradeChargeCreditType.js';
 
 export interface CreateAllocation {
-  /** The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off. */
+  /** The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1 for on and 0 for off. */
   quantity: number;
   /**
    * Decimal representation of the allocated quantity. Only valid when decimal

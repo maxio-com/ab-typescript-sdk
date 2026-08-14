@@ -21,6 +21,7 @@
 | `RenewalFailure` |
 | `SubscriptionStateChange` |
 | `SubscriptionProductChange` |
+| `SubscriptionProductChangeScheduled` |
 | `PendingCancellationChange` |
 | `ExpiringCard` |
 | `CustomerUpdate` |
@@ -92,4 +93,12 @@
 | `SubscriptionTermRenewalPending` |
 | `SubscriptionTermRenewalActivated` |
 | `SubscriptionTermRenewalRemoved` |
+
+## Example
+
+```ts
+import { EventKey } from '@maxio-com/advanced-billing-sdk';
+
+const eventKey = EventKey.SubscriptionGroupSignupSuccess;
+```
 

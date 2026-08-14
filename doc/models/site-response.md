@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `site` | [`Site`](../../doc/models/site.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "site": {
-    "id": 64,
-    "name": "name4",
-    "subdomain": "subdomain0",
-    "currency": "currency4",
-    "seller_id": 228
-  }
-}
+```ts
+import { SiteResponse } from '@maxio-com/advanced-billing-sdk';
+
+const siteResponse: SiteResponse = {
+  site: {
+    id: 64,
+    name: 'name4',
+    subdomain: 'subdomain0',
+    currency: 'currency4',
+    sellerId: 228,
+  },
+};
 ```
 

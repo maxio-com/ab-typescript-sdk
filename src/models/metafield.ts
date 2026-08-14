@@ -27,7 +27,7 @@ export interface Metafield {
   scope?: MetafieldScope;
   /** The amount of subscriptions this metafield has been applied to in Advanced Billing. */
   dataCount?: number;
-  /** Indicates the type of metafield. A text metafield allows any string value. Dropdown and radio metafields have a set of values that can be selected.  Defaults to 'text'. */
+  /** Indicates the type of metafield. A text metafield allows any string value. Dropdown and radio metafields have a set of values that can be selected. Defaults to 'text'. */
   inputType?: MetafieldInput;
   mEnum?: MetafieldEnum | null;
   [key: string]: unknown;

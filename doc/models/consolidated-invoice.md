@@ -11,26 +11,35 @@
 |  --- | --- | --- | --- |
 | `invoices` | [`Invoice[] \| undefined`](../../doc/models/invoice.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "invoices": [
+```ts
+import { ConsolidatedInvoice } from '@maxio-com/advanced-billing-sdk';
+
+const consolidatedInvoice: ConsolidatedInvoice = {
+  invoices: [
     {
-      "id": 196,
-      "uid": "uid6",
-      "site_id": 122,
-      "customer_id": 234,
-      "subscription_id": 50
+      id: BigInt(196),
+      uid: 'uid6',
+      siteId: 122,
+      customerId: 234,
+      subscriptionId: 50,
     },
     {
-      "id": 196,
-      "uid": "uid6",
-      "site_id": 122,
-      "customer_id": 234,
-      "subscription_id": 50
+      id: BigInt(196),
+      uid: 'uid6',
+      siteId: 122,
+      customerId: 234,
+      subscriptionId: 50,
+    },
+    {
+      id: BigInt(196),
+      uid: 'uid6',
+      siteId: 122,
+      customerId: 234,
+      subscriptionId: 50,
     }
-  ]
-}
+  ],
+};
 ```
 

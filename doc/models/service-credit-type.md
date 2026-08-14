@@ -14,3 +14,11 @@ The type of entry
 | `Credit` |
 | `Debit` |
 
+## Example
+
+```ts
+import { ServiceCreditType } from '@maxio-com/advanced-billing-sdk';
+
+const serviceCreditType = ServiceCreditType.Credit;
+```
+

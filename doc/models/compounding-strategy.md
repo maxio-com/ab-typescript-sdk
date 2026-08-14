@@ -14,3 +14,11 @@ Applicable only to stackable coupons. For `compound`, Percentage-based discounts
 | `Compound` |
 | `Fullprice` |
 
+## Example
+
+```ts
+import { CompoundingStrategy } from '@maxio-com/advanced-billing-sdk';
+
+const compoundingStrategy = CompoundingStrategy.Compound;
+```
+

@@ -14,14 +14,16 @@
 | `autoReplenish` | `boolean \| undefined` | Optional | - |
 | `replenishThresholdAmountInCents` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "initial_funding_amount_in_cents": 40,
-  "replenish_to_amount_in_cents": 42,
-  "auto_replenish": false,
-  "replenish_threshold_amount_in_cents": 242
-}
+```ts
+import { UpsertPrepaidConfiguration } from '@maxio-com/advanced-billing-sdk';
+
+const upsertPrepaidConfiguration: UpsertPrepaidConfiguration = {
+  initialFundingAmountInCents: BigInt(244),
+  replenishToAmountInCents: BigInt(246),
+  autoReplenish: false,
+  replenishThresholdAmountInCents: BigInt(190),
+};
 ```
 

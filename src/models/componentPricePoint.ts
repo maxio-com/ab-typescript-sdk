@@ -37,7 +37,7 @@ export interface ComponentPricePoint {
    * 3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one.
    */
   type?: PricePointType;
-  /** Note: Refer to type attribute instead */
+  /** Note: Refer to type attribute instead. */
   mDefault?: boolean;
   name?: string;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
@@ -53,7 +53,7 @@ export interface ComponentPricePoint {
   /** (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for. */
   subscriptionId?: number;
   taxIncluded?: boolean;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number | null;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;

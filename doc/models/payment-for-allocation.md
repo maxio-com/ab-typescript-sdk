@@ -16,14 +16,16 @@ Information for captured payment, if applicable
 | `success` | `boolean \| undefined` | Optional | - |
 | `memo` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 72,
-  "amount_in_cents": 158,
-  "success": false,
-  "memo": "memo6"
-}
+```ts
+import { PaymentForAllocation } from '@maxio-com/advanced-billing-sdk';
+
+const paymentForAllocation: PaymentForAllocation = {
+  id: 68,
+  amountInCents: BigInt(102),
+  success: false,
+  memo: 'memo6',
+};
 ```
 

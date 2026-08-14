@@ -5,6 +5,7 @@
  */
 
 import {
+  boolean,
   expandoObject,
   nullable,
   number,
@@ -19,6 +20,8 @@ export interface ProductFamily {
   handle?: string;
   accountingCode?: string | null;
   description?: string | null;
+  /** Whether surcharging applies to this product family. Only included on sites where surcharging is enabled. */
+  surcharging?: boolean;
   createdAt?: string;
   updatedAt?: string;
   /** Timestamp indicating when this product family was archived. `null` if the product family is not archived. */
@@ -32,6 +35,7 @@ export const productFamilySchema: Schema<ProductFamily> = expandoObject({
   handle: ['handle', optional(string())],
   accountingCode: ['accounting_code', optional(nullable(string()))],
   description: ['description', optional(nullable(string()))],
+  surcharging: ['surcharging', optional(boolean())],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
   archivedAt: ['archived_at', optional(nullable(string()))],

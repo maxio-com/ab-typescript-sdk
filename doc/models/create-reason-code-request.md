@@ -11,15 +11,17 @@
 |  --- | --- | --- | --- |
 | `reasonCode` | [`CreateReasonCode`](../../doc/models/create-reason-code.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason_code": {
-    "code": "code4",
-    "description": "description6",
-    "position": 14
-  }
-}
+```ts
+import { CreateReasonCodeRequest } from '@maxio-com/advanced-billing-sdk';
+
+const createReasonCodeRequest: CreateReasonCodeRequest = {
+  reasonCode: {
+    code: 'code4',
+    description: 'description6',
+    position: 14,
+  },
+};
 ```
 

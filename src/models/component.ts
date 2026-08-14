@@ -26,12 +26,12 @@ import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 export interface Component {
   /** The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. */
   id?: number;
-  /** The name of the Component, suitable for display on statements. i.e. Text Messages. */
+  /** The name of the Component, suitable for display on statements. e.g., Text Messages. */
   name?: string;
   /** The component API handle */
   handle?: string | null;
   pricingScheme?: PricingScheme | null;
-  /** The name of the unit that the component’s usage is measured in. i.e. message */
+  /** The name of the unit that the component’s usage is measured in. e.g., message */
   unitName?: string;
   /** The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. */
   unitPrice?: string | null;
@@ -41,7 +41,7 @@ export interface Component {
   productFamilyName?: string;
   /** The handle of the Product Family to which the Component belongs */
   productFamilyHandle?: string;
-  /** deprecated - use unit_price instead */
+  /** deprecated - use unit_price instead. */
   pricePerUnitInCents?: bigint | null;
   /** A handle for the component type */
   kind?: ComponentKind;
@@ -84,10 +84,12 @@ export interface Component {
   accountingCode?: string | null;
   /** (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events. */
   eventBasedBillingMetricId?: number;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component’s default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
+  /** (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. */
+  unspscCode?: string | null;
   [key: string]: unknown;
 }
 
@@ -146,5 +148,6 @@ export const componentSchema: Schema<Component> = lazy(() =>
     ],
     interval: ['interval', optional(number())],
     intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+    unspscCode: ['unspsc_code', optional(nullable(string()))],
   })
 );

@@ -17,15 +17,17 @@
 | `startingBalanceInCents` | `bigint \| undefined` | Optional | **Constraints**: `>= 0` |
 | `endingBalanceInCents` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 110,
-  "subscription_id": 220,
-  "amount_in_cents": 196,
-  "memo": "memo6",
-  "created_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { CreatedPrepayment } from '@maxio-com/advanced-billing-sdk';
+
+const createdPrepayment: CreatedPrepayment = {
+  id: BigInt(186),
+  subscriptionId: 40,
+  amountInCents: BigInt(240),
+  memo: 'memo6',
+  createdAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

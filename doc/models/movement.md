@@ -19,15 +19,17 @@
 | `subscriptionId` | `number \| undefined` | Optional | - |
 | `subscriberName` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "amount_in_cents": 174,
-  "amount_formatted": "amount_formatted4",
-  "description": "description2",
-  "category": "category0"
-}
+```ts
+import { Movement } from '@maxio-com/advanced-billing-sdk';
+
+const movement: Movement = {
+  timestamp: '2016-03-13T12:52:32.123Z',
+  amountInCents: BigInt(34),
+  amountFormatted: 'amount_formatted6',
+  description: 'description4',
+  category: 'category2',
+};
 ```
 

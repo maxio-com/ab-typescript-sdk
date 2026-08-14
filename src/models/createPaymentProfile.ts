@@ -44,21 +44,21 @@ export interface CreatePaymentProfile {
   fullNumber?: string;
   /** The type of card used. */
   cardType?: CardType;
-  /** (Optional when performing an Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, i.e. 5 */
+  /** (Optional when performing an Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, e.g., 5 */
   expirationMonth?: CreatePaymentProfileExpirationMonth;
-  /** (Optional when performing a Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012 */
+  /** (Optional when performing an Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, e.g., 2012 */
   expirationYear?: CreatePaymentProfileExpirationYear;
-  /** The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway. */
+  /** The credit card or bank account billing street address (e.g., 123 Main St.). This value is merely passed through to the payment gateway. */
   billingAddress?: string;
-  /** Second line of the customer’s billing address i.e. Apt. 100 */
+  /** Second line of the customer’s billing address e.g., Apt. 100 */
   billingAddress2?: string | null;
-  /** The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway. */
+  /** The credit card or bank account billing address city (e.g., “Boston”). This value is merely passed through to the payment gateway. */
   billingCity?: string;
-  /** The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes. */
+  /** The credit card or bank account billing address state (e.g., MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes. */
   billingState?: string;
-  /** The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time. */
+  /** “The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (e.g., “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time.” */
   billingCountry?: string;
-  /** The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway. */
+  /** The credit card or bank account billing address zip code (e.g., 12345). This value is merely passed through to the payment gateway. */
   billingZip?: string;
   /** The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. */
   currentVault?: AllVaults;
@@ -78,13 +78,13 @@ export interface CreatePaymentProfile {
   cvv?: string;
   /** (Required when creating with ACH or GoCardless, optional with Stripe Direct Debit). The name of the bank where the customerʼs account resides */
   bankName?: string;
-  /** (Optional when creating with GoCardless, required with Stripe Direct Debit). International Bank Account Number. Alternatively, local bank details can be provided */
+  /** (Optional when creating with GoCardless, required with Stripe Direct Debit). International Bank Account Number. Alternatively, local bank details can be provided. */
   bankIban?: string;
-  /** (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API */
+  /** (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API. */
   bankRoutingNumber?: string;
   /** (Required when creating with ACH, GoCardless, Stripe BECS or BACS Direct Debit, and bank_iban is blank) The customerʼs bank account number */
   bankAccountNumber?: string;
-  /** (Optional when creating with GoCardless, required with Stripe BECS or BACS Direct Debit) Branch/Sort code. Alternatively, an IBAN can be provided */
+  /** (Optional when creating with GoCardless, required with Stripe BECS or BACS Direct Debit) Branch/Sort code. Alternatively, an IBAN can be provided. */
   bankBranchCode?: string;
   /** Defaults to checking */
   bankAccountType?: BankAccountType;

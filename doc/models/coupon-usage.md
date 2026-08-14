@@ -14,18 +14,20 @@
 | `signups` | `number \| undefined` | Optional | Number of times the coupon has been applied |
 | `savings` | `number \| null \| undefined` | Optional | Dollar amount of customer savings as a result of the coupon. |
 | `savingsInCents` | `bigint \| null \| undefined` | Optional | Dollar amount of customer savings as a result of the coupon. |
-| `revenue` | `number \| null \| undefined` | Optional | Total revenue of the all subscriptions that have received a discount from this coupon. |
-| `revenueInCents` | `bigint \| undefined` | Optional | Total revenue of the all subscriptions that have received a discount from this coupon. |
+| `revenue` | `number \| null \| undefined` | Optional | Total revenue of all subscriptions that have received a discount from this coupon. |
+| `revenueInCents` | `bigint \| undefined` | Optional | Total revenue of all subscriptions that have received a discount from this coupon. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 14,
-  "name": "name0",
-  "signups": 34,
-  "savings": 52,
-  "savings_in_cents": 138
-}
+```ts
+import { CouponUsage } from '@maxio-com/advanced-billing-sdk';
+
+const couponUsage: CouponUsage = {
+  id: 240,
+  name: 'name8',
+  signups: 4,
+  savings: 22,
+  savingsInCents: BigInt(108),
+};
 ```
 

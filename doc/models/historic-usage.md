@@ -1,7 +1,7 @@
 
 # Historic Usage
 
-Optional for Event Based Components. If the `include=historic_usages` query param is provided, the last ten billing periods will be returned.
+(Optional) For Event Based Components. If the `include=historic_usages` query param is provided, the last ten billing periods will be returned.
 
 ## Structure
 
@@ -15,13 +15,15 @@ Optional for Event Based Components. If the `include=historic_usages` query para
 | `billingPeriodStartsAt` | `string \| undefined` | Optional | Start date of billing period |
 | `billingPeriodEndsAt` | `string \| undefined` | Optional | End date of billing period |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_usage_quantity": 26.6,
-  "billing_period_starts_at": "2016-03-13T12:52:32.123Z",
-  "billing_period_ends_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { HistoricUsage } from '@maxio-com/advanced-billing-sdk';
+
+const historicUsage: HistoricUsage = {
+  totalUsageQuantity: 140.74,
+  billingPeriodStartsAt: '2016-03-13T12:52:32.123Z',
+  billingPeriodEndsAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

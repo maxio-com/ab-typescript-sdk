@@ -13,11 +13,16 @@ Example schema for an `change_chargeback_status` event
 |  --- | --- | --- | --- |
 | `chargebackStatus` | [`ChargebackStatus`](../../doc/models/chargeback-status.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargeback_status": "open"
-}
+```ts
+import {
+  ChangeChargebackStatusEventData,
+  ChargebackStatus,
+} from '@maxio-com/advanced-billing-sdk';
+
+const changeChargebackStatusEventData: ChangeChargebackStatusEventData = {
+  chargebackStatus: ChargebackStatus.Won,
+};
 ```
 

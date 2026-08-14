@@ -12,12 +12,16 @@
 | `resume` | `boolean \| undefined` | Optional | - |
 | `resumeMembers` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "resume": false,
-  "resume_members": false
-}
+```ts
+import {
+  ReactivateSubscriptionGroupRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const reactivateSubscriptionGroupRequest: ReactivateSubscriptionGroupRequest = {
+  resume: false,
+  resumeMembers: false,
+};
 ```
 

@@ -6,7 +6,7 @@
 
 import { boolean, expandoObject, optional, Schema } from '../schema.js';
 
-/** Optional attributes related to billing date and accrual. Note: Only applicable for new subscriptions. */
+/** (Optional) Attributes related to billing date and accrual. Note: Only applicable for new subscriptions. */
 export interface GroupBilling {
   /** A flag indicating whether or not to accrue charges on the new subscription. */
   accrue?: boolean;

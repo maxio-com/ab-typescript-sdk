@@ -11,15 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`SubscriptionGroupUpdateError \| undefined`](../../doc/models/subscription-group-update-error.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "members": [
-      "members2",
-      "members1"
-    ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof SubscriptionGroupUpdateErrorResponseError) {
+    console.log(error.result);
   }
 }
 ```

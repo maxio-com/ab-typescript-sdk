@@ -13,13 +13,15 @@
 | `requiresSecurityToken` | `boolean \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "public_key": "public_key8",
-  "requires_security_token": false,
-  "created_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { PublicKey } from '@maxio-com/advanced-billing-sdk';
+
+const publicKey: PublicKey = {
+  publicKey: 'public_key2',
+  requiresSecurityToken: false,
+  createdAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

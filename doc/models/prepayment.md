@@ -20,20 +20,25 @@
 | `paymentType` | [`PrepaymentMethod \| undefined`](../../doc/models/prepayment-method.md) | Optional | The payment type of the prepayment. |
 | `createdAt` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 50,
-  "subscription_id": 160,
-  "amount_in_cents": 120,
-  "remaining_amount_in_cents": 194,
-  "refunded_amount_in_cents": 144,
-  "details": "details4",
-  "external": false,
-  "memo": "memo8",
-  "payment_type": "cash",
-  "created_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import {
+  Prepayment,
+  PrepaymentMethod,
+} from '@maxio-com/advanced-billing-sdk';
+
+const prepayment: Prepayment = {
+  id: 38,
+  subscriptionId: 148,
+  amountInCents: BigInt(124),
+  remainingAmountInCents: BigInt(182),
+  external: false,
+  memo: 'memo2',
+  createdAt: '2016-03-13T12:52:32.123Z',
+  refundedAmountInCents: BigInt(132),
+  details: 'details8',
+  paymentType: PrepaymentMethod.CreditCard,
+};
 ```
 

@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `mrr` | [`ListMRRResponseResult`](../../doc/models/list-mrr-response-result.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "mrr": {
-    "page": 30,
-    "per_page": 198,
-    "total_pages": 92,
-    "total_entries": 188,
-    "currency": "currency4"
-  }
-}
+```ts
+import { ListMRRResponse } from '@maxio-com/advanced-billing-sdk';
+
+const listMRRResponse: ListMRRResponse = {
+  mrr: {
+    page: 30,
+    perPage: 198,
+    totalPages: 92,
+    totalEntries: 188,
+    currency: 'currency4',
+  },
+};
 ```
 

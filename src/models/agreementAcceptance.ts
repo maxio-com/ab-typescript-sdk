@@ -10,7 +10,7 @@ import { expandoObject, optional, Schema, string } from '../schema.js';
 export interface AgreementAcceptance {
   /** Required when providing agreement acceptance params. */
   ipAddress?: string;
-  /** Required when creating a subscription with Maxio Payments. Either terms_url or provacy_policy_url required when providing agreement_acceptance params. */
+  /** Required when creating a subscription with Maxio Payments. Either terms_url or privacy_policy_url is required when providing agreement_acceptance params. */
   termsUrl?: string;
   privacyPolicyUrl?: string;
   returnRefundPolicyUrl?: string;

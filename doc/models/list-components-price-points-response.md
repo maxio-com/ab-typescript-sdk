@@ -11,19 +11,25 @@
 |  --- | --- | --- | --- |
 | `pricePoints` | [`ComponentPricePoint[]`](../../doc/models/component-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_points": [
+```ts
+import {
+  ListComponentsPricePointsResponse,
+  PricePointType,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listComponentsPricePointsResponse: ListComponentsPricePointsResponse = {
+  pricePoints: [
     {
-      "id": 40,
-      "type": "default",
-      "default": false,
-      "name": "name2",
-      "pricing_scheme": "per_unit"
+      id: 40,
+      type: PricePointType.Default,
+      mDefault: false,
+      name: 'name2',
+      pricingScheme: PricingScheme.PerUnit,
     }
-  ]
-}
+  ],
+};
 ```
 

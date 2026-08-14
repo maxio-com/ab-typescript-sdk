@@ -19,9 +19,18 @@ import {
   addCouponsRequestSchema,
 } from '../models/addCouponsRequest.js';
 import {
+  CollectionMethod1,
+  collectionMethod1Schema,
+} from '../models/collectionMethod1.js';
+import {
+  ListSubscriptionsInputProduct,
+  listSubscriptionsInputProductSchema,
+} from '../models/containers/listSubscriptionsInputProduct.js';
+import {
   CreateSubscriptionRequest,
   createSubscriptionRequestSchema,
 } from '../models/createSubscriptionRequest.js';
+import { GroupStatus, groupStatusSchema } from '../models/groupStatus.js';
 import {
   OverrideSubscriptionRequest,
   overrideSubscriptionRequestSchema,
@@ -30,6 +39,7 @@ import {
   PrepaidConfigurationResponse,
   prepaidConfigurationResponseSchema,
 } from '../models/prepaidConfigurationResponse.js';
+import { QScope, qScopeSchema } from '../models/qScope.js';
 import {
   SortingDirection,
   sortingDirectionSchema,
@@ -74,7 +84,7 @@ import {
   UpsertPrepaidConfigurationRequest,
   upsertPrepaidConfigurationRequestSchema,
 } from '../models/upsertPrepaidConfigurationRequest.js';
-import { array, dict, number, optional, string } from '../schema.js';
+import { array, boolean, dict, number, optional, string } from '../schema.js';
 import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
 import { ErrorArrayMapResponseError } from '../errors/errorArrayMapResponseError.js';
@@ -99,6 +109,61 @@ export class SubscriptionsController extends BaseController {
    * Select an option from the **Request Examples** drop-down on the right side of the portal to see
    * examples of common scenarios for creating subscriptions.
    *
+   * ## List vs Sales Pricing
+   *
+   * When a subscription uses custom pricing as the sales price, you can optionally provide a list price
+   * for any item. If omitted, the list price defaults to the sales price. The difference between the
+   * list price and sales price is used to calculate implicit discounts, which appear on Invoices and in
+   * reporting. List price can also support revenue allocations in [Advanced Revenue](https://docs.maxio.
+   * com/hc/en-us/articles/24177001342861-Create-and-Configure-RevenueBooks).
+   *
+   * If your site has list pricing enabled, the API accepts `custom_price.list_price_point_id` for custom
+   * pricing, validates and persists it, and returns list price metadata in subscription responses. If
+   * list pricing is disabled, this input is ignored and related response fields are omitted.
+   *
+   * When list pricing is enabled:
+   *
+   * - Subscription → Product `product_price_point_list_price_point_id` (integer)
+   * - `product_price_point_list_price_point_handle` (string)
+   * - Subscription Components (when components are included in the response, such as with subscriptions
+   * built from components or component serialization paths) `component_id` (integer)
+   * - `price_point_id` (integer)
+   * - `list_price_point_id` (integer)
+   *
+   * When list pricing is disabled:
+   *
+   * - Subscription → Product `product_price_point_list_price_point_id`: omitted
+   * - `product_price_point_list_price_point_handle`: omitted
+   * - Subscription Components `list_price_point_id`: omitted
+   *
+   * This functionality is supported in the API, but is not currently supported in SDKs.
+   *
+   * ## Subscriptions can now work independently from the catalog
+   *
+   * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
+   * experience-and-terminology) enabled, you can create subscriptions without a `product_id` or
+   * `product_handle` using POST /subscriptions, building them entirely from components.
+   *
+   * A valid subscription must include at least one active component with:
+   * - a positive `allocated_quantity`,
+   * - a positive `unit_balance`, or
+   * - 'enabled: true' (for on/off components)
+   * - a configured metered component
+   *
+   * `component_id` can be provided as a numeric ID or in handle: format. If `trial_interval` and
+   * `trial_interval_unit` are included, they are applied at creation.
+   *
+   * In the response, product and product price point fields are null, and component details are returned
+   * instead.
+   *
+   * This functionality is supported in the API, but is not currently supported in SDKs.
+   *
+   * ## Payment information
+   *
+   * Payment information may be required to create a subscription, depending on the options for the
+   * Product being subscribed. See [product options](https://docs.maxio.com/hc/en-
+   * us/articles/24261076617869-Edit-Products) for more information. See the [Payments
+   * Profile]($e/Payment%20Profiles/createPaymentProfile) endpoint for details on payment parameters.
    * See the [Subscription Signups](page:introduction/basic-concepts/subscription-signup) article for
    * more information on working with subscriptions in Advanced Billing.
    *
@@ -153,8 +218,13 @@ export class SubscriptionsController extends BaseController {
   }
 
   /**
-   * Returns an array of subscriptions from a Site. Pay close attention to query string filters and
-   * pagination in order to control responses from the server.
+   * Lists subscriptions for a site. Use the query string filters and pagination to control responses
+   * from the server.
+   *
+   * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
+   * experience-and-terminology) enabled, some subscriptions may not have an associated product. For
+   * subscriptions without an associated product, 'product', 'product_price_point_id', and
+   * 'product_price_point_type' are returned as 'null'.
    *
    * ## Search for a subscription
    *
@@ -166,104 +236,138 @@ export class SubscriptionsController extends BaseController {
    * Self-Service Page token for the subscriptions is not returned by default. If this information is
    * desired, the include[]=self_service_page_token parameter must be provided with the request.
    *
-   * @param page                   Result records are organized in pages. By default, the
-   *                                                            first page of results is displayed. The page parameter
-   *                                                            specifies a page number of results to fetch. You can
-   *                                                            start navigating through the pages to consume the
-   *                                                            results. You do this by passing in a page parameter.
-   *                                                            Retrieve the next page by adding ?page=2 to the query
-   *                                                            string. If there are no results to return, then an
-   *                                                            empty result set will be returned. Use in query
-   *                                                            `page=1`.
-   * @param perPage                This parameter indicates how many records to fetch in
-   *                                                            each request. Default value is 20. The maximum allowed
-   *                                                            values is 200; any per_page value over 200 will be
-   *                                                            changed to 200. Use in query `per_page=200`.
-   * @param state                  The current state of the subscription
-   * @param product                The product id of the subscription. (Note that the
-   *                                                            product handle cannot be used.)
-   * @param productPricePointId    The ID of the product price point. If supplied,
-   *                                                            product is required
-   * @param coupon                 The numeric id of the coupon currently applied to the
-   *                                                            subscription. (This can be found in the URL when
-   *                                                            editing a coupon. Note that the coupon code cannot be
-   *                                                            used.)
-   * @param couponCode             The coupon code currently applied to the subscription
-   * @param dateField              The type of filter you'd like to apply to your search.
-   *                                                            Allowed Values: , current_period_ends_at,
-   *                                                            current_period_starts_at, created_at, activated_at,
-   *                                                            canceled_at, expires_at, trial_started_at,
-   *                                                            trial_ended_at, updated_at
-   * @param startDate              The start date (format YYYY-MM-DD) with which to
-   *                                                            filter the date_field. Returns subscriptions with a
-   *                                                            timestamp at or after midnight (12:00:00 AM) in your
-   *                                                            site’s time zone on the date specified. Use in query
-   *                                                            `start_date=2022-07-01`.
-   * @param endDate                The end date (format YYYY-MM-DD) with which to filter
-   *                                                            the date_field. Returns subscriptions with a timestamp
-   *                                                            up to and including 11:59:59PM in your site’s time zone
-   *                                                            on the date specified. Use in query `end_date=2022-08-
-   *                                                            01`.
-   * @param startDatetime          The start date and time (format YYYY-MM-DD HH:MM:SS)
-   *                                                            with which to filter the date_field. Returns
-   *                                                            subscriptions with a timestamp at or after exact time
-   *                                                            provided in query. You can specify timezone in query -
-   *                                                            otherwise your site's time zone will be used. If
-   *                                                            provided, this parameter will be used instead of
-   *                                                            start_date. Use in query `start_datetime=2022-07-01 09:
-   *                                                            00:05`.
-   * @param endDatetime            The end date and time (format YYYY-MM-DD HH:MM:SS)
-   *                                                            with which to filter the date_field. Returns
-   *                                                            subscriptions with a timestamp at or before exact time
-   *                                                            provided in query. You can specify timezone in query -
-   *                                                            otherwise your site's time zone will be used. If
-   *                                                            provided, this parameter will be used instead of
-   *                                                            end_date. Use in query `end_datetime=2022-08-01 10:00:
-   *                                                            05`.
-   * @param metadata               The value of the metadata field specified in the
-   *                                                            parameter. Use in query `metadata[my-
-   *                                                            field]=value&metadata[other-field]=another_value`.
-   * @param direction              Controls the order in which results are returned. Use
-   *                                                            in query `direction=asc`.
+   * @param page                   Result records are organized in pages. By default,
+   *                                                                the first page of results is displayed. The page
+   *                                                                parameter specifies a page number of results to
+   *                                                                fetch. You can start navigating through the pages
+   *                                                                to consume the results. You do this by passing in a
+   *                                                                page parameter. Retrieve the next page by adding ?
+   *                                                                page=2 to the query string. If there are no results
+   *                                                                to return, then an empty result set will be
+   *                                                                returned. Use in query `page=1`.
+   * @param perPage                This parameter indicates how many records to fetch
+   *                                                                in each request. Default value is 20. The maximum
+   *                                                                allowed values is 200; any per_page value over 200
+   *                                                                will be changed to 200. Use in query `per_page=200`.
    * @param sort                   The attribute by which to sort
-   * @param include                Allows including additional data in the response. Use
-   *                                                            in query: `include[]=self_service_page_token`.
+   * @param direction              Controls the order in which results are returned.
+   *                                                                Use in query `direction=asc`.
+   * @param state                  The current state of the subscription
+   * @param product                Filter subscriptions by product. Accepts product
+   *                                                                ID or exact product name. Product handle is not
+   *                                                                supported.
+   * @param q                      Search string.
+   * @param qScope                 Scope of fields used by the q search.
+   * @param customerId             The Advanced Billing id of the customer.
+   * @param productPricePointId    The ID of the product price point. If supplied,
+   *                                                                product is required.
+   * @param coupon                 The numeric id of the coupon currently applied to
+   *                                                                the subscription. (This can be found in the URL
+   *                                                                when editing a coupon. Note that the coupon code
+   *                                                                cannot be used.)
+   * @param couponCode             The coupon code currently applied to the
+   *                                                                subscription
+   * @param collectionMethod       The collection method for the subscription.
+   * @param brandingThemeId        Filter subscriptions by the ID of an assigned
+   *                                                                Branding Theme. Branding Themes is a beta feature.
+   *                                                                See [Understand Branding Themes](https://docs.maxio.
+   *                                                                com/hc/en-us/articles/43796895662093-Understand-
+   *                                                                Branding-Themes#understand-branding-themes-0-0) for
+   *                                                                more information.
+   * @param dateField              The type of filter you'd like to apply to your
+   *                                                                search.  Allowed Values: , current_period_ends_at,
+   *                                                                current_period_starts_at, created_at, activated_at,
+   *                                                                canceled_at, expires_at, trial_started_at,
+   *                                                                trial_ended_at, updated_at
+   * @param startDate              The start date (format YYYY-MM-DD) with which to
+   *                                                                filter the date_field. Returns subscriptions with a
+   *                                                                timestamp at or after midnight (12:00:00 AM) in
+   *                                                                your site’s time zone on the date specified. Use in
+   *                                                                query `start_date=2022-07-01`.
+   * @param endDate                The end date (format YYYY-MM-DD) with which to
+   *                                                                filter the date_field. Returns subscriptions with a
+   *                                                                timestamp up to and including 11:59:59PM in your
+   *                                                                site’s time zone on the date specified. Use in
+   *                                                                query `end_date=2022-08-01`.
+   * @param startDatetime          The start date and time (format YYYY-MM-DD HH:MM:
+   *                                                                SS) with which to filter the date_field. Returns
+   *                                                                subscriptions with a timestamp at or after exact
+   *                                                                time provided in query. You can specify timezone in
+   *                                                                query - otherwise your site's time zone will be
+   *                                                                used. If provided, this parameter will be used
+   *                                                                instead of start_date. Use in query
+   *                                                                `start_datetime=2022-07-01 09:00:05`.
+   * @param endDatetime            The end date and time (format YYYY-MM-DD HH:MM:SS)
+   *                                                                with which to filter the date_field. Returns
+   *                                                                subscriptions with a timestamp at or before exact
+   *                                                                time provided in query. You can specify timezone in
+   *                                                                query - otherwise your site's time zone will be
+   *                                                                used. If provided, this parameter will be used
+   *                                                                instead of end_date. Use in query
+   *                                                                `end_datetime=2022-08-01 10:00:05`.
+   * @param metadata               The value of the metadata field specified in the
+   *                                                                parameter. Use in query `metadata[my-
+   *                                                                field]=value&metadata[other-field]=another_value`.
+   * @param groupStatus            Filter by whether a subscription is in a group.
+   * @param dunningExemption       Filter by dunning exemption status.
+   * @param paymentGateways        Comma-separated payment gateway identifiers.
+   * @param currencies             Comma-separated currency codes.
+   * @param include                Allows including additional data in the response.
+   *                                                                Use in query: `include[]=self_service_page_token`.
    * @return Response from the API call
    */
   async listSubscriptions(
     {
       page,
       perPage,
+      sort,
+      direction,
       state,
       product,
+      q,
+      qScope,
+      customerId,
       productPricePointId,
       coupon,
       couponCode,
+      collectionMethod,
+      brandingThemeId,
       dateField,
       startDate,
       endDate,
       startDatetime,
       endDatetime,
       metadata,
-      direction,
-      sort,
+      groupStatus,
+      dunningExemption,
+      paymentGateways,
+      currencies,
       include,
     }: {
       page?: number;
       perPage?: number;
+      sort?: SubscriptionSort;
+      direction?: SortingDirection;
       state?: SubscriptionStateFilter;
-      product?: number;
+      product?: ListSubscriptionsInputProduct;
+      q?: string;
+      qScope?: QScope;
+      customerId?: number;
       productPricePointId?: number;
       coupon?: number;
       couponCode?: string;
+      collectionMethod?: CollectionMethod1;
+      brandingThemeId?: number;
       dateField?: SubscriptionDateField;
       startDate?: string;
       endDate?: string;
       startDatetime?: string;
       endDatetime?: string;
       metadata?: Record<string, string>;
-      direction?: SortingDirection;
-      sort?: SubscriptionSort;
+      groupStatus?: GroupStatus;
+      dunningExemption?: boolean;
+      paymentGateways?: string;
+      currencies?: string;
       include?: SubscriptionListInclude[];
     },
     requestOptions?: RequestOptions
@@ -272,25 +376,39 @@ export class SubscriptionsController extends BaseController {
     const mapped = req.prepareArgs({
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
+      sort: [sort, optional(subscriptionSortSchema)],
+      direction: [direction, optional(sortingDirectionSchema)],
       state: [state, optional(subscriptionStateFilterSchema)],
-      product: [product, optional(number())],
+      product: [product, optional(listSubscriptionsInputProductSchema)],
+      q: [q, optional(string())],
+      qScope: [qScope, optional(qScopeSchema)],
+      customerId: [customerId, optional(number())],
       productPricePointId: [productPricePointId, optional(number())],
       coupon: [coupon, optional(number())],
       couponCode: [couponCode, optional(string())],
+      collectionMethod: [collectionMethod, optional(collectionMethod1Schema)],
+      brandingThemeId: [brandingThemeId, optional(number())],
       dateField: [dateField, optional(subscriptionDateFieldSchema)],
       startDate: [startDate, optional(string())],
       endDate: [endDate, optional(string())],
       startDatetime: [startDatetime, optional(string())],
       endDatetime: [endDatetime, optional(string())],
       metadata: [metadata, optional(dict(string()))],
-      direction: [direction, optional(sortingDirectionSchema)],
-      sort: [sort, optional(subscriptionSortSchema)],
+      groupStatus: [groupStatus, optional(groupStatusSchema)],
+      dunningExemption: [dunningExemption, optional(boolean())],
+      paymentGateways: [paymentGateways, optional(string())],
+      currencies: [currencies, optional(string())],
       include: [include, optional(array(subscriptionListIncludeSchema))],
     });
     req.query('page', mapped.page, unindexedPrefix);
     req.query('per_page', mapped.perPage, unindexedPrefix);
+    req.query('sort', mapped.sort, unindexedPrefix);
+    req.query('direction', mapped.direction, unindexedPrefix);
     req.query('state', mapped.state, unindexedPrefix);
     req.query('product', mapped.product, unindexedPrefix);
+    req.query('q', mapped.q, unindexedPrefix);
+    req.query('q_scope', mapped.qScope, unindexedPrefix);
+    req.query('customer_id', mapped.customerId, unindexedPrefix);
     req.query(
       'product_price_point_id',
       mapped.productPricePointId,
@@ -298,14 +416,18 @@ export class SubscriptionsController extends BaseController {
     );
     req.query('coupon', mapped.coupon, unindexedPrefix);
     req.query('coupon_code', mapped.couponCode, unindexedPrefix);
+    req.query('collection_method', mapped.collectionMethod, unindexedPrefix);
+    req.query('branding_theme_id', mapped.brandingThemeId, unindexedPrefix);
     req.query('date_field', mapped.dateField, unindexedPrefix);
     req.query('start_date', mapped.startDate, unindexedPrefix);
     req.query('end_date', mapped.endDate, unindexedPrefix);
     req.query('start_datetime', mapped.startDatetime, unindexedPrefix);
     req.query('end_datetime', mapped.endDatetime, unindexedPrefix);
     req.query('metadata', mapped.metadata, unindexedPrefix);
-    req.query('direction', mapped.direction, unindexedPrefix);
-    req.query('sort', mapped.sort, unindexedPrefix);
+    req.query('group_status', mapped.groupStatus, unindexedPrefix);
+    req.query('dunning_exemption', mapped.dunningExemption, unindexedPrefix);
+    req.query('payment_gateways', mapped.paymentGateways, unindexedPrefix);
+    req.query('currencies', mapped.currencies, unindexedPrefix);
     req.query('include', mapped.include, unindexedPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(subscriptionResponseSchema), requestOptions);
@@ -390,9 +512,14 @@ export class SubscriptionsController extends BaseController {
    * eligible for calendar billing**.
    *
    * > Note: If you change the product associated with a subscription that contains a `snap_day` and
-   * immediately `READ/GET` the subscription data, it will still contain original `snap_day`. The
-   * `snap_day` will reset to null on the next billing cycle. This is because a product change is
+   * immediately READ/GET the subscription data, it will still contain the original `snap_day`. The
+   * `snap_day` will be reset to `null` on the next billing cycle. This is because a product change is
    * instantaneous and only affects the product associated with a subscription.
+   *
+   * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
+   * experience-and-terminology) enabled, some subscriptions may not have an associated product. For
+   * subscriptions without an associated product, `product`, `product_price_point_id`, and
+   * `product_price_point_type` are returned as `null`.
    *
    * @param subscriptionId  The Chargify id of the subscription.
    * @param body
@@ -423,6 +550,11 @@ export class SubscriptionsController extends BaseController {
 
   /**
    * Retrieves subscription details.
+   *
+   * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
+   * experience-and-terminology) enabled, some subscriptions may not have an associated product. For
+   * subscriptions without an associated product, 'product', 'product_price_point_id', and
+   * 'product_price_point_type' are returned as 'null'.
    *
    * ## Self-Service Page token
    *
@@ -534,7 +666,7 @@ export class SubscriptionsController extends BaseController {
   /**
    * Purges an individual subscription for sites in test mode.
    *
-   * Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string
+   * Provide the subscription ID in the URL.  To confirm, supply the customer ID in the query string
    * `ack` parameter. You may also delete the customer record and/or payment profiles by passing
    * `cascade` parameters. For example, to delete just the customer record, the query params would be: `?
    * ack={customer_id}&cascade[]=customer`
@@ -611,37 +743,54 @@ export class SubscriptionsController extends BaseController {
    *
    * The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary.
    *
-   * A subscription will not be created by utilizing this endpoint; it is meant to serve as a prediction.
+   * This endpoint does not create a subscription; it is meant to serve as a prediction.
    *
-   * For more information, see our documentation [here](https://maxio.zendesk.com/hc/en-
+   * For more information, see [Subscriber Interface Overview](https://maxio.zendesk.com/hc/en-
    * us/articles/24252493695757-Subscriber-Interface-Overview).
+   *
+   * ## Subscriptions can now work independently from the catalog
+   *
+   * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
+   * experience-and-terminology) enabled, you can create subscriptions without a `product_id` or
+   * `product_handle` using POST /subscriptions, building them entirely from components.
+   *
+   * A valid subscription must include at least one active component with:
+   * - a positive `allocated_quantity`,
+   * - a positive `unit_balance`, or
+   * - 'enabled: true' (for on/off components)
+   *
+   * `component_id` can be provided as a numeric ID or in handle: format. If `trial_interval` and
+   * `trial_interval_unit` are included, they are applied at creation.
+   *
+   * In the response, product and product price point fields are null, and component details are returned
+   * instead.
+   *
+   * This functionality is supported in the API, but is not currently supported in SDKs.
    *
    * ## Taxable Subscriptions
    *
-   * This endpoint will preview taxes applicable to a purchase. In order for taxes to be previewed, the
-   * following conditions must be met:
+   * This endpoint previews taxes applicable to a purchase. For taxes to be previewed, the following
+   * conditions must be met:
    *
    * + Taxes must be configured on the subscription
    * + The preview must be for the purchase of a taxable product or component, or combination of the two.
-   * + The subscription payload must contain a full billing or shipping address in order to calculate
-   * tax
+   * + The subscription payload must contain a full billing or shipping address to calculate tax
    *
-   * For more information about creating taxable previews, see our documentation guide on how to create
-   * [taxable subscriptions.](https://maxio.zendesk.com/hc/en-us/sections/24287012349325-Taxes)
+   * For more information about creating taxable previews, see [Taxes](https://maxio.zendesk.com/hc/en-
+   * us/sections/24287012349325-Taxes).
    *
    * You do **not** need to include a card number to generate tax information when you are previewing a
    * subscription. However, when you actually want to create the subscription, you must include the
-   * credit card information if you want the billing address to be stored in Advanced Billing. The
-   * billing address and the credit card information are stored together within the payment profile
-   * object. Also, you may not send a billing address to Advanced Billing without payment profile
-   * information, as the address is stored on the card.
+   * credit card information if you want the billing address to be stored. The billing address and the
+   * credit card information are stored together within the payment profile object. Also, you cannot send
+   * a billing address without payment profile information, as the address is stored on the card.
    *
    * You can pass shipping and billing addresses and still decide not to calculate taxes. To do that,
    * pass `skip_billing_manifest_taxes: true` attribute.
    *
    * ## Non-taxable Subscriptions
    *
-   * If you'd like to calculate subscriptions that do not include tax you may leave off the billing
+   * If you'd like to calculate subscriptions that do not include tax, you can leave off the billing
    * information.
    *
    * @param body
@@ -712,9 +861,9 @@ export class SubscriptionsController extends BaseController {
   /**
    * Removes a coupon from an existing subscription.
    *
-   * For more information on the expected behavior of removing a coupon from a subscription, see our
-   * documentation [here.](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-
-   * Subscriptions#removing-a-coupon)
+   * For more information on the expected behavior of removing a coupon from a subscription, see [Coupons
+   * and Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-
+   * Subscriptions#removing-a-coupon).
    *
    * @param subscriptionId  The Chargify id of the subscription.
    * @param couponCode      The coupon code
@@ -744,21 +893,18 @@ export class SubscriptionsController extends BaseController {
 
   /**
    * Activates awaiting signup and trialing subscriptions. This feature is only available on the
-   * Relationship Invoicing architecture. Subscriptions in a group may not be activated immediately.
-   *
-   * For details on how the activation works, and how to activate subscriptions through the application,
-   * see [activation](#).
+   * Relationship Invoicing architecture. Subscriptions in a group cannot be activated immediately.
    *
    * The `revert_on_failure` parameter controls the behavior upon activation failure.
-   * - If set to `true` and something goes wrong i.e. payment fails, then Advanced Billing will not
-   * change the subscription's state. The subscription’s billing period will also remain the same.
-   * - If set to `false` and something goes wrong i.e. payment fails, then Advanced Billing will continue
-   * through with the activation and enter an end of life state. For trialing subscriptions, that will
-   * either be trial ended (if the trial is no obligation), past due (if the trial has an obligation), or
-   * canceled (if the site has no dunning strategy, or has a strategy that says to cancel immediately).
-   * For awaiting signup subscriptions, that will always be canceled.
+   * - If set to `true` and something goes wrong i.e. payment fails, the subscription's state does not
+   * change. The subscription’s billing period also remains the same.
+   * - If set to `false` and something goes wrong i.e. payment fails, the activation continues and enters
+   * an end of life state. For trialing subscriptions, that is either trial ended (if the trial is no
+   * obligation), past due (if the trial has an obligation), or canceled (if the site has no dunning
+   * strategy, or has a strategy that says to cancel immediately). For awaiting signup subscriptions,
+   * that is always canceled.
    *
-   * The default activation failure behavior can be configured per activation attempt, or you may set a
+   * The default activation failure behavior can be configured per activation attempt, or you can set a
    * default value under Config > Settings > Subscription Activation Settings.
    *
    * ## Activation Scenarios
@@ -791,11 +937,11 @@ export class SubscriptionsController extends BaseController {
    *
    * ### Activate Trialing subscription
    *
-   * You can read more about the behavior of trialing subscriptions [here](https://maxio.zendesk.
-   * com/hc/en-us/articles/24252155721869-Trialing-Subscriptions).
-   * When the `revert_on_failure` parameter is set to `true`, the subscription's state will remain as
-   * Trialing, we will void the invoice from activation and return any prepayments and credits applied to
-   * the invoice back to the subscription.
+   * For more information about the behavior of trialing subscriptions, see [Trialing
+   * Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24252155721869-Trialing-Subscriptions).
+   * When the `revert_on_failure` parameter is set to `true`, the subscription's state remains Trialing;
+   * the invoice from activation is voided, and any prepayments and credits applied to the invoice are
+   * returned to the subscription.
    *
    *
    * @param subscriptionId  The Chargify id of the subscription.

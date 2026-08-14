@@ -14,3 +14,11 @@ The role of the debit note.
 | `Chargeback` |
 | `Refund` |
 
+## Example
+
+```ts
+import { DebitNoteRole } from '@maxio-com/advanced-billing-sdk';
+
+const debitNoteRole = DebitNoteRole.Chargeback;
+```
+

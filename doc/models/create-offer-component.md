@@ -13,13 +13,15 @@
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `startingQuantity` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 242,
-  "price_point_id": 10,
-  "starting_quantity": 50
-}
+```ts
+import { CreateOfferComponent } from '@maxio-com/advanced-billing-sdk';
+
+const createOfferComponent: CreateOfferComponent = {
+  componentId: 252,
+  pricePointId: 20,
+  startingQuantity: 196,
+};
 ```
 

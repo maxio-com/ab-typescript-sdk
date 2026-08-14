@@ -11,19 +11,24 @@
 |  --- | --- | --- | --- |
 | `subscriptionsComponents` | [`SubscriptionComponent[]`](../../doc/models/subscription-component.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscriptions_components": [
+```ts
+import {
+  ComponentKind,
+  ListSubscriptionComponentsResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionComponentsResponse: ListSubscriptionComponentsResponse = {
+  subscriptionsComponents: [
     {
-      "id": 138,
-      "name": "name2",
-      "kind": "metered_component",
-      "unit_name": "unit_name4",
-      "enabled": false
+      id: 138,
+      name: 'name2',
+      kind: ComponentKind.MeteredComponent,
+      unitName: 'unit_name4',
+      enabled: false,
     }
-  ]
-}
+  ],
+};
 ```
 

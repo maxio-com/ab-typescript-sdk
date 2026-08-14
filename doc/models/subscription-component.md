@@ -13,8 +13,8 @@
 | `name` | `string \| undefined` | Optional | - |
 | `kind` | [`ComponentKind \| undefined`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
 | `unitName` | `string \| undefined` | Optional | - |
-| `enabled` | `boolean \| undefined` | Optional | (for on/off components) indicates if the component is enabled for the subscription |
-| `unitBalance` | `number \| undefined` | Optional | - |
+| `enabled` | `boolean \| undefined` | Optional | (for on/off components) indicates if the component is enabled for the subscription. |
+| `unitBalance` | [`SubscriptionComponentUnitBalance \| undefined`](../../doc/models/containers/subscription-component-unit-balance.md) | Optional | This is a container for one-of cases. |
 | `currency` | `string \| undefined` | Optional | - |
 | `allocatedQuantity` | [`SubscriptionComponentAllocatedQuantity \| undefined`](../../doc/models/containers/subscription-component-allocated-quantity.md) | Optional | This is a container for one-of cases. |
 | `pricingScheme` | [`PricingScheme \| null \| undefined`](../../doc/models/pricing-scheme.md) | Optional | - |
@@ -36,21 +36,26 @@
 | `useSiteExchangeRate` | `boolean \| null \| undefined` | Optional | - |
 | `description` | `string \| null \| undefined` | Optional | - |
 | `allowFractionalQuantities` | `boolean \| undefined` | Optional | - |
-| `subscription` | [`SubscriptionComponentSubscription \| undefined`](../../doc/models/subscription-component-subscription.md) | Optional | An optional object, will be returned if provided `include=subscription` query param. |
+| `subscription` | [`SubscriptionComponentSubscription \| undefined`](../../doc/models/subscription-component-subscription.md) | Optional | (Optional) Object that will be returned if the `include=subscription` query param is provided. |
 | `historicUsages` | [`HistoricUsage[] \| undefined`](../../doc/models/historic-usage.md) | Optional | - |
 | `displayOnHostedPage` | `boolean \| undefined` | Optional | - |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `intervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 20,
-  "name": "name8",
-  "kind": "quantity_based_component",
-  "unit_name": "unit_name0",
-  "enabled": false
-}
+```ts
+import {
+  ComponentKind,
+  SubscriptionComponent,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionComponent: SubscriptionComponent = {
+  id: 254,
+  name: 'name8',
+  kind: ComponentKind.QuantityBasedComponent,
+  unitName: 'unit_name0',
+  enabled: false,
+};
 ```
 

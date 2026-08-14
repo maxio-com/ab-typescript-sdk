@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `message` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "message": "message8"
-}
+```ts
+import { DelayedCancellationResponse } from '@maxio-com/advanced-billing-sdk';
+
+const delayedCancellationResponse: DelayedCancellationResponse = {
+  message: 'message4',
+};
 ```
 

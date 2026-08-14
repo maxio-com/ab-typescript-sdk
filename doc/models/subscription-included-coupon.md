@@ -17,17 +17,19 @@
 | `amountInCents` | `bigint \| null \| undefined` | Optional | **Constraints**: `>= 0` |
 | `percentage` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "\"ABCD_10\"",
-  "use_count": 2,
-  "uses_allowed": 10,
-  "expires_at": "\"2023-07-13T05:18:58-04:00\"",
-  "amount_in_cents": 1000,
-  "percentage": "\"15.0\"",
-  "recurring": false
-}
+```ts
+import { SubscriptionIncludedCoupon } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionIncludedCoupon: SubscriptionIncludedCoupon = {
+  code: '"ABCD_10"',
+  useCount: 2,
+  usesAllowed: 10,
+  expiresAt: '"2023-07-13T05:18:58-04:00"',
+  recurring: false,
+  amountInCents: BigInt(1000),
+  percentage: '"15.0"',
+};
 ```
 

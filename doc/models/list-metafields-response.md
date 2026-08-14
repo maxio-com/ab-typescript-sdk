@@ -15,29 +15,61 @@
 | `perPage` | `number \| undefined` | Optional | - |
 | `metafields` | [`Metafield[] \| undefined`](../../doc/models/metafield.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_count": 210,
-  "current_page": 186,
-  "total_pages": 198,
-  "per_page": 92,
-  "metafields": [
+```ts
+import {
+  IncludeOption,
+  ListMetafieldsResponse,
+  MetafieldInput,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listMetafieldsResponse: ListMetafieldsResponse = {
+  totalCount: 228,
+  currentPage: 204,
+  totalPages: 216,
+  perPage: 74,
+  metafields: [
     {
-      "id": 22,
-      "name": "name2",
-      "scope": {
-        "csv": "0",
-        "invoices": "0",
-        "statements": "0",
-        "portal": "0",
-        "public_show": "0"
+      id: 22,
+      name: 'name2',
+      scope: {
+        csv: IncludeOption.Exclude,
+        invoices: IncludeOption.Exclude,
+        statements: IncludeOption.Exclude,
+        portal: IncludeOption.Exclude,
+        publicShow: IncludeOption.Exclude,
       },
-      "data_count": 10,
-      "input_type": "balance_tracker"
+      dataCount: 10,
+      inputType: MetafieldInput.BalanceTracker,
+    },
+    {
+      id: 22,
+      name: 'name2',
+      scope: {
+        csv: IncludeOption.Exclude,
+        invoices: IncludeOption.Exclude,
+        statements: IncludeOption.Exclude,
+        portal: IncludeOption.Exclude,
+        publicShow: IncludeOption.Exclude,
+      },
+      dataCount: 10,
+      inputType: MetafieldInput.BalanceTracker,
+    },
+    {
+      id: 22,
+      name: 'name2',
+      scope: {
+        csv: IncludeOption.Exclude,
+        invoices: IncludeOption.Exclude,
+        statements: IncludeOption.Exclude,
+        portal: IncludeOption.Exclude,
+        publicShow: IncludeOption.Exclude,
+      },
+      dataCount: 10,
+      inputType: MetafieldInput.BalanceTracker,
     }
-  ]
-}
+  ],
+};
 ```
 

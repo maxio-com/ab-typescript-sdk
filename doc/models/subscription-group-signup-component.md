@@ -15,73 +15,79 @@
 | `pricePointId` | [`SubscriptionGroupSignupComponentPricePointId \| undefined`](../../doc/models/containers/subscription-group-signup-component-price-point-id.md) | Optional | This is a container for one-of cases. |
 | `customPrice` | [`SubscriptionGroupComponentCustomPrice \| undefined`](../../doc/models/subscription-group-component-custom-price.md) | Optional | Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": "String1",
-  "allocated_quantity": "String5",
-  "unit_balance": "String9",
-  "price_point_id": "String5",
-  "custom_price": {
-    "pricing_scheme": "stairstep",
-    "prices": [
+```ts
+import {
+  IntervalUnit,
+  PricingScheme,
+  SubscriptionGroupSignupComponent,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupSignupComponent: SubscriptionGroupSignupComponent = {
+  componentId: 'String7',
+  allocatedQuantity: 'String1',
+  unitBalance: 'String5',
+  pricePointId: 'String1',
+  customPrice: {
+    pricingScheme: PricingScheme.Stairstep,
+    prices: [
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       },
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       }
     ],
-    "overage_pricing": [
+    overagePricing: [
       {
-        "tax_included": false,
-        "pricing_scheme": "stairstep",
-        "interval": 230,
-        "interval_unit": "day",
-        "list_price_point_id": 10,
-        "prices": [
+        prices: [
           {
-            "starting_quantity": 242,
-            "ending_quantity": 40,
-            "unit_price": 23.26
+            startingQuantity: 242,
+            unitPrice: 23.26,
+            endingQuantity: 40,
           }
-        ]
+        ],
+        taxIncluded: false,
+        pricingScheme: PricingScheme.Stairstep,
+        interval: 230,
+        intervalUnit: IntervalUnit.Day,
+        listPricePointId: 10,
       },
       {
-        "tax_included": false,
-        "pricing_scheme": "stairstep",
-        "interval": 230,
-        "interval_unit": "day",
-        "list_price_point_id": 10,
-        "prices": [
+        prices: [
           {
-            "starting_quantity": 242,
-            "ending_quantity": 40,
-            "unit_price": 23.26
+            startingQuantity: 242,
+            unitPrice: 23.26,
+            endingQuantity: 40,
           }
-        ]
+        ],
+        taxIncluded: false,
+        pricingScheme: PricingScheme.Stairstep,
+        interval: 230,
+        intervalUnit: IntervalUnit.Day,
+        listPricePointId: 10,
       },
       {
-        "tax_included": false,
-        "pricing_scheme": "stairstep",
-        "interval": 230,
-        "interval_unit": "day",
-        "list_price_point_id": 10,
-        "prices": [
+        prices: [
           {
-            "starting_quantity": 242,
-            "ending_quantity": 40,
-            "unit_price": 23.26
+            startingQuantity: 242,
+            unitPrice: 23.26,
+            endingQuantity: 40,
           }
-        ]
+        ],
+        taxIncluded: false,
+        pricingScheme: PricingScheme.Stairstep,
+        interval: 230,
+        intervalUnit: IntervalUnit.Day,
+        listPricePointId: 10,
       }
-    ]
-  }
-}
+    ],
+  },
+};
 ```
 

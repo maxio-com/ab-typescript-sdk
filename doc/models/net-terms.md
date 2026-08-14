@@ -15,15 +15,17 @@
 | `netTermsOnRemittanceSignupsEnabled` | `boolean \| undefined` | Optional | **Default**: `false` |
 | `customNetTermsEnabled` | `boolean \| undefined` | Optional | **Default**: `false` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "default_net_terms": 0,
-  "automatic_net_terms": 0,
-  "remittance_net_terms": 0,
-  "net_terms_on_remittance_signups_enabled": false,
-  "custom_net_terms_enabled": false
-}
+```ts
+import { NetTerms } from '@maxio-com/advanced-billing-sdk';
+
+const netTerms: NetTerms = {
+  defaultNetTerms: 0,
+  automaticNetTerms: 0,
+  remittanceNetTerms: 0,
+  netTermsOnRemittanceSignupsEnabled: false,
+  customNetTermsEnabled: false,
+};
 ```
 

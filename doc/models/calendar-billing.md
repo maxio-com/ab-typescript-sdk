@@ -1,7 +1,7 @@
 
 # Calendar Billing
 
-(Optional). Cannot be used when also specifying next_billing_at
+(Optional). Cannot be used when also specifying next_billing_at.
 
 ## Structure
 
@@ -14,12 +14,17 @@
 | `snapDay` | [`CalendarBillingSnapDay \| undefined`](../../doc/models/containers/calendar-billing-snap-day.md) | Optional | This is a container for one-of cases. |
 | `calendarBillingFirstCharge` | [`FirstChargeType \| undefined`](../../doc/models/first-charge-type.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "snap_day": 210,
-  "calendar_billing_first_charge": "prorated"
-}
+```ts
+import {
+  CalendarBilling,
+  FirstChargeType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const calendarBilling: CalendarBilling = {
+  snapDay: 200,
+  calendarBillingFirstCharge: FirstChargeType.Delayed,
+};
 ```
 

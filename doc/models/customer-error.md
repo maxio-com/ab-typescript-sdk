@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `customer` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "customer": "customer8"
-}
+```ts
+import { CustomerError } from '@maxio-com/advanced-billing-sdk';
+
+const customerError: CustomerError = {
+  customer: 'customer8',
+};
 ```
 

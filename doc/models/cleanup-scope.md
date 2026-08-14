@@ -14,3 +14,11 @@ all: Will clear all products, customers, and related subscriptions from the site
 | `All` |
 | `Customers` |
 
+## Example
+
+```ts
+import { CleanupScope } from '@maxio-com/advanced-billing-sdk';
+
+const cleanupScope = CleanupScope.All;
+```
+

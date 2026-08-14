@@ -21,22 +21,24 @@
 | `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
 | `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
 | `pricePointId` | `number \| undefined` | Optional | - |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `intervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 | `previousPricePointId` | `number \| undefined` | Optional | - |
 | `pricePointHandle` | `string \| undefined` | Optional | - |
 | `pricePointName` | `string \| undefined` | Optional | - |
 | `componentHandle` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 54,
-  "subscription_id": 54,
-  "quantity": 78,
-  "previous_quantity": 192,
-  "memo": "memo6"
-}
+```ts
+import { AllocationPreviewItem } from '@maxio-com/advanced-billing-sdk';
+
+const allocationPreviewItem: AllocationPreviewItem = {
+  componentId: 176,
+  subscriptionId: 176,
+  quantity: 200,
+  previousQuantity: 30,
+  memo: 'memo8',
+};
 ```
 

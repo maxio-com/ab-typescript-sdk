@@ -10,7 +10,7 @@ export interface Register {
   id?: number;
   maxioId?: string;
   name?: string;
-  /** The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. */
+  /** The ISO 4217 currency code (3 character string) representing the currency of an invoice transaction. */
   currencyCode?: string;
   [key: string]: unknown;
 }

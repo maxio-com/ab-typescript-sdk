@@ -1,7 +1,7 @@
 
 # Refund Consolidated Invoice
 
-Refund consolidated invoice
+Refund consolidated invoice.
 
 ## Structure
 
@@ -18,19 +18,21 @@ Refund consolidated invoice
 | `applyCredit` | `boolean \| undefined` | Optional | If set to true, creates credit and applies it to an invoice. Defaults to `false`. |
 | `amount` | `string \| undefined` | Optional | The amount of payment to be refunded in decimal format. Example: "10.50". This will default to the full amount of the payment if not provided. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "memo": "memo0",
-  "payment_id": 46,
-  "segment_uids": [
-    "String0",
-    "String1"
+```ts
+import { RefundConsolidatedInvoice } from '@maxio-com/advanced-billing-sdk';
+
+const refundConsolidatedInvoice: RefundConsolidatedInvoice = {
+  memo: 'memo0',
+  paymentId: 138,
+  segmentUids: [
+    'String0',
+    'String1'
   ],
-  "external": false,
-  "apply_credit": false,
-  "amount": "amount8"
-}
+  external: false,
+  applyCredit: false,
+  amount: 'amount8',
+};
 ```
 

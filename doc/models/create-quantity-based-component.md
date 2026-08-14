@@ -11,31 +11,37 @@
 |  --- | --- | --- | --- |
 | `quantityBasedComponent` | [`QuantityBasedComponent`](../../doc/models/quantity-based-component.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "quantity_based_component": {
-    "name": "name0",
-    "unit_name": "unit_name2",
-    "description": "description0",
-    "handle": "handle6",
-    "taxable": false,
-    "pricing_scheme": "stairstep",
-    "prices": [
+```ts
+import {
+  CreateQuantityBasedComponent,
+  CreditType,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createQuantityBasedComponent: CreateQuantityBasedComponent = {
+  quantityBasedComponent: {
+    name: 'name0',
+    unitName: 'unit_name2',
+    pricingScheme: PricingScheme.Stairstep,
+    description: 'description0',
+    handle: 'handle6',
+    taxable: false,
+    prices: [
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       },
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       }
     ],
-    "upgrade_charge": "prorated"
-  }
-}
+    upgradeCharge: CreditType.Prorated,
+  },
+};
 ```
 

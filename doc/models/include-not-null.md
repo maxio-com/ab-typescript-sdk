@@ -15,7 +15,9 @@ Passed as a parameter to list methods to return only non null values.
 
 ## Example
 
-```
-not_null
+```ts
+import { IncludeNotNull } from '@maxio-com/advanced-billing-sdk';
+
+const includeNotNull = IncludeNotNull.NotNull;
 ```
 

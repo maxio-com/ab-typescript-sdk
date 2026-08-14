@@ -13,21 +13,26 @@
 | `ccRecipientEmails` | `string[] \| undefined` | Optional | - |
 | `bccRecipientEmails` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "recipient_emails": [
-    "recipient_emails9"
+```ts
+import {
+  DeliverProformaInvoiceRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const deliverProformaInvoiceRequest: DeliverProformaInvoiceRequest = {
+  recipientEmails: [
+    'recipient_emails3',
+    'recipient_emails4'
   ],
-  "cc_recipient_emails": [
-    "cc_recipient_emails8"
+  ccRecipientEmails: [
+    'cc_recipient_emails2',
+    'cc_recipient_emails1',
+    'cc_recipient_emails0'
   ],
-  "bcc_recipient_emails": [
-    "bcc_recipient_emails2",
-    "bcc_recipient_emails3",
-    "bcc_recipient_emails4"
-  ]
-}
+  bccRecipientEmails: [
+    'bcc_recipient_emails6'
+  ],
+};
 ```
 

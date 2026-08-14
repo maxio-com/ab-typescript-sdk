@@ -16,15 +16,17 @@
 | `expiresAt` | `string \| undefined` | Optional | - |
 | `lastInviteSentAt` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "url": "url0",
-  "fetch_count": 222,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "new_link_available_at": "2016-03-13T12:52:32.123Z",
-  "expires_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { PortalManagementLink } from '@maxio-com/advanced-billing-sdk';
+
+const portalManagementLink: PortalManagementLink = {
+  url: 'url8',
+  fetchCount: 88,
+  createdAt: '2016-03-13T12:52:32.123Z',
+  newLinkAvailableAt: '2016-03-13T12:52:32.123Z',
+  expiresAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

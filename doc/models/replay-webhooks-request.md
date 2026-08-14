@@ -11,13 +11,17 @@
 |  --- | --- | --- | --- |
 | `ids` | `bigint[]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "ids": [
-    15
-  ]
-}
+```ts
+import { ReplayWebhooksRequest } from '@maxio-com/advanced-billing-sdk';
+
+const replayWebhooksRequest: ReplayWebhooksRequest = {
+  ids: [
+    BigInt(209),
+    BigInt(210),
+    BigInt(211)
+  ],
+};
 ```
 

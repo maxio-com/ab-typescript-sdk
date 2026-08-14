@@ -12,12 +12,14 @@
 | `currentPage` | `number \| undefined` | Optional | - |
 | `totalCount` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "current_page": 14,
-  "total_count": 38
-}
+```ts
+import { ListSubscriptionGroupsMeta } from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionGroupsMeta: ListSubscriptionGroupsMeta = {
+  currentPage: 104,
+  totalCount: 128,
+};
 ```
 

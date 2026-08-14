@@ -26,14 +26,14 @@ import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 export interface ComponentCustomPrice {
   /** Whether or not the price point includes tax */
   taxIncluded?: boolean;
-  /** Omit for On/Off components */
+  /** Omit for On/Off components. */
   pricingScheme?: PricingScheme;
-  /** The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
   /**
-   * Optional id of the price point to use for list price calculations when
+   * (Optional) Id of the price point to use for list price calculations when
    * overriding the customer price.
    */
   listPricePointId?: number | null;

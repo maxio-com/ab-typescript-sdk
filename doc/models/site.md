@@ -30,15 +30,17 @@
 | `portalEnabled` | `boolean \| undefined` | Optional | Whether the Billing Portal is enabled for this site. |
 | `test` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 34,
-  "name": "name0",
-  "subdomain": "subdomain4",
-  "currency": "currency0",
-  "seller_id": 198
-}
+```ts
+import { Site } from '@maxio-com/advanced-billing-sdk';
+
+const site: Site = {
+  id: 64,
+  name: 'name4',
+  subdomain: 'subdomain0',
+  currency: 'currency4',
+  sellerId: 228,
+};
 ```
 

@@ -17,15 +17,17 @@
 | `productFamilyId` | [`CreateInvoiceCouponProductFamilyId \| undefined`](../../doc/models/containers/create-invoice-coupon-product-family-id.md) | Optional | This is a container for one-of cases. |
 | `compoundingStrategy` | [`CompoundingStrategy \| undefined`](../../doc/models/compounding-strategy.md) | Optional | Applicable only to stackable coupons. For `compound`, Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated. For `full-price`, Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "percentage": 50.0,
-  "code": "code4",
-  "subcode": "subcode8",
-  "amount": "String9",
-  "description": "description4"
-}
+```ts
+import { CreateInvoiceCoupon } from '@maxio-com/advanced-billing-sdk';
+
+const createInvoiceCoupon: CreateInvoiceCoupon = {
+  code: 'code8',
+  subcode: 'subcode4',
+  percentage: 50,
+  amount: 'String9',
+  description: 'description0',
+};
 ```
 

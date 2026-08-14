@@ -17,32 +17,25 @@
 | `createdAt` | `string` | Required | - |
 | `eventSpecificData` | [`EventEventSpecificData \| null`](../../doc/models/containers/event-event-specific-data.md) | Required | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 40,
-  "key": "subscription_group_signup_success",
-  "message": "message8",
-  "subscription_id": 150,
-  "customer_id": 78,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "event_specific_data": {
-    "previous_unit_balance": null,
-    "previous_overage_unit_balance": null,
-    "new_unit_balance": null,
-    "new_overage_unit_balance": null,
-    "usage_quantity": null,
-    "overage_usage_quantity": null,
-    "component_id": null,
-    "component_handle": null,
-    "memo": null,
-    "allocation_details": [
-      null
-    ],
-    "previous_product_id": 126,
-    "new_product_id": 12
-  }
-}
+```ts
+import { Event, EventKey } from '@maxio-com/advanced-billing-sdk';
+
+const event: Event = {
+  id: BigInt(242),
+  key: EventKey.SubscriptionRemovedFromGroup,
+  message: 'message0',
+  subscriptionId: 96,
+  customerId: 24,
+  createdAt: '2016-03-13T12:52:32.123Z',
+  eventSpecificData: {
+    previousProductId: 126,
+    newProductId: 12,
+    previousProductPricePointId: 250,
+    newProductPricePointId: 244,
+    effectiveAt: '2016-03-13T12:52:32.123Z',
+  },
+};
 ```
 

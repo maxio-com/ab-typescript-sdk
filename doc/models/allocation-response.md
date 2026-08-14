@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `allocation` | [`Allocation \| undefined`](../../doc/models/allocation.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation": {
-    "allocation_id": 238,
-    "component_id": 8,
-    "component_handle": "component_handle8",
-    "subscription_id": 8,
-    "quantity": 32
-  }
-}
+```ts
+import { AllocationResponse } from '@maxio-com/advanced-billing-sdk';
+
+const allocationResponse: AllocationResponse = {
+  allocation: {
+    allocationId: 238,
+    componentId: 8,
+    componentHandle: 'component_handle8',
+    subscriptionId: 8,
+    quantity: 32,
+  },
+};
 ```
 

@@ -25,33 +25,35 @@
 | `consolidationLevel` | `string` | Required | - |
 | `lineItems` | [`InvoiceLineItemEventData[]`](../../doc/models/invoice-line-item-event-data.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "number": "number8",
-  "role": "role2",
-  "due_date": "2016-03-13T12:52:32.123Z",
-  "issue_date": "issue_date0",
-  "paid_date": "paid_date6",
-  "due_amount": "due_amount6",
-  "paid_amount": "paid_amount4",
-  "tax_amount": "tax_amount2",
-  "refund_amount": "refund_amount0",
-  "total_amount": "total_amount0",
-  "status_amount": "status_amount4",
-  "product_name": "product_name0",
-  "consolidation_level": "consolidation_level4",
-  "line_items": [
+```ts
+import { InvoiceIssued } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceIssued: InvoiceIssued = {
+  uid: 'uid8',
+  number: 'number4',
+  role: 'role8',
+  dueDate: '2016-03-13T12:52:32.123Z',
+  issueDate: 'issue_date4',
+  paidDate: 'paid_date8',
+  dueAmount: 'due_amount0',
+  paidAmount: 'paid_amount0',
+  taxAmount: 'tax_amount8',
+  refundAmount: 'refund_amount6',
+  totalAmount: 'total_amount4',
+  statusAmount: 'status_amount8',
+  productName: 'product_name4',
+  consolidationLevel: 'consolidation_level0',
+  lineItems: [
     {
-      "uid": "uid8",
-      "title": "title4",
-      "description": "description8",
-      "quantity": 102,
-      "quantity_delta": 204
+      uid: 'uid8',
+      title: 'title4',
+      description: 'description8',
+      quantity: 102,
+      quantityDelta: 204,
     }
-  ]
-}
+  ],
+};
 ```
 

@@ -12,18 +12,24 @@
 | `payment` | [`CreateInvoicePayment`](../../doc/models/create-invoice-payment.md) | Required | - |
 | `type` | [`InvoicePaymentType \| undefined`](../../doc/models/invoice-payment-type.md) | Optional | The type of payment to be applied to an Invoice. Defaults to external. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment": {
-    "amount": "String9",
-    "memo": "memo0",
-    "method": "ach",
-    "details": "details6",
-    "payment_profile_id": 42
+```ts
+import {
+  CreateInvoicePaymentRequest,
+  InvoicePaymentMethodType,
+  InvoicePaymentType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createInvoicePaymentRequest: CreateInvoicePaymentRequest = {
+  payment: {
+    amount: 'String9',
+    memo: 'memo0',
+    method: InvoicePaymentMethodType.Ach,
+    details: 'details6',
+    paymentProfileId: 42,
   },
-  "type": "external"
-}
+  type: InvoicePaymentType.External,
+};
 ```
 

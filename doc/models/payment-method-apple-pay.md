@@ -11,11 +11,16 @@
 |  --- | --- | --- | --- |
 | `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "type": "apple_pay"
-}
+```ts
+import {
+  InvoiceEventPaymentMethod,
+  PaymentMethodApplePay,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentMethodApplePay: PaymentMethodApplePay = {
+  type: InvoiceEventPaymentMethod.ApplePay,
+};
 ```
 

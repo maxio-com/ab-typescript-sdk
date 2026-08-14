@@ -13,13 +13,17 @@
 | `message` | `string \| undefined` | Optional | - |
 | `pricePoint` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 206,
-  "message": "message4",
-  "price_point": 152
-}
+```ts
+import {
+  ComponentPricePointErrorItem,
+} from '@maxio-com/advanced-billing-sdk';
+
+const componentPricePointErrorItem: ComponentPricePointErrorItem = {
+  componentId: 174,
+  message: 'message2',
+  pricePoint: 72,
+};
 ```
 

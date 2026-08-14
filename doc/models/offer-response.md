@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `offer` | [`Offer \| undefined`](../../doc/models/offer.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "offer": {
-    "id": 28,
-    "site_id": 210,
-    "product_family_id": 224,
-    "product_id": 30,
-    "product_price_point_id": 150
-  }
-}
+```ts
+import { OfferResponse } from '@maxio-com/advanced-billing-sdk';
+
+const offerResponse: OfferResponse = {
+  offer: {
+    id: 28,
+    siteId: 210,
+    productFamilyId: 224,
+    productId: 30,
+    productPricePointId: 150,
+  },
+};
 ```
 

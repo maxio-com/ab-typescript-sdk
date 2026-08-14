@@ -15,30 +15,25 @@
 | `perPage` | `number \| undefined` | Optional | - |
 | `metadata` | [`Metadata[] \| undefined`](../../doc/models/metadata.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_count": 26,
-  "current_page": 2,
-  "total_pages": 14,
-  "per_page": 20,
-  "metadata": [
+```ts
+import { PaginatedMetadata } from '@maxio-com/advanced-billing-sdk';
+
+const paginatedMetadata: PaginatedMetadata = {
+  totalCount: 166,
+  currentPage: 142,
+  totalPages: 154,
+  perPage: 136,
+  metadata: [
     {
-      "id": 50,
-      "value": "value8",
-      "resource_id": 134,
-      "name": "name6",
-      "deleted_at": "2016-03-13T12:52:32.123Z"
-    },
-    {
-      "id": 50,
-      "value": "value8",
-      "resource_id": 134,
-      "name": "name6",
-      "deleted_at": "2016-03-13T12:52:32.123Z"
+      id: 50,
+      value: 'value8',
+      resourceId: 134,
+      name: 'name6',
+      deletedAt: '2016-03-13T12:52:32.123Z',
     }
-  ]
-}
+  ],
+};
 ```
 

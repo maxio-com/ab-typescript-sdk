@@ -75,7 +75,7 @@ export class ProductFamiliesController extends BaseController {
    *                                                       specify timezone in query - otherwise your site's time zone
    *                                                       will be used. If provided, this parameter will be used
    *                                                       instead of end_date.
-   * @param includeArchived   Include archived products
+   * @param includeArchived   Include archived products.
    * @param include           Allows including additional data in the response. Use in
    *                                                       query `include=prepaid_product_price_point`.
    * @return Response from the API call
@@ -139,8 +139,8 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * Creates a Product Family within your Advanced Billing site. Create a Product Family to act as a
-   * container for your products, components, and coupons.
+   * Creates a Product Family within your site. Create a Product Family to act as a container for your
+   * products, components, and coupons.
    *
    * Full documentation on how Product Families operate within the Advanced Billing UI can be located
    * [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
@@ -169,7 +169,7 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * Returns a list of Product Families for a site.
+   * Lists Product Families for a site.
    *
    * @param dateField      The type of filter you would like to apply to your search. Use in query:
    *                                         `date_field=created_at`.

@@ -25,9 +25,9 @@ export interface CouponUsage {
   savings?: number | null;
   /** Dollar amount of customer savings as a result of the coupon. */
   savingsInCents?: bigint | null;
-  /** Total revenue of the all subscriptions that have received a discount from this coupon. */
+  /** Total revenue of all subscriptions that have received a discount from this coupon. */
   revenue?: number | null;
-  /** Total revenue of the all subscriptions that have received a discount from this coupon. */
+  /** Total revenue of all subscriptions that have received a discount from this coupon. */
   revenueInCents?: bigint;
   [key: string]: unknown;
 }

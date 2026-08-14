@@ -14,14 +14,16 @@
 | `totalPages` | `number \| undefined` | Optional | - |
 | `statusCode` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_count": 226,
-  "current_page": 202,
-  "total_pages": 214,
-  "status_code": 244
-}
+```ts
+import { ListProformaInvoicesMeta } from '@maxio-com/advanced-billing-sdk';
+
+const listProformaInvoicesMeta: ListProformaInvoicesMeta = {
+  totalCount: 50,
+  currentPage: 26,
+  totalPages: 38,
+  statusCode: 68,
+};
 ```
 

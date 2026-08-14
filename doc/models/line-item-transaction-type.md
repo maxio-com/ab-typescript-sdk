@@ -19,3 +19,11 @@ A handle for the line item transaction type
 | `InfoTransaction` |
 | `PaymentAuthorization` |
 
+## Example
+
+```ts
+import { LineItemTransactionType } from '@maxio-com/advanced-billing-sdk';
+
+const lineItemTransactionType = LineItemTransactionType.Payment;
+```
+

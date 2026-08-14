@@ -12,12 +12,16 @@
 | `error` | `string` | Required | - |
 | `newLinkAvailableAt` | `string` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "error": "error2",
-  "new_link_available_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import {
+  TooManyManagementLinkRequests,
+} from '@maxio-com/advanced-billing-sdk';
+
+const tooManyManagementLinkRequests: TooManyManagementLinkRequests = {
+  error: 'error8',
+  newLinkAvailableAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

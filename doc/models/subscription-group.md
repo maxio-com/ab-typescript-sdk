@@ -16,24 +16,29 @@
 | `subscriptionIds` | `number[] \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "customer_id": 36,
-  "payment_profile": {
-    "id": 44,
-    "first_name": "first_name4",
-    "last_name": "last_name2",
-    "masked_card_number": "masked_card_number2"
+```ts
+import {
+  CollectionMethod,
+  SubscriptionGroup,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroup: SubscriptionGroup = {
+  uid: 'uid8',
+  customerId: 78,
+  paymentProfile: {
+    id: 44,
+    firstName: 'first_name4',
+    lastName: 'last_name2',
+    maskedCardNumber: 'masked_card_number2',
   },
-  "payment_collection_method": "prepaid",
-  "subscription_ids": [
-    146,
-    147,
-    148
-  ]
-}
+  paymentCollectionMethod: CollectionMethod.Automatic,
+  subscriptionIds: [
+    188,
+    189,
+    190
+  ],
+};
 ```
 

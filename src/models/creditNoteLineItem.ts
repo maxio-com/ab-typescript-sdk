@@ -31,7 +31,7 @@ export interface CreditNoteLineItem {
   quantity?: string;
   /**
    * The price per unit for the line item.
-   * When tiered pricing was used (i.e. not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
+   * When tiered pricing was used (i.e., not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
    */
   unitPrice?: string;
   /** The line subtotal, generally calculated as `quantity * unit_price`. This is the canonical amount of record for the line - when rounding differences are in play, `subtotal_amount` takes precedence over the value derived from `quantity * unit_price` (which may not have the proper precision to exactly equal this amount). */

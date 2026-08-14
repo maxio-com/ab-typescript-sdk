@@ -11,16 +11,18 @@
 |  --- | --- | --- | --- |
 | `currencyPrices` | [`UpdateCouponCurrency[]`](../../doc/models/update-coupon-currency.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
+```ts
+import { CouponCurrencyRequest } from '@maxio-com/advanced-billing-sdk';
+
+const couponCurrencyRequest: CouponCurrencyRequest = {
+  currencyPrices: [
     {
-      "currency": "currency8",
-      "price": 78
+      currency: 'currency8',
+      price: 78,
     }
-  ]
-}
+  ],
+};
 ```
 

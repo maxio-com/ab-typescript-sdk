@@ -13,3 +13,11 @@
 | `FlatAmount` |
 | `Rollover` |
 
+## Example
+
+```ts
+import { InvoiceDiscountType } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceDiscountType = InvoiceDiscountType.Percentage;
+```
+

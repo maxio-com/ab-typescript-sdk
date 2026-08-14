@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `status` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "status4"
-}
+```ts
+import { ReplayWebhooksResponse } from '@maxio-com/advanced-billing-sdk';
+
+const replayWebhooksResponse: ReplayWebhooksResponse = {
+  status: 'status6',
+};
 ```
 

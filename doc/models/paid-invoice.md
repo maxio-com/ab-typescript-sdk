@@ -14,14 +14,16 @@
 | `dueAmount` | `string \| undefined` | Optional | The remaining due amount on the invoice |
 | `paidAmount` | `string \| undefined` | Optional | The total amount paid on this invoice (including any prior payments) |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "invoice_id": "invoice_id6",
-  "status": "open",
-  "due_amount": "due_amount8",
-  "paid_amount": "paid_amount8"
-}
+```ts
+import { InvoiceStatus, PaidInvoice } from '@maxio-com/advanced-billing-sdk';
+
+const paidInvoice: PaidInvoice = {
+  invoiceId: 'invoice_id2',
+  status: InvoiceStatus.Canceled,
+  dueAmount: 'due_amount4',
+  paidAmount: 'paid_amount6',
+};
 ```
 

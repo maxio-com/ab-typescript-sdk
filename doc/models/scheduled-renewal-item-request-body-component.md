@@ -12,33 +12,38 @@
 | `itemType` | `string` | Required, Constant | Item type to add. Either Product or Component.<br><br>**Value**: `'Component'` |
 | `itemId` | `number` | Required | Product or component identifier. |
 | `pricePointId` | `number \| undefined` | Optional | Price point identifier. |
-| `quantity` | `number \| undefined` | Optional | Optional quantity for the item. |
+| `quantity` | `number \| undefined` | Optional | (Optional) Quantity for the item. |
 | `customPrice` | [`ScheduledRenewalComponentCustomPrice \| undefined`](../../doc/models/scheduled-renewal-component-custom-price.md) | Optional | Custom pricing for a component within a scheduled renewal. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "item_type": "Component",
-  "item_id": 108,
-  "price_point_id": 122,
-  "quantity": 212,
-  "custom_price": {
-    "tax_included": false,
-    "pricing_scheme": "stairstep",
-    "prices": [
+```ts
+import {
+  PricingScheme,
+  ScheduledRenewalItemRequestBodyComponent,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalItemRequestBodyComponent: ScheduledRenewalItemRequestBodyComponent = {
+  itemType: 'Component',
+  itemId: 20,
+  pricePointId: 6,
+  quantity: 84,
+  customPrice: {
+    pricingScheme: PricingScheme.Stairstep,
+    prices: [
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       },
       {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
       }
-    ]
-  }
-}
+    ],
+    taxIncluded: false,
+  },
+};
 ```
 

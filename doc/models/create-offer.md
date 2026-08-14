@@ -17,30 +17,39 @@
 | `components` | [`CreateOfferComponent[] \| undefined`](../../doc/models/create-offer-component.md) | Optional | - |
 | `coupons` | `string[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name4",
-  "handle": "handle0",
-  "description": "description4",
-  "product_id": 208,
-  "product_price_point_id": 132,
-  "components": [
+```ts
+import { CreateOffer } from '@maxio-com/advanced-billing-sdk';
+
+const createOffer: CreateOffer = {
+  name: 'name6',
+  handle: 'handle2',
+  productId: 66,
+  description: 'description6',
+  productPricePointId: 246,
+  components: [
     {
-      "component_id": 108,
-      "price_point_id": 124,
-      "starting_quantity": 84
+      componentId: 108,
+      pricePointId: 124,
+      startingQuantity: 84,
     },
     {
-      "component_id": 108,
-      "price_point_id": 124,
-      "starting_quantity": 84
+      componentId: 108,
+      pricePointId: 124,
+      startingQuantity: 84,
+    },
+    {
+      componentId: 108,
+      pricePointId: 124,
+      startingQuantity: 84,
     }
   ],
-  "coupons": [
-    "coupons4"
-  ]
-}
+  coupons: [
+    'coupons6',
+    'coupons5',
+    'coupons4'
+  ],
+};
 ```
 

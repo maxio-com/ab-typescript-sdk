@@ -11,11 +11,16 @@
 |  --- | --- | --- | --- |
 | `creditScheme` | [`CreditScheme`](../../doc/models/credit-scheme.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "credit_scheme": "credit"
-}
+```ts
+import {
+  CreditScheme,
+  CreditSchemeRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const creditSchemeRequest: CreditSchemeRequest = {
+  creditScheme: CreditScheme.Credit,
+};
 ```
 

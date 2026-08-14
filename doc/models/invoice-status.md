@@ -19,3 +19,11 @@ The current status of the invoice. See [Invoice Statuses](https://maxio.zendesk.
 | `Canceled` |
 | `Processing` |
 
+## Example
+
+```ts
+import { InvoiceStatus } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceStatus = InvoiceStatus.Paid;
+```
+

@@ -11,33 +11,21 @@
 |  --- | --- | --- | --- |
 | `offers` | [`Offer[] \| undefined`](../../doc/models/offer.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "offers": [
+```ts
+import { ListOffersResponse } from '@maxio-com/advanced-billing-sdk';
+
+const listOffersResponse: ListOffersResponse = {
+  offers: [
     {
-      "id": 12,
-      "site_id": 194,
-      "product_family_id": 16,
-      "product_id": 210,
-      "product_price_point_id": 134
-    },
-    {
-      "id": 12,
-      "site_id": 194,
-      "product_family_id": 16,
-      "product_id": 210,
-      "product_price_point_id": 134
-    },
-    {
-      "id": 12,
-      "site_id": 194,
-      "product_family_id": 16,
-      "product_id": 210,
-      "product_price_point_id": 134
+      id: 12,
+      siteId: 194,
+      productFamilyId: 16,
+      productId: 210,
+      productPricePointId: 134,
     }
-  ]
-}
+  ],
+};
 ```
 

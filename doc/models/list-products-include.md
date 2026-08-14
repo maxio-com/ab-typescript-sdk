@@ -13,7 +13,9 @@
 
 ## Example
 
-```
-prepaid_product_price_point
+```ts
+import { ListProductsInclude } from '@maxio-com/advanced-billing-sdk';
+
+const listProductsInclude = ListProductsInclude.PrepaidProductPricePoint;
 ```
 

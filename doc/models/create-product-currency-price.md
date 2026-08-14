@@ -13,13 +13,18 @@
 | `price` | `number` | Required | Price for the given role. |
 | `role` | [`CurrencyPriceRole`](../../doc/models/currency-price-role.md) | Required | Role for the price. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency": "currency0",
-  "price": 222,
-  "role": "baseline"
-}
+```ts
+import {
+  CreateProductCurrencyPrice,
+  CurrencyPriceRole,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createProductCurrencyPrice: CreateProductCurrencyPrice = {
+  currency: 'currency2',
+  price: 78,
+  role: CurrencyPriceRole.Baseline,
+};
 ```
 

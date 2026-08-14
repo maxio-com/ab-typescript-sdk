@@ -12,12 +12,14 @@
 | `uid` | `string \| undefined` | Optional | The UID of the credit note |
 | `number` | `string \| undefined` | Optional | The number of the credit note |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "number": "number0"
-}
+```ts
+import { AppliedCreditNoteData } from '@maxio-com/advanced-billing-sdk';
+
+const appliedCreditNoteData: AppliedCreditNoteData = {
+  uid: 'uid4',
+  number: 'number2',
+};
 ```
 

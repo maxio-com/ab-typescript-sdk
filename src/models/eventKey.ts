@@ -22,6 +22,7 @@ export enum EventKey {
   RenewalFailure = 'renewal_failure',
   SubscriptionStateChange = 'subscription_state_change',
   SubscriptionProductChange = 'subscription_product_change',
+  SubscriptionProductChangeScheduled = 'subscription_product_change_scheduled',
   PendingCancellationChange = 'pending_cancellation_change',
   ExpiringCard = 'expiring_card',
   CustomerUpdate = 'customer_update',

@@ -24,15 +24,20 @@
 | `type` | `string \| undefined` | Optional | - |
 | `taxExemptAmount` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "title": "title6",
-  "description": "description2",
-  "source_type": "Tax",
-  "source_id": 164
-}
+```ts
+import {
+  InvoiceTax,
+  ProformaInvoiceTaxSourceType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const invoiceTax: InvoiceTax = {
+  uid: 'uid2',
+  title: 'title8',
+  description: 'description2',
+  sourceType: ProformaInvoiceTaxSourceType.Tax,
+  sourceId: 86,
+};
 ```
 

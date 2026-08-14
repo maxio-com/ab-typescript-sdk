@@ -16,15 +16,20 @@
 | `paymentProfileId` | `number \| undefined` | Optional | The ID of the payment profile to be used for the payment. |
 | `receivedOn` | `string \| undefined` | Optional | Date reflecting when the payment was received from a customer. Must be in the past. Applicable only to<br>`external` payments. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": "String9",
-  "memo": "memo0",
-  "method": "cash",
-  "details": "details6",
-  "payment_profile_id": 122
-}
+```ts
+import {
+  CreateInvoicePayment,
+  InvoicePaymentMethodType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createInvoicePayment: CreateInvoicePayment = {
+  amount: 'String7',
+  memo: 'memo8',
+  method: InvoicePaymentMethodType.Ach,
+  details: 'details4',
+  paymentProfileId: 30,
+};
 ```
 

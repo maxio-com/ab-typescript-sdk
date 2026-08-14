@@ -12,18 +12,33 @@
 | `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`CreateOrUpdateSegmentPrice[] \| undefined`](../../doc/models/create-or-update-segment-price.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "pricing_scheme": "stairstep",
-  "prices": [
+```ts
+import {
+  PricingScheme,
+  UpdateSegment,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateSegment: UpdateSegment = {
+  pricingScheme: PricingScheme.Stairstep,
+  prices: [
     {
-      "starting_quantity": 64,
-      "ending_quantity": 38,
-      "unit_price": "String3"
+      unitPrice: 'String3',
+      startingQuantity: 64,
+      endingQuantity: 38,
+    },
+    {
+      unitPrice: 'String3',
+      startingQuantity: 64,
+      endingQuantity: 38,
+    },
+    {
+      unitPrice: 'String3',
+      startingQuantity: 64,
+      endingQuantity: 38,
     }
-  ]
-}
+  ],
+};
 ```
 

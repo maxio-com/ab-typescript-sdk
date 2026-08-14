@@ -17,7 +17,7 @@ import { ItemCategory, itemCategorySchema } from './itemCategory.js';
 
 export interface UpdateComponent {
   handle?: string;
-  /** The name of the Component, suitable for display on statements. i.e. Text Messages. */
+  /** The name of the Component, suitable for display on statements. e.g., Text Messages. */
   name?: string;
   /** The description of the component. */
   description?: string | null;
@@ -31,6 +31,8 @@ export interface UpdateComponent {
   displayOnHostedPage?: boolean;
   /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
+  /** (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. */
+  unspscCode?: string | null;
   [key: string]: unknown;
 }
 
@@ -44,4 +46,5 @@ export const updateComponentSchema: Schema<UpdateComponent> = expandoObject({
   itemCategory: ['item_category', optional(nullable(itemCategorySchema))],
   displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
   upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+  unspscCode: ['unspsc_code', optional(nullable(string()))],
 });

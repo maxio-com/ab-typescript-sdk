@@ -19,15 +19,17 @@
 | `gatewayHandle` | `string \| null \| undefined` | Optional | - |
 | `achLateReject` | `boolean \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_id": 172,
-  "payment_id": 42,
-  "memo": "memo6",
-  "original_amount": "original_amount6",
-  "applied_amount": "applied_amount6"
-}
+```ts
+import { InvoiceRefund } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceRefund: InvoiceRefund = {
+  transactionId: 166,
+  paymentId: 36,
+  memo: 'memo6',
+  originalAmount: 'original_amount6',
+  appliedAmount: 'applied_amount6',
+};
 ```
 

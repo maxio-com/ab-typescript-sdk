@@ -14,25 +14,26 @@
 | `bccRecipientEmails` | `string[] \| undefined` | Optional | **Constraints**: *Maximum Items*: `5` |
 | `attachmentUrls` | `string[] \| undefined` | Optional | Array of URLs to files to attach to the invoice email. Max 10 files, 10MB each.<br><br>**Constraints**: *Maximum Items*: `10` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "recipient_emails": [
-    "recipient_emails3",
-    "recipient_emails4"
+```ts
+import { SendInvoiceRequest } from '@maxio-com/advanced-billing-sdk';
+
+const sendInvoiceRequest: SendInvoiceRequest = {
+  recipientEmails: [
+    'recipient_emails7'
   ],
-  "cc_recipient_emails": [
-    "cc_recipient_emails6",
-    "cc_recipient_emails5"
+  ccRecipientEmails: [
+    'cc_recipient_emails2'
   ],
-  "bcc_recipient_emails": [
-    "bcc_recipient_emails6"
+  bccRecipientEmails: [
+    'bcc_recipient_emails0',
+    'bcc_recipient_emails1',
+    'bcc_recipient_emails2'
   ],
-  "attachment_urls": [
-    "attachment_urls0",
-    "attachment_urls1"
-  ]
-}
+  attachmentUrls: [
+    'attachment_urls4'
+  ],
+};
 ```
 

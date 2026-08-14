@@ -18,25 +18,31 @@
 | `ids` | `number[] \| undefined` | Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
 | `archivedAt` | [`IncludeNullOrNotNull \| undefined`](../../doc/models/include-null-or-not-null.md) | Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "start_date": "2011-12-17",
-  "end_date": "2011-12-15",
-  "start_datetime": "12/19/2011 09:15:30",
-  "end_datetime": "06/07/2019 17:20:06",
-  "type": [
-    "catalog",
-    "default",
-    "custom"
+```ts
+import {
+  BasicDateField,
+  ListPricePointsFilter,
+  PricePointType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listPricePointsFilter: ListPricePointsFilter = {
+  dateField: BasicDateField.UpdatedAt,
+  startDate: '2011-12-17',
+  endDate: '2011-12-15',
+  startDatetime: '2011-12-19T09:15:30+00:00',
+  endDatetime: '2019-06-07T17:20:06Z',
+  type: [
+    PricePointType.Catalog,
+    PricePointType.Default,
+    PricePointType.Custom
   ],
-  "ids": [
+  ids: [
     1,
     2,
     3
   ],
-  "date_field": "updated_at"
-}
+};
 ```
 

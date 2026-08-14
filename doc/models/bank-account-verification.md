@@ -12,12 +12,14 @@
 | `deposit1InCents` | `bigint \| undefined` | Optional | - |
 | `deposit2InCents` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "deposit_1_in_cents": 142,
-  "deposit_2_in_cents": 132
-}
+```ts
+import { BankAccountVerification } from '@maxio-com/advanced-billing-sdk';
+
+const bankAccountVerification: BankAccountVerification = {
+  deposit1InCents: BigInt(248),
+  deposit2InCents: BigInt(10),
+};
 ```
 

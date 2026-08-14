@@ -16,7 +16,9 @@ Allows to filter by `not_null` or `null`.
 
 ## Example
 
-```
-not_null
+```ts
+import { IncludeNullOrNotNull } from '@maxio-com/advanced-billing-sdk';
+
+const includeNullOrNotNull = IncludeNullOrNotNull.NotNull;
 ```
 

@@ -21,15 +21,17 @@
 | `totalUnpaidSubscriptions` | `number \| undefined` | Optional | - |
 | `totalDunningSubscriptions` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_subscriptions": 204,
-  "subscriptions_today": 134,
-  "total_revenue": "total_revenue6",
-  "revenue_today": "revenue_today4",
-  "revenue_this_month": "revenue_this_month4"
-}
+```ts
+import { SiteStatistics } from '@maxio-com/advanced-billing-sdk';
+
+const siteStatistics: SiteStatistics = {
+  totalSubscriptions: 168,
+  subscriptionsToday: 170,
+  totalRevenue: 'total_revenue2',
+  revenueToday: 'revenue_today0',
+  revenueThisMonth: 'revenue_this_month0',
+};
 ```
 

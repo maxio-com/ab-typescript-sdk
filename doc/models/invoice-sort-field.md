@@ -20,7 +20,9 @@
 
 ## Example
 
-```
-total_amount
+```ts
+import { InvoiceSortField } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceSortField = InvoiceSortField.UpdatedAt;
 ```
 

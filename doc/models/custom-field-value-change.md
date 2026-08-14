@@ -17,17 +17,19 @@
 | `resourceType` | `string` | Required | - |
 | `resourceId` | `number` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "event_type": "event_type2",
-  "metafield_name": "metafield_name6",
-  "metafield_id": 78,
-  "old_value": "old_value2",
-  "new_value": "new_value8",
-  "resource_type": "resource_type2",
-  "resource_id": 74
-}
+```ts
+import { CustomFieldValueChange } from '@maxio-com/advanced-billing-sdk';
+
+const customFieldValueChange: CustomFieldValueChange = {
+  eventType: 'event_type8',
+  metafieldName: 'metafield_name2',
+  metafieldId: 138,
+  oldValue: 'old_value6',
+  newValue: 'new_value2',
+  resourceType: 'resource_type6',
+  resourceId: 14,
+};
 ```
 

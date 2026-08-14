@@ -13,3 +13,11 @@ The vault that stores the payment profile with the provided vault_token.
 |  --- |
 | `BraintreeBlue` |
 
+## Example
+
+```ts
+import { ApplePayVault } from '@maxio-com/advanced-billing-sdk';
+
+const applePayVault = ApplePayVault.BraintreeBlue;
+```
+

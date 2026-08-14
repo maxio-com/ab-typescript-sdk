@@ -11,19 +11,25 @@
 |  --- | --- | --- | --- |
 | `paymentProfile` | [`BankAccountPaymentProfile`](../../doc/models/bank-account-payment-profile.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_profile": {
-    "payment_type": "bank_account",
-    "verified": false,
-    "id": 44,
-    "first_name": "first_name4",
-    "last_name": "last_name2",
-    "customer_id": 82,
-    "current_vault": "authorizenet"
-  }
-}
+```ts
+import {
+  BankAccountResponse,
+  BankAccountVault,
+  PaymentType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const bankAccountResponse: BankAccountResponse = {
+  paymentProfile: {
+    paymentType: PaymentType.BankAccount,
+    id: 44,
+    firstName: 'first_name4',
+    lastName: 'last_name2',
+    customerId: 82,
+    currentVault: BankAccountVault.Authorizenet,
+    verified: false,
+  },
+};
 ```
 

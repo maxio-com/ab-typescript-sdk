@@ -22,15 +22,17 @@
 | `updatedAt` | `string \| undefined` | Optional | - |
 | `prices` | [`SegmentPrice[] \| undefined`](../../doc/models/segment-price.md) | Optional | **Constraints**: *Minimum Items*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 6,
-  "component_id": 116,
-  "price_point_id": 140,
-  "event_based_billing_metric_id": 200,
-  "pricing_scheme": "stairstep"
-}
+```ts
+import { PricingScheme, Segment } from '@maxio-com/advanced-billing-sdk';
+
+const segment: Segment = {
+  id: 118,
+  componentId: 228,
+  pricePointId: 4,
+  eventBasedBillingMetricId: 56,
+  pricingScheme: PricingScheme.Stairstep,
+};
 ```
 

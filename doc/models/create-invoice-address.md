@@ -21,15 +21,17 @@ Overrides the default address.
 | `zip` | `string \| undefined` | Optional | - |
 | `country` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "phone": "phone6",
-  "address": "address0",
-  "address_2": "address_28"
-}
+```ts
+import { CreateInvoiceAddress } from '@maxio-com/advanced-billing-sdk';
+
+const createInvoiceAddress: CreateInvoiceAddress = {
+  firstName: 'first_name6',
+  lastName: 'last_name4',
+  phone: 'phone4',
+  address: 'address2',
+  address2: 'address_20',
+};
 ```
 

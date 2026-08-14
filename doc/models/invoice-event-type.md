@@ -27,3 +27,11 @@ Invoice Event Type
 | `FailedPayment` |
 | `ChangeChargebackStatus` |
 
+## Example
+
+```ts
+import { InvoiceEventType } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceEventType = InvoiceEventType.CreateCreditNote;
+```
+

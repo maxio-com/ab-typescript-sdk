@@ -11,16 +11,18 @@
 |  --- | --- | --- | --- |
 | `refund` | [`RefundPrepayment`](../../doc/models/refund-prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "refund": {
-    "amount_in_cents": 132,
-    "amount": "String1",
-    "memo": "memo2",
-    "external": false
-  }
-}
+```ts
+import { RefundPrepaymentRequest } from '@maxio-com/advanced-billing-sdk';
+
+const refundPrepaymentRequest: RefundPrepaymentRequest = {
+  refund: {
+    amountInCents: BigInt(132),
+    amount: 'String1',
+    memo: 'memo2',
+    external: false,
+  },
+};
 ```
 

@@ -1,7 +1,7 @@
 
 # Reactivation Billing
 
-These values are only applicable to subscriptions using calendar billing
+These values are only applicable to subscriptions using calendar billing.
 
 ## Structure
 
@@ -11,13 +11,18 @@ These values are only applicable to subscriptions using calendar billing
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `reactivationCharge` | [`ReactivationCharge \| undefined`](../../doc/models/reactivation-charge.md) | Optional | You may choose how to handle the reactivation charge for that subscription: 1) `prorated` A prorated charge for the product price will be attempted for to complete the period 2) `immediate` A full-price charge for the product price will be attempted immediately 3) `delayed` A full-price charge for the product price will be attempted at the next renewal<br><br>**Default**: `ReactivationCharge.Prorated` |
+| `reactivationCharge` | [`ReactivationCharge \| undefined`](../../doc/models/reactivation-charge.md) | Optional | You may choose how to handle the reactivation charge for that subscription: 1) `prorated` A prorated charge for the product price will be attempted to complete the period 2) `immediate` A full-price charge for the product price will be attempted immediately 3) `delayed` A full-price charge for the product price will be attempted at the next renewal.<br><br>**Default**: `ReactivationCharge.Prorated` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reactivation_charge": "prorated"
-}
+```ts
+import {
+  ReactivationBilling,
+  ReactivationCharge,
+} from '@maxio-com/advanced-billing-sdk';
+
+const reactivationBilling: ReactivationBilling = {
+  reactivationCharge: ReactivationCharge.Prorated,
+};
 ```
 

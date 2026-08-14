@@ -21,15 +21,19 @@
 | `decimalQuantity` | `string \| undefined` | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 146,
-  "subscription_id": 0,
-  "subscription_renewal_configuration_id": 156,
-  "item_id": 38,
-  "item_type": "item_type4"
-}
+```ts
+import {
+  ScheduledRenewalConfigurationItem,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalConfigurationItem: ScheduledRenewalConfigurationItem = {
+  id: 54,
+  subscriptionId: 164,
+  subscriptionRenewalConfigurationId: 64,
+  itemId: 202,
+  itemType: 'item_type0',
+};
 ```
 

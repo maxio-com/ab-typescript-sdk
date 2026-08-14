@@ -13,13 +13,17 @@
 | `chargeId` | `number \| undefined` | Optional | - |
 | `usageQuantity` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation_id": 72,
-  "charge_id": 30,
-  "usage_quantity": 212
-}
+```ts
+import {
+  PrepaidUsageAllocationDetail,
+} from '@maxio-com/advanced-billing-sdk';
+
+const prepaidUsageAllocationDetail: PrepaidUsageAllocationDetail = {
+  allocationId: 144,
+  chargeId: 214,
+  usageQuantity: 140,
+};
 ```
 

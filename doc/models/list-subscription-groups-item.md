@@ -21,17 +21,20 @@
 | `accountBalances` | [`SubscriptionGroupBalances \| undefined`](../../doc/models/subscription-group-balances.md) | Optional | - |
 | `groupType` | [`GroupType \| undefined`](../../doc/models/group-type.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid0",
-  "scheme": 124,
-  "customer_id": 144,
-  "payment_profile_id": 52,
-  "subscription_ids": [
-    254
-  ]
-}
+```ts
+import { ListSubscriptionGroupsItem } from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionGroupsItem: ListSubscriptionGroupsItem = {
+  uid: 'uid0',
+  scheme: 228,
+  customerId: 248,
+  paymentProfileId: 100,
+  subscriptionIds: [
+    102,
+    103
+  ],
+};
 ```
 

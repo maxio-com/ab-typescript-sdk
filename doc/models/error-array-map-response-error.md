@@ -11,15 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | `Record<string, unknown> \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "key0": {
-      "key1": "val1",
-      "key2": "val2"
-    }
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof ErrorArrayMapResponseError) {
+    console.log(error.result);
   }
 }
 ```

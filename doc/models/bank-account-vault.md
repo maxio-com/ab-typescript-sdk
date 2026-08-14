@@ -20,3 +20,11 @@ The vault that stores the payment profile with the provided vault_token. Use `bo
 | `Maxp` |
 | `StripeConnect` |
 
+## Example
+
+```ts
+import { BankAccountVault } from '@maxio-com/advanced-billing-sdk';
+
+const bankAccountVault = BankAccountVault.Maxp;
+```
+

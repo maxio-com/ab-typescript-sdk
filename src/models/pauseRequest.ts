@@ -7,7 +7,7 @@
 import { expandoObject, lazy, optional, Schema } from '../schema.js';
 import { AutoResume, autoResumeSchema } from './autoResume.js';
 
-/** Allows to pause a Subscription */
+/** Allows you to pause a Subscription. */
 export interface PauseRequest {
   hold?: AutoResume;
   [key: string]: unknown;

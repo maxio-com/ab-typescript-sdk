@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `count` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "count": 60
-}
+```ts
+import { CountResponse } from '@maxio-com/advanced-billing-sdk';
+
+const countResponse: CountResponse = {
+  count: 56,
+};
 ```
 

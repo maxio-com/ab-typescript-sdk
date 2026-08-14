@@ -11,18 +11,20 @@
 |  --- | --- | --- | --- |
 | `allocation` | [`CreateAllocation`](../../doc/models/create-allocation.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation": {
-    "quantity": 228.94,
-    "decimal_quantity": "decimal_quantity6",
-    "previous_quantity": 254.04,
-    "decimal_previous_quantity": "decimal_previous_quantity8",
-    "component_id": 8,
-    "memo": "memo2"
-  }
-}
+```ts
+import { CreateAllocationRequest } from '@maxio-com/advanced-billing-sdk';
+
+const createAllocationRequest: CreateAllocationRequest = {
+  allocation: {
+    quantity: 228.94,
+    decimalQuantity: 'decimal_quantity6',
+    previousQuantity: 254.04,
+    decimalPreviousQuantity: 'decimal_previous_quantity8',
+    componentId: 8,
+    memo: 'memo2',
+  },
+};
 ```
 

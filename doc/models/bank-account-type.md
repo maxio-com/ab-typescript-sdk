@@ -14,3 +14,11 @@ Defaults to checking
 | `Checking` |
 | `Savings` |
 
+## Example
+
+```ts
+import { BankAccountType } from '@maxio-com/advanced-billing-sdk';
+
+const bankAccountType = BankAccountType.Checking;
+```
+

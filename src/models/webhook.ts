@@ -17,7 +17,7 @@ import {
 export interface Webhook {
   /** A string describing which event type produced the given webhook */
   event?: string;
-  /** The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. */
+  /** The unique identifier for the webhook (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. */
   id?: bigint;
   /** Timestamp indicating when the webhook was created */
   createdAt?: string;
@@ -31,7 +31,7 @@ export interface Webhook {
   lastSentAt?: string;
   /** The url that the endpoint was last sent to. */
   lastSentUrl?: string;
-  /** A boolean flag describing whether the webhook was accepted by the webhook endpoint for the most recent attempt. (Acceptance is defined by receiving a “200 OK” HTTP response within a reasonable timeframe, i.e. 15 seconds) */
+  /** “A boolean flag describing whether the webhook was accepted by the webhook endpoint for the most recent attempt. (Acceptance is defined by receiving a “200 OK” HTTP response within a reasonable timeframe, e.g., 15 seconds.)” */
   successful?: boolean;
   /** The data sent within the webhook post */
   body?: string;

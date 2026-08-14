@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `preservePeriod` | `boolean \| undefined` | Optional | The alternative to sending preserve_period as a direct attribute to migration |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "preserve_period": false
-}
+```ts
+import { Proration } from '@maxio-com/advanced-billing-sdk';
+
+const proration: Proration = {
+  preservePeriod: false,
+};
 ```
 

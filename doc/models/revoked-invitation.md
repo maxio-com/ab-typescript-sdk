@@ -13,13 +13,15 @@
 | `lastAcceptedAt` | `string \| undefined` | Optional | - |
 | `uninvitedCount` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "last_sent_at": "last_sent_at2",
-  "last_accepted_at": "last_accepted_at2",
-  "uninvited_count": 226
-}
+```ts
+import { RevokedInvitation } from '@maxio-com/advanced-billing-sdk';
+
+const revokedInvitation: RevokedInvitation = {
+  lastSentAt: 'last_sent_at8',
+  lastAcceptedAt: 'last_accepted_at8',
+  uninvitedCount: 130,
+};
 ```
 

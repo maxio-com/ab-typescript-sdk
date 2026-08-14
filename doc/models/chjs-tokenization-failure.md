@@ -12,16 +12,18 @@
 | `errors` | `string` | Required | - |
 | `paymentProfileParams` | [`PaymentProfileParams \| undefined`](../../doc/models/payment-profile-params.md) | Optional | PCI-safe cardholder fields only. Full card numbers, CVV, and billing address are never included. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": "errors2",
-  "payment_profile_params": {
-    "first_name": "first_name2",
-    "last_name": "last_name0",
-    "card_type": "card_type2"
-  }
-}
+```ts
+import { ChjsTokenizationFailure } from '@maxio-com/advanced-billing-sdk';
+
+const chjsTokenizationFailure: ChjsTokenizationFailure = {
+  errors: 'errors2',
+  paymentProfileParams: {
+    firstName: 'first_name2',
+    lastName: 'last_name0',
+    cardType: 'card_type2',
+  },
+};
 ```
 

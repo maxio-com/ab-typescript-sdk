@@ -12,3 +12,13 @@
 | `Coupon` |
 | `Referral` |
 
+## Example
+
+```ts
+import {
+  ProformaInvoiceDiscountSourceType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const proformaInvoiceDiscountSourceType = ProformaInvoiceDiscountSourceType.Coupon;
+```
+

@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `prepayment` | [`CreatedPrepayment`](../../doc/models/created-prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayment": {
-    "id": 38,
-    "subscription_id": 148,
-    "amount_in_cents": 124,
-    "memo": "memo2",
-    "created_at": "2016-03-13T12:52:32.123Z"
-  }
-}
+```ts
+import { CreatePrepaymentResponse } from '@maxio-com/advanced-billing-sdk';
+
+const createPrepaymentResponse: CreatePrepaymentResponse = {
+  prepayment: {
+    id: BigInt(38),
+    subscriptionId: 148,
+    amountInCents: BigInt(124),
+    memo: 'memo2',
+    createdAt: '2016-03-13T12:52:32.123Z',
+  },
+};
 ```
 

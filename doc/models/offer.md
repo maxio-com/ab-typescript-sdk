@@ -29,15 +29,17 @@
 | `productPriceInCents` | `bigint \| undefined` | Optional | - |
 | `offerSignupPages` | [`OfferSignupPage[] \| undefined`](../../doc/models/offer-signup-page.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 154,
-  "site_id": 80,
-  "product_family_id": 158,
-  "product_id": 96,
-  "product_price_point_id": 20
-}
+```ts
+import { Offer } from '@maxio-com/advanced-billing-sdk';
+
+const offer: Offer = {
+  id: 28,
+  siteId: 210,
+  productFamilyId: 224,
+  productId: 30,
+  productPricePointId: 150,
+};
 ```
 

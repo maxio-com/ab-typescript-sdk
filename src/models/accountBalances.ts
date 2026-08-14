@@ -8,9 +8,9 @@ import { expandoObject, lazy, optional, Schema } from '../schema.js';
 import { AccountBalance, accountBalanceSchema } from './accountBalance.js';
 
 export interface AccountBalances {
-  /** The balance, in cents, of the sum of the subscription's  open, payable invoices. */
+  /** The balance, in cents, of the sum of the subscription's open, payable invoices. */
   openInvoices?: AccountBalance;
-  /** The balance, in cents, of the sum of the subscription's  pending, payable invoices. */
+  /** The balance, in cents, of the sum of the subscription's pending, payable invoices. */
   pendingInvoices?: AccountBalance;
   /** The balance, in cents, of the subscription's Pending Discount account. */
   pendingDiscounts?: AccountBalance;

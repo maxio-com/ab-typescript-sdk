@@ -30,15 +30,17 @@
 | `billingScheduleItemId` | `number \| null \| undefined` | Optional | - |
 | `customItem` | `boolean \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "title": "title0",
-  "description": "description6",
-  "quantity": 40,
-  "quantity_delta": 114
-}
+```ts
+import { InvoiceLineItemEventData } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceLineItemEventData: InvoiceLineItemEventData = {
+  uid: 'uid4',
+  title: 'title0',
+  description: 'description4',
+  quantity: 190,
+  quantityDelta: 36,
+};
 ```
 

@@ -1,9 +1,9 @@
 
-# List Subcription Group Prepayment Item
+# List Subscription Group Prepayment Item
 
 ## Structure
 
-`ListSubcriptionGroupPrepaymentItem`
+`ListSubscriptionGroupPrepaymentItem`
 
 ## Fields
 
@@ -19,15 +19,19 @@
 | `paymentType` | [`PrepaymentMethod \| undefined`](../../doc/models/prepayment-method.md) | Optional | - |
 | `createdAt` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 254,
-  "subscription_group_uid": "subscription_group_uid6",
-  "amount_in_cents": 172,
-  "remaining_amount_in_cents": 142,
-  "details": "details2"
-}
+```ts
+import {
+  ListSubscriptionGroupPrepaymentItem,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionGroupPrepaymentItem: ListSubscriptionGroupPrepaymentItem = {
+  id: 72,
+  subscriptionGroupUid: 'subscription_group_uid6',
+  amountInCents: BigInt(98),
+  remainingAmountInCents: BigInt(216),
+  details: 'details2',
+};
 ```
 

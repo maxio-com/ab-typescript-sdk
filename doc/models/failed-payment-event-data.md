@@ -17,15 +17,20 @@ Example schema for an `failed_payment` event
 | `paymentMethod` | [`InvoicePaymentMethodType`](../../doc/models/invoice-payment-method-type.md) | Required | - |
 | `transactionId` | `number` | Required | The transaction ID of the failed payment. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount_in_cents": 128,
-  "applied_amount": 154,
-  "memo": "memo2",
-  "payment_method": "credit_card",
-  "transaction_id": 170
-}
+```ts
+import {
+  FailedPaymentEventData,
+  InvoicePaymentMethodType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const failedPaymentEventData: FailedPaymentEventData = {
+  amountInCents: 34,
+  appliedAmount: 196,
+  paymentMethod: InvoicePaymentMethodType.Ach,
+  transactionId: 76,
+  memo: 'memo0',
+};
 ```
 

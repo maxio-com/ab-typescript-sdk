@@ -11,17 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`ProformaError \| undefined`](../../doc/models/proforma-error.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "subscription": {
-      "base": [
-        "base3",
-        "base4"
-      ]
-    }
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof ProformaBadRequestErrorResponseError) {
+    console.log(error.result);
   }
 }
 ```

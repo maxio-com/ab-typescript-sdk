@@ -82,19 +82,19 @@ export interface Subscription {
   balanceInCents?: bigint;
   /** Gives the total revenue from the subscription in the number of cents. */
   totalRevenueInCents?: bigint;
-  /** (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. */
+  /** (Added Nov 5 2013) The recurring amount of the product (and version), currently subscribed. NOTE: this may differ from the current price of the product, if you’ve changed the price of the product but haven’t moved this subscription to a newer version. */
   productPriceInCents?: bigint;
   /** The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility. */
   productVersionNumber?: number;
-  /** Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) */
+  /** Timestamp relating to the end of the current (recurring) period (i.e., when the next regularly scheduled attempted charge will occur) */
   currentPeriodEndsAt?: string | null;
-  /** Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases) */
+  /** Timestamp that indicates when capture of payment will be tried or retried. This value will usually track the current_period_ends_at, but will diverge if a renewal payment fails and must be retried. In that case, the current_period_ends_at will advance to the end of the next period (time doesn’t stop because a payment was missed) but the next_assessment_at will be scheduled for the auto-retry time (e.g., 24 hours in the future, in some cases). */
   nextAssessmentAt?: string | null;
   /** Timestamp for when the trial period (if any) began */
   trialStartedAt?: string | null;
   /** Timestamp for when the trial period (if any) ended */
   trialEndedAt?: string | null;
-  /** Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial) */
+  /** Timestamp for when the subscription began (i.e., when it came out of trial, or when it began in the case of no trial) */
   activatedAt?: string | null;
   /** Timestamp giving the expiration date of this subscription (if any) */
   expiresAt?: string | null;
@@ -112,11 +112,11 @@ export interface Subscription {
   canceledAt?: string | null;
   /** Timestamp relating to the start of the current (recurring) period */
   currentPeriodStartedAt?: string | null;
-  /** Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) */
+  /** Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state). */
   previousState?: SubscriptionState;
   /** The ID of the transaction that generated the revenue */
   signupPaymentId?: number;
-  /** The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) */
+  /** The revenue, formatted as a string of decimal separated dollars and cents, from the subscription signup ($50.00 would be formatted as 50.00) */
   signupRevenue?: string;
   /** Timestamp for when the subscription is currently set to cancel. */
   delayedCancelAt?: string | null;
@@ -143,7 +143,7 @@ export interface Subscription {
   couponUseCount?: number | null;
   /** (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons. */
   couponUsesAllowed?: number | null;
-  /** The churn reason code associated to a cancelled subscription. */
+  /** The churn reason code associated to a canceled subscription. */
   reasonCode?: string | null;
   /** The date the subscription is scheduled to automatically resume from the on_hold state. */
   automaticallyResumeAt?: string | null;
@@ -170,14 +170,14 @@ export interface Subscription {
   netTerms?: number | null;
   /** For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. */
   storedCredentialTransactionId?: number | null;
-  /** The reference value (provided by your app) for the subscription istelf. */
+  /** The reference value (provided by your app) for the subscription itself. */
   reference?: string | null;
   /** The timestamp of the most recent on hold action. */
   onHoldAt?: string | null;
-  /** Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled */
+  /** Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled. */
   prepaidDunning?: boolean;
   /**
-   * Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.
+   * Additional coupon data. To use this data you also have to include the following param in the request: `include[]=coupons`.
    * Only in Read Subscription Endpoint.
    */
   coupons?: SubscriptionIncludedCoupon[];

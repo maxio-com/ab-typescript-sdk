@@ -11,16 +11,20 @@
 |  --- | --- | --- | --- |
 | `components` | [`ComponentPricePointAssignment[] \| undefined`](../../doc/models/component-price-point-assignment.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "components": [
+```ts
+import {
+  BulkComponentsPricePointAssignment,
+} from '@maxio-com/advanced-billing-sdk';
+
+const bulkComponentsPricePointAssignment: BulkComponentsPricePointAssignment = {
+  components: [
     {
-      "component_id": 108,
-      "price_point": "String5"
+      componentId: 108,
+      pricePoint: 'String5',
     }
-  ]
-}
+  ],
+};
 ```
 

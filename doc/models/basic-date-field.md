@@ -16,7 +16,9 @@ Allows to filter by `created_at` or `updated_at`.
 
 ## Example
 
-```
-updated_at
+```ts
+import { BasicDateField } from '@maxio-com/advanced-billing-sdk';
+
+const basicDateField = BasicDateField.UpdatedAt;
 ```
 

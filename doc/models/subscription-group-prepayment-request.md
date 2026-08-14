@@ -11,16 +11,21 @@
 |  --- | --- | --- | --- |
 | `prepayment` | [`SubscriptionGroupPrepayment`](../../doc/models/subscription-group-prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayment": {
-    "amount": 136,
-    "details": "details8",
-    "memo": "memo2",
-    "method": "paypal_account"
-  }
-}
+```ts
+import {
+  SubscriptionGroupPrepaymentMethod,
+  SubscriptionGroupPrepaymentRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupPrepaymentRequest: SubscriptionGroupPrepaymentRequest = {
+  prepayment: {
+    amount: 136,
+    details: 'details8',
+    memo: 'memo2',
+    method: SubscriptionGroupPrepaymentMethod.PaypalAccount,
+  },
+};
 ```
 

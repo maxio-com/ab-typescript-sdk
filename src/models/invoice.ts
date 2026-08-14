@@ -68,13 +68,13 @@ export interface Invoice {
    * While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
    */
   number?: string;
-  /** A monotonically increasing number assigned to invoices as they are created.  This number is unique within a site and can be used to sort and order invoices. */
+  /** A monotonically increasing number assigned to invoices as they are created. This number is unique within a site and can be used to sort and order invoices. */
   sequenceNumber?: number;
   transactionTime?: string;
   createdAt?: string;
   updatedAt?: string;
   /**
-   * Date the invoice was issued to the customer.  This is the date that the invoice was made available for payment.
+   * Date the invoice was issued to the customer. This is the date that the invoice was made available for payment.
    * The format is `"YYYY-MM-DD"`.
    */
   issueDate?: string;
@@ -100,7 +100,7 @@ export interface Invoice {
   /** The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. */
   currency?: string;
   /**
-   * Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:
+   * Consolidation level of the invoice, which is applicable to invoice consolidation. It will hold one of the following values:
    * * "none": A normal invoice with no consolidation.
    * * "child": An invoice segment which has been combined into a consolidated invoice.
    * * "parent": A consolidated invoice, whose contents are composed of invoice segments.
@@ -121,12 +121,12 @@ export interface Invoice {
   productFamilyName?: string;
   /** Information about the seller (merchant) listed on the masthead of the invoice. */
   seller?: InvoiceSeller;
-  /** Information about the customer who is owner or recipient the invoiced subscription. */
+  /** Information about the customer who is owner or recipient of the invoiced subscription. */
   customer?: InvoiceCustomer;
   payer?: InvoicePayer;
   recipientEmails?: string[];
   netTerms?: number;
-  /** The memo printed on invoices of any collection type.  This message is in control of the merchant. */
+  /** The memo printed on invoices of any collection type. This message is in control of the merchant. */
   memo?: string;
   /** The invoice billing address. */
   billingAddress?: InvoiceAddress;
@@ -138,7 +138,7 @@ export interface Invoice {
   discountAmount?: string;
   /** Total tax on the invoice. */
   taxAmount?: string;
-  /** The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.' */
+  /** The invoice total, which is `subtotal_amount - discount_amount + tax_amount`. */
   totalAmount?: string;
   /**
    * The amount of credit (from credit notes) applied to this invoice.
@@ -167,6 +167,8 @@ export interface Invoice {
   previousBalanceData?: InvoicePreviousBalance;
   /** The format is `"YYYY-MM-DD"`. */
   publicUrlExpiresOn?: string;
+  /** The ID of the Branding Theme associated with this invoice. This value represents the Branding Theme used for invoice theming, such as themed invoice rendering. Available only when Branding Themes are enabled for the site. */
+  brandingThemeId?: number | null;
   [key: string]: unknown;
 }
 
@@ -246,5 +248,6 @@ export const invoiceSchema: Schema<Invoice> = lazy(() =>
       optional(invoicePreviousBalanceSchema),
     ],
     publicUrlExpiresOn: ['public_url_expires_on', optional(string())],
+    brandingThemeId: ['branding_theme_id', optional(nullable(number()))],
   })
 );

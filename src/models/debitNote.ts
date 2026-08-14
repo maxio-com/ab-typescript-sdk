@@ -35,7 +35,7 @@ export interface DebitNote {
   customerId?: number;
   /** ID of the subscription that generated the debit note. */
   subscriptionId?: number;
-  /** A unique, identifier that appears on the debit note and in places it is referenced. */
+  /** A unique identifier that appears on the debit note and in places it is referenced. */
   number?: number;
   /** A monotonically increasing number assigned to debit notes as they are created. */
   sequenceNumber?: number;
@@ -44,7 +44,7 @@ export interface DebitNote {
    * While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
    */
   originCreditNoteUid?: string;
-  /** A unique, identifying string of the connected credit note. */
+  /** A unique identifying string of the connected credit note. */
   originCreditNoteNumber?: string;
   /**
    * Date the document was issued to the customer. This is the date that the document was made available for payment.
@@ -68,7 +68,7 @@ export interface DebitNote {
   currency?: string;
   /** Information about the seller (merchant) listed on the masthead of the debit note. */
   seller?: InvoiceSeller;
-  /** Information about the customer who is owner or recipient the debited subscription. */
+  /** Information about the customer who is the owner or recipient of the debited subscription. */
   customer?: InvoiceCustomer;
   /** The billing address of the debited subscription. */
   billingAddress?: InvoiceAddress;

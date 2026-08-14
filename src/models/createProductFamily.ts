@@ -5,6 +5,7 @@
  */
 
 import {
+  boolean,
   expandoObject,
   nullable,
   optional,
@@ -16,6 +17,8 @@ export interface CreateProductFamily {
   name: string;
   handle?: string | null;
   description?: string | null;
+  /** Whether surcharging applies to this product family. Defaults to `true` when omitted. Only applied on sites where surcharging is enabled. */
+  surcharging?: boolean;
   [key: string]: unknown;
 }
 
@@ -24,5 +27,6 @@ export const createProductFamilySchema: Schema<CreateProductFamily> = expandoObj
     name: ['name', string()],
     handle: ['handle', optional(nullable(string()))],
     description: ['description', optional(nullable(string()))],
+    surcharging: ['surcharging', optional(boolean())],
   }
 );

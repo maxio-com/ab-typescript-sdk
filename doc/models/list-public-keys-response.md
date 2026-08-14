@@ -12,28 +12,25 @@
 | `chargifyJsKeys` | [`PublicKey[] \| undefined`](../../doc/models/public-key.md) | Optional | - |
 | `meta` | [`ListPublicKeysMeta \| undefined`](../../doc/models/list-public-keys-meta.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargify_js_keys": [
+```ts
+import { ListPublicKeysResponse } from '@maxio-com/advanced-billing-sdk';
+
+const listPublicKeysResponse: ListPublicKeysResponse = {
+  chargifyJsKeys: [
     {
-      "public_key": "public_key8",
-      "requires_security_token": false,
-      "created_at": "2016-03-13T12:52:32.123Z"
-    },
-    {
-      "public_key": "public_key8",
-      "requires_security_token": false,
-      "created_at": "2016-03-13T12:52:32.123Z"
+      publicKey: 'public_key8',
+      requiresSecurityToken: false,
+      createdAt: '2016-03-13T12:52:32.123Z',
     }
   ],
-  "meta": {
-    "total_count": 150,
-    "current_page": 126,
-    "total_pages": 138,
-    "per_page": 152
-  }
-}
+  meta: {
+    totalCount: 150,
+    currentPage: 126,
+    totalPages: 138,
+    perPage: 152,
+  },
+};
 ```
 

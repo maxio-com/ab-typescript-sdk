@@ -130,8 +130,8 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * Returns all active payment profiles for a site, or for one customer within a site. If no payment
-   * profiles are found, this endpoint will return an empty array, not a 404.
+   * Lists all active payment profiles for a site, or for one customer within a site. If no payment
+   * profiles are found, this endpoint returns an empty array.
    *
    * @param page        Result records are organized in pages. By default, the first page of results is
    *                              displayed. The page parameter specifies a page number of results to fetch. You can
@@ -307,8 +307,8 @@ export class PaymentProfilesController extends BaseController {
   /**
    * Deletes an unused payment profile.
    *
-   * If the payment profile is in use by one or more subscriptions or groups, a 422 and error message
-   * will be returned.
+   * If the payment profile is in use by one or more subscriptions or groups, an error message is
+   * returned.
    *
    * @param paymentProfileId   The Chargify id of the payment profile
    * @return Response from the API call
@@ -336,12 +336,12 @@ export class PaymentProfilesController extends BaseController {
   /**
    * Deletes a payment profile belonging to the customer on the subscription.
    *
-   * + If the customer has multiple subscriptions, the payment profile will be removed from all of them.
+   * If the customer has multiple subscriptions, the payment profile is removed from all of them.
    *
-   * + If you delete the default payment profile for a subscription, you will need to specify another
-   * payment profile to be the default through the api, or either prompt the user to enter a card in the
-   * billing portal or on the self-service page, or visit the Payment Details tab on the subscription in
-   * the Admin UI and use the “Add New Credit Card” or “Make Active Payment Method” link, (depending on
+   * If you delete the default payment profile for a subscription, you need to specify another payment
+   * profile to be the default through the API, or either prompt the user to enter a card in the billing
+   * portal or on the self-service page, or visit the Payment Details tab on the subscription in the
+   * Admin UI and use the “Add New Credit Card” or “Make Active Payment Method” link, (depending on
    * whether there are other cards present).
    *
    * @param subscriptionId     The Chargify id of the subscription.
@@ -454,8 +454,8 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * This will change the default payment profile on the subscription group to the existing payment
-   * profile with the id specified.
+   * Changes the default payment profile on the subscription group to the existing payment profile with
+   * the specified ID.
    *
    * You must elect to change the existing payment profile to a new payment profile ID in order to
    * receive a satisfactory response from this endpoint.
@@ -489,8 +489,9 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe
-   * only) data for a customer.
+   * Returns the one-time token data, including credit card or ACH details, associated with the provided
+   * token ID. One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or
+   * Stripe only) data for a customer.
    *
    * You can use One Time Tokens while creating a subscription or payment profile instead of passing all
    * bank account or credit card data directly to a given API endpoint.
@@ -521,7 +522,7 @@ export class PaymentProfilesController extends BaseController {
   }
 
   /**
-   * You can send a "request payment update" email to the customer associated with the subscription.
+   * Sends a "request payment update" email to the customer associated with the subscription.
    *
    * If you attempt to send a "request payment update" email more than five times within a 30-minute
    * period, you will receive a `422` response with an error message in the body. This error message will

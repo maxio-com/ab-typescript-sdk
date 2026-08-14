@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `coupon` | [`Coupon \| undefined`](../../doc/models/coupon.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "coupon": {
-    "id": 196,
-    "name": "name4",
-    "code": "code2",
-    "description": "description6",
-    "amount": 97.66
-  }
-}
+```ts
+import { CouponResponse } from '@maxio-com/advanced-billing-sdk';
+
+const couponResponse: CouponResponse = {
+  coupon: {
+    id: 196,
+    name: 'name4',
+    code: 'code2',
+    description: 'description6',
+    amount: 97.66,
+  },
+};
 ```
 

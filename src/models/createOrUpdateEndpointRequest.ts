@@ -10,9 +10,9 @@ import {
   createOrUpdateEndpointSchema,
 } from './createOrUpdateEndpoint.js';
 
-/** Used to Create or Update Endpoint */
+/** Used to Create or Update Endpoint. */
 export interface CreateOrUpdateEndpointRequest {
-  /** Used to Create or Update Endpoint */
+  /** Used to Create or Update Endpoint. */
   endpoint: CreateOrUpdateEndpoint;
   [key: string]: unknown;
 }

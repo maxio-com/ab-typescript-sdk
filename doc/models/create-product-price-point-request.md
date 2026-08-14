@@ -11,22 +11,28 @@
 |  --- | --- | --- | --- |
 | `pricePoint` | [`CreateProductPricePoint`](../../doc/models/create-product-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_point": {
-    "name": "name0",
-    "price_in_cents": 196,
-    "interval": 44,
-    "interval_unit": "day",
-    "use_site_exchange_rate": true,
-    "handle": "handle6",
-    "trial_price_in_cents": 108,
-    "trial_interval": 202,
-    "trial_interval_unit": "day",
-    "trial_type": "no_obligation"
-  }
-}
+```ts
+import {
+  CreateProductPricePointRequest,
+  IntervalUnit,
+  TrialType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createProductPricePointRequest: CreateProductPricePointRequest = {
+  pricePoint: {
+    name: 'name0',
+    priceInCents: BigInt(196),
+    interval: 44,
+    intervalUnit: IntervalUnit.Day,
+    handle: 'handle6',
+    trialPriceInCents: BigInt(108),
+    trialInterval: 202,
+    trialIntervalUnit: IntervalUnit.Day,
+    trialType: TrialType.NoObligation,
+    useSiteExchangeRate: true,
+  },
+};
 ```
 

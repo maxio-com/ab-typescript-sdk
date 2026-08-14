@@ -19,24 +19,29 @@
 | `useSiteExchangeRate` | `boolean \| undefined` | Optional | If true, restricts the list to coupons whose pricing is recalculated from the site’s current exchange rates, so their currency_prices array contains on-the-fly conversions rather than stored price records. If false, restricts the list to coupons that have manually defined amounts for each currency, ensuring the response includes the saved currency_prices entries instead of exchange-rate-derived values. Use in query `filter[use_site_exchange_rate]=true`. |
 | `includeArchived` | `boolean \| undefined` | Optional | Controls returning archived coupons. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "start_date": "2011-12-17",
-  "end_date": "2011-12-15",
-  "start_datetime": "12/19/2011 09:15:30",
-  "end_datetime": "06/07/2019 17:20:06",
-  "ids": [
+```ts
+import {
+  BasicDateField,
+  ListCouponsFilter,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listCouponsFilter: ListCouponsFilter = {
+  dateField: BasicDateField.UpdatedAt,
+  startDate: '2011-12-17',
+  endDate: '2011-12-15',
+  startDatetime: '2011-12-19T09:15:30+00:00',
+  endDatetime: '2019-06-07T17:20:06Z',
+  ids: [
     1,
     2,
     3
   ],
-  "codes": [
-    "free",
-    "free_trial"
+  codes: [
+    'free',
+    'free_trial'
   ],
-  "date_field": "updated_at"
-}
+};
 ```
 

@@ -46,3 +46,11 @@ The vault that stores the payment profile with the provided `vault_token`. Use `
 | `Unipaas` |
 | `Wirecard` |
 
+## Example
+
+```ts
+import { AllVaults } from '@maxio-com/advanced-billing-sdk';
+
+const allVaults = AllVaults.EwayRapidStd;
+```
+

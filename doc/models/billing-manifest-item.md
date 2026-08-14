@@ -24,15 +24,21 @@
 | `periodRangeStart` | `string \| undefined` | Optional | - |
 | `periodRangeEnd` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_type": "info_transaction",
-  "kind": "baseline",
-  "amount_in_cents": 216,
-  "memo": "memo4",
-  "discount_amount_in_cents": 236
-}
+```ts
+import {
+  BillingManifestItem,
+  BillingManifestLineItemKind,
+  LineItemTransactionType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const billingManifestItem: BillingManifestItem = {
+  transactionType: LineItemTransactionType.Payment,
+  kind: BillingManifestLineItemKind.Trial,
+  amountInCents: BigInt(148),
+  memo: 'memo0',
+  discountAmountInCents: BigInt(88),
+};
 ```
 

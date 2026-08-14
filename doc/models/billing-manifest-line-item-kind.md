@@ -18,3 +18,11 @@ A handle for the billing manifest line item kind
 | `Component` |
 | `Tax` |
 
+## Example
+
+```ts
+import { BillingManifestLineItemKind } from '@maxio-com/advanced-billing-sdk';
+
+const billingManifestLineItemKind = BillingManifestLineItemKind.Component;
+```
+

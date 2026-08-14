@@ -15,11 +15,14 @@ importers:
         specifier: ^0.3.20
         version: 0.3.20
       '@apimatic/core':
-        specifier: ^0.10.28
-        version: 0.10.28
+        specifier: ^0.10.30
+        version: 0.10.30
       '@apimatic/schema':
         specifier: ^0.7.21
         version: 0.7.21
+      tslib:
+        specifier: ^2.5.0
+        version: 2.8.1
     devDependencies:
       '@types/jest':
         specifier: ^29.4.0
@@ -42,9 +45,6 @@ importers:
       ts-jest:
         specifier: 29.2.6
         version: 29.2.6(@babel/core@7.28.4)(jest@29.7.0)(typescript@5.9.2)
-      tslib:
-        specifier: ^2.5.0
-        version: 2.8.1
       typescript:
         specifier: ^5.2.0
         version: 5.9.2
@@ -137,6 +137,13 @@ packages:
       tslib: 2.8.1
     dev: false
 
+  /@apimatic/convert-to-stream@0.1.9:
+    resolution: {integrity: sha512-C9NEKnDZoTRBRVeUGXVyAEmy6P5o+8oLwEckTKj0iBlExJLEXNt14nf4wxfzRO1KR8j5Bw8S6yStKCrQzcVERA==}
+    engines: {node: '>=14.15.0 || >=16.0.0'}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
+
   /@apimatic/core-interfaces@0.2.14:
     resolution: {integrity: sha512-PQmSU32ndxtDddMCjbkNY/sVvDwQAsHUGKrdG5aGVE7iw/qvB2Tm2zyCarOB5TlDr4OB+/tuLCVhji0icx6MHg==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
@@ -146,11 +153,11 @@ packages:
       tslib: 2.8.1
     dev: false
 
-  /@apimatic/core@0.10.28:
-    resolution: {integrity: sha512-/1TsXtfuS6BOu1qRrKxnHuuBSSg3Q6ckf7ZPRyejzaA32PN0ke/eq+tK0tYGhnHrJtq869EXJ1r84mDw6Yb0zw==}
+  /@apimatic/core@0.10.30:
+    resolution: {integrity: sha512-MqODm1YwuW5yK7gkVtqiRQBgoAfjsTSNYTYJP4cg/JDaF8RokpiupSEDuUW6Xdo3fl/4tGCzphtAlKSeLUWKVA==}
     engines: {node: '>=14.15.0 || >=16.0.0'}
     dependencies:
-      '@apimatic/convert-to-stream': 0.1.8
+      '@apimatic/convert-to-stream': 0.1.9
       '@apimatic/core-interfaces': 0.2.14
       '@apimatic/file-wrapper': 0.3.9
       '@apimatic/http-headers': 0.3.8

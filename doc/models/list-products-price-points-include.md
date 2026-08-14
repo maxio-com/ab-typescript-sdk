@@ -13,7 +13,11 @@
 
 ## Example
 
-```
-currency_prices
+```ts
+import {
+  ListProductsPricePointsInclude,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listProductsPricePointsInclude = ListProductsPricePointsInclude.CurrencyPrices;
 ```
 

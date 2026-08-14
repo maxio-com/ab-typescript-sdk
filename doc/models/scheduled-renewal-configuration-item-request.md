@@ -11,32 +11,37 @@
 |  --- | --- | --- | --- |
 | `renewalConfigurationItem` | [`ScheduledRenewalConfigurationItemRequestRenewalConfigurationItem`](../../doc/models/containers/scheduled-renewal-configuration-item-request-renewal-configuration-item.md) | Required | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "renewal_configuration_item": {
-    "item_type": "Component",
-    "item_id": 108,
-    "price_point_id": 122,
-    "quantity": 212,
-    "custom_price": {
-      "tax_included": false,
-      "pricing_scheme": "stairstep",
-      "prices": [
+```ts
+import {
+  PricingScheme,
+  ScheduledRenewalConfigurationItemRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalConfigurationItemRequest: ScheduledRenewalConfigurationItemRequest = {
+  renewalConfigurationItem: {
+    itemType: 'Component',
+    itemId: 108,
+    pricePointId: 122,
+    quantity: 212,
+    customPrice: {
+      pricingScheme: PricingScheme.Stairstep,
+      prices: [
         {
-          "starting_quantity": 242,
-          "ending_quantity": 40,
-          "unit_price": 23.26
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
         },
         {
-          "starting_quantity": 242,
-          "ending_quantity": 40,
-          "unit_price": 23.26
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
         }
-      ]
-    }
-  }
-}
+      ],
+      taxIncluded: false,
+    },
+  },
+};
 ```
 

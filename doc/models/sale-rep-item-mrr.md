@@ -13,13 +13,15 @@
 | `usage` | `string \| undefined` | Optional | - |
 | `recurring` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "mrr": "mrr2",
-  "usage": "usage0",
-  "recurring": "recurring4"
-}
+```ts
+import { SaleRepItemMrr } from '@maxio-com/advanced-billing-sdk';
+
+const saleRepItemMrr: SaleRepItemMrr = {
+  mrr: 'mrr8',
+  usage: 'usage0',
+  recurring: 'recurring6',
+};
 ```
 

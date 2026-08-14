@@ -11,36 +11,41 @@
 |  --- | --- | --- | --- |
 | `segments` | [`CreateSegment[] \| undefined`](../../doc/models/create-segment.md) | Optional | **Constraints**: *Maximum Items*: `2000` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "segments": [
+```ts
+import {
+  BulkCreateSegments,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const bulkCreateSegments: BulkCreateSegments = {
+  segments: [
     {
-      "segment_property_1_value": "String3",
-      "segment_property_2_value": "String5",
-      "segment_property_3_value": "String3",
-      "segment_property_4_value": "String7",
-      "pricing_scheme": "stairstep",
-      "prices": [
+      pricingScheme: PricingScheme.Stairstep,
+      segmentProperty1Value: 'String3',
+      segmentProperty2Value: 'String5',
+      segmentProperty3Value: 'String3',
+      segmentProperty4Value: 'String7',
+      prices: [
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         },
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         },
         {
-          "starting_quantity": 64,
-          "ending_quantity": 38,
-          "unit_price": "String3"
+          unitPrice: 'String3',
+          startingQuantity: 64,
+          endingQuantity: 38,
         }
-      ]
+      ],
     }
-  ]
-}
+  ],
+};
 ```
 

@@ -11,17 +11,22 @@
 |  --- | --- | --- | --- |
 | `subscription` | [`Subscription \| undefined`](../../doc/models/subscription.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription": {
-    "id": 8,
-    "state": "paused",
-    "balance_in_cents": 124,
-    "total_revenue_in_cents": 48,
-    "product_price_in_cents": 238
-  }
-}
+```ts
+import {
+  SubscriptionResponse,
+  SubscriptionState,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionResponse: SubscriptionResponse = {
+  subscription: {
+    id: 8,
+    state: SubscriptionState.Paused,
+    balanceInCents: BigInt(124),
+    totalRevenueInCents: BigInt(48),
+    productPriceInCents: BigInt(238),
+  },
+};
 ```
 

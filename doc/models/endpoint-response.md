@@ -11,19 +11,21 @@
 |  --- | --- | --- | --- |
 | `endpoint` | [`Endpoint \| undefined`](../../doc/models/endpoint.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "endpoint": {
-    "id": 202,
-    "url": "url2",
-    "site_id": 128,
-    "status": "status0",
-    "webhook_subscriptions": [
-      "webhook_subscriptions4"
-    ]
-  }
-}
+```ts
+import { EndpointResponse } from '@maxio-com/advanced-billing-sdk';
+
+const endpointResponse: EndpointResponse = {
+  endpoint: {
+    id: 202,
+    url: 'url2',
+    siteId: 128,
+    status: 'status0',
+    webhookSubscriptions: [
+      'webhook_subscriptions4'
+    ],
+  },
+};
 ```
 

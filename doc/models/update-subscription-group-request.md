@@ -11,16 +11,20 @@
 |  --- | --- | --- | --- |
 | `subscriptionGroup` | [`UpdateSubscriptionGroup`](../../doc/models/update-subscription-group.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_group": {
-    "member_ids": [
+```ts
+import {
+  UpdateSubscriptionGroupRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateSubscriptionGroupRequest: UpdateSubscriptionGroupRequest = {
+  subscriptionGroup: {
+    memberIds: [
       164,
       165
-    ]
-  }
-}
+    ],
+  },
+};
 ```
 

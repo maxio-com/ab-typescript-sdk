@@ -19,15 +19,17 @@
 | `prevQuantity` | `number \| undefined` | Optional | - |
 | `recurring` | `boolean \| undefined` | Optional | When `true`, the line item's MRR value will contribute to the `plan` breakout. When `false`, the line item contributes to the `usage` breakout. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "product_id": 156,
-  "component_id": 68,
-  "price_point_id": 164,
-  "name": "name6",
-  "mrr": 154
-}
+```ts
+import { MovementLineItem } from '@maxio-com/advanced-billing-sdk';
+
+const movementLineItem: MovementLineItem = {
+  productId: 146,
+  componentId: 58,
+  pricePointId: 82,
+  name: 'name8',
+  mrr: 92,
+};
 ```
 

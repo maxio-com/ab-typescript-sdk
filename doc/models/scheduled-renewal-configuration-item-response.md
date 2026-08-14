@@ -11,17 +11,21 @@
 |  --- | --- | --- | --- |
 | `scheduledRenewalConfigurationItem` | [`ScheduledRenewalConfigurationItem \| undefined`](../../doc/models/scheduled-renewal-configuration-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "scheduled_renewal_configuration_item": {
-    "id": 98,
-    "subscription_id": 208,
-    "subscription_renewal_configuration_id": 108,
-    "item_id": 246,
-    "item_type": "item_type2"
-  }
-}
+```ts
+import {
+  ScheduledRenewalConfigurationItemResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalConfigurationItemResponse: ScheduledRenewalConfigurationItemResponse = {
+  scheduledRenewalConfigurationItem: {
+    id: 98,
+    subscriptionId: 208,
+    subscriptionRenewalConfigurationId: 108,
+    itemId: 246,
+    itemType: 'item_type2',
+  },
+};
 ```
 

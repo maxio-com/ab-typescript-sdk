@@ -1,7 +1,7 @@
 
 # Create or Update Endpoint
 
-Used to Create or Update Endpoint
+Used to Create or Update Endpoint.
 
 ## Structure
 
@@ -14,14 +14,21 @@ Used to Create or Update Endpoint
 | `url` | `string` | Required | - |
 | `webhookSubscriptions` | [`WebhookSubscription[]`](../../doc/models/webhook-subscription.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "url": "url8",
-  "webhook_subscriptions": [
-    "refund_success"
-  ]
-}
+```ts
+import {
+  CreateOrUpdateEndpoint,
+  WebhookSubscription,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createOrUpdateEndpoint: CreateOrUpdateEndpoint = {
+  url: 'url4',
+  webhookSubscriptions: [
+    WebhookSubscription.TrialEndNotice,
+    WebhookSubscription.SubscriptionStateChange,
+    WebhookSubscription.SubscriptionProductChangeScheduled
+  ],
+};
 ```
 

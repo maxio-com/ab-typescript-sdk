@@ -19,3 +19,11 @@
 | `TrialEndedAt` |
 | `UpdatedAt` |
 
+## Example
+
+```ts
+import { SubscriptionDateField } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionDateField = SubscriptionDateField.UpdatedAt;
+```
+

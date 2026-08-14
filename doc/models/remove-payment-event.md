@@ -15,35 +15,41 @@
 | `eventType` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `InvoiceEventType.RemovePayment` |
 | `eventData` | [`RemovePaymentEventData`](../../doc/models/remove-payment-event-data.md) | Required | Example schema for an `remove_payment` event |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 236,
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "invoice": {
-    "issue_date": "2024-01-01",
-    "due_date": "2024-01-01",
-    "paid_date": "2024-01-01",
-    "public_url_expires_on": "2024-01-21",
-    "id": 166,
-    "uid": "uid6",
-    "site_id": 92,
-    "customer_id": 204,
-    "subscription_id": 20
+```ts
+import {
+  InvoiceEventPaymentMethod,
+  InvoiceEventType,
+  RemovePaymentEvent,
+} from '@maxio-com/advanced-billing-sdk';
+
+const removePaymentEvent: RemovePaymentEvent = {
+  id: BigInt(132),
+  timestamp: '2016-03-13T12:52:32.123Z',
+  invoice: {
+    id: BigInt(166),
+    uid: 'uid6',
+    siteId: 92,
+    customerId: 204,
+    subscriptionId: 20,
+    issueDate: '2024-01-01',
+    dueDate: '2024-01-01',
+    paidDate: '2024-01-01',
+    publicUrlExpiresOn: '2024-01-21',
   },
-  "event_type": "remove_payment",
-  "event_data": {
-    "transaction_id": 78,
-    "memo": "memo0",
-    "applied_amount": "applied_amount2",
-    "transaction_time": "2016-03-13T12:52:32.123Z",
-    "payment_method": {
-      "type": "apple_pay"
+  eventType: InvoiceEventType.RemovePayment,
+  eventData: {
+    transactionId: 78,
+    memo: 'memo0',
+    appliedAmount: 'applied_amount2',
+    transactionTime: '2016-03-13T12:52:32.123Z',
+    paymentMethod: {
+      type: InvoiceEventPaymentMethod.ApplePay,
     },
-    "prepayment": false,
-    "original_amount": "original_amount0"
-  }
-}
+    prepayment: false,
+    originalAmount: 'original_amount0',
+  },
+};
 ```
 

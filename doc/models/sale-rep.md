@@ -15,30 +15,39 @@
 | `testMode` | `boolean \| undefined` | Optional | - |
 | `subscriptions` | [`SaleRepSubscription[] \| undefined`](../../doc/models/sale-rep-subscription.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 18,
-  "full_name": "full_name0",
-  "subscriptions_count": 162,
-  "test_mode": false,
-  "subscriptions": [
+```ts
+import { SaleRep } from '@maxio-com/advanced-billing-sdk';
+
+const saleRep: SaleRep = {
+  id: 78,
+  fullName: 'full_name0',
+  subscriptionsCount: 102,
+  testMode: false,
+  subscriptions: [
     {
-      "id": 202,
-      "site_name": "site_name8",
-      "subscription_url": "subscription_url2",
-      "customer_name": "customer_name8",
-      "created_at": "created_at4"
+      id: 202,
+      siteName: 'site_name8',
+      subscriptionUrl: 'subscription_url2',
+      customerName: 'customer_name8',
+      createdAt: 'created_at4',
     },
     {
-      "id": 202,
-      "site_name": "site_name8",
-      "subscription_url": "subscription_url2",
-      "customer_name": "customer_name8",
-      "created_at": "created_at4"
+      id: 202,
+      siteName: 'site_name8',
+      subscriptionUrl: 'subscription_url2',
+      customerName: 'customer_name8',
+      createdAt: 'created_at4',
+    },
+    {
+      id: 202,
+      siteName: 'site_name8',
+      subscriptionUrl: 'subscription_url2',
+      customerName: 'customer_name8',
+      createdAt: 'created_at4',
     }
-  ]
-}
+  ],
+};
 ```
 

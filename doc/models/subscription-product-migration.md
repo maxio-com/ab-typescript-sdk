@@ -19,16 +19,20 @@
 | `productPricePointHandle` | `string \| undefined` | Optional | The ID or handle of the specified product's price point. This can be passed to migrate to a non-default price point. |
 | `proration` | [`Proration \| undefined`](../../doc/models/proration.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "include_trial": false,
-  "include_initial_charge": false,
-  "include_coupons": true,
-  "preserve_period": false,
-  "product_id": 8,
-  "product_price_point_id": 172
-}
+```ts
+import {
+  SubscriptionProductMigration,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionProductMigration: SubscriptionProductMigration = {
+  productId: 44,
+  productPricePointId: 224,
+  includeTrial: false,
+  includeInitialCharge: false,
+  includeCoupons: true,
+  preservePeriod: false,
+};
 ```
 

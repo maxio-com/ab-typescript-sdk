@@ -11,16 +11,21 @@
 |  --- | --- | --- | --- |
 | `payment` | [`CreatePayment`](../../doc/models/create-payment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment": {
-    "amount": "amount8",
-    "memo": "memo0",
-    "payment_details": "payment_details6",
-    "payment_method": "cash"
-  }
-}
+```ts
+import {
+  InvoicePaymentMethodType,
+  RecordPaymentRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const recordPaymentRequest: RecordPaymentRequest = {
+  payment: {
+    amount: 'amount8',
+    memo: 'memo0',
+    paymentDetails: 'payment_details6',
+    paymentMethod: InvoicePaymentMethodType.Cash,
+  },
+};
 ```
 

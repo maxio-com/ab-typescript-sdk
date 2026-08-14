@@ -11,17 +11,19 @@
 |  --- | --- | --- | --- |
 | `pricePoint` | [`ProductPricePoint`](../../doc/models/product-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_point": {
-    "id": 248,
-    "name": "name0",
-    "handle": "handle6",
-    "price_in_cents": 196,
-    "interval": 44
-  }
-}
+```ts
+import { ProductPricePointResponse } from '@maxio-com/advanced-billing-sdk';
+
+const productPricePointResponse: ProductPricePointResponse = {
+  pricePoint: {
+    id: 248,
+    name: 'name0',
+    handle: 'handle6',
+    priceInCents: BigInt(196),
+    interval: 44,
+  },
+};
 ```
 

@@ -18,15 +18,17 @@
 | `lastFour` | `string \| null \| undefined` | Optional | - |
 | `maskedCardNumber` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "details": "details8",
-  "kind": "kind6",
-  "memo": "memo2",
-  "type": "type8",
-  "card_brand": "card_brand8"
-}
+```ts
+import { InvoicePaymentMethod } from '@maxio-com/advanced-billing-sdk';
+
+const invoicePaymentMethod: InvoicePaymentMethod = {
+  details: 'details2',
+  kind: 'kind0',
+  memo: 'memo6',
+  type: 'type8',
+  cardBrand: 'card_brand4',
+};
 ```
 

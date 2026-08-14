@@ -14,14 +14,19 @@
 | `memo` | `string \| null` | Required | - |
 | `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "details": "details4",
-  "kind": "kind2",
-  "memo": "memo8",
-  "type": "external"
-}
+```ts
+import {
+  InvoiceEventPaymentMethod,
+  PaymentMethodExternal,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentMethodExternal: PaymentMethodExternal = {
+  details: 'details0',
+  kind: 'kind8',
+  memo: 'memo4',
+  type: InvoiceEventPaymentMethod.External,
+};
 ```
 

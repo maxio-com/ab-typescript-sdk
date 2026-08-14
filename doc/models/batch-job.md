@@ -15,15 +15,17 @@
 | `createdAt` | `string \| null \| undefined` | Optional | - |
 | `completed` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 246,
-  "finished_at": "2016-03-13T12:52:32.123Z",
-  "row_count": 254,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "completed": "completed0"
-}
+```ts
+import { BatchJob } from '@maxio-com/advanced-billing-sdk';
+
+const batchJob: BatchJob = {
+  id: 60,
+  finishedAt: '2016-03-13T12:52:32.123Z',
+  rowCount: 68,
+  createdAt: '2016-03-13T12:52:32.123Z',
+  completed: 'completed6',
+};
 ```
 

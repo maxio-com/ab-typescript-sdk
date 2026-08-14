@@ -16,15 +16,17 @@
 | `email` | `string \| undefined` | Optional | - |
 | `vatNumber` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargify_id": 46,
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "organization": "organization8",
-  "email": "email2"
-}
+```ts
+import { InvoicePayer } from '@maxio-com/advanced-billing-sdk';
+
+const invoicePayer: InvoicePayer = {
+  chargifyId: 198,
+  firstName: 'first_name2',
+  lastName: 'last_name0',
+  organization: 'organization4',
+  email: 'email4',
+};
 ```
 

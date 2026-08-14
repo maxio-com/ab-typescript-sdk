@@ -18,7 +18,7 @@ import {
   prepaymentMethodSchema,
 } from './prepaymentMethod.js';
 
-export interface ListSubcriptionGroupPrepaymentItem {
+export interface ListSubscriptionGroupPrepaymentItem {
   id?: number;
   subscriptionGroupUid?: string;
   amountInCents?: bigint;
@@ -31,7 +31,7 @@ export interface ListSubcriptionGroupPrepaymentItem {
   [key: string]: unknown;
 }
 
-export const listSubcriptionGroupPrepaymentItemSchema: Schema<ListSubcriptionGroupPrepaymentItem> = expandoObject(
+export const listSubscriptionGroupPrepaymentItemSchema: Schema<ListSubscriptionGroupPrepaymentItem> = expandoObject(
   {
     id: ['id', optional(number())],
     subscriptionGroupUid: ['subscription_group_uid', optional(string())],

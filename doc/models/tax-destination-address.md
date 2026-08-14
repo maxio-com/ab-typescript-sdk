@@ -14,3 +14,11 @@
 | `ShippingOnly` |
 | `BillingOnly` |
 
+## Example
+
+```ts
+import { TaxDestinationAddress } from '@maxio-com/advanced-billing-sdk';
+
+const taxDestinationAddress = TaxDestinationAddress.ShippingOnly;
+```
+

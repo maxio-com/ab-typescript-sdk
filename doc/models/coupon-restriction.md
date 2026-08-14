@@ -15,15 +15,20 @@
 | `name` | `string \| undefined` | Optional | - |
 | `handle` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 180,
-  "item_type": "Component",
-  "item_id": 184,
-  "name": "name4",
-  "handle": "handle0"
-}
+```ts
+import {
+  CouponRestriction,
+  RestrictionType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const couponRestriction: CouponRestriction = {
+  id: 66,
+  itemType: RestrictionType.Component,
+  itemId: 214,
+  name: 'name0',
+  handle: 'handle6',
+};
 ```
 

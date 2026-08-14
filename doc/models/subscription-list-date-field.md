@@ -13,7 +13,9 @@
 
 ## Example
 
-```
-updated_at
+```ts
+import { SubscriptionListDateField } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionListDateField = SubscriptionListDateField.UpdatedAt;
 ```
 

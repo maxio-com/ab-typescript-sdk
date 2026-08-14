@@ -18,15 +18,17 @@
 | `formattedUnitPrice` | `string \| undefined` | Optional | - |
 | `segmentId` | `number \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 234,
-  "component_id": 88,
-  "starting_quantity": 104,
-  "ending_quantity": 78,
-  "unit_price": "unit_price0"
-}
+```ts
+import { ComponentPrice } from '@maxio-com/advanced-billing-sdk';
+
+const componentPrice: ComponentPrice = {
+  id: 18,
+  componentId: 128,
+  startingQuantity: 64,
+  endingQuantity: 218,
+  unitPrice: 'unit_price4',
+};
 ```
 

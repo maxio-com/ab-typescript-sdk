@@ -11,9 +11,9 @@
 |  --- | --- | --- | --- |
 | `bankName` | `string \| undefined` | Optional | (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides |
 | `bankAccountNumber` | `string \| undefined` | Optional | (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number |
-| `bankRoutingNumber` | `string \| undefined` | Optional | (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API |
-| `bankIban` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided |
-| `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided |
+| `bankRoutingNumber` | `string \| undefined` | Optional | (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless.) The routing number of the bank. It becomes bank_code while passing via GoCardless API. |
+| `bankIban` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided. |
+| `bankBranchCode` | `string \| undefined` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided. |
 | `bankAccountType` | [`BankAccountType \| undefined`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bankAccountHolderType` | [`BankAccountHolderType \| undefined`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
 | `paymentType` | [`PaymentType \| undefined`](../../doc/models/payment-type.md) | Optional | - |
@@ -26,15 +26,19 @@
 | `currentVault` | [`BankAccountVault \| undefined`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. |
 | `gatewayHandle` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "bank_name": "bank_name2",
-  "bank_account_number": "bank_account_number4",
-  "bank_routing_number": "bank_routing_number8",
-  "bank_iban": "bank_iban6",
-  "bank_branch_code": "bank_branch_code6"
-}
+```ts
+import {
+  SubscriptionGroupBankAccount,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupBankAccount: SubscriptionGroupBankAccount = {
+  bankName: 'bank_name2',
+  bankAccountNumber: 'bank_account_number4',
+  bankRoutingNumber: 'bank_routing_number8',
+  bankIban: 'bank_iban6',
+  bankBranchCode: 'bank_branch_code6',
+};
 ```
 

@@ -12,14 +12,19 @@ Attributes of the target customer who will be the responsible payer of the creat
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `type` | [`GroupTargetType`](../../doc/models/group-target-type.md) | Required | The type of object indicated by the id attribute. |
-| `id` | `number \| undefined` | Optional | The id of the target customer or subscription to group the existing subscription with. Ignored and should not be included if type is "self" , "parent", or "eldest" |
+| `id` | `number \| undefined` | Optional | The id of the target customer or subscription to group the existing subscription with. Ignored and should not be included if type is "self", "parent", or "eldest". |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "type": "self",
-  "id": 134
-}
+```ts
+import {
+  GroupTarget,
+  GroupTargetType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const groupTarget: GroupTarget = {
+  type: GroupTargetType.Parent,
+  id: 234,
+};
 ```
 

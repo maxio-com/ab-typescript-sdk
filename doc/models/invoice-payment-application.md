@@ -13,13 +13,15 @@
 | `applicationUid` | `string \| undefined` | Optional | Unique identifier for the payment. It has the prefix "pmt_" followed by alphanumeric characters. |
 | `appliedAmount` | `string \| undefined` | Optional | Dollar amount of the paid invoice. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "invoice_uid": "invoice_uid2",
-  "application_uid": "application_uid4",
-  "applied_amount": "applied_amount6"
-}
+```ts
+import { InvoicePaymentApplication } from '@maxio-com/advanced-billing-sdk';
+
+const invoicePaymentApplication: InvoicePaymentApplication = {
+  invoiceUid: 'invoice_uid8',
+  applicationUid: 'application_uid8',
+  appliedAmount: 'applied_amount0',
+};
 ```
 

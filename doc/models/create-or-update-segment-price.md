@@ -13,13 +13,15 @@
 | `endingQuantity` | `number \| undefined` | Optional | - |
 | `unitPrice` | [`CreateOrUpdateSegmentPriceUnitPrice`](../../doc/models/containers/create-or-update-segment-price-unit-price.md) | Required | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "starting_quantity": 78,
-  "ending_quantity": 52,
-  "unit_price": "String7"
-}
+```ts
+import { CreateOrUpdateSegmentPrice } from '@maxio-com/advanced-billing-sdk';
+
+const createOrUpdateSegmentPrice: CreateOrUpdateSegmentPrice = {
+  unitPrice: 'String9',
+  startingQuantity: 98,
+  endingQuantity: 184,
+};
 ```
 

@@ -11,14 +11,16 @@
 |  --- | --- | --- | --- |
 | `attribute` | `string[]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "attribute": [
-    "attribute6",
-    "attribute7"
-  ]
-}
+```ts
+import { AttributeError } from '@maxio-com/advanced-billing-sdk';
+
+const attributeError: AttributeError = {
+  attribute: [
+    'attribute8',
+    'attribute7'
+  ],
+};
 ```
 

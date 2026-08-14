@@ -16,3 +16,11 @@ The identifier for the pricing scheme. See [Product Components](https://help.cha
 | `PerUnit` |
 | `Tiered` |
 
+## Example
+
+```ts
+import { PricingScheme } from '@maxio-com/advanced-billing-sdk';
+
+const pricingScheme = PricingScheme.Stairstep;
+```
+

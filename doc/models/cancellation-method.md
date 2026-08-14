@@ -18,3 +18,11 @@ The process used to cancel the subscription, if the subscription has been cancel
 | `Unknown` |
 | `Imported` |
 
+## Example
+
+```ts
+import { CancellationMethod } from '@maxio-com/advanced-billing-sdk';
+
+const cancellationMethod = CancellationMethod.MerchantUi;
+```
+

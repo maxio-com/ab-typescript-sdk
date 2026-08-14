@@ -109,7 +109,7 @@ const value: EventEventSpecificData = {
 ```ts
 const value: EventEventSpecificData = {
   previousUnitBalance: 'previous_unit_balance6',
-  newUnitBalance: 80,
+  newUnitBalance: 2,
   usageQuantity: 42,
   componentId: 4,
   componentHandle: 'component_handle8',
@@ -127,8 +127,8 @@ const value: EventEventSpecificData = {
 const value: EventEventSpecificData = {
   previousUnitBalance: 'previous_unit_balance0',
   previousOverageUnitBalance: 'previous_overage_unit_balance4',
-  newUnitBalance: 252,
-  newOverageUnitBalance: 224,
+  newUnitBalance: 174,
+  newOverageUnitBalance: 146,
   usageQuantity: 214,
   overageUsageQuantity: 106,
   componentId: 176,

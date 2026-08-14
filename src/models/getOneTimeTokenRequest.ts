@@ -6,18 +6,21 @@
 
 import { expandoObject, lazy, Schema } from '../schema.js';
 import {
-  GetOneTimeTokenPaymentProfile,
-  getOneTimeTokenPaymentProfileSchema,
-} from './getOneTimeTokenPaymentProfile.js';
+  GetOneTimeTokenRequestPaymentProfile,
+  getOneTimeTokenRequestPaymentProfileSchema,
+} from './containers/getOneTimeTokenRequestPaymentProfile.js';
 
 export interface GetOneTimeTokenRequest {
-  paymentProfile: GetOneTimeTokenPaymentProfile;
+  paymentProfile: GetOneTimeTokenRequestPaymentProfile;
   [key: string]: unknown;
 }
 
 export const getOneTimeTokenRequestSchema: Schema<GetOneTimeTokenRequest> = lazy(
   () =>
     expandoObject({
-      paymentProfile: ['payment_profile', getOneTimeTokenPaymentProfileSchema],
+      paymentProfile: [
+        'payment_profile',
+        getOneTimeTokenRequestPaymentProfileSchema,
+      ],
     })
 );

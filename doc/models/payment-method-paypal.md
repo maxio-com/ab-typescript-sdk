@@ -12,12 +12,17 @@
 | `email` | `string` | Required | - |
 | `type` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "email": "email2",
-  "type": "paypal_account"
-}
+```ts
+import {
+  InvoiceEventPaymentMethod,
+  PaymentMethodPaypal,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentMethodPaypal: PaymentMethodPaypal = {
+  email: 'email8',
+  type: InvoiceEventPaymentMethod.PaypalAccount,
+};
 ```
 

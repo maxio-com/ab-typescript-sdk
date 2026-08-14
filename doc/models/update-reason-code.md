@@ -13,13 +13,15 @@
 | `description` | `string \| undefined` | Optional | The friendly summary of what the code signifies |
 | `position` | `number \| undefined` | Optional | The order that code appears in lists |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "code0",
-  "description": "description8",
-  "position": 118
-}
+```ts
+import { UpdateReasonCode } from '@maxio-com/advanced-billing-sdk';
+
+const updateReasonCode: UpdateReasonCode = {
+  code: 'code4',
+  description: 'description6',
+  position: 4,
+};
 ```
 

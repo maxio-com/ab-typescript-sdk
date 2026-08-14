@@ -11,33 +11,30 @@
 |  --- | --- | --- | --- |
 | `rates` | [`ComponentCostData[] \| undefined`](../../doc/models/component-cost-data.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "rates": [
+```ts
+import {
+  InvoiceLineItemComponentCostData,
+} from '@maxio-com/advanced-billing-sdk';
+
+const invoiceLineItemComponentCostData: InvoiceLineItemComponentCostData = {
+  rates: [
     {
-      "component_code_id": 116,
-      "price_point_id": 226,
-      "product_id": 94,
-      "quantity": "quantity0",
-      "amount": "amount6"
+      componentCodeId: 116,
+      pricePointId: 226,
+      productId: 94,
+      quantity: 'quantity0',
+      amount: 'amount6',
     },
     {
-      "component_code_id": 116,
-      "price_point_id": 226,
-      "product_id": 94,
-      "quantity": "quantity0",
-      "amount": "amount6"
-    },
-    {
-      "component_code_id": 116,
-      "price_point_id": 226,
-      "product_id": 94,
-      "quantity": "quantity0",
-      "amount": "amount6"
+      componentCodeId: 116,
+      pricePointId: 226,
+      productId: 94,
+      quantity: 'quantity0',
+      amount: 'amount6',
     }
-  ]
-}
+  ],
+};
 ```
 

@@ -11,30 +11,20 @@
 |  --- | --- | --- | --- |
 | `currencyPrices` | [`CouponCurrency[] \| undefined`](../../doc/models/coupon-currency.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
+```ts
+import { CouponCurrencyResponse } from '@maxio-com/advanced-billing-sdk';
+
+const couponCurrencyResponse: CouponCurrencyResponse = {
+  currencyPrices: [
     {
-      "id": 50,
-      "currency": "currency8",
-      "price": 233.74,
-      "coupon_id": 224
-    },
-    {
-      "id": 50,
-      "currency": "currency8",
-      "price": 233.74,
-      "coupon_id": 224
-    },
-    {
-      "id": 50,
-      "currency": "currency8",
-      "price": 233.74,
-      "coupon_id": 224
+      id: 50,
+      currency: 'currency8',
+      price: 233.74,
+      couponId: 224,
     }
-  ]
-}
+  ],
+};
 ```
 

@@ -31,12 +31,15 @@ import { ErrorListResponseError } from '../errors/errorListResponseError.js';
 
 export class ProductsController extends BaseController {
   /**
-   * Creates a product in your Advanced Billing site.
+   * Creates a product in your site.
    *
-   * See the following product documentation for more information:
+   * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
+   * experience-and-terminology) enabled, the `auto_create_signup_page` parameter is not supported. If
+   * `auto_create_signup_page` is included (with any value) an error is returned.
    *
-   * + [Products Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-
-   * Overview)
+   * For more information, see:
+   *
+   * + [Products Overview](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
    * + [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-
    * Product-Changes-and-Migrations)
    *

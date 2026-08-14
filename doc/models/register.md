@@ -12,16 +12,18 @@
 | `id` | `number \| undefined` | Optional | - |
 | `maxioId` | `string \| undefined` | Optional | - |
 | `name` | `string \| undefined` | Optional | - |
-| `currencyCode` | `string \| undefined` | Optional | The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. |
+| `currencyCode` | `string \| undefined` | Optional | The ISO 4217 currency code (3 character string) representing the currency of an invoice transaction. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 90,
-  "maxio_id": "maxio_id0",
-  "name": "name6",
-  "currency_code": "currency_code2"
-}
+```ts
+import { Register } from '@maxio-com/advanced-billing-sdk';
+
+const register: Register = {
+  id: 54,
+  maxioId: 'maxio_id4',
+  name: 'name2',
+  currencyCode: 'currency_code2',
+};
 ```
 

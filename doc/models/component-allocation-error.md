@@ -11,30 +11,15 @@
 |  --- | --- | --- | --- |
 | `errors` | [`ComponentAllocationErrorItem[] \| undefined`](../../doc/models/component-allocation-error-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    {
-      "component_id": 236,
-      "message": "message0",
-      "kind": "kind8",
-      "on": "on0"
-    },
-    {
-      "component_id": 236,
-      "message": "message0",
-      "kind": "kind8",
-      "on": "on0"
-    },
-    {
-      "component_id": 236,
-      "message": "message0",
-      "kind": "kind8",
-      "on": "on0"
-    }
-  ]
+```ts
+try {
+  // make the API call
+} catch (error) {
+  if (error instanceof ComponentAllocationError) {
+    console.log(error.result);
+  }
 }
 ```
 

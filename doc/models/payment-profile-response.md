@@ -11,18 +11,24 @@
 |  --- | --- | --- | --- |
 | `paymentProfile` | [`PaymentProfile`](../../doc/models/containers/payment-profile.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_profile": {
-    "payment_type": "apple_pay",
-    "id": 60,
-    "first_name": "first_name2",
-    "last_name": "last_name0",
-    "customer_id": 98,
-    "current_vault": "braintree_blue"
-  }
-}
+```ts
+import {
+  ApplePayVault,
+  PaymentProfileResponse,
+  PaymentType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paymentProfileResponse: PaymentProfileResponse = {
+  paymentProfile: {
+    paymentType: PaymentType.ApplePay,
+    id: 60,
+    firstName: 'first_name2',
+    lastName: 'last_name0',
+    customerId: 98,
+    currentVault: ApplePayVault.BraintreeBlue,
+  },
+};
 ```
 

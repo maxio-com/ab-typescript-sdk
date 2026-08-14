@@ -20,15 +20,17 @@
 | `lastPayment` | `string \| undefined` | Optional | - |
 | `churnDate` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 18,
-  "site_name": "site_name2",
-  "subscription_url": "subscription_url6",
-  "customer_name": "customer_name2",
-  "created_at": "created_at8"
-}
+```ts
+import { SaleRepSubscription } from '@maxio-com/advanced-billing-sdk';
+
+const saleRepSubscription: SaleRepSubscription = {
+  id: 68,
+  siteName: 'site_name8',
+  subscriptionUrl: 'subscription_url2',
+  customerName: 'customer_name8',
+  createdAt: 'created_at4',
+};
 ```
 

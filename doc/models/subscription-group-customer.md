@@ -15,15 +15,17 @@
 | `email` | `string \| undefined` | Optional | - |
 | `reference` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "organization": "organization2",
-  "email": "email2",
-  "reference": "reference0"
-}
+```ts
+import { SubscriptionGroupCustomer } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupCustomer: SubscriptionGroupCustomer = {
+  firstName: 'first_name6',
+  lastName: 'last_name4',
+  organization: 'organization0',
+  email: 'email0',
+  reference: 'reference8',
+};
 ```
 

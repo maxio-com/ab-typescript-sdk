@@ -29,16 +29,22 @@
 | `createdAt` | `string \| undefined` | Optional | A timestamp indicating when this payment profile was created |
 | `updatedAt` | `string \| undefined` | Optional | A timestamp indicating when this payment profile was last updated |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_type": "paypal_account",
-  "id": 10,
-  "first_name": "first_name0",
-  "last_name": "last_name8",
-  "customer_id": 48,
-  "current_vault": "moduslink"
-}
+```ts
+import {
+  PayPalVault,
+  PaymentType,
+  PaypalPaymentProfile,
+} from '@maxio-com/advanced-billing-sdk';
+
+const paypalPaymentProfile: PaypalPaymentProfile = {
+  paymentType: PaymentType.PaypalAccount,
+  id: 214,
+  firstName: 'first_name0',
+  lastName: 'last_name8',
+  customerId: 252,
+  currentVault: PayPalVault.Moduslink,
+};
 ```
 

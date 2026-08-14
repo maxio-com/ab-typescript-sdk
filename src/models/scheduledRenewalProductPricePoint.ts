@@ -45,7 +45,7 @@ export interface ScheduledRenewalProductPricePoint {
   taxIncluded?: boolean;
   /** The product price point initial charge, in integer cents. */
   initialChargeInCents?: bigint;
-  /** The numerical expiration interval. i.e. an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. */
+  /** The numerical expiration interval. e.g., an expiration_interval of ‘30’ coupled with an expiration_interval_unit of day would mean this product price point would expire after 30 days. */
   expirationInterval?: number;
   /** A string representing the expiration interval unit for this product price point, either month, day or never */
   expirationIntervalUnit?: ExpirationIntervalUnit | null;

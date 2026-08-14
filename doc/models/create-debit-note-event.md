@@ -15,31 +15,36 @@
 | `eventType` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `InvoiceEventType.CreateDebitNote` |
 | `eventData` | [`DebitNote`](../../doc/models/debit-note.md) | Required | Example schema for an `create_debit_note` event |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 98,
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "invoice": {
-    "issue_date": "2024-01-01",
-    "due_date": "2024-01-01",
-    "paid_date": "2024-01-01",
-    "public_url_expires_on": "2024-01-21",
-    "id": 166,
-    "uid": "uid6",
-    "site_id": 92,
-    "customer_id": 204,
-    "subscription_id": 20
+```ts
+import {
+  CreateDebitNoteEvent,
+  InvoiceEventType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const createDebitNoteEvent: CreateDebitNoteEvent = {
+  id: BigInt(176),
+  timestamp: '2016-03-13T12:52:32.123Z',
+  invoice: {
+    id: BigInt(166),
+    uid: 'uid6',
+    siteId: 92,
+    customerId: 204,
+    subscriptionId: 20,
+    issueDate: '2024-01-01',
+    dueDate: '2024-01-01',
+    paidDate: '2024-01-01',
+    publicUrlExpiresOn: '2024-01-21',
   },
-  "event_type": "create_debit_note",
-  "event_data": {
-    "uid": "uid6",
-    "site_id": 132,
-    "customer_id": 244,
-    "subscription_id": 60,
-    "number": 64
-  }
-}
+  eventType: InvoiceEventType.CreateDebitNote,
+  eventData: {
+    uid: 'uid6',
+    siteId: 132,
+    customerId: 244,
+    subscriptionId: 60,
+    number: 64,
+  },
+};
 ```
 

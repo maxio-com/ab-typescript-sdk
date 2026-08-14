@@ -19,18 +19,23 @@
 | `state` | `string \| undefined` | Optional | - |
 | `cancelAtEndOfPeriod` | `boolean \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "scheme": 66,
-  "customer_id": 86,
-  "payment_profile_id": 250,
-  "subscription_ids": [
-    196,
-    197
-  ]
-}
+```ts
+import {
+  ReactivateSubscriptionGroupResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const reactivateSubscriptionGroupResponse: ReactivateSubscriptionGroupResponse = {
+  uid: 'uid0',
+  scheme: 10,
+  customerId: 30,
+  paymentProfileId: 62,
+  subscriptionIds: [
+    140,
+    141,
+    142
+  ],
+};
 ```
 

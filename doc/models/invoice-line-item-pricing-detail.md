@@ -12,12 +12,16 @@
 | `label` | `string \| undefined` | Optional | - |
 | `amount` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "label": "label0",
-  "amount": "amount2"
-}
+```ts
+import {
+  InvoiceLineItemPricingDetail,
+} from '@maxio-com/advanced-billing-sdk';
+
+const invoiceLineItemPricingDetail: InvoiceLineItemPricingDetail = {
+  label: 'label4',
+  amount: 'amount6',
+};
 ```
 

@@ -14,12 +14,16 @@ Example schema for an `change_invoice_collection_method` event
 | `fromCollectionMethod` | `string` | Required | The previous collection method of the invoice. |
 | `toCollectionMethod` | `string` | Required | The new collection method of the invoice. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "from_collection_method": "from_collection_method4",
-  "to_collection_method": "to_collection_method2"
-}
+```ts
+import {
+  ChangeInvoiceCollectionMethodEventData,
+} from '@maxio-com/advanced-billing-sdk';
+
+const changeInvoiceCollectionMethodEventData: ChangeInvoiceCollectionMethodEventData = {
+  fromCollectionMethod: 'from_collection_method8',
+  toCollectionMethod: 'to_collection_method4',
+};
 ```
 

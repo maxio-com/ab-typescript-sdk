@@ -14,14 +14,16 @@
 | `subscriptionId` | `number \| undefined` | Optional | - |
 | `code` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 42,
-  "site_id": 224,
-  "subscription_id": 152,
-  "code": "code6"
-}
+```ts
+import { ReferralCode } from '@maxio-com/advanced-billing-sdk';
+
+const referralCode: ReferralCode = {
+  id: 186,
+  siteId: 112,
+  subscriptionId: 40,
+  code: 'code6',
+};
 ```
 

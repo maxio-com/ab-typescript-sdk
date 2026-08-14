@@ -15,15 +15,20 @@
 | `entryType` | [`ServiceCreditType \| undefined`](../../doc/models/service-credit-type.md) | Optional | The type of entry |
 | `memo` | `string \| null \| undefined` | Optional | A memo attached to the entry. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 110,
-  "amount_in_cents": 196,
-  "ending_balance_in_cents": 236,
-  "entry_type": "Credit",
-  "memo": "memo2"
-}
+```ts
+import {
+  ServiceCreditType,
+  SubscriptionGroupPrepaymentResponse,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupPrepaymentResponse: SubscriptionGroupPrepaymentResponse = {
+  id: 32,
+  amountInCents: BigInt(138),
+  endingBalanceInCents: BigInt(158),
+  entryType: ServiceCreditType.Credit,
+  memo: 'memo2',
+};
 ```
 

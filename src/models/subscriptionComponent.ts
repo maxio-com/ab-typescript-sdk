@@ -20,6 +20,10 @@ import {
   SubscriptionComponentAllocatedQuantity,
   subscriptionComponentAllocatedQuantitySchema,
 } from './containers/subscriptionComponentAllocatedQuantity.js';
+import {
+  SubscriptionComponentUnitBalance,
+  subscriptionComponentUnitBalanceSchema,
+} from './containers/subscriptionComponentUnitBalance.js';
 import { CreditType, creditTypeSchema } from './creditType.js';
 import { HistoricUsage, historicUsageSchema } from './historicUsage.js';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
@@ -36,9 +40,9 @@ export interface SubscriptionComponent {
   /** A handle for the component type */
   kind?: ComponentKind;
   unitName?: string;
-  /** (for on/off components) indicates if the component is enabled for the subscription */
+  /** (for on/off components) indicates if the component is enabled for the subscription. */
   enabled?: boolean;
-  unitBalance?: number;
+  unitBalance?: SubscriptionComponentUnitBalance;
   currency?: string;
   /** For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off. */
   allocatedQuantity?: SubscriptionComponentAllocatedQuantity;
@@ -63,11 +67,11 @@ export interface SubscriptionComponent {
   useSiteExchangeRate?: boolean | null;
   description?: string | null;
   allowFractionalQuantities?: boolean;
-  /** An optional object, will be returned if provided `include=subscription` query param. */
+  /** (Optional) Object that will be returned if the `include=subscription` query param is provided. */
   subscription?: SubscriptionComponentSubscription;
   historicUsages?: HistoricUsage[];
   displayOnHostedPage?: boolean;
-  /** The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  /** The numerical interval. e.g., an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
@@ -82,7 +86,10 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = lazy(
       kind: ['kind', optional(componentKindSchema)],
       unitName: ['unit_name', optional(string())],
       enabled: ['enabled', optional(boolean())],
-      unitBalance: ['unit_balance', optional(number())],
+      unitBalance: [
+        'unit_balance',
+        optional(subscriptionComponentUnitBalanceSchema),
+      ],
       currency: ['currency', optional(string())],
       allocatedQuantity: [
         'allocated_quantity',

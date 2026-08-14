@@ -18,16 +18,18 @@ Example schema for an `apply_debit_note` event
 | `memo` | `string \| null \| undefined` | Optional | The debit note memo. |
 | `transactionTime` | `string \| null \| undefined` | Optional | The time the debit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "debit_note_number": "debit_note_number0",
-  "debit_note_uid": "debit_note_uid6",
-  "original_amount": "original_amount4",
-  "applied_amount": "applied_amount8",
-  "memo": "memo4",
-  "transaction_time": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { ApplyDebitNoteEventData } from '@maxio-com/advanced-billing-sdk';
+
+const applyDebitNoteEventData: ApplyDebitNoteEventData = {
+  debitNoteNumber: 'debit_note_number8',
+  debitNoteUid: 'debit_note_uid4',
+  originalAmount: 'original_amount2',
+  appliedAmount: 'applied_amount0',
+  memo: 'memo2',
+  transactionTime: '2016-03-13T12:52:32.123Z',
+};
 ```
 

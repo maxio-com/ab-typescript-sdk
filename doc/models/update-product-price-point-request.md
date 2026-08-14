@@ -11,14 +11,18 @@
 |  --- | --- | --- | --- |
 | `pricePoint` | [`UpdateProductPricePoint`](../../doc/models/update-product-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_point": {
-    "handle": "handle6",
-    "price_in_cents": 196
-  }
-}
+```ts
+import {
+  UpdateProductPricePointRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const updateProductPricePointRequest: UpdateProductPricePointRequest = {
+  pricePoint: {
+    handle: 'handle6',
+    priceInCents: BigInt(196),
+  },
+};
 ```
 

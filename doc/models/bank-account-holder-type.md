@@ -14,3 +14,11 @@ Defaults to personal
 | `Personal` |
 | `Business` |
 
+## Example
+
+```ts
+import { BankAccountHolderType } from '@maxio-com/advanced-billing-sdk';
+
+const bankAccountHolderType = BankAccountHolderType.Personal;
+```
+

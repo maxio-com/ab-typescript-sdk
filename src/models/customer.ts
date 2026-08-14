@@ -21,7 +21,7 @@ export interface Customer {
   lastName?: string;
   /** The email address of the customer */
   email?: string;
-  /** A comma-separated list of emails that should be cc’d on all customer communications (i.e. “joe@example.com, sue@example.com”) */
+  /** “A comma-separated list of emails that should be cc’d on all customer communications (e.g., “joe@example.com, sue@example.com”)” */
   ccEmails?: string | null;
   /** The organization of the customer. If no value, `null` or empty string is provided, `organization` will be populated with the customer's first and last name, separated with a space. */
   organization?: string | null;
@@ -33,17 +33,17 @@ export interface Customer {
   createdAt?: string;
   /** The timestamp in which the customer object was last edited */
   updatedAt?: string;
-  /** The customer’s shipping street address (i.e. “123 Main St.”) */
+  /** The customer’s shipping street address (e.g., “123 Main St.”) */
   address?: string | null;
-  /** Second line of the customer’s shipping address i.e. “Apt. 100” */
+  /** Second line of the customer’s shipping address e.g., “Apt. 100” */
   address2?: string | null;
-  /** The customer’s shipping address city (i.e. “Boston”) */
+  /** The customer’s shipping address city (e.g., “Boston”) */
   city?: string | null;
-  /** The customer’s shipping address state (i.e. “MA”) */
+  /** The customer’s shipping address state (e.g., “MA”) */
   state?: string | null;
   /** The customer's full name of state */
   stateName?: string | null;
-  /** The customer’s shipping address zip code (i.e. “12345”) */
+  /** The customer’s shipping address zip code (e.g., “12345”) */
   zip?: string | null;
   /** The customer shipping address country */
   country?: string | null;
@@ -61,6 +61,8 @@ export interface Customer {
   portalInviteLastAcceptedAt?: string | null;
   /** The tax exempt status for the customer. Acceptable values are true or 1 for true and false or 0 for false. */
   taxExempt?: boolean;
+  /** Whether surcharging is enabled for the customer. Only included on sites where surcharging control is enabled. */
+  surcharging?: boolean;
   /** The VAT business identification number for the customer. This number is used to determine VAT tax opt out rules. It is not validated when added or updated on a customer record. Instead, it is validated via VIES before calculating taxes. Only valid business identification numbers will allow for VAT opt out. */
   vatNumber?: string | null;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
@@ -76,6 +78,8 @@ export interface Customer {
   defaultAutoRenewalProfileId?: number | null;
   /** The Maxio-generated unique identifier for the customer. */
   maxioid?: string | null;
+  /** The ID of the Branding Theme assigned to this customer as the customer's default Branding Theme. This customer-level Branding Theme is used when a subscription does not have its own subscription-level Branding Theme.  Available only when Branding Themes are enabled for the site. */
+  brandingThemeId?: number | null;
   [key: string]: unknown;
 }
 
@@ -112,6 +116,7 @@ export const customerSchema: Schema<Customer> = expandoObject({
     optional(nullable(string())),
   ],
   taxExempt: ['tax_exempt', optional(boolean())],
+  surcharging: ['surcharging', optional(boolean())],
   vatNumber: ['vat_number', optional(nullable(string()))],
   parentId: ['parent_id', optional(nullable(number()))],
   locale: ['locale', optional(nullable(string()))],
@@ -126,4 +131,5 @@ export const customerSchema: Schema<Customer> = expandoObject({
     optional(nullable(number())),
   ],
   maxioid: ['maxioid', optional(nullable(string()))],
+  brandingThemeId: ['branding_theme_id', optional(nullable(number()))],
 });

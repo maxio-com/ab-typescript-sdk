@@ -12,3 +12,11 @@
 | `Amount` |
 | `Percent` |
 
+## Example
+
+```ts
+import { DiscountType } from '@maxio-com/advanced-billing-sdk';
+
+const discountType = DiscountType.Amount;
+```
+

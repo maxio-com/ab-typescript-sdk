@@ -20,3 +20,11 @@
 | `OpenBalance` |
 | `ExpiresAt` |
 
+## Example
+
+```ts
+import { SubscriptionSort } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionSort = SubscriptionSort.TotalPayments;
+```
+

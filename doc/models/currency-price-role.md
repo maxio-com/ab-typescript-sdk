@@ -15,3 +15,11 @@ Role for the price.
 | `Trial` |
 | `Initial` |
 
+## Example
+
+```ts
+import { CurrencyPriceRole } from '@maxio-com/advanced-billing-sdk';
+
+const currencyPriceRole = CurrencyPriceRole.Initial;
+```
+

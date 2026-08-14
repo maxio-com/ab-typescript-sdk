@@ -14,14 +14,16 @@
 | `primarySubscriptionId` | `number \| undefined` | Optional | The subscription ID of the primary within the group. Applicable to scheme 1. |
 | `primary` | `boolean \| undefined` | Optional | A boolean indicating whether the subscription is the primary in the group. Applicable to scheme 1. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "scheme": 62,
-  "primary_subscription_id": 10,
-  "primary": false
-}
+```ts
+import { NestedSubscriptionGroup } from '@maxio-com/advanced-billing-sdk';
+
+const nestedSubscriptionGroup: NestedSubscriptionGroup = {
+  uid: 'uid6',
+  scheme: 106,
+  primarySubscriptionId: 54,
+  primary: false,
+};
 ```
 

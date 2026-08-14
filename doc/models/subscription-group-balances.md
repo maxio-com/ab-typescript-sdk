@@ -14,30 +14,32 @@
 | `openInvoices` | [`AccountBalance \| undefined`](../../doc/models/account-balance.md) | Optional | - |
 | `pendingDiscounts` | [`AccountBalance \| undefined`](../../doc/models/account-balance.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayments": {
-    "balance_in_cents": 192,
-    "automatic_balance_in_cents": 178,
-    "remittance_balance_in_cents": 146
+```ts
+import { SubscriptionGroupBalances } from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupBalances: SubscriptionGroupBalances = {
+  prepayments: {
+    balanceInCents: BigInt(192),
+    automaticBalanceInCents: BigInt(178),
+    remittanceBalanceInCents: BigInt(146),
   },
-  "service_credits": {
-    "balance_in_cents": 84,
-    "automatic_balance_in_cents": 70,
-    "remittance_balance_in_cents": 38
+  serviceCredits: {
+    balanceInCents: BigInt(84),
+    automaticBalanceInCents: BigInt(70),
+    remittanceBalanceInCents: BigInt(38),
   },
-  "open_invoices": {
-    "balance_in_cents": 40,
-    "automatic_balance_in_cents": 202,
-    "remittance_balance_in_cents": 170
+  openInvoices: {
+    balanceInCents: BigInt(40),
+    automaticBalanceInCents: BigInt(202),
+    remittanceBalanceInCents: BigInt(170),
   },
-  "pending_discounts": {
-    "balance_in_cents": 88,
-    "automatic_balance_in_cents": 154,
-    "remittance_balance_in_cents": 134
-  }
-}
+  pendingDiscounts: {
+    balanceInCents: BigInt(88),
+    automaticBalanceInCents: BigInt(154),
+    remittanceBalanceInCents: BigInt(134),
+  },
+};
 ```
 

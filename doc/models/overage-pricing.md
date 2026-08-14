@@ -12,28 +12,28 @@
 | `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "pricing_scheme": "stairstep",
-  "prices": [
+```ts
+import {
+  OveragePricing,
+  PricingScheme,
+} from '@maxio-com/advanced-billing-sdk';
+
+const overagePricing: OveragePricing = {
+  pricingScheme: PricingScheme.PerUnit,
+  prices: [
     {
-      "starting_quantity": 242,
-      "ending_quantity": 40,
-      "unit_price": 23.26
+      startingQuantity: 242,
+      unitPrice: 23.26,
+      endingQuantity: 40,
     },
     {
-      "starting_quantity": 242,
-      "ending_quantity": 40,
-      "unit_price": 23.26
-    },
-    {
-      "starting_quantity": 242,
-      "ending_quantity": 40,
-      "unit_price": 23.26
+      startingQuantity: 242,
+      unitPrice: 23.26,
+      endingQuantity: 40,
     }
-  ]
-}
+  ],
+};
 ```
 

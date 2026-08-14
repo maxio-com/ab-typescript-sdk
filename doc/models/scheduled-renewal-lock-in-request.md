@@ -11,11 +11,15 @@
 |  --- | --- | --- | --- |
 | `lockInAt` | `string` | Required | Date to lock in the renewal. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "lock_in_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import {
+  ScheduledRenewalLockInRequest,
+} from '@maxio-com/advanced-billing-sdk';
+
+const scheduledRenewalLockInRequest: ScheduledRenewalLockInRequest = {
+  lockInAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

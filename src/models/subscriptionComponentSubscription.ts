@@ -10,7 +10,7 @@ import {
   subscriptionStateSchema,
 } from './subscriptionState.js';
 
-/** An optional object, will be returned if provided `include=subscription` query param. */
+/** (Optional) Object that will be returned if the `include=subscription` query param is provided. */
 export interface SubscriptionComponentSubscription {
   /**
    * The state of a subscription.

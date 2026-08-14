@@ -11,24 +11,16 @@
 |  --- | --- | --- | --- |
 | `base` | `unknown[] \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "base": [
-    {
-      "key1": "val1",
-      "key2": "val2"
-    },
-    {
-      "key1": "val1",
-      "key2": "val2"
-    },
-    {
-      "key1": "val1",
-      "key2": "val2"
-    }
-  ]
-}
+```ts
+import { BaseRefundError } from '@maxio-com/advanced-billing-sdk';
+
+const baseRefundError: BaseRefundError = {
+  base: [
+    { 'key1': 'val1', 'key2': 'val2' },
+    { 'key1': 'val1', 'key2': 'val2' }
+  ],
+};
 ```
 

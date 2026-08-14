@@ -9,21 +9,21 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `allocationId` | `number \| undefined` | Optional | The allocation unique id |
-| `componentId` | `number \| undefined` | Optional | The integer component ID for the allocation. This references a component that you have created in your Product setup |
-| `componentHandle` | `string \| null \| undefined` | Optional | The handle of the component. This references a component that you have created in your Product setup |
-| `subscriptionId` | `number \| undefined` | Optional | The integer subscription ID for the allocation. This references a unique subscription in your Site |
+| `allocationId` | `number \| undefined` | Optional | The allocation unique ID |
+| `componentId` | `number \| undefined` | Optional | The integer component ID for the allocation. This references a component that you have created in your Product setup. |
+| `componentHandle` | `string \| null \| undefined` | Optional | The handle of the component. This references a component that you have created in your Product setup. |
+| `subscriptionId` | `number \| undefined` | Optional | The integer subscription ID for the allocation. This references a unique subscription in your Site. |
 | `quantity` | [`AllocationQuantity \| undefined`](../../doc/models/containers/allocation-quantity.md) | Optional | This is a container for one-of cases. |
 | `previousQuantity` | [`AllocationPreviousQuantity \| undefined`](../../doc/models/containers/allocation-previous-quantity.md) | Optional | This is a container for one-of cases. |
 | `memo` | `string \| null \| undefined` | Optional | The memo passed when the allocation was created |
-| `timestamp` | `string \| undefined` | Optional | The time that the allocation was recorded, in format and UTC timezone, i.e. 2012-11-20T22:00:37Z |
+| `timestamp` | `string \| undefined` | Optional | The time that the allocation was recorded, in ISO 8601 format and UTC timezone, e.g., 2012-11-20T22:00:37Z |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when this allocation was created |
 | `prorationUpgradeScheme` | `string \| undefined` | Optional | The scheme used if the proration was an upgrade. This is only present when the allocation was created mid-period. |
 | `prorationDowngradeScheme` | `string \| undefined` | Optional | The scheme used if the proration was a downgrade. This is only present when the allocation was created mid-period. |
 | `pricePointId` | `number \| undefined` | Optional | - |
 | `pricePointName` | `string \| undefined` | Optional | - |
 | `pricePointHandle` | `string \| undefined` | Optional | - |
-| `interval` | `number \| undefined` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `intervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 | `previousPricePointId` | `number \| undefined` | Optional | - |
 | `accrueCharge` | `boolean \| undefined` | Optional | If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. |
@@ -35,15 +35,17 @@
 | `usedQuantity` | `bigint \| undefined` | Optional | - |
 | `chargeId` | `bigint \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation_id": 102,
-  "component_id": 144,
-  "component_handle": "component_handle0",
-  "subscription_id": 144,
-  "quantity": 168
-}
+```ts
+import { Allocation } from '@maxio-com/advanced-billing-sdk';
+
+const allocation: Allocation = {
+  allocationId: 238,
+  componentId: 8,
+  componentHandle: 'component_handle8',
+  subscriptionId: 8,
+  quantity: 32,
+};
 ```
 

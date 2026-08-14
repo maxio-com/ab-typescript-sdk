@@ -22,3 +22,11 @@ A handle for the line item kind
 | `Coupon` |
 | `Tax` |
 
+## Example
+
+```ts
+import { LineItemKind } from '@maxio-com/advanced-billing-sdk';
+
+const lineItemKind = LineItemKind.PrepaidUsageComponent;
+```
+

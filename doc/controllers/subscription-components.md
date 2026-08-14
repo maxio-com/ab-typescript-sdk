@@ -715,7 +715,7 @@ try {
 
 # List Allocations
 
-Returns the 50 most recent Allocations, ordered by most recent first.
+Lists the 50 most recent Allocations, ordered by most recent first.
 
 ## On/Off Components
 
@@ -1538,7 +1538,7 @@ try {
 
 # List Usages
 
-Returns a list of usages associated with a subscription for a particular metered component. This will display the previously recorded components for a subscription.
+Lists usages associated with a subscription for a particular metered component. This will display the previously recorded components for a subscription.
 
 This endpoint is not compatible with quantity-based components.
 
@@ -1589,8 +1589,8 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `subscriptionIdOrReference` | [`ListUsagesInputSubscriptionIdOrReference`](../../doc/models/containers/list-usages-input-subscription-id-or-reference.md) | Template, Required | This is a container for one-of cases. |
 | `componentId` | [`ListUsagesInputComponentId`](../../doc/models/containers/list-usages-input-component-id.md) | Template, Required | This is a container for one-of cases. |
-| `sinceId` | `bigint \| undefined` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
-| `maxId` | `bigint \| undefined` | Query, Optional | Returns usages with an id less than or equal to the one specified |
+| `sinceId` | `bigint \| undefined` | Query, Optional | Returns usages with an id greater than or equal to the one specified. |
+| `maxId` | `bigint \| undefined` | Query, Optional | Returns usages with an id less than or equal to the one specified. |
 | `sinceDate` | `string \| undefined` | Query, Optional | Returns usages with a created_at date greater than or equal to midnight (12:00 AM) on the date specified. |
 | `untilDate` | `string \| undefined` | Query, Optional | Returns usages with a created_at date less than or equal to midnight (12:00 AM) on the date specified. |
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
@@ -1673,13 +1673,13 @@ try {
 
 Activates an event-based component for a single subscription.
 
-In order to bill your subscribers on your Events data under the Events-Based Billing feature, the components must be activated for the subscriber.
+To bill your subscribers on your Events data under the Events-Based Billing feature, the components must be activated for the subscriber.
 
-Learn more about the role of activation in the [Events-Based Billing docs](https://maxio.zendesk.com/hc/en-us/articles/24260323329805-Events-Based-Billing-Overview).
+For more information, see [Design Your Catalog](https://docs.maxio.com/hc/en-us/articles/24181036583053-Design-Your-Catalog?method=componenttypes).
 
-Use this endpoint to activate an event-based component for a single subscription. Activating an event-based component causes Advanced Billing to bill for events when the subscription is renewed.
+Use this endpoint to activate an event-based component for a single subscription. Activating an event-based component causes billing for events when the subscription is renewed.
 
-*Note: it is possible to stream events for a subscription at any time, regardless of component activation status. The activation status only determines if the subscription should be billed for event-based component usage at renewal.*
+Note: it is possible to stream events for a subscription at any time, regardless of component activation status. The activation status only determines if the subscription should be billed for event-based component usage at renewal.
 
 ```ts
 async activateEventBasedComponent(
@@ -1834,21 +1834,15 @@ try {
 
 Records a single event for Events-Based Billing.
 
-## Documentation
-
 Events-Based Billing is an evolved form of metered billing that is based on data-rich events streamed in real-time from your system to Advanced Billing.
 
 These events can then be transformed, enriched, or analyzed to form the computed totals of usage charges billed to your customers.
 
 This API allows you to stream events into the Advanced Billing data ingestion engine.
 
-Learn more about the feature in general in the [Events-Based Billing help docs](https://maxio.zendesk.com/hc/en-us/articles/24260323329805-Events-Based-Billing-Overview).
+For more information, see [Design Your Catalog](https://docs.maxio.com/hc/en-us/articles/24181036583053-Design-Your-Catalog?method=componenttypes).
 
-## Record Event
-
-Use this endpoint to record a single event.
-
-*Note: this endpoint differs from the standard Chargify API endpoints in that the URL subdomain will be `events` and your site subdomain will be included in the URL path. For example:*
+Note: this endpoint differs from the standard URL for this API in that `events` and your site subdomain are included in the path. For example:
 
 ```
 https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
@@ -1872,7 +1866,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `apiHandle` | `string` | Template, Required | Identifies the Stream for which the event should be published. |
-| `storeUid` | `string \| undefined` | Query, Optional | If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store. |
+| `storeUid` | `string \| undefined` | Query, Optional | If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store. This applies to Legacy Metering sites only — it has no effect on Maxio Metering sites. |
 | `body` | [`EBBEvent \| undefined`](../../doc/models/ebb-event.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -1927,7 +1921,7 @@ try {
 
 Records a collection of events.
 
-*Note: this endpoint differs from the standard Chargify API endpoints in that the subdomain will be `events` and your site subdomain will be included in the URL path.*
+Note: this endpoint differs from the standard URL for this API in that `events` and your site subdomain are included in the path.
 
 A maximum of 1000 events can be published in a single request. A 422 will be returned if this limit is exceeded.
 
@@ -1949,7 +1943,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `apiHandle` | `string` | Template, Required | Identifies the Stream for which the events should be published. |
-| `storeUid` | `string \| undefined` | Query, Optional | If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store. |
+| `storeUid` | `string \| undefined` | Query, Optional | If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store. This applies to Legacy Metering sites only — it has no effect on Maxio Metering sites. |
 | `body` | [`EBBEvent[] \| undefined`](../../doc/models/ebb-event.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 

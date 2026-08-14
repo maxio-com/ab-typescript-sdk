@@ -11,6 +11,9 @@ import { Schema, stringEnum } from '../schema.js';
  */
 export enum SubscriptionListInclude {
   SelfServicePageToken = 'self_service_page_token',
+  CurrentAccountBalanceInCents = 'current_account_balance_in_cents',
+  CurrentBillingAmount = 'current_billing_amount',
+  Coupons = 'coupons',
 }
 
 /**

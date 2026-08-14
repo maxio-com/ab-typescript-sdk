@@ -10,7 +10,7 @@ import {
   webhookSubscriptionSchema,
 } from './webhookSubscription.js';
 
-/** Used to Create or Update Endpoint */
+/** Used to Create or Update Endpoint. */
 export interface CreateOrUpdateEndpoint {
   url: string;
   webhookSubscriptions: WebhookSubscription[];

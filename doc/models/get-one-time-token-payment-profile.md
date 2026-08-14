@@ -31,31 +31,37 @@
 | `customerVaultToken` | `string \| null \| undefined` | Optional | - |
 | `gatewayHandle` | `string \| null \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id2",
-  "first_name": "first_name2",
-  "last_name": "last_name0",
-  "masked_card_number": "masked_card_number0",
-  "card_type": "routex",
-  "expiration_month": 187.78,
-  "expiration_year": 164.44,
-  "customer_id": "customer_id0",
-  "current_vault": "braintree_blue",
-  "vault_token": "vault_token4",
-  "billing_address": "billing_address4",
-  "billing_address_2": "billing_address_24",
-  "billing_city": "billing_city0",
-  "billing_country": "billing_country6",
-  "billing_state": "billing_state6",
-  "billing_zip": "billing_zip0",
-  "payment_type": "payment_type2",
-  "disabled": false,
-  "site_gateway_setting_id": 232,
-  "customer_vault_token": "customer_vault_token0",
-  "gateway_handle": "gateway_handle4"
-}
+```ts
+import {
+  CardType,
+  CreditCardVault,
+  GetOneTimeTokenPaymentProfile,
+} from '@maxio-com/advanced-billing-sdk';
+
+const getOneTimeTokenPaymentProfile: GetOneTimeTokenPaymentProfile = {
+  firstName: 'first_name4',
+  lastName: 'last_name2',
+  maskedCardNumber: 'masked_card_number2',
+  cardType: CardType.MaestroNoLuhn,
+  expirationMonth: 28.3,
+  expirationYear: 4.96,
+  currentVault: CreditCardVault.TrustCommerce,
+  vaultToken: 'vault_token6',
+  billingAddress: 'billing_address6',
+  billingCity: 'billing_city2',
+  billingCountry: 'billing_country8',
+  billingState: 'billing_state2',
+  billingZip: 'billing_zip2',
+  paymentType: 'payment_type6',
+  disabled: false,
+  siteGatewaySettingId: 156,
+  id: 'id4',
+  customerId: 'customer_id2',
+  billingAddress2: 'billing_address_26',
+  customerVaultToken: 'customer_vault_token2',
+  gatewayHandle: 'gateway_handle6',
+};
 ```
 

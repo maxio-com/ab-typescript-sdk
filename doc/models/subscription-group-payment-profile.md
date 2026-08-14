@@ -14,14 +14,18 @@
 | `lastName` | `string \| undefined` | Optional | - |
 | `maskedCardNumber` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 22,
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "masked_card_number": "masked_card_number2"
-}
+```ts
+import {
+  SubscriptionGroupPaymentProfile,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionGroupPaymentProfile: SubscriptionGroupPaymentProfile = {
+  id: 246,
+  firstName: 'first_name6',
+  lastName: 'last_name4',
+  maskedCardNumber: 'masked_card_number4',
+};
 ```
 

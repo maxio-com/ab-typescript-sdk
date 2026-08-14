@@ -22,15 +22,20 @@
 | `transactionId` | `number \| undefined` | Optional | - |
 | `lineItemBreakouts` | [`InvoiceDiscountBreakout[] \| undefined`](../../doc/models/invoice-discount-breakout.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid0",
-  "title": "title4",
-  "description": "description0",
-  "code": "code8",
-  "source_type": "Coupon"
-}
+```ts
+import {
+  InvoiceDiscount,
+  InvoiceDiscountSourceType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const invoiceDiscount: InvoiceDiscount = {
+  uid: 'uid4',
+  title: 'title0',
+  description: 'description6',
+  code: 'code2',
+  sourceType: InvoiceDiscountSourceType.Coupon,
+};
 ```
 

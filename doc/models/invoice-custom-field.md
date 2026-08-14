@@ -15,15 +15,20 @@
 | `value` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `metadatumId` | `number \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "owner_id": 142,
-  "owner_type": "Customer",
-  "name": "name0",
-  "value": "value2",
-  "metadatum_id": 142
-}
+```ts
+import {
+  CustomFieldOwner,
+  InvoiceCustomField,
+} from '@maxio-com/advanced-billing-sdk';
+
+const invoiceCustomField: InvoiceCustomField = {
+  ownerId: 14,
+  ownerType: CustomFieldOwner.Customer,
+  name: 'name0',
+  value: 'value2',
+  metadatumId: 14,
+};
 ```
 

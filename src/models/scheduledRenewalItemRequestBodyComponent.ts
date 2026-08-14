@@ -24,7 +24,7 @@ export interface ScheduledRenewalItemRequestBodyComponent {
   itemId: number;
   /** Price point identifier. */
   pricePointId?: number;
-  /** Optional quantity for the item. */
+  /** (Optional) Quantity for the item. */
   quantity?: number;
   /** Custom pricing for a component within a scheduled renewal. */
   customPrice?: ScheduledRenewalComponentCustomPrice;

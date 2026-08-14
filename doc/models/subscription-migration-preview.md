@@ -14,14 +14,18 @@
 | `paymentDueInCents` | `bigint \| undefined` | Optional | The amount of the payment due in the case of an upgrade. |
 | `creditAppliedInCents` | `bigint \| undefined` | Optional | Represents a credit in cents that is applied to your subscription as part of a migration process for a specific product, which reduces the amount owed for the subscription. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prorated_adjustment_in_cents": 134,
-  "charge_in_cents": 16,
-  "payment_due_in_cents": 188,
-  "credit_applied_in_cents": 148
-}
+```ts
+import {
+  SubscriptionMigrationPreview,
+} from '@maxio-com/advanced-billing-sdk';
+
+const subscriptionMigrationPreview: SubscriptionMigrationPreview = {
+  proratedAdjustmentInCents: BigInt(6),
+  chargeInCents: BigInt(144),
+  paymentDueInCents: BigInt(60),
+  creditAppliedInCents: BigInt(20),
+};
 ```
 

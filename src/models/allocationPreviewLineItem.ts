@@ -36,7 +36,7 @@ export interface AllocationPreviewLineItem {
   taxableAmountInCents?: bigint;
   componentId?: number;
   componentHandle?: string;
-  /** Visible when using Fine-grained Component Control */
+  /** Visible when using Fine-grained Component Control. */
   direction?: AllocationPreviewDirection;
   [key: string]: unknown;
 }

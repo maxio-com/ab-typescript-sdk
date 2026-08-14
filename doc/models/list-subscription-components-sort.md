@@ -14,7 +14,11 @@
 
 ## Example
 
-```
-updated_at
+```ts
+import {
+  ListSubscriptionComponentsSort,
+} from '@maxio-com/advanced-billing-sdk';
+
+const listSubscriptionComponentsSort = ListSubscriptionComponentsSort.Id;
 ```
 

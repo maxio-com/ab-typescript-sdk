@@ -17,15 +17,20 @@
 | `taxAmount` | `string \| undefined` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `lineItemBreakouts` | [`InvoiceTaxBreakout[] \| undefined`](../../doc/models/invoice-tax-breakout.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "title": "title4",
-  "source_type": "Tax",
-  "percentage": "percentage6",
-  "taxable_amount": "taxable_amount2"
-}
+```ts
+import {
+  ProformaInvoiceTax,
+  ProformaInvoiceTaxSourceType,
+} from '@maxio-com/advanced-billing-sdk';
+
+const proformaInvoiceTax: ProformaInvoiceTax = {
+  uid: 'uid4',
+  title: 'title0',
+  sourceType: ProformaInvoiceTaxSourceType.Tax,
+  percentage: 'percentage2',
+  taxableAmount: 'taxable_amount8',
+};
 ```
 

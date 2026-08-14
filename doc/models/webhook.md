@@ -10,27 +10,29 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `event` | `string \| undefined` | Optional | A string describing which event type produced the given webhook |
-| `id` | `bigint \| undefined` | Optional | The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. |
+| `id` | `bigint \| undefined` | Optional | The unique identifier for the webhook (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event. |
 | `createdAt` | `string \| undefined` | Optional | Timestamp indicating when the webhook was created |
 | `lastError` | `string \| undefined` | Optional | Text describing the status code and/or error from the last failed attempt to send the Webhook. When a webhook is retried and accepted, this field will be cleared. |
 | `lastErrorAt` | `string \| undefined` | Optional | Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared. |
 | `acceptedAt` | `string \| null \| undefined` | Optional | Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again. |
 | `lastSentAt` | `string \| undefined` | Optional | Timestamp indicating when the most recent attempt was made to send the webhook |
 | `lastSentUrl` | `string \| undefined` | Optional | The url that the endpoint was last sent to. |
-| `successful` | `boolean \| undefined` | Optional | A boolean flag describing whether the webhook was accepted by the webhook endpoint for the most recent attempt. (Acceptance is defined by receiving a “200 OK” HTTP response within a reasonable timeframe, i.e. 15 seconds) |
+| `successful` | `boolean \| undefined` | Optional | “A boolean flag describing whether the webhook was accepted by the webhook endpoint for the most recent attempt. (Acceptance is defined by receiving a “200 OK” HTTP response within a reasonable timeframe, e.g., 15 seconds.)” |
 | `body` | `string \| undefined` | Optional | The data sent within the webhook post |
 | `signature` | `string \| undefined` | Optional | The calculated webhook signature |
 | `signatureHmacSha256` | `string \| undefined` | Optional | The calculated HMAC-SHA-256 webhook signature |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "event": "event6",
-  "id": 154,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "last_error": "last_error8",
-  "last_error_at": "2016-03-13T12:52:32.123Z"
-}
+```ts
+import { Webhook } from '@maxio-com/advanced-billing-sdk';
+
+const webhook: Webhook = {
+  event: 'event2',
+  id: BigInt(18),
+  createdAt: '2016-03-13T12:52:32.123Z',
+  lastError: 'last_error4',
+  lastErrorAt: '2016-03-13T12:52:32.123Z',
+};
 ```
 

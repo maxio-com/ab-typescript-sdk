@@ -11,7 +11,7 @@ import { GroupTarget, groupTargetSchema } from './groupTarget.js';
 export interface GroupSettings {
   /** Attributes of the target customer who will be the responsible payer of the created subscription. Required. */
   target: GroupTarget;
-  /** Optional attributes related to billing date and accrual. Note: Only applicable for new subscriptions. */
+  /** (Optional) Attributes related to billing date and accrual. Note: Only applicable for new subscriptions. */
   billing?: GroupBilling;
   [key: string]: unknown;
 }

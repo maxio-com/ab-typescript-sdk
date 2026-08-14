@@ -24,15 +24,17 @@
 | `stateAssignedNo` | `string \| undefined` | Optional | - |
 | `taxSubType` | `string \| undefined` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "tax_rule_id": 226,
-  "percentage": "percentage0",
-  "country_code": "country_code8",
-  "subdivision_code": "subdivision_code6",
-  "tax_amount": "tax_amount4"
-}
+```ts
+import { InvoiceTaxComponentBreakout } from '@maxio-com/advanced-billing-sdk';
+
+const invoiceTaxComponentBreakout: InvoiceTaxComponentBreakout = {
+  taxRuleId: 66,
+  percentage: 'percentage0',
+  countryCode: 'country_code2',
+  subdivisionCode: 'subdivision_code6',
+  taxAmount: 'tax_amount4',
+};
 ```
 

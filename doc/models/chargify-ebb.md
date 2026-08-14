@@ -16,15 +16,17 @@
 | `subscriptionId` | `number \| undefined` | Optional | Id of Maxio Advanced Billing Subscription which is connected to this event.<br>Provide `subscription_id` if you configured `chargify.subscription_id` as Subscription Identifier in your Event Stream. |
 | `subscriptionReference` | `string \| undefined` | Optional | Reference of Maxio Advanced Billing Subscription which is connected to this event.<br>Provide `subscription_reference` if you configured `chargify.subscription_reference` as Subscription Identifier in your Event Stream. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "id": "id4",
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "uniqueness_token": "uniqueness_token0",
-  "subscription_id": 200
-}
+```ts
+import { ChargifyEBB } from '@maxio-com/advanced-billing-sdk';
+
+const chargifyEBB: ChargifyEBB = {
+  timestamp: '2016-03-13T12:52:32.123Z',
+  id: 'id2',
+  createdAt: '2016-03-13T12:52:32.123Z',
+  uniquenessToken: 'uniqueness_token8',
+  subscriptionId: 224,
+};
 ```
 
