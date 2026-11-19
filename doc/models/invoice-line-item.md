@@ -31,6 +31,11 @@
 | `hide` | `boolean \| undefined` | Optional | - |
 | `componentCostData` | [`InvoiceLineItemComponentCostData \| null \| undefined`](../../doc/models/invoice-line-item-component-cost-data.md) | Optional | - |
 | `productPricePointId` | `number \| null \| undefined` | Optional | The price point ID of the line item's product |
+| `listUnitPrice` | `string \| null \| undefined` | Optional | The unit price from the list price point, in decimal format. Returned only when list vs sales pricing is enabled for the site. |
+| `listTotalAmount` | `string \| null \| undefined` | Optional | The total amount for the line item at the list price, in decimal format |
+| `listDiscountAmount` | `string \| null \| undefined` | Optional | The difference between the list total and the sales total, in decimal format |
+| `listDiscountRate` | `string \| null \| undefined` | Optional | The list discount as a fraction of the list total, in decimal format. For example, `"0.25"` is a 25% discount. |
+| `listPricePointId` | `number \| null \| undefined` | Optional | The ID of the list price point this line item's sales price is compared against |
 | `customItem` | `boolean \| undefined` | Optional | - |
 | `kind` | `string \| undefined` | Optional | - |
 | `prepaidAllocationExpiresAt` | `string \| null \| undefined` | Optional | The date a prepaid allocation is set to expire. Only present on line items representing prepaid component allocations. The format is `"YYYY-MM-DD"`. |

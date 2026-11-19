@@ -23,7 +23,7 @@ const subscriptionComponentResponse: SubscriptionComponentResponse = {
   component: {
     id: 80,
     name: 'name8',
-    kind: ComponentKind.QuantityBasedComponent,
+    kind: ComponentKind.EventBasedComponent,
     unitName: 'unit_name0',
     enabled: false,
   },

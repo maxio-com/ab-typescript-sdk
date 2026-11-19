@@ -38,6 +38,10 @@ export interface SubscriptionGroupSignupItem {
   offerId?: number;
   /** The reference value (provided by your app) for the subscription itself. */
   reference?: string;
+  /** (Optional) The ID of the customer the subscription belongs to. The customer must be the payer or a customer below the payer in the customer hierarchy. If you omit both `customer_id` and `customer_reference`, the subscription belongs to the payer. */
+  customerId?: number;
+  /** (Optional) The reference of the customer the subscription belongs to, matched case-insensitively. Use in place of `customer_id`. If you pass both, `customer_id` is used. */
+  customerReference?: string;
   /** One of the subscriptions must be marked as primary in the group. */
   primary?: boolean;
   /** (Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription. */
@@ -66,6 +70,8 @@ export const subscriptionGroupSignupItemSchema: Schema<SubscriptionGroupSignupIt
       ],
       offerId: ['offer_id', optional(number())],
       reference: ['reference', optional(string())],
+      customerId: ['customer_id', optional(number())],
+      customerReference: ['customer_reference', optional(string())],
       primary: ['primary', optional(boolean())],
       currency: ['currency', optional(string())],
       couponCodes: ['coupon_codes', optional(array(string()))],

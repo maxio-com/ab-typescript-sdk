@@ -27,6 +27,10 @@ import { CreditType, creditTypeSchema } from './creditType.js';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { Price, priceSchema } from './price.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import {
+  SecondaryPricing,
+  secondaryPricingSchema,
+} from './secondaryPricing.js';
 
 export interface QuantityBasedComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, e.g., "Minutes". */
@@ -41,8 +45,10 @@ export interface QuantityBasedComponent {
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme: PricingScheme;
-  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
+  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing-schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
+  /** Hybrid Pricing only. The secondary pricing model that takes over once usage passes the primary model's included threshold. Applies to Quantity-Based and Metered Components on Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices` brackets start at `1`, not at the primary model's highest `ending_quantity`. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). */
+  secondaryPricing?: SecondaryPricing;
   /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
   upgradeCharge?: CreditType | null;
   /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
@@ -77,6 +83,7 @@ export const quantityBasedComponentSchema: Schema<QuantityBasedComponent> = lazy
       taxable: ['taxable', optional(boolean())],
       pricingScheme: ['pricing_scheme', pricingSchemeSchema],
       prices: ['prices', optional(array(priceSchema))],
+      secondaryPricing: ['secondary_pricing', optional(secondaryPricingSchema)],
       upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
       downgradeCredit: [
         'downgrade_credit',

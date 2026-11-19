@@ -16,7 +16,6 @@
 ```ts
 import {
   CreateQuantityBasedComponent,
-  CreditType,
   PricingScheme,
 } from '@maxio-com/advanced-billing-sdk';
 
@@ -40,7 +39,21 @@ const createQuantityBasedComponent: CreateQuantityBasedComponent = {
         endingQuantity: 40,
       }
     ],
-    upgradeCharge: CreditType.Prorated,
+    secondaryPricing: {
+      pricingScheme: PricingScheme.Stairstep,
+      prices: [
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        },
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        }
+      ],
+    },
   },
 };
 ```

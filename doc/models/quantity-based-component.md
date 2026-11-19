@@ -15,7 +15,8 @@
 | `handle` | `string \| undefined` | Optional | A unique identifier for your use that can be used to retrieve this component in subsequent requests. Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br><br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
 | `taxable` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
-| `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
+| `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing-schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
+| `secondaryPricing` | [`SecondaryPricing \| undefined`](../../doc/models/secondary-pricing.md) | Optional | Hybrid Pricing only. The secondary pricing model that takes over once usage passes the primary model's included threshold. Applies to Quantity-Based and Metered Components on Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices` brackets start at `1`, not at the primary model's highest `ending_quantity`. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). |
 | `upgradeCharge` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
 | `downgradeCredit` | [`CreditType \| null \| undefined`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
 | `pricePoints` | [`ComponentPricePointItem[] \| undefined`](../../doc/models/component-price-point-item.md) | Optional | - |
@@ -34,7 +35,6 @@
 
 ```ts
 import {
-  CreditType,
   PricingScheme,
   QuantityBasedComponent,
 } from '@maxio-com/advanced-billing-sdk';
@@ -53,7 +53,21 @@ const quantityBasedComponent: QuantityBasedComponent = {
       endingQuantity: 40,
     }
   ],
-  upgradeCharge: CreditType.Full,
+  secondaryPricing: {
+    pricingScheme: PricingScheme.Stairstep,
+    prices: [
+      {
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
+      },
+      {
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
+      }
+    ],
+  },
 };
 ```
 

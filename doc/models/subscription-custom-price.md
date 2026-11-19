@@ -25,6 +25,8 @@
 | `expirationInterval` | [`SubscriptionCustomPriceExpirationInterval \| undefined`](../../doc/models/containers/subscription-custom-price-expiration-interval.md) | Optional | This is a container for one-of cases. |
 | `expirationIntervalUnit` | [`ExpirationIntervalUnit \| null \| undefined`](../../doc/models/expiration-interval-unit.md) | Optional | (Optional) |
 | `taxIncluded` | `boolean \| undefined` | Optional | (Optional) |
+| `listPricePointId` | `number \| null \| undefined` | Optional | (Optional) The ID of a catalog price point of the same product to use as the list price. Ignored unless list vs sales pricing is enabled for the site. |
+| `useDefaultListPrice` | `boolean \| undefined` | Optional | (Optional) When list vs sales pricing is enabled and `list_price_point_id` is omitted, the product's default price point is used as the list price unless this is `false`. Defaults to `true`. |
 
 ## Example
 

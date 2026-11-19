@@ -17,6 +17,8 @@ import {
 export interface SubscriptionGroupItem {
   id?: number;
   reference?: string | null;
+  /** The ID of the customer the subscription belongs to. This is the payer unless the signup request named another customer for the subscription. */
+  customerId?: number;
   productId?: number;
   productHandle?: string | null;
   productPricePointId?: number;
@@ -32,6 +34,7 @@ export const subscriptionGroupItemSchema: Schema<SubscriptionGroupItem> = expand
   {
     id: ['id', optional(number())],
     reference: ['reference', optional(nullable(string()))],
+    customerId: ['customer_id', optional(number())],
     productId: ['product_id', optional(number())],
     productHandle: ['product_handle', optional(nullable(string()))],
     productPricePointId: ['product_price_point_id', optional(number())],

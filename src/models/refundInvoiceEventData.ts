@@ -21,7 +21,10 @@ import {
 
 /** Example schema for an `refund_invoice` event */
 export interface RefundInvoiceEventData {
-  /** If true, credit was created and applied it to the invoice. */
+  /**
+   * If true, credit was created and applied it to the invoice.
+   * If false, no credit note was created. `credit_note_attributes` is still present, but its `number` and `sequence_number` are `null`.
+   */
   applyCredit: boolean;
   /**
    * Consolidation level of the invoice, which is applicable to invoice consolidation. It will hold one of the following values:
@@ -29,7 +32,7 @@ export interface RefundInvoiceEventData {
    * * "child": An invoice segment which has been combined into a consolidated invoice.
    * * "parent": A consolidated invoice, whose contents are composed of invoice segments.
    * "Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.
-   * See also the [invoice consolidation documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-Invoice-Consolidation).
+   * See also the [invoice consolidation documentation](https://docs.maxio.com/billing/invoicing/working-with-invoices/understand-invoice-consolidation).
    */
   consolidationLevel?: InvoiceConsolidationLevel;
   creditNoteAttributes: CreditNote;

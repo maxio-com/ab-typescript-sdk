@@ -20,7 +20,7 @@ import {
 } from './subscriptionGroupSubscriptionError.js';
 
 export interface SubscriptionGroupSignupError {
-  /** Object that as key have subscription position in request subscriptions array and as value subscription errors object. */
+  /** Subscription errors keyed by the subscription's `reference` from the request, or by its zero-based position in the `subscriptions` array when it has no reference. */
   subscriptions?: Record<string, SubscriptionGroupSubscriptionError>;
   payerReference?: string;
   payer?: PayerError;

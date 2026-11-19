@@ -15,9 +15,9 @@
 | `pricingScheme` | [`PricingScheme \| null \| undefined`](../../doc/models/pricing-scheme.md) | Optional | - |
 | `unitName` | `string \| undefined` | Optional | The name of the unit that the component’s usage is measured in. e.g., message |
 | `unitPrice` | `string \| null \| undefined` | Optional | The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. |
-| `productFamilyId` | `number \| undefined` | Optional | The id of the Product Family to which the Component belongs |
-| `productFamilyName` | `string \| undefined` | Optional | The name of the Product Family to which the Component belongs |
-| `productFamilyHandle` | `string \| undefined` | Optional | The handle of the Product Family to which the Component belongs |
+| `productFamilyId` | `number \| null \| undefined` | Optional | The id of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. |
+| `productFamilyName` | `string \| null \| undefined` | Optional | The name of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. |
+| `productFamilyHandle` | `string \| null \| undefined` | Optional | The handle of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. |
 | `pricePerUnitInCents` | `bigint \| null \| undefined` | Optional | deprecated - use unit_price instead. |
 | `kind` | [`ComponentKind \| undefined`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
 | `archived` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is archived or not. |
@@ -41,10 +41,12 @@
 | `itemCategory` | [`ItemCategory \| null \| undefined`](../../doc/models/item-category.md) | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |
 | `useSiteExchangeRate` | `boolean \| null \| undefined` | Optional | - |
 | `accountingCode` | `string \| null \| undefined` | Optional | E.g. Internal ID or SKU Number |
-| `eventBasedBillingMetricId` | `number \| undefined` | Optional | (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events. |
+| `eventBasedBillingMetricId` | `number \| undefined` | Optional | The ID of an attached metric from legacy Events Based Billing. Omitted if no metric is attached. If the metric is linked to a Maxio Metering meter, the response can include both event_based_billing_metric_id and metering_meter_id. |
+| `meteringMeterId` | `number \| undefined` | Optional | The ID of an attached single Maxio Metering meter. Omitted if no single meter is attached, including when the component uses only an Advanced Formula. If a legacy Events Based Billing metric is linked to the meter, the response can include both metering_meter_id and event_based_billing_metric_id. |
 | `interval` | `number \| undefined` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component’s default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `intervalUnit` | [`IntervalUnit \| null \| undefined`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 | `unspscCode` | `string \| null \| undefined` | Optional | (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. |
+| `features` | [`FeatureCatalogItem[] \| null \| undefined`](../../doc/models/feature-catalog-item.md) | Optional | The active feature catalog items attached to this component. Present only when the request includes `include_features=true`. |
 
 ## Example
 

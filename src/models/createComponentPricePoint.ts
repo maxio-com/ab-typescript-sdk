@@ -18,6 +18,10 @@ import {
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { Price, priceSchema } from './price.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import {
+  SecondaryPricing,
+  secondaryPricingSchema,
+} from './secondaryPricing.js';
 
 export interface CreateComponentPricePoint {
   name: string;
@@ -25,6 +29,10 @@ export interface CreateComponentPricePoint {
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme: PricingScheme;
   prices: Price[];
+  /** Hybrid Pricing only. The secondary pricing model that takes over once usage passes the primary model's included threshold. Applies to Quantity-Based and Metered Components on Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices` brackets start at `1`, not at the primary model's highest `ending_quantity`. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). */
+  secondaryPricing?: SecondaryPricing;
+  /** Hybrid Pricing only. Alternative to `secondary_pricing.pricing_scheme`; when both are sent, `secondary_pricing.pricing_scheme` is used. Setting not supported when creating price points in bulk. */
+  secondaryPricingScheme?: PricingScheme;
   /** Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. Setting not supported when creating price points in bulk. */
   useSiteExchangeRate?: boolean;
   /** Whether or not the price point includes tax. Setting not supported when creating price points in bulk. */
@@ -43,6 +51,11 @@ export const createComponentPricePointSchema: Schema<CreateComponentPricePoint> 
       handle: ['handle', optional(string())],
       pricingScheme: ['pricing_scheme', pricingSchemeSchema],
       prices: ['prices', array(priceSchema)],
+      secondaryPricing: ['secondary_pricing', optional(secondaryPricingSchema)],
+      secondaryPricingScheme: [
+        'secondary_pricing_scheme',
+        optional(pricingSchemeSchema),
+      ],
       useSiteExchangeRate: ['use_site_exchange_rate', optional(boolean())],
       taxIncluded: ['tax_included', optional(boolean())],
       interval: ['interval', optional(number())],

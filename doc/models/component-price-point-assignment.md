@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `componentId` | `number \| undefined` | Optional | - |
+| `componentId` | [`ComponentPricePointAssignmentComponentId \| undefined`](../../doc/models/containers/component-price-point-assignment-component-id.md) | Optional | This is a container for one-of cases. |
 | `pricePoint` | [`ComponentPricePointAssignmentPricePoint \| undefined`](../../doc/models/containers/component-price-point-assignment-price-point.md) | Optional | This is a container for one-of cases. |
 
 ## Example
@@ -20,7 +20,7 @@ import {
 } from '@maxio-com/advanced-billing-sdk';
 
 const componentPricePointAssignment: ComponentPricePointAssignment = {
-  componentId: 190,
+  componentId: 112,
   pricePoint: 'String7',
 };
 ```

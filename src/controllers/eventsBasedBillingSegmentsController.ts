@@ -33,12 +33,12 @@ import {
   UpdateSegmentRequest,
   updateSegmentRequestSchema,
 } from '../models/updateSegmentRequest.js';
-import { number, optional, string } from '../schema.js';
+import { boolean, number, optional, string } from '../schema.js';
 import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
 import { EventBasedBillingListSegmentsErrorsError } from '../errors/eventBasedBillingListSegmentsErrorsError.js';
-import { EventBasedBillingSegmentError } from '../errors/eventBasedBillingSegmentError.js';
-import { EventBasedBillingSegmentErrorsError } from '../errors/eventBasedBillingSegmentErrorsError.js';
+import { EventBasedBillingSegmentWriteErrorResponseError } from '../errors/eventBasedBillingSegmentWriteErrorResponseError.js';
+import { SegmentPricePointErrorsError } from '../errors/segmentPricePointErrorsError.js';
 
 export class EventsBasedBillingSegmentsController extends BaseController {
   /**
@@ -48,6 +48,15 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    *
    * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
+   *
+   * ## Custom Price Points
+   *
+   * This endpoint changes segments on catalog price points only. If the price point is a subscription's
+   * custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such
+   * as "Segments on a subscription's custom price point can't be changed here. Set them with
+   * custom_price on the subscription or component endpoints.", and nothing is saved. To change a
+   * subscription's segment rates, send `custom_price.segments` to [Update
+   * Subscription]($e/Subscriptions/updateSubscription).
    *
    * @param componentId    ID or Handle for the Component
    * @param pricePointId   ID or Handle for the Price Point belonging to the Component
@@ -72,7 +81,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
       422,
-      EventBasedBillingSegmentErrorsError,
+      EventBasedBillingSegmentWriteErrorResponseError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
@@ -89,21 +98,34 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
    *
-   * @param componentId    ID or Handle for the Component
-   * @param pricePointId   ID or Handle for the Price Point belonging to the Component
-   * @param page           Result records are organized in pages. By default, the first
-   *                                                    page of results is displayed. The page parameter specifies a
-   *                                                    page number of results to fetch. You can start navigating
-   *                                                    through the pages to consume the results. You do this by
-   *                                                    passing in a page parameter. Retrieve the next page by adding ?
-   *                                                    page=2 to the query string. If there are no results to return,
-   *                                                    then an empty result set will be returned. Use in query
-   *                                                    `page=1`.
-   * @param perPage        This parameter indicates how many records to fetch in each
-   *                                                    request. Default value is 30. The maximum allowed values is 200;
-   *                                                    any per_page value over 200 will be changed to 200. Use in
-   *                                                    query `per_page=200`.
-   * @param filter         Filter to use for List Segments for a Price Point operation
+   * ## Subscription Segment Rates
+   *
+   * This endpoint also returns the segments of a subscription's custom price point, including segment
+   * rates set through `custom_price.segments` on [Create
+   * Subscription]($e/Subscriptions/createSubscription) or [Update
+   * Subscription]($e/Subscriptions/updateSubscription). Use the subscription component's
+   * `price_point_id`, available from [Read Subscription
+   * Component]($e/Subscription%20Components/readSubscriptionComponent).
+   *
+   * @param componentId     ID or Handle for the Component
+   * @param pricePointId    ID or Handle for the Price Point belonging to the Component
+   * @param page            Result records are organized in pages. By default, the first
+   *                                                     page of results is displayed. The page parameter specifies a
+   *                                                     page number of results to fetch. You can start navigating
+   *                                                     through the pages to consume the results. You do this by
+   *                                                     passing in a page parameter. Retrieve the next page by adding ?
+   *                                                     page=2 to the query string. If there are no results to return,
+   *                                                     then an empty result set will be returned. Use in query
+   *                                                     `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each
+   *                                                     request. Default value is 30. The maximum allowed values is
+   *                                                     200; any per_page value over 200 will be changed to 200. Use
+   *                                                     in query `per_page=200`.
+   * @param filter          Filter to use for List Segments for a Price Point operation
+   * @param currencyPrices  (Optional) If you have defined multiple currencies at the
+   *                                                     site level, pass `true` to include each segment's
+   *                                                     `currency_prices` in the response. Use in query:
+   *                                                     `currency_prices=true`.
    * @return Response from the API call
    */
   async listSegmentsForPricePoint(
@@ -113,12 +135,14 @@ export class EventsBasedBillingSegmentsController extends BaseController {
       page,
       perPage,
       filter,
+      currencyPrices,
     }: {
       componentId: string;
       pricePointId: string;
       page?: number;
       perPage?: number;
       filter?: ListSegmentsFilter;
+      currencyPrices?: boolean;
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ListSegmentsResponse>> {
@@ -129,10 +153,12 @@ export class EventsBasedBillingSegmentsController extends BaseController {
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
       filter: [filter, optional(listSegmentsFilterSchema)],
+      currencyPrices: [currencyPrices, optional(boolean())],
     });
     req.query('page', mapped.page, commaPrefix);
     req.query('per_page', mapped.perPage, commaPrefix);
     req.query('filter', mapped.filter, commaPrefix);
+    req.query('currency_prices', mapped.currencyPrices, commaPrefix);
     req.appendTemplatePath`/components/${mapped.componentId}/price_points/${mapped.pricePointId}/segments.json`;
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
@@ -151,6 +177,15 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    *
    * You can specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
+   *
+   * ## Custom Price Points
+   *
+   * This endpoint changes segments on catalog price points only. If the segment belongs to a
+   * subscription's custom price point, or the `price_point_id` in the URL names one, the request returns
+   * `422 Unprocessable Entity` with a `price_point` error such as "Segments on a subscription's custom
+   * price point can't be changed here. Set them with custom_price on the subscription or component
+   * endpoints.", and nothing is saved. To change a subscription's segment rates, send `custom_price.
+   * segments` to [Update Subscription]($e/Subscriptions/updateSubscription).
    *
    * @param componentId    ID or Handle of the Component
    * @param pricePointId   ID or Handle of the Price Point belonging to the Component
@@ -178,7 +213,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
       422,
-      EventBasedBillingSegmentErrorsError,
+      ApiError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
@@ -191,6 +226,16 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    *
    * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
+   *
+   * ## Custom Price Points
+   *
+   * This endpoint changes segments on catalog price points only. If the segment belongs to a
+   * subscription's custom price point, the request returns `422 Unprocessable Entity` with a
+   * `price_point` error such as "Segments on a subscription's custom price point can't be changed here.
+   * Set them with custom_price on the subscription or component endpoints.", and nothing is saved. The
+   * check uses the segment's own price point, whichever `price_point_id` the URL names. To change a
+   * subscription's segment rates, send `custom_price.segments` to [Update
+   * Subscription]($e/Subscriptions/updateSubscription).
    *
    * @param componentId    ID or Handle of the Component
    * @param pricePointId   ID or Handle of the Price Point belonging to the Component
@@ -213,7 +258,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
       422,
-      ApiError,
+      SegmentPricePointErrorsError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
@@ -230,6 +275,15 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    *
    * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
+   *
+   * ## Custom Price Points
+   *
+   * This endpoint changes segments on catalog price points only. If the price point is a subscription's
+   * custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such
+   * as "Segments on a subscription's custom price point can't be changed here. Set them with
+   * custom_price on the subscription or component endpoints.", and nothing is saved. To change a
+   * subscription's segment rates, send `custom_price.segments` to [Update
+   * Subscription]($e/Subscriptions/updateSubscription).
    *
    * @param componentId    ID or Handle for the Component
    * @param pricePointId   ID or Handle for the Price Point belonging to the Component
@@ -254,7 +308,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
       422,
-      EventBasedBillingSegmentError,
+      ApiError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );
@@ -271,6 +325,15 @@ export class EventsBasedBillingSegmentsController extends BaseController {
    *
    * You may specify component and/or price point by using either the numeric ID or the `handle:gold`
    * syntax.
+   *
+   * ## Custom Price Points
+   *
+   * This endpoint changes segments on catalog price points only. If the price point is a subscription's
+   * custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such
+   * as "Segments on a subscription's custom price point can't be changed here. Set them with
+   * custom_price on the subscription or component endpoints.", and nothing is saved. To change a
+   * subscription's segment rates, send `custom_price.segments` to [Update
+   * Subscription]($e/Subscriptions/updateSubscription).
    *
    * @param componentId    ID or Handle for the Component
    * @param pricePointId   ID or Handle for the Price Point belonging to the Component
@@ -295,7 +358,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
       422,
-      EventBasedBillingSegmentError,
+      ApiError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );

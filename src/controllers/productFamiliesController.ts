@@ -139,11 +139,10 @@ export class ProductFamiliesController extends BaseController {
   }
 
   /**
-   * Creates a Product Family within your site. Create a Product Family to act as a container for your
-   * products, components, and coupons.
+   * Creates a Product Family within your site.
    *
    * Full documentation on how Product Families operate within the Advanced Billing UI can be located
-   * [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
+   * [here](https://docs.maxio.com/billing/catalog/plans/organize-product-families).
    *
    * @param body
    * @return Response from the API call

@@ -39,9 +39,10 @@ export class ProductsController extends BaseController {
    *
    * For more information, see:
    *
-   * + [Products Overview](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
-   * + [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-
-   * Product-Changes-and-Migrations)
+   * + [Products Overview](https://docs.maxio.com/billing/catalog/plans/understand-plans)
+   * + [Changing a Subscription's Product](https://docs.maxio.
+   * com/billing/subscriptions/management/subscription-actions/understand-upgrade-and-downgrade-
+   * scenarios)
    *
    * @param productFamilyId   Either the product family's id or its handle
    *                                                                 prefixed with `handle:`
@@ -74,15 +75,23 @@ export class ProductsController extends BaseController {
   /**
    * Reads the current details of a product.
    *
-   * @param productId  The Advanced Billing id of the product
+   * @param productId        The Advanced Billing id of the product
+   * @param includeFeatures  When `true`, embeds the active feature catalog items for each result in a
+   *                                    `features` array. Default value is `false`. Ignored on sites without
+   *                                    Entitlements enabled: no `features` key is returned and no error is raised.
    * @return Response from the API call
    */
   async readProduct(
     productId: number,
+    includeFeatures?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse>> {
     const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ productId: [productId, number()] });
+    const mapped = req.prepareArgs({
+      productId: [productId, number()],
+      includeFeatures: [includeFeatures, optional(boolean())],
+    });
+    req.query('include_features', mapped.includeFeatures, commaPrefix);
     req.appendTemplatePath`/products/${mapped.productId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(productResponseSchema, requestOptions);
@@ -215,6 +224,10 @@ export class ProductsController extends BaseController {
    *                                                      `include_archived=true`.
    * @param include          Allows including additional data in the response. Use in
    *                                                      query `include=prepaid_product_price_point`.
+   * @param includeFeatures  When `true`, embeds the active feature catalog items for
+   *                                                      each result in a `features` array. Default value is `false`.
+   *                                                      Ignored on sites without Entitlements enabled: no `features`
+   *                                                      key is returned and no error is raised.
    * @return Response from the API call
    */
   async listProducts(
@@ -229,6 +242,7 @@ export class ProductsController extends BaseController {
       perPage,
       includeArchived,
       include,
+      includeFeatures,
     }: {
       dateField?: BasicDateField;
       filter?: ListProductsFilter;
@@ -240,6 +254,7 @@ export class ProductsController extends BaseController {
       perPage?: number;
       includeArchived?: boolean;
       include?: ListProductsInclude;
+      includeFeatures?: boolean;
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ProductResponse[]>> {
@@ -255,6 +270,7 @@ export class ProductsController extends BaseController {
       perPage: [perPage, optional(number())],
       includeArchived: [includeArchived, optional(boolean())],
       include: [include, optional(listProductsIncludeSchema)],
+      includeFeatures: [includeFeatures, optional(boolean())],
     });
     req.query('date_field', mapped.dateField, commaPrefix);
     req.query('filter', mapped.filter, commaPrefix);
@@ -266,6 +282,7 @@ export class ProductsController extends BaseController {
     req.query('per_page', mapped.perPage, commaPrefix);
     req.query('include_archived', mapped.includeArchived, commaPrefix);
     req.query('include', mapped.include, commaPrefix);
+    req.query('include_features', mapped.includeFeatures, commaPrefix);
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(array(productResponseSchema), requestOptions);
   }

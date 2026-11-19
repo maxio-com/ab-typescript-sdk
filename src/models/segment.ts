@@ -14,6 +14,10 @@ import {
   string,
 } from '../schema.js';
 import {
+  ComponentCurrencyPrice,
+  componentCurrencyPriceSchema,
+} from './componentCurrencyPrice.js';
+import {
   SegmentSegmentProperty1Value,
   segmentSegmentProperty1ValueSchema,
 } from './containers/segmentSegmentProperty1Value.js';
@@ -46,6 +50,8 @@ export interface Segment {
   createdAt?: string;
   updatedAt?: string;
   prices?: SegmentPrice[];
+  /** Prices of the segment in the site's non-primary currencies, one entry for each price and currency. This field is present only when the request includes `currency_prices=true`. If the price point uses the site exchange rate, the prices are calculated from the current rate and each `id` is `null`. */
+  currencyPrices?: ComponentCurrencyPrice[];
   [key: string]: unknown;
 }
 
@@ -78,5 +84,9 @@ export const segmentSchema: Schema<Segment> = lazy(() =>
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],
     prices: ['prices', optional(array(segmentPriceSchema))],
+    currencyPrices: [
+      'currency_prices',
+      optional(array(componentCurrencyPriceSchema)),
+    ],
   })
 );

@@ -102,8 +102,8 @@ import { ProductPricePointErrorResponseError } from '../errors/productPricePoint
 
 export class ProductPricePointsController extends BaseController {
   /**
-   * Creates a Product Price Point. See the [Product Price Point](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261111947789-Product-Price-Points) documentation for details.
+   * Creates a Product Price Point. See the [Product Price Point](https://docs.maxio.
+   * com/billing/catalog/plans/setting-up-plan-price-points) documentation for details.
    *
    * @param productId    The id or handle of the product. When using the
    *                                                              handle, it must be prefixed with `handle:`

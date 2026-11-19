@@ -23,6 +23,10 @@ import {
 } from '../models/createMultiInvoicePaymentRequest.js';
 import { CreditNote, creditNoteSchema } from '../models/creditNote.js';
 import {
+  CreditNoteDateField,
+  creditNoteDateFieldSchema,
+} from '../models/creditNoteDateField.js';
+import {
   CustomerChangesPreviewResponse,
   customerChangesPreviewResponseSchema,
 } from '../models/customerChangesPreviewResponse.js';
@@ -519,15 +523,43 @@ export class InvoicesController extends BaseController {
    * as a key in the query with a value set to `true`.
    *
    * @param subscriptionId  The subscription's Advanced Billing id
-   * @param page            Result records are organized in pages. By default, the first page of results is
-   *                                   displayed. The page parameter specifies a page number of results to fetch. You
-   *                                   can start navigating through the pages to consume the results. You do this by
-   *                                   passing in a page parameter. Retrieve the next page by adding ?page=2 to the
-   *                                   query string. If there are no results to return, then an empty result set will
-   *                                   be returned. Use in query `page=1`.
-   * @param perPage         This parameter indicates how many records to fetch in each request. Default
-   *                                   value is 20. The maximum allowed values is 200; any per_page value over 200 will
-   *                                   be changed to 200. Use in query `per_page=200`.
+   * @param dateField       The type of filter you would like to apply to your search. Use in
+   *                                               query `date_field=issue_date`. If a date range is provided without
+   *                                               an explicit `date_field`, it defaults to `issue_date`. If only
+   *                                               `start_datetime`/`end_datetime` are provided without an explicit
+   *                                               `date_field`, it defaults to `created_at` instead. An unrecognized
+   *                                               `date_field` is ignored rather than raising an error.
+   * @param startDate       The start date (format YYYY-MM-DD) with which to filter the
+   *                                               date_field. Returns credit notes with a timestamp at or after
+   *                                               midnight (12:00:00 AM) in your site’s time zone on the date
+   *                                               specified.
+   * @param endDate         The end date (format YYYY-MM-DD) with which to filter the
+   *                                               date_field. Returns credit notes with a timestamp up to and
+   *                                               including 11:59:59PM in your site’s time zone on the date specified.
+   * @param startDatetime   The start date and time (format YYYY-MM-DD HH:MM:SS) with which to
+   *                                               filter the date_field. Returns credit notes with a timestamp at or
+   *                                               after exact time provided in query. If provided, this parameter will
+   *                                               be used instead of start_date. If no timezone offset is included in
+   *                                               the value, it is interpreted as UTC. Allowed to be used only along
+   *                                               with date_field set to created_at or updated_at.
+   * @param endDatetime     The end date and time (format YYYY-MM-DD HH:MM:SS) with which to
+   *                                               filter the date_field. Returns credit notes with a timestamp at or
+   *                                               before exact time provided in query. If provided, this parameter
+   *                                               will be used instead of end_date. If no timezone offset is included
+   *                                               in the value, it is interpreted as UTC. Allowed to be used only
+   *                                               along with date_field set to created_at or updated_at.
+   * @param page            Result records are organized in pages. By default, the first page
+   *                                               of results is displayed. The page parameter specifies a page number
+   *                                               of results to fetch. You can start navigating through the pages to
+   *                                               consume the results. You do this by passing in a page parameter.
+   *                                               Retrieve the next page by adding ?page=2 to the query string. If
+   *                                               there are no results to return, then an empty result set will be
+   *                                               returned. Use in query `page=1`.
+   * @param perPage         This parameter indicates how many records to fetch in each request.
+   *                                               Default value is 20. The maximum allowed values is 200; any per_page
+   *                                               value over 200 will be changed to 200. Use in query `per_page=200`.
+   * @param direction       The sort direction of the returned credit notes, sorted by
+   *                                               sequence_number.
    * @param lineItems       Include line items data.
    * @param discounts       Include discounts data.
    * @param taxes           Include taxes data.
@@ -538,8 +570,14 @@ export class InvoicesController extends BaseController {
   async listCreditNotes(
     {
       subscriptionId,
+      dateField,
+      startDate,
+      endDate,
+      startDatetime,
+      endDatetime,
       page,
       perPage,
+      direction,
       lineItems,
       discounts,
       taxes,
@@ -547,8 +585,14 @@ export class InvoicesController extends BaseController {
       applications,
     }: {
       subscriptionId?: number;
+      dateField?: CreditNoteDateField;
+      startDate?: string;
+      endDate?: string;
+      startDatetime?: string;
+      endDatetime?: string;
       page?: number;
       perPage?: number;
+      direction?: Direction;
       lineItems?: boolean;
       discounts?: boolean;
       taxes?: boolean;
@@ -560,8 +604,14 @@ export class InvoicesController extends BaseController {
     const req = this.createRequest('GET', '/credit_notes.json');
     const mapped = req.prepareArgs({
       subscriptionId: [subscriptionId, optional(number())],
+      dateField: [dateField, optional(creditNoteDateFieldSchema)],
+      startDate: [startDate, optional(string())],
+      endDate: [endDate, optional(string())],
+      startDatetime: [startDatetime, optional(string())],
+      endDatetime: [endDatetime, optional(string())],
       page: [page, optional(number())],
       perPage: [perPage, optional(number())],
+      direction: [direction, optional(directionSchema)],
       lineItems: [lineItems, optional(boolean())],
       discounts: [discounts, optional(boolean())],
       taxes: [taxes, optional(boolean())],
@@ -569,8 +619,14 @@ export class InvoicesController extends BaseController {
       applications: [applications, optional(boolean())],
     });
     req.query('subscription_id', mapped.subscriptionId, commaPrefix);
+    req.query('date_field', mapped.dateField, commaPrefix);
+    req.query('start_date', mapped.startDate, commaPrefix);
+    req.query('end_date', mapped.endDate, commaPrefix);
+    req.query('start_datetime', mapped.startDatetime, commaPrefix);
+    req.query('end_datetime', mapped.endDatetime, commaPrefix);
     req.query('page', mapped.page, commaPrefix);
     req.query('per_page', mapped.perPage, commaPrefix);
+    req.query('direction', mapped.direction, commaPrefix);
     req.query('line_items', mapped.lineItems, commaPrefix);
     req.query('discounts', mapped.discounts, commaPrefix);
     req.query('taxes', mapped.taxes, commaPrefix);
@@ -816,6 +872,9 @@ export class InvoicesController extends BaseController {
    * overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supported
    * only for quantity based, on/off and metered components. For prepaid and event based billing
    * components `unit_price` is required.
+   * A Wallet Product can't be invoiced this way: a line item for one returns `422` ("Wallet Products can
+   * only be invoiced through a wallet purchase"). Use [Create Wallet
+   * Purchase]($e/Wallet%20Purchases/createWalletPurchase) instead.
    *
    * ### Coupons
    * When creating ad hoc invoice, new discounts can be applied in following way:
@@ -1158,7 +1217,9 @@ export class InvoicesController extends BaseController {
    * On success, a 204 no-content response will be returned. The response does not indicate that email(s)
    * have been delivered, but instead indicates that emails have been successfully queued for delivery.
    * If _any_ invalid or malformed email address is found in the request body, the entire request will be
-   * rejected and a 422 response will be returned.
+   * rejected and a 422 response will be returned. A 422 response will also be returned if the invoice is
+   * in `draft`, `pending`, or `processing` status, or if the invoice cannot be found within the site
+   * instance.
    *
    * @param uid          The unique identifier for the invoice, this does not refer to
    *                                                  the public facing invoice number.

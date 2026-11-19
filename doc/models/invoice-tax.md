@@ -12,7 +12,7 @@
 | `uid` | `string \| undefined` | Optional | - |
 | `title` | `string \| undefined` | Optional | - |
 | `description` | `string \| null \| undefined` | Optional | - |
-| `sourceType` | [`ProformaInvoiceTaxSourceType \| undefined`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | - |
+| `sourceType` | [`ProformaInvoiceTaxSourceType \| undefined`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | The source of the tax. `Tax` is a tax configured in Advanced Billing. The other values identify the tax service that calculated the tax. |
 | `sourceId` | `number \| undefined` | Optional | - |
 | `percentage` | `string \| undefined` | Optional | - |
 | `taxableAmount` | `string \| undefined` | Optional | - |
@@ -36,7 +36,7 @@ const invoiceTax: InvoiceTax = {
   uid: 'uid2',
   title: 'title8',
   description: 'description2',
-  sourceType: ProformaInvoiceTaxSourceType.Tax,
+  sourceType: ProformaInvoiceTaxSourceType.TaxJar,
   sourceId: 86,
 };
 ```

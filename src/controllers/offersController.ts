@@ -28,8 +28,8 @@ export class OffersController extends BaseController {
    *
    * Once an offer is defined it can be used as an alternative to the product when creating subscriptions.
    *
-   * For more information, see [Offers](https://maxio.zendesk.com/hc/en-us/articles/24261295098637-Offers-
-   * Overview) in the product documentation.
+   * For more information, see [Offers](https://docs.maxio.com/billing/catalog/offers/understand-offers)
+   * in the product documentation.
    *
    * ## Using a Product Price Point
    *

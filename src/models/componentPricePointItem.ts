@@ -17,6 +17,10 @@ import {
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { Price, priceSchema } from './price.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import {
+  SecondaryPricing,
+  secondaryPricingSchema,
+} from './secondaryPricing.js';
 
 export interface ComponentPricePointItem {
   name?: string;
@@ -28,6 +32,8 @@ export interface ComponentPricePointItem {
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
   prices?: Price[];
+  /** Hybrid Pricing only. Applies only to price points of Quantity-Based and Metered Components on Sites with Hybrid Pricing enabled; ignored for other component types and on Sites without Hybrid Pricing. Omit it to create a normal, non-hybrid price point. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). */
+  secondaryPricing?: SecondaryPricing;
   [key: string]: unknown;
 }
 
@@ -40,5 +46,6 @@ export const componentPricePointItemSchema: Schema<ComponentPricePointItem> = la
       interval: ['interval', optional(number())],
       intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
       prices: ['prices', optional(array(priceSchema))],
+      secondaryPricing: ['secondary_pricing', optional(secondaryPricingSchema)],
     })
 );

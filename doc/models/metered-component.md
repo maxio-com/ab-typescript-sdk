@@ -15,7 +15,8 @@
 | `handle` | `string \| undefined` | Optional | A unique identifier for your use that can be used to retrieve this component in subsequent requests. Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br><br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
 | `taxable` | `boolean \| undefined` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `pricingScheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
-| `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
+| `prices` | [`Price[] \| undefined`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing-schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
+| `secondaryPricing` | [`SecondaryPricing \| undefined`](../../doc/models/secondary-pricing.md) | Optional | Hybrid Pricing only. The secondary pricing model that takes over once usage passes the primary model's included threshold. Applies to Quantity-Based and Metered Components on Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices` brackets start at `1`, not at the primary model's highest `ending_quantity`. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). |
 | `pricePoints` | [`ComponentPricePointItem[] \| undefined`](../../doc/models/component-price-point-item.md) | Optional | - |
 | `unitPrice` | [`MeteredComponentUnitPrice \| undefined`](../../doc/models/containers/metered-component-unit-price.md) | Optional | This is a container for one-of cases. |
 | `taxCode` | `string \| undefined` | Optional | A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. |
@@ -31,7 +32,6 @@
 
 ```ts
 import {
-  IntervalUnit,
   MeteredComponent,
   PricingScheme,
 } from '@maxio-com/advanced-billing-sdk';
@@ -60,22 +60,21 @@ const meteredComponent: MeteredComponent = {
       endingQuantity: 40,
     }
   ],
-  pricePoints: [
-    {
-      name: 'name2',
-      handle: 'handle8',
-      pricingScheme: PricingScheme.PerUnit,
-      interval: 92,
-      intervalUnit: IntervalUnit.Day,
-    },
-    {
-      name: 'name2',
-      handle: 'handle8',
-      pricingScheme: PricingScheme.PerUnit,
-      interval: 92,
-      intervalUnit: IntervalUnit.Day,
-    }
-  ],
+  secondaryPricing: {
+    pricingScheme: PricingScheme.Stairstep,
+    prices: [
+      {
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
+      },
+      {
+        startingQuantity: 242,
+        unitPrice: 23.26,
+        endingQuantity: 40,
+      }
+    ],
+  },
 };
 ```
 

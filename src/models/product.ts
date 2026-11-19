@@ -20,6 +20,10 @@ import {
   ExpirationIntervalUnit,
   expirationIntervalUnitSchema,
 } from './expirationIntervalUnit.js';
+import {
+  FeatureCatalogItem,
+  featureCatalogItemSchema,
+} from './featureCatalogItem.js';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { ProductFamily, productFamilySchema } from './productFamily.js';
 import {
@@ -91,8 +95,14 @@ export interface Product {
   itemCategory?: string | null;
   productPricePointId?: number;
   productPricePointHandle?: string | null;
+  /** The ID of the catalog price point used as the list price for the subscription's custom product price. Returned only when list vs sales pricing is enabled for the site. */
+  productPricePointListPricePointId?: number | null;
+  /** The handle of the catalog price point used as the list price for the subscription's custom product price. Returned only when list vs sales pricing is enabled for the site. */
+  productPricePointListPricePointHandle?: string | null;
   /** (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this product instead of the default derived from item_category. */
   unspscCode?: string | null;
+  /** The active feature catalog items attached to this product. Present only when the request includes `include_features=true`. */
+  features?: FeatureCatalogItem[] | null;
   [key: string]: unknown;
 }
 
@@ -159,6 +169,15 @@ export const productSchema: Schema<Product> = lazy(() =>
       'product_price_point_handle',
       optional(nullable(string())),
     ],
+    productPricePointListPricePointId: [
+      'product_price_point_list_price_point_id',
+      optional(nullable(number())),
+    ],
+    productPricePointListPricePointHandle: [
+      'product_price_point_list_price_point_handle',
+      optional(nullable(string())),
+    ],
     unspscCode: ['unspsc_code', optional(nullable(string()))],
+    features: ['features', optional(nullable(array(featureCatalogItemSchema)))],
   })
 );

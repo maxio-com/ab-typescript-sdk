@@ -15,6 +15,7 @@ export enum ComponentKind {
   OnOffComponent = 'on_off_component',
   PrepaidUsageComponent = 'prepaid_usage_component',
   EventBasedComponent = 'event_based_component',
+  WalletProduct = 'wallet_product',
 }
 
 /**

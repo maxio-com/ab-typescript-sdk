@@ -24,7 +24,7 @@ const listSubscriptionComponentsResponse: ListSubscriptionComponentsResponse = {
     {
       id: 138,
       name: 'name2',
-      kind: ComponentKind.MeteredComponent,
+      kind: ComponentKind.EventBasedComponent,
       unitName: 'unit_name4',
       enabled: false,
     }
