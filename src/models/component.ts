@@ -86,8 +86,10 @@ export interface Component {
   useSiteExchangeRate?: boolean | null;
   /** E.g. Internal ID or SKU Number */
   accountingCode?: string | null;
-  /** (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events. */
+  /** The ID of an attached metric from legacy Events Based Billing. Omitted if no metric is attached. If the metric is linked to a Maxio Metering meter, the response can include both event_based_billing_metric_id and metering_meter_id. */
   eventBasedBillingMetricId?: number;
+  /** The ID of an attached single Maxio Metering meter. Omitted if no single meter is attached, including when the component uses only an Advanced Formula. If a legacy Events Based Billing metric is linked to the meter, the response can include both metering_meter_id and event_based_billing_metric_id. */
+  meteringMeterId?: number;
   /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component’s default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
@@ -155,6 +157,7 @@ export const componentSchema: Schema<Component> = lazy(() =>
       'event_based_billing_metric_id',
       optional(number()),
     ],
+    meteringMeterId: ['metering_meter_id', optional(number())],
     interval: ['interval', optional(number())],
     intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     unspscCode: ['unspsc_code', optional(nullable(string()))],

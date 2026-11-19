@@ -25,7 +25,6 @@ const createEBBComponent: CreateEBBComponent = {
     name: 'name8',
     unitName: 'unit_name0',
     pricingScheme: PricingScheme.Stairstep,
-    eventBasedBillingMetricId: 68,
     description: 'description8',
     handle: 'handle4',
     taxable: false,

@@ -49,8 +49,12 @@ export interface EBBComponent {
   taxCode?: string;
   /** (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. */
   hideDateRangeOnInvoice?: boolean;
-  /** The ID of an event based billing metric that will be attached to this component. */
-  eventBasedBillingMetricId: number;
+  /** ID of a site-owned metric. Required to create a component with legacy Events Based Billing. During migration, a meter linked to the metric is attached automatically when present. Sites using Maxio Metering ignore this input; provide metering_meter_id or metering_formula instead. */
+  eventBasedBillingMetricId?: number;
+  /** ID of a merchant-owned Maxio Metering meter. To create a component with Maxio Metering, provide this ID or metering_formula, but not both. Meter IDs and legacy metric IDs identify different resources. Sites using Events Based Billing ignore this input and require event_based_billing_metric_id instead. */
+  meteringMeterId?: number;
+  /** An Advanced Formula using Maxio Metering meters available to the site. To create a component with Maxio Metering, provide a non-blank formula or metering_meter_id, but not both. Sites using Events Based Billing ignore this input and require event_based_billing_metric_id instead. */
+  meteringFormula?: string;
   /** The numerical interval. i.e., an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
@@ -76,7 +80,12 @@ export const eBBComponentSchema: Schema<EBBComponent> = lazy(() =>
     unitPrice: ['unit_price', optional(eBBComponentUnitPriceSchema)],
     taxCode: ['tax_code', optional(string())],
     hideDateRangeOnInvoice: ['hide_date_range_on_invoice', optional(boolean())],
-    eventBasedBillingMetricId: ['event_based_billing_metric_id', number()],
+    eventBasedBillingMetricId: [
+      'event_based_billing_metric_id',
+      optional(number()),
+    ],
+    meteringMeterId: ['metering_meter_id', optional(number())],
+    meteringFormula: ['metering_formula', optional(string())],
     interval: ['interval', optional(number())],
     intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     unspscCode: ['unspsc_code', optional(nullable(string()))],

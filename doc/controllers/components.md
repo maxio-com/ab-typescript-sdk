@@ -641,9 +641,11 @@ try {
 
 Creates an event-based component definition under the specified product family. An event-based component can then be added and “allocated” for a subscription.
 
-Event-based components are similar to other component types, in that you define the component parameters (such as name and taxability) and the pricing. A key difference for the event-based component is that it must be attached to a metric. This is because the metric provides the component with the actual quantity used in computing what and how much will be billed each period for each subscription.
+Event-based components are similar to other component types: you define their parameters (such as name and taxability) and pricing.
 
-So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events.
+For [Maxio Metering](https://docs.maxio.com/billing/maxio-metering/overview/understand-maxio-metering), provide either `metering_meter_id` or `metering_formula`, but not both. For legacy Events Based Billing, provide `event_based_billing_metric_id` instead. Meter IDs and legacy metric IDs identify different resources. A legacy metric ID cannot replace a meter ID or formula on a site using Maxio Metering.
+
+Instead of reporting usage directly for each component (as you would with metered components), usage is derived from analysis of your events.
 
 For more information, see [Understand Products](https://docs.maxio.com/billing/catalog/products/understand-products).
 
@@ -685,7 +687,6 @@ const body: CreateEBBComponent = {
     name: 'Component Name',
     unitName: 'string',
     pricingScheme: PricingScheme.PerUnit,
-    eventBasedBillingMetricId: 123,
     description: 'string',
     handle: 'some_handle',
     taxable: true,
@@ -695,6 +696,7 @@ const body: CreateEBBComponent = {
         unitPrice: '0.49',
       }
     ],
+    eventBasedBillingMetricId: 123,
   },
 };
 
