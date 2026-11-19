@@ -19,6 +19,10 @@ import {
 import { ComponentKind, componentKindSchema } from './componentKind.js';
 import { ComponentPrice, componentPriceSchema } from './componentPrice.js';
 import { CreditType, creditTypeSchema } from './creditType.js';
+import {
+  FeatureCatalogItem,
+  featureCatalogItemSchema,
+} from './featureCatalogItem.js';
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { ItemCategory, itemCategorySchema } from './itemCategory.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
@@ -35,12 +39,12 @@ export interface Component {
   unitName?: string;
   /** The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. */
   unitPrice?: string | null;
-  /** The id of the Product Family to which the Component belongs */
-  productFamilyId?: number;
-  /** The name of the Product Family to which the Component belongs */
-  productFamilyName?: string;
-  /** The handle of the Product Family to which the Component belongs */
-  productFamilyHandle?: string;
+  /** The id of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. */
+  productFamilyId?: number | null;
+  /** The name of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. */
+  productFamilyName?: string | null;
+  /** The handle of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. */
+  productFamilyHandle?: string | null;
   /** deprecated - use unit_price instead. */
   pricePerUnitInCents?: bigint | null;
   /** A handle for the component type */
@@ -90,6 +94,8 @@ export interface Component {
   intervalUnit?: IntervalUnit | null;
   /** (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. */
   unspscCode?: string | null;
+  /** The active feature catalog items attached to this component. Present only when the request includes `include_features=true`. */
+  features?: FeatureCatalogItem[] | null;
   [key: string]: unknown;
 }
 
@@ -101,9 +107,12 @@ export const componentSchema: Schema<Component> = lazy(() =>
     pricingScheme: ['pricing_scheme', optional(nullable(pricingSchemeSchema))],
     unitName: ['unit_name', optional(string())],
     unitPrice: ['unit_price', optional(nullable(string()))],
-    productFamilyId: ['product_family_id', optional(number())],
-    productFamilyName: ['product_family_name', optional(string())],
-    productFamilyHandle: ['product_family_handle', optional(string())],
+    productFamilyId: ['product_family_id', optional(nullable(number()))],
+    productFamilyName: ['product_family_name', optional(nullable(string()))],
+    productFamilyHandle: [
+      'product_family_handle',
+      optional(nullable(string())),
+    ],
     pricePerUnitInCents: [
       'price_per_unit_in_cents',
       optional(nullable(bigint())),
@@ -149,5 +158,6 @@ export const componentSchema: Schema<Component> = lazy(() =>
     interval: ['interval', optional(number())],
     intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     unspscCode: ['unspsc_code', optional(nullable(string()))],
+    features: ['features', optional(nullable(array(featureCatalogItemSchema)))],
   })
 );

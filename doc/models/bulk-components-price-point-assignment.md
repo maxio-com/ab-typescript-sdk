@@ -21,7 +21,7 @@ import {
 const bulkComponentsPricePointAssignment: BulkComponentsPricePointAssignment = {
   components: [
     {
-      componentId: 108,
+      componentId: 30,
       pricePoint: 'String5',
     }
   ],

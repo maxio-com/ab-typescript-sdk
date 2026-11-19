@@ -9,6 +9,7 @@ import {
   expandoObject,
   lazy,
   nullable,
+  number,
   optional,
   Schema,
   string,
@@ -74,6 +75,10 @@ export interface SubscriptionCustomPrice {
   expirationIntervalUnit?: ExpirationIntervalUnit | null;
   /** (Optional) */
   taxIncluded?: boolean;
+  /** (Optional) The ID of a catalog price point of the same product to use as the list price. Ignored unless list vs sales pricing is enabled for the site. */
+  listPricePointId?: number | null;
+  /** (Optional) When list vs sales pricing is enabled and `list_price_point_id` is omitted, the product's default price point is used as the list price unless this is `false`. Defaults to `true`. */
+  useDefaultListPrice?: boolean;
   [key: string]: unknown;
 }
 
@@ -115,5 +120,7 @@ export const subscriptionCustomPriceSchema: Schema<SubscriptionCustomPrice> = la
         optional(nullable(expirationIntervalUnitSchema)),
       ],
       taxIncluded: ['tax_included', optional(boolean())],
+      listPricePointId: ['list_price_point_id', optional(nullable(number()))],
+      useDefaultListPrice: ['use_default_list_price', optional(boolean())],
     })
 );

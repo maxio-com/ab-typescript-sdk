@@ -1,5 +1,9 @@
 # Products
 
+The Product object defines what you sell, including default pricing, billing interval, and trial configuration. With the new catalog experience, the UI labels products as Plans, while the API keeps the product name. See [Catalog terminology](https://docs.maxio.com/billing/catalog/overview/using-the-new-product-catalog#catalog-terminology).
+
+Products are grouped under a Product Family and are the base type a customer subscribes to. Products can also grant features to subscribers through [Create Product Feature Catalog Item](../../doc/controllers/product-features.md#create-product-feature). For more information, see [Understand Plans](https://docs.maxio.com/billing/catalog/plans/understand-plans).
+
 ```ts
 const productsController = new ProductsController(client);
 ```
@@ -26,8 +30,8 @@ If you have the new [Catalog experience](page:help/announcements/2026-announceme
 
 For more information, see:
 
-+ [Products Overview](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
-+ [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Changes-and-Migrations)
++ [Products Overview](https://docs.maxio.com/billing/catalog/plans/understand-plans)
++ [Changing a Subscription's Product](https://docs.maxio.com/billing/subscriptions/management/subscription-actions/understand-upgrade-and-downgrade-scenarios)
 
 ```ts
 async createProduct(
@@ -168,6 +172,7 @@ Reads the current details of a product.
 ```ts
 async readProduct(
   productId: number,
+  includeFeatures?: boolean,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductResponse>>
 ```
@@ -181,6 +186,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `productId` | `number` | Template, Required | The Advanced Billing id of the product |
+| `includeFeatures` | `boolean \| undefined` | Query, Optional | When `true`, embeds the active feature catalog items for each result in a `features` array. Default value is `false`. Ignored on sites without Entitlements enabled: no `features` key is returned and no error is raised.<br><br>**Default**: `false` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -194,8 +200,13 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const productId = 202;
 
+const includeFeatures = false;
+
 try {
-  const response = await productsController.readProduct(productId);
+  const response = await productsController.readProduct(
+    productId,
+    includeFeatures
+  );
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -642,6 +653,7 @@ async listProducts(
     perPage,
     includeArchived,
     include,
+    includeFeatures,
   }: {
     dateField?: BasicDateField;
     filter?: ListProductsFilter;
@@ -653,6 +665,7 @@ async listProducts(
     perPage?: number;
     includeArchived?: boolean;
     include?: ListProductsInclude;
+    includeFeatures?: boolean;
   },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ProductResponse[]>>
@@ -676,6 +689,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `includeArchived` | `boolean \| undefined` | Query, Optional | Include archived products. Use in query: `include_archived=true`. |
 | `include` | [`ListProductsInclude \| undefined`](../../doc/models/list-products-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
+| `includeFeatures` | `boolean \| undefined` | Query, Optional | When `true`, embeds the active feature catalog items for each result in a `features` array. Default value is `false`. Ignored on sites without Entitlements enabled: no `features` key is returned and no error is raised.<br><br>**Default**: `false` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -699,7 +713,8 @@ const collect = {
   page: 1,
   perPage: 50,
   includeArchived: true,
-  include: ListProductsInclude.PrepaidProductPricePoint
+  include: ListProductsInclude.PrepaidProductPricePoint,
+  includeFeatures: false
 }
 
 try {

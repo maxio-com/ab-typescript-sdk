@@ -13,6 +13,10 @@ import {
   Schema,
   string,
 } from '../schema.js';
+import {
+  EntityIdentifierKind,
+  entityIdentifierKindSchema,
+} from './entityIdentifierKind.js';
 
 export interface Customer {
   /** The first name of the customer */
@@ -63,8 +67,14 @@ export interface Customer {
   taxExempt?: boolean;
   /** Whether surcharging is enabled for the customer. Only included on sites where surcharging control is enabled. */
   surcharging?: boolean;
-  /** The VAT business identification number for the customer. This number is used to determine VAT tax opt out rules. It is not validated when added or updated on a customer record. Instead, it is validated via VIES before calculating taxes. Only valid business identification numbers will allow for VAT opt out. */
+  /** The VAT business identification number for the customer. This number is used to determine VAT tax opt out rules. It is not validated when added or updated on a customer record. Instead, it is validated via VIES before calculating taxes. Only valid business identification numbers will allow for VAT opt out. When the customer holds an entity identifier, this field returns that identifier's value, whatever its kind. */
   vatNumber?: string | null;
+  /** The two-letter ISO 3166-1 country code that qualifies the customer's VAT number. Set to `null` when an identifier is stored through `entity_identifier_kind` for a kind that is not tied to a VAT country, meaning `company_reg`, `gln`, `duns`, or `lei`. */
+  vatCountry?: string | null;
+  /** The kind of tax or business identifier held by the customer. Returned as `null` when the customer has no entity identifier, including a legacy customer whose `vat_number` predates entity identifiers. */
+  entityIdentifierKind?: EntityIdentifierKind | null;
+  /** The value of the customer's tax or business identifier. Returned as `null` when the customer has no entity identifier. */
+  entityIdentifierValue?: string | null;
   /** The parent ID in Chargify if applicable. Parent is another Customer object. */
   parentId?: number | null;
   /** The locale for the customer to identify language-region */
@@ -118,6 +128,15 @@ export const customerSchema: Schema<Customer> = expandoObject({
   taxExempt: ['tax_exempt', optional(boolean())],
   surcharging: ['surcharging', optional(boolean())],
   vatNumber: ['vat_number', optional(nullable(string()))],
+  vatCountry: ['vat_country', optional(nullable(string()))],
+  entityIdentifierKind: [
+    'entity_identifier_kind',
+    optional(nullable(entityIdentifierKindSchema)),
+  ],
+  entityIdentifierValue: [
+    'entity_identifier_value',
+    optional(nullable(string())),
+  ],
   parentId: ['parent_id', optional(nullable(number()))],
   locale: ['locale', optional(nullable(string()))],
   defaultSubscriptionGroupUid: [

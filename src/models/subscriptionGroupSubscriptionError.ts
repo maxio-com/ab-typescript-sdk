@@ -8,6 +8,7 @@ import { array, expandoObject, optional, Schema, string } from '../schema.js';
 
 /** Object which contains subscription errors. */
 export interface SubscriptionGroupSubscriptionError {
+  customer?: string[];
   product?: string[];
   productPricePointId?: string[];
   paymentProfile?: string[];
@@ -21,6 +22,7 @@ export interface SubscriptionGroupSubscriptionError {
 
 export const subscriptionGroupSubscriptionErrorSchema: Schema<SubscriptionGroupSubscriptionError> = expandoObject(
   {
+    customer: ['customer', optional(array(string()))],
     product: ['product', optional(array(string()))],
     productPricePointId: ['product_price_point_id', optional(array(string()))],
     paymentProfile: ['payment_profile', optional(array(string()))],

@@ -17,7 +17,7 @@ import {
 export interface TaxConfiguration {
   kind?: TaxConfigurationKind;
   destinationAddress?: TaxDestinationAddress;
-  /** Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio.zendesk.com/hc/en-us/articles/24287012608909-Taxes-Overview */
+  /** Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://docs.maxio.com/billing/taxes/overview/understand-tax-options */
   fullyConfigured?: boolean;
   [key: string]: unknown;
 }

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptions` | [`Record<string, SubscriptionGroupSubscriptionError> \| undefined`](../../doc/models/subscription-group-subscription-error.md) | Optional | Object that as key have subscription position in request subscriptions array and as value subscription errors object. |
+| `subscriptions` | [`Record<string, SubscriptionGroupSubscriptionError> \| undefined`](../../doc/models/subscription-group-subscription-error.md) | Optional | Subscription errors keyed by the subscription's `reference` from the request, or by its zero-based position in the `subscriptions` array when it has no reference. |
 | `payerReference` | `string \| undefined` | Optional | - |
 | `payer` | [`PayerError \| undefined`](../../doc/models/payer-error.md) | Optional | - |
 | `subscriptionGroup` | `string[] \| undefined` | Optional | - |
@@ -26,6 +26,10 @@ import {
 const subscriptionGroupSignupError: SubscriptionGroupSignupError = {
   subscriptions: {
     'key0': {
+      customer: [
+        'customer1',
+        'customer2'
+      ],
       product: [
         'product9'
       ],
@@ -37,13 +41,13 @@ const subscriptionGroupSignupError: SubscriptionGroupSignupError = {
       ],
       paymentProfileChargifyToken: [
         'payment_profile.chargify_token6'
-      ],
-      base: [
-        'base5',
-        'base6'
       ],
     },
     'key1': {
+      customer: [
+        'customer1',
+        'customer2'
+      ],
       product: [
         'product9'
       ],
@@ -55,13 +59,13 @@ const subscriptionGroupSignupError: SubscriptionGroupSignupError = {
       ],
       paymentProfileChargifyToken: [
         'payment_profile.chargify_token6'
-      ],
-      base: [
-        'base5',
-        'base6'
       ],
     },
     'key2': {
+      customer: [
+        'customer1',
+        'customer2'
+      ],
       product: [
         'product9'
       ],
@@ -73,10 +77,6 @@ const subscriptionGroupSignupError: SubscriptionGroupSignupError = {
       ],
       paymentProfileChargifyToken: [
         'payment_profile.chargify_token6'
-      ],
-      base: [
-        'base5',
-        'base6'
       ],
     }
   },

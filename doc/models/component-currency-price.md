@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `number \| undefined` | Optional | - |
+| `id` | `number \| null \| undefined` | Optional | The ID of the stored currency price. This is `null` when the price point uses the site exchange rate (`use_site_exchange_rate: true`), because the price is calculated from the rate and is not stored. |
 | `currency` | `string \| undefined` | Optional | - |
 | `price` | `string \| undefined` | Optional | - |
 | `formattedPrice` | `string \| undefined` | Optional | - |

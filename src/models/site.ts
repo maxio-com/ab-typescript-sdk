@@ -49,6 +49,10 @@ export interface Site {
   multiFrequencyEnabled?: boolean;
   /** Whether the auto-renewals feature is enabled for this site. */
   autoRenewalsEnabled?: boolean;
+  /** Indicates whether the site has list vs sales pricing enabled. */
+  listPricingEnabled?: boolean;
+  /** Indicates whether the site allows subscriptions without a plan. */
+  planlessSubscriptionsEnabled?: boolean;
   /** Whether the Billing Portal is enabled for this site. */
   portalEnabled?: boolean;
   test?: boolean;
@@ -93,6 +97,11 @@ export const siteSchema: Schema<Site> = lazy(() =>
     netTerms: ['net_terms', optional(netTermsSchema)],
     multiFrequencyEnabled: ['multi_frequency_enabled', optional(boolean())],
     autoRenewalsEnabled: ['auto_renewals_enabled', optional(boolean())],
+    listPricingEnabled: ['list_pricing_enabled', optional(boolean())],
+    planlessSubscriptionsEnabled: [
+      'planless_subscriptions_enabled',
+      optional(boolean()),
+    ],
     portalEnabled: ['portal_enabled', optional(boolean())],
     test: ['test', optional(boolean())],
   })

@@ -26,9 +26,9 @@ export class SubscriptionNotesController extends BaseController {
    * If you have structured data such as birth date, color, etc., consider using
    * [Metadata]($e/Custom%20Fields/createMetadata) instead.
    *
-   * For more information, see [Adding Notes](https://docs.maxio.com/hc/en-us/articles/24251654953997-
-   * Understanding-the-Subscription-Summary-Page#billing-portal-status:~:text=documentation%20for%20more.-
-   * ,Adding%20Notes,-Notes%20are%20optional) in the product documentation.
+   * For more information, see [Adding Notes](https://docs.maxio.com/getting-started/maxio-platform-
+   * basics/advanced-billing-overview-and-resources/subscription-summary-tabs/understanding-the-
+   * subscription-summary-page#adding-notes) in the product documentation.
    *
    * @param subscriptionId  The Chargify id of the subscription.
    * @param body

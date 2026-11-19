@@ -1,7 +1,7 @@
 
 # Configuration-Based Client Initialization
 
-The SDK client can be initialized directly from a JSON configuration file using the `fromJsonConfig` static method available on the `Client` class.` This allows you to store and load configuration settings from JSON files, making it easier to organize and manage different configurations across environments.
+The SDK client can be initialized directly from a JSON configuration file using the `fromJsonConfig` static method available on the `Client` class. This allows you to store and load configuration settings from JSON files, making it easier to organize and manage different configurations across environments.
 
 ## Node.js Environment
 
@@ -12,7 +12,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { Client } from '@maxio-com/advanced-billing-sdk';
 
-// Provide absolute path for the .env file
+// Provide absolute path for the configuration file
 const absolutePath = path.resolve('./config.json');
 
 // Read the configuration file content
@@ -22,18 +22,19 @@ const fileContent = fs.readFileSync(absolutePath, 'utf-8');
 const client = Client.fromJsonConfig(fileContent);
 ```
 
-## Browser Environment
+## Providing Credentials
 
-In browser environments, you can use the `import` function to load the configuration file.
+Authentication credentials are left out of the example configuration file below. Keep credentials out of `.env` and configuration files that are committed to source control or shipped with your application, and load them at runtime from a secret manager or your hosting platform's environment instead. Never bundle credentials into browser code. Pass them in code using the `withConfiguration` method:
 
 ```ts
 import { Client } from '@maxio-com/advanced-billing-sdk';
 
-// Load configuration using dynamic import
-const configModule = await import('./config.json', { assert: { type: 'json' } });
-
-// Initialize client from JSON configuration content
-const client = Client.fromJsonConfig(JSON.stringify(configModule.default));
+const client = Client.fromJsonConfig(fileContent).withConfiguration({
+  basicAuthCredentials: {
+    username: 'BasicAuthUserName',
+    password: 'BasicAuthPassword'
+  },
+});
 ```
 
 ## Example Configuration File
@@ -43,10 +44,6 @@ const client = Client.fromJsonConfig(JSON.stringify(configModule.default));
   "timeout": 30000,
   "environment": "US",
   "site": "subdomain",
-  "basicAuthCredentials": {
-    "username": "username",
-    "password": "password"
-  },
   "httpClientOptions": {
     "timeout": 30000,
     "retryConfig": {
@@ -60,11 +57,7 @@ const client = Client.fromJsonConfig(JSON.stringify(configModule.default));
     },
     "proxySettings": {
       "address": "http://localhost:3000",
-      "port": 8080,
-      "auth": {
-        "username": "username",
-        "password": "password"
-      }
+      "port": 8080
     }
   }
 }

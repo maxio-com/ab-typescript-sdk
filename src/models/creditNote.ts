@@ -8,6 +8,7 @@ import {
   array,
   expandoObject,
   lazy,
+  nullable,
   number,
   optional,
   Schema,
@@ -45,10 +46,14 @@ export interface CreditNote {
   /**
    * A unique, identifying string that appears on the credit note and in places it is referenced.
    * While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
+   * A saved credit note always has a number. The value is `null` only in `refund_invoice` event data when the refund did not create a credit note (`apply_credit` is `false`).
    */
-  number?: string;
-  /** A monotonically increasing number assigned to credit notes as they are created.  This number is unique within a site and can be used to sort and order credit notes. */
-  sequenceNumber?: number;
+  number?: string | null;
+  /**
+   * A monotonically increasing number assigned to credit notes as they are created.  This number is unique within a site and can be used to sort and order credit notes.
+   * A saved credit note always has a sequence number. The value is `null` only in `refund_invoice` event data when the refund did not create a credit note (`apply_credit` is `false`).
+   */
+  sequenceNumber?: number | null;
   /**
    * Date the credit note was issued to the customer.  This is the date that the credit was made available for application, and may come before it is fully applied.
    * The format is `"YYYY-MM-DD"`.
@@ -92,7 +97,7 @@ export interface CreditNote {
   taxes?: InvoiceTax[];
   applications?: CreditNoteApplication[];
   refunds?: InvoiceRefund[];
-  /** An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-Notes-Proration#origin-invoices). */
+  /** An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://docs.maxio.com/billing/invoicing/working-with-invoices/how-credit-notes-work#how-origin-invoices-work). */
   originInvoices?: OriginInvoice[];
   [key: string]: unknown;
 }
@@ -103,8 +108,8 @@ export const creditNoteSchema: Schema<CreditNote> = lazy(() =>
     siteId: ['site_id', optional(number())],
     customerId: ['customer_id', optional(number())],
     subscriptionId: ['subscription_id', optional(number())],
-    number: ['number', optional(string())],
-    sequenceNumber: ['sequence_number', optional(number())],
+    number: ['number', optional(nullable(string()))],
+    sequenceNumber: ['sequence_number', optional(nullable(number()))],
     issueDate: ['issue_date', optional(string())],
     appliedDate: ['applied_date', optional(string())],
     status: ['status', optional(creditNoteStatusSchema)],

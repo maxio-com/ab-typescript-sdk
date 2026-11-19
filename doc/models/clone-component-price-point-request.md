@@ -16,12 +16,40 @@
 ```ts
 import {
   CloneComponentPricePointRequest,
+  EntitlementPeriodicityUnit,
+  GrantExpirationUnit,
 } from '@maxio-com/advanced-billing-sdk';
 
 const cloneComponentPricePointRequest: CloneComponentPricePointRequest = {
   pricePoint: {
     name: 'name0',
     handle: 'handle6',
+    featureCatalogItems: [
+      {
+        featureTemplateId: 8,
+        value: 'value4',
+        periodicityInterval: 136,
+        periodicityUnit: EntitlementPeriodicityUnit.Hour,
+        grantExpirationInterval: 60,
+        grantExpirationUnit: GrantExpirationUnit.Month,
+      },
+      {
+        featureTemplateId: 8,
+        value: 'value4',
+        periodicityInterval: 136,
+        periodicityUnit: EntitlementPeriodicityUnit.Hour,
+        grantExpirationInterval: 60,
+        grantExpirationUnit: GrantExpirationUnit.Month,
+      },
+      {
+        featureTemplateId: 8,
+        value: 'value4',
+        periodicityInterval: 136,
+        periodicityUnit: EntitlementPeriodicityUnit.Hour,
+        grantExpirationInterval: 60,
+        grantExpirationUnit: GrantExpirationUnit.Month,
+      }
+    ],
   },
 };
 ```

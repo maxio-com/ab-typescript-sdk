@@ -71,6 +71,8 @@ export interface SubscriptionComponent {
   subscription?: SubscriptionComponentSubscription;
   historicUsages?: HistoricUsage[];
   displayOnHostedPage?: boolean;
+  /** The ID of the catalog price point used as the list price for this component's custom price. Returned only when list vs sales pricing is enabled for the site. */
+  listPricePointId?: number | null;
   /** The numerical interval. e.g., an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
   interval?: number;
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
@@ -135,6 +137,7 @@ export const subscriptionComponentSchema: Schema<SubscriptionComponent> = lazy(
       ],
       historicUsages: ['historic_usages', optional(array(historicUsageSchema))],
       displayOnHostedPage: ['display_on_hosted_page', optional(boolean())],
+      listPricePointId: ['list_price_point_id', optional(nullable(number()))],
       interval: ['interval', optional(number())],
       intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
     })

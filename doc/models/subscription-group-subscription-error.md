@@ -11,6 +11,7 @@ Object which contains subscription errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `customer` | `string[] \| undefined` | Optional | - |
 | `product` | `string[] \| undefined` | Optional | - |
 | `productPricePointId` | `string[] \| undefined` | Optional | - |
 | `paymentProfile` | `string[] \| undefined` | Optional | - |
@@ -28,6 +29,11 @@ import {
 } from '@maxio-com/advanced-billing-sdk';
 
 const subscriptionGroupSubscriptionError: SubscriptionGroupSubscriptionError = {
+  customer: [
+    'customer7',
+    'customer8',
+    'customer9'
+  ],
   product: [
     'product7',
     'product8'
@@ -43,11 +49,6 @@ const subscriptionGroupSubscriptionError: SubscriptionGroupSubscriptionError = {
   paymentProfileChargifyToken: [
     'payment_profile.chargify_token2',
     'payment_profile.chargify_token3'
-  ],
-  base: [
-    'base1',
-    'base2',
-    'base3'
   ],
 };
 ```

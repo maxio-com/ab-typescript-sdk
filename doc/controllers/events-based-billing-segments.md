@@ -24,6 +24,10 @@ Creates a new segment for a component with a segmented metric. It allows you to 
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
+## Custom Price Points
+
+This endpoint changes segments on catalog price points only. If the price point is a subscription's custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such as "Segments on a subscription's custom price point can't be changed here. Set them with custom_price on the subscription or component endpoints.", and nothing is saved. To change a subscription's segment rates, send `custom_price.segments` to [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription).
+
 ```ts
 async createSegment(
   componentId: string,
@@ -102,7 +106,7 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
-    if (error instanceof EventBasedBillingSegmentErrorsError) {
+    if (error instanceof EventBasedBillingSegmentWriteErrorResponseError) {
       console.log(error.result);
     }
   }
@@ -114,7 +118,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsError`](../../doc/models/event-based-billing-segment-errors-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentWriteErrorResponseError`](../../doc/models/event-based-billing-segment-write-error-response-error.md) |
 
 
 # List Segments for Price Point
@@ -125,6 +129,10 @@ You can pass `page` and `per_page` parameters in order to access all of the segm
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
+## Subscription Segment Rates
+
+This endpoint also returns the segments of a subscription's custom price point, including segment rates set through `custom_price.segments` on [Create Subscription](../../doc/controllers/subscriptions.md#create-subscription) or [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription). Use the subscription component's `price_point_id`, available from [Read Subscription Component](../../doc/controllers/subscription-components.md#read-subscription-component).
+
 ```ts
 async listSegmentsForPricePoint(
   {
@@ -133,12 +141,14 @@ async listSegmentsForPricePoint(
     page,
     perPage,
     filter,
+    currencyPrices,
   }: {
     componentId: string;
     pricePointId: string;
     page?: number;
     perPage?: number;
     filter?: ListSegmentsFilter;
+    currencyPrices?: boolean;
   },
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<ListSegmentsResponse>>
@@ -157,6 +167,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `page` | `number \| undefined` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `perPage` | `number \| undefined` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `30`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListSegmentsFilter \| undefined`](../../doc/models/list-segments-filter.md) | Query, Optional | Filter to use for List Segments for a Price Point operation |
+| `currencyPrices` | `boolean \| undefined` | Query, Optional | (Optional) If you have defined multiple currencies at the site level, pass `true` to include each segment's `currency_prices` in the response. Use in query: `currency_prices=true`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -175,7 +186,8 @@ const collect = {
   perPage: 50,
   filter: {
     segmentProperty1Value: 'EU',
-  }
+  },
+  currencyPrices: true
 }
 
 try {
@@ -218,6 +230,10 @@ try {
 Updates a single segment for a component with a segmented metric. You can also update the pricing for the segment.
 
 You can specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+
+## Custom Price Points
+
+This endpoint changes segments on catalog price points only. If the segment belongs to a subscription's custom price point, or the `price_point_id` in the URL names one, the request returns `422 Unprocessable Entity` with a `price_point` error such as "Segments on a subscription's custom price point can't be changed here. Set them with custom_price on the subscription or component endpoints.", and nothing is saved. To change a subscription's segment rates, send `custom_price.segments` to [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription).
 
 ```ts
 async updateSegment(
@@ -282,9 +298,6 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
-    if (error instanceof EventBasedBillingSegmentErrorsError) {
-      console.log(error.result);
-    }
   }
 }
 ```
@@ -294,7 +307,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsError`](../../doc/models/event-based-billing-segment-errors-error.md) |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
 # Delete Segment
@@ -302,6 +315,10 @@ try {
 Deletes a segment with the specified ID.
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+
+## Custom Price Points
+
+This endpoint changes segments on catalog price points only. If the segment belongs to a subscription's custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such as "Segments on a subscription's custom price point can't be changed here. Set them with custom_price on the subscription or component endpoints.", and nothing is saved. The check uses the segment's own price point, whichever `price_point_id` the URL names. To change a subscription's segment rates, send `custom_price.segments` to [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription).
 
 ```ts
 async deleteSegment(
@@ -364,6 +381,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof SegmentPricePointErrorsError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -373,7 +393,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`SegmentPricePointErrorsError`](../../doc/models/segment-price-point-errors-error.md) |
 
 
 # Bulk Create Segments
@@ -383,6 +403,10 @@ Creates multiple segments in one request. The array of segments can contain up t
 If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+
+## Custom Price Points
+
+This endpoint changes segments on catalog price points only. If the price point is a subscription's custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such as "Segments on a subscription's custom price point can't be changed here. Set them with custom_price on the subscription or component endpoints.", and nothing is saved. To change a subscription's segment rates, send `custom_price.segments` to [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription).
 
 ```ts
 async bulkCreateSegments(
@@ -442,9 +466,6 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
-    if (error instanceof EventBasedBillingSegmentError) {
-      console.log(error.result);
-    }
   }
 }
 ```
@@ -454,7 +475,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 
 
 # Bulk Update Segments
@@ -464,6 +485,10 @@ Updates multiple segments in one request. The array of segments can contain up t
 If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+
+## Custom Price Points
+
+This endpoint changes segments on catalog price points only. If the price point is a subscription's custom price point, the request returns `422 Unprocessable Entity` with a `price_point` error such as "Segments on a subscription's custom price point can't be changed here. Set them with custom_price on the subscription or component endpoints.", and nothing is saved. To change a subscription's segment rates, send `custom_price.segments` to [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription).
 
 ```ts
 async bulkUpdateSegments(
@@ -523,9 +548,6 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
-    if (error instanceof EventBasedBillingSegmentError) {
-      console.log(error.result);
-    }
   }
 }
 ```
@@ -535,5 +557,5 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error-1.md) |
+| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
 

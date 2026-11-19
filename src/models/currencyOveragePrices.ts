@@ -64,6 +64,10 @@ export interface CurrencyOveragePrices {
   overagePrices?: ComponentPrice[];
   /** Applicable only to prepaid usage components. Pricing scheme for overage pricing. */
   overagePricingScheme?: PricingScheme;
+  /** Returned only for hybrid price points. An array of secondary price brackets. Hybrid price points never return `overage_prices` or `overage_pricing_scheme`. */
+  secondaryPrices?: ComponentPrice[];
+  /** Returned only for hybrid price points. Pricing scheme for the secondary pricing model. */
+  secondaryPricingScheme?: PricingScheme;
   /** Applicable only to prepaid usage components. Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period. */
   renewPrepaidAllocation?: boolean;
   /** Applicable only to prepaid usage components. Boolean which controls whether or not remaining units should be rolled over to the next period. */
@@ -74,6 +78,8 @@ export interface CurrencyOveragePrices {
   expirationIntervalUnit?: ExpirationIntervalUnit | null;
   /** Applicable only to prepaid usage components. An array of currency pricing data for overage prices. */
   currencyOveragePrices?: ComponentCurrencyPrice[];
+  /** Returned only for hybrid price points, by List All Component Price Points with `include=currency_secondary_prices` or `include=currency_overage_prices`. An array of currency pricing data for secondary prices. */
+  currencySecondaryPrices?: ComponentCurrencyPrice[];
   [key: string]: unknown;
 }
 
@@ -105,6 +111,14 @@ export const currencyOveragePricesSchema: Schema<CurrencyOveragePrices> = lazy(
         'overage_pricing_scheme',
         optional(pricingSchemeSchema),
       ],
+      secondaryPrices: [
+        'secondary_prices',
+        optional(array(componentPriceSchema)),
+      ],
+      secondaryPricingScheme: [
+        'secondary_pricing_scheme',
+        optional(pricingSchemeSchema),
+      ],
       renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],
       rolloverPrepaidRemainder: [
         'rollover_prepaid_remainder',
@@ -117,6 +131,10 @@ export const currencyOveragePricesSchema: Schema<CurrencyOveragePrices> = lazy(
       ],
       currencyOveragePrices: [
         'currency_overage_prices',
+        optional(array(componentCurrencyPriceSchema)),
+      ],
+      currencySecondaryPrices: [
+        'currency_secondary_prices',
         optional(array(componentCurrencyPriceSchema)),
       ],
     })

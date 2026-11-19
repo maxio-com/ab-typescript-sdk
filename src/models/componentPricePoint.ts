@@ -63,6 +63,10 @@ export interface ComponentPricePoint {
   overagePrices?: ComponentPrice[];
   /** Applicable only to prepaid usage components. Pricing scheme for overage pricing. */
   overagePricingScheme?: PricingScheme;
+  /** Returned only for hybrid price points. An array of secondary price brackets. Hybrid price points never return `overage_prices` or `overage_pricing_scheme`. */
+  secondaryPrices?: ComponentPrice[];
+  /** Returned only for hybrid price points. Pricing scheme for the secondary pricing model. */
+  secondaryPricingScheme?: PricingScheme;
   /** Applicable only to prepaid usage components. Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period. */
   renewPrepaidAllocation?: boolean;
   /** Applicable only to prepaid usage components. Boolean which controls whether or not remaining units should be rolled over to the next period. */
@@ -99,6 +103,14 @@ export const componentPricePointSchema: Schema<ComponentPricePoint> = lazy(() =>
     overagePrices: ['overage_prices', optional(array(componentPriceSchema))],
     overagePricingScheme: [
       'overage_pricing_scheme',
+      optional(pricingSchemeSchema),
+    ],
+    secondaryPrices: [
+      'secondary_prices',
+      optional(array(componentPriceSchema)),
+    ],
+    secondaryPricingScheme: [
+      'secondary_pricing_scheme',
       optional(pricingSchemeSchema),
     ],
     renewPrepaidAllocation: ['renew_prepaid_allocation', optional(boolean())],

@@ -26,6 +26,9 @@
 | `productVersion` | `number \| undefined` | Optional | The version of the product being credited. |
 | `componentId` | `number \| null \| undefined` | Optional | The ID of the component being credited. Will be `nil` for non-component credits. |
 | `pricePointId` | `number \| null \| undefined` | Optional | The price point ID of the component being credited. Will be `nil` for non-component credits. |
+| `listUnitPrice` | `string \| null \| undefined` | Optional | The unit price from the list price point, in decimal format |
+| `listTotalAmount` | `string \| null \| undefined` | Optional | The total amount for the line item at the list price, in decimal format |
+| `listPricePointId` | `number \| null \| undefined` | Optional | The ID of the list price point this line item's sales price is compared against |
 | `billingScheduleItemId` | `number \| null \| undefined` | Optional | - |
 | `customItem` | `boolean \| undefined` | Optional | - |
 | `prepaidAllocationExpiresAt` | `string \| null \| undefined` | Optional | The date a prepaid allocation is set to expire. Only present on line items representing prepaid component allocations. The format is `"YYYY-MM-DD"`. |
