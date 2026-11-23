@@ -11,6 +11,7 @@ import { Errors } from '../models/errors.js';
  * Creates an instance of EventBasedBillingListSegmentsErrors
  */
 interface EventBasedBillingListSegmentsErrors {
+  /** Validation error details for listing segments. */
   errors?: Errors;
   [key: string]: unknown;
 }

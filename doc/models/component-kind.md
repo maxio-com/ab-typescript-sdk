@@ -16,12 +16,13 @@ A handle for the component type
 | `OnOffComponent` |
 | `PrepaidUsageComponent` |
 | `EventBasedComponent` |
+| `WalletProduct` |
 
 ## Example
 
 ```ts
 import { ComponentKind } from '@maxio-com/advanced-billing-sdk';
 
-const componentKind = ComponentKind.PrepaidUsageComponent;
+const componentKind = ComponentKind.EventBasedComponent;
 ```
 

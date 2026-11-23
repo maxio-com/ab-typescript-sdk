@@ -18,6 +18,10 @@ import {
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 import { UpdatePrice, updatePriceSchema } from './updatePrice.js';
+import {
+  UpdateSecondaryPricing,
+  updateSecondaryPricingSchema,
+} from './updateSecondaryPricing.js';
 
 export interface UpdateComponentPricePoint {
   name?: string;
@@ -33,6 +37,10 @@ export interface UpdateComponentPricePoint {
   /** A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. */
   intervalUnit?: IntervalUnit | null;
   prices?: UpdatePrice[];
+  /** Hybrid Pricing only. Changes the secondary pricing model of an existing hybrid price point. Send `pricing_scheme` (or the top-level `secondary_pricing_scheme`) every time you send this block; a block without a scheme returns `422`. Brackets sent without an `id` are added to the existing ones rather than replacing them, so to change a bracket set, update existing brackets by `id` and remove the ones you no longer want with `_destroy: true`. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). */
+  secondaryPricing?: UpdateSecondaryPricing;
+  /** Hybrid Pricing only. Alternative to `secondary_pricing.pricing_scheme`; when both are sent, `secondary_pricing.pricing_scheme` is used. */
+  secondaryPricingScheme?: PricingScheme;
   [key: string]: unknown;
 }
 
@@ -47,5 +55,13 @@ export const updateComponentPricePointSchema: Schema<UpdateComponentPricePoint> 
       interval: ['interval', optional(number())],
       intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
       prices: ['prices', optional(array(updatePriceSchema))],
+      secondaryPricing: [
+        'secondary_pricing',
+        optional(updateSecondaryPricingSchema),
+      ],
+      secondaryPricingScheme: [
+        'secondary_pricing_scheme',
+        optional(pricingSchemeSchema),
+      ],
     })
 );

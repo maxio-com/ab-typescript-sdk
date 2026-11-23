@@ -16,7 +16,6 @@
 ```ts
 import {
   CreateMeteredComponent,
-  IntervalUnit,
   PricingScheme,
 } from '@maxio-com/advanced-billing-sdk';
 
@@ -45,29 +44,21 @@ const createMeteredComponent: CreateMeteredComponent = {
         endingQuantity: 40,
       }
     ],
-    pricePoints: [
-      {
-        name: 'name2',
-        handle: 'handle8',
-        pricingScheme: PricingScheme.PerUnit,
-        interval: 92,
-        intervalUnit: IntervalUnit.Day,
-      },
-      {
-        name: 'name2',
-        handle: 'handle8',
-        pricingScheme: PricingScheme.PerUnit,
-        interval: 92,
-        intervalUnit: IntervalUnit.Day,
-      },
-      {
-        name: 'name2',
-        handle: 'handle8',
-        pricingScheme: PricingScheme.PerUnit,
-        interval: 92,
-        intervalUnit: IntervalUnit.Day,
-      }
-    ],
+    secondaryPricing: {
+      pricingScheme: PricingScheme.Stairstep,
+      prices: [
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        },
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        }
+      ],
+    },
   },
 };
 ```

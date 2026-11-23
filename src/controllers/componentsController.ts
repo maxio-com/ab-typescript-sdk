@@ -62,13 +62,13 @@ export class ComponentsController extends BaseController {
    *
    * #### Hybrid Pricing
    * A `volume`, `tiered`, or `stairstep` metered component can combine its primary pricing with a
-   * secondary pricing model (the `overage_pricing` parameter) so both bill as a single invoice line item
-   * instead of two. This does not apply to metered components configured for event-based billing (metric,
-   * meter, or formula). See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing) for
-   * requirements and configuration details.
+   * secondary pricing model (the `secondary_pricing` parameter) so both bill as a single invoice line
+   * item instead of two. This does not apply to metered components configured for event-based billing
+   * (metric, meter, or formula). See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing)
+   * for requirements and configuration details.
    *
-   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://docs.maxio.
+   * com/billing/catalog/products/understand-products).
    *
    * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
    * experience-and-terminology) enabled, taxable components must include a non-blank `tax_code`. Sending
@@ -121,16 +121,16 @@ export class ComponentsController extends BaseController {
    * The allocated quantity for one-time quantity-based components immediately gets reset back to zero
    * after the allocation is made.
    *
-   * For more information, see [Components Overview](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261141522189-Components-Overview).
+   * For more information, see [Understand Products](https://docs.maxio.
+   * com/billing/catalog/products/understand-products).
    * #### Hybrid Pricing
    * A `volume`, `tiered`, or `stairstep` component can combine its primary pricing with a secondary
-   * pricing model (the `overage_pricing` parameter) so both bill as a single invoice line item instead
+   * pricing model (the `secondary_pricing` parameter) so both bill as a single invoice line item instead
    * of two. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing) for requirements and
    * configuration details.
    *
-   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://docs.maxio.
+   * com/billing/catalog/products/understand-products).
    *
    * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
    * experience-and-terminology) enabled, taxable components must include a non-blank `tax_code`. Sending
@@ -172,8 +172,8 @@ export class ComponentsController extends BaseController {
    * On/off components are used for any flat fee, recurring add on (think $99/month for tech support or a
    * flat add on shipping fee).
    *
-   * For more information on components, see our documentation [here](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261141522189-Components-Overview).
+   * For more information on components, see our documentation [here](https://docs.maxio.
+   * com/billing/catalog/products/understand-products).
    *
    * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
    * experience-and-terminology) enabled, taxable components must include a non-blank `tax_code`. Sending
@@ -217,8 +217,8 @@ export class ComponentsController extends BaseController {
    * charge at the end of the period for the amount of units used, prepaid components are charged for at
    * the time of purchase, and usage is subsequently tracked against the amount purchased.
    *
-   * For more information, see [Components Overview](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261141522189-Components-Overview).
+   * For more information, see [Understand Products](https://docs.maxio.
+   * com/billing/catalog/products/understand-products).
    *
    * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
    * experience-and-terminology) enabled, taxable components must include a non-blank `tax_code`; sending
@@ -257,17 +257,20 @@ export class ComponentsController extends BaseController {
    * Creates an event-based component definition under the specified product family. An event-based
    * component can then be added and “allocated” for a subscription.
    *
-   * Event-based components are similar to other component types, in that you define the component
-   * parameters (such as name and taxability) and the pricing. A key difference for the event-based
-   * component is that it must be attached to a metric. This is because the metric provides the component
-   * with the actual quantity used in computing what and how much will be billed each period for each
-   * subscription.
+   * Event-based components are similar to other component types: you define their parameters (such as
+   * name and taxability) and pricing.
    *
-   * So, instead of reporting usage directly for each component (as you would with metered components),
-   * the usage is derived from analysis of your events.
+   * For [Maxio Metering](https://docs.maxio.com/billing/maxio-metering/overview/understand-maxio-
+   * metering), provide either `metering_meter_id` or `metering_formula`, but not both. For legacy Events
+   * Based Billing, provide `event_based_billing_metric_id` instead. Meter IDs and legacy metric IDs
+   * identify different resources. A legacy metric ID cannot replace a meter ID or formula on a site
+   * using Maxio Metering.
    *
-   * For more information, see [Components Overview](https://maxio.zendesk.com/hc/en-
-   * us/articles/24261141522189-Components-Overview).
+   * Instead of reporting usage directly for each component (as you would with metered components), usage
+   * is derived from analysis of your events.
+   *
+   * For more information, see [Understand Products](https://docs.maxio.
+   * com/billing/catalog/products/understand-products).
    *
    * If you have the new [Catalog experience](page:help/announcements/2026-announcements#new-catalog-
    * experience-and-terminology) enabled, taxable components must include a non-blank `tax_code`; sending
@@ -328,19 +331,25 @@ export class ComponentsController extends BaseController {
    *
    * @param productFamilyId   The Advanced Billing id of the product family to which the component belongs
    * @param componentId       Either the Advanced Billing id of the component or the handle for the
-   *                                    component prefixed with `handle:`
+   *                                     component prefixed with `handle:`
+   * @param includeFeatures   When `true`, embeds the active feature catalog items for each result in a
+   *                                     `features` array. Default value is `false`. Ignored on sites without
+   *                                     Entitlements enabled: no `features` key is returned and no error is raised.
    * @return Response from the API call
    */
   async readComponent(
     productFamilyId: number,
     componentId: string,
+    includeFeatures?: boolean,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<ComponentResponse>> {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       productFamilyId: [productFamilyId, number()],
       componentId: [componentId, string()],
+      includeFeatures: [includeFeatures, optional(boolean())],
     });
+    req.query('include_features', mapped.includeFeatures, commaPrefix);
     req.appendTemplatePath`/product_families/${mapped.productFamilyId}/components/${mapped.componentId}.json`;
     req.authenticate([{ basicAuth: true }]);
     return req.callAsJson(componentResponseSchema, requestOptions);

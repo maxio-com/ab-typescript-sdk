@@ -27,16 +27,18 @@ if (fs.existsSync(absolutePath)) {
 const client = Client.fromEnvironment(process.env);
 ```
 
-## Browser Environment
+## Providing Credentials
 
-In browser environments, you can pass configuration values directly as key-value pairs to the `fromEnvironment` method.  Since `process.env` is not available in browsers, environment variables must be passed as an object.
+Authentication credentials are left out of the example `.env` file below. Keep credentials out of `.env` and configuration files that are committed to source control or shipped with your application, and load them at runtime from a secret manager or your hosting platform's environment instead. Never bundle credentials into browser code. Pass them in code using the `withConfiguration` method:
 
 ```ts
-import { Client, Configuration } from '@maxio-com/advanced-billing-sdk';
+import { Client } from '@maxio-com/advanced-billing-sdk';
 
-const client = Client.fromEnvironment({
-  TIMEOUT: '30000',
-  ENVIRONMENT: 'testing'
+const client = Client.fromEnvironment(process.env).withConfiguration({
+  basicAuthCredentials: {
+    username: 'BasicAuthUserName',
+    password: 'BasicAuthPassword'
+  },
 });
 ```
 
@@ -47,10 +49,6 @@ const client = Client.fromEnvironment({
 TIMEOUT=30000
 ENVIRONMENT=US
 SITE=subdomain
-
-# Authentication Credentials
-USERNAME=username
-PASSWORD=password
 
 # Retry Configuration
 MAX_NUMBER_OF_RETRIES=3
@@ -64,7 +62,5 @@ HTTP_METHODS_TO_RETRY=GET,PUT,DELETE
 # Proxy Settings
 PROXY_ADDRESS=http://localhost:3000
 PROXY_PORT=8080
-PROXY_AUTH_USERNAME=username
-PROXY_AUTH_PASSWORD=password
 ```
 

@@ -26,6 +26,10 @@ import {
 import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
 import { Price, priceSchema } from './price.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import {
+  SecondaryPricing,
+  secondaryPricingSchema,
+} from './secondaryPricing.js';
 
 export interface MeteredComponent {
   /** A name for this component that is suitable for showing customers and displaying on billing statements, e.g., "Minutes". */
@@ -40,8 +44,10 @@ export interface MeteredComponent {
   taxable?: boolean;
   /** The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. */
   pricingScheme: PricingScheme;
-  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
+  /** (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing-schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. */
   prices?: Price[];
+  /** Hybrid Pricing only. The secondary pricing model that takes over once usage passes the primary model's included threshold. Applies to Quantity-Based and Metered Components on Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices` brackets start at `1`, not at the primary model's highest `ending_quantity`. See [Hybrid Pricing](page:introduction/basic-concepts/hybrid-pricing). */
+  secondaryPricing?: SecondaryPricing;
   pricePoints?: ComponentPricePointItem[];
   /** The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. e.g., 1.00 or 0.0012 or 0.00000065 */
   unitPrice?: MeteredComponentUnitPrice;
@@ -70,6 +76,7 @@ export const meteredComponentSchema: Schema<MeteredComponent> = lazy(() =>
     taxable: ['taxable', optional(boolean())],
     pricingScheme: ['pricing_scheme', pricingSchemeSchema],
     prices: ['prices', optional(array(priceSchema))],
+    secondaryPricing: ['secondary_pricing', optional(secondaryPricingSchema)],
     pricePoints: [
       'price_points',
       optional(array(componentPricePointItemSchema)),

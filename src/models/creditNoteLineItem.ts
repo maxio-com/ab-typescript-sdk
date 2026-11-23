@@ -74,6 +74,12 @@ export interface CreditNoteLineItem {
   componentId?: number | null;
   /** The price point ID of the component being credited. Will be `nil` for non-component credits. */
   pricePointId?: number | null;
+  /** The unit price from the list price point, in decimal format */
+  listUnitPrice?: string | null;
+  /** The total amount for the line item at the list price, in decimal format */
+  listTotalAmount?: string | null;
+  /** The ID of the list price point this line item's sales price is compared against */
+  listPricePointId?: number | null;
   billingScheduleItemId?: number | null;
   customItem?: boolean;
   /** The date a prepaid allocation is set to expire. Only present on line items representing prepaid component allocations. The format is `"YYYY-MM-DD"`. */
@@ -100,6 +106,9 @@ export const creditNoteLineItemSchema: Schema<CreditNoteLineItem> = expandoObjec
     productVersion: ['product_version', optional(number())],
     componentId: ['component_id', optional(nullable(number()))],
     pricePointId: ['price_point_id', optional(nullable(number()))],
+    listUnitPrice: ['list_unit_price', optional(nullable(string()))],
+    listTotalAmount: ['list_total_amount', optional(nullable(string()))],
+    listPricePointId: ['list_price_point_id', optional(nullable(number()))],
     billingScheduleItemId: [
       'billing_schedule_item_id',
       optional(nullable(number())),

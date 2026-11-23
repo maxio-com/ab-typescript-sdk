@@ -16,7 +16,6 @@
 ```ts
 import {
   CreateComponentPricePointRequest,
-  IntervalUnit,
   PricingScheme,
 } from '@maxio-com/advanced-billing-sdk';
 
@@ -32,10 +31,24 @@ const createComponentPricePointRequest: CreateComponentPricePointRequest = {
       }
     ],
     handle: 'handle6',
+    secondaryPricing: {
+      pricingScheme: PricingScheme.Stairstep,
+      prices: [
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        },
+        {
+          startingQuantity: 242,
+          unitPrice: 23.26,
+          endingQuantity: 40,
+        }
+      ],
+    },
+    secondaryPricingScheme: PricingScheme.Stairstep,
     useSiteExchangeRate: true,
     taxIncluded: false,
-    interval: 24,
-    intervalUnit: IntervalUnit.Day,
   },
 };
 ```

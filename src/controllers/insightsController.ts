@@ -80,8 +80,8 @@ export class InsightsController extends BaseController {
    *
    * ## Understanding MRR movements
    *
-   * This endpoint will aid in accessing your site's [MRR Report](https://maxio.zendesk.com/hc/en-
-   * us/articles/24285894587021-MRR-Analytics) data.
+   * This endpoint will aid in accessing your site's [MRR Report](https://docs.maxio.com/insights/report-
+   * management/reporting-in-general/understanding-reporting-differences-across-platforms) data.
    *
    * Whenever a subscription event occurs that causes your site's MRR to change (such as a signup or
    * upgrade), we record an MRR movement. These records are accessible via the MRR Movements endpoint.
@@ -91,9 +91,10 @@ export class InsightsController extends BaseController {
    *
    * ### Plan & Usage Breakouts
    *
-   * In the MRR Report UI, we support a setting to [include or exclude](https://maxio.zendesk.com/hc/en-
-   * us/articles/24285894587021-MRR-Analytics#displaying-component-based-metered-usage-in-mrr) usage
-   * revenue. In the MRR APIs, responses include `plan` and `usage` breakouts.
+   * In the MRR Report UI, we support a setting to [include or exclude](https://docs.maxio.
+   * com/insights/report-management/reporting-in-general/understanding-reporting-differences-across-
+   * platforms#mrrarr-treatment-by-revenue-type) usage revenue. In the MRR APIs, responses include `plan`
+   * and `usage` breakouts.
    *
    * Plan includes revenue from:
    * * Products

@@ -14,6 +14,11 @@ export enum TaxConfigurationKind {
   EnumManagedAvalara = 'managed avalara',
   EnumLinkedAvalara = 'linked avalara',
   EnumDigitalRiver = 'digital river',
+  Anrok = 'anrok',
+  Taxjar = 'taxjar',
+  Numeral = 'numeral',
+  Sphere = 'sphere',
+  Taxwire = 'taxwire',
 }
 
 /**

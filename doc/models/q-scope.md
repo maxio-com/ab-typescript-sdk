@@ -15,12 +15,13 @@
 | `Organization` |
 | `CustomerReference` |
 | `SubscriptionReference` |
+| `LastFour` |
 
 ## Example
 
 ```ts
 import { QScope } from '@maxio-com/advanced-billing-sdk';
 
-const qScope = QScope.LastName;
+const qScope = QScope.CustomerReference;
 ```
 

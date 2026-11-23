@@ -6,6 +6,7 @@
 
 import { array, expandoObject, optional, Schema, string } from '../schema.js';
 
+/** Validation error details for listing segments. */
 export interface Errors {
   perPage?: string[];
   pricePoint?: string[];

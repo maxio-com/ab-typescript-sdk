@@ -1,0 +1,197 @@
+/**
+ * AdvancedBilling
+ *
+ * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
+ */
+
+import {
+  array,
+  bigint,
+  boolean,
+  expandoObject,
+  lazy,
+  nullable,
+  number,
+  optional,
+  Schema,
+  string,
+} from '../schema.js';
+import { ComponentKind, componentKindSchema } from './componentKind.js';
+import { ComponentPrice, componentPriceSchema } from './componentPrice.js';
+import { CreditType, creditTypeSchema } from './creditType.js';
+import {
+  FeatureCatalogItem,
+  featureCatalogItemSchema,
+} from './featureCatalogItem.js';
+import { IntervalUnit, intervalUnitSchema } from './intervalUnit.js';
+import { ItemCategory, itemCategorySchema } from './itemCategory.js';
+import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
+import {
+  WalletProductPricePointSummary,
+  walletProductPricePointSummarySchema,
+} from './walletProductPricePointSummary.js';
+import {
+  WalletProductUsageCount,
+  walletProductUsageCountSchema,
+} from './walletProductUsageCount.js';
+
+/** A Wallet Product as it appears in [List Wallet Products]($e/Wallet%20Products/listWalletProducts): the full Component field set, plus a usage count and a price point summary that only the list response reports. */
+export interface WalletProductListItem {
+  /** The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. */
+  id?: number;
+  /** The name of the Component, suitable for display on statements. e.g., Text Messages. */
+  name?: string;
+  /** The component API handle */
+  handle?: string | null;
+  pricingScheme?: PricingScheme | null;
+  /** The name of the unit that the component’s usage is measured in. e.g., message */
+  unitName?: string;
+  /** The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. */
+  unitPrice?: string | null;
+  /** The id of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. */
+  productFamilyId?: number | null;
+  /** The name of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. */
+  productFamilyName?: string | null;
+  /** The handle of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. */
+  productFamilyHandle?: string | null;
+  /** deprecated - use unit_price instead. */
+  pricePerUnitInCents?: bigint | null;
+  /** A handle for the component type */
+  kind?: ComponentKind;
+  /** Boolean flag describing whether a component is archived or not. */
+  archived?: boolean;
+  /** The description of the component. */
+  description?: string | null;
+  defaultPricePointId?: number | null;
+  /** Applicable only to prepaid usage components. An array of overage price brackets. */
+  overagePrices?: ComponentPrice[] | null;
+  /** An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. */
+  prices?: ComponentPrice[] | null;
+  /** Count for the number of price points associated with the component */
+  pricePointCount?: number;
+  /** URL that points to the location to read the existing price points via GET request */
+  pricePointsUrl?: string | null;
+  defaultPricePointName?: string;
+  /** Boolean flag describing whether a component is taxable or not. */
+  taxable?: boolean;
+  /** A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. */
+  taxCode?: string | null;
+  recurring?: boolean;
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
+  upgradeCharge?: CreditType | null;
+  /** The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. */
+  downgradeCredit?: CreditType | null;
+  /** Timestamp indicating when this component was created */
+  createdAt?: string;
+  /** Timestamp indicating when this component was updated */
+  updatedAt?: string;
+  /** Timestamp indicating when this component was archived */
+  archivedAt?: string | null;
+  /** (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. */
+  hideDateRangeOnInvoice?: boolean;
+  allowFractionalQuantities?: boolean;
+  /** One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other */
+  itemCategory?: ItemCategory | null;
+  useSiteExchangeRate?: boolean | null;
+  /** E.g. Internal ID or SKU Number */
+  accountingCode?: string | null;
+  /** The ID of an attached metric from legacy Events Based Billing. Omitted if no metric is attached. If the metric is linked to a Maxio Metering meter, the response can include both event_based_billing_metric_id and metering_meter_id. */
+  eventBasedBillingMetricId?: number;
+  /** The ID of an attached single Maxio Metering meter. Omitted if no single meter is attached, including when the component uses only an Advanced Formula. If a legacy Events Based Billing metric is linked to the meter, the response can include both metering_meter_id and event_based_billing_metric_id. */
+  meteringMeterId?: number;
+  /** The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component’s default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. */
+  interval?: number;
+  /** A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. */
+  intervalUnit?: IntervalUnit | null;
+  /** (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. */
+  unspscCode?: string | null;
+  /** The active feature catalog items attached to this component. Present only when the request includes `include_features=true`. */
+  features?: FeatureCatalogItem[] | null;
+  /** A rollup of what's using this Wallet Product, for the catalog listing. */
+  usedBy?: WalletProductUsageCount;
+  /** A summary of the Wallet Product's default price point, for rendering a catalog listing without a separate price points call. */
+  pricePointSummary?: WalletProductPricePointSummary;
+  [key: string]: unknown;
+}
+
+export const walletProductListItemSchema: Schema<WalletProductListItem> = lazy(
+  () =>
+    expandoObject({
+      id: ['id', optional(number())],
+      name: ['name', optional(string())],
+      handle: ['handle', optional(nullable(string()))],
+      pricingScheme: [
+        'pricing_scheme',
+        optional(nullable(pricingSchemeSchema)),
+      ],
+      unitName: ['unit_name', optional(string())],
+      unitPrice: ['unit_price', optional(nullable(string()))],
+      productFamilyId: ['product_family_id', optional(nullable(number()))],
+      productFamilyName: ['product_family_name', optional(nullable(string()))],
+      productFamilyHandle: [
+        'product_family_handle',
+        optional(nullable(string())),
+      ],
+      pricePerUnitInCents: [
+        'price_per_unit_in_cents',
+        optional(nullable(bigint())),
+      ],
+      kind: ['kind', optional(componentKindSchema)],
+      archived: ['archived', optional(boolean())],
+      description: ['description', optional(nullable(string()))],
+      defaultPricePointId: [
+        'default_price_point_id',
+        optional(nullable(number())),
+      ],
+      overagePrices: [
+        'overage_prices',
+        optional(nullable(array(componentPriceSchema))),
+      ],
+      prices: ['prices', optional(nullable(array(componentPriceSchema)))],
+      pricePointCount: ['price_point_count', optional(number())],
+      pricePointsUrl: ['price_points_url', optional(nullable(string()))],
+      defaultPricePointName: ['default_price_point_name', optional(string())],
+      taxable: ['taxable', optional(boolean())],
+      taxCode: ['tax_code', optional(nullable(string()))],
+      recurring: ['recurring', optional(boolean())],
+      upgradeCharge: ['upgrade_charge', optional(nullable(creditTypeSchema))],
+      downgradeCredit: [
+        'downgrade_credit',
+        optional(nullable(creditTypeSchema)),
+      ],
+      createdAt: ['created_at', optional(string())],
+      updatedAt: ['updated_at', optional(string())],
+      archivedAt: ['archived_at', optional(nullable(string()))],
+      hideDateRangeOnInvoice: [
+        'hide_date_range_on_invoice',
+        optional(boolean()),
+      ],
+      allowFractionalQuantities: [
+        'allow_fractional_quantities',
+        optional(boolean()),
+      ],
+      itemCategory: ['item_category', optional(nullable(itemCategorySchema))],
+      useSiteExchangeRate: [
+        'use_site_exchange_rate',
+        optional(nullable(boolean())),
+      ],
+      accountingCode: ['accounting_code', optional(nullable(string()))],
+      eventBasedBillingMetricId: [
+        'event_based_billing_metric_id',
+        optional(number()),
+      ],
+      meteringMeterId: ['metering_meter_id', optional(number())],
+      interval: ['interval', optional(number())],
+      intervalUnit: ['interval_unit', optional(nullable(intervalUnitSchema))],
+      unspscCode: ['unspsc_code', optional(nullable(string()))],
+      features: [
+        'features',
+        optional(nullable(array(featureCatalogItemSchema))),
+      ],
+      usedBy: ['used_by', optional(walletProductUsageCountSchema)],
+      pricePointSummary: [
+        'price_point_summary',
+        optional(walletProductPricePointSummarySchema),
+      ],
+    })
+);

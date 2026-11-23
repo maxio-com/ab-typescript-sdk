@@ -11,6 +11,8 @@ import { Schema, stringEnum } from '../schema.js';
  */
 export enum ListComponentsPricePointsInclude {
   CurrencyPrices = 'currency_prices',
+  CurrencyOveragePrices = 'currency_overage_prices',
+  CurrencySecondaryPrices = 'currency_secondary_prices',
 }
 
 /**

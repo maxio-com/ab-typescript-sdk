@@ -427,6 +427,14 @@ export class ProformaInvoicesController extends BaseController {
    * associating the proforma invoice with a customer_id to easily find their proforma invoices, since
    * the subscription_id will always be blank.
    *
+   * ## Segment-Level Custom Pricing
+   *
+   * When a component's `custom_price` includes `segments`, this endpoint validates them with the same
+   * rules as [Create Subscription]($e/Subscriptions/createSubscription) and returns the same `422
+   * Unprocessable Entity` errors. No segment rates are persisted. Valid segment rates do not change the
+   * totals returned here, because no usage has been recorded for a subscription that is only being
+   * signed up.
+   *
    * @param body
    * @return Response from the API call
    */
@@ -471,6 +479,14 @@ export class ProformaInvoicesController extends BaseController {
    * profile to populate a shipping or billing address.
    *
    * A product and customer first name, last name, and email are the minimum requirements.
+   *
+   * ## Segment-Level Custom Pricing
+   *
+   * When a component's `custom_price` includes `segments`, this endpoint validates them with the same
+   * rules as [Create Subscription]($e/Subscriptions/createSubscription) and returns the same `422
+   * Unprocessable Entity` errors. No segment rates are persisted. Valid segment rates do not change the
+   * totals returned here, because no usage has been recorded for a subscription that is only being
+   * signed up.
    *
    * @param include      Choose to include a proforma invoice preview for the
    *                                                           first renewal. Use in query

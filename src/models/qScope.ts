@@ -16,6 +16,7 @@ export enum QScope {
   Organization = 'organization',
   CustomerReference = 'customer_reference',
   SubscriptionReference = 'subscription_reference',
+  LastFour = 'last_four',
 }
 
 /**

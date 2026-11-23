@@ -32,6 +32,7 @@ export interface InvoiceTax {
   uid?: string;
   title?: string;
   description?: string | null;
+  /** The source of the tax. `Tax` is a tax configured in Advanced Billing. The other values identify the tax service that calculated the tax. */
   sourceType?: ProformaInvoiceTaxSourceType;
   sourceId?: number;
   percentage?: string;

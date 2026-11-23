@@ -10,6 +10,8 @@
 | Name |
 |  --- |
 | `CurrencyPrices` |
+| `CurrencyOveragePrices` |
+| `CurrencySecondaryPrices` |
 
 ## Example
 

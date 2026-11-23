@@ -12,6 +12,11 @@ import { Schema, stringEnum } from '../schema.js';
 export enum ProformaInvoiceTaxSourceType {
   Tax = 'Tax',
   Avalara = 'Avalara',
+  Anrok = 'Anrok',
+  TaxJar = 'TaxJar',
+  Numeral = 'Numeral',
+  Sphere = 'Sphere',
+  Taxwire = 'Taxwire',
 }
 
 /**

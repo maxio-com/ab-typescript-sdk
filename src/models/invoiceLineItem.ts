@@ -95,6 +95,16 @@ export interface InvoiceLineItem {
   componentCostData?: InvoiceLineItemComponentCostData | null;
   /** The price point ID of the line item's product */
   productPricePointId?: number | null;
+  /** The unit price from the list price point, in decimal format. Returned only when list vs sales pricing is enabled for the site. */
+  listUnitPrice?: string | null;
+  /** The total amount for the line item at the list price, in decimal format */
+  listTotalAmount?: string | null;
+  /** The difference between the list total and the sales total, in decimal format */
+  listDiscountAmount?: string | null;
+  /** The list discount as a fraction of the list total, in decimal format. For example, `"0.25"` is a 25% discount. */
+  listDiscountRate?: string | null;
+  /** The ID of the list price point this line item's sales price is compared against */
+  listPricePointId?: number | null;
   customItem?: boolean;
   kind?: string;
   /** The date a prepaid allocation is set to expire. Only present on line items representing prepaid component allocations. The format is `"YYYY-MM-DD"`. */
@@ -135,6 +145,11 @@ export const invoiceLineItemSchema: Schema<InvoiceLineItem> = lazy(() =>
       'product_price_point_id',
       optional(nullable(number())),
     ],
+    listUnitPrice: ['list_unit_price', optional(nullable(string()))],
+    listTotalAmount: ['list_total_amount', optional(nullable(string()))],
+    listDiscountAmount: ['list_discount_amount', optional(nullable(string()))],
+    listDiscountRate: ['list_discount_rate', optional(nullable(string()))],
+    listPricePointId: ['list_price_point_id', optional(nullable(number()))],
     customItem: ['custom_item', optional(boolean())],
     kind: ['kind', optional(string())],
     prepaidAllocationExpiresAt: [
