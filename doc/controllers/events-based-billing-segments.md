@@ -298,6 +298,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof EventBasedBillingSegmentWriteErrorResponseError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -307,7 +310,7 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `ApiError` |
-| 422 | Unprocessable Entity (WebDAV) | `ApiError` |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentWriteErrorResponseError`](../../doc/models/event-based-billing-segment-write-error-response-error.md) |
 
 
 # Delete Segment

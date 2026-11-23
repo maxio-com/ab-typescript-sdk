@@ -21,7 +21,7 @@ import {
   UpdateFeatureCatalogItemRequest,
   updateFeatureCatalogItemRequestSchema,
 } from '../models/updateFeatureCatalogItemRequest.js';
-import { boolean, number, optional } from '../schema.js';
+import { boolean, nullable, number, optional } from '../schema.js';
 import { BaseController } from './baseController.js';
 import { ApiError } from '@apimatic/core';
 import { ErrorListResponseError } from '../errors/errorListResponseError.js';
@@ -213,7 +213,7 @@ export class ComponentFeaturesController extends BaseController {
     id: number,
     destroyEntitlements?: boolean,
     requestOptions?: RequestOptions
-  ): Promise<ApiResponse<FeatureCatalogItemResponse>> {
+  ): Promise<ApiResponse<FeatureCatalogItemResponse | null>> {
     const req = this.createRequest('DELETE');
     const mapped = req.prepareArgs({
       componentId: [componentId, number()],
@@ -230,7 +230,10 @@ export class ComponentFeaturesController extends BaseController {
       "The price point has subscribers but can't be cloned (it is archived or custom, or it is a component price point with an interval on a site without multi-frequency). Send `destroy_entitlements=true` to remove the feature from its existing subscribers instead."
     );
     req.authenticate([{ basicAuth: true }]);
-    return req.callAsJson(featureCatalogItemResponseSchema, requestOptions);
+    return req.callAsJson(
+      nullable(featureCatalogItemResponseSchema),
+      requestOptions
+    );
   }
 
   /**

@@ -4,13 +4,16 @@
  * This file was automatically generated for Maxio by APIMATIC v3.0 ( https://www.apimatic.io ).
  */
 
-import { array, expandoObject, Schema, string } from '../schema.js';
+import { array, expandoObject, optional, Schema, string } from '../schema.js';
 
+/** Validation error details for listing segments. */
 export interface Errors {
-  pricePoint: string[];
+  perPage?: string[];
+  pricePoint?: string[];
   [key: string]: unknown;
 }
 
 export const errorsSchema: Schema<Errors> = expandoObject({
-  pricePoint: ['price_point', array(string())],
+  perPage: ['per_page', optional(array(string()))],
+  pricePoint: ['price_point', optional(array(string()))],
 });

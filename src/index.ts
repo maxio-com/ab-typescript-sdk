@@ -325,9 +325,7 @@ export type { EndpointResponse } from './models/endpointResponse.js';
 export { EntitlementPeriodicityUnit } from './models/entitlementPeriodicityUnit.js';
 export { EntityIdentifierKind } from './models/entityIdentifierKind.js';
 export type { Errors } from './models/errors.js';
-export type { Errors1 } from './models/errors1.js';
 export type { Event } from './models/event.js';
-export type { EventBasedBillingSegmentSingleError } from './models/eventBasedBillingSegmentSingleError.js';
 export { EventKey } from './models/eventKey.js';
 export type { EventResponse } from './models/eventResponse.js';
 export { ExpirationIntervalUnit } from './models/expirationIntervalUnit.js';
@@ -607,6 +605,7 @@ export type { ScheduledRenewalUpdateRequest } from './models/scheduledRenewalUpd
 export type { SecondaryPricing } from './models/secondaryPricing.js';
 export type { Segment } from './models/segment.js';
 export type { SegmentPrice } from './models/segmentPrice.js';
+export type { SegmentPricePointErrorDetails } from './models/segmentPricePointErrorDetails.js';
 export type { SegmentResponse } from './models/segmentResponse.js';
 export type { SendEmail } from './models/sendEmail.js';
 export type { SendInvoiceRequest } from './models/sendInvoiceRequest.js';

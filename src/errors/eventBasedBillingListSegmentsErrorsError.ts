@@ -5,13 +5,14 @@
  */
 
 import { ApiError } from '../core.js';
-import { Errors1 } from '../models/errors1.js';
+import { Errors } from '../models/errors.js';
 
 /**
  * Creates an instance of EventBasedBillingListSegmentsErrors
  */
 interface EventBasedBillingListSegmentsErrors {
-  errors?: Errors1;
+  /** Validation error details for listing segments. */
+  errors?: Errors;
   [key: string]: unknown;
 }
 

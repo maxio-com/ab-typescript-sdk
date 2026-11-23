@@ -1,6 +1,8 @@
 
 # Errors
 
+Validation error details for listing segments.
+
 ## Structure
 
 `Errors`
@@ -9,7 +11,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `pricePoint` | `string[]` | Required | - |
+| `perPage` | `string[] \| undefined` | Optional | - |
+| `pricePoint` | `string[] \| undefined` | Optional | - |
 
 ## Example
 
@@ -17,6 +20,11 @@
 import { Errors } from '@maxio-com/advanced-billing-sdk';
 
 const errors: Errors = {
+  perPage: [
+    'per_page1',
+    'per_page2',
+    'per_page3'
+  ],
   pricePoint: [
     'price_point0',
     'price_point9',

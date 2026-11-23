@@ -213,7 +213,7 @@ export class EventsBasedBillingSegmentsController extends BaseController {
     req.throwOn(404, ApiError, true, "Not Found:'{$response.body}'");
     req.throwOn(
       422,
-      ApiError,
+      EventBasedBillingSegmentWriteErrorResponseError,
       true,
       "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     );

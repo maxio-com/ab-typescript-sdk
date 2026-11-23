@@ -347,7 +347,7 @@ async removeProductFeature(
   id: number,
   destroyEntitlements?: boolean,
   requestOptions?: RequestOptions
-): Promise<ApiResponse<FeatureCatalogItemResponse>>
+): Promise<ApiResponse<FeatureCatalogItemResponse | null>>
 ```
 
 ## Authentication
@@ -367,7 +367,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 **200**: The price point had subscribers, so the removal was made on a clone of it. Returns the archived feature catalog item on the clone.
 
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`FeatureCatalogItemResponse`](../../doc/models/feature-catalog-item-response.md).
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`FeatureCatalogItemResponse | null`](../../doc/models/feature-catalog-item-response.md).
 
 ## Example Usage
 

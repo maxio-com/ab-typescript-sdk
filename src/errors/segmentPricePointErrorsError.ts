@@ -5,13 +5,14 @@
  */
 
 import { ApiError } from '../core.js';
-import { Errors } from '../models/errors.js';
+import { SegmentPricePointErrorDetails } from '../models/segmentPricePointErrorDetails.js';
 
 /**
  * Creates an instance of SegmentPricePointErrors
  */
 interface SegmentPricePointErrors {
-  errors: Errors;
+  /** Price-point validation error details for segment writes. */
+  errors: SegmentPricePointErrorDetails;
   [key: string]: unknown;
 }
 

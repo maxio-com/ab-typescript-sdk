@@ -11,7 +11,7 @@ Returned when a segment write targets a subscription's custom price point. Segme
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | [`Errors`](../../doc/models/errors.md) | Required | - |
+| `errors` | [`SegmentPricePointErrorDetails`](../../doc/models/segment-price-point-error-details.md) | Required | Price-point validation error details for segment writes. |
 
 ## Example
 
